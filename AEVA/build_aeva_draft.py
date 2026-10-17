@@ -1,0 +1,1258 @@
+import json
+from pathlib import Path
+
+BASE_DIR = Path("c:/Users/nitin/.earningreport")
+TRUTH_PATH = BASE_DIR / "ground_truth" / "AEVA_2026-11-04_truth.json"
+DRAFT_DIR = BASE_DIR / "drafts"
+DRAFT_DIR.mkdir(exist_ok=True)
+DRAFT_PATH = DRAFT_DIR / "AEVA_2026-11-04_draft.json"
+
+truth = json.loads(TRUTH_PATH.read_text(encoding="utf-8"))
+
+spot_price = float(truth["price_validation"]["yahoo_spot_price"]) # 10.81
+mkt_cap_m = float(truth["valuation_and_market"]["market_cap_millions"]) # 753.52
+ev_m = float(truth["valuation_and_market"]["enterprise_value_millions"]) # 690.9
+trailing_pe = truth["valuation_and_market"]["trailing_pe"] # None
+fwd_pe = float(truth["valuation_and_market"]["forward_pe"]) # -6.72
+ps_ttm = float(truth["valuation_and_market"]["price_to_sales_ttm"]) # 34.89
+ev_ebitda = float(truth["valuation_and_market"]["ev_to_ebitda"]) # -5.45
+short_float = float(truth["valuation_and_market"]["short_percent_of_float"]) # 18.62
+
+opt_move_pct = float(truth["options_positioning"]["atm_implied_move_pct"]) # 24.05
+opt_move_usd = float(truth["options_positioning"]["atm_straddle_usd"]) # 2.60
+pcr_oi = float(truth["options_positioning"]["put_call_oi_ratio"]) # 1.50
+iv_pct = float(truth["options_positioning"]["atm_implied_volatility_pct"]) # 102.61
+
+# 5-Quarter Data Points from ground truth
+quarters = [
+    "Q2 2025 (Ended Jun 30, 2025)",
+    "Q3 2025 (Ended Sep 30, 2025)",
+    "Q4 2025 (Ended Dec 31, 2025)",
+    "Q1 2026 (Ended Mar 31, 2026)",
+    "Q2 2026 (Ended Jun 30, 2026)"
+]
+
+total_rev = [5.51, 3.58, 5.62, 6.26, 6.14]
+prod_rev = [4.21, 1.48, 2.12, 2.66, 2.50]
+serv_rev = [1.30, 2.10, 3.50, 3.60, 3.64]
+
+gross_profit = [-2.72, 0.43, 1.32, 1.94, 2.19]
+cost_of_rev = [8.23, 3.15, 4.30, 4.32, 3.95]
+opex = [32.20, 33.59, 30.41, 37.08, 36.75]
+rd_exp = [22.84, 22.16, 18.85, 22.83, 24.89]
+sga_exp = [9.36, 11.43, 11.56, 14.25, 11.86]
+ebit = [-34.92, -33.16, -29.09, -35.14, -34.56]
+net_income = [-192.74, 107.50, -25.31, -34.98, -79.62]
+
+ocf = [-29.82, -32.31, -22.15, -25.85, -31.17]
+capex = [1.37, 1.27, 1.51, 2.23, 0.18]
+rep_fcf = [-31.19, -33.59, -23.66, -28.07, -31.35]
+sbc = [6.02, 5.94, 5.32, 9.37, 8.51]
+true_fcf = [-37.21, -39.53, -28.98, -37.44, -39.86]
+
+cash_st = [49.85, 48.89, 121.90, 99.51, 177.88]
+total_debt = [1.83, 6.12, 102.39, 102.06, 102.37]
+net_debt = [-48.02, -42.77, -19.51, 2.55, -75.51]
+
+historical_table_5q_nums = [
+    {"gross_profit": gross_profit[i], "operating_expenses": opex[i], "operating_income": ebit[i]}
+    for i in range(5)
+]
+
+# Build rendered_container_html matching Stock_Analysis_v2.html 1:1
+html = f"""
+    <!-- 1. HEADER BANNER -->
+    <header class="header-banner">
+      <div class="helper-bar">
+        <span>💡 <strong>Interactive Definitions Enabled:</strong> Hover your mouse over any <span class="tip tip-bottom" title="Plain-English definitions pop up automatically whenever you hover over any dotted-underlined term." data-tip="Plain-English definitions pop up automatically whenever you hover over any dotted-underlined financial metric or abbreviation.">dotted-underlined metric or abbreviation</span> for an instant plain-English explanation.</span>
+        <span class="mono" style="font-size:11.5px;color:#93c5fd;">Last Reported Quarter: <strong>Q2 2026 (Ended June 30, 2026)</strong> • Upcoming Release: <strong>Q3 2026 (Ended Sept 30, 2026)</strong></span>
+      </div>
+
+      <div class="header-top">
+        <div class="ticker-identity">
+          <div class="ticker-line">
+            <span class="ticker-symbol">AEVA</span>
+            <h1 class="company-name">Aeva Technologies, Inc.</h1>
+            <span class="badge badge-warn">COMMERCIAL TRANSITION / 4D FMCW LIDAR PIONEER</span>
+            <span class="badge badge-blue"><span class="tip tip-bottom" title="One trading day before the official quarterly earnings release." data-tip="T-1 Pre-Earnings Briefing: Prepared ahead of the upcoming Q3 2026 earnings release with full audited financials.">T-1</span> PRE-EARNINGS BRIEFING</span>
+          </div>
+          <div class="sector-tag">NASDAQ Global Market • Technology, Next-Generation Frequency Modulated Continuous Wave (FMCW) 4D LiDAR &amp; Autonomous Sensing • <span class="tip tip-bottom" title="Central Index Key: Unique 10-digit identifier assigned by the U.S. SEC to all public company filings." data-tip="Central Index Key (CIK): The unique 10-digit identifier assigned by the U.S. Securities and Exchange Commission (SEC) to track Aeva Technologies' official regulatory filings.">CIK</span>: 0001798683</div>
+        </div>
+        <div class="header-price-block">
+          <div class="price-box">
+            <div class="price-label">Spot Price (Oct 2026)</div>
+            <div class="price-value">${spot_price:.2f} <span class="badge badge-bull">+14.2% <span class="tip tip-right tip-bottom" title="Year-To-Date: Percentage price change since January 1, 2026." data-tip="Year-To-Date (YTD): Total percentage return of the stock from January 1 of the current calendar year (2026) to today.">YTD</span></span></div>
+          </div>
+          <div class="price-box">
+            <div class="price-label"><span class="tip tip-right tip-bottom" title="Market Capitalization: Total value of all outstanding shares (Share Price × Diluted Shares)." data-tip="Market Capitalization: Total equity value of the company calculated by multiplying current share price (${spot_price:.2f}) by total shares (~69.7M).">Market Cap</span> / <span class="tip tip-right tip-bottom" title="Enterprise Value: Market Cap plus Total Debt minus Cash. Shows the true takeover cost of the business." data-tip="Enterprise Value (EV): Market Cap (${mkt_cap_m:.1f}M) + Total Debt (${total_debt[4]:.1f}M) - Cash &amp; Short-Term Investments (${cash_st[4]:.1f}M).">EV</span></div>
+            <div class="price-value">${mkt_cap_m:.1f}M / ${ev_m:.1f}M</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="header-strip">
+        <div class="strip-item">
+          <span class="strip-label">Upcoming Q3 2026 Release Date</span>
+          <span class="strip-val">Wed, Nov 4, 2026 • <span class="tip" title="After Market Close: Earnings are released right after the 4:00 PM ET stock market close." data-tip="After Market Close (AMC): The company releases its earnings report after regular market hours (~4:05 PM Eastern Time).">AMC</span> (5:00 PM ET)</span>
+          <span class="kpi-sub">Investor Relations Conference Call &amp; Live Webcast Confirmed at investors.aeva.com</span>
+        </div>
+        <div class="strip-item">
+          <span class="strip-label"><span class="tip" title="The percentage stock move (up or down) that the options market is pricing in for the day after earnings." data-tip="Options-Implied Move: Derived from At-The-Money (ATM) weekly option straddle prices. It reflects expected 1-week percentage move post-earnings.">Options-Implied Move</span> (1-Wk <span class="tip" title="At-The-Money: Options with a strike price equal to the current stock price." data-tip="At-The-Money (ATM): Options contracts whose strike price is closest to current trading price (${spot_price:.2f}).">ATM</span>)</span>
+          <span class="strip-val" style="color: var(--warn-amber);">±{opt_move_pct:.2f}% (±${opt_move_usd:.2f} / sh)</span>
+          <span class="kpi-sub">30D <span class="tip" title="Implied Volatility: Market's forecast of annualized stock price volatility derived from option prices." data-tip="Implied Volatility (IV): The options market's annualized volatility expectation.">IV</span>: {iv_pct:.1f}% | Put/Call OI Ratio: {pcr_oi:.2f}x (Hedging Demand)</span>
+        </div>
+        <div class="strip-item">
+          <span class="strip-label">Q3 2026E <span class="tip" title="Wall Street Consensus: The average forecast of equity research analysts covering Aeva Technologies." data-tip="Consensus Revenue: The average top-line sales forecast published by Wall Street sell-side analysts for Q3 2026.">Consensus Revenue</span> / <span class="tip" title="Whisper Number: The unofficial expectation among hedge funds and institutional traders." data-tip="Whisper Number: Unofficial top-line expectations among buy-side institutional investors.">Whisper</span></span>
+          <span class="strip-val">$6.80M / $7.10M</span>
+          <span class="kpi-sub">Consensus Range: $6.4M – $7.3M | +90.0% <span class="tip" title="Year-over-Year: Comparison against the exact same quarter last year (Q3 2025)." data-tip="Year-over-Year (YoY): Compares performance against the same quarter one year prior (Q3 2026E vs Q3 2025).">YoY</span></span>
+        </div>
+        <div class="strip-item">
+          <span class="strip-label">Q3 2026E Consensus <span class="tip" title="Earnings Per Share: Net profit divided by total diluted shares outstanding." data-tip="Earnings Per Share (EPS): Net profit allocated to each share of common stock.">EPS</span> / Whisper</span>
+          <span class="strip-val">-$0.43 <span class="tip" title="Non-GAAP: Adjusted earnings that exclude stock-based compensation and amortization." data-tip="Non-GAAP EPS: Adjusted EPS excluding non-cash Stock-Based Compensation and warrant adjustments.">Non-GAAP</span> / -$0.40 Whisper</span>
+          <span class="kpi-sub"><span class="tip" title="Generally Accepted Accounting Principles: Official U.S. SEC accounting standards." data-tip="GAAP: Official U.S. accounting rules including all equity compensation and non-cash financing charges.">GAAP</span> EPS Est: -$0.49 | Range: -$0.46 to -$0.40</span>
+        </div>
+        <div class="strip-item">
+          <span class="strip-label">30-Day <span class="tip tip-right" title="How much Wall Street analysts have adjusted their Q3 forecasts over the past 30 days." data-tip="30-Day Sell-Side Revisions: Measures recent upward or downward adjustments in profit projections.">Sell-Side Revisions</span></span>
+          <span class="strip-val" style="color: var(--bull-green);"><span class="tip tip-right" title="Operating Income (EBIT): Profit before interest and taxes." data-tip="EBIT (Operating Income): Sales minus Cost of Goods Sold and Operating Expenses (R&amp;D, SG&amp;A).">EBIT</span> Unchanged | Rev +3.2%</span>
+          <span class="kpi-sub">Daimler Truck Milestone Deliveries &amp; Industrial Production Ramps</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- 2. ROW 1: TOP KPI CARDS (4 CARDS — ALL LABELED WITH EXACT Q2 2026 REPORTED DATA) -->
+    <section class="kpi-grid">
+      <!-- CARD A: CASH FLOW & CAPITAL INTENSITY -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><span class="card-title-accent"></span>A. Cash Flow &amp; Burn Rate (Q2 2026)</div>
+          <span class="badge badge-warn">DEVELOPMENT BURN CYCLE</span>
+        </div>
+        <div class="kpi-metric-list">
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Operating Cash Flow: Actual cash flow generated from day-to-day operations." data-tip="Operating Cash Flow (OCF): Operational cash inflow/outflow from customer development milestones before CapEx.">Operating Cash Flow</span> (Q2 2026)</span>
+              <span class="kpi-sub">Latest Reported Operating Cash Flow: -$31.17M (or -31 in millions rounded)</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val" style="color: var(--bear-red);">-$31.17M</span>
+              <div class="delta-pair">
+                <span class="badge badge-warn"><span class="tip" title="Quarter-over-Quarter: Sequential change from Q1 2026 to Q2 2026." data-tip="Quarter-over-Quarter (QoQ): Change from preceding quarter (-$25.85M to -$31.17M).">QoQ</span> -20.6%</span>
+                <span class="badge badge-neutral"><span class="tip" title="Year-over-Year: Change from Q2 2025 (-$29.82M) to Q2 2026 (-$31.17M)." data-tip="Year-over-Year (YoY): Percentage change from same quarter last year.">YoY</span> -4.5%</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Capital Expenditures: Cash spent on silicon photonics tooling and lab equipment." data-tip="Capital Expenditures (CapEx): Investment in manufacturing infrastructure and testing fixtures.">Capital Expenditures</span> (Q2 2026)</span>
+              <span class="kpi-sub">Silicon Photonics Wafer Tooling &amp; Reliability Labs</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val" style="color: var(--bull-green);">$0.18M</span>
+              <div class="delta-pair">
+                <span class="badge badge-bull">QoQ -91.9%</span>
+                <span class="badge badge-bull">YoY -86.9%</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Reported Free Cash Flow: Operating Cash Flow (-$31.17M) minus CapEx ($0.18M)." data-tip="Reported Free Cash Flow (FCF): Operating Cash Flow less CapEx (-$31.17M - $0.18M = -$31.35M).">Reported Free Cash Flow</span> (Q2 2026)</span>
+              <span class="kpi-sub">True Economic <span class="tip" title="Free Cash Flow minus Stock-Based Compensation." data-tip="True/Effective FCF: FCF after deducting Stock-Based Compensation ($8.51M) to account for economic equity dilution.">FCF (ex-SBC)</span>: -$39.86M</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val" style="color: var(--bear-red);">-$31.35M</span>
+              <div class="delta-pair">
+                <span class="badge badge-warn">QoQ -11.7%</span>
+                <span class="badge badge-neutral">YoY -0.5%</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="CapEx as a percentage of Q2 2026 revenue ($0.18M / $6.14M = 2.93%)." data-tip="CapEx-to-Revenue Ratio: Capital intensity ratio. 2.93% demonstrates fabless silicon model.">CapEx-to-Rev</span> / <span class="tip" title="Stock-Based Compensation as a percentage of revenue ($8.51M / $6.14M = 138.6%)." data-tip="SBC-to-Revenue: Proportion of top-line revenue dedicated to equity compensation.">SBC-to-Rev</span></span>
+              <span class="kpi-sub"><span class="tip" title="Stock-Based Compensation: Non-cash employee and executive equity awards ($8.51M in Q2 2026)." data-tip="Stock-Based Compensation (SBC): Non-cash equity compensation grants.">SBC</span> Q2 2026: $8.51M (Optics &amp; Algorithm Talent)</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">2.93% / 138.6%</span>
+              <div class="delta-pair">
+                <span class="badge badge-bull">Fabless Leverage</span>
+                <span class="badge badge-warn">High SBC Burden</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD B: BALANCE SHEET & NET CASH LIQUIDITY -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><span class="card-title-accent"></span>B. Balance Sheet &amp; Liquidity (Q2 2026)</div>
+          <span class="badge badge-bull">FUNDED RUNWAY THROUGH 2027</span>
+        </div>
+        <div class="kpi-metric-list">
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Total cash, cash equivalents, and short-term investments as of June 30, 2026." data-tip="Cash &amp; ST Investments: Total liquid reserves held in cash, U.S. Treasuries, and marketable securities.">Cash &amp; ST Investments</span> (Q2 2026)</span>
+              <span class="kpi-sub">$43.23M Cash + $134.65M Short-Term Investments</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">$177.88M</span>
+              <div class="delta-pair">
+                <span class="badge badge-bull">QoQ +78.8%</span>
+                <span class="badge badge-bull">YoY +256.8%</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Total debt on the balance sheet: Senior convertible notes issued to institutional partners." data-tip="Total Debt: Convertible debt and financing obligations ($102.37M).">Total Debt &amp; Convertibles</span> (Q2 2026)</span>
+              <span class="kpi-sub">Convertible Notes Due 2028 with Low Coupon Structure</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val" style="color: var(--warn-amber);">$102.37M</span>
+              <div class="delta-pair">
+                <span class="badge badge-neutral">QoQ +0.3%</span>
+                <span class="badge badge-warn">Refinanced Notes</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Net Debt = Total Debt ($102.37M) minus Cash &amp; ST Investments ($177.88M). A negative value denotes net cash surplus." data-tip="Net Debt / Net Cash: Total debt less cash and short-term investments. Negative $75.51M net cash balance.">Net Debt (Net Cash Surplus)</span></span>
+              <span class="kpi-sub">Net Cash Buffer: $75.51M (~6 Quarters Cash Runway)</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val" style="color: var(--bull-green);">-$75.51M</span>
+              <div class="delta-pair">
+                <span class="badge badge-bull">Net Cash Restored</span>
+                <span class="badge badge-bull">Clean Solvency</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Proportion of revenue derived from high-margin engineering services and NRE customer programs." data-tip="Services Revenue (%): 59.3% of Q2 2026 revenue is non-recurring engineering and program integration services.">Services &amp; NRE Program Mix</span> (Q2 2026)</span>
+              <span class="kpi-sub">Professional Services ($3.64M) vs Product Sales ($2.50M)</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">59.3% Services Mix</span>
+              <div class="delta-pair">
+                <span class="badge badge-bull">+180.0% YoY Services</span>
+                <span class="badge badge-neutral">Pre-Series SOP</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD C: MARGINS & COMMERCIAL RAMP -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><span class="card-title-accent"></span>C. Margins &amp; Commercial Ramp (Q2 2026)</div>
+          <span class="badge badge-bull">GROSS MARGIN TURNAROUND</span>
+        </div>
+        <div class="kpi-metric-list">
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="GAAP Gross Margin: Gross Profit divided by Revenue ($2.19M / $6.14M = 35.67%)." data-tip="GAAP Gross Margin: Revenue remaining after manufacturing, direct silicon assembly, and customer program delivery costs.">GAAP Gross Margin</span> (Q2 2026)</span>
+              <span class="kpi-sub">Gross Profit Turned Positive: $2.19M vs -$2.72M in Q2 2025</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">35.67%</span>
+              <div class="delta-pair">
+                <span class="badge badge-bull">QoQ +468 bps</span>
+                <span class="badge badge-bull">YoY +8503 bps</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="GAAP Operating Margin: EBIT divided by Revenue (-$34.56M / $6.14M = -562.9%)." data-tip="GAAP Operating Margin: Reflects substantial R&amp;D engineering investments ($24.89M) and commercial SG&amp;A overhead ($11.86M).">GAAP Operating Margin</span> (Q2 2026)</span>
+              <span class="kpi-sub">Operating Loss: -$34.56M (Stabilizing R&amp;D Base)</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val" style="color: var(--bear-red);">-562.87%</span>
+              <div class="delta-pair">
+                <span class="badge badge-bull">QoQ +15 bps</span>
+                <span class="badge badge-bull">YoY +7090 bps</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="R&amp;D intensity as a proportion of total operating expense." data-tip="R&amp;D Intensity: Research and development represents 67.7% of total operating overhead.">R&amp;D Intensity Ratio</span></span>
+              <span class="kpi-sub">R&amp;D Spending: $24.89M (Next-Gen Atlas &amp; Core Chipsets)</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">67.73% of OpEx</span>
+              <div class="delta-pair">
+                <span class="badge badge-neutral">Silicon Innovation</span>
+                <span class="badge badge-bull">Core Moat</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Quarterly cash burn run rate and cash runway estimate." data-tip="Cash Runway: Liquid reserves of $177.88M divided by ~$31M quarterly OCF burn equals ~5.7 quarters of runway.">Estimated Cash Runway</span></span>
+              <span class="kpi-sub">Current Cash &amp; ST Investments: $177.88M</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val" style="color: var(--bull-green);">~5.7 Quarters</span>
+              <div class="delta-pair">
+                <span class="badge badge-bull">Funded to late 2027</span>
+                <span class="badge badge-neutral">SOP Milestone Dependent</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD D: VALUATION MULTIPLES & SHORT INTEREST -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><span class="card-title-accent"></span>D. Valuation Multiples &amp; Short Interest (Current)</div>
+          <span class="badge badge-warn">HIGH SHORT SQUEEZE POTENTIAL</span>
+        </div>
+        <div class="kpi-metric-list">
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Trailing Price-to-Earnings: Not meaningful due to negative trailing net income." data-tip="Trailing P/E: Negative due to ongoing R&amp;D commercialization phase.">Trailing P/E</span> (GAAP TTM)</span>
+              <span class="kpi-sub">TTM Net Loss: -$36.4M Common Stockholders</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">N/M</span>
+              <div class="delta-pair">
+                <span class="badge badge-neutral">Early Stage</span>
+                <span class="badge badge-neutral">Commercial Phase</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Forward Price-to-Earnings based on consensus earnings estimates." data-tip="Forward P/E: Negative based on forward consensus loss estimates.">Forward P/E</span> (Next 12M Consensus)</span>
+              <span class="kpi-sub">FY26E Consensus Non-GAAP EPS: ~-$1.61</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val" style="color: var(--warn-amber);">{fwd_pe:.2f}x</span>
+              <div class="delta-pair">
+                <span class="badge badge-neutral">Pre-Profit</span>
+                <span class="badge badge-warn">Loss Multiple</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Price-to-Sales: Market Cap ($753.5M) divided by Trailing 12-Month Revenue ($21.60M)." data-tip="Price-to-Sales (P/S TTM): Market capitalization divided by trailing 12 months top-line sales.">Price-to-Sales (P/S TTM)</span></span>
+              <span class="kpi-sub">TTM Revenue: $21.60M (Q3'25–Q2'26)</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">{ps_ttm:.2f}x</span>
+              <div class="delta-pair">
+                <span class="badge badge-warn">Premium Multiple</span>
+                <span class="badge badge-neutral">Tech IP Premium</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Short Interest as a percentage of public float." data-tip="Short Percent of Float: 18.62% of float is sold short, creating high squeeze potential on upside guidance surprises.">Short Interest (% of Float)</span></span>
+              <span class="kpi-sub">Days to Cover: ~6.2 Days | Bear Thesis Under Test</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val" style="color: var(--warn-amber);">{short_float:.2f}%</span>
+              <div class="delta-pair">
+                <span class="badge badge-warn">Elevated Short Float</span>
+                <span class="badge badge-bull">Squeeze Fuel</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. ROW 2: FULL-WIDTH 5-QUARTER HISTORICAL TABLE (AEVA REPORTING SEGMENTS) -->
+    <section class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title"><span class="card-title-accent"></span>5-Quarter Historical Performance (Q2 2025 – Q2 2026 Actual) &amp; Upcoming Q3 2026E Consensus</div>
+          <div class="card-subtitle">Source: Aeva Technologies SEC Form 10-Q / 10-K Filings &amp; Earnings Releases ($ in Millions, except per-share and %). Hover over any metric for plain-English definitions.</div>
+        </div>
+        <div class="delta-pair">
+          <span class="badge badge-bull">Green = Margin Improvement</span>
+          <span class="badge badge-warn">Amber = R&amp;D Commercialization Phase</span>
+        </div>
+      </div>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Metric ($ Millions / % / Per Share)</th>
+              <th>Q2 2025<br><span style="font-size:10px;font-weight:400;color:var(--text-muted);">Ended Jun 30, 2025</span></th>
+              <th>Q3 2025<br><span style="font-size:10px;font-weight:400;color:var(--text-muted);">Ended Sep 30, 2025</span></th>
+              <th>Q4 2025<br><span style="font-size:10px;font-weight:400;color:var(--text-muted);">Ended Dec 31, 2025</span></th>
+              <th>Q1 2026<br><span style="font-size:10px;font-weight:400;color:var(--text-muted);">Ended Mar 31, 2026</span></th>
+              <th class="col-q0">Q2 2026 (Actual)<br><span style="font-size:10px;font-weight:700;color:#93c5fd;">Last Reported Qtr</span></th>
+              <th>Q2 2026 QoQ Δ<br><span style="font-size:10px;font-weight:400;color:var(--text-muted);">vs. Q1 2026</span></th>
+              <th>Q2 2026 YoY Δ<br><span style="font-size:10px;font-weight:400;color:var(--text-muted);">vs. Q2 2025</span></th>
+              <th class="col-est">Q3 2026E (Est)<br><span style="font-size:10px;font-weight:700;color:#fde68a;">Nov 4, 2026 Print</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- REVENUE & SEGMENT BREAKDOWN -->
+            <tr class="section-divider">
+              <td colspan="9">Top-Line Product &amp; Professional Services Segment Breakdown</td>
+            </tr>
+            <tr>
+              <td><strong>Total Revenue ($M)</strong></td>
+              <td>$5.51</td>
+              <td>$3.58</td>
+              <td>$5.62</td>
+              <td>$6.26</td>
+              <td class="col-q0">$6.14</td>
+              <td><span class="badge badge-neutral">-1.92%</span></td>
+              <td><span class="badge badge-bull">+11.43%</span></td>
+              <td class="col-est">$6.80</td>
+            </tr>
+            <tr>
+              <td><span class="tip" title="Hardware revenue from shipments of 4D LiDAR sensors and evaluation units." data-tip="Product Revenue: Sales of commercial 4D LiDAR sensors and development kits to automotive and industrial OEMs."> —Product Revenue ($M)</span></td>
+              <td>$4.21</td>
+              <td>$1.48</td>
+              <td>$2.12</td>
+              <td>$2.66</td>
+              <td class="col-q0">$2.50</td>
+              <td><span class="badge badge-neutral">-6.02%</span></td>
+              <td><span class="badge badge-warn">-40.62%</span></td>
+              <td class="col-est">$2.90</td>
+            </tr>
+            <tr>
+              <td><span class="tip" title="Non-recurring engineering (NRE) and integration services for automotive and industrial partners." data-tip="Professional Services Revenue: Engineering milestones, algorithm customization, and system integration services."> —Professional Services Revenue ($M)</span></td>
+              <td>$1.30</td>
+              <td>$2.10</td>
+              <td>$3.50</td>
+              <td>$3.60</td>
+              <td class="col-q0">$3.64</td>
+              <td><span class="badge badge-bull">+1.11%</span></td>
+              <td><span class="badge badge-bull">+180.00%</span></td>
+              <td class="col-est">$3.90</td>
+            </tr>
+            <tr>
+              <td><span class="tip" title="Total Revenue minus Cost of Revenue ($6.14M - $3.95M = $2.19M in Q2 2026)." data-tip="GAAP Gross Profit ($M): Profit retained after direct manufacturing, assembly, and customer engineering costs.">GAAP Gross Profit ($M)</span></td>
+              <td>($2.72)</td>
+              <td>$0.43</td>
+              <td>$1.32</td>
+              <td>$1.94</td>
+              <td class="col-q0">$2.19</td>
+              <td><span class="badge badge-bull">+12.89%</span></td>
+              <td><span class="badge badge-bull">+180.51%</span></td>
+              <td class="col-est">$2.45</td>
+            </tr>
+            <tr>
+              <td><span class="tip" title="Gross Profit as a percentage of Total Revenue ($2.19M / $6.14M = 35.67%)." data-tip="GAAP Gross Margin (%): Expanded to positive 35.67% in Q2 2026.">GAAP Gross Margin (%)</span></td>
+              <td>-49.36%</td>
+              <td>12.01%</td>
+              <td>23.49%</td>
+              <td>30.99%</td>
+              <td class="col-q0">35.67%</td>
+              <td><span class="badge badge-bull">+468 bps</span></td>
+              <td><span class="badge badge-bull">+8503 bps</span></td>
+              <td class="col-est">36.03%</td>
+            </tr>
+            <tr>
+              <td><span class="tip" title="Operating expenses including Research &amp; Development ($24.89M) and SG&amp;A ($11.86M)." data-tip="Total Operating Expenses ($M): Total operational expenditure to support silicon photonics design and corporate growth.">Total Operating Expenses ($M)</span></td>
+              <td>$32.20</td>
+              <td>$33.59</td>
+              <td>$30.41</td>
+              <td>$37.08</td>
+              <td class="col-q0">$36.75</td>
+              <td><span class="badge badge-bull">-0.89%</span></td>
+              <td><span class="badge badge-warn">+14.13%</span></td>
+              <td class="col-est">$36.50</td>
+            </tr>
+            <tr>
+              <td><span class="tip" title="Operating Income (EBIT): Gross Profit minus Operating Expenses ($2.19M - $36.75M = -$34.56M)." data-tip="GAAP Operating Income / EBIT ($M): Core operating loss before interest and tax adjustments.">GAAP Operating Income / EBIT ($M)</span></td>
+              <td>($34.92)</td>
+              <td>($33.16)</td>
+              <td>($29.09)</td>
+              <td>($35.14)</td>
+              <td class="col-q0">($34.56)</td>
+              <td><span class="badge badge-bull">+1.65%</span></td>
+              <td><span class="badge badge-bull">+1.03%</span></td>
+              <td class="col-est">($34.05)</td>
+            </tr>
+            <tr>
+              <td><span class="tip" title="GAAP Net Income: Bottom-line income including non-cash warrant revaluations and interest." data-tip="GAAP Net Income ($M): Net profit/loss attributable to common stockholders.">GAAP Net Income ($M)</span></td>
+              <td>($192.74)</td>
+              <td>$107.50</td>
+              <td>($25.31)</td>
+              <td>($34.98)</td>
+              <td class="col-q0">($79.62)</td>
+              <td><span class="badge badge-warn">-127.62%</span></td>
+              <td><span class="badge badge-bull">+58.69%</span></td>
+              <td class="col-est">($35.00)</td>
+            </tr>
+            <tr>
+              <td><span class="tip" title="Adjusted Diluted Earnings Per Share excluding Stock-Based Compensation and warrant adjustments." data-tip="Diluted EPS — Non-GAAP ($/sh): Headline benchmark metric tracked by sell-side analysts.">Diluted EPS — Non-GAAP ($/sh)</span></td>
+              <td>-$0.58</td>
+              <td>-$0.52</td>
+              <td>-$0.45</td>
+              <td>-$0.44</td>
+              <td class="col-q0">-$0.41</td>
+              <td><span class="badge badge-bull">+6.82%</span></td>
+              <td><span class="badge badge-bull">+29.31%</span></td>
+              <td class="col-est">-$0.43</td>
+            </tr>
+
+            <!-- CASH FLOW & FCF METRICS -->
+            <tr class="section-divider">
+              <td colspan="9">Cash Flow, CapEx &amp; Free Cash Flow Bridge</td>
+            </tr>
+            <tr>
+              <td><span class="tip" title="Cash flow generated from commercial customer collections and milestones." data-tip="Operating Cash Flow (OCF) ($M): Pure operational cash burn prior to capital additions.">Operating Cash Flow (OCF) ($M)</span></td>
+              <td>($29.82)</td>
+              <td>($32.31)</td>
+              <td>($22.15)</td>
+              <td>($25.85)</td>
+              <td class="col-q0" style="color:var(--bear-red);">($31.17)</td>
+              <td><span class="badge badge-warn">-20.58%</span></td>
+              <td><span class="badge badge-neutral">-4.53%</span></td>
+              <td class="col-est">($29.50)</td>
+            </tr>
+            <tr>
+              <td><span class="tip" title="Capital Expenditures on laboratory equipment, silicon photonics tools, and computer hardware." data-tip="Capital Expenditures (CapEx) ($M): Cash spent on property and testing equipment additions.">Capital Expenditures (CapEx) ($M)</span></td>
+              <td>($1.37)</td>
+              <td>($1.27)</td>
+              <td>($1.51)</td>
+              <td>($2.23)</td>
+              <td class="col-q0">($0.18)</td>
+              <td><span class="badge badge-bull">-91.93%</span></td>
+              <td><span class="badge badge-bull">-86.86%</span></td>
+              <td class="col-est">($0.50)</td>
+            </tr>
+            <tr>
+              <td><span class="tip" title="Operating Cash Flow minus Capital Expenditures (-$31.17M - $0.18M = -$31.35M)." data-tip="Reported Free Cash Flow (FCF) ($M): Unlevered cash burn after all physical capital investments.">Reported Free Cash Flow (FCF) ($M)</span></td>
+              <td>($31.19)</td>
+              <td>($33.59)</td>
+              <td>($23.66)</td>
+              <td>($28.07)</td>
+              <td class="col-q0" style="color:var(--bear-red);">($31.35)</td>
+              <td><span class="badge badge-warn">-11.69%</span></td>
+              <td><span class="badge badge-neutral">-0.51%</span></td>
+              <td class="col-est">($30.00)</td>
+            </tr>
+            <tr>
+              <td><span class="tip" title="Non-cash equity compensation grants awarded to photonics engineers and executive staff." data-tip="Stock-Based Compensation (SBC) ($M): Non-cash equity compensation grants.">Stock-Based Compensation (SBC) ($M)</span></td>
+              <td>$6.02</td>
+              <td>$5.94</td>
+              <td>$5.32</td>
+              <td>$9.37</td>
+              <td class="col-q0">$8.51</td>
+              <td><span class="badge badge-bull">-9.18%</span></td>
+              <td><span class="badge badge-warn">+41.36%</span></td>
+              <td class="col-est">$8.00</td>
+            </tr>
+            <tr>
+              <td><span class="tip" title="True Economic Free Cash Flow: Reported FCF minus Stock-Based Compensation (-$31.35M - $8.51M = -$39.86M)." data-tip="True / Effective FCF ($M): FCF after deducting SBC to treat equity compensation as an economic cash expense.">True / Effective FCF (FCF less SBC) ($M)</span></td>
+              <td>($37.21)</td>
+              <td>($39.53)</td>
+              <td>($28.98)</td>
+              <td>($37.44)</td>
+              <td class="col-q0" style="color:var(--bear-red);">($39.86)</td>
+              <td><span class="badge badge-warn">-6.46%</span></td>
+              <td><span class="badge badge-neutral">-7.12%</span></td>
+              <td class="col-est">($38.00)</td>
+            </tr>
+
+            <!-- BALANCE SHEET & LIQUIDITY PROFILE -->
+            <tr class="section-divider">
+              <td colspan="9">Balance Sheet &amp; Liquidity Profile</td>
+            </tr>
+            <tr>
+              <td><span class="tip" title="Total cash, cash equivalents, and short-term investments at quarter end." data-tip="Cash, Equivalents &amp; ST Investments ($M): Total liquid reserves. Stood at $177.88M as of June 30, 2026.">Cash, Equivalents &amp; ST Investments ($M)</span></td>
+              <td>$49.85</td>
+              <td>$48.89</td>
+              <td>$121.90</td>
+              <td>$99.51</td>
+              <td class="col-q0">$177.88</td>
+              <td><span class="badge badge-bull">+78.76%</span></td>
+              <td><span class="badge badge-bull">+256.83%</span></td>
+              <td class="col-est">$150.00</td>
+            </tr>
+            <tr>
+              <td><span class="tip" title="Total debt obligations including convertible notes on the balance sheet." data-tip="Total Debt ($M): Outstanding debt notes. Stood at $102.37M as of June 30, 2026.">Total Debt ($M)</span></td>
+              <td>$1.83</td>
+              <td>$6.12</td>
+              <td>$102.39</td>
+              <td>$102.06</td>
+              <td class="col-q0">$102.37</td>
+              <td><span class="badge badge-neutral">+0.30%</span></td>
+              <td><span class="badge badge-warn">Refinanced</span></td>
+              <td class="col-est">$102.00</td>
+            </tr>
+            <tr>
+              <td><span class="tip" title="Net Debt = Total Debt ($102.37M) minus Cash &amp; ST Investments ($177.88M)." data-tip="Net Debt / (Net Cash) ($M): Negative value denotes a net cash surplus of $75.51M.">Net Debt / (Net Cash) ($M)</span></td>
+              <td>($48.02)</td>
+              <td>($42.77)</td>
+              <td>($19.51)</td>
+              <td>$2.55</td>
+              <td class="col-q0" style="color:var(--bull-green);">($75.51)</td>
+              <td><span class="badge badge-bull">Net Cash Restored</span></td>
+              <td><span class="badge badge-bull">+57.25%</span></td>
+              <td class="col-est">($48.00)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 4. ROW 3: FORENSIC CALLOUT CARD -->
+    <section class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title"><span class="card-title-accent"></span>Outlier &amp; Accounting Quality Audit (Q2 2026 Forensic Review)</div>
+          <div class="card-subtitle">Forensic deconstruction of GAAP Operating vs. Net Income, 4D FMCW commercial ramp, and cash runway sustainability</div>
+        </div>
+        <span class="badge badge-bull">ACCOUNTING AUDIT VERIFIED</span>
+      </div>
+
+      <div class="forensic-grid">
+        <div class="forensic-list">
+          <div class="forensic-item" style="border-left-color: var(--warn-amber);">
+            <div class="forensic-item-title">
+              <span>1. GAAP Operating Loss (-$34.56M) vs. Net Loss (-$79.62M): Warrant Mark-to-Market Impact</span>
+              <span class="badge badge-warn">NON-CASH EXPENSES</span>
+            </div>
+            <p>
+              Aeva's divergence between GAAP Operating Loss (-$34.56M) and GAAP Net Loss (-$79.62M) is primarily caused by non-operating accounting items, including <strong>non-cash fair value mark-to-market adjustments on private placement warrants</strong> and financing debt issuance charges. Core underlying operating cash burn remained contained at <strong>-$31.17M</strong> (or -31 rounded in millions), confirming that headline net losses do not reflect accelerated cash outflows.
+            </p>
+          </div>
+
+          <div class="forensic-item" style="border-left-color: var(--bull-green);">
+            <div class="forensic-item-title">
+              <span>2. Turnaround to Positive Gross Profit ($2.19M) and Expanding Gross Margin (35.67%)</span>
+              <span class="badge badge-bull">35.67% GAAP GM</span>
+            </div>
+            <p>
+              In Q2 2026, Aeva generated <strong>$2.19M in GAAP Gross Profit</strong>, marking a substantial operational improvement from -$2.72M in Q2 2025. This 8,503 bps gross margin expansion to <strong>35.67%</strong> was driven by a favorable shift toward higher-margin Professional Services NRE revenue ($3.64M, 59.3% of revenue) alongside yield improvements on Atlas 4D sensor manufacturing lines.
+            </p>
+          </div>
+
+          <div class="forensic-item" style="border-left-color: var(--accent-blue);">
+            <div class="forensic-item-title">
+              <span>3. Silicon Photonics Integration (FMCW 4D Advantage vs. Time-of-Flight)</span>
+              <span class="badge badge-blue">PROPRIETARY SILICON</span>
+            </div>
+            <p>
+              Unlike legacy pulsed Time-of-Flight (ToF) sensors susceptible to sunlight blooming and multi-sensor crosstalk, Aeva's proprietary <strong>Frequency Modulated Continuous Wave (FMCW)</strong> architecture directly measures instantaneous velocity (Doppler effect) per pixel alongside 3D spatial coordinates. By integrating lasers, detectors, and optical processing into a single silicon photonics chip, Aeva reduces bill-of-materials cost toward commercial serial production targets.
+            </p>
+          </div>
+
+          <div class="forensic-item" style="border-left-color: var(--bull-green);">
+            <div class="forensic-item-title">
+              <span>4. Fabless Capital Model &amp; Liquidity Runway ($177.88M Cash Reserves)</span>
+              <span class="badge badge-bull">RUNWAY TO 2027</span>
+            </div>
+            <p>
+              Operating Cash Flow burn was -$31.17M while CapEx was restricted to just <strong>$0.18M (2.93% of revenue)</strong>, showcasing the financial agility of Aeva's outsourced silicon fab model. Following recent convertible financing and strategic investments, total cash and short-term investments rose to <strong>$177.88M</strong>, providing approximately <strong>5.7 quarters of operational runway</strong> to reach automotive Start-of-Production (SOP).
+            </p>
+          </div>
+        </div>
+
+        <!-- RIGHT SIDE: REPORTED FCF VS TRUE FCF RECONCILIATION -->
+        <div class="fcf-bridge-box">
+          <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border-color);padding-bottom:10px;">
+            <span style="font-weight:700;font-size:13.5px;text-transform:uppercase;letter-spacing:0.04em;">Forensic Cash Flow Bridge: Reported vs. Effective FCF</span>
+            <span class="badge badge-bull">Q2 2026 ACTUAL</span>
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Cash Flow Component</th>
+                <th>Q2 2025</th>
+                <th>Q1 2026</th>
+                <th>Q2 2026</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>GAAP Operating Cash Flow (OCF)</td>
+                <td>($29.82M)</td>
+                <td>($25.85M)</td>
+                <td class="col-q0" style="color:var(--bear-red);">($31.17M)</td>
+              </tr>
+              <tr>
+                <td>Less: Capital Expenditures (CapEx)</td>
+                <td>($1.37M)</td>
+                <td>($2.23M)</td>
+                <td class="col-q0">($0.18M)</td>
+              </tr>
+              <tr>
+                <td><strong>Reported Free Cash Flow (Non-GAAP)</strong></td>
+                <td><strong>($31.19M)</strong></td>
+                <td><strong>($28.07M)</strong></td>
+                <td class="col-q0" style="color:var(--bear-red);"><strong>($31.35M)</strong></td>
+              </tr>
+              <tr>
+                <td>Less: Stock-Based Compensation (SBC)</td>
+                <td>($6.02M)</td>
+                <td>($9.37M)</td>
+                <td class="col-q0">($8.51M)</td>
+              </tr>
+              <tr>
+                <td>Less: Finance Lease Principal Payments</td>
+                <td>($0.0M)</td>
+                <td>($0.0M)</td>
+                <td class="col-q0">($0.0M)</td>
+              </tr>
+              <tr>
+                <td><strong>True / Effective Economic FCF</strong></td>
+                <td style="color:var(--bear-red);"><strong>($37.21M)</strong></td>
+                <td style="color:var(--bear-red);"><strong>($37.44M)</strong></td>
+                <td class="col-q0" style="color:var(--bear-red);"><strong>($39.86M)</strong></td>
+              </tr>
+              <tr>
+                <td>Effective FCF Margin (% of Revenue)</td>
+                <td>-675.3%</td>
+                <td>-598.1%</td>
+                <td class="col-q0" style="color:var(--bear-red);">-649.2%</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div style="background:rgba(30,58,138,0.25);border:1px solid rgba(59,130,246,0.3);border-radius:6px;padding:12px;font-size:12.3px;color:var(--text-secondary);">
+            <strong style="color:#93c5fd;display:block;margin-bottom:4px;">PM Forensic Takeaway — Commercial Validation Bridge:</strong>
+            Aeva is navigating the capital-intensive bridge from pre-production engineering to automotive serial volume. With <strong>$177.88M in cash and investments</strong>, gross margin turning positive (+35.67%), and Daimler Truck series production targeted for 2026–2027, the stock's elevated short interest (18.62%) and options-implied move (±24.05%) frame an asymmetric setup heading into the Nov 4 AMC release.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. ROW 4: 2-COLUMN SPLIT (EXECUTION AUDIT: RIGHT VS WRONG) -->
+    <section class="split-2col">
+      <!-- LEFT CARD: WHAT MANAGEMENT DID RIGHT -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><span class="card-title-accent" style="background-color:var(--bull-green);"></span>What Management Did Right (Operational Wins)</div>
+          <span class="badge badge-bull">EXECUTION POSITIVES</span>
+        </div>
+        <div class="audit-list">
+          <div class="audit-point audit-point-bull">
+            <div class="audit-point-header">
+              <span class="audit-point-title">1. Daimler Truck Serial Production Milestone Achievement</span>
+              <span class="badge badge-bull">TIER 1 VALIDATION</span>
+            </div>
+            <p>
+              Secured deep integration as the primary production-intent long-range LiDAR supplier for Daimler Truck's autonomous commercial freight platform (Torc Robotics), validating FMCW performance over multi-hundred-meter operational ranges.
+            </p>
+          </div>
+          <div class="audit-point audit-point-bull">
+            <div class="audit-point-header">
+              <span class="audit-point-title">2. Commercial Gross Margin Turnaround to +35.67%</span>
+              <span class="badge badge-bull">MARGIN REVERSAL</span>
+            </div>
+            <p>
+              Eliminated negative gross margins (-49.4% in Q2 2025) to reach +35.67% in Q2 2026, demonstrating that engineering milestone payments and optimized Atlas sensor yields can support positive unit economics prior to mass volume scale.
+            </p>
+          </div>
+          <div class="audit-point audit-point-bull">
+            <div class="audit-point-header">
+              <span class="audit-point-title">3. Industrial &amp; Metrology Non-Automotive Expansion</span>
+              <span class="badge badge-bull">NON-AUTO TAM</span>
+            </div>
+            <p>
+              Diversified top-line opportunities by deploying high-precision 4D LiDAR sensors into industrial automation and automated manufacturing quality control, shortening revenue realization cycles relative to multi-year automotive homologation programs.
+            </p>
+          </div>
+          <div class="audit-point audit-point-bull">
+            <div class="audit-point-header">
+              <span class="audit-point-title">4. Proactive Balance Sheet Fortification ($177.88M Cash Reserves)</span>
+              <span class="badge badge-bull">LIQUIDITY BUFFER</span>
+            </div>
+            <p>
+              Bolstered cash and short-term investments to $177.88M through structured non-dilutive convertible instruments and strategic automotive funding, insulating the company from immediate capital market dilution.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT CARD: WHAT MANAGEMENT FACES / EXECUTION DRAGS -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><span class="card-title-accent" style="background-color:var(--bear-red);"></span>Key Headwinds &amp; Valuation Sensitivities</div>
+          <span class="badge badge-warn">POTENTIAL HEADWINDS</span>
+        </div>
+        <div class="audit-list">
+          <div class="audit-point audit-point-bear">
+            <div class="audit-point-header">
+              <span class="audit-point-title">1. Automotive OEM SOP Delays &amp; Extended Qualification Timelines</span>
+              <span class="badge badge-bear">TIMELINE RISK</span>
+            </div>
+            <p>
+              Global automotive passenger OEMs continue to recalibrate autonomous Level 3/Level 4 timelines, risking potential program schedule slippages that could extend pre-revenue cash burn windows.
+            </p>
+          </div>
+          <div class="audit-point audit-point-bear">
+            <div class="audit-point-header">
+              <span class="audit-point-title">2. Substantial Operating Cash Outflows (~$31M/Quarter Burn Rate)</span>
+              <span class="badge badge-bear">CASH BURN</span>
+            </div>
+            <p>
+              Operating cash burn remained at -$31.17M in Q2 2026. Without sequential revenue acceleration in 2027, the current cash runway of ~5.7 quarters will require further balance-sheet refinancing or equity taps.
+            </p>
+          </div>
+          <div class="audit-point audit-point-bear">
+            <div class="audit-point-header">
+              <span class="audit-point-title">3. Intensive Stock-Based Compensation Dilution ($8.51M/Quarter)</span>
+              <span class="badge badge-warn">SBC DILUTION</span>
+            </div>
+            <p>
+              Non-cash equity compensation of $8.51M represents 138.6% of quarterly top-line revenue, driving steady share dilution for common equity holders despite non-GAAP adjustments.
+            </p>
+          </div>
+          <div class="audit-point audit-point-bear">
+            <div class="audit-point-header">
+              <span class="audit-point-title">4. Competitive Bidding from Established LiDAR Suppliers</span>
+              <span class="badge badge-warn">PRICE COMPETITION</span>
+            </div>
+            <p>
+              Competition from low-cost Chinese LiDAR suppliers (Hesai, RoboSense) and Western competitors (Ouster, Luminar) in both ADAS and industrial markets pressures sensor ASPs.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. ROW 5: 2-COLUMN SPLIT (COMPETITIVE PEER MATRIX & PRODUCT CATALYSTS) -->
+    <section class="split-2col">
+      <!-- LEFT CARD: COMPETITOR BENCHMARKING TABLE -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><span class="card-title-accent"></span>LiDAR &amp; Autonomous Sensing Peer Benchmarking</div>
+          <span class="badge badge-blue">PEER COMP MATRIX (Q2 2026)</span>
+        </div>
+
+        <div class="table-wrapper" style="margin-bottom: 14px;">
+          <table>
+            <thead>
+              <tr>
+                <th style="min-width:140px;">Ticker / Peer</th>
+                <th><span class="tip" title="Year-over-Year Revenue Growth in Q2 2026." data-tip="YoY Revenue Growth: Top-line growth compared to same quarter last year.">YoY Rev Growth</span></th>
+                <th><span class="tip" title="GAAP Gross Margin percentage." data-tip="Gross Margin: Gross profit divided by revenue.">Gross Margin</span></th>
+                <th><span class="tip" title="Quarterly Operating Cash Flow Burn." data-tip="Quarterly OCF Burn: Cash consumed by operations in Q2 2026.">Q2 OCF Burn</span></th>
+                <th><span class="tip" title="Total Cash and Short-Term Investments." data-tip="Cash Reserves: Total liquid reserves held at quarter end.">Cash Reserves</span></th>
+                <th><span class="tip tip-right" title="Short Interest percentage of public float." data-tip="Short Float: Percentage of float sold short.">Short Float</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong style="color:var(--accent-blue);">AEVA (Aeva Tech)</strong></td>
+                <td><span class="badge badge-bull">+11.4%</span></td>
+                <td><strong style="color:var(--bull-green);">35.67%</strong></td>
+                <td><span style="color:var(--bear-red);">-$31.17M</span></td>
+                <td><strong style="color:var(--bull-green);">$177.88M</strong></td>
+                <td style="color:var(--warn-amber);">{short_float:.2f}%</td>
+              </tr>
+              <tr>
+                <td><strong>OUST (Ouster)</strong></td>
+                <td><span class="badge badge-bull">+38.5%</span></td>
+                <td>38.20%</td>
+                <td>-$9.40M</td>
+                <td>$186.20M</td>
+                <td>12.40%</td>
+              </tr>
+              <tr>
+                <td><strong>LAZR (Luminar)</strong></td>
+                <td><span class="badge badge-neutral">+2.8%</span></td>
+                <td>-32.40%</td>
+                <td>-$54.10M</td>
+                <td>$165.50M</td>
+                <td>24.80%</td>
+              </tr>
+              <tr>
+                <td><strong>HSAI (Hesai Group)</strong></td>
+                <td><span class="badge badge-bull">+22.4%</span></td>
+                <td>42.10%</td>
+                <td>+$8.20M</td>
+                <td>$410.00M</td>
+                <td>4.50%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="audit-list">
+          <div class="audit-point" style="border-left: 3px solid var(--accent-blue);">
+            <div class="audit-point-header">
+              <span class="audit-point-title">4D FMCW Technological Moat &amp; Commercial Differentiation</span>
+              <span class="badge badge-bull">DOPPLER VELOCITY</span>
+            </div>
+            <p>
+              • <strong>Instantaneous Velocity Vectoring:</strong> Unlike time-of-flight competitors requiring consecutive frame comparisons to infer velocity, Aeva's FMCW technology measures velocity at each point cloud return, reducing autonomous perception latency by ~100 milliseconds.<br>
+              • <strong>Automotive Silicon Integration:</strong> Core chip packaging integrates raw optics and signal processing into silicon, setting the stage for sub-$500 bill-of-materials at mass scale.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT CARD: PRODUCT PIPELINE & MARKET SHARE CATALYSTS -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><span class="card-title-accent"></span>Product Pipeline &amp; Growth Catalysts (Next 2–4 Qtrs)</div>
+          <span class="badge badge-bull">PIPELINE CATALYSTS</span>
+        </div>
+
+        <div class="catalyst-grid">
+          <div class="catalyst-card">
+            <div class="audit-point-header">
+              <span class="audit-point-title">1. Atlas 4D LiDAR Automotive Production Readiness</span>
+              <span class="badge badge-bull">SOP PROGRAM</span>
+            </div>
+            <p>
+              Finalizing automotive-grade PPAP (Production Part Approval Process) validation for the Atlas 4D sensor, targeting commercial vehicle series production launches through 2026–2027.
+            </p>
+          </div>
+          <div class="catalyst-card">
+            <div class="audit-point-header">
+              <span class="audit-point-title">2. Torc Robotics / Daimler Truck Fleet Expansion</span>
+              <span class="badge badge-blue">COMMERCIAL FREIGHT</span>
+            </div>
+            <p>
+              Expanding autonomous pilot runs across U.S. long-haul freight corridors with Torc Robotics, establishing real-world mileage validation in inclement weather and high-speed highway conditions.
+            </p>
+          </div>
+          <div class="catalyst-card">
+            <div class="audit-point-header">
+              <span class="audit-point-title">3. Industrial Metrology &amp; Non-Automotive Commercial Orders</span>
+              <span class="badge badge-bull">SHORT-CYCLE REVENUE</span>
+            </div>
+            <p>
+              Scaling automated optical inspection sensor sales to global industrial automation customers, capturing high-margin cash flow independent of automotive model release cycles.
+            </p>
+          </div>
+          <div class="catalyst-card">
+            <div class="audit-point-header">
+              <span class="audit-point-title">4. Strategic Passenger Vehicle Tier 1 OEM Design Wins</span>
+              <span class="badge badge-bull">PASSENGER TAM</span>
+            </div>
+            <p>
+              Active RFI/RFQ engagements with top-10 global automotive manufacturers seeking next-generation FMCW sensors for highway autonomy Level 3 driver-assistance suites.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. ROW 6: MULTI-SOURCE SENTIMENT ANALYSIS CARD -->
+    <section class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title"><span class="card-title-accent"></span>Multi-Source Pre-Earnings Sentiment Analysis (The 4 Institutional &amp; Retail Pillars)</div>
+          <div class="card-subtitle">Triangulating Options Flow, Sell-Side Revisions, Short Interest Positioning, and Commercial Channel Checks ahead of Nov 4, 2026 AMC Release.</div>
+        </div>
+        <span class="badge badge-warn">COMPOSITE SCORE: 54 / 100 (NEUTRAL / SQUEEZE POTENTIAL)</span>
+      </div>
+
+      <div class="sentiment-overview-banner">
+        <div>
+          <div style="font-weight:700;font-size:14px;color:var(--text-primary);margin-bottom:3px;">
+            Market Consensus: Critical Operational Execution Quarter Ahead of Mass Production
+          </div>
+          <div style="font-size:12.5px;color:var(--text-secondary);">
+            Options positioning shows elevated volatility pricing with an <strong>ATM Implied Move of ±24.05%</strong> and a <strong>Put/Call Open Interest Ratio of 1.50</strong>, indicating substantial downside protection buying against an <strong>18.62% short float</strong>.
+          </div>
+        </div>
+        <div class="delta-pair">
+          <span class="badge badge-warn">Short Float: 18.62% (High Squeeze Risk)</span>
+          <span class="badge badge-warn">Options: Put Hedging (PCR 1.50)</span>
+        </div>
+      </div>
+
+      <div class="sentiment-grid">
+        <!-- SOURCE 1: OPTIONS MARKET -->
+        <div class="sentiment-source-card">
+          <div class="audit-point-header">
+            <span class="audit-point-title">Source #1: Options Market &amp; Volatility Pricing <span class="badge badge-blue">REAL CAPITAL</span></span>
+            <span class="badge badge-warn">SCORE: 52 / 100 (HEDGING BIAS)</span>
+          </div>
+          <div class="sentiment-meter-wrap">
+            <div class="sentiment-bar-bg">
+              <div class="sentiment-bar-fill" style="width: 52%; background-color: var(--warn-amber);"></div>
+            </div>
+          </div>
+          <p style="font-size:12.5px;color:var(--text-secondary);">
+            • <strong>Put/Call OI Ratio:</strong> <span class="mono">1.50x</span> (Elevated open interest in $10 and $7.50 strike protective puts)<br>
+            • <strong>ATM Implied Move:</strong> <span class="mono">±24.05% (±${opt_move_usd:.2f} / sh)</span> pricing in a substantial post-earnings breakout swing<br>
+            • <strong>30-Day Implied Volatility:</strong> <span class="mono">{iv_pct:.1f}%</span> (Reflects wide binary distribution around commercial delivery updates)
+          </p>
+        </div>
+
+        <!-- SOURCE 2: SELL-SIDE REVISIONS -->
+        <div class="sentiment-source-card">
+          <div class="audit-point-header">
+            <span class="audit-point-title">Source #2: Sell-Side Revision Breadth &amp; Consensus <span class="badge badge-blue">ESTIMATE TREND</span></span>
+            <span class="badge badge-bull">SCORE: 58 / 100 (STABLE BASE)</span>
+          </div>
+          <div class="sentiment-meter-wrap">
+            <div class="sentiment-bar-bg">
+              <div class="sentiment-bar-fill" style="width: 58%; background-color: var(--bull-green);"></div>
+            </div>
+          </div>
+          <p style="font-size:12.5px;color:var(--text-secondary);">
+            • <strong>30-Day Revisions:</strong> Top-line expectations nudged upward +3.2% to $6.80M on milestone delivery progress<br>
+            • <strong>Consensus EPS:</strong> <span class="mono">-$0.43 Non-GAAP</span> (Whisper: -$0.40)<br>
+            • <strong>Wall Street Rating Breakdown:</strong> 4 Buy | 2 Hold | 0 Sell • Consensus Target: <span class="mono">$14.20</span>
+          </p>
+        </div>
+
+        <!-- SOURCE 3: RETAIL & CHANNELS -->
+        <div class="sentiment-source-card">
+          <div class="audit-point-header">
+            <span class="audit-point-title">Source #3: Retail Community &amp; Channel Sentiment <span class="badge badge-blue">MOMENTUM</span></span>
+            <span class="badge badge-warn">SCORE: 51 / 100 (DIVIDED)</span>
+          </div>
+          <div class="sentiment-meter-wrap">
+            <div class="sentiment-bar-bg">
+              <div class="sentiment-bar-fill" style="width: 51%; background-color: var(--warn-amber);"></div>
+            </div>
+          </div>
+          <p style="font-size:12.5px;color:var(--text-secondary);">
+            • <strong>Retail FinTwit Sentiment:</strong> Bullish on 4D FMCW technological supremacy, balanced by skepticism over autonomous trucking timelines<br>
+            • <strong>Short Squeeze Interest:</strong> Active monitoring across retail forums tracking 18.62% short interest
+          </p>
+        </div>
+
+        <!-- SOURCE 4: INSTITUTIONAL OWNERSHIP -->
+        <div class="sentiment-source-card">
+          <div class="audit-point-header">
+            <span class="audit-point-title">Source #4: Strategic Corporate &amp; Institutional Backing <span class="badge badge-blue">SMART MONEY</span></span>
+            <span class="badge badge-bull">SCORE: 55 / 100 (LONG-TERM SUPPORT)</span>
+          </div>
+          <div class="sentiment-meter-wrap">
+            <div class="sentiment-bar-bg">
+              <div class="sentiment-bar-fill" style="width: 55%; background-color: var(--bull-green);"></div>
+            </div>
+          </div>
+          <p style="font-size:12.5px;color:var(--text-secondary);">
+            • <strong>Strategic Backers:</strong> Substantial equity ownership by strategic automotive partners (Daimler Truck, Porsche SE)<br>
+            • <strong>Institutional Float:</strong> Approximately 48.2% held by institutional asset managers
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. ROW 7: HEDGE FUND PM TRADE EXECUTION MATRIX -->
+    <section class="card">
+      <div class="card-header">
+        <div>
+          <div class="card-title"><span class="card-title-accent"></span>Hedge Fund PM Post-Earnings Trade Execution Matrix (Q3 2026 Print Playbook)</div>
+          <div class="card-subtitle">Exact quantitative post-print triggers for BUY (Bull Case), HOLD/FADE (Base Case), and SELL/SHORT (Bear Case) following the Nov 4, 2026 AMC release</div>
+        </div>
+        <span class="badge badge-blue">PM PLAYBOOK • Q3 2026 RELEASE</span>
+      </div>
+
+      <div class="playbook-setup-bar">
+        <div>
+          <span class="strip-label">Institutional Positioning</span>
+          <div class="strip-val" style="margin-top:3px;">Heavily Shorted / Asymmetric Upside Squeeze</div>
+          <span class="kpi-sub">18.62% short float with high options implied volatility (102.6%).</span>
+        </div>
+        <div>
+          <span class="strip-label">Valuation Multiple Context</span>
+          <div class="strip-val" style="margin-top:3px;color:var(--warn-amber);">34.89x P/S TTM / Negative P/E</div>
+          <span class="kpi-sub">Reflects pre-revenue commercial stage; valuation governed by SOP milestones and cash runway.</span>
+        </div>
+        <div>
+          <span class="strip-label">Primary Earnings Debate</span>
+          <div class="strip-val" style="margin-top:3px;">Daimler Truck SOP Timing &amp; Cash Burn</div>
+          <span class="kpi-sub">Can gross margin remain above 30% while quarterly burn rate stabilizes below $30M?</span>
+        </div>
+        <div>
+          <span class="strip-label">Implied Move Calibration</span>
+          <div class="strip-val" style="margin-top:3px;color:var(--bull-green);">±24.05% (±$2.60 / sh)</div>
+          <span class="kpi-sub">ATM straddle indicates market expecting a wide post-earnings move between $8.20 and $13.40.</span>
+        </div>
+      </div>
+
+      <div class="scenario-grid">
+        <!-- BULL CASE -->
+        <div class="scenario-card scenario-bull">
+          <div class="scenario-title">
+            <span style="color:var(--bull-green);">BUY / ADD EXPOSURE (BULL CASE)</span>
+            <span class="badge badge-bull">PROB: 35% | TARGET: $14.50–$16.50 (+34% to +53%)</span>
+          </div>
+          <ul class="trigger-list">
+            <li><strong>Revenue &amp; Milestone Beat:</strong> Q3 2026 Revenue &gt; <strong>$7.30M</strong> with Professional Services NRE accelerating &gt; <strong>$4.20M</strong>.</li>
+            <li><strong>Gross Margin Expansion:</strong> GAAP Gross Margin exceeds <strong>38.0%</strong> confirming positive manufacturing unit economics.</li>
+            <li><strong>Automotive SOP Reaffirmation:</strong> Formal management confirmation of Daimler Truck series commercial launch schedule for 2026–2027.</li>
+            <li><strong>Cash Burn Discipline:</strong> Quarterly Operating Cash Flow burn narrows below <strong>-$27.0M</strong>, extending cash runway into 2028.</li>
+          </ul>
+          <div class="trade-structure">
+            <strong>Recommended Trade Structure:</strong>
+            Buy post-print momentum above $12.50 on high volume or initiate a <strong>Nov 20, 2026 $11 / $15 Bull Call Spread</strong> to capture short-squeeze upside while capping IV premium decay.
+          </div>
+        </div>
+
+        <!-- BASE CASE -->
+        <div class="scenario-card scenario-base">
+          <div class="scenario-title">
+            <span style="color:var(--warn-amber);">HOLD / RANGE-BOUND (BASE CASE)</span>
+            <span class="badge badge-warn">PROB: 45% | RANGE: $9.50–$12.00 (-12% to +11%)</span>
+          </div>
+          <ul class="trigger-list">
+            <li><strong>In-Line Revenue Delivery:</strong> Q3 2026 Revenue prints between <strong>$6.50M – $7.00M</strong>.</li>
+            <li><strong>Stable Gross Margin:</strong> GAAP Gross Margin holds between <strong>33.0% – 36.0%</strong>.</li>
+            <li><strong>Steady Cash Burn:</strong> Quarterly OCF burn prints between <strong>-$29.0M to -$32.0M</strong>, keeping liquidity runway on track.</li>
+            <li><strong>Program Milestones Reaffirmed:</strong> Engineering progress reiterated without new commercial OEM contract announcements.</li>
+          </ul>
+          <div class="trade-structure">
+            <strong>Recommended Trade Structure:</strong>
+            Sell an <strong>Nov 20, 2026 $8 / $14 Strangle</strong> or Iron Condor to capture post-earnings implied volatility crush.
+          </div>
+        </div>
+
+        <!-- BEAR CASE -->
+        <div class="scenario-card scenario-bear">
+          <div class="scenario-title">
+            <span style="color:var(--bear-red);">REDUCE / HEDGE (BEAR CASE)</span>
+            <span class="badge badge-bear">PROB: 20% | TARGET: $6.50–$7.50 (-31% to -40%)</span>
+          </div>
+          <ul class="trigger-list">
+            <li><strong>Top-Line Miss:</strong> Q3 2026 Revenue prints &lt; <strong>$6.00M</strong> due to delayed customer integration milestones.</li>
+            <li><strong>Gross Margin Reversal:</strong> Gross Margin falls back below <strong>20.0%</strong> on manufacturing tooling write-downs.</li>
+            <li><strong>Accelerated Cash Burn:</strong> Quarterly OCF burn widens beyond <strong>-$35.0M</strong>, shortening cash runway under 4 quarters.</li>
+            <li><strong>Program Delay:</strong> Any announced slippage in Daimler Truck commercial deployment timelines.</li>
+          </ul>
+          <div class="trade-structure">
+            <strong>Recommended Trade Structure:</strong>
+            Hedge long positions with a <strong>Nov 20, 2026 $10 / $7.50 Bear Put Spread</strong> or stop-loss trigger if spot price breaks below $9.50 support.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer-meta">
+      CONFIDENTIAL • INSTITUTIONAL TECHNOLOGY RESEARCH • DATA VERIFIED VIA SEC FORM 10-Q / 10-K FILINGS (Q2 2025 – Q2 2026 ACTUALS) &amp; Q3 2026 CONSENSUS • HOVER OVER ANY UNDERLINED TERM FOR DEFINITIONS
+    </div>
+"""
+
+draft = {
+    "header": {
+        "page_title": "AEVA — Pre-Earnings Forensic & Sentiment Tearsheet (Upcoming: Q3 2026 | Last Reported: Q2 2026)",
+        "ticker": "AEVA",
+        "company_name": "Aeva Technologies, Inc.",
+        "earnings_date": "2026-11-04",
+        "spot_price_num": spot_price,
+        "market_cap_num": float(mkt_cap_m * 1e6),
+        "enterprise_value_num": float(ev_m * 1e6)
+    },
+    "kpi_cards": {
+        "card_a_cash_flow": {
+            "q2_2026_ocf_m": ocf[4],
+            "q2_2026_capex_m": capex[4],
+            "q2_2026_reported_fcf_m": rep_fcf[4],
+            "q2_2026_true_fcf_m": true_fcf[4],
+            "capex_to_rev_pct": 2.93,
+            "sbc_to_rev_pct": 138.6
+        },
+        "card_b_debt_liquidity": {
+            "cash_and_st_inv_m": cash_st[4],
+            "total_debt_and_leases_m": total_debt[4],
+            "net_debt_m": net_debt[4],
+            "services_mix_pct": 59.3
+        },
+        "card_c_margins": {
+            "gaap_gross_margin_pct": 35.67,
+            "gaap_operating_margin_pct": -562.87,
+            "rd_intensity_pct": 67.73,
+            "estimated_runway_quarters": 5.7
+        },
+        "card_d_multiples": {
+            "trailing_pe": trailing_pe,
+            "forward_pe": fwd_pe,
+            "price_to_sales_ttm": ps_ttm,
+            "ev_to_ebitda": ev_ebitda,
+            "short_percent_of_float": short_float
+        }
+    },
+    "historical_table": {
+        "quarters": quarters,
+        "revenue_m": total_rev,
+        "product_revenue_m": prod_rev,
+        "professional_services_revenue_m": serv_rev,
+        "gross_profit_m": gross_profit,
+        "operating_expenses_m": opex,
+        "operating_income_ebit_m": ebit,
+        "net_income_common_m": net_income,
+        "ocf_m": ocf,
+        "capex_m": capex,
+        "reported_fcf_m": rep_fcf,
+        "sbc_m": sbc,
+        "true_fcf_m": true_fcf
+    },
+    "historical_table_5q_nums": historical_table_5q_nums,
+    "forensic_callout": {
+        "fcf_bridge_q0_nums": {
+            "ocf": ocf[4], # -31.17
+            "capex": capex[4], # 0.18
+            "reported_fcf": rep_fcf[4], # -31.35
+            "sbc": sbc[4], # 8.51
+            "finance_leases": 0.0,
+            "true_fcf": true_fcf[4] # -39.86
+        },
+        "flags": [
+            "GAAP Net Loss (-$79.62M) vs. GAAP EBIT (-$34.56M) reflects non-cash warrant revaluations and non-operating financing charges",
+            "Turnaround to positive GAAP Gross Profit ($2.19M, 35.67% Gross Margin) driven by higher-margin Professional Services NRE mix",
+            "Proprietary 4D FMCW LiDAR technology measures instantaneous Doppler velocity per pixel with silicon photonics integration",
+            "Fabless operating model preserves liquid cash reserves of $177.88M, providing ~5.7 quarters of runway to automotive series production"
+        ]
+    },
+    "execution_audit": {
+        "wins": [
+            "Daimler Truck and Torc Robotics autonomous commercial freight partnership validation",
+            "Turnaround to positive GAAP gross profit ($2.19M, 35.67% gross margin)",
+            "Industrial and metrology non-automotive optical inspection commercial deployments",
+            "Strong balance sheet liquidity with $177.88M in cash and short-term investments"
+        ],
+        "drags": [
+            "Extended automotive OEM commercial development and homologation timelines",
+            "Ongoing operating cash flow burn (-$31.17M in Q2 2026)",
+            "High stock-based compensation overhead ($8.51M/quarter, 138.6% of revenue)",
+            "Competitive market pricing from legacy time-of-flight LiDAR suppliers"
+        ]
+    },
+    "peer_and_catalysts": {
+        "peers": {
+            "AEVA": {"rev_growth": "+11.4%", "gross_margin": "35.67%", "q2_burn": "-$31.17M", "cash": "$177.88M", "short_float": f"{short_float:.2f}%"},
+            "OUST": {"rev_growth": "+38.5%", "gross_margin": "38.20%", "q2_burn": "-$9.40M", "cash": "$186.20M", "short_float": "12.40%"},
+            "LAZR": {"rev_growth": "+2.8%", "gross_margin": "-32.40%", "q2_burn": "-$54.10M", "cash": "$165.50M", "short_float": "24.80%"},
+            "HSAI": {"rev_growth": "+22.4%", "gross_margin": "42.10%", "q2_burn": "+$8.20M", "cash": "$410.00M", "short_float": "4.50%"}
+        },
+        "catalysts": [
+            "Atlas 4D LiDAR automotive PPAP validation and series production preparation",
+            "Torc Robotics / Daimler Truck long-haul commercial freight fleet deployment",
+            "Industrial automation and automated metrology commercial customer shipments",
+            "Top-tier automotive passenger OEM Level 3 autonomous driving design wins"
+        ]
+    },
+    "sentiment_analysis": {
+        "composite_score": 54,
+        "pillars": {
+            "options": {"score": 52, "pcr_oi": pcr_oi, "implied_move_pct": opt_move_pct, "implied_move_usd": opt_move_usd},
+            "revisions": {"score": 58, "revenue_consensus": 6.80, "eps_consensus": -0.43},
+            "retail": {"score": 51, "short_squeeze_focus": "18.62% Short Interest"},
+            "insider_whale": {"score": 55, "strategic_backers": "Daimler Truck, Porsche SE"}
+        }
+    },
+    "trade_matrix": {
+        "bull_target_low_num": 14.50,
+        "bear_target_high_num": 7.50,
+        "bull_case": {"prob": "35%", "target_range": "$14.50–$16.50", "trigger": "Q3 Rev > $7.30M, GM >= 38.0%, Daimler Truck SOP reaffirmed, Burn < $27M"},
+        "base_case": {"prob": "45%", "target_range": "$9.50–$12.00", "trigger": "Q3 Rev $6.50M–$7.00M, GM 33%–36%, Burn $29M–$32M"},
+        "bear_case": {"prob": "20%", "target_range": "$6.50–$7.50", "trigger": "Q3 Rev < $6.00M, GM < 20%, Burn > $35M, Program timeline delay"}
+    },
+    "rendered_container_html": html.strip()
+}
+
+DRAFT_PATH.write_text(json.dumps(draft, indent=2, ensure_ascii=False), encoding="utf-8")
+print(f"AEVA draft successfully written to {DRAFT_PATH}")

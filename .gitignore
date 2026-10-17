@@ -1,0 +1,18 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Environments
+.venv/
+venv/
+ENV/
+
+# Ephemeral runtime tunnels & logs
+tunnel_url.json
+*.log
+
+# System files
+.DS_Store
+Thumbs.db

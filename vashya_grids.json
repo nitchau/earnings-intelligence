@@ -1,0 +1,123 @@
+{
+  "grids": [
+    {
+      "source": "AstroYogi",
+      "rows_stand_for": "Bride",
+      "columns_stand_for": "Groom",
+      "row_headings": [
+        "Chatushpada",
+        "Human",
+        "Jalchar",
+        "Vanacara",
+        "Keet"
+      ],
+      "column_headings": [
+        "Chatushpada",
+        "Human",
+        "Jalchar",
+        "Vanacara",
+        "Keet"
+      ],
+      "cells": [
+        [
+          2,
+          1,
+          1,
+          1.5,
+          1
+        ],
+        [
+          1,
+          2,
+          1.5,
+          0,
+          1
+        ],
+        [
+          1,
+          1.5,
+          2,
+          1,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          2,
+          0
+        ],
+        [
+          1,
+          1,
+          1,
+          0,
+          2
+        ]
+      ]
+    },
+    {
+      "source": "OnlineJyotish",
+      "rows_stand_for": "Bride",
+      "columns_stand_for": "Groom",
+      "row_headings": [
+        "Chatushpada",
+        "Nara",
+        "Jalachara",
+        "Vanachara",
+        "Keeta"
+      ],
+      "column_headings": [
+        "Chatushpada",
+        "Nara",
+        "Jalachara",
+        "Vanachara",
+        "Keeta"
+      ],
+      "cells": [
+        [
+          2,
+          1,
+          1,
+          0,
+          1
+        ],
+        [
+          1,
+          2,
+          0.5,
+          0,
+          1
+        ],
+        [
+          1,
+          0.5,
+          2,
+          1,
+          1
+        ],
+        [
+          0,
+          0,
+          1,
+          2,
+          0
+        ],
+        [
+          1,
+          0,
+          1,
+          0,
+          2
+        ]
+      ]
+    }
+  ],
+  "notes": [
+    "Halves representation: In AstroYogi, half points are printed as decimals ('1.5'). In OnlineJyotish, half points are printed as the vulgar fraction '1/2' (for Nara-Jalachara and Jalachara-Nara), represented here numerically as 0.5.",
+    "Row/Column orientation: Both pages explicitly label the rows as 'Bride' and the columns as 'Groom' (OnlineJyotish places 'Bride \\ Groom' in the top-left cell, while AstroYogi places 'Bride' above the row labels and 'Groom' spanning the top of the columns).",
+    "Headings terminology: AstroYogi uses 'Chatushpada', 'Human', 'Jalchar', 'Vanacara', and 'Keet', whereas OnlineJyotish uses the full Sanskrit forms 'Chatushpada', 'Nara', 'Jalachara', 'Vanachara', and 'Keeta'.",
+    "Points differences between grids: (1) Chatushpada-Vanacara is 1.5 in AstroYogi vs 0 in OnlineJyotish; (2) Human/Nara-Jalchar/Jalachara is 1.5 in AstroYogi vs 1/2 (0.5) in OnlineJyotish; (3) Jalchar/Jalachara-Human/Nara is 1.5 in AstroYogi vs 1/2 (0.5) in OnlineJyotish; (4) Vanacara/Vanachara-Jalchar/Jalachara is 0 in AstroYogi vs 1 in OnlineJyotish; (5) Keet/Keeta-Human/Nara is 1 in AstroYogi vs 0 in OnlineJyotish.",
+    "All cells were readable with complete confidence."
+  ]
+}
