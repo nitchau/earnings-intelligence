@@ -1,0 +1,2392 @@
+{
+  "ticker": "IBM",
+  "company_name": "International Business Machines Corporation",
+  "sector": "Technology",
+  "industry": "Information Technology Services",
+  "schedule_verification": {
+    "earnings_date": "2026-10-21",
+    "confirmation_flag": "SCHEDULED_IN_EARNINGS_CALENDAR_VERIFY_WEBCAST_TIME",
+    "release_timing_hint": "AMC (After Market Close)",
+    "yahoo_consensus_eps": 2.87
+  },
+  "price_validation": {
+    "yahoo_spot_price": 236.39,
+    "google_finance_spot_price": null,
+    "cross_source_divergence_pct": 0.0,
+    "status": "VERIFIED"
+  },
+  "valuation_and_market": {
+    "market_cap_millions": 222711.15,
+    "enterprise_value_millions": 275936.08,
+    "trailing_pe": 21.01,
+    "forward_pe": 17.98,
+    "price_to_sales_ttm": 3.22,
+    "ev_to_ebitda": 16.75,
+    "short_percent_of_float": 2.85
+  },
+  "options_positioning": {
+    "expiry_strictly_after_earnings": "2026-10-23",
+    "pricing_method_used": "BID_ASK_MIDPOINT / BID_ASK_MIDPOINT",
+    "atm_straddle_usd": 16.3,
+    "atm_implied_move_pct": 6.9,
+    "atm_implied_volatility_pct": 75.03,
+    "put_call_oi_ratio": 0.6
+  },
+  "stitched_5q_financials": {
+    "income_statement_5q": {
+      "period_headers": [
+        "Q2 2025 (Ended Jun 30, 2025)",
+        "Q3 2025 (Ended Sep 30, 2025)",
+        "Q4 2025 (Ended Dec 31, 2025)",
+        "Q1 2026 (Ended Mar 31, 2026)",
+        "Q2 2026 (Ended Jun 30, 2026)"
+      ],
+      "metrics_millions": {
+        "Tax Effect Of Unusual Items": {
+          "values_5q_chronological": [
+            -26.6,
+            -33.31,
+            -100.75,
+            -55.18,
+            3.91
+          ],
+          "q0_latest": 3.91,
+          "qoq_change_pct": 107.09,
+          "yoy_change_pct": 114.7
+        },
+        "Tax Rate For Calcs": {
+          "values_5q_chronological": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "q0_latest": 0.0,
+          "qoq_change_pct": null,
+          "yoy_change_pct": null
+        },
+        "Normalized EBITDA": {
+          "values_5q_chronological": [
+            4543.0,
+            4323.0,
+            6311.0,
+            3579.0,
+            4283.0
+          ],
+          "q0_latest": 4283.0,
+          "qoq_change_pct": 19.67,
+          "yoy_change_pct": -5.72
+        },
+        "Total Unusual Items": {
+          "values_5q_chronological": [
+            -171.0,
+            -118.0,
+            -394.0,
+            -445.0,
+            31.0
+          ],
+          "q0_latest": 31.0,
+          "qoq_change_pct": 106.97,
+          "yoy_change_pct": 118.13
+        },
+        "Total Unusual Items Excluding Goodwill": {
+          "values_5q_chronological": [
+            -171.0,
+            -118.0,
+            -394.0,
+            -445.0,
+            31.0
+          ],
+          "q0_latest": 31.0,
+          "qoq_change_pct": 106.97,
+          "yoy_change_pct": 118.13
+        },
+        "Net Income From Continuing Operation Net Minority Interest": {
+          "values_5q_chronological": [
+            2193.0,
+            1744.0,
+            5579.0,
+            1216.0,
+            2166.0
+          ],
+          "q0_latest": 2166.0,
+          "qoq_change_pct": 78.12,
+          "yoy_change_pct": -1.23
+        },
+        "Reconciled Depreciation": {
+          "values_5q_chronological": [
+            1265.0,
+            1283.0,
+            1296.0,
+            1274.0,
+            1349.0
+          ],
+          "q0_latest": 1349.0,
+          "qoq_change_pct": 5.89,
+          "yoy_change_pct": 6.64
+        },
+        "Reconciled Cost Of Revenue": {
+          "values_5q_chronological": [
+            6060.0,
+            6017.0,
+            6793.0,
+            6027.0,
+            6284.0
+          ],
+          "q0_latest": 6284.0,
+          "qoq_change_pct": 4.26,
+          "yoy_change_pct": 3.7
+        },
+        "EBITDA": {
+          "values_5q_chronological": [
+            4372.0,
+            4205.0,
+            5917.0,
+            3134.0,
+            4314.0
+          ],
+          "q0_latest": 4314.0,
+          "qoq_change_pct": 37.65,
+          "yoy_change_pct": -1.33
+        },
+        "EBIT": {
+          "values_5q_chronological": [
+            3107.0,
+            2922.0,
+            4621.0,
+            1860.0,
+            2965.0
+          ],
+          "q0_latest": 2965.0,
+          "qoq_change_pct": 59.41,
+          "yoy_change_pct": -4.57
+        },
+        "Net Interest Income": {
+          "values_5q_chronological": [
+            -338.0,
+            -342.0,
+            -346.0,
+            -321.0,
+            -400.0
+          ],
+          "q0_latest": -400.0,
+          "qoq_change_pct": -24.61,
+          "yoy_change_pct": -18.34
+        },
+        "Interest Expense": {
+          "values_5q_chronological": [
+            510.0,
+            492.0,
+            478.0,
+            473.0,
+            486.0
+          ],
+          "q0_latest": 486.0,
+          "qoq_change_pct": 2.75,
+          "yoy_change_pct": -4.71
+        },
+        "Interest Income": {
+          "values_5q_chronological": [
+            172.0,
+            150.0,
+            132.0,
+            152.0,
+            86.0
+          ],
+          "q0_latest": 86.0,
+          "qoq_change_pct": -43.42,
+          "yoy_change_pct": -50.0
+        },
+        "Normalized Income": {
+          "values_5q_chronological": [
+            2337.4,
+            1828.69,
+            5872.25,
+            1605.82,
+            2138.91
+          ],
+          "q0_latest": 2138.91,
+          "qoq_change_pct": 33.2,
+          "yoy_change_pct": -8.49
+        },
+        "Net Income From Continuing And Discontinued Operation": {
+          "values_5q_chronological": [
+            2194.0,
+            1744.0,
+            5600.0,
+            1216.0,
+            2165.0
+          ],
+          "q0_latest": 2165.0,
+          "qoq_change_pct": 78.04,
+          "yoy_change_pct": -1.32
+        },
+        "Total Expenses": {
+          "values_5q_chronological": [
+            13892.0,
+            13538.0,
+            14837.0,
+            13699.0,
+            14317.0
+          ],
+          "q0_latest": 14317.0,
+          "qoq_change_pct": 4.51,
+          "yoy_change_pct": 3.06
+        },
+        "Diluted Average Shares": {
+          "values_5q_chronological": [
+            947.96,
+            948.93,
+            952.4,
+            952.1,
+            953.26
+          ],
+          "q0_latest": 953.26,
+          "qoq_change_pct": 0.12,
+          "yoy_change_pct": 0.56
+        },
+        "Basic Average Shares": {
+          "values_5q_chronological": [
+            930.81,
+            933.86,
+            936.5,
+            938.5,
+            941.19
+          ],
+          "q0_latest": 941.19,
+          "qoq_change_pct": 0.29,
+          "yoy_change_pct": 1.12
+        },
+        "Diluted EPS": {
+          "values_5q_chronological": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "q0_latest": 0.0,
+          "qoq_change_pct": null,
+          "yoy_change_pct": null
+        },
+        "Basic EPS": {
+          "values_5q_chronological": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "q0_latest": 0.0,
+          "qoq_change_pct": null,
+          "yoy_change_pct": null
+        },
+        "Diluted NI Availto Com Stockholders": {
+          "values_5q_chronological": [
+            2194.0,
+            1744.0,
+            5600.0,
+            1216.0,
+            2165.0
+          ],
+          "q0_latest": 2165.0,
+          "qoq_change_pct": 78.04,
+          "yoy_change_pct": -1.32
+        },
+        "Net Income Common Stockholders": {
+          "values_5q_chronological": [
+            2194.0,
+            1744.0,
+            5600.0,
+            1216.0,
+            2165.0
+          ],
+          "q0_latest": 2165.0,
+          "qoq_change_pct": 78.04,
+          "yoy_change_pct": -1.32
+        },
+        "Net Income": {
+          "values_5q_chronological": [
+            2194.0,
+            1744.0,
+            5600.0,
+            1216.0,
+            2165.0
+          ],
+          "q0_latest": 2165.0,
+          "qoq_change_pct": 78.04,
+          "yoy_change_pct": -1.32
+        },
+        "Net Income Including Noncontrolling Interests": {
+          "values_5q_chronological": [
+            2194.0,
+            1744.0,
+            5600.0,
+            1216.0,
+            2165.0
+          ],
+          "q0_latest": 2165.0,
+          "qoq_change_pct": 78.04,
+          "yoy_change_pct": -1.32
+        },
+        "Net Income Discontinuous Operations": {
+          "values_5q_chronological": [
+            1.0,
+            0.0,
+            21.0,
+            0.0,
+            -1.0
+          ],
+          "q0_latest": -1.0,
+          "qoq_change_pct": null,
+          "yoy_change_pct": -200.0
+        },
+        "Net Income Continuous Operations": {
+          "values_5q_chronological": [
+            2193.0,
+            1744.0,
+            5579.0,
+            1216.0,
+            2166.0
+          ],
+          "q0_latest": 2166.0,
+          "qoq_change_pct": 78.12,
+          "yoy_change_pct": -1.23
+        },
+        "Tax Provision": {
+          "values_5q_chronological": [
+            404.0,
+            686.0,
+            -1435.0,
+            172.0,
+            313.0
+          ],
+          "q0_latest": 313.0,
+          "qoq_change_pct": 81.98,
+          "yoy_change_pct": -22.52
+        },
+        "Pretax Income": {
+          "values_5q_chronological": [
+            2597.0,
+            2430.0,
+            4143.0,
+            1387.0,
+            2479.0
+          ],
+          "q0_latest": 2479.0,
+          "qoq_change_pct": 78.73,
+          "yoy_change_pct": -4.54
+        },
+        "Other Income Expense": {
+          "values_5q_chronological": [
+            -151.0,
+            -21.0,
+            -358.0,
+            -510.0,
+            33.0
+          ],
+          "q0_latest": 33.0,
+          "qoq_change_pct": 106.47,
+          "yoy_change_pct": 121.85
+        },
+        "Other Non Operating Income Expenses": {
+          "values_5q_chronological": [
+            20.0,
+            97.0,
+            36.0,
+            -65.0,
+            2.0
+          ],
+          "q0_latest": 2.0,
+          "qoq_change_pct": 103.08,
+          "yoy_change_pct": -90.0
+        },
+        "Special Income Charges": {
+          "values_5q_chronological": [
+            -18.0,
+            -43.0,
+            -293.0,
+            -359.0,
+            -65.0
+          ],
+          "q0_latest": -65.0,
+          "qoq_change_pct": 81.89,
+          "yoy_change_pct": -261.11
+        },
+        "Restructuring And Mergern Acquisition": {
+          "values_5q_chronological": [
+            18.0,
+            43.0,
+            293.0,
+            359.0,
+            65.0
+          ],
+          "q0_latest": 65.0,
+          "qoq_change_pct": -81.89,
+          "yoy_change_pct": 261.11
+        },
+        "Gain On Sale Of Security": {
+          "values_5q_chronological": [
+            -153.0,
+            -75.0,
+            -101.0,
+            -86.0,
+            96.0
+          ],
+          "q0_latest": 96.0,
+          "qoq_change_pct": 211.63,
+          "yoy_change_pct": 162.75
+        },
+        "Net Non Operating Interest Income Expense": {
+          "values_5q_chronological": [
+            -338.0,
+            -342.0,
+            -346.0,
+            -321.0,
+            -400.0
+          ],
+          "q0_latest": -400.0,
+          "qoq_change_pct": -24.61,
+          "yoy_change_pct": -18.34
+        },
+        "Interest Expense Non Operating": {
+          "values_5q_chronological": [
+            510.0,
+            492.0,
+            478.0,
+            473.0,
+            486.0
+          ],
+          "q0_latest": 486.0,
+          "qoq_change_pct": 2.75,
+          "yoy_change_pct": -4.71
+        },
+        "Interest Income Non Operating": {
+          "values_5q_chronological": [
+            172.0,
+            150.0,
+            132.0,
+            152.0,
+            86.0
+          ],
+          "q0_latest": 86.0,
+          "qoq_change_pct": -43.42,
+          "yoy_change_pct": -50.0
+        },
+        "Operating Income": {
+          "values_5q_chronological": [
+            3086.0,
+            2792.0,
+            4849.0,
+            2219.0,
+            2845.0
+          ],
+          "q0_latest": 2845.0,
+          "qoq_change_pct": 28.21,
+          "yoy_change_pct": -7.81
+        },
+        "Operating Expense": {
+          "values_5q_chronological": [
+            6891.0,
+            6568.0,
+            7079.0,
+            6731.0,
+            7062.0
+          ],
+          "q0_latest": 7062.0,
+          "qoq_change_pct": 4.92,
+          "yoy_change_pct": 2.48
+        },
+        "Other Operating Expenses": {
+          "values_5q_chronological": [
+            -215.0,
+            -219.0,
+            -277.0,
+            -172.0,
+            -166.0
+          ],
+          "q0_latest": -166.0,
+          "qoq_change_pct": 3.49,
+          "yoy_change_pct": 22.79
+        },
+        "Provision For Doubtful Accounts": {
+          "values_5q_chronological": [
+            14.0,
+            -1.0,
+            6.0,
+            -2.0,
+            7.0
+          ],
+          "q0_latest": 7.0,
+          "qoq_change_pct": 450.0,
+          "yoy_change_pct": -50.0
+        },
+        "Depreciation Amortization Depletion Income Statement": {
+          "values_5q_chronological": [
+            324.0,
+            330.0,
+            331.0,
+            333.0,
+            378.0
+          ],
+          "q0_latest": 378.0,
+          "qoq_change_pct": 13.51,
+          "yoy_change_pct": 16.67
+        },
+        "Depreciation And Amortization In Income Statement": {
+          "values_5q_chronological": [
+            324.0,
+            330.0,
+            331.0,
+            333.0,
+            378.0
+          ],
+          "q0_latest": 378.0,
+          "qoq_change_pct": 13.51,
+          "yoy_change_pct": 16.67
+        },
+        "Amortization": {
+          "values_5q_chronological": [
+            324.0,
+            330.0,
+            331.0,
+            333.0,
+            378.0
+          ],
+          "q0_latest": 378.0,
+          "qoq_change_pct": 13.51,
+          "yoy_change_pct": 16.67
+        },
+        "Amortization Of Intangibles Income Statement": {
+          "values_5q_chronological": [
+            324.0,
+            330.0,
+            331.0,
+            333.0,
+            378.0
+          ],
+          "q0_latest": 378.0,
+          "qoq_change_pct": 13.51,
+          "yoy_change_pct": 16.67
+        },
+        "Research And Development": {
+          "values_5q_chronological": [
+            2097.0,
+            2082.0,
+            2187.0,
+            2173.0,
+            2311.0
+          ],
+          "q0_latest": 2311.0,
+          "qoq_change_pct": 6.35,
+          "yoy_change_pct": 10.21
+        },
+        "Selling General And Administration": {
+          "values_5q_chronological": [
+            4671.0,
+            4376.0,
+            4832.0,
+            4399.0,
+            4532.0
+          ],
+          "q0_latest": 4532.0,
+          "qoq_change_pct": 3.02,
+          "yoy_change_pct": -2.98
+        },
+        "Selling And Marketing Expense": {
+          "values_5q_chronological": [
+            349.0,
+            270.0,
+            271.0,
+            229.0,
+            384.0
+          ],
+          "q0_latest": 384.0,
+          "qoq_change_pct": 67.69,
+          "yoy_change_pct": 10.03
+        },
+        "General And Administrative Expense": {
+          "values_5q_chronological": [
+            4322.0,
+            4106.0,
+            4561.0,
+            4170.0,
+            4148.0
+          ],
+          "q0_latest": 4148.0,
+          "qoq_change_pct": -0.53,
+          "yoy_change_pct": -4.03
+        },
+        "Other Gand A": {
+          "values_5q_chronological": [
+            4078.0,
+            3873.0,
+            4351.0,
+            3900.0,
+            3920.0
+          ],
+          "q0_latest": 3920.0,
+          "qoq_change_pct": 0.51,
+          "yoy_change_pct": -3.87
+        },
+        "Salaries And Wages": {
+          "values_5q_chronological": [
+            244.0,
+            233.0,
+            210.0,
+            270.0,
+            228.0
+          ],
+          "q0_latest": 228.0,
+          "qoq_change_pct": -15.56,
+          "yoy_change_pct": -6.56
+        },
+        "Gross Profit": {
+          "values_5q_chronological": [
+            9977.0,
+            9360.0,
+            11928.0,
+            8950.0,
+            9907.0
+          ],
+          "q0_latest": 9907.0,
+          "qoq_change_pct": 10.69,
+          "yoy_change_pct": -0.7
+        },
+        "Cost Of Revenue": {
+          "values_5q_chronological": [
+            7001.0,
+            6970.0,
+            7758.0,
+            6968.0,
+            7255.0
+          ],
+          "q0_latest": 7255.0,
+          "qoq_change_pct": 4.12,
+          "yoy_change_pct": 3.63
+        },
+        "Total Revenue": {
+          "values_5q_chronological": [
+            16977.0,
+            16331.0,
+            19687.0,
+            15917.0,
+            17162.0
+          ],
+          "q0_latest": 17162.0,
+          "qoq_change_pct": 7.82,
+          "yoy_change_pct": 1.09
+        },
+        "Operating Revenue": {
+          "values_5q_chronological": [
+            16977.0,
+            16331.0,
+            19687.0,
+            15917.0,
+            17162.0
+          ],
+          "q0_latest": 17162.0,
+          "qoq_change_pct": 7.82,
+          "yoy_change_pct": 1.09
+        }
+      }
+    },
+    "cash_flow_5q": {
+      "period_headers": [
+        "Q2 2025 (Ended Jun 30, 2025)",
+        "Q3 2025 (Ended Sep 30, 2025)",
+        "Q4 2025 (Ended Dec 31, 2025)",
+        "Q1 2026 (Ended Mar 31, 2026)",
+        "Q2 2026 (Ended Jun 30, 2026)"
+      ],
+      "metrics_millions": {
+        "Free Cash Flow": {
+          "values_5q_chronological": [
+            1328.0,
+            2665.0,
+            3487.0,
+            4778.0,
+            2214.0
+          ],
+          "q0_latest": 2214.0,
+          "qoq_change_pct": -53.66,
+          "yoy_change_pct": 66.72
+        },
+        "Repurchase Of Capital Stock": {
+          "values_5q_chronological": [
+            -153.0,
+            -414.0,
+            -167.0,
+            -350.0,
+            -115.0
+          ],
+          "q0_latest": -115.0,
+          "qoq_change_pct": 67.14,
+          "yoy_change_pct": 24.84
+        },
+        "Repayment Of Debt": {
+          "values_5q_chronological": [
+            -1308.0,
+            -1114.0,
+            -1810.0,
+            -2928.0,
+            -4213.0
+          ],
+          "q0_latest": -4213.0,
+          "qoq_change_pct": -43.89,
+          "yoy_change_pct": -222.09
+        },
+        "Issuance Of Debt": {
+          "values_5q_chronological": [
+            7.0,
+            6.0,
+            0.0,
+            7437.0,
+            0.0
+          ],
+          "q0_latest": 0.0,
+          "qoq_change_pct": -100.0,
+          "yoy_change_pct": -100.0
+        },
+        "Issuance Of Capital Stock": {
+          "values_5q_chronological": [
+            185.0,
+            134.0,
+            175.0,
+            178.0,
+            240.0
+          ],
+          "q0_latest": 240.0,
+          "qoq_change_pct": 34.83,
+          "yoy_change_pct": 29.73
+        },
+        "Capital Expenditure": {
+          "values_5q_chronological": [
+            -373.0,
+            -417.0,
+            -553.0,
+            -391.0,
+            -383.0
+          ],
+          "q0_latest": -383.0,
+          "qoq_change_pct": 2.05,
+          "yoy_change_pct": -2.68
+        },
+        "End Cash Position": {
+          "values_5q_chronological": [
+            12026.0,
+            11600.0,
+            13640.0,
+            10864.0,
+            7217.0
+          ],
+          "q0_latest": 7217.0,
+          "qoq_change_pct": -33.57,
+          "yoy_change_pct": -39.99
+        },
+        "Beginning Cash Position": {
+          "values_5q_chronological": [
+            11161.0,
+            12026.0,
+            11600.0,
+            13640.0,
+            10864.0
+          ],
+          "q0_latest": 10864.0,
+          "qoq_change_pct": -20.35,
+          "yoy_change_pct": -2.66
+        },
+        "Effect Of Exchange Rate Changes": {
+          "values_5q_chronological": [
+            320.0,
+            -58.0,
+            -11.0,
+            -177.0,
+            -34.0
+          ],
+          "q0_latest": -34.0,
+          "qoq_change_pct": 80.79,
+          "yoy_change_pct": -110.62
+        },
+        "Changes In Cash": {
+          "values_5q_chronological": [
+            545.0,
+            -368.0,
+            2051.0,
+            -2599.0,
+            -3613.0
+          ],
+          "q0_latest": -3613.0,
+          "qoq_change_pct": -39.02,
+          "yoy_change_pct": -762.94
+        },
+        "Financing Cash Flow": {
+          "values_5q_chronological": [
+            -2854.0,
+            -3012.0,
+            -3406.0,
+            2719.0,
+            -5727.0
+          ],
+          "q0_latest": -5727.0,
+          "qoq_change_pct": -310.63,
+          "yoy_change_pct": -100.67
+        },
+        "Cash Flow From Continuing Financing Activities": {
+          "values_5q_chronological": [
+            -2854.0,
+            -3012.0,
+            -3406.0,
+            2719.0,
+            -5727.0
+          ],
+          "q0_latest": -5727.0,
+          "qoq_change_pct": -310.63,
+          "yoy_change_pct": -100.67
+        },
+        "Net Other Financing Charges": {
+          "values_5q_chronological": [
+            -22.0,
+            -55.0,
+            -30.0,
+            -42.0,
+            -49.0
+          ],
+          "q0_latest": -49.0,
+          "qoq_change_pct": -16.67,
+          "yoy_change_pct": -122.73
+        },
+        "Cash Dividends Paid": {
+          "values_5q_chronological": [
+            -1563.0,
+            -1569.0,
+            -1574.0,
+            -1576.0,
+            -1590.0
+          ],
+          "q0_latest": -1590.0,
+          "qoq_change_pct": -0.89,
+          "yoy_change_pct": -1.73
+        },
+        "Common Stock Dividend Paid": {
+          "values_5q_chronological": [
+            -1563.0,
+            -1569.0,
+            -1574.0,
+            -1576.0,
+            -1590.0
+          ],
+          "q0_latest": -1590.0,
+          "qoq_change_pct": -0.89,
+          "yoy_change_pct": -1.73
+        },
+        "Net Common Stock Issuance": {
+          "values_5q_chronological": [
+            32.0,
+            -280.0,
+            8.0,
+            -172.0,
+            125.0
+          ],
+          "q0_latest": 125.0,
+          "qoq_change_pct": 172.67,
+          "yoy_change_pct": 290.62
+        },
+        "Common Stock Payments": {
+          "values_5q_chronological": [
+            -153.0,
+            -414.0,
+            -167.0,
+            -350.0,
+            -115.0
+          ],
+          "q0_latest": -115.0,
+          "qoq_change_pct": 67.14,
+          "yoy_change_pct": 24.84
+        },
+        "Common Stock Issuance": {
+          "values_5q_chronological": [
+            185.0,
+            134.0,
+            175.0,
+            178.0,
+            240.0
+          ],
+          "q0_latest": 240.0,
+          "qoq_change_pct": 34.83,
+          "yoy_change_pct": 29.73
+        },
+        "Net Issuance Payments Of Debt": {
+          "values_5q_chronological": [
+            -1301.0,
+            -1108.0,
+            -1810.0,
+            4509.0,
+            -4213.0
+          ],
+          "q0_latest": -4213.0,
+          "qoq_change_pct": -193.44,
+          "yoy_change_pct": -223.83
+        },
+        "Net Short Term Debt Issuance": {
+          "values_5q_chronological": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "q0_latest": 0.0,
+          "qoq_change_pct": null,
+          "yoy_change_pct": null
+        },
+        "Net Long Term Debt Issuance": {
+          "values_5q_chronological": [
+            -1301.0,
+            -1108.0,
+            -1810.0,
+            4509.0,
+            -4213.0
+          ],
+          "q0_latest": -4213.0,
+          "qoq_change_pct": -193.44,
+          "yoy_change_pct": -223.83
+        },
+        "Long Term Debt Payments": {
+          "values_5q_chronological": [
+            -1308.0,
+            -1114.0,
+            -1810.0,
+            -2928.0,
+            -4213.0
+          ],
+          "q0_latest": -4213.0,
+          "qoq_change_pct": -43.89,
+          "yoy_change_pct": -222.09
+        },
+        "Long Term Debt Issuance": {
+          "values_5q_chronological": [
+            7.0,
+            6.0,
+            0.0,
+            7437.0,
+            0.0
+          ],
+          "q0_latest": 0.0,
+          "qoq_change_pct": -100.0,
+          "yoy_change_pct": -100.0
+        },
+        "Investing Cash Flow": {
+          "values_5q_chronological": [
+            1698.0,
+            -438.0,
+            1417.0,
+            -10489.0,
+            -481.0
+          ],
+          "q0_latest": -481.0,
+          "qoq_change_pct": 95.41,
+          "yoy_change_pct": -128.33
+        },
+        "Cash Flow From Continuing Investing Activities": {
+          "values_5q_chronological": [
+            1698.0,
+            -438.0,
+            1416.0,
+            -10488.0,
+            -482.0
+          ],
+          "q0_latest": -482.0,
+          "qoq_change_pct": 95.4,
+          "yoy_change_pct": -128.39
+        },
+        "Net Other Investing Changes": {
+          "values_5q_chronological": [
+            null,
+            null,
+            null,
+            -1.0,
+            null
+          ],
+          "q0_latest": null,
+          "qoq_change_pct": null,
+          "yoy_change_pct": null
+        },
+        "Net Investment Purchase And Sale": {
+          "values_5q_chronological": [
+            2781.0,
+            30.0,
+            2357.0,
+            359.0,
+            -107.0
+          ],
+          "q0_latest": -107.0,
+          "qoq_change_pct": -129.81,
+          "yoy_change_pct": -103.85
+        },
+        "Sale Of Investment": {
+          "values_5q_chronological": [
+            4035.0,
+            1200.0,
+            3542.0,
+            1971.0,
+            1152.0
+          ],
+          "q0_latest": 1152.0,
+          "qoq_change_pct": -41.55,
+          "yoy_change_pct": -71.45
+        },
+        "Purchase Of Investment": {
+          "values_5q_chronological": [
+            -1254.0,
+            -1170.0,
+            -1185.0,
+            -1612.0,
+            -1259.0
+          ],
+          "q0_latest": -1259.0,
+          "qoq_change_pct": 21.9,
+          "yoy_change_pct": -0.4
+        },
+        "Net Business Purchase And Sale": {
+          "values_5q_chronological": [
+            -747.0,
+            -58.0,
+            -391.0,
+            -10464.0,
+            -15.0
+          ],
+          "q0_latest": -15.0,
+          "qoq_change_pct": 99.86,
+          "yoy_change_pct": 97.99
+        },
+        "Sale Of Business": {
+          "values_5q_chronological": [
+            null,
+            null,
+            null,
+            1.0,
+            0.0
+          ],
+          "q0_latest": 0.0,
+          "qoq_change_pct": -100.0,
+          "yoy_change_pct": null
+        },
+        "Purchase Of Business": {
+          "values_5q_chronological": [
+            -747.0,
+            -58.0,
+            -391.0,
+            -10465.0,
+            -15.0
+          ],
+          "q0_latest": -15.0,
+          "qoq_change_pct": 99.86,
+          "yoy_change_pct": 97.99
+        },
+        "Net Intangibles Purchase And Sale": {
+          "values_5q_chronological": [
+            -163.0,
+            -162.0,
+            -171.0,
+            -159.0,
+            -154.0
+          ],
+          "q0_latest": -154.0,
+          "qoq_change_pct": 3.14,
+          "yoy_change_pct": 5.52
+        },
+        "Purchase Of Intangibles": {
+          "values_5q_chronological": [
+            -163.0,
+            -162.0,
+            -171.0,
+            -159.0,
+            -154.0
+          ],
+          "q0_latest": -154.0,
+          "qoq_change_pct": 3.14,
+          "yoy_change_pct": 5.52
+        },
+        "Net PPE Purchase And Sale": {
+          "values_5q_chronological": [
+            -173.0,
+            -248.0,
+            -379.0,
+            -224.0,
+            -206.0
+          ],
+          "q0_latest": -206.0,
+          "qoq_change_pct": 8.04,
+          "yoy_change_pct": -19.08
+        },
+        "Sale Of PPE": {
+          "values_5q_chronological": [
+            37.0,
+            7.0,
+            3.0,
+            8.0,
+            23.0
+          ],
+          "q0_latest": 23.0,
+          "qoq_change_pct": 187.5,
+          "yoy_change_pct": -37.84
+        },
+        "Purchase Of PPE": {
+          "values_5q_chronological": [
+            -210.0,
+            -255.0,
+            -382.0,
+            -232.0,
+            -229.0
+          ],
+          "q0_latest": -229.0,
+          "qoq_change_pct": 1.29,
+          "yoy_change_pct": -9.05
+        },
+        "Operating Cash Flow": {
+          "values_5q_chronological": [
+            1701.0,
+            3082.0,
+            4040.0,
+            5169.0,
+            2597.0
+          ],
+          "q0_latest": 2597.0,
+          "qoq_change_pct": -49.76,
+          "yoy_change_pct": 52.67
+        },
+        "Cash Flow From Continuing Operating Activities": {
+          "values_5q_chronological": [
+            1702.0,
+            3081.0,
+            4041.0,
+            5170.0,
+            2596.0
+          ],
+          "q0_latest": 2596.0,
+          "qoq_change_pct": -49.79,
+          "yoy_change_pct": 52.53
+        },
+        "Change In Working Capital": {
+          "values_5q_chronological": [
+            -2180.0,
+            -383.0,
+            -2335.0,
+            2185.0,
+            -1349.0
+          ],
+          "q0_latest": -1349.0,
+          "qoq_change_pct": -161.74,
+          "yoy_change_pct": 38.12
+        },
+        "Other Non Cash Items": {
+          "values_5q_chronological": [
+            null,
+            null,
+            null,
+            -1.0,
+            null
+          ],
+          "q0_latest": null,
+          "qoq_change_pct": null,
+          "yoy_change_pct": null
+        },
+        "Stock Based Compensation": {
+          "values_5q_chronological": [
+            441.0,
+            443.0,
+            430.0,
+            506.0,
+            498.0
+          ],
+          "q0_latest": 498.0,
+          "qoq_change_pct": -1.58,
+          "yoy_change_pct": 12.93
+        },
+        "Depreciation Amortization Depletion": {
+          "values_5q_chronological": [
+            1265.0,
+            1283.0,
+            1296.0,
+            1274.0,
+            1349.0
+          ],
+          "q0_latest": 1349.0,
+          "qoq_change_pct": 5.89,
+          "yoy_change_pct": 6.64
+        },
+        "Depreciation And Amortization": {
+          "values_5q_chronological": [
+            1265.0,
+            1283.0,
+            1296.0,
+            1274.0,
+            1349.0
+          ],
+          "q0_latest": 1349.0,
+          "qoq_change_pct": 5.89,
+          "yoy_change_pct": 6.64
+        },
+        "Amortization Cash Flow": {
+          "values_5q_chronological": [
+            687.0,
+            699.0,
+            710.0,
+            719.0,
+            816.0
+          ],
+          "q0_latest": 816.0,
+          "qoq_change_pct": 13.49,
+          "yoy_change_pct": 18.78
+        },
+        "Amortization Of Intangibles": {
+          "values_5q_chronological": [
+            687.0,
+            699.0,
+            710.0,
+            719.0,
+            816.0
+          ],
+          "q0_latest": 816.0,
+          "qoq_change_pct": 13.49,
+          "yoy_change_pct": 18.78
+        },
+        "Depreciation": {
+          "values_5q_chronological": [
+            578.0,
+            584.0,
+            586.0,
+            555.0,
+            533.0
+          ],
+          "q0_latest": 533.0,
+          "qoq_change_pct": -3.96,
+          "yoy_change_pct": -7.79
+        },
+        "Operating Gains Losses": {
+          "values_5q_chronological": [
+            -18.0,
+            -6.0,
+            7.0,
+            -11.0,
+            -67.0
+          ],
+          "q0_latest": -67.0,
+          "qoq_change_pct": -509.09,
+          "yoy_change_pct": -272.22
+        },
+        "Pension And Employee Benefit Expense": {
+          "values_5q_chronological": [
+            null,
+            null,
+            0.0,
+            null,
+            null
+          ],
+          "q0_latest": null,
+          "qoq_change_pct": null,
+          "yoy_change_pct": null
+        },
+        "Gain Loss On Sale Of Business": {
+          "values_5q_chronological": [
+            -18.0,
+            -6.0,
+            7.0,
+            -11.0,
+            -67.0
+          ],
+          "q0_latest": -67.0,
+          "qoq_change_pct": -509.09,
+          "yoy_change_pct": -272.22
+        },
+        "Net Income From Continuing Operations": {
+          "values_5q_chronological": [
+            2194.0,
+            1744.0,
+            5600.0,
+            1216.0,
+            2165.0
+          ],
+          "q0_latest": 2165.0,
+          "qoq_change_pct": 78.04,
+          "yoy_change_pct": -1.32
+        }
+      }
+    },
+    "balance_sheet_5q": {
+      "period_headers": [
+        "Q2 2025 (Ended Jun 30, 2025)",
+        "Q3 2025 (Ended Sep 30, 2025)",
+        "Q4 2025 (Ended Dec 31, 2025)",
+        "Q1 2026 (Ended Mar 31, 2026)",
+        "Q2 2026 (Ended Jun 30, 2026)"
+      ],
+      "metrics_millions": {
+        "Treasury Shares Number": {
+          "values_5q_chronological": [
+            1353.03,
+            1353.66,
+            1353.67,
+            1353.67,
+            null
+          ],
+          "q0_latest": null,
+          "qoq_change_pct": null,
+          "yoy_change_pct": null
+        },
+        "Ordinary Shares Number": {
+          "values_5q_chronological": [
+            931.52,
+            934.74,
+            936.95,
+            939.89,
+            942.13
+          ],
+          "q0_latest": 942.13,
+          "qoq_change_pct": 0.24,
+          "yoy_change_pct": 1.14
+        },
+        "Share Issued": {
+          "values_5q_chronological": [
+            2284.55,
+            2288.4,
+            2290.62,
+            2293.55,
+            942.13
+          ],
+          "q0_latest": 942.13,
+          "qoq_change_pct": -58.92,
+          "yoy_change_pct": -58.76
+        },
+        "Net Debt": {
+          "values_5q_chronological": [
+            52221.0,
+            51547.0,
+            47673.0,
+            55542.0,
+            54815.0
+          ],
+          "q0_latest": 54815.0,
+          "qoq_change_pct": -1.31,
+          "yoy_change_pct": 4.97
+        },
+        "Total Debt": {
+          "values_5q_chronological": [
+            67719.0,
+            66569.0,
+            64607.0,
+            69802.0,
+            65272.0
+          ],
+          "q0_latest": 65272.0,
+          "qoq_change_pct": -6.49,
+          "yoy_change_pct": -3.61
+        },
+        "Tangible Book Value": {
+          "values_5q_chronological": [
+            -52251.0,
+            -51221.0,
+            -46459.0,
+            -56359.0,
+            -54101.0
+          ],
+          "q0_latest": -54101.0,
+          "qoq_change_pct": 4.01,
+          "yoy_change_pct": -3.54
+        },
+        "Invested Capital": {
+          "values_5q_chronological": [
+            91673.0,
+            91021.0,
+            93908.0,
+            99335.0,
+            96439.0
+          ],
+          "q0_latest": 96439.0,
+          "qoq_change_pct": -2.92,
+          "yoy_change_pct": 5.2
+        },
+        "Working Capital": {
+          "values_5q_chronological": [
+            -3473.0,
+            -2402.0,
+            -1714.0,
+            -8187.0,
+            -7514.0
+          ],
+          "q0_latest": -7514.0,
+          "qoq_change_pct": 8.22,
+          "yoy_change_pct": -116.35
+        },
+        "Net Tangible Assets": {
+          "values_5q_chronological": [
+            -52251.0,
+            -51221.0,
+            -46459.0,
+            -56359.0,
+            -54101.0
+          ],
+          "q0_latest": -54101.0,
+          "qoq_change_pct": 4.01,
+          "yoy_change_pct": -3.54
+        },
+        "Capital Lease Obligations": {
+          "values_5q_chronological": [
+            3555.0,
+            3453.0,
+            3347.0,
+            3441.0,
+            3285.0
+          ],
+          "q0_latest": 3285.0,
+          "qoq_change_pct": -4.53,
+          "yoy_change_pct": -7.59
+        },
+        "Common Stock Equity": {
+          "values_5q_chronological": [
+            27509.0,
+            27905.0,
+            32648.0,
+            32974.0,
+            34452.0
+          ],
+          "q0_latest": 34452.0,
+          "qoq_change_pct": 4.48,
+          "yoy_change_pct": 25.24
+        },
+        "Total Capitalization": {
+          "values_5q_chronological": [
+            82728.0,
+            83079.0,
+            87484.0,
+            90680.0,
+            90664.0
+          ],
+          "q0_latest": 90664.0,
+          "qoq_change_pct": -0.02,
+          "yoy_change_pct": 9.59
+        },
+        "Total Equity Gross Minority Interest": {
+          "values_5q_chronological": [
+            27588.0,
+            27990.0,
+            32741.0,
+            33055.0,
+            34541.0
+          ],
+          "q0_latest": 34541.0,
+          "qoq_change_pct": 4.5,
+          "yoy_change_pct": 25.2
+        },
+        "Minority Interest": {
+          "values_5q_chronological": [
+            79.0,
+            85.0,
+            93.0,
+            81.0,
+            89.0
+          ],
+          "q0_latest": 89.0,
+          "qoq_change_pct": 9.88,
+          "yoy_change_pct": 12.66
+        },
+        "Stockholders Equity": {
+          "values_5q_chronological": [
+            27509.0,
+            27905.0,
+            32648.0,
+            32974.0,
+            34452.0
+          ],
+          "q0_latest": 34452.0,
+          "qoq_change_pct": 4.48,
+          "yoy_change_pct": 25.24
+        },
+        "Other Equity Interest": {
+          "values_5q_chronological": [
+            null,
+            null,
+            null,
+            null,
+            null
+          ],
+          "q0_latest": null,
+          "qoq_change_pct": null,
+          "yoy_change_pct": null
+        },
+        "Gains Losses Not Affecting Retained Earnings": {
+          "values_5q_chronological": [
+            -16041.0,
+            -15983.0,
+            -15713.0,
+            -15415.0,
+            -15151.0
+          ],
+          "q0_latest": -15151.0,
+          "qoq_change_pct": 1.71,
+          "yoy_change_pct": 5.55
+        },
+        "Other Equity Adjustments": {
+          "values_5q_chronological": [
+            -16041.0,
+            -15983.0,
+            -15713.0,
+            -15415.0,
+            -15151.0
+          ],
+          "q0_latest": -15151.0,
+          "qoq_change_pct": 1.71,
+          "yoy_change_pct": 5.55
+        },
+        "Treasury Stock": {
+          "values_5q_chronological": [
+            170209.0,
+            170512.0,
+            170605.0,
+            170874.0,
+            170934.0
+          ],
+          "q0_latest": 170934.0,
+          "qoq_change_pct": 0.04,
+          "yoy_change_pct": 0.43
+        },
+        "Retained Earnings": {
+          "values_5q_chronological": [
+            151367.0,
+            151581.0,
+            155648.0,
+            155327.0,
+            155937.0
+          ],
+          "q0_latest": 155937.0,
+          "qoq_change_pct": 0.39,
+          "yoy_change_pct": 3.02
+        },
+        "Capital Stock": {
+          "values_5q_chronological": [
+            62392.0,
+            62819.0,
+            63318.0,
+            63936.0,
+            64600.0
+          ],
+          "q0_latest": 64600.0,
+          "qoq_change_pct": 1.04,
+          "yoy_change_pct": 3.54
+        },
+        "Common Stock": {
+          "values_5q_chronological": [
+            62392.0,
+            62819.0,
+            63318.0,
+            63936.0,
+            64600.0
+          ],
+          "q0_latest": 64600.0,
+          "qoq_change_pct": 1.04,
+          "yoy_change_pct": 3.54
+        },
+        "Total Liabilities Net Minority Interest": {
+          "values_5q_chronological": [
+            120997.0,
+            118322.0,
+            119139.0,
+            123174.0,
+            117558.0
+          ],
+          "q0_latest": 117558.0,
+          "qoq_change_pct": -4.56,
+          "yoy_change_pct": -2.84
+        },
+        "Total Non Current Liabilities Net Minority Interest": {
+          "values_5q_chronological": [
+            83271.0,
+            83180.0,
+            80481.0,
+            83073.0,
+            81646.0
+          ],
+          "q0_latest": 81646.0,
+          "qoq_change_pct": -1.72,
+          "yoy_change_pct": -1.95
+        },
+        "Other Non Current Liabilities": {
+          "values_5q_chronological": [
+            11522.0,
+            11762.0,
+            1068.0,
+            9766.0,
+            10044.0
+          ],
+          "q0_latest": 10044.0,
+          "qoq_change_pct": 2.85,
+          "yoy_change_pct": -12.83
+        },
+        "Derivative Product Liabilities": {
+          "values_5q_chronological": [
+            null,
+            null,
+            259.0,
+            null,
+            null
+          ],
+          "q0_latest": null,
+          "qoq_change_pct": null,
+          "yoy_change_pct": null
+        },
+        "Employee Benefits": {
+          "values_5q_chronological": [
+            9882.0,
+            9735.0,
+            10841.0,
+            8763.0,
+            8603.0
+          ],
+          "q0_latest": 8603.0,
+          "qoq_change_pct": -1.83,
+          "yoy_change_pct": -12.94
+        },
+        "Non Current Pension And Other Postretirement Benefit Plans": {
+          "values_5q_chronological": [
+            9882.0,
+            9735.0,
+            10563.0,
+            8763.0,
+            8603.0
+          ],
+          "q0_latest": 8603.0,
+          "qoq_change_pct": -1.83,
+          "yoy_change_pct": -12.94
+        },
+        "Non Current Accrued Expenses": {
+          "values_5q_chronological": [
+            null,
+            null,
+            207.0,
+            null,
+            null
+          ],
+          "q0_latest": null,
+          "qoq_change_pct": null,
+          "yoy_change_pct": null
+        },
+        "Non Current Deferred Liabilities": {
+          "values_5q_chronological": [
+            3913.0,
+            3863.0,
+            5052.0,
+            4195.0,
+            4272.0
+          ],
+          "q0_latest": 4272.0,
+          "qoq_change_pct": 1.84,
+          "yoy_change_pct": 9.17
+        },
+        "Non Current Deferred Revenue": {
+          "values_5q_chronological": [
+            3913.0,
+            3863.0,
+            4271.0,
+            4195.0,
+            4272.0
+          ],
+          "q0_latest": 4272.0,
+          "qoq_change_pct": 1.84,
+          "yoy_change_pct": 9.17
+        },
+        "Non Current Deferred Taxes Liabilities": {
+          "values_5q_chronological": [
+            null,
+            null,
+            781.0,
+            null,
+            null
+          ],
+          "q0_latest": null,
+          "qoq_change_pct": null,
+          "yoy_change_pct": null
+        },
+        "Long Term Debt And Capital Lease Obligation": {
+          "values_5q_chronological": [
+            57954.0,
+            57820.0,
+            57383.0,
+            60349.0,
+            58727.0
+          ],
+          "q0_latest": 58727.0,
+          "qoq_change_pct": -2.69,
+          "yoy_change_pct": 1.33
+        },
+        "Long Term Capital Lease Obligation": {
+          "values_5q_chronological": [
+            2735.0,
+            2646.0,
+            2547.0,
+            2643.0,
+            2515.0
+          ],
+          "q0_latest": 2515.0,
+          "qoq_change_pct": -4.84,
+          "yoy_change_pct": -8.04
+        },
+        "Long Term Debt": {
+          "values_5q_chronological": [
+            55219.0,
+            55174.0,
+            54836.0,
+            57706.0,
+            56212.0
+          ],
+          "q0_latest": 56212.0,
+          "qoq_change_pct": -2.59,
+          "yoy_change_pct": 1.8
+        },
+        "Long Term Provisions": {
+          "values_5q_chronological": [
+            null,
+            null,
+            5671.0,
+            null,
+            null
+          ],
+          "q0_latest": null,
+          "qoq_change_pct": null,
+          "yoy_change_pct": null
+        },
+        "Current Liabilities": {
+          "values_5q_chronological": [
+            37726.0,
+            35142.0,
+            38658.0,
+            40101.0,
+            35912.0
+          ],
+          "q0_latest": 35912.0,
+          "qoq_change_pct": -10.45,
+          "yoy_change_pct": -4.81
+        },
+        "Other Current Liabilities": {
+          "values_5q_chronological": [
+            -1.0,
+            null,
+            null,
+            -1.0,
+            null
+          ],
+          "q0_latest": null,
+          "qoq_change_pct": null,
+          "yoy_change_pct": null
+        },
+        "Current Deferred Liabilities": {
+          "values_5q_chronological": [
+            15022.0,
+            13878.0,
+            16101.0,
+            17034.0,
+            16160.0
+          ],
+          "q0_latest": 16160.0,
+          "qoq_change_pct": -5.13,
+          "yoy_change_pct": 7.58
+        },
+        "Current Deferred Revenue": {
+          "values_5q_chronological": [
+            15022.0,
+            13878.0,
+            16101.0,
+            17034.0,
+            16160.0
+          ],
+          "q0_latest": 16160.0,
+          "qoq_change_pct": -5.13,
+          "yoy_change_pct": 7.58
+        },
+        "Current Debt And Capital Lease Obligation": {
+          "values_5q_chronological": [
+            9765.0,
+            8749.0,
+            7224.0,
+            9453.0,
+            6545.0
+          ],
+          "q0_latest": 6545.0,
+          "qoq_change_pct": -30.76,
+          "yoy_change_pct": -32.97
+        },
+        "Current Capital Lease Obligation": {
+          "values_5q_chronological": [
+            820.0,
+            807.0,
+            800.0,
+            798.0,
+            770.0
+          ],
+          "q0_latest": 770.0,
+          "qoq_change_pct": -3.51,
+          "yoy_change_pct": -6.1
+        },
+        "Current Debt": {
+          "values_5q_chronological": [
+            8945.0,
+            7942.0,
+            6424.0,
+            8655.0,
+            5775.0
+          ],
+          "q0_latest": 5775.0,
+          "qoq_change_pct": -33.28,
+          "yoy_change_pct": -35.44
+        },
+        "Other Current Borrowings": {
+          "values_5q_chronological": [
+            8945.0,
+            7942.0,
+            6424.0,
+            8655.0,
+            5775.0
+          ],
+          "q0_latest": 5775.0,
+          "qoq_change_pct": -33.28,
+          "yoy_change_pct": -35.44
+        },
+        "Pensionand Other Post Retirement Benefit Plans Current": {
+          "values_5q_chronological": [
+            3353.0,
+            3508.0,
+            4114.0,
+            3941.0,
+            3364.0
+          ],
+          "q0_latest": 3364.0,
+          "qoq_change_pct": -14.64,
+          "yoy_change_pct": 0.33
+        },
+        "Payables And Accrued Expenses": {
+          "values_5q_chronological": [
+            9587.0,
+            9007.0,
+            11219.0,
+            9674.0,
+            9843.0
+          ],
+          "q0_latest": 9843.0,
+          "qoq_change_pct": 1.75,
+          "yoy_change_pct": 2.67
+        },
+        "Current Accrued Expenses": {
+          "values_5q_chronological": [
+            3932.0,
+            3477.0,
+            4116.0,
+            3582.0,
+            3425.0
+          ],
+          "q0_latest": 3425.0,
+          "qoq_change_pct": -4.38,
+          "yoy_change_pct": -12.89
+        },
+        "Payables": {
+          "values_5q_chronological": [
+            5655.0,
+            5530.0,
+            7103.0,
+            6092.0,
+            6418.0
+          ],
+          "q0_latest": 6418.0,
+          "qoq_change_pct": 5.35,
+          "yoy_change_pct": 13.49
+        },
+        "Total Tax Payable": {
+          "values_5q_chronological": [
+            1681.0,
+            1663.0,
+            2347.0,
+            2053.0,
+            2023.0
+          ],
+          "q0_latest": 2023.0,
+          "qoq_change_pct": -1.46,
+          "yoy_change_pct": 20.35
+        },
+        "Accounts Payable": {
+          "values_5q_chronological": [
+            3974.0,
+            3867.0,
+            4756.0,
+            4039.0,
+            4395.0
+          ],
+          "q0_latest": 4395.0,
+          "qoq_change_pct": 8.81,
+          "yoy_change_pct": 10.59
+        },
+        "Total Assets": {
+          "values_5q_chronological": [
+            148585.0,
+            146312.0,
+            151880.0,
+            156229.0,
+            152099.0
+          ],
+          "q0_latest": 152099.0,
+          "qoq_change_pct": -2.64,
+          "yoy_change_pct": 2.36
+        },
+        "Total Non Current Assets": {
+          "values_5q_chronological": [
+            114332.0,
+            113571.0,
+            114934.0,
+            124316.0,
+            123700.0
+          ],
+          "q0_latest": 123700.0,
+          "qoq_change_pct": -0.5,
+          "yoy_change_pct": 8.19
+        },
+        "Other Non Current Assets": {
+          "values_5q_chronological": [
+            1891.0,
+            1796.0,
+            2112.0,
+            2009.0,
+            2028.0
+          ],
+          "q0_latest": 2028.0,
+          "qoq_change_pct": 0.95,
+          "yoy_change_pct": 7.24
+        },
+        "Defined Pension Benefit": {
+          "values_5q_chronological": [
+            7983.0,
+            8044.0,
+            7544.0,
+            7578.0,
+            7645.0
+          ],
+          "q0_latest": 7645.0,
+          "qoq_change_pct": 0.88,
+          "yoy_change_pct": -4.23
+        },
+        "Non Current Prepaid Assets": {
+          "values_5q_chronological": [
+            7983.0,
+            8044.0,
+            7544.0,
+            7578.0,
+            null
+          ],
+          "q0_latest": null,
+          "qoq_change_pct": null,
+          "yoy_change_pct": null
+        },
+        "Non Current Deferred Assets": {
+          "values_5q_chronological": [
+            9270.0,
+            9273.0,
+            9435.0,
+            9383.0,
+            9544.0
+          ],
+          "q0_latest": 9544.0,
+          "qoq_change_pct": 1.72,
+          "yoy_change_pct": 2.96
+        },
+        "Non Current Deferred Taxes Assets": {
+          "values_5q_chronological": [
+            8475.0,
+            8505.0,
+            8610.0,
+            8552.0,
+            8709.0
+          ],
+          "q0_latest": 8709.0,
+          "qoq_change_pct": 1.84,
+          "yoy_change_pct": 2.76
+        },
+        "Non Current Accounts Receivable": {
+          "values_5q_chronological": [
+            6171.0,
+            6258.0,
+            7708.0,
+            7014.0,
+            7126.0
+          ],
+          "q0_latest": 7126.0,
+          "qoq_change_pct": 1.6,
+          "yoy_change_pct": 15.48
+        },
+        "Goodwill And Other Intangible Assets": {
+          "values_5q_chronological": [
+            79760.0,
+            79126.0,
+            79107.0,
+            89333.0,
+            88553.0
+          ],
+          "q0_latest": 88553.0,
+          "qoq_change_pct": -0.87,
+          "yoy_change_pct": 11.02
+        },
+        "Other Intangible Assets": {
+          "values_5q_chronological": [
+            12254.0,
+            11730.0,
+            11390.0,
+            14624.0,
+            13954.0
+          ],
+          "q0_latest": 13954.0,
+          "qoq_change_pct": -4.58,
+          "yoy_change_pct": 13.87
+        },
+        "Goodwill": {
+          "values_5q_chronological": [
+            67506.0,
+            67396.0,
+            67717.0,
+            74709.0,
+            74599.0
+          ],
+          "q0_latest": 74599.0,
+          "qoq_change_pct": -0.15,
+          "yoy_change_pct": 10.51
+        },
+        "Net PPE": {
+          "values_5q_chronological": [
+            9257.0,
+            9074.0,
+            9028.0,
+            8999.0,
+            8804.0
+          ],
+          "q0_latest": 8804.0,
+          "qoq_change_pct": -2.17,
+          "yoy_change_pct": -4.89
+        },
+        "Accumulated Depreciation": {
+          "values_5q_chronological": [
+            -12218.0,
+            -12207.0,
+            -11975.0,
+            -11985.0,
+            -11867.0
+          ],
+          "q0_latest": -11867.0,
+          "qoq_change_pct": 0.98,
+          "yoy_change_pct": 2.87
+        },
+        "Gross PPE": {
+          "values_5q_chronological": [
+            21475.0,
+            21281.0,
+            21003.0,
+            20984.0,
+            20671.0
+          ],
+          "q0_latest": 20671.0,
+          "qoq_change_pct": -1.49,
+          "yoy_change_pct": -3.74
+        },
+        "Other Properties": {
+          "values_5q_chronological": [
+            21475.0,
+            21281.0,
+            7129.0,
+            20984.0,
+            20671.0
+          ],
+          "q0_latest": 20671.0,
+          "qoq_change_pct": -1.49,
+          "yoy_change_pct": -3.74
+        },
+        "Machinery Furniture Equipment": {
+          "values_5q_chronological": [
+            null,
+            null,
+            8885.0,
+            null,
+            null
+          ],
+          "q0_latest": null,
+          "qoq_change_pct": null,
+          "yoy_change_pct": null
+        },
+        "Buildings And Improvements": {
+          "values_5q_chronological": [
+            null,
+            null,
+            4807.0,
+            null,
+            null
+          ],
+          "q0_latest": null,
+          "qoq_change_pct": null,
+          "yoy_change_pct": null
+        },
+        "Land And Improvements": {
+          "values_5q_chronological": [
+            null,
+            null,
+            182.0,
+            null,
+            null
+          ],
+          "q0_latest": null,
+          "qoq_change_pct": null,
+          "yoy_change_pct": null
+        },
+        "Properties": {
+          "values_5q_chronological": [
+            null,
+            null,
+            0.0,
+            null,
+            null
+          ],
+          "q0_latest": null,
+          "qoq_change_pct": null,
+          "yoy_change_pct": null
+        },
+        "Current Assets": {
+          "values_5q_chronological": [
+            34253.0,
+            32740.0,
+            36944.0,
+            31914.0,
+            28398.0
+          ],
+          "q0_latest": 28398.0,
+          "qoq_change_pct": -11.02,
+          "yoy_change_pct": -17.09
+        },
+        "Other Current Assets": {
+          "values_5q_chronological": [
+            2797.0,
+            2738.0,
+            2530.0,
+            3208.0,
+            3189.0
+          ],
+          "q0_latest": 3189.0,
+          "qoq_change_pct": -0.59,
+          "yoy_change_pct": 14.02
+        },
+        "Assets Held For Sale Current": {
+          "values_5q_chronological": [
+            746.0,
+            745.0,
+            1131.0,
+            743.0,
+            874.0
+          ],
+          "q0_latest": 874.0,
+          "qoq_change_pct": 17.63,
+          "yoy_change_pct": 17.16
+        },
+        "Current Deferred Assets": {
+          "values_5q_chronological": [
+            1182.0,
+            1113.0,
+            1084.0,
+            1157.0,
+            1238.0
+          ],
+          "q0_latest": 1238.0,
+          "qoq_change_pct": 7.0,
+          "yoy_change_pct": 4.74
+        },
+        "Restricted Cash": {
+          "values_5q_chronological": [
+            83.0,
+            30.0,
+            54.0,
+            45.0,
+            45.0
+          ],
+          "q0_latest": 45.0,
+          "qoq_change_pct": 0.0,
+          "yoy_change_pct": -45.78
+        },
+        "Inventory": {
+          "values_5q_chronological": [
+            1251.0,
+            1397.0,
+            1220.0,
+            1476.0,
+            1746.0
+          ],
+          "q0_latest": 1746.0,
+          "qoq_change_pct": 18.29,
+          "yoy_change_pct": 39.57
+        },
+        "Other Inventories": {
+          "values_5q_chronological": [
+            null,
+            null,
+            null,
+            null,
+            1.0
+          ],
+          "q0_latest": 1.0,
+          "qoq_change_pct": null,
+          "yoy_change_pct": null
+        },
+        "Finished Goods": {
+          "values_5q_chronological": [
+            188.0,
+            314.0,
+            230.0,
+            268.0,
+            320.0
+          ],
+          "q0_latest": 320.0,
+          "qoq_change_pct": 19.4,
+          "yoy_change_pct": 70.21
+        },
+        "Work In Process": {
+          "values_5q_chronological": [
+            1063.0,
+            1083.0,
+            990.0,
+            1208.0,
+            1425.0
+          ],
+          "q0_latest": 1425.0,
+          "qoq_change_pct": 17.96,
+          "yoy_change_pct": 34.05
+        },
+        "Receivables": {
+          "values_5q_chronological": [
+            12747.0,
+            11862.0,
+            16508.0,
+            13502.0,
+            13174.0
+          ],
+          "q0_latest": 13174.0,
+          "qoq_change_pct": -2.43,
+          "yoy_change_pct": 3.35
+        },
+        "Other Receivables": {
+          "values_5q_chronological": [
+            6773.0,
+            6330.0,
+            8396.0,
+            7009.0,
+            7130.0
+          ],
+          "q0_latest": 7130.0,
+          "qoq_change_pct": 1.73,
+          "yoy_change_pct": 5.27
+        },
+        "Accounts Receivable": {
+          "values_5q_chronological": [
+            5974.0,
+            5532.0,
+            8112.0,
+            6493.0,
+            6044.0
+          ],
+          "q0_latest": 6044.0,
+          "qoq_change_pct": -6.92,
+          "yoy_change_pct": 1.17
+        },
+        "Allowance For Doubtful Accounts Receivable": {
+          "values_5q_chronological": [
+            -109.0,
+            -116.0,
+            -99.0,
+            -102.0,
+            -107.0
+          ],
+          "q0_latest": -107.0,
+          "qoq_change_pct": -4.9,
+          "yoy_change_pct": 1.83
+        },
+        "Gross Accounts Receivable": {
+          "values_5q_chronological": [
+            6083.0,
+            5648.0,
+            8211.0,
+            6595.0,
+            6151.0
+          ],
+          "q0_latest": 6151.0,
+          "qoq_change_pct": -6.73,
+          "yoy_change_pct": 1.12
+        },
+        "Cash Cash Equivalents And Short Term Investments": {
+          "values_5q_chronological": [
+            15447.0,
+            14855.0,
+            14417.0,
+            11783.0,
+            8132.0
+          ],
+          "q0_latest": 8132.0,
+          "qoq_change_pct": -30.99,
+          "yoy_change_pct": -47.36
+        },
+        "Other Short Term Investments": {
+          "values_5q_chronological": [
+            3504.0,
+            3286.0,
+            830.0,
+            964.0,
+            960.0
+          ],
+          "q0_latest": 960.0,
+          "qoq_change_pct": -0.41,
+          "yoy_change_pct": -72.6
+        },
+        "Cash And Cash Equivalents": {
+          "values_5q_chronological": [
+            11943.0,
+            11569.0,
+            13587.0,
+            10819.0,
+            7172.0
+          ],
+          "q0_latest": 7172.0,
+          "qoq_change_pct": -33.71,
+          "yoy_change_pct": -39.95
+        }
+      }
+    },
+    "sec_edgar_filings_meta": {
+      "cik": "0000051143",
+      "recent_10q_10k_filings": [
+        {
+          "form": "10-Q",
+          "filing_date": "2026-07-23",
+          "period_of_report": "2026-06-30"
+        },
+        {
+          "form": "10-Q",
+          "filing_date": "2026-04-23",
+          "period_of_report": "2026-03-31"
+        },
+        {
+          "form": "10-K",
+          "filing_date": "2026-02-24",
+          "period_of_report": "2025-12-31"
+        },
+        {
+          "form": "10-Q",
+          "filing_date": "2025-10-23",
+          "period_of_report": "2025-09-30"
+        },
+        {
+          "form": "10-Q",
+          "filing_date": "2025-07-24",
+          "period_of_report": "2025-06-30"
+        }
+      ]
+    }
+  }
+}
