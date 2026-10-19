@@ -1,0 +1,19 @@
+from edgar import Company, set_identity
+from bs4 import BeautifulSoup
+import re
+
+set_identity('AntigravityResearch research@agentic.com')
+comp = Company('IBM')
+
+# Q3 2025 10-Q (filing date 2025-10-23)
+f_q3 = comp.get_filings(form='10-Q', filing_date='2025-10-23').latest(1)
+if f_q3:
+    soup = BeautifulSoup(f_q3.html(), 'html.parser')
+    for table in soup.find_all('table'):
+        t = table.get_text()
+        if 'Software' in t and 'Consulting' in t and 'Infrastructure' in t:
+            for r in table.find_all('tr'):
+                cols = [c.get_text().strip() for c in r.find_all(['td', 'th']) if c.get_text().strip()]
+                if any(term in ' '.join(cols) for term in ['Total Software', 'Total Consulting', 'Total Infrastructure', 'Financing', 'Total revenue']):
+                    print("Q3 2025:", ' | '.join(cols))
+            break
