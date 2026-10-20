@@ -28,9 +28,28 @@ Using `ground_truth/{TICKER}_{DATE}_truth.json` and live web search for 10-Q/10-
 ### Stage 3: Adversarial Critic & Deterministic Validator Loop
 Run `python stage3_validate_draft.py {TICKER} {DATE}`.
 - If `"passed": false`, fix every error listed in `errors` inside `drafts/{TICKER}_{DATE}_draft.json` and re-run Stage 3 until `"passed": true`.
+- **Mandatory Guardrails Enforced**:
+  1. **Content Depth**: `rendered_container_html` length must be $\ge 45,000$ characters.
+  2. **8-Card Institutional Structure**: Strictly verifies presence of all 8 core cards:
+     - Header banner (`header-banner`) & header strip (`header-strip`)
+     - Card 1: KPI strip (`kpi-grid` with 4 metric cards)
+     - Card 2: 5-Quarter Financial Table (`table-wrapper`, 5Q columns)
+     - Card 3: Free Cash Flow Bridge & Capital Intensity (`forensic-grid`, `waterfall-row`)
+     - Card 4: Forensic Breakdown (Segment Analysis & Capital Return)
+     - Card 5: Qualitative Audit (`audit-grid` with 4 operational tailwinds/wins & 4 execution headwinds/drags)
+     - Card 6: Peer Benchmarking / Relative Valuation Matrix
+     - Card 7: 4-Pillar Multi-Source Sentiment Gauge (`sentiment-grid`, `sentiment-meter-bar`)
+     - Card 8: Portfolio Manager Decision Matrix / 3-Scenario Trade Playbook (`scenario-grid`, `scenario-bull`, `scenario-base`, `scenario-bear`, `trade-structure`)
+  3. **Template Purity**: Explicitly rejects shorthand templates (`grid-2`, `grid-4`, `<section class="section">`).
+  4. **Interactive Tooltips**: Enforces $\ge 20$ `.tip` classes and $\ge 20$ `data-tip="..."` definitions.
+  5. **Segment Leak Prevention**: Zero foreign-ticker terminology (e.g. Tesla terms in non-TSLA reports).
+  6. **Deterministic Accounting Math**: 5Q P&L subtraction (Gross Profit - OpEx = Operating Income) and FCF waterfall bridge balance (tolerance $\le \$2.0\text{M}$).
+  7. **Prose Grounding**: Ground-truth spot price and latest OCF must appear explicitly in prose.
+  8. **PM Strike Sanity**: Bull case target > Spot Price > Bear case target.
 
 ### Stage 4: Read-Only HTML Injection, Multi-Versioning & Publishing
 Run `python stage4_render_html.py {TICKER} {DATE}`.
+- **Pre-Publish Size Gatekeeper**: Verifies total rendered HTML size is $\ge 75,000$ bytes (aborts publication immediately if truncated).
 - **Automatic Multi-Versioning**: Automatically generates versioned files (`{TICKER}_T1_{DATE}_v{N}.html`) and updates the canonical latest file (`{TICKER}_T1_{DATE}.html`). A version banner is embedded at the top of the tearsheet linking directly to prior versions for gap analysis.
 - **Automatic Index Updating**: Automatically regenerates `published_reports/index.html` and root `index.html` displaying all reports, live metrics, and version comparison pills.
 - Records all version links and public tunnel URLs in `published_ledger.json`. Always populate and display these active public browser links in the final report summary.

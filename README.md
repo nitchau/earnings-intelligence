@@ -14,6 +14,7 @@ Access the full institutional research portal and all interactive tearsheets:
 
 | Ticker | Company Name | Upcoming Release Date | Implied Move | Spot Price | Canonical Report | Version History |
 | :---: | :--- | :---: | :---: | :---: | :---: | :---: |
+| **NOK** | Nokia Oyj | Oct 22, 2026 (BMO) | &plusmn;32.2% | $9.08 | [Open Tearsheet](https://nitchau.github.io/earnings-intelligence/published_reports/NOK_T1_2026-10-22.html) | [`v1`](https://nitchau.github.io/earnings-intelligence/published_reports/NOK_T1_2026-10-22_v1.html) |
 | **TSLA** | Tesla, Inc. | Oct 21, 2026 (AMC) | &plusmn;6.8% | $218.85 | [Open Tearsheet](https://nitchau.github.io/earnings-intelligence/published_reports/TSLA_T1_2026-10-21.html) | [`v1`](https://nitchau.github.io/earnings-intelligence/published_reports/TSLA_T1_2026-10-21_v1.html) |
 | **IBM** | International Business Machines | Oct 21, 2026 (AMC) | &plusmn;6.9% | $236.39 | [Open Tearsheet](https://nitchau.github.io/earnings-intelligence/published_reports/IBM_T1_2026-10-21.html) | [`v1`](https://nitchau.github.io/earnings-intelligence/published_reports/IBM_T1_2026-10-21_v1.html) |
 | **LRCX** | Lam Research Corporation | Oct 21, 2026 (AMC) | &plusmn;7.9% | $272.20 | [Open Tearsheet](https://nitchau.github.io/earnings-intelligence/published_reports/LRCX_T1_2026-10-21.html) | [`v1`](https://nitchau.github.io/earnings-intelligence/published_reports/LRCX_T1_2026-10-21_v1.html) |

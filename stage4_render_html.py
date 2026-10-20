@@ -124,6 +124,16 @@ def publish_report(ticker: str, earnings_date: str):
 </body>
 </html>"""
 
+    # PRE-PUBLISH GUARDRAIL: Mandatory Minimum File Size Check (>= 75,000 bytes)
+    raw_bytes_len = len(final_html.encode("utf-8"))
+    MIN_PUBLISH_BYTES = 75000
+    if raw_bytes_len < MIN_PUBLISH_BYTES:
+        raise RuntimeError(
+            f"PUBLISH GUARDRAIL VIOLATION: Rendered tearsheet size ({raw_bytes_len:,} bytes) "
+            f"is below mandatory threshold ({MIN_PUBLISH_BYTES:,} bytes). "
+            f"Report appears truncated or missing required cards. Publication aborted."
+        )
+
     # Save to both versioned file and canonical file
     versioned_filename = f"{ticker}_T1_{earnings_date}_{ver_str}.html"
     canonical_filename = f"{ticker}_T1_{earnings_date}.html"
