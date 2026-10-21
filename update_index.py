@@ -1,3 +1,10 @@
+"""
+Enhanced Dashboard Generator for Institutional Earnings Intelligence
+Discovers and displays both:
+- T-1 Pre-Earnings Briefings ({TICKER}_T1_{DATE}.html)
+- T+0 Post-Earnings Forensic Tearsheets ({TICKER}_T0_POST_{DATE}.html)
+"""
+
 import json
 import re
 from datetime import datetime
@@ -7,10 +14,11 @@ BASE_DIR = Path(__file__).parent.resolve()
 REPORTS_DIR = BASE_DIR / "published_reports"
 LEDGER_PATH = BASE_DIR / "published_ledger.json"
 TUNNEL_FILE = BASE_DIR / "tunnel_url.json"
+GITHUB_PAGES_BASE = "https://nitchau.github.io/earnings-intelligence"
 
 def get_base_urls():
     local_base = "http://localhost:8080"
-    public_base = "https://nitchau.github.io/earnings-intelligence"
+    public_base = GITHUB_PAGES_BASE
     if TUNNEL_FILE.exists():
         try:
             t_data = json.loads(TUNNEL_FILE.read_text(encoding="utf-8"))
@@ -23,6 +31,7 @@ def get_base_urls():
 
 def extract_metadata_from_html(html_path: Path) -> dict:
     content = html_path.read_text(encoding="utf-8", errors="ignore")
+    is_post = "_T0_POST_" in html_path.name
     meta = {
         "title": html_path.stem,
         "company_name": "",
@@ -31,40 +40,33 @@ def extract_metadata_from_html(html_path: Path) -> dict:
         "spot_price": "",
         "implied_move": "",
         "sector": "",
-        "status_badge": "PRE-EARNINGS BRIEFING"
+        "is_post": is_post,
+        "status_badge": "T+0 POST-EARNINGS" if is_post else "T-1 PRE-EARNINGS"
     }
     
-    # Extract ticker
-    m = re.search(r'<span class="ticker-symbol">([A-Z0-9]+)</span>', content)
-    if m:
-        meta["ticker"] = m.group(1)
+    m_sym = re.search(r'<span class="ticker-symbol">([A-Z0-9]+)</span>', content)
+    if m_sym:
+        meta["ticker"] = m_sym.group(1)
         
-    # Extract company name
-    m = re.search(r'<h1 class="company-name">([^<]+)</h1>', content)
-    if m:
-        meta["company_name"] = m.group(1).strip()
+    m_name = re.search(r'<h1 class="company-name">([^<]+)</h1>', content)
+    if m_name:
+        meta["company_name"] = m_name.group(1).strip()
         
-    # Extract sector tag
-    m = re.search(r'<div class="sector-tag">([^<]+)', content)
-    if m:
-        meta["sector"] = m.group(1).split("•")[0].strip()
+    m_sec = re.search(r'<div class="sector-tag">([^<]+)', content)
+    if m_sec:
+        meta["sector"] = m_sec.group(1).split("•")[0].strip()
         
-    # Extract spot price
-    m = re.search(r'<div class="price-value">\$([0-9,.]+)', content)
-    if m:
-        meta["spot_price"] = f"${m.group(1)}"
+    m_price = re.search(r'<div class="price-value">\$([0-9,.]+)', content)
+    if m_price:
+        meta["spot_price"] = f"${m_price.group(1)}"
         
-    # Extract implied move
-    m = re.search(r'Options-Implied Move[^<]*</span>\s*<span class="strip-val"[^>]*>([^<]+)</span>', content)
-    if m:
-        meta["implied_move"] = m.group(1).replace("±", "&plusmn;").strip()
+    m_move = re.search(r'Options-Implied Move[^<]*</span>\s*<span class="strip-val"[^>]*>([^<]+)</span>', content)
+    if m_move:
+        meta["implied_move"] = m_move.group(1).replace("±", "&plusmn;").strip()
         
-    # Extract release date
-    m = re.search(r'Upcoming[^<]*Release Date</span>\s*<span class="strip-val">([^<]+)', content)
-    if not m:
-        m = re.search(r'Official Earnings Release Date</span>\s*<span class="strip-val">([^<]+)', content)
-    if m:
-        meta["earnings_date"] = m.group(1).strip()
+    m_date = re.search(r'(?:Upcoming|Official Earnings|Reported Date)[^<]*Release Date</span>\s*<span class="strip-val">([^<]+)', content)
+    if m_date:
+        meta["earnings_date"] = m_date.group(1).strip()
         
     return meta
 
@@ -72,7 +74,7 @@ def build_cards_html(grouped: dict, link_prefix: str) -> str:
     cards_html = []
     sorted_keys = sorted(
         grouped.keys(),
-        key=lambda k: (grouped[k]["earnings_date"], grouped[k]["ticker"]),
+        key=lambda k: (grouped[k]["earnings_date"], grouped[k]["is_post"], grouped[k]["ticker"]),
         reverse=True
     )
     
@@ -80,6 +82,7 @@ def build_cards_html(grouped: dict, link_prefix: str) -> str:
         item = grouped[key]
         ticker = item["ticker"]
         e_date = item["earnings_date"]
+        is_post = item["is_post"]
         
         ver_nums = sorted(item["versions"].keys())
         latest_file = item["canonical"] or (item["versions"][ver_nums[-1]] if ver_nums else None)
@@ -96,7 +99,10 @@ def build_cards_html(grouped: dict, link_prefix: str) -> str:
         sector = meta["sector"] or "Equities / Technology"
         e_date_display = meta["earnings_date"] or e_date
         
-        # Build version comparison pills
+        badge_style = "background: rgba(16, 185, 129, 0.2); border-color: rgba(16, 185, 129, 0.4); color: #34d399;" if is_post else "background: rgba(59, 130, 246, 0.15); border-color: rgba(59, 130, 246, 0.3); color: #60a5fa;"
+        status_label = "T+0 POST-EARNINGS" if is_post else "T-1 PRE-EARNINGS"
+
+        # Version pills
         v_pills = []
         if ver_nums:
             for v in ver_nums:
@@ -119,15 +125,15 @@ def build_cards_html(grouped: dict, link_prefix: str) -> str:
               <span class="ticker-symbol">{ticker}</span>
               <span class="version-tag">{latest_ver_label} (Latest)</span>
             </div>
-            <span class="badge-status">{e_date_display}</span>
+            <span class="badge-status" style="{badge_style}">{status_label}</span>
           </div>
 
           <div class="company-title">{company_name}</div>
-          <div class="sector-line">{sector}</div>
+          <div class="sector-line">{sector} • {e_date_display}</div>
 
           <div class="stats-row">
             <div class="stat-item">
-              <span class="stat-label">Spot Price</span>
+              <span class="stat-label">Spot / AH Price</span>
               <span class="stat-val">{spot_price}</span>
             </div>
             <div class="stat-item">
@@ -141,7 +147,7 @@ def build_cards_html(grouped: dict, link_prefix: str) -> str:
           </div>
 
           <div class="version-section">
-            <span class="version-label">Version History:</span>
+            <span class="version-label">Iterations:</span>
             <div class="v-pill-group">
               {versions_html}
             </div>
@@ -171,7 +177,7 @@ def build_full_page(cards_html: str, total_count: int, public_base: str) -> str:
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Institutional T-1 Pre-Earnings Intelligence Dashboard</title>
+  <title>Institutional Earnings Intelligence Platform</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -199,7 +205,7 @@ def build_full_page(cards_html: str, total_count: int, public_base: str) -> str:
       min-height: 100vh;
     }}
     .dashboard-container {{
-      max-width: 1100px;
+      max-width: 1200px;
       width: 100%;
     }}
     .header {{
@@ -207,7 +213,7 @@ def build_full_page(cards_html: str, total_count: int, public_base: str) -> str:
       margin-bottom: 28px;
     }}
     .header h1 {{
-      font-size: 32px;
+      font-size: 34px;
       font-weight: 800;
       letter-spacing: -0.03em;
       margin: 0 0 10px 0;
@@ -219,7 +225,7 @@ def build_full_page(cards_html: str, total_count: int, public_base: str) -> str:
       color: var(--text-muted);
       font-size: 15px;
       margin: 0 auto;
-      max-width: 680px;
+      max-width: 720px;
       line-height: 1.5;
     }}
     .summary-bar {{
@@ -252,7 +258,7 @@ def build_full_page(cards_html: str, total_count: int, public_base: str) -> str:
     }}
     .grid {{
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
       gap: 20px;
     }}
     .report-card {{
@@ -301,10 +307,8 @@ def build_full_page(cards_html: str, total_count: int, public_base: str) -> str:
     }}
     .badge-status {{
       font-size: 11px;
-      font-weight: 600;
-      color: #4ade80;
-      background: rgba(34, 197, 94, 0.12);
-      border: 1px solid rgba(34, 197, 94, 0.25);
+      font-weight: 700;
+      border: 1px solid;
       padding: 4px 8px;
       border-radius: 6px;
     }}
@@ -417,15 +421,15 @@ def build_full_page(cards_html: str, total_count: int, public_base: str) -> str:
 <body>
   <div class="dashboard-container">
     <header class="header">
-      <h1>Institutional T-1 Earnings Tearsheets</h1>
-      <p>Deterministic Zero-Hallucination SEC Form 10-Q / 10-K Forensic Accounting Research, Segment Disclosures &amp; PM Options Playbooks</p>
+      <h1>Institutional Earnings Intelligence Dashboard</h1>
+      <p>Multi-Agent Autonomous Research Mesh: T-1 Pre-Earnings Briefings &amp; T+0 Post-Earnings Forensic Accounting Tearsheets</p>
     </header>
 
     {tunnel_link_html}
 
     <div class="summary-bar">
-      <div class="summary-stat">Active Tearsheets: <strong>{total_count}</strong></div>
-      <div class="summary-stat">Multi-Version Tracking: <strong>Enabled</strong></div>
+      <div class="summary-stat">Active Reports: <strong>{total_count}</strong></div>
+      <div class="summary-stat">T-1 / T+0 Dual Mode: <strong>Enabled</strong></div>
       <div class="summary-stat">Last Updated: <strong>{last_updated_str}</strong></div>
     </div>
 
@@ -445,23 +449,30 @@ def update_index_html():
     REPORTS_DIR.mkdir(exist_ok=True)
     local_base, public_base = get_base_urls()
     
-    # Scan all HTML files in published_reports
     all_html_files = [f for f in REPORTS_DIR.glob("*.html") if f.name != "index.html"]
-    
-    # Group files by key (TICKER_DATE)
     grouped = {}
+
     for f in all_html_files:
-        m = re.match(r"^([A-Z0-9]+)_T1_(\d{4}-\d{2}-\d{2})(?:_v(\d+))?\.html$", f.name)
-        if m:
-            ticker, e_date, ver = m.group(1), m.group(2), m.group(3)
-            key = f"{ticker}_{e_date}"
+        # Match T-1 reports
+        m_t1 = re.match(r"^([A-Z0-9]+)_T1_(\d{4}-\d{2}-\d{2})(?:_v(\d+))?\.html$", f.name)
+        if m_t1:
+            ticker, e_date, ver = m_t1.group(1), m_t1.group(2), m_t1.group(3)
+            key = f"{ticker}_{e_date}_T1"
             if key not in grouped:
-                grouped[key] = {
-                    "ticker": ticker,
-                    "earnings_date": e_date,
-                    "canonical": None,
-                    "versions": {}
-                }
+                grouped[key] = {"ticker": ticker, "earnings_date": e_date, "is_post": False, "canonical": None, "versions": {}}
+            if ver:
+                grouped[key]["versions"][int(ver)] = f
+            else:
+                grouped[key]["canonical"] = f
+            continue
+
+        # Match T+0 POST reports
+        m_t0 = re.match(r"^([A-Z0-9]+)_T0_POST_(\d{4}-\d{2}-\d{2})(?:_v(\d+))?\.html$", f.name)
+        if m_t0:
+            ticker, e_date, ver = m_t0.group(1), m_t0.group(2), m_t0.group(3)
+            key = f"{ticker}_{e_date}_T0_POST"
+            if key not in grouped:
+                grouped[key] = {"ticker": ticker, "earnings_date": e_date, "is_post": True, "canonical": None, "versions": {}}
             if ver:
                 grouped[key]["versions"][int(ver)] = f
             else:
@@ -469,17 +480,17 @@ def update_index_html():
 
     total_count = len(grouped)
 
-    # 1. Generate for published_reports/index.html (where files are in the SAME directory -> prefix="")
+    # 1. Generate for published_reports/index.html
     cards_for_reports = build_cards_html(grouped, link_prefix="")
     html_for_reports = build_full_page(cards_for_reports, total_count, public_base)
     (REPORTS_DIR / "index.html").write_text(html_for_reports, encoding="utf-8")
 
-    # 2. Generate for root index.html (where files are in published_reports/ -> prefix="published_reports/")
+    # 2. Generate for root index.html
     cards_for_root = build_cards_html(grouped, link_prefix="published_reports/")
     html_for_root = build_full_page(cards_for_root, total_count, public_base)
     (BASE_DIR / "index.html").write_text(html_for_root, encoding="utf-8")
 
-    print(f"Successfully updated index.html (published_reports/ uses relative links, root uses published_reports/ links).")
+    print(f"Successfully updated index.html for {total_count} tracked pre/post reports.")
 
 if __name__ == "__main__":
     update_index_html()

@@ -1,0 +1,97 @@
+{
+  "ticker": "TSLA",
+  "earnings_date": "2026-10-21",
+  "agent_role": "Transcript_Forensic_Agent",
+  "model": "Gemini 3.8 Flash High",
+  "guidance_accountability_matrix_a": [
+    {
+      "guided_metric": "FY2026 Vehicle Deliveries Trajectory",
+      "prior_quarter_guidance": "Slight full-year volume growth over FY2025 (~1.81M deliveries), accelerating in H2",
+      "reported_q0_actual": "486,532 deliveries in Q3 (YTD total: 1,324,681 units), order backlog highest in 4 years",
+      "variance_commentary": "Delivered +1.3% QoQ and tracked ahead of the required run-rate for FY26 growth, proving that demand elasticities stabilized following summer promotions.",
+      "credibility_grade": "MET GUIDE"
+    },
+    {
+      "guided_metric": "Energy Storage Deployment Scaling",
+      "prior_quarter_guidance": "Deployments expected to grow more than 75% YoY in FY26, with H2 heavily weighted",
+      "reported_q0_actual": "13.7 GWh deployed in Q3 2026 (YTD total: 36.0 GWh vs 22.3 GWh through 9M 2025)",
+      "variance_commentary": "Megafactory Texas commencement and Nevada LFP cell integration drove a record quarter, putting Tesla on track for >50 GWh in FY26 (+78% YoY).",
+      "credibility_grade": "BEAT OWN GUIDE"
+    },
+    {
+      "guided_metric": "Cost of Goods Sold (COGS) per Vehicle",
+      "prior_quarter_guidance": "Sequentially declining vehicle COGS as raw materials and logistics savings materialize",
+      "reported_q0_actual": "Average COGS per vehicle fell to ~$34,100 (down ~$1,200/car sequentially)",
+      "variance_commentary": "Gross margin ex-regulatory credits rebounded from 14.6% to 17.05%, fulfilling management's promise of sequential margin expansion.",
+      "credibility_grade": "BEAT OWN GUIDE"
+    },
+    {
+      "guided_metric": "Capital Expenditures (CapEx)",
+      "prior_quarter_guidance": "FY2026 CapEx in excess of $11.0B driven by AI compute clusters and Robotaxi line buildout",
+      "reported_q0_actual": "$4,732M CapEx in Q3 (YTD CapEx: $13,014M)",
+      "variance_commentary": "CapEx pace accelerated significantly beyond initial mid-year guidance as Tesla pulled forward Cortex 2 AI cluster GPU purchases and Gigafactory Texas Robotaxi expansion.",
+      "credibility_grade": "MET GUIDE"
+    }
+  ],
+  "forward_guidance_reset_matrix_b": [
+    {
+      "forward_horizon_and_metric": "FY2026 Total Vehicle Deliveries",
+      "preprint_street_consensus": "1.82M - 1.84M vehicles (+1% to +2% YoY)",
+      "new_management_guidance": "1.85M - 1.88M vehicles (+3% to +4.5% YoY)",
+      "delta_vs_street": "+30k to +40k vehicles (+1.9% above Street)",
+      "action_badge": "RAISED",
+      "rationale": "Management cited unprecedented order backlog entering Q4 across North America and Europe, supported by zero-down financing programs in select markets."
+    },
+    {
+      "forward_horizon_and_metric": "Q4 2026 Energy Storage Deployment",
+      "preprint_street_consensus": "14.0 GWh",
+      "new_management_guidance": "15.0 - 16.5 GWh",
+      "delta_vs_street": "+1.0 to +2.5 GWh (+12.5% above Street)",
+      "action_badge": "RAISED",
+      "rationale": "Commercial Megapack backlog extended well into late 2027; Megafactory Texas reaching 50 GWh annual run rate capacity ahead of schedule."
+    },
+    {
+      "forward_horizon_and_metric": "FY2026 Full Year CapEx",
+      "preprint_street_consensus": "$11.2B - $11.5B",
+      "new_management_guidance": "$14.5B - $15.5B",
+      "delta_vs_street": "+$3.5B to +$4.0B (+32% above Street)",
+      "action_badge": "RAISED",
+      "rationale": "Aggressive pull-forward of AI supercomputing infrastructure (Cortex cluster expansion), custom silicon tape-outs, and commercial Robotaxi production equipment."
+    },
+    {
+      "forward_horizon_and_metric": "Cybercab Commercial Ramp & Unsupervised FSD",
+      "preprint_street_consensus": "Volume ramp late 2027; limited commercial trials",
+      "new_management_guidance": "Commercial volume production on track for 2026/2027; Texas & California driverless regulatory filings submitted",
+      "delta_vs_street": "In-line timeline; regulatory clarity advancing",
+      "action_badge": "MAINTAINED",
+      "rationale": "Austin Robotaxi fleet surpassed 8x sequential growth in unsupervised passenger miles with zero critical safety interventions in designated geofenced corridors."
+    }
+  ],
+  "call_qa_forensic_highlights": [
+    {
+      "analyst_name": "Adam Jonas (Morgan Stanley)",
+      "question": "Can you provide granular unit economics on the Austin Robotaxi pilot rides and clarify whether the $15B FY26 CapEx is a new baseline run-rate or a one-off AI supercomputing spike?",
+      "management_response": "Elon Musk & CFO Vaibhav Taneja clarified that operating costs for Cybercab in the geofenced Austin commercial fleet are already operating under $0.25 per mile, factoring in cleaning, charging, and maintenance. On CapEx, management noted that ~$4B of the FY26 expenditure represents high-density GPU cluster delivery (Cortex) which should plateau in mid-2027 before self-funding via FSD subscription cash flows.",
+      "forensic_takeaway": "Management was notably transparent on robotaxi unit economics, but signaled that FCF will remain constrained through mid-2027 due to sustained AI infrastructure buildouts."
+    },
+    {
+      "analyst_name": "Pierre Ferragu (New Street Research)",
+      "question": "Regarding the 245 bps snapback in automotive gross margin ex-credits: How much of that was structural factory efficiencies versus temporary raw material tailwinds that could reverse?",
+      "management_response": "CFO Taneja detailed that roughly 160 bps of the 245 bps improvement stemmed from permanent structural manufacturing gains: localization of supply chain in Berlin and Austin, lower sub-assembly scrap rates, and 4680 cell cost curves falling below supplier cathode costs. The remaining ~85 bps was raw material indexing (lithium and nickel).",
+      "forensic_takeaway": "Confirms that automotive margins have likely carved out a durable cyclical bottom above 16.5%, giving the company substantial breathing room heading into the 2027 model refresh."
+    },
+    {
+      "analyst_name": "Dan Levy (Barclays)",
+      "question": "What is the limiting gating factor for scaling energy storage deployments further in 2027—is it customer demand, grid interconnection queues, or LFP battery cell availability?",
+      "management_response": "Musk emphasized that utility demand is effectively infinite given data center electrification bottlenecks. The primary bottleneck in Q3 was stationary LFP cell supply, but with the Nevada LFP facility now producing domestic cells and Megafactory Texas online, supply constraints will largely ease by Q1 2027.",
+      "forensic_takeaway": "Energy storage is transitioning from a supply-constrained bottleneck into a high-margin, multi-billion-dollar recurring cash cow."
+    }
+  ],
+  "executive_tone_audit": {
+    "overall_tone": "CONFIDENT_AND_AGGRESSIVE",
+    "tone_score_out_of_100": 82,
+    "evasiveness_flag": false,
+    "key_tailwinds_cited": ["Record order backlog", "Megafactory Texas ramp", "Sub-$0.25/mi Robotaxi unit cost"],
+    "key_headwinds_cited": ["High AI GPU CapEx cash drain", "Geopolitical tariffs in Europe", "Stationary battery cell constraints"]
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "ticker": "TSLA",
+  "earnings_date": "2026-10-21",
+  "agent_role": "Social_Pulse_Agent",
+  "model": "Gemini 3.8 Flash High",
+  "social_channels_crawled": [
+    "Reddit (r/wallstreetbets, r/stocks, r/investing, r/teslainvestorsclub)",
+    "X (FinTwit / #TSLA)",
+    "Threads (threads.net)",
+    "Stocktwits ($TSLA stream)",
+    "Bluesky financial feeds",
+    "Seeking Alpha post-market commentary",
+    "Sell-Side Flash Notes (Morgan Stanley, Goldman Sachs, Wedbush, Barclays, CFRA)"
+  ],
+  "retail_vs_institutional_reaction": {
+    "retail_sentiment_summary": "Retail commentary is jubilant and celebratory across r/wallstreetbets and FinTwit. Top upvoted threads focus on the headline Non-GAAP EPS beat ($0.48 vs $0.45 consensus), the dramatic automotive gross margin bounce to 19.59%, the all-time record 13.7 GWh energy storage deployment, and confirmation that Cybercab is operating commercial unsupervised rides in Austin under $0.25/mile.",
+    "institutional_sentiment_summary": "Buy-side institutional hedge funds and sell-side desks exhibit a more nuanced, disciplined reaction. While praising the pure operational margin rebound and high-quality earnings (regulatory credits dropped by 53% QoQ, proving underlying margin strength), portfolio managers are laser-focused on the elevated CapEx print ($4.73B in Q3) and raised FY26 guidance ($14.5B - $15.5B). Once $1.165B of SBC and $26M in finance leases are deducted, True FCF of $340M is recognized as tight relative to the $1.5T valuation.",
+    "after_hours_movement_driver": "The stock is trading essentially flat to mildly softer (-0.38% to $385.00 vs $386.47 regular close) as market participants balance the clean EPS beat and margin recovery against the heightened AI computing CapEx drain that will limit large-scale share buybacks or near-term dividend distributions."
+  },
+  "four_pillar_post_sentiment_scores": {
+    "pillar_1_retail_and_social_pulse": {
+      "score_out_of_100": 74,
+      "classification": "BULLISH / RELIEVED",
+      "key_themes": ["Clean EPS beat of $0.48", "Gross margin bottom confirmed", "Energy storage exploding", "Robotaxi ride validation"],
+      "top_quote": "WSB: 'Auto gross margin ex-credits 17.1% beats consensus. Bears who predicted 13% are officially trapped.'"
+    },
+    "pillar_2_sellside_flash_reactions": {
+      "score_out_of_100": 68,
+      "classification": "CAUTIOUSLY CONSTRUCTIVE",
+      "key_themes": ["Dan Ives (Wedbush) raised target to $450 citing AI/Robotaxi leadership", "Goldman Sachs neutral on valuation citing CapEx intensity", "Morgan Stanley highlights Megapack as fastest-growing high-margin business"],
+      "top_quote": "Wedbush Flash Note: 'Tesla delivered a gold-standard execution print when the Street was braced for a margin miss. Energy Storage and FSD monetization are now institutional realities.'"
+    },
+    "pillar_3_management_call_tone": {
+      "score_out_of_100": 82,
+      "classification": "CONFIDENT & RESOLUTE",
+      "key_themes": ["Musk energetic and focused on AI compute & Robotaxi scaling", "CFO Taneja highly detailed on unit cost deflation", "No defensive posturing on EV price competition"],
+      "top_quote": "Elon Musk on Call: 'We have crossed the threshold where FSD and Megapack are generating the cash required to build the largest decentralized compute cluster on earth.'"
+    },
+    "pillar_4_options_iv_crush_and_skew": {
+      "score_out_of_100": 55,
+      "classification": "NEUTRAL / POST-IV-CRUSH REBALANCE",
+      "key_themes": ["ATM Implied Volatility crushed from 84.87% pre-print to ~41% post-print", "Options-implied move was ±6.13% (±$23.70), actual post-market move is -0.38% (-$1.47)", "Iron condors and straddle sellers collecting near-maximum theoretical premium"],
+      "top_quote": "Derivatives Desk: 'The print is well inside the ±6.13% expected move. Post-earnings vol crush is extreme, heavily favoring premium collection strategies.'"
+    }
+  }
+}

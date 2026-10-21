@@ -1,0 +1,102 @@
+{
+  "ticker": "TSLA",
+  "earnings_date": "2026-10-21",
+  "agent_role": "KPI_Discovery_Agent",
+  "model": "Gemini 3.8 Flash High",
+  "company_specific_kpis": [
+    {
+      "metric_name": "Automotive Gross Margin (ex-Regulatory Credits)",
+      "street_consensus": 16.5,
+      "t1_whisper": 17.2,
+      "reported_actual_q0": 17.05,
+      "unit": "%",
+      "qoq_change_bps": 245,
+      "yoy_change_bps": -15,
+      "beat_miss_vs_consensus": "+55 bps",
+      "beat_miss_vs_whisper": "-15 bps",
+      "verdict": "BEAT",
+      "commentary": "Automotive gross margin excluding zero-emission regulatory credits snapped back significantly from 14.6% in Q2 2026 to 17.05% in Q3 2026, driven by lower cost of goods sold per vehicle ($34,100) and higher Model 3/Y production density in Austin and Berlin.",
+      "tooltip": "Automotive Gross Margin ex-Regulatory Credits: The pure profitability of vehicle manufacturing, subtracting 100% margin regulatory credit sales to assess true underlying unit economics."
+    },
+    {
+      "metric_name": "Total Vehicle Deliveries",
+      "street_consensus": 482000,
+      "t1_whisper": 485000,
+      "reported_actual_q0": 486532,
+      "unit": "vehicles",
+      "qoq_change_pct": 1.33,
+      "yoy_change_pct": -2.13,
+      "beat_miss_vs_consensus": "+4,532 vehicles (+0.94%)",
+      "beat_miss_vs_whisper": "+1,532 vehicles (+0.32%)",
+      "verdict": "BEAT",
+      "commentary": "Delivered 486,532 vehicles globally (478,237 Model 3/Y and 8,295 Other Models), exceeding both Wall Street consensus and buy-side whisper numbers with order backlog reaching a 4-year high.",
+      "tooltip": "Total Vehicle Deliveries: The exact count of customer deliveries recognized during the 3-month reporting period under GAAP revenue recognition criteria."
+    },
+    {
+      "metric_name": "Energy Storage Deployment",
+      "street_consensus": 12.8,
+      "t1_whisper": 13.5,
+      "reported_actual_q0": 13.7,
+      "unit": "GWh",
+      "qoq_change_pct": 1.48,
+      "yoy_change_pct": 9.6,
+      "beat_miss_vs_consensus": "+0.90 GWh (+7.03%)",
+      "beat_miss_vs_whisper": "+0.20 GWh (+1.48%)",
+      "verdict": "BEAT",
+      "commentary": "Deployed a record 13.7 GWh of Megapack and Powerwall utility-scale energy storage, driven by surging AI data center backup power demand and initial shipments from Megafactory Texas.",
+      "tooltip": "Energy Storage Deployment (GWh): Gigawatt-hours of utility-scale Megapacks and residential Powerwalls installed and connected to commercial or residential grids."
+    },
+    {
+      "metric_name": "Active FSD Subscriptions",
+      "street_consensus": 1.55,
+      "t1_whisper": 1.65,
+      "reported_actual_q0": 1.74,
+      "unit": "million subscribers",
+      "qoq_change_pct": 17.57,
+      "yoy_change_pct": 67.31,
+      "beat_miss_vs_consensus": "+0.19M (+12.26%)",
+      "beat_miss_vs_whisper": "+0.09M (+5.45%)",
+      "verdict": "BEAT",
+      "commentary": "Active Full Self-Driving (Supervised & Unsupervised) paying subscriber base expanded by +260k sequentially to 1.74M users, boosting deferred revenue recognition to $1,255M in Q3.",
+      "tooltip": "Active FSD Subscriptions: Cumulative count of active monthly recurring subscriptions and recognized upfront software purchases for Tesla's Full Self-Driving neural network suite."
+    },
+    {
+      "metric_name": "Automotive Regulatory Credits",
+      "street_consensus": 550,
+      "t1_whisper": 600,
+      "reported_actual_q0": 417,
+      "unit": "$M",
+      "qoq_change_pct": -53.15,
+      "yoy_change_pct": -43.11,
+      "beat_miss_vs_consensus": "-$133M (-24.18%)",
+      "beat_miss_vs_whisper": "-$183M (-30.50%)",
+      "verdict": "HIGH_QUALITY_MISS",
+      "commentary": "Regulatory credit sales plummeted to $417M from $890M in Q2 2026. Because credits carry near 100% gross margin, this makes the total gross profit beat ($5,494M) exceptionally high quality.",
+      "tooltip": "Automotive Regulatory Credits: Pure-profit carbon offset credits sold to legacy OEM automakers who fail to meet government clean air fleet emission mandates."
+    }
+  ],
+  "reporting_segments": [
+    {
+      "segment_name": "Automotive Revenues",
+      "q0_actual_millions": 20560.0,
+      "percentage_of_total": 73.31,
+      "qoq_growth_pct": 0.21,
+      "yoy_growth_pct": -3.04
+    },
+    {
+      "segment_name": "Energy Generation and Storage",
+      "q0_actual_millions": 2881.0,
+      "percentage_of_total": 10.27,
+      "qoq_growth_pct": -8.22,
+      "yoy_growth_pct": -15.64
+    },
+    {
+      "segment_name": "Services and Other",
+      "q0_actual_millions": 4605.0,
+      "percentage_of_total": 16.42,
+      "qoq_growth_pct": 0.52,
+      "yoy_growth_pct": 32.52
+    }
+  ],
+  "segment_leak_prevention_check": "TSLA_VERIFIED"
+}
