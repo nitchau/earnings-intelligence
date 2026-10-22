@@ -10,7 +10,7 @@
     "yahoo_consensus_eps": 5.46
   },
   "price_validation": {
-    "yahoo_spot_price": 654.59,
+    "yahoo_spot_price": 697.52,
     "google_finance_spot_price": null,
     "cross_source_divergence_pct": 0.0,
     "status": "VERIFIED"
@@ -31,6 +31,70 @@
     "atm_implied_move_pct": 2.94,
     "atm_implied_volatility_pct": 50.85,
     "put_call_oi_ratio": 0.82
+  },
+  "historical_earnings_track_record": {
+    "quarters_evaluated": 4,
+    "beats_count": 2,
+    "beat_rate_pct": 50.0,
+    "avg_eps_surprise_pct": -8.49,
+    "avg_historical_1d_move_abs_pct": 9.56,
+    "current_implied_move_pct": 2.94,
+    "implied_vs_historical_move_delta_pct": -6.62,
+    "options_vol_regime": "UNDERPRICED_VS_HISTORY (LONG VOLATILITY EDGE)",
+    "prior_4q_releases": [
+      {
+        "earnings_date": "2026-07-29",
+        "eps_estimate": 7.22,
+        "eps_actual": 6.18,
+        "surprise_pct": -14.42,
+        "verdict": "MISS",
+        "actual_1d_move_pct": -7.95
+      },
+      {
+        "earnings_date": "2026-04-29",
+        "eps_estimate": 6.66,
+        "eps_actual": 10.44,
+        "surprise_pct": 56.79,
+        "verdict": "BEAT",
+        "actual_1d_move_pct": -8.55
+      },
+      {
+        "earnings_date": "2026-01-28",
+        "eps_estimate": 8.22,
+        "eps_actual": 8.88,
+        "surprise_pct": 8.0,
+        "verdict": "BEAT",
+        "actual_1d_move_pct": 10.4
+      },
+      {
+        "earnings_date": "2025-10-29",
+        "eps_estimate": 6.71,
+        "eps_actual": 1.05,
+        "surprise_pct": -84.34,
+        "verdict": "MISS",
+        "actual_1d_move_pct": -11.33
+      }
+    ]
+  },
+  "street_consensus_and_targets": {
+    "target_mean_price": 833.13,
+    "target_median_price": 847.5,
+    "target_high_price": 1050.0,
+    "target_low_price": 600.0,
+    "implied_upside_to_mean_pct": 19.44,
+    "analyst_count": 58,
+    "recommendation_key": "strong_buy",
+    "recommendation_mean": 1.4,
+    "yahoo_consensus_eps_q0e": 5.46
+  },
+  "forensic_fcf_bridge_latest": {
+    "period_label": "Q2 2026 (Ended Jun 30, 2026)",
+    "ocf": 31862.0,
+    "capex": 30116.0,
+    "reported_fcf": 1746.0,
+    "sbc": 7658.0,
+    "finance_leases": 0.0,
+    "true_fcf": -5912.0
   },
   "stitched_5q_financials": {
     "income_statement_5q": {

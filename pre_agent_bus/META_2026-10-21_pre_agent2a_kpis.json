@@ -1,0 +1,94 @@
+{
+  "ticker": "META",
+  "earnings_date": "2026-10-21",
+  "agent": "Pre_KPI_Consensus_Agent (Agent 2A)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "upcoming_quarter_label": "Q3 2026E",
+  "latest_reported_quarter_label": "Q2 2026",
+  "headline_and_company_kpis": [
+    {
+      "metric": "Total Revenue ($M)",
+      "tooltip_title": "Consolidated GAAP revenue across Family of Apps (FoA) and Reality Labs (RL) for Q3 2026E.",
+      "tooltip_def": "Total Revenue ($M): Management guided Q3 2026 revenue to $61.0B–$64.0B ($62,500M midpoint); buy-side whisper sits at $63,200M (+23.3% YoY).",
+      "q_minus_1_actual": "$60,801M",
+      "q_minus_4_yoy_baseline": "$51,242M",
+      "street_consensus_q0e": "$62,500M",
+      "whisper_bogey_q0e": "$63,200M",
+      "whisper_spread_display": "+$700M (+1.12% Whisper Hurdle)",
+      "bar_width_pct": 78,
+      "hurdle_badge": "BULL HURDLE >$63.2B"
+    },
+    {
+      "metric": "Diluted EPS (Normalized / Consensus)",
+      "tooltip_title": "Wall Street consensus Diluted EPS for Q3 2026E ($5.46 Yahoo / $5.64 blended Street) vs Buy-Side Whisper ($5.85).",
+      "tooltip_def": "Diluted EPS ($): Consensus stands at $5.46 (range $5.40–$5.95) vs Q2 2026 actual of $6.18; buy-side whisper demands $5.85+ on core operating leverage.",
+      "q_minus_1_actual": "$6.18",
+      "q_minus_4_yoy_baseline": "$1.05 (Tax-Impacted)",
+      "street_consensus_q0e": "$5.46",
+      "whisper_bogey_q0e": "$5.85",
+      "whisper_spread_display": "+$0.39 (+7.14% Whisper Hurdle)",
+      "bar_width_pct": 84,
+      "hurdle_badge": "BULL HURDLE >$5.85"
+    },
+    {
+      "metric": "Family of Apps (FoA) Advertising Revenue ($M)",
+      "tooltip_title": "Core digital advertising revenue across Instagram, Facebook, Reels, and WhatsApp in Q3 2026E.",
+      "tooltip_def": "FoA Advertising Revenue ($M): Expected to reach $61,000M consensus ($61,800M buy-side whisper), driven by Advantage+ creative automation and Muse AI ranking.",
+      "q_minus_1_actual": "$59,900M",
+      "q_minus_4_yoy_baseline": "$50,082M",
+      "street_consensus_q0e": "$61,000M",
+      "whisper_bogey_q0e": "$61,800M",
+      "whisper_spread_display": "+$800M (+1.31% Whisper Hurdle)",
+      "bar_width_pct": 80,
+      "hurdle_badge": "KEY AD ENGINE"
+    },
+    {
+      "metric": "Average Price per Ad (% YoY Growth)",
+      "tooltip_title": "Year-over-Year blended CPM / ad auction pricing growth across Family of Apps.",
+      "tooltip_def": "Average Price per Ad (% YoY): Printed +10.0% YoY in Q2 2026; buy-side bulls look for +11.5%+ YoY in Q3 as Advantage+ conversion rates expand.",
+      "q_minus_1_actual": "+10.0%",
+      "q_minus_4_yoy_baseline": "+10.0%",
+      "street_consensus_q0e": "+10.0%",
+      "whisper_bogey_q0e": "+11.5%",
+      "whisper_spread_display": "+150 bps Whisper Spread",
+      "bar_width_pct": 86,
+      "hurdle_badge": "PRICING POWER"
+    },
+    {
+      "metric": "Family Daily Active People (DAP)",
+      "tooltip_title": "Average Daily Active People across Facebook, Instagram, Messenger, and WhatsApp.",
+      "tooltip_def": "Family Daily Active People (DAP): Consensus models 3.58B daily active users (whisper 3.60B+) as Meta AI and Threads engagement deepen.",
+      "q_minus_1_actual": "3.54B",
+      "q_minus_4_yoy_baseline": "3.29B",
+      "street_consensus_q0e": "3.58B",
+      "whisper_bogey_q0e": "3.60B",
+      "whisper_spread_display": "+20M (+0.56% User Hurdle)",
+      "bar_width_pct": 72,
+      "hurdle_badge": "USER SCALE"
+    },
+    {
+      "metric": "Quarterly Capital Expenditures (P&E + Leases) ($M)",
+      "tooltip_title": "Quarterly cash capital expenditures deployed into Nvidia H100/H200/Blackwell clusters and custom MTIA silicon.",
+      "tooltip_def": "Quarterly CapEx ($M): Surged to $30,116M in Q2 2026 (49.5% of revenue); Street models $32,000M in Q3 2026E with buy-side bracing for $33,500M+ on Muse Wonder cluster buildouts.",
+      "q_minus_1_actual": "$30,116M",
+      "q_minus_4_yoy_baseline": "$18,829M",
+      "street_consensus_q0e": "$32,000M",
+      "whisper_bogey_q0e": "$33,500M",
+      "whisper_spread_display": "+$1,500M CapEx Intensity Risk",
+      "bar_width_pct": 90,
+      "hurdle_badge": "SWING FACTOR"
+    },
+    {
+      "metric": "Reality Labs Operating Loss ($M)",
+      "tooltip_title": "Quarterly operating loss in the Reality Labs hardware and AR/VR software division.",
+      "tooltip_def": "Reality Labs Operating Loss ($M): Printed -$4,839M in Q2 2026; Street consensus models -$4,500M in Q3 2026E (whisper -$4,400M or narrower as spend shifts to AI).",
+      "q_minus_1_actual": "-$4,839M",
+      "q_minus_4_yoy_baseline": "-$4,432M",
+      "street_consensus_q0e": "-$4,500M",
+      "whisper_bogey_q0e": "-$4,400M",
+      "whisper_spread_display": "+$100M Narrower Loss Bogey",
+      "bar_width_pct": 70,
+      "hurdle_badge": "COST DISCIPLINE"
+    }
+  ]
+}

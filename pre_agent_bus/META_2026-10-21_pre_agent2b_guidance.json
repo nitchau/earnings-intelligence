@@ -1,0 +1,115 @@
+{
+  "ticker": "META",
+  "earnings_date": "2026-10-21",
+  "agent": "Pre_Guidance_Debate_Agent (Agent 2B)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "credibility_score": 89,
+  "credibility_label": "89 / 100 (Consistent Top-Line Sandbagger)",
+  "matrix_a_prior_guidance_and_track_record": [
+    {
+      "metric": "Q3 2026E Total Revenue Corridor",
+      "tooltip_title": "Management's official Q3 2026 revenue guidance issued on the Q2 2026 earnings call.",
+      "tooltip_def": "Q3 2026 Revenue Guidance: Issued at $61.0B to $64.0B ($62.50B midpoint). Meta has beaten the midpoint of its quarterly revenue guidance in 4 of the last 4 quarters.",
+      "prior_q_guidance_for_q0": "$61.0B – $64.0B ($62.50B Midpoint)",
+      "current_street_consensus": "$62,500M ($63.20B Whisper)",
+      "historical_4q_beat_rate": "4 / 4 Top-Line Beats (+2.4% Avg)",
+      "variance_and_sandbag_commentary": "CFO Susan Li historically embeds a 150–250 bps conservatism buffer into quarterly revenue guidance; buy-side expects a print near or above the $64.0B top end.",
+      "credibility_grade": "HIGH SANDBAG PROBABILITY"
+    },
+    {
+      "metric": "Full-Year 2026 CapEx Envelope (incl. Finance Leases)",
+      "tooltip_title": "Full-Year 2026 capital expenditure guidance corridor issued in Q2 2026.",
+      "tooltip_def": "FY2026 CapEx Guidance: Raised in Q2 2026 to $130.0B–$145.0B (including principal payments on finance leases) as Meta scales multi-gigawatt Muse Wonder clusters.",
+      "prior_q_guidance_for_q0": "$130.0B – $145.0B (FY26 Full Year)",
+      "current_street_consensus": "$137.5B Midpoint ($32.0B in Q3E)",
+      "historical_4q_beat_rate": "Raised CapEx Low-End 3 Straight Qtrs",
+      "variance_and_sandbag_commentary": "Management has ratcheted the lower bound of CapEx higher every quarter in 2026; expect the corridor to tighten toward $135B–$145B.",
+      "credibility_grade": "UPPER-HALF TRACKING"
+    },
+    {
+      "metric": "Full-Year 2026 Total GAAP Expense Corridor",
+      "tooltip_title": "Full-Year 2026 total operating expense guidance prior to one-time legal accruals.",
+      "tooltip_def": "FY2026 Total Expense Guidance: Guided at $162.0B–$167.0B in Q2 2026; investors are watching for any one-time U.S. State Attorneys General litigation accrual impacts vs core headcount discipline.",
+      "prior_q_guidance_for_q0": "$162.0B – $167.0B (Core OpEx Guide)",
+      "current_street_consensus": "$164.8B Core ($30.5B in Q3E)",
+      "historical_4q_beat_rate": "Core Headcount Down YoY via AI",
+      "variance_and_sandbag_commentary": "Internal deployment of Muse Code has held engineering headcount lean, though legal settlement accruals remain a headline GAAP swing factor.",
+      "credibility_grade": "DISCIPLINED CORE OPEX"
+    },
+    {
+      "metric": "4-Quarter Historical EPS & 1-Day Stock Reaction Track Record",
+      "tooltip_title": "Deterministic 4-quarter historical EPS surprise and 1-day post-earnings stock price move from Stage 1.",
+      "tooltip_def": "4Q Historical Reaction Audit: Over the last 4 quarters, META moved an average of ±9.56% on T+1 (-7.95%, -8.55%, +10.40%, -11.33%), whereas the current weekly straddle prices only ±2.94%.",
+      "prior_q_guidance_for_q0": "Last 4Q Moves: -7.95%, -8.55%, +10.40%, -11.33%",
+      "current_street_consensus": "Current ATM Straddle: ±2.94% (±$19.27/sh)",
+      "historical_4q_beat_rate": "9.56% Avg Realized 1D Move",
+      "variance_and_sandbag_commentary": "Options market implied move (±2.94%) is -6.62% below the 4-quarter historical realized average (9.56%), signaling compressed front-week volatility pricing.",
+      "credibility_grade": "VOLATILITY UNDERPRICED"
+    }
+  ],
+  "matrix_b_forward_guidance_bogeys": [
+    {
+      "forward_metric": "Q4 2026E Holiday Quarter Revenue Guidance",
+      "tooltip_title": "The single most important forward number in the Q3 2026 release.",
+      "tooltip_def": "Q4 2026E Revenue Guide Bogey: Street consensus sits at $71.5B ($70.5B–$72.5B). A guide midpoint above $73.0B+ triggers immediate institutional re-rating.",
+      "street_consensus_hurdle": "$70.5B – $72.5B ($71.5B Midpoint)",
+      "bull_case_bogey": "$73.0B – $76.0B ($74.5B Midpoint)",
+      "bear_case_breakdown": "Midpoint Below $69.5B",
+      "sensitivity_badge": "PRIMARY T+1 DRIVER",
+      "strategic_rationale": "Holiday e-commerce ad budgets and +10% to +14% Advantage+ ad pricing lift must offset macro and FX headwinds to prove AI CapEx is monetizing today."
+    },
+    {
+      "forward_metric": "FY2026 CapEx Corridor & Preliminary FY2027 CapEx Tone",
+      "tooltip_title": "Capital expenditure trajectory and Free Cash Flow inflection timeline.",
+      "tooltip_def": "CapEx Bogey: Investors can digest $135B–$145B in FY26 CapEx ONLY if paired with a Q4 revenue guide above $73B and commentary that Reality Labs burn will shrink to help self-fund AI.",
+      "street_consensus_hurdle": "$135.0B – $145.0B FY26 Corridor",
+      "bull_case_bogey": "Capped <=$145B + RL Offset in FY27",
+      "bear_case_breakdown": "Uncapped >$150B without Revenue Beat",
+      "sensitivity_badge": "FCF MULTIPLE SWING",
+      "strategic_rationale": "With Q2 True FCF dipping to -$5,912M ($1,746M Reported FCF minus $7,658M SBC), institutional multiples hinge on whether AI CapEx is self-funded via operating leverage."
+    },
+    {
+      "forward_metric": "Reality Labs FY2026 / FY2027 Operating Loss Trajectory",
+      "tooltip_title": "Forward commitment on narrowing metaverse hardware operating losses.",
+      "tooltip_def": "Reality Labs Burn Bogey: Buy-side bulls are pressuring CFO Susan Li to cap FY26 RL losses at $18B–$19B and commit to narrowing FY27 RL losses toward ~$15B.",
+      "street_consensus_hurdle": "-$19.5B in FY26 / -$18.0B in FY27",
+      "bull_case_bogey": "Explicit FY27 Reduction to ~$15B",
+      "bear_case_breakdown": "RL Losses Widen >$20B/yr",
+      "sensitivity_badge": "MARGIN CATALYST",
+      "strategic_rationale": "Every $3B–$4B reduction in Reality Labs annual burn flows 100% into consolidated GAAP Operating Income and offsets AI server depreciation."
+    },
+    {
+      "forward_metric": "Capital Structure, Buyback Pacing & Share Split Optionality",
+      "tooltip_title": "Share repurchase activity and capital structure flexibility during peak CapEx.",
+      "tooltip_def": "Capital Return & Split Optionality: With cash flows prioritized for GPU clusters, investors watch for share class or split announcements and dividend continuity ($0.525/qtr).",
+      "street_consensus_hurdle": "Maintain $1.35B/qtr Cash Dividend",
+      "bull_case_bogey": "Structural Equity / Split Catalyst",
+      "bear_case_breakdown": "Dilutive Debt/Equity Issuance Shock",
+      "sensitivity_badge": "VALUATION RERATE",
+      "strategic_rationale": "Trading at 18.73x forward P/E ($697.52 spot vs $833.13 average Street target), any shareholder-friendly structural action unlocks immediate multiple expansion."
+    }
+  ],
+  "section_4b_pre_print_debates": [
+    {
+      "debate_title": "1. The $130B–$145B AI CapEx Payback Debate: Muse Wonder ROI vs. Negative True FCF — Framed by JPMorgan & Morgan Stanley",
+      "border_color": "#60a5fa",
+      "title_color": "#93c5fd",
+      "bull_vs_bear_ framing": "Bulls argue that Meta's October 2026 launch of Muse and Muse Wonder (1M-token context, Active Memory, Meta Model API at $4/$20 per M tokens) plus Advantage+ ad ranking (+10% to +14% ad pricing lift) proves immediate, high-margin monetization on GPU clusters. Bears counter that spending ~50% of revenue on CapEx ($30,116M in Q2) pushed Forensic True FCF to -$5,912M and paused aggressive buybacks.",
+      "call_focus_question": "What to Listen For on the Call: How does Mark Zuckerberg quantify the direct revenue attribution from Muse / Muse Wonder and Advantage+ in Q3, and will Q4 revenue guidance exceed $73B to prove AI CapEx is immediately accretive?"
+    },
+    {
+      "debate_title": "2. Operating Margin Resilience Amid Surging AI Server Depreciation & Headcount Discipline — Framed by Goldman Sachs",
+      "border_color": "#34d399",
+      "title_color": "#34d399",
+      "bull_vs_bear_framing": "Bulls point out that internal deployment of Muse Code and agentic engineering tools is allowing Meta to reduce FTE headcount YoY while scaling annualized revenue past $250B, keeping core operating margins above 35%. Bears warn that 5-year server depreciation from 2025–2026 GPU purchases is ramping >40% YoY, threatening to compress GAAP gross margins below 80%.",
+      "call_focus_question": "What to Listen For on the Call: Can CFO Susan Li demonstrate sequential R&D and core G&A leverage via lower FTE headcount, and how should investors separate any one-time legal settlement accruals (e.g., U.S. State AG youth litigation) from normalized operating margins?"
+    },
+    {
+      "debate_title": "3. Reality Labs Cost Reallocation & Capital Structure Catalyst Watch — Framed by Bank of America & Citi",
+      "border_color": "#f59e0b",
+      "title_color": "#fcd34d",
+      "bull_vs_bear_framing": "Institutional investors are demanding that Meta fund a portion of its AI supercluster buildout by trimming Reality Labs metaverse hardware burn (which lost -$4,839M in Q2 2026). Bulls anticipate an explicit commitment to reduce Reality Labs losses in FY2027 toward ~$15B alongside potential capital structure / stock split catalysts.",
+      "call_focus_question": "What to Listen For on the Call: Will management explicitly guide Reality Labs operating losses lower for FY26/FY27 as engineering talent shifts to Meta Superintelligence Labs (MSL) and Ray-Ban Meta AI glasses?"
+    }
+  ]
+}
