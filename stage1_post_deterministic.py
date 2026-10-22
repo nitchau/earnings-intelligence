@@ -4,7 +4,8 @@ Executes Layer 0 (Gatekeeper) & Layer 1 (Deterministic Mesh) before any LLM writ
 - Gatekeeper (Layer 0): Checks tickers.txt and published_ledger.json for T+0 reporting.
   Supports CLI forced ticker or --check-only scan.
   Extracts locked T-1 baseline (consensus, whisper, implied move, prior guidance).
-- Agent 1A (SEC_IR_Agent): Pulls Form 8-K (Item 2.02) / 10-Q / Exhibit 99.1 filings via edgartools/SEC API.
+- Agent 1A (SEC_IR_Agent): Pulls Form 8-K (Item 2.02) / 10-Q / Exhibit 99.1 filings via edgartools/SEC API
+  and caches {TICKER}/exhibit_99_1.txt for deterministic reproducibility.
 - Agent 1B (Market_Portal_Agent): Pulls closing price, after-hours price/volume from Yahoo & Google Finance.
 - Agent 1C (Data_Reconciliation_Referee): Reconciles sources, rolls forward 5-quarter table,
   pre-computes all QoQ/YoY/bps deltas, beat/miss deltas, post-print move, and FCF bridge.
@@ -155,7 +156,8 @@ def fetch_sec_filings_facts(symbol: str, target_date_str: str) -> dict:
     }
 
     # Check cached {symbol}/exhibit_99_1.txt first for speed and deterministic reproducibility
-    cached_ex = BASE_DIR / symbol / "exhibit_99_1.txt"
+    ticker_dir = BASE_DIR / symbol
+    cached_ex = ticker_dir / "exhibit_99_1.txt"
     if cached_ex.exists():
         exhibit_text = cached_ex.read_text(encoding="utf-8", errors="ignore")
         sec_data["filing_form"] = "8-K"
@@ -214,6 +216,11 @@ def fetch_sec_filings_facts(symbol: str, target_date_str: str) -> dict:
                     pass
 
             if exhibit_text:
+                try:
+                    ticker_dir.mkdir(parents=True, exist_ok=True)
+                    cached_ex.write_text(exhibit_text, encoding="utf-8")
+                except Exception:
+                    pass
                 sec_data["facts"] = parse_financial_metrics_from_text(exhibit_text, symbol)
 
     except Exception as e:
@@ -376,6 +383,56 @@ def parse_financial_metrics_from_text(text: str, symbol: str) -> dict:
         if m_sys: facts["systems_revenue_q0"] = round(float(m_sys.group(1).replace(",", "")) / 1000.0, 2)
         if m_csbg: facts["csbg_revenue_q0"] = round(float(m_csbg.group(1).replace(",", "")) / 1000.0, 2)
 
+    else:
+        # 3. Universal Generic 8-K Condensed Financial Statement Parser for Any Future Ticker
+        # Automatically detects unit scale ("in thousands" -> divide by 1000.0, default "in millions" -> 1.0)
+        in_thousands = bool(re.search(r"\(\s*in\s+thousands", flat_text, re.IGNORECASE))
+        scale = 1000.0 if in_thousands else 1.0
+
+        def extract_scaled(pattern: str) -> float | None:
+            m = re.search(pattern, flat_text, re.IGNORECASE)
+            if not m:
+                return None
+            val = safe_float(m.group(1).replace(",", ""))
+            if val is None:
+                return None
+            return round(val / scale, 2)
+
+        if "revenue_q0" not in facts:
+            rev_v = extract_scaled(r"(?:Total\s+revenues?|Total\s+net\s+revenues?|Net\s+revenues?|Revenues?)\s+\$?\s*([\d,]+)")
+            if rev_v: facts["revenue_q0"] = rev_v
+        if "gross_profit_q0" not in facts:
+            gp_v = extract_scaled(r"(?:Total\s+gross\s+profit|Gross\s+profit|Gross\s+margin)\s+\$?\s*([\d,]+)")
+            if gp_v: facts["gross_profit_q0"] = gp_v
+        if "operating_expenses_q0" not in facts:
+            opex_v = extract_scaled(r"(?:Total\s+operating\s+expenses|Operating\s+expenses)\s+\$?\s*([\d,]+)")
+            if opex_v: facts["operating_expenses_q0"] = opex_v
+        if "operating_income_q0" not in facts:
+            opinc_v = extract_scaled(r"(?:Income\s+from\s+operations|Operating\s+income)\s+\$?\s*([\d,]+)")
+            if opinc_v: facts["operating_income_q0"] = opinc_v
+        if "net_income_gaap_q0" not in facts:
+            net_v = extract_scaled(r"(?:Net\s+income\s+attributable\s+to\s+common\s+stockholders|Net\s+income)\s+\$?\s*([\d,]+)")
+            if net_v: facts["net_income_gaap_q0"] = net_v
+        if "ocf_q0" not in facts:
+            ocf_v = extract_scaled(r"(?:Net\s+cash\s+provided\s+by\s+operating\s+activities|Cash\s+flows?\s+from\s+operating\s+activities)\s+\$?\s*([\d,]+)")
+            if ocf_v: facts["ocf_q0"] = ocf_v
+        if "capex_q0" not in facts:
+            capex_v = extract_scaled(r"(?:Purchases?\s+of\s+property\s+and\s+equipment|Capital\s+expenditures?|Payments\s+for\s+property,\s+plant\s+and\s+equipment)\s+\(?\$?\s*([\d,]+)\)?")
+            if capex_v: facts["capex_q0"] = capex_v
+        if "sbc_q0" not in facts:
+            sbc_v = extract_scaled(r"(?:Stock-based\s+compensation|Share-based\s+compensation(?:\s+expense)?|Equity-based\s+compensation(?:\s+expense)?)\s+\$?\s*([\d,]+)")
+            if sbc_v: facts["sbc_q0"] = sbc_v
+        if "leases_q0" not in facts:
+            leases_v = extract_scaled(r"(?:Principal\s+payments\s+on\s+finance\s+leases|Payments\s+on\s+finance\s+lease\s+obligations)\s+\(?\$?\s*([\d,]+)\)?")
+            if leases_v: facts["leases_q0"] = leases_v
+
+        m_eps_g = re.search(r"(?:GAAP\s+diluted\s+(?:net\s+income\s+per\s+share|EPS)|Diluted\s+(?:earnings|net\s+income)\s+per\s+share)\s+\$?\s*(\d+\.\d+)", flat_text, re.IGNORECASE)
+        if m_eps_g and "eps_gaap_q0" not in facts:
+            facts["eps_gaap_q0"] = safe_float(m_eps_g.group(1))
+        m_eps_ng = re.search(r"(?:Non-GAAP\s+diluted\s+(?:net\s+income\s+per\s+share|EPS)|Non-GAAP\s+net\s+income\s+per\s+diluted\s+share)\s+\$?\s*(\d+\.\d+)", flat_text, re.IGNORECASE)
+        if m_eps_ng and "eps_nongaap_q0" not in facts:
+            facts["eps_nongaap_q0"] = safe_float(m_eps_ng.group(1))
+
     return facts
 
 # ==============================================================================
@@ -470,7 +527,7 @@ def reconcile_and_compute_post_truth(symbol: str, earnings_date_str: str) -> dic
     # 3. Agent 1B Market Portal Quotes (prefer locked T+0 snapshot if re-running on T+1)
     market_data = locked_market if locked_market else fetch_market_portal_data(symbol)
 
-    # 4. Resolve 5-quarter chronological arrays (Q3 2025, Q4 2025, Q1 2026, Q2 2026, Q3 2026 Actual)
+    # 4. Resolve 5-quarter chronological arrays (Q-4, Q-3, Q-2, Q-1, Q0 Actual)
     t = yf.Ticker(symbol)
     q_inc = t.quarterly_income_stmt
     q_cf = t.quarterly_cashflow
@@ -480,7 +537,7 @@ def reconcile_and_compute_post_truth(symbol: str, earnings_date_str: str) -> dic
         if metric_key_facts in facts and len(facts[metric_key_facts]) == 5:
             return facts[metric_key_facts]
 
-        # 2. Check if Q0 actual was extracted from 2/3-column SEC 8-K (e.g., META, IBM, LRCX)
+        # 2. Check if Q0 actual was extracted from 2/3-column SEC 8-K (e.g., META, IBM, LRCX, or generic)
         q0_key = f"{metric_key_facts.replace('_5q', '')}_q0"
         q0_val = facts.get(q0_key)
 
@@ -637,6 +694,7 @@ def reconcile_and_compute_post_truth(symbol: str, earnings_date_str: str) -> dic
             "period_labels": [
                 "Q3 2025", "Q4 2025", "Q1 2026", "Q2 2026", "Q3 2026 (Actual)"
             ],
+            "next_quarter_estimate_label": "Q4 2026E (Guided / Street)",
             "total_revenue": rev_5q,
             "gross_profit": gp_5q,
             "operating_expenses": opex_5q,
