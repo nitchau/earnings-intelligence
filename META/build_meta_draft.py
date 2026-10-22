@@ -1112,7 +1112,7 @@ html = f"""
         <div class="scenario-card scenario-bear">
           <div class="scenario-title">
             <span style="color:var(--bear-red);">REDUCE / HEDGE TAIL RISK (BEAR CASE)</span>
-            <span class="badge badge-bear">PROB: 15% | TARGET: $630–$655 (-7% to -11%)</span>
+            <span class="badge badge-bear">PROB: 15% | TARGET: $585–$610 (-7% to -11%)</span>
           </div>
           <ul class="trigger-list">
             <li><strong>CapEx Guidance Shock:</strong> Management hints that FY2027 CapEx could surge beyond <strong>$85.0B</strong>, triggering fears of prolonged negative True FCF.</li>
@@ -1194,10 +1194,10 @@ draft = {
     },
     "trade_matrix": {
         "bull_target_low_num": 755.0,
-        "bear_target_high_num": 655.0,
+        "bear_target_high_num": 610.0,
         "bull_case": {"prob": "35%", "target_range": "$755–$790", "trigger": "Q4 Rev Guide > $68B, CapEx Discipline"},
         "base_case": {"prob": "50%", "target_range": "$680–$730", "trigger": "Q3 Rev $62B–$63B, IV crush compression"},
-        "bear_case": {"prob": "15%", "target_range": "$630–$655", "trigger": "FY27 CapEx > $85B or E-commerce ad slowdown"}
+        "bear_case": {"prob": "15%", "target_range": "$585–$610", "trigger": "FY27 CapEx > $85B or E-commerce ad slowdown"}
     },
     "rendered_container_html": html
 }

@@ -10,27 +10,27 @@
     "yahoo_consensus_eps": 0.45
   },
   "price_validation": {
-    "yahoo_spot_price": 386.49,
+    "yahoo_spot_price": 386.05,
     "google_finance_spot_price": null,
     "cross_source_divergence_pct": 0.0,
     "status": "VERIFIED"
   },
   "valuation_and_market": {
-    "market_cap_millions": 1526737.14,
-    "enterprise_value_millions": 1449202.42,
-    "trailing_pe": 357.93,
-    "forward_pe": 178.26,
-    "price_to_sales_ttm": 14.73,
-    "ev_to_ebitda": 134.75,
+    "market_cap_millions": 1524722.83,
+    "enterprise_value_millions": 1499598.55,
+    "trailing_pe": 357.45,
+    "forward_pe": 177.45,
+    "price_to_sales_ttm": 14.71,
+    "ev_to_ebitda": 139.43,
     "short_percent_of_float": 2.01
   },
   "options_positioning": {
     "expiry_strictly_after_earnings": "2026-10-23",
     "pricing_method_used": "BID_ASK_MIDPOINT / BID_ASK_MIDPOINT",
-    "atm_straddle_usd": 23.7,
-    "atm_implied_move_pct": 6.13,
-    "atm_implied_volatility_pct": 84.87,
-    "put_call_oi_ratio": 0.93
+    "atm_straddle_usd": 11.53,
+    "atm_implied_move_pct": 2.99,
+    "atm_implied_volatility_pct": 50.73,
+    "put_call_oi_ratio": 0.97
   },
   "stitched_5q_financials": {
     "income_statement_5q": {
@@ -2087,6 +2087,11 @@
       "recent_10q_10k_filings": [
         {
           "form": "10-Q",
+          "filing_date": "2026-10-22",
+          "period_of_report": "2026-09-30"
+        },
+        {
+          "form": "10-Q",
           "filing_date": "2026-07-23",
           "period_of_report": "2026-06-30"
         },
@@ -2104,11 +2109,6 @@
           "form": "10-K",
           "filing_date": "2026-01-29",
           "period_of_report": "2025-12-31"
-        },
-        {
-          "form": "10-Q",
-          "filing_date": "2025-10-23",
-          "period_of_report": "2025-09-30"
         }
       ]
     }
