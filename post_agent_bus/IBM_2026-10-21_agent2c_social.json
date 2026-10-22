@@ -4,42 +4,41 @@
   "agent_role": "Social_Pulse_Agent",
   "model": "Gemini 3.8 Flash High",
   "social_channels_crawled": [
-    "Reddit (r/stocks, r/investing, r/wallstreetbets)",
-    "X (FinTwit / #IBM)",
-    "Threads (threads.net)",
+    "Reddit (r/stocks, r/investing, r/dividends)",
+    "X (FinTwit / #IBM / $IBM)",
     "Stocktwits ($IBM stream)",
     "Seeking Alpha post-market commentary",
-    "Sell-Side Flash Notes (Morgan Stanley, BofA Global Research, Bernstein, Evercore ISI)"
+    "Sell-Side Flash Notes (Bernstein, BofA, Morgan Stanley, JPMorgan, Stifel)"
   ],
   "retail_vs_institutional_reaction": {
-    "retail_sentiment_summary": "Retail investors on Reddit and Stocktwits are expressing frustration over the headline revenue miss ($17.16B vs $17.55B consensus) and the -4.6% after-hours pullback after IBM stock recently traded at all-time highs above $250. Bullish commenters highlight the dividend safety and watsonx GenAI book crossing $3.0B, while bears point to Consulting stagnation as a sign of economic caution.",
-    "institutional_sentiment_summary": "Institutional portfolio managers view the print as a classic high-multiple re-rating event. Having rallied ~40% year-to-date, IBM faced an elevated bar. While Software and Red Hat performed adequately (+14% growth), the Consulting segment's 0.2% growth validated concerns seen across peers that enterprise discretionary IT budgets remain frozen. However, raising the full-year FCF guide to >$13.0B provides an institutional valuation floor.",
-    "after_hours_movement_driver": "The stock declined -4.64% to $239.80 (down -$11.66 from $251.46 regular close) primarily due to the Consulting revenue shortfall ($5.33B vs $5.48B expected) and headline revenue miss, though the drop was contained within the ±7.11% options-implied straddle band."
+    "retail_sentiment_summary": "Retail investors on r/dividends and X viewed the -4.64% after-hours pullback to $239.80 (after a +4.21% run-up during regular trading from $241.30 to $251.46) as a classic 'sell-the-news' reaction to the slight headline GAAP revenue print ($17,103M vs $17,550M Street consensus, though +6% in constant currency). Dividend and value investors praised the $2.95 Operating Non-GAAP EPS beat (vs $2.87 consensus) and the raised full-year FCF outlook (>$1B YoY increase).",
+    "institutional_sentiment_summary": "Institutional desks focused on the high quality of IBM's mix shift: Software revenue beat at $7,804M (+8.2% YoY, +8.7% CC) with a 35.0% segment profit margin, Data software surged +20% CC, Distributed Infrastructure jumped +31% YoY, Operating Non-GAAP Pre-Tax margin expanded +70 bps YoY to 19.3%, and Q3 GAAP OCF jumped +30.6% YoY to $4,025M.",
+    "after_hours_movement_driver": "After rallying from $241.30 to $251.46 into the close, IBM retraced -4.64% after hours to $239.80 as quant algorithms reacted to reported USD revenue of $17,103M vs $17,550M consensus, even as fundamental PMs bought the dip on the $2.95 Non-GAAP EPS beat and >$1B YoY FCF guidance raise."
   },
   "four_pillar_post_sentiment_scores": {
     "pillar_1_retail_and_social_pulse": {
-      "score_out_of_100": 52,
-      "classification": "NEUTRAL / DISAPPOINTED",
-      "key_themes": ["Top-line revenue miss", "Stock pulled back from ATHs", "watsonx $3B milestone praised", "Dividend yield supported"],
-      "top_quote": "Stocktwits Trader: 'IBM software beat is great, but consulting dragged total revenue below consensus. Good buying opportunity if it tests the 50-day moving average.'"
+      "score_out_of_100": 58,
+      "classification": "NEUTRAL / BUYING THE DIP",
+      "key_themes": ["$2.95 Non-GAAP EPS beats $2.87 Est", "FY26 Free Cash Flow guidance raised (>+$1B YoY)", "Software (+9% CC) & Data (+20% CC) breakout", "$1.69/sh dividend reaffirmed"],
+      "top_quote": "FinTwit Enterprise Analyst: 'IBM ran from $241 to $251 into the close and gave back $11 AH on FX-impacted headline rev ($17.1B, +6% CC), while Software grew 9% CC, Data grew 20% CC, and FCF guidance got raised by >$1B. Classic dip-buy.'"
     },
     "pillar_2_sellside_flash_reactions": {
-      "score_out_of_100": 64,
-      "classification": "DEFENSIVE COMPOUNDER THESIS INTACT",
-      "key_themes": ["BofA reiterates Buy citing >$13B FCF raise", "Morgan Stanley notes consulting pause reflects macro, not share loss", "Bernstein highlights Red Hat acceleration"],
-      "top_quote": "BofA Global Research Flash Note: 'While consulting revenue was light, IBM raised its FY26 Free Cash Flow guide to >$13.0B, reflecting software operating leverage and structural defensiveness.'"
+      "score_out_of_100": 68,
+      "classification": "CONSTRUCTIVE ON SOFTWARE & FCF RAISE",
+      "key_themes": ["BofA & Stifel highlight +70 bps Operating Pre-Tax Margin expansion to 19.3%", "Software segment profit up +15.2% YoY to $2,734M", "Q3 GAAP OCF of $4,025M (+30.6% YoY) validates FCF raise"],
+      "top_quote": "BofA Flash Note: 'Underneath the headline FX noise, IBM delivered +6% constant-currency revenue growth, +9% CC Software growth, $2.95 Operating EPS (+8c beat), and raised full-year FCF growth to >$1B YoY.'"
     },
     "pillar_3_management_call_tone": {
-      "score_out_of_100": 76,
-      "classification": "CALM & PRAGMATIC",
-      "key_themes": ["Arvind Krishna articulate on watsonx client pipeline", "CFO Kavanaugh confident on full-year FCF conversion", "Direct and transparent on consulting headwinds"],
-      "top_quote": "Arvind Krishna on Call: 'Generative AI is not a hype cycle for IBM; it is an enterprise reality where our book of business has scaled from zero to over $3 billion in under 18 months.'"
+      "score_out_of_100": 78,
+      "classification": "CONFIDENT & CASH-FLOW FOCUSED",
+      "key_themes": ["Arvind Krishna bullish on enterprise Super Intelligence operating model transformation", "CFO James Kavanaugh raises FY26 FCF guidance on internal productivity gains", "$11.4B YTD software M&A integration on track"],
+      "top_quote": "CEO Arvind Krishna: 'For the full year, we continue to expect constant currency revenue growth in the range of four-to-five percent, and we now expect free cash flow to increase by more than $1 billion year-over-year.'"
     },
     "pillar_4_options_iv_crush_and_skew": {
-      "score_out_of_100": 58,
-      "classification": "VOLATILITY CRUSH / STRADDLE PROFITABLE",
-      "key_themes": ["Post-earnings IV crushed from 97.4% to ~38%", "Expected move was ±7.11% (±$17.48), actual move settled at -4.64% (-$11.66)", "Sellers of weekly straddles and iron condors comfortably retain net premium"],
-      "top_quote": "Derivatives Desk: 'IBM post-market move of -4.64% landed well inside the 7.11% market-maker implied move. Implied volatility crush is taking out remaining premium.'"
+      "score_out_of_100": 52,
+      "classification": "MEAN-REVERTING TO T-1 BASELINE",
+      "key_themes": ["Stock closed regular session at $251.46 (+4.2% intraday) and settled at $239.80 AH—within 0.6% of prior day's $241.30 close", "62.5% pre-print ATM IV crushes toward ~22% post-call", "Strong institutional put-write support at the $230-$235 level"],
+      "top_quote": "Options Desk: 'Net of today's regular-session squeeze to $251.46, $239.80 AH puts IBM right back at yesterday's $241.30 close. Expect rapid IV crush and support around the 2.8% dividend yield floor.'"
     }
   }
 }

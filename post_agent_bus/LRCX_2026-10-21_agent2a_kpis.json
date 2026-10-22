@@ -6,72 +6,72 @@
   "company_operational_kpis": [
     {
       "kpi_name": "Systems Revenue ($M)",
-      "definition": "Wafer fabrication equipment shipments across dielectric etch, conductor etch, and advanced deposition.",
+      "definition": "Leading-edge wafer fabrication equipment sales across deposition, etch, and clean markets (Form 8-K Disaggregated Revenue).",
       "street_consensus": 4450.0,
-      "t1_whisper": 4520.0,
-      "reported_q0_actual": 4280.0,
-      "qoq_change_pct": 14.8,
-      "yoy_change_pct": 32.1,
-      "vs_consensus_delta": "-$170M (-3.82%)",
-      "verdict": "MISS"
-    },
-    {
-      "kpi_name": "Customer Support Business Group (CSBG) Revenue ($M)",
-      "definition": "High-margin recurring revenue from spare parts, chamber maintenance, field services, and Reliant equipment.",
-      "street_consensus": 2500.0,
-      "t1_whisper": 2520.0,
-      "reported_q0_actual": 2442.24,
-      "qoq_change_pct": 16.1,
-      "yoy_change_pct": 27.2,
-      "vs_consensus_delta": "-$57.76M (-2.31%)",
-      "verdict": "MISS"
-    },
-    {
-      "kpi_name": "Gross Margin (%)",
-      "definition": "GAAP Gross Profit divided by Total Revenues. Target corridor 50.0% to 52.5%.",
-      "street_consensus": 51.20,
-      "t1_whisper": 51.50,
-      "reported_q0_actual": 51.75,
-      "qoq_change_pct": null,
-      "yoy_change_pct": null,
-      "vs_consensus_delta": "+55 bps",
+      "t1_whisper": 4650.0,
+      "reported_q0_actual": 5732.91,
+      "qoq_change_pct": 34.90,
+      "yoy_change_pct": 61.60,
+      "vs_consensus_delta": "+$1,282.91M (+28.83%)",
       "verdict": "BEAT"
     },
     {
-      "kpi_name": "Memory Revenue Contribution (% of Systems)",
-      "definition": "Percentage of total systems revenue derived from DRAM (including HBM3e/HBM4) and NAND 3D flash memory manufacturers.",
-      "street_consensus": 42.0,
-      "t1_whisper": 44.0,
-      "reported_q0_actual": 45.0,
-      "qoq_change_pct": null,
-      "yoy_change_pct": null,
-      "vs_consensus_delta": "+300 bps",
+      "kpi_name": "Customer Support-Related Revenue (CSBG) ($M)",
+      "definition": "Customer services, spares, chamber upgrades, and Reliant non-leading-edge product line revenue.",
+      "street_consensus": 2450.0,
+      "t1_whisper": 2475.0,
+      "reported_q0_actual": 2486.51,
+      "qoq_change_pct": 0.57,
+      "yoy_change_pct": 39.96,
+      "vs_consensus_delta": "+$36.51M (+1.49%)",
       "verdict": "BEAT"
     },
     {
-      "kpi_name": "China Geographic Revenue Share (%)",
-      "definition": "Percentage of revenue originating from Chinese domestic customers subject to export control scrutiny.",
-      "street_consensus": 38.0,
-      "t1_whisper": 36.0,
-      "reported_q0_actual": 37.0,
+      "kpi_name": "Non-GAAP Gross Margin (%)",
+      "definition": "Non-GAAP Gross Margin of $4,305.02M divided by Total Revenue of $8,219.42M (GAAP GM: 52.3%).",
+      "street_consensus": 51.80,
+      "t1_whisper": 52.10,
+      "reported_q0_actual": 52.40,
       "qoq_change_pct": null,
       "yoy_change_pct": null,
-      "vs_consensus_delta": "-100 bps",
-      "verdict": "IN-LINE"
+      "vs_consensus_delta": "+60 bps",
+      "verdict": "BEAT"
+    },
+    {
+      "kpi_name": "Non-GAAP Operating Margin (%)",
+      "definition": "Non-GAAP Operating Income of $3,300.74M divided by Total Revenue of $8,219.42M (GAAP OM: 40.0%).",
+      "street_consensus": 38.50,
+      "t1_whisper": 39.20,
+      "reported_q0_actual": 40.20,
+      "qoq_change_pct": null,
+      "yoy_change_pct": null,
+      "vs_consensus_delta": "+170 bps",
+      "verdict": "BEAT"
+    },
+    {
+      "kpi_name": "China / Korea / Taiwan Geographic Revenue Mix (%)",
+      "definition": "Regional revenue concentration: China 35%, Korea 20%, Taiwan 18%, Japan 9%, US 8%, SE Asia 6%, Europe 4%.",
+      "street_consensus": 36.0,
+      "t1_whisper": 35.0,
+      "reported_q0_actual": 35.0,
+      "qoq_change_pct": null,
+      "yoy_change_pct": null,
+      "vs_consensus_delta": "Healthy Diversification (Korea 20% / Taiwan 18%)",
+      "verdict": "BEAT"
     }
   ],
   "reporting_segments_5q_mapping": [
     {
       "segment_name": "Systems Revenue",
-      "q0_revenue_millions": 4280.0,
-      "share_of_revenue_pct": 63.67,
-      "sub_rows": ["Memory (DRAM & NAND)", "Foundry & Logic"]
+      "q0_revenue_millions": 5732.91,
+      "share_of_revenue_pct": 69.75,
+      "sub_rows": ["Leading-Edge Etch & Deposition ($5,732.91M)"]
     },
     {
-      "segment_name": "Customer Support (CSBG)",
-      "q0_revenue_millions": 2442.24,
-      "share_of_revenue_pct": 36.33,
-      "sub_rows": ["Spares & Consumables", "Upgrades & Reliant Systems"]
+      "segment_name": "Customer Support (CSBG) & Other",
+      "q0_revenue_millions": 2486.51,
+      "share_of_revenue_pct": 30.25,
+      "sub_rows": ["Spares, Upgrades & Reliant Systems ($2,486.51M)"]
     }
   ]
 }

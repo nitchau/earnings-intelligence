@@ -2,7 +2,7 @@
 End-to-End Orchestrator for Post-Earnings (T+0) Tearsheet Generation
 Executes the full 5-Layer workflow:
 1. Stage 1: Deterministic Data Mesh (stage1_post_deterministic.py)
-2. Layer 2: Checks bus files or invokes dedicated draft builder
+2. Layer 2: Checks bus files & invokes dedicated draft builder ({TICKER}/build_{ticker}_post_draft.py)
 3. Stage 4: stage4_validate_post.py & stage4_render_post_html.py
 4. Layer 5: agent5_chief_auditor.py & stage5_publish_github.py
 """
@@ -34,16 +34,15 @@ def run_post_harness_for_ticker(ticker: str, earnings_date: str):
     if not run_step([sys.executable, "stage1_post_deterministic.py", ticker, earnings_date], "Stage 1 Deterministic Anchor"):
         sys.exit(1)
 
-    # Step 2: Check Layer 2 Bus files / run draft builder if present
+    # Step 2: Check Layer 2 Bus files & run draft builder if present
     draft_path = BASE_DIR / "drafts" / f"{ticker}_{earnings_date}_post_draft.json"
-    if not draft_path.exists():
-        builder = BASE_DIR / ticker / f"build_{ticker.lower()}_post_draft.py"
-        if builder.exists():
-            if not run_step([sys.executable, str(builder)], f"Draft Builder for {ticker}"):
-                sys.exit(1)
-        else:
-            print(f"[NOTICE] Draft {draft_path.name} not found. Please populate Layer 2 bus and build draft.", file=sys.stderr)
+    builder = BASE_DIR / ticker / f"build_{ticker.lower()}_post_draft.py"
+    if builder.exists():
+        if not run_step([sys.executable, str(builder)], f"Draft Builder for {ticker}"):
             sys.exit(1)
+    elif not draft_path.exists():
+        print(f"[NOTICE] Draft {draft_path.name} not found. Please populate Layer 2 bus and build draft.", file=sys.stderr)
+        sys.exit(1)
 
     # Step 3: Stage 4 Validation
     if not run_step([sys.executable, "stage4_validate_post.py", ticker, earnings_date], "Stage 4 Deterministic Validation"):

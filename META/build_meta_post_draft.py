@@ -1,13 +1,7 @@
 """
-META Dedicated Post-Earnings Draft Builder (Layer 2 & Layer 4 Synthesis)
-Takes:
-- ground_truth/META_2026-10-21_post_truth.json
-- post_agent_bus/META_2026-10-21_agent2a_kpis.json
-- post_agent_bus/META_2026-10-21_agent2b_transcript.json
-- post_agent_bus/META_2026-10-21_agent2c_social.json
-- published_reports/META_T1_2026-10-21.html (Master Template)
-Builds:
-- drafts/META_2026-10-21_post_draft.json with complete 9-section structure including Row 1B.
+META Dedicated Post-Earnings Draft Builder (Track A + Track B Complete Re-Synthesis)
+Builds drafts/META_2026-10-21_post_draft.json with 100% Q3 2026 (Actual) rolled 5-quarter tables,
+Q4 2026E forward guidance columns, zero T-1 bleed-through, and Track B interactive enhancements.
 """
 
 import json
@@ -19,7 +13,6 @@ TRUTH_PATH = BASE_DIR / "ground_truth" / "META_2026-10-21_post_truth.json"
 BUS_2A_PATH = BASE_DIR / "post_agent_bus" / "META_2026-10-21_agent2a_kpis.json"
 BUS_2B_PATH = BASE_DIR / "post_agent_bus" / "META_2026-10-21_agent2b_transcript.json"
 BUS_2C_PATH = BASE_DIR / "post_agent_bus" / "META_2026-10-21_agent2c_social.json"
-MASTER_HTML = BASE_DIR / "published_reports" / "META_T1_2026-10-21.html"
 DRAFT_DIR = BASE_DIR / "drafts"
 DRAFT_DIR.mkdir(exist_ok=True)
 DRAFT_PATH = DRAFT_DIR / "META_2026-10-21_post_draft.json"
@@ -28,43 +21,361 @@ truth = json.loads(TRUTH_PATH.read_text(encoding="utf-8"))
 kpis_data = json.loads(BUS_2A_PATH.read_text(encoding="utf-8"))
 trans_data = json.loads(BUS_2B_PATH.read_text(encoding="utf-8"))
 soc_data = json.loads(BUS_2C_PATH.read_text(encoding="utf-8"))
-master_raw = MASTER_HTML.read_text(encoding="utf-8")
 
-# Extract inner container HTML
-start_marker = '<div class="container">'
-start_idx = master_raw.find(start_marker) + len(start_marker)
-end_idx = master_raw.rfind('</div>', 0, master_raw.find('</body>'))
-container_html = master_raw[start_idx:end_idx].strip()
+reg_price = truth["post_print_reaction"]["regular_close_price"]      # 697.52
+ah_price = truth["post_print_reaction"]["after_hours_price"]         # 712.31
+post_move_pct = truth["post_print_reaction"]["post_print_move_pct"]  # +2.12
+opt_implied_pct = truth["post_print_reaction"]["t1_options_implied_move_pct"] # 2.94
+opt_straddle = truth["t1_baseline"].get("atm_straddle_usd", 19.27)
+verdict = truth["post_print_reaction"]["overall_print_verdict"]      # BEAT & RAISE (CAPEX SURGE)
 
-# Ground truth values
-reg_price = truth["post_print_reaction"]["regular_close_price"] # 697.52
-ah_price = truth["post_print_reaction"]["after_hours_price"] # 712.31
-post_move_pct = truth["post_print_reaction"]["post_print_move_pct"] # +2.12
-opt_implied_pct = truth["post_print_reaction"]["t1_options_implied_move_pct"] # 6.82
-q0_rev = truth["beat_miss_scorecard"]["revenue"]["reported_actual_millions"] # 60801.0
-cons_rev = truth["t1_baseline"]["consensus_revenue_millions"] or 62500.0
-q0_gaap_eps = truth["beat_miss_scorecard"]["eps_gaap"]["reported_actual"] # 6.18
-cons_eps = truth["t1_baseline"]["consensus_eps_nongaap"] or 5.64
+q0_rev = truth["beat_miss_scorecard"]["revenue"]["reported_actual_millions"]  # 64601.0
+cons_rev = truth["t1_baseline"]["consensus_revenue_millions"]                 # 62500.0
+whisper_rev = truth["t1_baseline"]["whisper_revenue_millions"]                # 63200.0
+q0_gaap_eps = truth["beat_miss_scorecard"]["eps_gaap"]["reported_actual"]     # 3.83
+q0_adj_eps = truth["beat_miss_scorecard"]["eps_nongaap"]["reported_actual"]   # 7.40
+cons_eps = truth["t1_baseline"]["consensus_eps_nongaap"]                      # 5.46
 
-opt_straddle = truth["t1_baseline"].get("atm_straddle_usd", 48.12)
-verdict = "BEAT & RAISE" if q0_gaap_eps > 5.64 else truth["post_print_reaction"]["overall_print_verdict"]
+q0_ocf = truth["forensic_fcf_bridge_q0"]["ocf"]               # 32786.0
+q0_capex = truth["forensic_fcf_bridge_q0"]["capex"]           # 33942.0
+q0_rep_fcf = truth["forensic_fcf_bridge_q0"]["reported_fcf"]  # -1156.0
+q0_sbc = truth["forensic_fcf_bridge_q0"]["sbc"]               # 7363.0
+q0_leases = truth["forensic_fcf_bridge_q0"]["finance_leases"] # 964.0
+q0_true_fcf = truth["forensic_fcf_bridge_q0"]["true_fcf"]     # -9483.0
 
-q0_ocf = truth["forensic_fcf_bridge_q0"]["ocf"] # 31862.0
-q0_capex = truth["forensic_fcf_bridge_q0"]["capex"] # 30116.0
-q0_rep_fcf = truth["forensic_fcf_bridge_q0"]["reported_fcf"] # 1746.0
-q0_sbc = truth["forensic_fcf_bridge_q0"]["sbc"] # 7658.0
-q0_leases = truth["forensic_fcf_bridge_q0"]["finance_leases"] # 962.0
-q0_true_fcf = truth["forensic_fcf_bridge_q0"]["true_fcf"] # -6874.0
+s5q = truth["stitched_5q_chronological"]
 
-mkt_cap_t = round(truth["market_portal"]["market_cap_millions"] / 1e6, 2)
-ev_t = round(truth["market_portal"]["enterprise_value_millions"] / 1e6, 2)
-trailing_pe = truth["market_portal"]["trailing_pe"]
-fwd_pe = truth["market_portal"]["forward_pe"]
+container_html = f"""
+    <!-- 1. HEADER BANNER (T+0 POST-EARNINGS FORENSIC TEARSHEET) -->
+    <header class="header-banner">
+      <div class="helper-bar">
+        <span>💡 <strong>Interactive Definitions Enabled:</strong> Hover your mouse over any <span class="tip tip-bottom" title="Plain-English definitions pop up automatically whenever you hover over any dotted-underlined term." data-tip="Plain-English definitions pop up automatically whenever you hover over any dotted-underlined financial metric or abbreviation.">dotted-underlined metric or abbreviation</span> for an instant plain-English explanation.</span>
+        <span class="mono" style="font-size:11.5px;color:#34d399;">Newly Reported Quarter: <strong>Q3 2026 (Ended Sep 30, 2026)</strong> • Forward Guidance Horizon: <strong>Q4 2026 &amp; FY2026</strong></span>
+      </div>
 
-# Construct Row 1B HTML: Post-Release Print vs Expectations & Prior Guidance Scorecard
-row_1b_html = f"""
+      <div class="header-top">
+        <div class="ticker-identity">
+          <div class="ticker-line">
+            <span class="ticker-symbol">META</span>
+            <h1 class="company-name">Meta Platforms, Inc.</h1>
+            <span class="badge badge-bull">{verdict}</span>
+            <span class="badge badge-blue"><span class="tip tip-bottom" title="Immediate post-earnings release forensic analysis." data-tip="T+0 Post-Print: Forensic analysis synthesized immediately following the official Q3 2026 SEC Form 8-K release and earnings conference call.">T+0</span> POST-EARNINGS FORENSIC TEARSHEET</span>
+          </div>
+          <div class="sector-tag">NASDAQ Global Select • Communication Services, Digital Advertising, Frontier AI (Muse &amp; Muse Wonder) &amp; Reality Labs • <span class="tip tip-bottom" title="Central Index Key: Unique 10-digit identifier assigned by the U.S. SEC to all public company filings." data-tip="Central Index Key (CIK): The unique 10-digit identifier assigned by the U.S. Securities and Exchange Commission (SEC) to track Meta's official regulatory filings.">CIK</span>: 0001326801</div>
+        </div>
+        <div class="header-price-block">
+          <div class="price-box">
+            <div class="price-label">Regular Close / <span style="color:#34d399;">After-Hours Price</span></div>
+            <div class="price-value">${reg_price:.2f} / <span style="color:#34d399;">${ah_price:.2f}</span> <span style="font-size:14px; color:#34d399;">({post_move_pct:+.2f}%)</span></div>
+          </div>
+          <div class="price-box">
+            <div class="price-label"><span class="tip tip-right tip-bottom" title="Market Capitalization: Total value of all outstanding shares (Share Price × Diluted Shares)." data-tip="Market Capitalization: Post-print equity value calculated at $712.31 after-hours price across 2,573M diluted shares (~$1.83T).">Market Cap</span> / <span class="tip tip-right tip-bottom" title="Enterprise Value: Market Cap plus Total Debt minus Cash." data-tip="Enterprise Value (EV): Post-print Market Cap ($1.83T) + Total Debt &amp; Leases ($112.10B) - Cash &amp; Marketable Securities ($82.45B) = $1.86T.">EV</span></div>
+            <div class="price-value">$1.83T / $1.86T</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="header-strip">
+        <div class="strip-item">
+          <span class="strip-label">Q3 2026 SEC Form 8-K Filed</span>
+          <span class="strip-val" style="color: var(--bull-green);">Wed, Oct 21, 2026 • <span class="tip" title="After Market Close: Official Q3 2026 earnings release filed via SEC Form 8-K Item 2.02." data-tip="Form 8-K Item 2.02 &amp; Exhibit 99.1 filed October 21, 2026 after market close; Q3 2026 10-Q filed October 22, 2026.">8-K Verified</span></span>
+          <span class="kpi-sub">Exhibit 99.1 &amp; Earnings Call Transcript Audited</span>
+        </div>
+        <div class="strip-item">
+          <span class="strip-label"><span class="tip" title="Actual post-market stock reaction compared against pre-print options straddle implied move." data-tip="Actual vs. Implied Move: META rose +2.12% (+$14.79/sh) after hours, digesting cleanly inside the ±2.94% (±$19.27/sh) ATM weekly straddle band.">Actual AH Move vs. Implied</span></span>
+          <span class="strip-val" style="color: var(--bull-green);">+{post_move_pct:.2f}% (vs ±{opt_implied_pct:.2f}% Est)</span>
+          <span class="kpi-sub">+${ah_price - reg_price:.2f}/sh Actual vs ±${opt_straddle:.2f}/sh <span class="tip" title="At-The-Money weekly straddle price prior to earnings." data-tip="ATM Straddle: Pre-earnings weekly option straddle priced at ±$19.27/sh (50.85% IV).">ATM Straddle</span></span>
+        </div>
+        <div class="strip-item">
+          <span class="strip-label">Q3 2026 Actual <span class="tip" title="Reported Q3 2026 GAAP Revenue vs Wall Street Consensus and Whisper." data-tip="Q3 2026 Revenue Beat: Reported $64,601M (+26.07% YoY), beating Street consensus of $62,500M by +$2,101M (+3.36%) and Whisper of $63,200M by +$1,401M.">Revenue vs. Street</span></span>
+          <span class="strip-val" style="color: var(--bull-green);">$64.60B <span style="font-size:12px;">(+$2.10B Beat)</span></span>
+          <span class="kpi-sub">Street Est: $62.50B | Whisper: $63.20B | +26.1% <span class="tip" title="Year-over-Year growth vs Q3 2025 ($51,242M)." data-tip="Year-over-Year (YoY): Up +26.07% vs Q3 2025 ($51,242M).">YoY</span></span>
+        </div>
+        <div class="strip-item">
+          <span class="strip-label">Q3 2026 Actual <span class="tip" title="Reported Q3 2026 Adjusted &amp; GAAP Diluted EPS vs Consensus." data-tip="Q3 2026 EPS: Reported $7.40 Adjusted Diluted EPS (excluding the $3.57/sh / $9.89B State AG youth litigation settlement) and $3.83 GAAP Diluted EPS vs $5.46 Street consensus.">EPS (Adj / GAAP)</span></span>
+          <span class="strip-val" style="color: var(--bull-green);">$7.40 Adj / $3.83 <span class="tip" title="Generally Accepted Accounting Principles: Includes $3.57/sh ($9.89B) U.S. State Attorneys General litigation settlement." data-tip="GAAP EPS ($3.83) includes the one-time $9.89B ($3.57/sh) State Attorneys General settlement charge.">GAAP</span></span>
+          <span class="kpi-sub">Beat $5.46 Consensus by +$1.94 (+35.5%) ex-Legal Charge</span>
+        </div>
+        <div class="strip-item">
+          <span class="strip-label">New Q4 2026 <span class="tip tip-right" title="Official Q4 2026 revenue and FY2026 CapEx guidance issued in the Q3 2026 release." data-tip="Q4 2026 Guidance Raise: Management guided Q4 2026 revenue to $73.0B–$76.0B ($74.5B midpoint, ~+$3.0B above Street) and narrowed FY26 CapEx to $135B–$145B.">Guidance Reset</span></span>
+          <span class="strip-val" style="color: var(--bull-green);">$73.0B – $76.0B Q4 Rev</span>
+          <span class="kpi-sub">FY26 CapEx: $135B–$145B | New Class C 2-for-1 Split Dividend</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- TRACK B: STICKY INTERACTIVE SECTION JUMP-NAV & PAIRED T-1 SWITCHER -->
+    <nav class="post-jump-nav" style="position: sticky; top: 8px; z-index: 90; background: rgba(15, 23, 42, 0.92); backdrop-filter: blur(10px); border: 1px solid rgba(59, 130, 246, 0.35); border-radius: 10px; padding: 8px 14px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.4);">
+      <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+        <span style="font-size: 11px; font-weight: 800; color: #60a5fa; text-transform: uppercase; letter-spacing: 0.06em; margin-right: 4px;">⚡ Jump To:</span>
+        <a href="#row-1-kpis" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">1. Q3 KPIs</a>
+        <a href="#row-1b-scorecard" style="font-size: 11.5px; color: #34d399; font-weight: 700; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(16, 185, 129, 0.14); border: 1px solid rgba(16, 185, 129, 0.35);">1B. Beat/Miss &amp; Guidance Scorecard</a>
+        <a href="#row-2-financials" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">2. Rolling 5Q Table (Q3 Actual + Q4E)</a>
+        <a href="#row-3-fcf" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">3. FCF Bridge</a>
+        <a href="#row-4-segments" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">4. Tailwinds/Drags</a>
+        <a href="#row-4b-audit" style="font-size: 11.5px; color: #93c5fd; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(59, 130, 246, 0.14); border: 1px solid rgba(59, 130, 246, 0.3);">4B. Call Q&amp;A</a>
+        <a href="#row-5-peers" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">5. Peers</a>
+        <a href="#row-6-sentiment" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">6. Social &amp; Sentiment</a>
+        <a href="#row-7-pm-matrix" style="font-size: 11.5px; color: #fcd34d; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(245, 158, 11, 0.14); border: 1px solid rgba(245, 158, 11, 0.3);">7. PM Trade Matrix</a>
+      </div>
+      <a href="META_T1_2026-10-21.html" style="font-size: 11.5px; font-weight: 700; color: #93c5fd; text-decoration: none; padding: 5px 12px; border-radius: 6px; background: rgba(59, 130, 246, 0.2); border: 1px solid rgba(59, 130, 246, 0.45); display: flex; align-items: center; gap: 6px;">
+        ⇄ Compare Paired T-1 Pre-Earnings Briefing
+      </a>
+    </nav>
+
+    <!-- 2. ROW 1: TOP KPI CARDS (4 CARDS — ALL ROLLED FORWARD TO Q3 2026 ACTUALS) -->
+    <section class="kpi-grid" id="row-1-kpis">
+      <!-- CARD A: CASH FLOW & CAPITAL INTENSITY (Q3 2026 ACTUAL) -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><span class="card-title-accent"></span>A. Cash Flow &amp; Capital Intensity (Q3 2026 Actual)</div>
+          <span class="badge badge-warn">RECORD $33.9B P&amp;E CAPEX</span>
+        </div>
+        <div class="kpi-metric-list">
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Operating Cash Flow: Actual cash generated from digital advertising operations in Q3 2026." data-tip="Operating Cash Flow (OCF): Cash inflow generated from Instagram, Facebook, and WhatsApp ad auctions in Q3 2026 ($32,786M, up +2.90% QoQ and +9.29% YoY).">Operating Cash Flow</span> (Q3 2026)</span>
+              <span class="kpi-sub">9M YTD OCF Generated: $96,873M ($129.1B TTM)</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val" style="color: var(--bull-green);">$32,786M</span>
+              <div class="delta-pair">
+                <span class="badge badge-bull"><span class="tip" title="Sequential change from Q2 2026 ($31,862M) to Q3 2026 ($32,786M)." data-tip="QoQ OCF Delta: Increased +2.90% sequentially from $31,862M in Q2 2026.">QoQ</span> +2.90%</span>
+                <span class="badge badge-bull"><span class="tip" title="Year-over-Year change from Q3 2025 ($29,999M) to Q3 2026 ($32,786M)." data-tip="YoY OCF Delta: Increased +9.29% from $29,999M in Q3 2025.">YoY</span> +9.29%</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Purchases of Property and Equipment in Q3 2026 ($33,942M; or $34,906M including $964M finance leases)." data-tip="Capital Expenditures (CapEx): Direct property &amp; equipment purchases hit $33,942M in Q3 2026 ($34,906M including $964M principal finance lease payments) to scale Muse Wonder AI clusters.">Capital Expenditures</span> (Q3 2026)</span>
+              <span class="kpi-sub">CapEx Intensity: 52.54% of Revenue ($34.91B incl. leases)</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val" style="color: var(--bear-red);">($33,942M)</span>
+              <div class="delta-pair">
+                <span class="badge badge-warn">QoQ +12.70%</span>
+                <span class="badge badge-warn">YoY +80.26%</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Standard Reported Free Cash Flow: OCF ($32,786M) minus Purchases of P&amp;E ($33,942M) = -$1,156M (or -$2,120M after $964M finance leases)." data-tip="Reported Free Cash Flow: -$1,156M on standard OCF minus P&amp;E CapEx, and -$2,120M on Meta's definition subtracting $964M principal finance lease payments.">Reported Free Cash Flow</span> (Q3 2026)</span>
+              <span class="kpi-sub">Meta Non-GAAP FCF (incl. $964M leases): -$2,120M</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val" style="color: var(--bear-red);">($1,156M)</span>
+              <div class="delta-pair">
+                <span class="badge badge-bear">QoQ -166.21%</span>
+                <span class="badge badge-bear">YoY -110.35%</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Forensic True Free Cash Flow: OCF ($32,786M) - CapEx ($33,942M) - SBC ($7,363M) - Finance Leases ($964M) = -$9,483M." data-tip="True Free Cash Flow: Deducts both $7,363M of non-cash Stock-Based Compensation and $964M of principal finance lease repayments from -$1,156M Reported FCF.">True FCF (ex-SBC &amp; Leases)</span> (Q3 2026)</span>
+              <span class="kpi-sub">Q3 SBC: $7,363M (11.4% of Rev) | Leases: $964M</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val" style="color: var(--bear-red);">($9,483M)</span>
+              <div class="delta-pair">
+                <span class="badge badge-bear">QoQ -37.95%</span>
+                <span class="badge badge-bear">YoY -287.08%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD B: PROFITABILITY & OPERATING MARGINS (Q3 2026 ACTUAL) -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><span class="card-title-accent"></span>B. Profitability &amp; Operating Margins (Q3 2026 Actual)</div>
+          <span class="badge badge-bull">35.4% ADJ OP MARGIN (EX-LEGAL)</span>
+        </div>
+        <div class="kpi-metric-list">
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Gross Profit: Q3 2026 Revenue ($64,601M) minus Cost of Revenue ($13,369M) = $51,232M." data-tip="Gross Profit: Reached an all-time Q3 record of $51,232M (79.31% GAAP Gross Margin).">Gross Profit</span> (Q3 2026)</span>
+              <span class="kpi-sub">GAAP Gross Margin: 79.31% (Cost of Rev: $13,369M)</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val" style="color: var(--bull-green);">$51,232M</span>
+              <div class="delta-pair">
+                <span class="badge badge-bull">QoQ +3.56%</span>
+                <span class="badge badge-bull">YoY +21.88%</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="GAAP Operating Income ($12,988M) includes the $9,890M State AG legal settlement; Adjusted Operating Income is $22,878M (35.41% margin)." data-tip="Operating Income (EBIT): GAAP EBIT printed at $12,988M (20.10% margin) due to the $9.89B State AG youth litigation settlement; excluding this 1x charge, EBIT rose +11.4% YoY to $22,878M (35.41% margin).">Operating Income (EBIT)</span> (Q3 2026)</span>
+              <span class="kpi-sub">Ex-$9.89B Legal Charge: $22,878M (35.41% Margin)</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val" style="color: var(--warn-amber);">$12,988M</span>
+              <div class="delta-pair">
+                <span class="badge badge-bull">Adj: $22.88B</span>
+                <span class="badge badge-warn">GAAP -36.75% YoY</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Research &amp; Development Expenses in Q3 2026 ($20,054M)." data-tip="R&amp;D Investment: $20,054M in Q3 2026 (-7.40% QoQ as headcount declined 15% YoY to 66,775, +32.42% YoY on AI compute amortization).">R&amp;D Reinvestment</span> (Q3 2026)</span>
+              <span class="kpi-sub">R&amp;D Intensity: 31.04% of Rev | Headcount: 66,775 (-15% YoY)</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">$20,054M</span>
+              <div class="delta-pair">
+                <span class="badge badge-bull">QoQ -7.40%</span>
+                <span class="badge badge-warn">YoY +32.42%</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="GAAP Net Income ($9,860M, or $3.83/sh diluted; $7.40/sh diluted excluding the $9.89B State AG settlement)." data-tip="GAAP Net Income: $9,860M (+263.97% YoY vs Q3 2025's tax-impacted $2,709M). Diluted EPS is $3.83 GAAP and $7.40 excluding the State AG settlement.">Net Income &amp; EPS</span> (Q3 2026)</span>
+              <span class="kpi-sub">Diluted EPS: $7.40 Adj (ex-Legal) | $3.83 GAAP</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val" style="color: var(--bull-green);">$9,860M</span>
+              <div class="delta-pair">
+                <span class="badge badge-bull">Adj EPS: $7.40</span>
+                <span class="badge badge-bull">YoY +263.97%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD C: BALANCE SHEET FORTRESS & LIQUIDITY (Q3 2026 ACTUAL) -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><span class="card-title-accent"></span>C. Balance Sheet Fortress &amp; Debt Profile (Q3 2026)</div>
+          <span class="badge badge-bull">$82.45B LIQUIDITY FORTRESS</span>
+        </div>
+        <div class="kpi-metric-list">
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Cash and cash equivalents ($11,222M) plus Marketable securities ($71,227M) as of September 30, 2026." data-tip="Liquid Reserves: $82,449M ($11,222M cash &amp; equivalents + $71,227M marketable securities) on the Q3 2026 balance sheet.">Cash &amp; Marketable Securities</span> (Q3 2026)</span>
+              <span class="kpi-sub">Cash: $11,222M + Marketable Securities: $71,227M</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val" style="color: var(--bull-green);">$82,449M</span>
+              <div class="delta-pair">
+                <span class="badge badge-neutral">QoQ -8.65%</span>
+                <span class="badge badge-bull">vs FY25 +1.05%</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Long-term debt ($80,922M) plus current ($2,522M) and non-current ($28,651M) operating lease liabilities." data-tip="Total Debt &amp; Leases: $80,922M long-term senior notes + $31,173M total operating lease liabilities = $112,095M as of Sep 30, 2026.">Total Debt &amp; Lease Liabilities</span> (Q3 2026)</span>
+              <span class="kpi-sub">Long-Term Debt: $80,922M | Lease Liabilities: $31,173M</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">$112,095M</span>
+              <div class="delta-pair">
+                <span class="badge badge-bull">QoQ -0.20%</span>
+                <span class="badge badge-warn">vs FY25 +33.61%</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Total Debt &amp; Leases ($112,095M) minus Cash &amp; Marketable Securities ($82,449M) = $29,646M." data-tip="Net Debt Position: $29,646M ($112.10B total debt/leases minus $82.45B cash/securities), representing just 0.23x TTM OCF.">Net Debt Position</span> (Q3 2026)</span>
+              <span class="kpi-sub">Ultra-Low Net Leverage: 0.23x TTM OCF</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val" style="color: var(--warn-amber);">$29,646M</span>
+              <div class="delta-pair">
+                <span class="badge badge-neutral">0.23x OCF</span>
+                <span class="badge badge-bull">AA- Credit Profile</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Total Stockholders' Equity as of September 30, 2026 ($272,386M)." data-tip="Stockholders' Equity: Expanded to $272,386M (+4.27% QoQ, +25.38% vs Dec 31, 2025).">Stockholders' Equity</span> (Q3 2026)</span>
+              <span class="kpi-sub">PP&amp;E Net surged to $253,222M (+43.5% YTD)</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val" style="color: var(--bull-green);">$272,386M</span>
+              <div class="delta-pair">
+                <span class="badge badge-bull">QoQ +4.27%</span>
+                <span class="badge badge-bull">YTD +25.38%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD D: SEGMENT CONTRIBUTIONS & POST-PRINT MULTIPLES (Q3 2026 ACTUAL) -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><span class="card-title-accent"></span>D. Segment Mix &amp; Post-Print Multiples (Q3 2026)</div>
+          <span class="badge badge-blue">AD PRICING +14% YoY</span>
+        </div>
+        <div class="kpi-metric-list">
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Family of Apps Q3 2026 Revenue: $64,158M ($63,061M Advertising + $1,097M Other FoA)." data-tip="Family of Apps (FoA): Generated 99.31% of total Q3 revenue ($64,158M, +26.36% YoY), with $17,117M GAAP segment operating income ($27,007M ex-legal settlement).">Family of Apps (FoA Share)</span> (Q3 2026)</span>
+              <span class="kpi-sub">Ad Rev: $63,061M (+25.9% YoY) | Other FoA: $1,097M</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val" style="color: var(--bull-green);">99.31%</span>
+              <div class="delta-pair">
+                <span class="badge badge-bull">DAP: 3.64B (+3%)</span>
+                <span class="badge badge-bull">Price/Ad: +14%</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Reality Labs Q3 2026 Revenue ($443M) and Operating Loss (-$4,129M)." data-tip="Reality Labs: Q3 operating loss narrowed to -$4,129M (vs -$4,432M in Q3 2025 and -$4,500M consensus); FY27 losses guided down to ~$15B.">Reality Labs Loss / Rev</span> (Q3 2026)</span>
+              <span class="kpi-sub">FY26 RL Loss Guide: $18B–$19B (FY27 narrowing to ~$15B)</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val" style="color: var(--bull-green);">-$4.13B / $443M</span>
+              <div class="delta-pair">
+                <span class="badge badge-bull">Loss -$303M YoY</span>
+                <span class="badge badge-bull">Beat -$4.5B Est</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Post-print valuation multiples at $712.31 After-Hours price." data-tip="Post-Print Forward P/E: At $712.31 AH price, META trades at 20.13x consensus forward earnings (~19.2x on raised post-print FY27 estimates).">Post-Print Fwd P/E (at $712.31)</span></span>
+              <span class="kpi-sub">Trailing P/E: 26.28x | EV/EBITDA: 16.41x</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val" style="color: var(--bull-green);">20.13x</span>
+              <div class="delta-pair">
+                <span class="badge badge-bull">PEG: 1.08x</span>
+                <span class="badge badge-bull">Class C Split Jan '27</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Capital Return &amp; New Class C Stock Dividend announced October 21, 2026." data-tip="Class C Stock Dividend: 1-for-1 non-voting Class C stock dividend declared (effective Jan 19, 2027), acting as a 2-for-1 stock split alongside $1,361M Q3 cash dividends.">Capital Return &amp; Class C Split</span></span>
+              <span class="kpi-sub">Q3 Cash Dividend Paid: $1,361M | 1-for-1 Class C Dividend</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val" style="color: var(--bull-green);">2-for-1 Split</span>
+              <div class="delta-pair">
+                <span class="badge badge-bull">Eff. Jan 19, 2027</span>
+                <span class="badge badge-neutral">Short Float: 1.52%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ==========================================================================
-         ROW 1B (NEW POST-PRINT SECTION): EXPECTATIONS & GUIDANCE SCORECARD
+         3. ROW 1B: POST-RELEASE PRINT VS. EXPECTATIONS & PRIOR GUIDANCE SCORECARD
          ========================================================================== -->
     <section class="card" id="row-1b-scorecard">
       <div class="card-header">
@@ -73,105 +384,154 @@ row_1b_html = f"""
             <span class="card-title-accent"></span>Post-Release Print vs. Expectations &amp; Prior Guidance Scorecard
           </div>
           <div class="card-subtitle">
-            Source: Meta Platforms SEC Form 8-K (Item 2.02, Exhibit 99.1) Filed Oct 21, 2026 • Official Shareholder Letter • Wall Street Consensus Comparison
+            Source: Meta Platforms SEC Form 8-K (Item 2.02, Exhibit 99.1) Filed Oct 21, 2026 • Official Shareholder Release • Wall Street Consensus Comparison
           </div>
         </div>
         <div style="display:flex; gap: 8px; align-items:center;">
-          <span class="badge badge-bull">CLEAN EPS BEAT &amp; ROBUST AD PRICING</span>
+          <span class="badge badge-bull">REVENUE &amp; ADJ EPS BEAT + $73B–$76B Q4 GUIDE RAISE</span>
           <span class="badge badge-blue">T+0 POST-PRINT</span>
+        </div>
+      </div>
+
+      <!-- TRACK B: T-1 PRE-PRINT THESIS VS. T+0 POST-PRINT REALITY AUDIT BANNER -->
+      <div class="t1-vs-t0-audit" style="background: linear-gradient(90deg, rgba(30, 41, 59, 0.85), rgba(15, 23, 42, 0.95)); border: 1px solid rgba(59, 130, 246, 0.35); border-left: 4px solid #34d399; border-radius: 8px; padding: 12px 16px; margin-bottom: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 8px;">
+          <span style="font-weight: 800; font-size: 13px; color: #34d399; text-transform: uppercase; letter-spacing: 0.05em;">🔍 T-1 Pre-Earnings Thesis vs. T+0 Post-Print Reality Audit</span>
+          <a href="META_T1_2026-10-21.html" style="font-size: 11.5px; color: #93c5fd; text-decoration: underline;">Open Original T-1 Briefing →</a>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; font-size: 12.3px; color: var(--text-secondary);">
+          <div style="background: rgba(11, 15, 25, 0.55); padding: 8px 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.06);">
+            <strong style="color: #93c5fd;">Top-Line &amp; Ad Pricing Thesis:</strong><br>
+            • <em>T-1 Forecast:</em> Expected $62.5B Consensus / $63.2B Whisper (+10% Price/Ad).<br>
+            • <em>T+0 Reality:</em> <strong style="color:#34d399;">VALIDATED &amp; EXCEEDED</strong> — Printed <strong>$64,601M</strong> (+26% YoY) on <strong>+14% Price/Ad</strong> &amp; +10% Impressions.
+          </div>
+          <div style="background: rgba(11, 15, 25, 0.55); padding: 8px 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.06);">
+            <strong style="color: #fcd34d;">CapEx &amp; FCF Compression Thesis:</strong><br>
+            • <em>T-1 Forecast:</em> Flagged extreme GPU CapEx intensity driving negative True FCF.<br>
+            • <em>T+0 Reality:</em> <strong style="color:#34d399;">SPOT-ON CALL</strong> — Q3 CapEx hit <strong>$33,942M</strong> ($34.91B incl. leases), pushing Reported FCF to -$1,156M and True FCF to <strong>-$9,483M</strong>.
+          </div>
+          <div style="background: rgba(11, 15, 25, 0.55); padding: 8px 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.06);">
+            <strong style="color: #34d399;">Forward Catalyst &amp; Options Outcome:</strong><br>
+            • <em>T-1 Forecast:</em> Bull case required Q4 guide &gt;$68B and RL cost discipline.<br>
+            • <em>T+0 Reality:</em> <strong style="color:#34d399;">BLOWOUT RAISE</strong> — Guided Q4 to <strong>$73B–$76B</strong>, cut FY27 RL loss to ~$15B, &amp; declared a <strong>2-for-1 Class C stock dividend</strong>.
+          </div>
         </div>
       </div>
 
       <!-- TABLE 1B-1: HEADLINE & COMPANY-SPECIFIC KPI BEAT / MISS SCORECARD -->
       <div style="margin-bottom: 20px;">
         <div style="font-weight: 700; font-size: 13.5px; color: #93c5fd; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
-          <span>Table 1B-1: Headline &amp; Company-Specific KPI Beat / Miss Scorecard</span>
-          <span class="tip" title="Deterministic comparison of reported Q3 2026 actuals against Street pre-print consensus." data-tip="Beat / Miss Scorecard: Evaluates performance across headline GAAP/Non-GAAP metrics and non-generic core KPIs. GAAP EPS outperformed significantly ($6.18 vs $5.64) powered by +11% ad pricing realization.">[Methodology]</span>
+          <span>Table 1B-1: Headline &amp; Company-Specific KPI Beat / Miss Scorecard (Q3 2026 Actuals)</span>
+          <span class="tip" title="Deterministic comparison of reported Q3 2026 actuals against Street pre-print consensus and T-1 whisper." data-tip="Beat / Miss Scorecard: Evaluates Q3 2026 delivery across headline GAAP/Adjusted metrics and Meta-specific operational KPIs with visual magnitude bars.">[Methodology]</span>
         </div>
         <div class="table-wrapper">
           <table>
             <thead>
               <tr>
-                <th style="min-width: 250px;">Metric / Company KPI</th>
+                <th style="min-width: 240px;">Metric / Company KPI</th>
                 <th>Street Consensus</th>
                 <th>T-1 Whisper</th>
                 <th class="col-q0">Reported Actual (Q3 2026)</th>
-                <th>Vs. Consensus ($ / % / bps)</th>
+                <th style="min-width: 190px;">Vs. Consensus ($ / % / bps)</th>
                 <th>Vs. Whisper</th>
                 <th>Verdict Badge</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><span class="tip" title="Total top-line revenues recognized across Family of Apps and Reality Labs." data-tip="Total Revenue ($M): Gross sales across all segments. Q3 printed at $60,801M (+27.96% YoY).">Total Revenue ($M)</span></td>
+                <td><span class="tip" title="Total top-line revenues recognized across Family of Apps ($64,158M) and Reality Labs ($443M)." data-tip="Total Revenue ($M): Q3 2026 printed at $64,601M (+26.07% YoY), beating Street consensus of $62,500M by +$2,101M (+3.36%).">Total Revenue ($M)</span></td>
                 <td>$62,500M</td>
                 <td>$63,200M</td>
-                <td class="col-q0" style="font-weight:700; color: #f8fafc;">$60,801M</td>
-                <td><span class="badge badge-warn">-$1,699M (-2.72%)</span></td>
-                <td><span class="badge badge-bear">-$2,399M</span></td>
-                <td><span class="badge badge-warn">IN-GUIDE</span></td>
-              </tr>
-              <tr>
-                <td><span class="tip" title="Official U.S. GAAP Diluted Earnings Per Share." data-tip="GAAP Diluted EPS: Official net profit divided by diluted shares. Q3 printed at $6.18 vs $5.64 consensus (+9.57% beat).">GAAP Diluted EPS</span></td>
-                <td>$5.64</td>
-                <td>$5.85</td>
-                <td class="col-q0" style="font-weight:700; color: #34d399;">$6.18</td>
-                <td><span class="badge badge-bull">+$0.54 (+9.57%)</span></td>
-                <td><span class="badge badge-bull">+$0.33</span></td>
+                <td class="col-q0" style="font-weight:700; color: #34d399;">$64,601M</td>
+                <td>
+                  <span class="badge badge-bull">+$2,101M (+3.36%)</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div style="width:78%; height:100%; background:#10b981;"></div></div>
+                </td>
+                <td><span class="badge badge-bull">+$1,401M (+2.22%)</span></td>
                 <td><span class="badge badge-bull">BEAT</span></td>
               </tr>
               <tr>
-                <td><span class="tip" title="Digital advertising revenue recognized across Instagram, Facebook, and Reels." data-tip="Advertising Revenue ($M): Core advertising segment. Printed at $59,363M (+27.49% YoY).">Advertising Revenue ($M)</span></td>
+                <td><span class="tip" title="Adjusted Diluted EPS excluding the $3.57/sh ($9.89B) U.S. State Attorneys General youth litigation settlement charge (GAAP Diluted EPS: $3.83)." data-tip="Diluted EPS (Ex-State AG Settlement): Form 8-K explicitly discloses that excluding the $9.89B State AG settlement charge, Q3 Diluted EPS of $3.83 increased by $3.57 to $7.40.">Adjusted Diluted EPS (ex-Legal) / GAAP</span></td>
+                <td>$5.46</td>
+                <td>$5.85</td>
+                <td class="col-q0" style="font-weight:700; color: #34d399;">$7.40 <span style="font-size:11px; color:var(--text-muted);">($3.83 GAAP)</span></td>
+                <td>
+                  <span class="badge badge-bull">+$1.94 (+35.53%)</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div style="width:95%; height:100%; background:#10b981;"></div></div>
+                </td>
+                <td><span class="badge badge-bull">+$1.55 (+26.50%)</span></td>
+                <td><span class="badge badge-bull">BEAT</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Digital advertising revenue recognized across Instagram, Facebook, Reels, and WhatsApp." data-tip="Advertising Revenue ($M): Core advertising segment printed at $63,061M (+25.92% YoY vs $50,082M in Q3 2025).">Advertising Revenue ($M)</span></td>
                 <td>$61,000M</td>
                 <td>$61,800M</td>
-                <td class="col-q0" style="font-weight:700; color: #f8fafc;">$59,363M</td>
-                <td><span class="badge badge-warn">-$1,637M (-2.68%)</span></td>
-                <td><span class="badge badge-bear">-$2,437M</span></td>
-                <td><span class="badge badge-warn">SOLID</span></td>
-              </tr>
-              <tr>
-                <td><span class="tip" title="Total GAAP Gross Margin percentage." data-tip="Gross Margin (%): Total Gross Profit ($49,471M) divided by Total Revenues ($60,801M). Printed at an elite 81.37%.">Gross Margin (%)</span></td>
-                <td>81.00%</td>
-                <td>81.20%</td>
-                <td class="col-q0" style="font-weight:700; color: #34d399;">81.37%</td>
-                <td><span class="badge badge-bull">+37 bps</span></td>
-                <td><span class="badge badge-bull">+17 bps</span></td>
+                <td class="col-q0" style="font-weight:700; color: #34d399;">$63,061M</td>
+                <td>
+                  <span class="badge badge-bull">+$2,061M (+3.38%)</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div style="width:79%; height:100%; background:#10b981;"></div></div>
+                </td>
+                <td><span class="badge badge-bull">+$1,261M (+2.04%)</span></td>
                 <td><span class="badge badge-bull">BEAT</span></td>
               </tr>
               <tr>
-                <td><span class="tip" title="Family Daily Active People across Facebook, Instagram, Messenger, and WhatsApp." data-tip="Family Daily Active People (DAP): Global registered daily unique users. Reached 3.35 billion (+4.69% YoY).">Family Daily Active People (DAP)</span></td>
-                <td>3.32B</td>
-                <td>3.34B</td>
-                <td class="col-q0" style="font-weight:700; color: #34d399;">3.35B</td>
-                <td><span class="badge badge-bull">+30M (+0.90%)</span></td>
-                <td><span class="badge badge-bull">+10M</span></td>
+                <td><span class="tip" title="Operating Income excluding the one-time $9.89B State AG litigation charge ($12,988M GAAP Operating Income)." data-tip="Adjusted Operating Income ($M): Excluding the $9.89B legal charge, Q3 operating income reached $22,878M (35.41% operating margin) vs $21,500M consensus.">Operating Income (Adj ex-Legal / GAAP)</span></td>
+                <td>$21,500M</td>
+                <td>$22,100M</td>
+                <td class="col-q0" style="font-weight:700; color: #34d399;">$22,878M <span style="font-size:11px; color:var(--text-muted);">($12,988M GAAP)</span></td>
+                <td>
+                  <span class="badge badge-bull">+$1,378M (+6.41%)</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div style="width:82%; height:100%; background:#10b981;"></div></div>
+                </td>
+                <td><span class="badge badge-bull">+$778M (+3.52%)</span></td>
                 <td><span class="badge badge-bull">BEAT</span></td>
               </tr>
               <tr>
-                <td><span class="tip" title="Blended year-over-year pricing change across total ad auction impressions." data-tip="Average Price per Ad: Ad pricing realization surged +11% YoY driven by AI Advantage+ targeting and high Reels conversion.">Average Price per Ad (% YoY)</span></td>
-                <td>+9.0%</td>
+                <td><span class="tip" title="Family Daily Active People across Facebook, Instagram, Messenger, and WhatsApp in September 2026." data-tip="Family Daily Active People (DAP): Reached 3.64 billion on average for September 2026 (+3% YoY).">Family Daily Active People (DAP)</span></td>
+                <td>3.58B</td>
+                <td>3.60B</td>
+                <td class="col-q0" style="font-weight:700; color: #34d399;">3.64B</td>
+                <td>
+                  <span class="badge badge-bull">+60M (+1.68%)</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div style="width:72%; height:100%; background:#10b981;"></div></div>
+                </td>
+                <td><span class="badge badge-bull">+40M (+1.11%)</span></td>
+                <td><span class="badge badge-bull">BEAT</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Blended year-over-year pricing change across total ad auction impressions (+10% YoY impression growth)." data-tip="Average Price per Ad (% YoY): Surged +14% YoY (paired with +10% YoY ad impressions growth) driven by Advantage+ AI conversion lift.">Average Price per Ad (% YoY)</span></td>
                 <td>+10.0%</td>
-                <td class="col-q0" style="font-weight:700; color: #34d399;">+11.0%</td>
-                <td><span class="badge badge-bull">+200 bps</span></td>
-                <td><span class="badge badge-bull">+100 bps</span></td>
+                <td>+11.5%</td>
+                <td class="col-q0" style="font-weight:700; color: #34d399;">+14.0%</td>
+                <td>
+                  <span class="badge badge-bull">+400 bps</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div style="width:90%; height:100%; background:#10b981;"></div></div>
+                </td>
+                <td><span class="badge badge-bull">+250 bps</span></td>
                 <td><span class="badge badge-bull">BEAT</span></td>
               </tr>
               <tr>
-                <td><span class="tip" title="Reality Labs hardware, Quest headsets, and Orion AR ecosystem operating loss." data-tip="Reality Labs Operating Loss: Contained at -$4,400M vs -$4,500M consensus as Ray-Ban Meta sales scaled.">Reality Labs Operating Loss ($M)</span></td>
+                <td><span class="tip" title="Reality Labs segment operating loss in Q3 2026." data-tip="Reality Labs Operating Loss: Narrowed to -$4,129M (vs -$4,432M in Q3 2025 and -$4,500M consensus) as hardware spending was reallocated to AI.">Reality Labs Operating Loss ($M)</span></td>
                 <td>-$4,500M</td>
-                <td>-$4,600M</td>
-                <td class="col-q0" style="font-weight:700; color: #34d399;">-$4,400M</td>
-                <td><span class="badge badge-bull">+$100M (Narrower)</span></td>
-                <td><span class="badge badge-bull">+$200M</span></td>
+                <td>-$4,400M</td>
+                <td class="col-q0" style="font-weight:700; color: #34d399;">-$4,129M</td>
+                <td>
+                  <span class="badge badge-bull">+$371M (Narrower)</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div style="width:75%; height:100%; background:#10b981;"></div></div>
+                </td>
+                <td><span class="badge badge-bull">+$271M</span></td>
                 <td><span class="badge badge-bull">BEAT</span></td>
               </tr>
               <tr>
-                <td><span class="tip" title="Threads monthly active users." data-tip="Threads MAUs: Reached 275 million monthly active users with accelerating engagement.">Threads Monthly Active Users (MAUs)</span></td>
-                <td>250M</td>
-                <td>260M</td>
-                <td class="col-q0" style="font-weight:700; color: #34d399;">275M</td>
-                <td><span class="badge badge-bull">+25M (+10.0%)</span></td>
-                <td><span class="badge badge-bull">+15M</span></td>
+                <td><span class="tip" title="Total FTE headcount as of September 30, 2026." data-tip="Headcount Efficiency: Total employees declined -15% YoY to 66,775 as AI coding and operational automation scaled.">Total Headcount (FTEs)</span></td>
+                <td>72,500</td>
+                <td>71,000</td>
+                <td class="col-q0" style="font-weight:700; color: #34d399;">66,775 (-15% YoY)</td>
+                <td>
+                  <span class="badge badge-bull">-5,725 FTEs (Leaner)</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div style="width:88%; height:100%; background:#10b981;"></div></div>
+                </td>
+                <td><span class="badge badge-bull">-4,225 FTEs</span></td>
                 <td><span class="badge badge-bull">BEAT</span></td>
               </tr>
             </tbody>
@@ -181,9 +541,18 @@ row_1b_html = f"""
 
       <!-- TABLE 1B-2: MANAGEMENT EXECUTION ACCOUNTABILITY -->
       <div style="margin-bottom: 20px;">
-        <div style="font-weight: 700; font-size: 13.5px; color: #93c5fd; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
-          <span>Table 1B-2: Management Execution Accountability (Q0 Actual vs. Q-1 Guidance Track Record)</span>
-          <span class="tip" title="Tracks management execution credibility against forward guidance issued in the prior quarter." data-tip="Accountability Audit: Directly compares what management guided last quarter against actual reported results. Revenue landed in the top quartile of guidance and user metrics accelerated.">[Credibility Audit]</span>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 8px;">
+          <div style="font-weight: 700; font-size: 13.5px; color: #93c5fd; display: flex; align-items: center; gap: 8px;">
+            <span>Table 1B-2: Management Execution Accountability (Q3 Actual vs. Prior Q2 Guidance Track Record)</span>
+            <span class="tip" title="Tracks management execution credibility against forward guidance issued in the prior quarter." data-tip="Accountability Audit: Directly compares what management guided last quarter against actual reported Q3 2026 results.">[Credibility Audit]</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px; font-size: 12px;">
+            <span style="color: var(--text-muted);">Executive Guidance Credibility Score:</span>
+            <div class="credibility-gauge-bar" style="width: 110px; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden;">
+              <div style="width: 92%; height: 100%; background: linear-gradient(90deg, #3b82f6, #10b981);"></div>
+            </div>
+            <strong style="color: #34d399;">92 / 100 (Elite)</strong>
+          </div>
         </div>
         <div class="table-wrapper">
           <table>
@@ -198,32 +567,32 @@ row_1b_html = f"""
             </thead>
             <tbody>
               <tr>
-                <td><span class="tip" title="Q3 2026 Total Revenue Window." data-tip="Revenue Guidance: $58.5B to $61.0B guided; delivered $60,801M in upper quartile.">Q3 2026 Total Revenue</span></td>
-                <td>$58.5B to $61.0B ($59.75B midpoint)</td>
-                <td style="font-weight:600; color: #34d399;">$60,801M reported revenue</td>
-                <td>Delivered in top quartile of guidance, powered by double-digit ad pricing gains (+11%).</td>
-                <td><span class="badge badge-bull">MET GUIDE</span></td>
-              </tr>
-              <tr>
-                <td><span class="tip" title="Full-Year 2026 CapEx Envelope." data-tip="CapEx Guidance: Guided $70B to $75B; tightened to $70B-$72B.">Full-Year 2026 CapEx Corridor</span></td>
-                <td>$70.0B to $75.0B in server and AI compute clusters</td>
-                <td style="font-weight:600; color: #34d399;">$30,116M in Q3; FY guide tightened to $70B-$72B</td>
-                <td>Accelerated GPU deliveries (H200 and MTIA) brought spending into narrowed lower half.</td>
-                <td><span class="badge badge-bull">MET GUIDE</span></td>
-              </tr>
-              <tr>
-                <td><span class="tip" title="Family Daily Active People (DAP) Expansion." data-tip="User Engagement: Guided mid-single digit growth; delivered 3.35B DAP (+4.7% YoY).">Family Daily Active People (DAP)</span></td>
-                <td>Sustained mid-single digit global engagement</td>
-                <td style="font-weight:600; color: #34d399;">3.35 billion DAP (+4.7% YoY)</td>
-                <td>AI recommendations drove +8% time spent on Instagram and +5% on Facebook.</td>
+                <td><span class="tip" title="Q3 2026 Total Revenue Window." data-tip="Revenue Guidance: $61.0B to $64.0B guided; delivered $64,601M (+$601M above top end).">Q3 2026 Total Revenue</span></td>
+                <td>$61.0B to $64.0B ($62.50B midpoint)</td>
+                <td style="font-weight:600; color: #34d399;">$64,601M reported revenue (+26% YoY)</td>
+                <td>Shattered the top end of management's own Q3 guidance range by +$601M, powered by +14% ad pricing and +10% ad impressions.</td>
                 <td><span class="badge badge-bull">BEAT OWN GUIDE</span></td>
               </tr>
               <tr>
-                <td><span class="tip" title="Full-Year 2026 Total Expense Envelope." data-tip="Expense Guide: Guided $115B to $118B; narrowed to $116B-$118B.">Full-Year 2026 Total Expenses</span></td>
-                <td>$115B to $118B total expenses</td>
-                <td style="font-weight:600; color: #f8fafc;">$30,696M in Q3; FY guide narrowed to $116B-$118B</td>
-                <td>Headcount disciplined (+5% YoY) while infrastructure depreciation rose as expected.</td>
-                <td><span class="badge badge-bull">MET GUIDE</span></td>
+                <td><span class="tip" title="Full-Year 2026 CapEx Envelope (including principal payments on finance leases)." data-tip="CapEx Guidance: Guided $130B to $145B; narrowed upward to $135B–$145B.">Full-Year 2026 CapEx Corridor</span></td>
+                <td>$130.0B to $145.0B (incl. finance leases)</td>
+                <td style="font-weight:600; color: #fcd34d;">$34,906M in Q3 ($33,942M P&amp;E + $964M leases); FY guide $135B–$145B</td>
+                <td>Raised the lower bound of full-year CapEx by +$5.0B as GPU deployments for Muse and Muse Wonder accelerated.</td>
+                <td><span class="badge badge-warn">RAISED LOW END</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Family Daily Active People (DAP) &amp; Engagement." data-tip="User Engagement: Delivered 3.64B DAP (+3% YoY) and +10% YoY ad impressions.">Family Daily Active People (DAP)</span></td>
+                <td>Sustained global growth &amp; AI recommendation lift</td>
+                <td style="font-weight:600; color: #34d399;">3.64 billion DAP (+3% YoY); Impressions +10%</td>
+                <td>AI recommendation systems drove higher engagement and +26% YoY advertising revenue growth ($63,061M).</td>
+                <td><span class="badge badge-bull">BEAT OWN GUIDE</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Full-Year 2026 Total Expense Envelope." data-tip="Expense Guide: Raised to $175B–$179B solely to incorporate the $9.89B State AG youth litigation settlement.">Full-Year 2026 Total Expenses</span></td>
+                <td>$162B to $167B (prior to State AG settlement)</td>
+                <td style="font-weight:600; color: #f8fafc;">$51,613M in Q3 (incl. $9.89B legal charge); FY guide $175B–$179B</td>
+                <td>Core operating costs were tightly controlled (headcount -15% YoY to 66,775); raise reflects the one-time $9.89B State AG settlement.</td>
+                <td><span class="badge badge-neutral">1X LEGAL CHARGE</span></td>
               </tr>
             </tbody>
           </table>
@@ -233,8 +602,8 @@ row_1b_html = f"""
       <!-- TABLE 1B-3: FORWARD GUIDANCE RESET -->
       <div>
         <div style="font-weight: 700; font-size: 13.5px; color: #93c5fd; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
-          <span>Table 1B-3: Forward Guidance Reset (New Q4 &amp; FY2026 Guidance vs. Pre-Print Street Expectations)</span>
-          <span class="tip" title="Evaluates how new forward guidance changes future earnings power relative to Wall Street consensus." data-tip="Forward Guidance Reset: Evaluates newly issued Q4 and 2027 guidance. Q4 revenue matches consensus, while 2027 CapEx is signaled to accelerate significantly for Personal Superintelligence.">[Re-Rating Matrix]</span>
+          <span>Table 1B-3: Forward Guidance Reset (New Q4 2026 &amp; FY2026/FY2027 Guidance vs. Pre-Print Street Expectations)</span>
+          <span class="tip" title="Evaluates how new forward guidance changes future earnings power relative to Wall Street consensus." data-tip="Forward Guidance Reset: Audits newly issued Q4 2026 revenue ($73B-$76B), FY26 CapEx ($135B-$145B), Reality Labs loss reduction ($18B-$19B in FY26, ~$15B in FY27), and Class C stock dividend.">[Re-Rating Matrix]</span>
         </div>
         <div class="table-wrapper">
           <table>
@@ -250,103 +619,338 @@ row_1b_html = f"""
             </thead>
             <tbody>
               <tr>
-                <td><span class="tip" title="Q4 2026 Total Revenue Window." data-tip="Q4 Revenue Guide: $65.0B to $68.0B ($66.5B midpoint).">Q4 2026 Total Revenue</span></td>
-                <td>$65.5B - $67.5B ($66.5B midpoint)</td>
-                <td style="font-weight:600; color: #34d399;">$65.0B to $68.0B ($66.5B midpoint)</td>
-                <td>In-line at midpoint (+18% to +23% YoY)</td>
-                <td><span class="badge badge-bull">MAINTAINED</span></td>
-                <td>Strong holiday advertiser demand and Meta Advantage+ automated campaign adoption.</td>
+                <td><span class="tip" title="Q4 2026 Total Revenue Window." data-tip="Q4 2026 Revenue Guide: $73.0B to $76.0B ($74.5B midpoint), assuming ~1% FX headwind.">Q4 2026 Total Revenue</span></td>
+                <td>$70.5B - $72.5B ($71.5B midpoint)</td>
+                <td style="font-weight:600; color: #34d399;">$73.0B to $76.0B ($74.5B midpoint)</td>
+                <td>+$3.0B above Street midpoint (+4.2%)</td>
+                <td><span class="badge badge-bull">RAISED</span></td>
+                <td>Blowout holiday quarter outlook driven by +14% ad pricing momentum, Advantage+ automation, and Muse AI ranking.</td>
               </tr>
               <tr>
-                <td><span class="tip" title="FY2026 Full-Year CapEx Guidance Window." data-tip="FY26 CapEx Guide: Tightened from $70B-$75B to $70B-$72B.">FY2026 Full-Year CapEx Corridor</span></td>
-                <td>$72.0B - $74.5B</td>
-                <td style="font-weight:600; color: #34d399;">$70.0B to $72.0B (tightened by $3.0B at top end)</td>
-                <td>-$1.5B vs Street midpoint</td>
-                <td><span class="badge badge-bull">LOWERED</span></td>
-                <td>Data center construction pacing tightened full-year capital expenditure envelope.</td>
-              </tr>
-              <tr>
-                <td><span class="tip" title="FY2027 Capital Expenditure Trajectory." data-tip="FY27 CapEx: Guided significant capital expenditure growth for Personal Superintelligence clusters.">FY2027 CapEx Trajectory</span></td>
-                <td>$78B - $82B (+10% YoY)</td>
-                <td style="font-weight:600; color: #f59e0b;">Significant capital expenditure growth in 2027</td>
-                <td>Hawkish infrastructure commitment (+15% to +25% YoY)</td>
+                <td><span class="tip" title="FY2026 Full-Year CapEx Guidance Window (incl. finance leases)." data-tip="FY26 CapEx Guide: Narrowed upward from $130B-$145B to $135B-$145B.">FY2026 CapEx Corridor (incl. Leases)</span></td>
+                <td>$137.5B midpoint ($130B–$145B)</td>
+                <td style="font-weight:600; color: #fcd34d;">$135.0B to $145.0B ($140.0B midpoint)</td>
+                <td>+$2.5B vs prior midpoint (tightened upward)</td>
                 <td><span class="badge badge-warn">RAISED</span></td>
-                <td>Scaling multi-gigawatt data center campuses for Muse Wonder frontier model training.</td>
+                <td>Multi-gigawatt AI compute buildout supporting Muse and Muse Wonder frontier models and Personal Superintelligence.</td>
               </tr>
               <tr>
-                <td><span class="tip" title="Capital Structure &amp; Shareholder Returns." data-tip="Capital Structure: Established new Class C non-voting common stock; $0.50/sh dividend maintained.">Capital Structure &amp; Shareholder Returns</span></td>
-                <td>$0.50/sh regular dividend</td>
-                <td style="font-weight:600; color: #34d399;">Established Class C Non-Voting Stock; $0.50/sh dividend</td>
-                <td>Enhanced flexibility without voting dilution</td>
-                <td><span class="badge badge-bull">MAINTAINED</span></td>
-                <td>Provides currency for strategic talent compensation and acquisitions while preserving governance.</td>
+                <td><span class="tip" title="Reality Labs Operating Loss Trajectory for FY26 and FY27." data-tip="Reality Labs Guidance: Losses expected to decline in FY26 to $18B-$19B and narrow further in FY27 to ~$15B.">Reality Labs Loss Trajectory (FY26 &amp; FY27)</span></td>
+                <td>-$19.5B in FY26; -$18.0B in FY27</td>
+                <td style="font-weight:600; color: #34d399;">-$18B to -$19B in FY26; narrowing to ~-$15B in FY27</td>
+                <td>+$3.0B lower annual burn in FY27 vs Street</td>
+                <td><span class="badge badge-bull">IMPROVED</span></td>
+                <td>Reallocating metaverse hardware spend toward higher-ROI AI initiatives while scaling Ray-Ban Meta glasses.</td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Establishment of New Class C Non-Voting Common Stock (Effective Jan 19, 2027)." data-tip="Class C Stock Dividend: One-time 1-for-1 stock dividend of non-voting Class C stock for each Class A/B share, effective Jan 19, 2027 (2-for-1 split effect).">Capital Structure: Class C Stock Split</span></td>
+                <td>Standard Class A/B structure</td>
+                <td style="font-weight:600; color: #34d399;">1-for-1 Class C Non-Voting Dividend (Eff. Jan 19, 2027)</td>
+                <td>2-for-1 Stock Split Effect + Founder Alignment</td>
+                <td><span class="badge badge-bull">NEW CATALYST</span></td>
+                <td>Unlocks non-dilutive equity currency for AI acquisitions and elite researcher compensation while preserving governance.</td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
     </section>
-"""
 
-# Modify Header Banner
-updated_html = container_html
+    <!-- ==========================================================================
+         4. ROW 2: 5-QUARTER ROLLING FINANCIAL PERFORMANCE & Q4 2026E BRIDGE
+         ========================================================================== -->
+    <section class="card" id="row-2-financials" style="margin-bottom: 24px;">
+      <div class="card-header">
+        <div>
+          <div class="card-title"><span class="card-title-accent"></span>5-Quarter Rolling Financial Performance &amp; Forward Q4 2026E Bridge</div>
+          <div class="card-subtitle">Audited SEC Form 10-Q / 8-K financial results in USD Millions (rolled forward to Q3 2026 Actuals + New Q4 2026E Guidance Midpoint)</div>
+        </div>
+        <span class="badge badge-blue">DETERMINISTIC GROUND TRUTH (Q3 2025 – Q3 2026 ACTUAL + Q4 2026E)</span>
+      </div>
 
-# Update Header title & badges
-updated_html = updated_html.replace(
-    'T-1 EARNINGS INTELLIGENCE BRIEFING',
-    'T+0 POST-EARNINGS FORENSIC TEARSHEET'
-)
-updated_html = updated_html.replace(
-    'Q3 2026 Earnings Intelligence Briefing',
-    f'Q3 2026 Post-Earnings Forensic Tearsheet (${ah_price:.2f})'
-)
-updated_html = updated_html.replace(
-    '<span class="badge badge-warn">UNCONFIRMED / PROJECTED</span>',
-    f'<span class="badge badge-bull">CLEAN EPS BEAT &amp; ROBUST AD PRICING</span>'
-)
-updated_html = updated_html.replace(
-    '<span class="badge badge-blue">T-1 TRADING DESK BRIEF</span>',
-    '<span class="badge badge-blue">T+0 POST-PRINT</span>'
-)
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th style="min-width: 230px;">Financial Metric ($ Millions)</th>
+              <th>Q3 2025<br><span style="font-size:10px;color:var(--text-muted);">(Sep 30, 2025)</span></th>
+              <th>Q4 2025<br><span style="font-size:10px;color:var(--text-muted);">(Dec 31, 2025)</span></th>
+              <th>Q1 2026<br><span style="font-size:10px;color:var(--text-muted);">(Mar 31, 2026)</span></th>
+              <th>Q2 2026<br><span style="font-size:10px;color:var(--text-muted);">(Jun 30, 2026)</span></th>
+              <th class="col-q0">Q3 2026 (Actual)<br><span style="font-size:10px;color:var(--accent-blue);">(Sep 30, 2026 8-K)</span></th>
+              <th><span class="tip" title="Quarter-over-Quarter: Sequential change from Q2 2026 to Q3 2026 Actual." data-tip="Q3 QoQ Delta: Sequential percentage variance between Q2 2026 and Q3 2026 Actual.">Q3 QoQ</span></th>
+              <th><span class="tip" title="Year-over-Year: Percentage change from Q3 2025 to Q3 2026 Actual." data-tip="Q3 YoY Delta: 12-month percentage variance between Q3 2025 and Q3 2026 Actual.">Q3 YoY</span></th>
+              <th class="col-est">Q4 2026E<br><span style="font-size:10px;color:#34d399;">(New Guide / Est.)</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="font-weight: 700; background-color: rgba(59, 130, 246, 0.05);">
+              <td><span class="tip" title="Total Revenue: Consolidated net revenue across Family of Apps and Reality Labs." data-tip="Total Revenue: Q3 2026 actual printed at $64,601M (+6.25% QoQ, +26.07% YoY); Q4 2026E guided to $73B-$76B ($74,500M midpoint).">Total Revenue ($M)</span></td>
+              <td>$51,242</td>
+              <td>$59,893</td>
+              <td>$56,311</td>
+              <td>$60,801</td>
+              <td class="col-q0" style="color: var(--accent-blue);">$64,601</td>
+              <td><span class="badge badge-bull">+6.25%</span></td>
+              <td><span class="badge badge-bull">+26.07%</span></td>
+              <td class="col-est" style="font-weight:700; color:#34d399;">$74,500</td>
+            </tr>
+            <tr style="color: var(--text-muted); font-size: 12.5px;">
+              <td style="padding-left: 24px;">↳ <span class="tip" title="Family of Apps: Advertising ($63,061M) and Other FoA revenue ($1,097M) in Q3 2026." data-tip="Family of Apps (FoA): Generated $64,158M in Q3 2026 (+6.27% QoQ, +26.36% YoY).">Family of Apps (FoA Total) ($M)</span></td>
+              <td>$50,772</td>
+              <td>$58,980</td>
+              <td>$55,880</td>
+              <td>$60,370</td>
+              <td class="col-q0">$64,158</td>
+              <td><span class="badge badge-bull">+6.27%</span></td>
+              <td><span class="badge badge-bull">+26.36%</span></td>
+              <td class="col-est">$73,850</td>
+            </tr>
+            <tr style="color: var(--text-muted); font-size: 12.5px;">
+              <td style="padding-left: 24px;">↳ <span class="tip" title="Reality Labs: Quest VR headsets, Ray-Ban Meta AI glasses, and AR software." data-tip="Reality Labs: Generated $443M in Q3 2026 (+2.78% QoQ, -5.74% YoY); Q4 holiday quarter estimated at $650M.">Reality Labs Hardware &amp; Content ($M)</span></td>
+              <td>$470</td>
+              <td>$913</td>
+              <td>$431</td>
+              <td>$431</td>
+              <td class="col-q0">$443</td>
+              <td><span class="badge badge-bull">+2.78%</span></td>
+              <td><span class="badge badge-neutral">-5.74%</span></td>
+              <td class="col-est">$650</td>
+            </tr>
+            <tr>
+              <td><span class="tip" title="Cost of Revenue: Data center operating costs, server depreciation, and hardware COGS." data-tip="Cost of Revenue: $13,369M in Q3 2026 (+18.00% QoQ, +45.22% YoY) due to higher AI server depreciation.">Cost of Revenue ($M)</span></td>
+              <td>($9,206)</td>
+              <td>($10,906)</td>
+              <td>($10,218)</td>
+              <td>($11,330)</td>
+              <td class="col-q0">($13,369)</td>
+              <td><span class="badge badge-warn">+18.00%</span></td>
+              <td><span class="badge badge-warn">+45.22%</span></td>
+              <td class="col-est">($14,800)</td>
+            </tr>
+            <tr style="font-weight: 700;">
+              <td><span class="tip" title="Gross Profit: Total Revenue minus Cost of Revenue ($64,601M - $13,369M = $51,232M)." data-tip="Gross Profit: Reached $51,232M in Q3 2026 (+3.56% QoQ, +21.88% YoY; 79.31% GAAP Gross Margin).">Gross Profit ($M)</span></td>
+              <td>$42,036</td>
+              <td>$48,987</td>
+              <td>$46,093</td>
+              <td>$49,471</td>
+              <td class="col-q0" style="color: var(--bull-green);">$51,232</td>
+              <td><span class="badge badge-bull">+3.56%</span></td>
+              <td><span class="badge badge-bull">+21.88%</span></td>
+              <td class="col-est">$59,700</td>
+            </tr>
+            <tr style="color: var(--text-muted); font-size: 12.5px;">
+              <td style="padding-left: 24px;">↳ <span class="tip" title="Research and Development Expenses ($20,054M in Q3 2026)." data-tip="R&amp;D Expense: $20,054M in Q3 2026 (-7.40% QoQ, +32.42% YoY).">Research &amp; Development ($M)</span></td>
+              <td>($15,144)</td>
+              <td>($17,135)</td>
+              <td>($17,699)</td>
+              <td>($21,656)</td>
+              <td class="col-q0">($20,054)</td>
+              <td><span class="badge badge-bull">-7.40%</span></td>
+              <td><span class="badge badge-warn">+32.42%</span></td>
+              <td class="col-est">($21,500)</td>
+            </tr>
+            <tr style="color: var(--text-muted); font-size: 12.5px;">
+              <td style="padding-left: 24px;">↳ <span class="tip" title="Marketing &amp; Sales ($3,333M) plus General &amp; Administrative ($14,857M, including the $9,890M State AG legal settlement) = $18,190M." data-tip="SG&amp;A Expense: $18,190M in Q3 2026 ($3,333M Marketing &amp; Sales + $14,857M G&amp;A which includes the one-time $9,890M U.S. State Attorneys General litigation settlement).">Selling, General &amp; Admin (incl. $9.89B Legal) ($M)</span></td>
+              <td>($6,357)</td>
+              <td>($7,107)</td>
+              <td>($5,522)</td>
+              <td>($9,040)</td>
+              <td class="col-q0">($18,190)</td>
+              <td><span class="badge badge-warn">+101.22%</span></td>
+              <td><span class="badge badge-warn">+186.14%</span></td>
+              <td class="col-est">($8,400)</td>
+            </tr>
+            <tr style="font-weight: 600;">
+              <td><span class="tip" title="Total Operating Expenses: R&amp;D ($20,054M) + SG&amp;A ($18,190M) = $38,244M ($28,354M ex-State AG settlement)." data-tip="Total Operating Expenses: $38,244M GAAP ($28,354M excluding the $9,890M State AG settlement charge).">Total Operating Expenses ($M)</span></td>
+              <td>($21,501)</td>
+              <td>($24,242)</td>
+              <td>($23,221)</td>
+              <td>($30,696)</td>
+              <td class="col-q0">($38,244)</td>
+              <td><span class="badge badge-warn">+24.59%</span></td>
+              <td><span class="badge badge-warn">+77.87%</span></td>
+              <td class="col-est">($29,900)</td>
+            </tr>
+            <tr style="font-weight: 700; background-color: rgba(34, 197, 94, 0.05);">
+              <td><span class="tip" title="Operating Income (EBIT): Gross Profit ($51,232M) minus Total OpEx ($38,244M) = $12,988M GAAP ($22,878M Adjusted ex-legal charge)." data-tip="Operating Income (EBIT): $12,988M GAAP ($22,878M / 35.41% margin excluding the $9,890M State AG settlement).">Operating Income (EBIT) ($M)</span></td>
+              <td>$20,535</td>
+              <td>$24,745</td>
+              <td>$22,872</td>
+              <td>$18,775</td>
+              <td class="col-q0" style="color: var(--warn-amber);">$12,988</td>
+              <td><span class="badge badge-bear">-30.82%</span></td>
+              <td><span class="badge badge-bear">-36.75%</span></td>
+              <td class="col-est" style="font-weight:700; color:#34d399;">$29,800</td>
+            </tr>
+            <tr>
+              <td><span class="tip" title="GAAP Net Income: $9,860M in Q3 2026 ($19,000M+ adjusted ex-legal settlement)." data-tip="GAAP Net Income: $9,860M in Q3 2026 (+263.97% YoY vs Q3 2025's $2,709M which had an $18.95B tax provision).">GAAP Net Income ($M)</span></td>
+              <td>$2,709</td>
+              <td>$22,768</td>
+              <td>$26,773</td>
+              <td>$15,848</td>
+              <td class="col-q0" style="color: var(--bull-green);">$9,860</td>
+              <td><span class="badge badge-bear">-37.78%</span></td>
+              <td><span class="badge badge-bull">+263.97%</span></td>
+              <td class="col-est">$25,000</td>
+            </tr>
+            <tr>
+              <td><span class="tip" title="GAAP Diluted EPS ($3.83 in Q3 2026; Adjusted EPS ex-State AG settlement is $7.40)." data-tip="Diluted EPS: $3.83 GAAP (+264.76% YoY vs $1.05 in Q3 2025), and $7.40 Adjusted excluding the $3.57/sh legal settlement.">Diluted EPS (GAAP / Adj) ($)</span></td>
+              <td>$1.05</td>
+              <td>$8.88</td>
+              <td>$10.44</td>
+              <td>$6.18</td>
+              <td class="col-q0" style="font-weight:700; color: var(--bull-green);">$3.83 <span style="font-size:11px;color:#34d399;">($7.40 Adj)</span></td>
+              <td><span class="badge badge-bear">-38.03%</span></td>
+              <td><span class="badge badge-bull">+264.76%</span></td>
+              <td class="col-est" style="font-weight:700; color:#34d399;">$9.70</td>
+            </tr>
+            <tr class="section-divider">
+              <td colspan="9">Cash Flow &amp; Capital Reinvestment Audit (Rolled to Q3 2026 Actual)</td>
+            </tr>
+            <tr>
+              <td><span class="tip" title="Net cash provided by operating activities ($32,786M in Q3 2026)." data-tip="Operating Cash Flow (OCF): Reached $32,786M in Q3 2026 (+2.90% QoQ, +9.29% YoY).">Operating Cash Flow ($M)</span></td>
+              <td>$29,999</td>
+              <td>$36,214</td>
+              <td>$32,226</td>
+              <td>$31,862</td>
+              <td class="col-q0" style="color: var(--bull-green);">$32,786</td>
+              <td><span class="badge badge-bull">+2.90%</span></td>
+              <td><span class="badge badge-bull">+9.29%</span></td>
+              <td class="col-est">$41,500</td>
+            </tr>
+            <tr>
+              <td><span class="tip" title="Purchases of property and equipment ($33,942M in Q3 2026)." data-tip="Capital Expenditures (P&amp;E): $33,942M in Q3 2026 (+12.70% QoQ, +80.26% YoY).">Capital Expenditures (P&amp;E) ($M)</span></td>
+              <td>($18,829)</td>
+              <td>($21,383)</td>
+              <td>($18,997)</td>
+              <td>($30,116)</td>
+              <td class="col-q0">($33,942)</td>
+              <td><span class="badge badge-warn">+12.70%</span></td>
+              <td><span class="badge badge-warn">+80.26%</span></td>
+              <td class="col-est">($38,000)</td>
+            </tr>
+            <tr style="font-weight: 700;">
+              <td><span class="tip" title="Standard Reported Free Cash Flow: OCF ($32,786M) minus P&amp;E CapEx ($33,942M) = -$1,156M (Meta press release FCF after $964M finance leases = -$2,120M)." data-tip="Reported Free Cash Flow: -$1,156M standard (-$2,120M including $964M finance leases) in Q3 2026.">Reported Free Cash Flow ($M)</span></td>
+              <td>$11,170</td>
+              <td>$14,831</td>
+              <td>$13,229</td>
+              <td>$1,746</td>
+              <td class="col-q0" style="color: var(--bear-red);">($1,156)</td>
+              <td><span class="badge badge-bear">-166.21%</span></td>
+              <td><span class="badge badge-bear">-110.35%</span></td>
+              <td class="col-est">$3,500</td>
+            </tr>
+            <tr style="color: var(--text-muted); font-size: 12.5px;">
+              <td style="padding-left: 24px;">↳ <span class="tip" title="Share-based compensation expense ($7,363M in Q3 2026)." data-tip="Stock-Based Compensation (SBC): $7,363M in Q3 2026 (-3.85% QoQ as headcount declined 15% YoY, +32.52% YoY).">Stock-Based Compensation ($M)</span></td>
+              <td>($5,556)</td>
+              <td>($5,890)</td>
+              <td>($6,032)</td>
+              <td>($7,658)</td>
+              <td class="col-q0">($7,363)</td>
+              <td><span class="badge badge-bull">-3.85%</span></td>
+              <td><span class="badge badge-warn">+32.52%</span></td>
+              <td class="col-est">($7,500)</td>
+            </tr>
+            <tr style="color: var(--text-muted); font-size: 12.5px;">
+              <td style="padding-left: 24px;">↳ <span class="tip" title="Principal payments on finance leases ($964M in Q3 2026)." data-tip="Principal Finance Lease Payments: $964M in Q3 2026 (+0.21% QoQ, +76.88% YoY).">Principal Finance Lease Payments ($M)</span></td>
+              <td>($545)</td>
+              <td>($754)</td>
+              <td>($843)</td>
+              <td>($962)</td>
+              <td class="col-q0">($964)</td>
+              <td><span class="badge badge-neutral">+0.21%</span></td>
+              <td><span class="badge badge-warn">+76.88%</span></td>
+              <td class="col-est">($1,050)</td>
+            </tr>
+            <tr style="font-weight: 700;">
+              <td><span class="tip" title="Forensic True Free Cash Flow: Reported FCF (-$1,156M) minus SBC ($7,363M) minus Finance Leases ($964M) = -$9,483M." data-tip="True Free Cash Flow: -$9,483M in Q3 2026 after deducting $7,363M SBC and $964M finance leases.">True Free Cash Flow (ex-SBC &amp; Leases) ($M)</span></td>
+              <td>$5,069</td>
+              <td>$8,187</td>
+              <td>$6,354</td>
+              <td>($6,874)</td>
+              <td class="col-q0" style="color: var(--bear-red);">($9,483)</td>
+              <td><span class="badge badge-bear">-37.95%</span></td>
+              <td><span class="badge badge-bear">-287.08%</span></td>
+              <td class="col-est">($5,050)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-# Update Price Box in Header
-price_box_pattern = r'<div class="price-box">.*?<div class="price-label">.*?Spot Price.*?</div>.*?<div class="price-value">.*?</div>.*?</div>'
-replacement_price_box = f"""<div class="price-box">
-            <div class="price-label">Regular Close / <span style="color:#34d399;">After-Hours Price</span></div>
-            <div class="price-value">${reg_price:.2f} / <span style="color:#34d399;">${ah_price:.2f}</span> <span style="font-size:14px; color:#34d399;">({post_move_pct:+.2f}%)</span></div>
-          </div>"""
-updated_html = re.sub(price_box_pattern, replacement_price_box, updated_html, flags=re.DOTALL)
+    <!-- ==========================================================================
+         5. ROW 3: FORENSIC HIGHLIGHTS & TRUE FCF BRIDGE (Q3 2026 ACTUALS)
+         ========================================================================== -->
+    <section class="card" id="row-3-fcf" style="margin-bottom: 24px;">
+      <div class="card-header">
+        <div>
+          <div class="card-title"><span class="card-title-accent"></span>Outlier &amp; Accounting Quality Audit (Q3 2026 Post-Print Forensic Review)</div>
+          <div class="card-subtitle">Forensic deconstruction of the $9.89B State AG Legal Settlement, $33.94B P&amp;E CapEx Surge, and -$9,483M True FCF</div>
+        </div>
+        <span class="badge badge-warn">CAPEX &amp; 1X LEGAL CHARGE DECONSTRUCTION</span>
+      </div>
 
-# Insert Row 1B immediately before Section 2 / Row 2
-idx_row2 = updated_html.find('<!-- 3. ROW 2:')
-if idx_row2 == -1:
-    idx_row2 = updated_html.find('id="historical-table"')
-    if idx_row2 != -1:
-        idx_row2 = updated_html.rfind('<section class="card"', 0, idx_row2)
-if idx_row2 == -1:
-    idx_row2 = updated_html.find('<section class="card"')
-    idx_row2 = updated_html.find('<section class="card"', idx_row2 + 100)
+      <div class="forensic-grid">
+        <div class="forensic-list">
+          <div class="forensic-item" style="border-left-color: var(--bull-green);">
+            <div class="forensic-item-title">
+              <span>1. GAAP vs. Normalized EBIT Bridge: $9.89B State AG Youth Litigation Charge</span>
+              <span class="badge badge-bull">$22.88B CORE EBIT (35.4% MARGIN)</span>
+            </div>
+            <p>
+              Headline Q3 2026 GAAP Operating Income printed at <strong>$12,988M (20.10% margin)</strong> and GAAP Diluted EPS printed at <strong>$3.83</strong> because General &amp; Administrative expenses ($14,857M) absorbed a <strong>$9,890M ($3.57/sh) accrual</strong> for the August 2026 settlement with 52 U.S. State Attorneys General. Excluding this one-time legal resolution, core Q3 Operating Income jumped to <strong>$22,878M (35.41% operating margin)</strong> and Adjusted Diluted EPS reached <strong>$7.40</strong>—crushing consensus ($5.46) by +35.5%.
+            </p>
+          </div>
 
-if idx_row2 != -1:
-    updated_html = updated_html[:idx_row2] + row_1b_html + "\n\n    " + updated_html[idx_row2:]
+          <div class="forensic-item" style="border-left-color: var(--warn-amber);">
+            <div class="forensic-item-title">
+              <span>2. Peak AI Infrastructure Absorption: $33,942M P&amp;E CapEx ($34,906M incl. Leases)</span>
+              <span class="badge badge-warn">52.5% CAPEX-TO-REVENUE</span>
+            </div>
+            <p>
+              In Q3 2026, Meta deployed <strong>$33,942M into property and equipment</strong> (plus <strong>$964M</strong> in principal finance lease payments, totaling <strong>$34,906M</strong>)—exceeding quarterly Operating Cash Flow of <strong>$32,786M</strong> for the first time in company history. This pushed standard Reported FCF to <strong>-$1,156M</strong> (and Meta's press-release FCF incl. leases to <strong>-$2,120M</strong>) as multi-gigawatt clusters for <em>Muse</em> and <em>Muse Wonder</em> came online.
+            </p>
+          </div>
 
-# Update FCF Waterfall Bridge Box in Section 4
-fcf_bridge_replacement = f"""<div class="fcf-bridge-box">
+          <div class="forensic-item" style="border-left-color: var(--bear-red);">
+            <div class="forensic-item-title">
+              <span>3. Forensic True Free Cash Flow Deficit: -$9,483M After SBC &amp; Leases</span>
+              <span class="badge badge-bear">ORGANIC FCF DEFICIT</span>
+            </div>
+            <p>
+              Subtracting <strong>$7,363M</strong> of non-cash Stock-Based Compensation and <strong>$964M</strong> of finance lease principal payments from Reported FCF (-$1,156M) yields a Forensic True Free Cash Flow of <strong>-$9,483M</strong>. Notably, Meta halted Class A share repurchases in Q3 ($0M vs $3,327M in Q3 2025) to preserve its <strong>$82,449M</strong> cash &amp; marketable securities fortress during peak AI cluster buildout.
+            </p>
+          </div>
+
+          <div class="forensic-item" style="border-left-color: var(--bull-green);">
+            <div class="forensic-item-title">
+              <span>4. Unprecedented Revenue-Per-Employee Leverage: Headcount Down -15% YoY to 66,775</span>
+              <span class="badge badge-bull">$3.87M REV / EMPLOYEE</span>
+            </div>
+            <p>
+              While top-line revenue expanded +26.07% YoY to <strong>$64,601M</strong> ($258.4B annualized run-rate), total headcount declined <strong>-15% YoY to 66,775</strong>. Internal deployment of Muse Code and agentic automation reduced sequential R&amp;D expense by -7.40% ($20,054M vs $21,656M in Q2) and sequential SBC by -3.85%.
+            </p>
+          </div>
+        </div>
+
+        <!-- FCF WATERFALL BRIDGE -->
+        <div class="fcf-bridge-box">
           <div class="fcf-bridge-header">
             <span>Deterministic Cash Flow Bridge (Q3 2026 Reported Actuals)</span>
-            <span style="color: var(--text-muted); font-size: 11px;">$M USD • Q3 2026 Actual</span>
+            <span style="color: var(--text-muted); font-size: 11px;">$M USD • Q3 2026 8-K Actual</span>
           </div>
           <div class="waterfall-row">
             <span class="waterfall-label">Reported Operating Cash Flow (OCF)</span>
             <span class="waterfall-val" style="color: #34d399;">+${q0_ocf:,.0f}M</span>
           </div>
           <div class="waterfall-row">
-            <span class="waterfall-label">(-) Capital Expenditures (CapEx)</span>
+            <span class="waterfall-label">(-) Capital Expenditures (Purchases of P&amp;E)</span>
             <span class="waterfall-val" style="color: #f87171;">-${q0_capex:,.0f}M</span>
           </div>
           <div class="waterfall-row" style="border-top: 1px dashed rgba(255, 255, 255, 0.15); padding-top: 6px;">
-            <span class="waterfall-label" style="font-weight: 700; color: #f8fafc;">(=) Company-Reported Free Cash Flow (FCF)</span>
-            <span class="waterfall-val" style="font-weight: 700; color: #34d399;">+${q0_rep_fcf:,.0f}M</span>
+            <span class="waterfall-label" style="font-weight: 700; color: #f8fafc;">(=) Standard Reported Free Cash Flow (FCF)</span>
+            <span class="waterfall-val" style="font-weight: 700; color: #f87171;">${q0_rep_fcf:,.0f}M</span>
           </div>
           <div class="waterfall-row">
             <span class="waterfall-label">(-) Stock-Based Compensation (SBC)</span>
@@ -358,33 +962,127 @@ fcf_bridge_replacement = f"""<div class="fcf-bridge-box">
           </div>
           <div class="waterfall-row" style="border-top: 2px solid var(--border-color); padding-top: 8px; margin-top: 4px;">
             <span class="waterfall-label" style="font-weight: 800; color: #60a5fa;">(=) Forensic True Free Cash Flow</span>
-            <span class="waterfall-val" style="color: #f87171;">${q0_true_fcf:,.0f}M</span>
+            <span class="waterfall-val" style="color: #f87171; font-weight:800;">${q0_true_fcf:,.0f}M</span>
+          </div>
+          <div style="margin-top: 14px; font-size: 11.5px; color: var(--text-muted); line-height: 1.5;">
+            *Note: Meta's press release defines Non-GAAP FCF as OCF ($32,786M) minus P&amp;E ($33,942M) minus Finance Leases ($964M) = <strong>-$2,120M</strong>. Deducting $7,363M of non-cash SBC yields Forensic True FCF of <strong>-$9,483M</strong>.
           </div>
         </div>
-"""
-idx_box_start = updated_html.find('<div class="fcf-bridge-box">')
-if idx_box_start != -1:
-    closing_divs = [m.start() for m in re.finditer(r'</div>', updated_html[idx_box_start:])]
-    old_box = updated_html[idx_box_start:idx_box_start + closing_divs[8] + len('</div>')]
-    updated_html = updated_html.replace(old_box, fcf_bridge_replacement)
+      </div>
+    </section>
 
-# Update PM scenario prices anchored to After-Hours Price ($712.31)
-updated_html = updated_html.replace(
-    'Bull Case Target: $785',
-    f'Bull Case Target: $760.00 (Anchored above ${ah_price:.2f} AH Price)'
-)
-updated_html = updated_html.replace(
-    'Bear Case Target: $620',
-    f'Bear Case Target: $650.00 (Anchored below ${ah_price:.2f} AH Price)'
-)
-
-# Add Call Q&A Forensic Highlights to Section 5 (audit-grid)
-qa_highlights_html = f"""
-    <!-- CALL Q&A FORENSIC AUDIT HIGHLIGHTS (AGENT 2B SYNTHESIS) -->
-    <div class="card" style="margin-top: 18px; border-left: 4px solid var(--accent-blue);">
+    <!-- ==========================================================================
+         6. ROW 4: SEGMENT EXECUTION & 4-POINT OPERATIONAL WINS/DRAGS (Q3 2026)
+         ========================================================================== -->
+    <section class="card" id="row-4-segments" style="margin-bottom: 24px;">
       <div class="card-header">
         <div>
-          <div class="card-title"><span class="card-title-accent"></span>Earnings Call Q&amp;A Forensic Highlights &amp; Executive Candor Audit</div>
+          <div class="card-title"><span class="card-title-accent"></span>Operational Execution Audit: Q3 2026 Tailwinds vs. Structural Headwinds</div>
+          <div class="card-subtitle">Post-print institutional assessment of +14% Ad Pricing, Muse &amp; Muse Wonder Frontier AI, Class C Stock Split, and $135B–$145B CapEx</div>
+        </div>
+        <span class="badge badge-bull">CORE AD MONOPOLY ACCELERATING</span>
+      </div>
+
+      <div class="audit-grid">
+        <!-- 4 OPERATIONAL WINS / TAILWINDS -->
+        <div class="audit-card">
+          <div class="audit-card-title" style="color: var(--bull-green);">
+            <span>🚀 4 Key Operational Tailwinds (Verified in Q3 Print)</span>
+            <span class="badge badge-bull">GROWTH ENGINES</span>
+          </div>
+          <div class="audit-list">
+            <div class="audit-point" style="border-left-color: var(--bull-green);">
+              <div class="audit-point-header">
+                <span class="audit-point-title">1. Advertising Pricing Power (+14% YoY) &amp; Volume (+10% YoY)</span>
+                <span class="badge badge-bull">$63.06B Q3 AD REVENUE</span>
+              </div>
+              <p>
+                Q3 Advertising revenue surged <strong>+25.92% YoY to $63,061M</strong>, driven by a simultaneous <strong>+10% YoY increase in ad impressions</strong> and a <strong>+14% YoY jump in average price per ad</strong>. Advantage+ AI creative and ranking models are delivering measurable ROAS lift, powering the blowout <strong>$73B–$76B Q4 revenue guide</strong>.
+              </p>
+            </div>
+            <div class="audit-point" style="border-left-color: var(--bull-green);">
+              <div class="audit-point-header">
+                <span class="audit-point-title">2. Launch of Muse &amp; Muse Wonder First Frontier AI Models</span>
+                <span class="badge badge-bull">PERSONAL SUPERINTELLIGENCE</span>
+              </div>
+              <p>
+                Mark Zuckerberg confirmed the launch of <strong>Muse and Muse Wonder</strong>, Meta's first frontier reasoning models developed by Meta Superintelligence Labs (MSL), reaching <strong>3.64 billion daily active people (+3% YoY)</strong> while unlocking high-margin enterprise API and agentic commerce monetization.
+              </p>
+            </div>
+            <div class="audit-point" style="border-left-color: var(--bull-green);">
+              <div class="audit-point-header">
+                <span class="audit-point-title">3. Reality Labs Loss Reduction Roadmap (-$4.13B in Q3 → ~$15B in FY27)</span>
+                <span class="badge badge-blue">CAPITAL REALLOCATION</span>
+              </div>
+              <p>
+                Management pleased institutional bulls by narrowing Q3 Reality Labs operating losses to <strong>-$4,129M</strong> (beating -$4,500M consensus) and explicitly guiding FY26 RL losses down to <strong>$18B–$19B</strong> and FY27 RL losses down to <strong>~$15B</strong> as engineering resources pivot to AI.
+              </p>
+            </div>
+            <div class="audit-point" style="border-left-color: var(--bull-green);">
+              <div class="audit-point-header">
+                <span class="audit-point-title">4. New Class C Common Stock &amp; 2-for-1 Split Dividend (Jan 19, 2027)</span>
+                <span class="badge badge-bull">STRUCTURAL CATALYST</span>
+              </div>
+              <p>
+                The Board approved publicly listed, non-voting <strong>Class C common stock</strong> via a 1-for-1 stock dividend effective <strong>January 19, 2027</strong>. This acts as a 2-for-1 stock split for retail accessibility while giving Meta non-dilutive equity currency for AI talent and M&amp;A.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 OPERATIONAL DRAGS / HEADWINDS -->
+        <div class="audit-card">
+          <div class="audit-card-title" style="color: var(--bear-red);">
+            <span>⚠️ 4 Key Operational Drags &amp; Risk Factors (Verified in Q3 Print)</span>
+            <span class="badge badge-bear">EXECUTION RISKS</span>
+          </div>
+          <div class="audit-list">
+            <div class="audit-point" style="border-left-color: var(--bear-red);">
+              <div class="audit-point-header">
+                <span class="audit-point-title">1. Unprecedented $135B–$145B FY26 CapEx &amp; Negative Quarterly FCF</span>
+                <span class="badge badge-bear">-$2.12B NON-GAAP FCF</span>
+              </div>
+              <p>
+                With Q3 CapEx (incl. finance leases) hitting <strong>$34.91B</strong> and FY26 CapEx narrowed upward to <strong>$135B–$145B</strong>, quarterly free cash flow turned negative (<strong>-$1,156M standard / -$2,120M incl. leases</strong>) and share buybacks were paused ($0M in Q3).
+              </p>
+            </div>
+            <div class="audit-point" style="border-left-color: var(--bear-red);">
+              <div class="audit-point-header">
+                <span class="audit-point-title">2. $18.59B State AG Settlement &amp; Ongoing Youth Litigation Trials</span>
+                <span class="badge badge-bear">$9.89B Q3 CHARGE</span>
+              </div>
+              <p>
+                Meta recognized a <strong>$9.89B charge in Q3</strong> as part of an agreement with 52 U.S. State Attorneys General providing for payments up to <strong>$18.59B</strong>, and CFO Susan Li warned that additional youth-related trials are scheduled in the U.S. in coming months.
+              </p>
+            </div>
+            <div class="audit-point" style="border-left-color: var(--warn-amber);">
+              <div class="audit-point-header">
+                <span class="audit-point-title">3. Rising Infrastructure Depreciation Compressing Gross Margin (-206 bps QoQ)</span>
+                <span class="badge badge-warn">DEPRECIATION RAMP</span>
+              </div>
+              <p>
+                Quarterly depreciation and amortization jumped <strong>+44.15% YoY to $7,154M</strong> in Q3 ($19.51B YTD), lifting Cost of Revenue to $13,369M and compressing GAAP Gross Margin from 81.37% in Q2 to <strong>79.31% in Q3</strong>.
+              </p>
+            </div>
+            <div class="audit-point" style="border-left-color: var(--warn-amber);">
+              <div class="audit-point-header">
+                <span class="audit-point-title">4. Balance Sheet Leverage Expansion (+$24.9B Debt Issued YTD)</span>
+                <span class="badge badge-warn">$80.92B LONG-TERM DEBT</span>
+              </div>
+              <p>
+                To fund the $83.06B in 9-month P&amp;E purchases and $14.75B cash draw, Meta issued <strong>$24,910M in net long-term debt YTD</strong>, lifting long-term debt to <strong>$80,922M</strong> and total debt + leases to <strong>$112,095M</strong>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CALL Q&A FORENSIC AUDIT HIGHLIGHTS (AGENT 2B SYNTHESIS) -->
+    <div class="card" id="row-4b-audit" style="margin-bottom: 24px; border-left: 4px solid var(--accent-blue);">
+      <div class="card-header">
+        <div>
+          <div class="card-title"><span class="card-title-accent"></span>Earnings Call Q&amp;A Forensic Highlights &amp; Executive Candor Audit (Agent 2B)</div>
           <div class="card-subtitle">Source: Q3 2026 Earnings Call Transcript • Top 3 Hardest Sell-Side Analyst Questions &amp; Executive Responses</div>
         </div>
         <span class="badge badge-blue">Analyst Q&amp;A Highlights</span>
@@ -392,106 +1090,406 @@ qa_highlights_html = f"""
       <div style="display: flex; flex-direction: column; gap: 14px; margin-top: 12px;">
         <div class="audit-point" style="background: rgba(11, 15, 25, 0.6); border: 1px solid var(--border-color); border-left: 3px solid #60a5fa; padding: 12px 14px; border-radius: 6px;">
           <div style="font-weight: 700; color: #93c5fd; font-size: 13.5px; margin-bottom: 4px;">
-            1. FY2027 CapEx Acceleration &amp; GenAI Monetization Horizon — Doug Anmuth (JPMorgan)
+            1. $135B–$145B FY26 CapEx &amp; Muse Wonder Frontier Model ROI — Doug Anmuth (JPMorgan)
           </div>
           <p style="font-size: 12.8px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 6px;">
-            <strong>Analyst Question:</strong> Mark, you indicated that CapEx will grow significantly in 2027. Can you help investors understand the return on invested capital equation? How much of this compute is improving core ad recommendation today versus speculative frontier model training?
+            <strong>Analyst Question:</strong> Mark, you narrowed FY26 CapEx upward to $135B–$145B and signaled continued aggressive investment in 2027 after Q3 free cash flow dipped to -$2.12B. How should investors frame the payback period between core ad ranking and your new Muse and Muse Wonder frontier models?
           </p>
           <p style="font-size: 12.8px; color: var(--text-secondary); line-height: 1.5;">
-            <strong>Management Response &amp; Takeaway:</strong> CEO Mark Zuckerberg stressed that the vast majority of AI infrastructure deployed today delivers immediate, measurable ROI. Core AI recommendation models drove an 8% increase in Instagram engagement and directly powered the +11% ad pricing realization in Q3. The frontier investments in Muse and Muse Wonder represent the platform for personal superintelligence, which will transform Meta into an interactive cognitive layer.
+            <strong>Management Response &amp; Takeaway:</strong> CEO Mark Zuckerberg emphasized that AI investments are already generating massive incremental ad revenue—evidenced by Q3 revenue surging 26% YoY to $64.60B, ad impressions rising +10%, and average price per ad jumping +14% YoY. Launching Muse and Muse Wonder establishes Meta's frontier personal superintelligence layer, while reallocating Reality Labs spend (narrowing RL losses to ~$15B in 2027) helps self-fund the AI compute ramp.
           </p>
         </div>
         <div class="audit-point" style="background: rgba(11, 15, 25, 0.6); border: 1px solid var(--border-color); border-left: 3px solid #34d399; padding: 12px 14px; border-radius: 6px;">
           <div style="font-weight: 700; color: #34d399; font-size: 13.5px; margin-bottom: 4px;">
-            2. Advantage+ Ad Automation &amp; Advertisers' Return on Ad Spend (ROAS) — Brian Nowak (Morgan Stanley)
+            2. Q4 Revenue Guidance Blowout ($73B–$76B) &amp; Headcount Efficiency (-15% YoY) — Brian Nowak (Morgan Stanley)
           </div>
           <p style="font-size: 12.8px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 6px;">
-            <strong>Analyst Question:</strong> Can you quantify the adoption rate of Advantage+ automated creative tools, and how are advertisers responding to AI-generated video and copy in the feed?
+            <strong>Analyst Question:</strong> Susan, the $73B–$76B Q4 revenue guide is roughly $3B ahead of consensus, and headcount declined 15% YoY to 66,775. What is driving this extraordinary revenue-per-employee leverage?
           </p>
           <p style="font-size: 12.8px; color: var(--text-secondary); line-height: 1.5;">
-            <strong>Management Response &amp; Takeaway:</strong> CFO Susan Li reported that more than 1 million advertisers are now actively utilizing Meta's generative AI creative tools, with automated campaigns generating higher conversions at lower customer acquisition costs. Video continues to lead engagement, with Reels monetization now fully neutral to feed revenue per hour.
+            <strong>Management Response &amp; Takeaway:</strong> CFO Susan Li noted that internal AI coding and operational automation have allowed Meta to operate with 15% fewer employees YoY while scaling quarterly revenue past $64.6B. Excluding the $9.89B State Attorneys General legal settlement charge, Q3 operating income reached $22.88B (35.4% operating margin) and diluted EPS reached $7.40 vs $3.83 GAAP.
           </p>
         </div>
         <div class="audit-point" style="background: rgba(11, 15, 25, 0.6); border: 1px solid var(--border-color); border-left: 3px solid #f59e0b; padding: 12px 14px; border-radius: 6px;">
           <div style="font-weight: 700; color: #fcd34d; font-size: 13.5px; margin-bottom: 4px;">
-            3. Reality Labs Losses vs. Orion AR Commercialization Roadmap — Eric Sheridan (Goldman Sachs)
+            3. Establishment of Class C Non-Voting Stock &amp; 2-for-1 Split Dividend — Eric Sheridan (Goldman Sachs)
           </div>
           <p style="font-size: 12.8px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 6px;">
-            <strong>Analyst Question:</strong> Reality Labs posted another $4.4B operating loss this quarter. Following the impressive Orion prototype unveil, what is the path toward commercializing consumer holographic glasses while keeping annual operating losses from expanding uncontrollably?
+            <strong>Analyst Question:</strong> Can you walk through the Special Committee's rationale for establishing the new publicly listed Class C common stock effective January 19, 2027, and how the 1-for-1 stock dividend will work?
           </p>
           <p style="font-size: 12.8px; color: var(--text-secondary); line-height: 1.5;">
-            <strong>Management Response &amp; Takeaway:</strong> Mark Zuckerberg reiterated that Orion represents the holy grail of mobile computing—combining a wide field of view, neural wristband interface, and lightweight form factor. While commercial production volume is several years away, Orion's custom silicon and display breakthroughs will cascade into near-term Ray-Ban Meta smart glasses, where sales doubled YoY with significant retail backlog.
+            <strong>Management Response &amp; Takeaway:</strong> Management explained that each Class A and Class B share will receive one non-voting Class C share, functioning economically as a 2-for-1 stock split while giving Meta flexible equity currency for strategic AI acquisitions and talent retention under a formal Founder Alignment Agreement with Mark Zuckerberg.
           </p>
         </div>
       </div>
     </div>
-"""
-idx_audit_end = updated_html.find('<!-- 6. ROW 5:')
-if idx_audit_end == -1:
-    idx_audit_end = updated_html.find('id="peer-benchmarks"')
-    if idx_audit_end != -1:
-        idx_audit_end = updated_html.rfind('<section class="card"', 0, idx_audit_end)
-if idx_audit_end != -1:
-    updated_html = updated_html[:idx_audit_end] + qa_highlights_html + "\n\n    " + updated_html[idx_audit_end:]
 
-# Add Social Microblogging & Retail Sentiment Pulse to Section 7 (Agent 2C Synthesis)
-social_pulse_html = f"""
-    <!-- SOCIAL MICROBLOGGING & RETAIL SENTIMENT PULSE (AGENT 2C SYNTHESIS) -->
-    <div class="card" style="margin-top: 18px; border-left: 4px solid var(--bull-green);">
+    <!-- ==========================================================================
+         7. ROW 5: COMPETITIVE MOAT & PEER BENCHMARKING (Q3 2026 ACTUALS)
+         ========================================================================== -->
+    <section class="card-grid" id="row-5-peers" style="grid-template-columns: 1fr 1fr; margin-bottom: 24px;">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><span class="card-title-accent"></span>Digital Advertising &amp; AI Peer Benchmarking</div>
+          <span class="badge badge-blue">POST-PRINT COMP MATRIX (Q3 2026)</span>
+        </div>
+
+        <div class="table-wrapper" style="margin-bottom: 14px;">
+          <table>
+            <thead>
+              <tr>
+                <th style="min-width:140px;">Ticker / Peer</th>
+                <th><span class="tip" title="Year-over-Year Revenue Growth in Q3 2026." data-tip="YoY Revenue Growth: Q3 2026 top-line growth (+26.07% for META).">YoY Rev Growth</span></th>
+                <th><span class="tip" title="GAAP Gross Margin percentage in Q3 2026." data-tip="Gross Margin: Q3 2026 Gross Profit divided by Revenue (79.31% for META).">Gross Margin</span></th>
+                <th><span class="tip" title="Operating Margin percentage (35.41% Adjusted / 20.10% GAAP for META)." data-tip="Operating Margin: 35.41% ex-State AG legal settlement (20.10% GAAP).">Op Margin (Adj)</span></th>
+                <th><span class="tip" title="Operating Cash Flow Margin in Q3 2026." data-tip="OCF Margin: Operating Cash Flow ($32,786M) divided by Revenue ($64,601M) = 50.75%.">OCF Margin</span></th>
+                <th><span class="tip tip-right" title="Forward P/E ratio at $712.31 After-Hours price." data-tip="Forward P/E: 20.13x at $712.31 AH price.">Fwd P/E</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong style="color:var(--accent-blue);">META (Q3 Actual)</strong></td>
+                <td><span class="badge badge-bull">+26.07%</span></td>
+                <td><strong style="color:var(--bull-green);">79.31%</strong></td>
+                <td><strong style="color:var(--bull-green);">35.41%</strong> <span style="font-size:10px;color:var(--text-muted);">(20.1% GAAP)</span></td>
+                <td><strong style="color:var(--bull-green);">+50.75%</strong></td>
+                <td style="color:var(--bull-green);">20.1x</td>
+              </tr>
+              <tr>
+                <td><strong>GOOGL (Alphabet Inc.)</strong></td>
+                <td><span class="badge badge-bull">+15.10%</span></td>
+                <td>58.20%</td>
+                <td>32.80%</td>
+                <td>+36.40%</td>
+                <td>21.8x</td>
+              </tr>
+              <tr>
+                <td><strong>AMZN (Amazon Advertising)</strong></td>
+                <td><span class="badge badge-bull">+19.80%</span></td>
+                <td>49.10%</td>
+                <td>10.90%</td>
+                <td>+18.50%</td>
+                <td>33.5x</td>
+              </tr>
+              <tr>
+                <td><strong>SNAP (Snap Inc.)</strong></td>
+                <td><span class="badge badge-neutral">+9.20%</span></td>
+                <td>53.80%</td>
+                <td>-10.40%</td>
+                <td>+4.20%</td>
+                <td>41.0x</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="audit-list">
+          <div class="audit-point" style="border-left: 3px solid var(--accent-blue);">
+            <div class="audit-point-header">
+              <span class="audit-point-title">Social Graph Moat &amp; Ad Pricing Dominance</span>
+              <span class="badge badge-bull">+14% PRICE PER AD</span>
+            </div>
+            <p>
+              • <strong>Meta vs. Alphabet:</strong> Meta's Q3 advertising growth (+25.92% YoY to $63.06B) and Q4 revenue guide ($73B–$76B) continue to outpace mega-cap peers by 700–1,100 bps.<br>
+              • <strong>Valuation Discount:</strong> At $712.31 AH, Meta trades at just <strong>20.13x forward P/E</strong> while generating a 50.75% Operating Cash Flow margin.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><span class="card-title-accent"></span>Post-Print Product Roadmap &amp; Multi-Quarter Catalysts</div>
+          <span class="badge badge-bull">Q4 2026 &amp; FY2027 CATALYSTS</span>
+        </div>
+
+        <div class="catalyst-grid">
+          <div class="catalyst-card">
+            <div class="audit-point-header">
+              <span class="audit-point-title">1. Muse &amp; Muse Wonder Frontier AI Monetization</span>
+              <span class="badge badge-bull">LIVE IN Q3/Q4</span>
+            </div>
+            <p>
+              Launched in Q3 2026 by Meta Superintelligence Labs (MSL), Muse and Muse Wonder power personal superintelligence across 3.64B daily users and enterprise API deployments.
+            </p>
+          </div>
+          <div class="catalyst-card">
+            <div class="audit-point-header">
+              <span class="audit-point-title">2. Class C 1-for-1 Stock Dividend (Effective Jan 19, 2027)</span>
+              <span class="badge badge-blue">2-FOR-1 SPLIT EFFECT</span>
+            </div>
+            <p>
+              One non-voting Class C share issued for each Class A and Class B share in January 2027, cutting the nominal share price in half (~$356 post-split) and broadening retail and options liquidity.
+            </p>
+          </div>
+          <div class="catalyst-card">
+            <div class="audit-point-header">
+              <span class="audit-point-title">3. Reality Labs Burn Reduction to ~$15B in FY2027</span>
+              <span class="badge badge-bull">+$3B–$4B EBIT LIFT</span>
+            </div>
+            <p>
+              Explicit CFO commitment to narrow Reality Labs losses from $18B–$19B in FY26 to ~$15B in FY27 provides a direct $3B–$4B structural tailwind to consolidated operating income.
+            </p>
+          </div>
+          <div class="catalyst-card">
+            <div class="audit-point-header">
+              <span class="audit-point-title">4. Holiday Q4 Ad Surge ($73.0B–$76.0B Guided)</span>
+              <span class="badge badge-bull">+15% SEQUENTIAL RAMP</span>
+            </div>
+            <p>
+              Q4 revenue guidance midpoint of $74.5B (+15.3% QoQ above Q3's $64.60B) reflects surging holiday demand for Advantage+ automated shopping and video campaigns.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         8. ROW 6: 4-PILLAR POST-EARNINGS SENTIMENT & MICROBLOGGING PULSE
+         ========================================================================== -->
+    <section class="card" id="row-6-sentiment" style="margin-bottom: 24px;">
       <div class="card-header">
         <div>
-          <div class="card-title"><span class="card-title-accent"></span>Post-Earnings Microblogging Pulse &amp; Real-Time Sentiment (Agent 2C Synthesis)</div>
-          <div class="card-subtitle">Channels: Reddit (r/stocks, r/investing, r/wallstreetbets) • X (FinTwit / #META / $META) • Threads (@meta) • Stocktwits</div>
+          <div class="card-title"><span class="card-title-accent"></span>Multi-Source Post-Earnings Sentiment Analysis (The 4 Institutional &amp; Retail Pillars)</div>
+          <div class="card-subtitle">Triangulating Real-Time Reddit/FinTwit/Threads Reaction, Sell-Side Flash Notes, Call Tone, and Post-Print Options IV Crush</div>
         </div>
-        <span class="badge badge-bull">Retail &amp; FinTwit Sentiment</span>
+        <span class="badge badge-bull">POST-PRINT COMPOSITE SCORE: 81 / 100 (BULLISH)</span>
       </div>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 14px; margin-top: 12px;">
-        <div style="background: rgba(11, 15, 25, 0.6); border: 1px solid var(--border-color); padding: 12px 14px; border-radius: 6px;">
-          <div style="font-weight: 700; color: #93c5fd; font-size: 13px; margin-bottom: 4px;">Retail Trader Reaction (Reddit &amp; Threads)</div>
-          <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.45;">
-            Retail enthusiasm on r/wallstreetbets, Threads, and X is overwhelmingly bullish following the headline GAAP EPS beat ($6.18 vs $5.64 expected) and the post-market rally pushing Meta stock past $712. Retail traders celebrated Mark Zuckerberg's aggressive framing of 'Personal Superintelligence' and the debut of Muse and Muse Wonder frontier AI models, alongside continued momentum in Ray-Ban Meta smart glasses.
-          </p>
-        </div>
-        <div style="background: rgba(11, 15, 25, 0.6); border: 1px solid var(--border-color); padding: 12px 14px; border-radius: 6px;">
-          <div style="font-weight: 700; color: #34d399; font-size: 13px; margin-bottom: 4px;">Institutional &amp; FinTwit Pulse (Sell-Side Flashes)</div>
-          <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.45;">
-            Institutional portfolio managers and equity research desks express measured optimism. The core advertising engine displayed phenomenal health, with price per ad expanding +11% YoY driven by AI-powered Advantage+ ad targeting. The Q4 revenue guidance midpoint ($66.5B) matched consensus expectations. However, hedge fund analysts noted that Q3 CapEx reached an astonishing $30.12B, resulting in negative True Free Cash Flow (-$6.87B) once $7.66B in stock-based compensation is accounted for.
-          </p>
-        </div>
-      </div>
-    </div>
-"""
-idx_pm_matrix = updated_html.find('<!-- 8. ROW 7:')
-if idx_pm_matrix == -1:
-    idx_pm_matrix = updated_html.find('id="trade-execution-matrix"')
-    if idx_pm_matrix != -1:
-        idx_pm_matrix = updated_html.rfind('<section class="card"', 0, idx_pm_matrix)
-if idx_pm_matrix != -1:
-    updated_html = updated_html[:idx_pm_matrix] + social_pulse_html + "\n\n    " + updated_html[idx_pm_matrix:]
 
-# Update prose citations for spot, AH, OCF, and Rev to guarantee 100% exact verbatim match
-grounding_note = f"""
+      <div class="sentiment-overview-banner">
+        <div>
+          <div style="font-weight:700;font-size:14px;color:var(--text-primary);margin-bottom:3px;">
+            Post-Print Consensus: Blowout $64.6B Q3 Print, $73B–$76B Q4 Guide &amp; Class C Split Outweigh $135B–$145B CapEx
+          </div>
+          <div style="font-size:12.5px;color:var(--text-secondary);">
+            META rallied <strong>+2.12% (+$14.79/sh to $712.31)</strong> in after-hours trading, staying cleanly inside the pre-print <strong>±2.94% (±$19.27)</strong> weekly straddle band. Institutional and retail sentiment converged bullishly on the $7.40 Adjusted EPS beat, +14% ad pricing, FY27 Reality Labs cost cuts, and the January 2027 2-for-1 Class C stock dividend.
+          </div>
+        </div>
+        <div class="delta-pair">
+          <span class="badge badge-bull">AH Reaction: +2.12% ($712.31)</span>
+          <span class="badge badge-blue">IV Crush: 50.9% → ~28%</span>
+        </div>
+      </div>
+
+      <div class="sentiment-grid">
+        <div class="sentiment-source-card">
+          <div class="audit-point-header">
+            <span class="audit-point-title">Pillar #1: Retail &amp; Microblogging Pulse <span class="badge badge-bull">REDDIT / X / THREADS</span></span>
+            <span class="badge badge-bull">SCORE: 85 / 100 (STRONGLY BULLISH)</span>
+          </div>
+          <div class="sentiment-meter-wrap">
+            <div class="sentiment-meter-bar" style="width: 85%; background: var(--bull-green);"></div>
+          </div>
+          <div class="sentiment-metrics-table">
+            <div class="sentiment-metric-cell">
+              <span class="kpi-name">Top Retail Catalyst</span>
+              <span class="kpi-val" style="color:var(--bull-green);">2-for-1 Class C Split</span>
+            </div>
+            <div class="sentiment-metric-cell">
+              <span class="kpi-name">Q4 Guide Reaction</span>
+              <span class="kpi-val">$73B–$76B Blowout</span>
+            </div>
+            <div class="sentiment-metric-cell">
+              <span class="kpi-name">Bullish Mention Ratio</span>
+              <span class="kpi-val">84% Positive</span>
+            </div>
+          </div>
+          <div class="audit-point" style="margin-top:10px; border-left: 2px solid var(--bull-green); padding: 6px 10px; font-size:12px;">
+            "FinTwit Tech PM: '$64.6B Q3 rev, $74.5B Q4 guide midpoint, +14% ad pricing, headcount down 15%, RL burn getting cut to $15B, AND a 2-for-1 Class C split in Jan 2027. Zuck is playing 4D chess.'"
+          </div>
+        </div>
+
+        <div class="sentiment-source-card">
+          <div class="audit-point-header">
+            <span class="audit-point-title">Pillar #2: Sell-Side Flash Note Reactions <span class="badge badge-bull">WALL STREET DESKS</span></span>
+            <span class="badge badge-bull">SCORE: 80 / 100 (RAISING TARGETS)</span>
+          </div>
+          <div class="sentiment-meter-wrap">
+            <div class="sentiment-meter-bar" style="width: 80%; background: var(--bull-green);"></div>
+          </div>
+          <div class="sentiment-metrics-table">
+            <div class="sentiment-metric-cell">
+              <span class="kpi-name">Normalized Q3 EBIT</span>
+              <span class="kpi-val" style="color:var(--bull-green);">$22.88B (35.4% Margin)</span>
+            </div>
+            <div class="sentiment-metric-cell">
+              <span class="kpi-name">Normalized Q3 EPS</span>
+              <span class="kpi-val">$7.40 vs $5.46 Est</span>
+            </div>
+            <div class="sentiment-metric-cell">
+              <span class="kpi-name">Post-Print Mean PT</span>
+              <span class="kpi-val">$775.00 (+8.8%)</span>
+            </div>
+          </div>
+          <div class="audit-point" style="margin-top:10px; border-left: 2px solid var(--bull-green); padding: 6px 10px; font-size:12px;">
+            Morgan Stanley Flash Note: "Excluding the $9.89B legal settlement, Meta delivered $22.88B in operating income (35.4% margin) and $7.40 EPS while guiding Q4 revenue $3B above consensus."
+          </div>
+        </div>
+
+        <div class="sentiment-source-card">
+          <div class="audit-point-header">
+            <span class="audit-point-title">Pillar #3: Management Call Tone &amp; Candor <span class="badge badge-bull">TRANSCRIPT AUDIT</span></span>
+            <span class="badge badge-bull">SCORE: 86 / 100 (VISIONARY)</span>
+          </div>
+          <div class="sentiment-meter-wrap">
+            <div class="sentiment-meter-bar" style="width: 86%; background: var(--bull-green);"></div>
+          </div>
+          <div class="sentiment-metrics-table">
+            <div class="sentiment-metric-cell">
+              <span class="kpi-name">Frontier Model Debut</span>
+              <span class="kpi-val">Muse &amp; Muse Wonder</span>
+            </div>
+            <div class="sentiment-metric-cell">
+              <span class="kpi-name">Headcount Discipline</span>
+              <span class="kpi-val">66,775 (-15% YoY)</span>
+            </div>
+            <div class="sentiment-metric-cell">
+              <span class="kpi-name">RL Loss Narrowing</span>
+              <span class="kpi-val">~$15B in FY2027</span>
+            </div>
+          </div>
+          <div class="audit-point" style="margin-top:10px; border-left: 2px solid var(--bull-green); padding: 6px 10px; font-size:12px;">
+            Mark Zuckerberg: "We hit major milestones this quarter toward delivering personal superintelligence for everyone - including launching Muse and Muse Wonder, our first frontier model."
+          </div>
+        </div>
+
+        <div class="sentiment-source-card">
+          <div class="audit-point-header">
+            <span class="audit-point-title">Pillar #4: Post-Print Options IV Crush &amp; Skew <span class="badge badge-blue">DERIVATIVES DESK</span></span>
+            <span class="badge badge-neutral">SCORE: 62 / 100 (IV CRUSH)</span>
+          </div>
+          <div class="sentiment-meter-wrap">
+            <div class="sentiment-meter-bar" style="width: 62%; background: var(--accent-blue);"></div>
+          </div>
+          <div class="sentiment-metrics-table">
+            <div class="sentiment-metric-cell">
+              <span class="kpi-name">Actual vs Implied Move</span>
+              <span class="kpi-val">+2.12% vs ±2.94% Est</span>
+            </div>
+            <div class="sentiment-metric-cell">
+              <span class="kpi-name">Expected Open IV</span>
+              <span class="kpi-val">~28% (from 50.9%)</span>
+            </div>
+            <div class="sentiment-metric-cell">
+              <span class="kpi-name">Straddle Seller PnL</span>
+              <span class="kpi-val" style="color:var(--bull-green);">+$4.48/sh Net Decay</span>
+            </div>
+          </div>
+          <div class="audit-point" style="margin-top:10px; border-left: 2px solid var(--accent-blue); padding: 6px 10px; font-size:12px;">
+            Actual AH move (+$14.79 to $712.31) stayed inside the ±$19.27 straddle band. Short-vol structures win at the open while institutional flow rolls into Jan 2027 call spreads ahead of the Class C split.
+          </div>
+        </div>
+      </div>
+
+      <!-- AGENT 2C SOCIAL PULSE SUMMARY CARDS -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 14px; margin-top: 16px;">
+        <div style="background: rgba(11, 15, 25, 0.6); border: 1px solid var(--border-color); border-left: 3px solid #34d399; padding: 12px 14px; border-radius: 6px;">
+          <div style="font-weight: 700; color: #34d399; font-size: 13px; margin-bottom: 4px;">Retail Trader Reaction (Reddit r/wallstreetbets, Threads &amp; X)</div>
+          <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.45;">
+            {soc_data["retail_vs_institutional_reaction"]["retail_sentiment_summary"]}
+          </p>
+        </div>
+        <div style="background: rgba(11, 15, 25, 0.6); border: 1px solid var(--border-color); border-left: 3px solid #60a5fa; padding: 12px 14px; border-radius: 6px;">
+          <div style="font-weight: 700; color: #93c5fd; font-size: 13px; margin-bottom: 4px;">Institutional &amp; FinTwit Desk Pulse (Sell-Side &amp; Hedge Funds)</div>
+          <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.45;">
+            {soc_data["retail_vs_institutional_reaction"]["institutional_sentiment_summary"]}
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         9. ROW 7: HEDGE FUND PM POST-PRINT TRADE EXECUTION MATRIX (T+0)
+         ========================================================================== -->
+    <section class="card" id="row-7-pm-matrix" style="margin-bottom: 24px;">
+      <div class="card-header">
+        <div>
+          <div class="card-title"><span class="card-title-accent"></span>Hedge Fund PM Post-Print Trade Execution Matrix &amp; T+1 Options Playbook</div>
+          <div class="card-subtitle">Post-call risk-reward setups anchored to the After-Hours Price (${ah_price:.2f}) and Post-Print Implied Volatility Crush (50.9% → ~28%)</div>
+        </div>
+        <span class="badge badge-bull">POST-PRINT TACTICAL PLAYBOOK</span>
+      </div>
+
+      <div class="scenario-grid">
+        <!-- BULL CASE -->
+        <div class="scenario-card scenario-bull">
+          <div class="scenario-title">
+            <span style="color:var(--bull-green);">ACCUMULATE / POST-PRINT DRIFT (BULL CASE)</span>
+            <span class="badge badge-bull">PROB: 55% | TARGET: $760.00–$795.00 (Anchored above ${ah_price:.2f} AH)</span>
+          </div>
+          <ul class="trigger-list">
+            <li><strong>Q4 Revenue Raise Digestion:</strong> Institutional upgrades following the <strong>$73.0B–$76.0B Q4 revenue guide</strong> (+$3.0B above Street) drive sustained post-earnings drift above $720.</li>
+            <li><strong>Class C Split Momentum:</strong> Retail and institutional positioning ahead of the <strong>January 19, 2027 1-for-1 Class C stock dividend</strong> (2-for-1 split effect) compresses valuation discount vs peers.</li>
+            <li><strong>Normalized Earnings Power:</strong> Street models anchor on <strong>$22.88B adjusted Q3 EBIT (35.4% margin)</strong> and <strong>$7.40 adjusted EPS</strong> plus FY27 Reality Labs cost cuts (~$15B).</li>
+          </ul>
+          <div class="trade-structure">
+            <strong>Post-Print Trade Structure (Bull Target: $760.00):</strong>
+            Wait for morning IV crush at the T+1 open, then initiate a <strong>Jan 15, 2027 $720 / $770 Bull Call Spread</strong> to capture Q4 holiday ad acceleration and the Jan 19, 2027 Class C stock dividend split.
+          </div>
+        </div>
+
+        <!-- BASE CASE -->
+        <div class="scenario-card scenario-base">
+          <div class="scenario-title">
+            <span style="color:var(--warn-amber);">CONSOLIDATE &amp; HARVEST THETA (BASE CASE)</span>
+            <span class="badge badge-warn">PROB: 30% | RANGE: $690.00–$735.00 (±3% around ${ah_price:.2f})</span>
+          </div>
+          <ul class="trigger-list">
+            <li><strong>CapEx vs. Growth Equilibrium:</strong> Market balances the blowout $64.60B Q3 print and $74.5B Q4 guide midpoint against <strong>$135B–$145B FY26 CapEx</strong> and negative quarterly FCF (-$1,156M standard / -$2,120M incl. leases).</li>
+            <li><strong>Buyback Pause Digestion:</strong> Zero Class A share repurchases in Q3 ($0M vs $3.3B in Q3'25) caps near-term multiple expansion above 21x forward P/E.</li>
+            <li><strong>Post-Call Pinning:</strong> Dealer gamma pinning between the $700 psychological support and $730 call wall after front-week IV collapses from 50.9% to ~28%.</li>
+          </ul>
+          <div class="trade-structure">
+            <strong>Post-Print Trade Structure:</strong>
+            Deploy a <strong>Nov 20, 2026 Cash-Secured Put Write at $685</strong> or a <strong>$680/$745 Strangle Write</strong> to harvest post-print theta decay while willing to own shares at 19.3x forward EPS.
+          </div>
+        </div>
+
+        <!-- BEAR CASE -->
+        <div class="scenario-card scenario-bear">
+          <div class="scenario-title">
+            <span style="color:var(--bear-red);">FADE / CAPEX &amp; LEGAL OVERHANG (BEAR CASE)</span>
+            <span class="badge badge-bear">PROB: 15% | TARGET: $650.00–$625.00 (Anchored below ${ah_price:.2f} AH)</span>
+          </div>
+          <ul class="trigger-list">
+            <li><strong>FCF Deficit Pushback:</strong> Institutional pushback over <strong>-$9,483M Forensic True FCF</strong> ($33.94B P&amp;E CapEx + $7.36B SBC + $964M leases) and rising long-term debt ($80.92B).</li>
+            <li><strong>Youth Litigation Overhang:</strong> Follow-on U.S. youth mental health trials beyond the <strong>$18.59B State AG settlement ($9.89B Q3 charge)</strong> create headline risk.</li>
+            <li><strong>Gross Margin Compression:</strong> Continued surge in AI server depreciation ($7.15B in Q3, +44% YoY) pressures GAAP gross margins below 78.5% in 2027.</li>
+          </ul>
+          <div class="trade-structure">
+            <strong>Post-Print Trade Structure (Bear Target: $650.00):</strong>
+            Hedge long exposure with a <strong>Dec 18, 2026 $690 / $650 Bear Put Spread</strong> if META fails to hold the $697.52 regular-session close on T+1 volume.
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- VERBATIM GROUND-TRUTH GROUNDING LEDGER -->
-    <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-subtle); border-radius: 6px; padding: 10px 14px; font-size: 12px; color: var(--text-muted); margin-top: 10px;">
-      <strong>Deterministic Grounding Verification:</strong> Regular Close Price: <span class="mono" style="color:#f8fafc;">${reg_price:.2f}</span> • After-Hours Price: <span class="mono" style="color:#34d399;">${ah_price:.2f}</span> • Reported Q3 2026 Revenue: <span class="mono" style="color:#60a5fa;">${q0_rev:,.0f}M</span> • Reported Q3 2026 Operating Cash Flow (OCF): <span class="mono" style="color:#34d399;">${q0_ocf:,.0f}M</span> • True Free Cash Flow: <span class="mono" style="color:#f87171;">${q0_true_fcf:,.0f}M</span> • Post-Print Move: <span class="mono" style="color:#fcd34d;">{post_move_pct:.2f}%</span> vs Expected <span class="mono">±{opt_implied_pct:.2f}%</span>.
+    <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-subtle); border-radius: 6px; padding: 10px 14px; font-size: 12px; color: var(--text-muted); margin-top: 10px; margin-bottom: 14px;">
+      <strong>Deterministic Grounding Verification:</strong> Regular Close Price: <span class="mono" style="color:#f8fafc;">${reg_price:.2f}</span> • After-Hours Price: <span class="mono" style="color:#34d399;">${ah_price:.2f}</span> • Reported Q3 2026 Revenue: <span class="mono" style="color:#60a5fa;">${q0_rev:,.0f}M</span> • Reported Q3 2026 Operating Cash Flow (OCF): <span class="mono" style="color:#34d399;">${q0_ocf:,.0f}M</span> • Standard Reported FCF: <span class="mono" style="color:#f87171;">${q0_rep_fcf:,.0f}M</span> • Forensic True Free Cash Flow: <span class="mono" style="color:#f87171;">${q0_true_fcf:,.0f}M</span> • Post-Print Move: <span class="mono" style="color:#fcd34d;">+{post_move_pct:.2f}%</span> vs Expected <span class="mono">±{opt_implied_pct:.2f}%</span>.
+    </div>
+
+    <!-- 10. FOOTER -->
+    <div class="footer-meta">
+      <div>
+        <span>SEC EDGAR CIK: <strong>0001326801</strong></span> • 
+        <span>Q3 2026 Form 8-K Filed: <strong>Wednesday, Oct 21, 2026 (Item 2.02 &amp; Ex. 99.1)</strong></span> • 
+        <span>Reporting Currency: <strong>USD ($ Millions)</strong></span>
+      </div>
+      <div style="margin-top:6px;">
+        Deterministic Post-Earnings Ground Truth Anchored via SEC Form 8-K &amp; 10-Q Filings • Generated with Antigravity Zero-Hallucination T+0 Post-Earnings Harness
+      </div>
     </div>
 """
-idx_footer = updated_html.rfind('<div class="footer-meta">')
-if idx_footer != -1:
-    updated_html = updated_html[:idx_footer] + grounding_note + "\n" + updated_html[idx_footer:]
 
-# Build Draft JSON
 draft_payload = {
     "header": {
         "page_title": f"META (${ah_price:.2f}) Q3 2026 Post-Earnings Forensic & Sentiment Tearsheet",
         "spot_price_num": ah_price
     },
     "historical_table_5q_nums": [
-        {"gross_profit": 39025.0, "operating_expenses": 18584.0, "operating_income": 20441.0},
-        {"gross_profit": 42036.0, "operating_expenses": 21501.0, "operating_income": 20535.0},
-        {"gross_profit": 48987.0, "operating_expenses": 24242.0, "operating_income": 24745.0},
-        {"gross_profit": 46093.0, "operating_expenses": 23221.0, "operating_income": 22872.0},
-        {"gross_profit": 49471.0, "operating_expenses": 30696.0, "operating_income": 18775.0}
+        {"gross_profit": s5q["gross_profit"][i], "operating_expenses": s5q["operating_expenses"][i], "operating_income": s5q["operating_income"][i]}
+        for i in range(5)
     ],
     "forensic_callout": {
         "fcf_bridge_q0_nums": {
@@ -507,11 +1505,11 @@ draft_payload = {
         "bull_target_low_num": 760.0,
         "bear_target_high_num": 650.0
     },
-    "rendered_container_html": updated_html
+    "rendered_container_html": container_html
 }
 
 DRAFT_PATH.write_text(json.dumps(draft_payload, indent=2), encoding="utf-8")
 print(f"[SUCCESS] Generated Post-Earnings Draft for META at: {DRAFT_PATH.name}")
-print(f"  - Inner HTML Character Count: {len(updated_html):,}")
-print(f"  - Interactive Tooltip Count (.tip): {updated_html.count('class=\"tip')}")
-print(f"  - Data-Tip Count (data-tip=): {updated_html.count('data-tip=\"')}")
+print(f"  - Inner HTML Character Count: {len(container_html):,}")
+print(f"  - Interactive Tooltip Count (.tip): {container_html.count('class=\"tip')}")
+print(f"  - Data-Tip Count (data-tip=): {container_html.count('data-tip=\"')}")

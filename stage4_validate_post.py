@@ -11,6 +11,7 @@ Validates drafts/{TICKER}_{DATE}_post_draft.json against:
 7. Deterministic Accounting Math (Gross Profit - OpEx = EBIT, OCF - CapEx = Rep FCF, True FCF balance)
 8. Prose and value grounding (verbatim After-Hours price, Close price, Revenue, OCF)
 9. PM Strike Sanity (Bull target > After-Hours price > Bear target)
+10. Track A & Track B Guardrails (Rolled Q3 2026 Actual + Q4 2026E headers, zero T-1 bleed-through, Track B widgets)
 Writes audit_logs/{TICKER}_{DATE}_post_validation.json
 """
 
@@ -150,9 +151,9 @@ def validate_post_draft(ticker: str, earnings_date: str) -> dict:
         errors.append(f"Ground-Truth After-Hours Price (${ah_price}) does not appear in rendered HTML.")
     if reg_price and f"{reg_price:.2f}" not in html_body and f"{reg_price}" not in html_body:
         errors.append(f"Ground-Truth Regular Close Price (${reg_price}) does not appear in rendered HTML.")
-    if q0_rev and f"{q0_rev:,.0f}" not in html_body and f"{q0_rev}" not in html_body:
+    if q0_rev and f"{q0_rev:,.0f}" not in html_body and f"{q0_rev}" not in html_body and f"{q0_rev:,.2f}" not in html_body:
         errors.append(f"Ground-Truth Q0 Revenue (${q0_rev}M) does not appear in rendered HTML.")
-    if q0_ocf and f"{q0_ocf:,.0f}" not in html_body and f"{q0_ocf}" not in html_body:
+    if q0_ocf and f"{q0_ocf:,.0f}" not in html_body and f"{q0_ocf}" not in html_body and f"{q0_ocf:,.2f}" not in html_body:
         errors.append(f"Ground-Truth Q0 OCF (${q0_ocf}M) does not appear in rendered HTML.")
 
     # Guardrail 9: PM Strike Sanity
@@ -166,10 +167,22 @@ def validate_post_draft(ticker: str, earnings_date: str) -> dict:
     if bear_target and bear_target >= ref_price:
         errors.append(f"PM Trade Logic Error: Bear target (${bear_target}) must be lower than After-Hours reference price (${ref_price}).")
 
-    # Guardrail 10: Placeholder Detector
-    for bad_token in ["NaN", "undefined", "TODO", "PLACEHOLDER"]:
+    # Guardrail 10: Placeholder Detector & T-1 Bleed-Through Prevention (Track A + Track B)
+    for bad_token in ["NaN", "undefined", "TODO", "PLACEHOLDER", "T-1 PRE-EARNINGS", "VERSION COMPARISON BANNER"]:
         if bad_token in html_body:
-            errors.append(f"Illegal Placeholder Found: '{bad_token}' appears in rendered HTML.")
+            errors.append(f"Illegal Placeholder or T-1 Bleed-Through Found: '{bad_token}' appears in rendered inner HTML.")
+
+    # Guardrail 11: Rolling 5Q Table & Track B Enhancements Verification
+    if '<th class="col-q0">Q3 2026 (Actual)' not in html_body:
+        errors.append("Row 2 5-Quarter Table Error: <th class='col-q0'> must be rolled forward to 'Q3 2026 (Actual)'.")
+    if '<th class="col-est">Q4 2026E' not in html_body:
+        errors.append("Row 2 5-Quarter Table Error: <th class='col-est'> must be rolled forward to 'Q4 2026E'.")
+    if '<th class="col-est">Q3 2026E' in html_body:
+        errors.append("Stale T-1 Table Header Found: '<th class=\"col-est\">Q3 2026E' is still present in Row 2.")
+
+    for tb_class in ["post-jump-nav", "t1-vs-t0-audit", "beat-bar-track", "credibility-gauge-bar"]:
+        if tb_class not in html_body:
+            errors.append(f"Missing Track B Product Enhancement Component: '{tb_class}' missing from rendered HTML.")
 
     passed = len(errors) == 0
     result = {

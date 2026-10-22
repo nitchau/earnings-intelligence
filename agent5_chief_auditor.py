@@ -59,7 +59,7 @@ def audit_rendered_post_html(ticker: str, earnings_date: str) -> dict:
     q0_ocf = truth.get("forensic_fcf_bridge_q0", {}).get("ocf")
     q0_fcf = truth.get("forensic_fcf_bridge_q0", {}).get("true_fcf")
 
-    if q0_rev and f"{q0_rev:,.0f}" not in html_content and f"{q0_rev}" not in html_content:
+    if q0_rev and f"{q0_rev:,.0f}" not in html_content and f"{q0_rev}" not in html_content and f"{q0_rev:,.2f}" not in html_content:
         defects.append(f"Reported Q0 Revenue (${q0_rev}M) missing or mismatched in rendered HTML.")
         route_to = "LAYER_1_DETERMINISTIC"
 
@@ -94,6 +94,21 @@ def audit_rendered_post_html(ticker: str, earnings_date: str) -> dict:
         defects.append(f"Insufficient interactive tooltips: Found {tip_matches}, require >= 18.")
         route_to = "AGENT_4B_FINALIZER"
 
+    # Check 6: Track A & Track B Zero-Bleed & Rolling 5Q Audit
+    if "T-1 PRE-EARNINGS" in html_content:
+        defects.append("T-1 PRE-EARNINGS badge bleed-through detected in T+0 post-earnings tearsheet.")
+        route_to = "AGENT_4B_FINALIZER"
+    if html_content.count("VERSION COMPARISON BANNER") > 1:
+        defects.append("Duplicate VERSION COMPARISON BANNER detected in rendered HTML.")
+        route_to = "AGENT_4B_FINALIZER"
+    if '<th class="col-q0">Q3 2026 (Actual)' not in html_content or '<th class="col-est">Q4 2026E' not in html_content:
+        defects.append("Row 2 5-Quarter table is not rolled forward to Q3 2026 (Actual) + Q4 2026E.")
+        route_to = "LAYER_1_DETERMINISTIC"
+    for tb_cls in ["post-jump-nav", "t1-vs-t0-audit", "beat-bar-track", "credibility-gauge-bar"]:
+        if tb_cls not in html_content:
+            defects.append(f"Missing Track B interactive component: .{tb_cls}")
+            route_to = "AGENT_4B_FINALIZER"
+
     # Final verdict determination
     status = "APPROVED" if not defects else "REJECTED"
     signoff = {
@@ -104,7 +119,7 @@ def audit_rendered_post_html(ticker: str, earnings_date: str) -> dict:
         "route_to": route_to,
         "defects": defects,
         "model_used": "Gemini 3.8 Flash High Standard",
-        "summary": "All 9 sections cross-validated against deterministic ground truth and Layer 2 agent bus." if status == "APPROVED" else f"Rejected with {len(defects)} defects routed to {route_to}."
+        "summary": "All 9 sections + Track A/B upgrades cross-validated against deterministic ground truth and Layer 2 agent bus." if status == "APPROVED" else f"Rejected with {len(defects)} defects routed to {route_to}."
     }
 
     out_file = AUDIT_DIR / f"{ticker}_{earnings_date}_agent5_signoff.json"

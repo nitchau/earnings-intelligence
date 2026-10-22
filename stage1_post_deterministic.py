@@ -15,7 +15,7 @@ import sys
 import re
 import json
 import math
-from datetime import datetime, date, timedelta
+from datetime import datetime, date
 from pathlib import Path
 import requests
 import pandas as pd
@@ -78,7 +78,7 @@ def extract_t1_baseline(ticker: str, earnings_date_str: str) -> dict:
     # 1. Search for matching ground_truth/{TICKER}_{DATE}_truth.json
     gt_file = GROUND_TRUTH_DIR / f"{ticker}_{earnings_date_str}_truth.json"
     if not gt_file.exists():
-        candidates = list(GROUND_TRUTH_DIR.glob(f"{ticker}_*_truth.json"))
+        candidates = [p for p in GROUND_TRUTH_DIR.glob(f"{ticker}_*_truth.json") if not p.name.endswith("_post_truth.json")]
         if candidates:
             candidates.sort(key=lambda p: p.stat().st_mtime, reverse=True)
             gt_file = candidates[0]
@@ -93,7 +93,6 @@ def extract_t1_baseline(ticker: str, earnings_date_str: str) -> dict:
             baseline["atm_straddle_usd"] = safe_float(opt.get("atm_straddle_usd"))
             baseline["consensus_eps_nongaap"] = safe_float(gt_data.get("schedule_verification", {}).get("yahoo_consensus_eps"))
 
-            # Prior quarter header from stitched 5Q
             p_headers = gt_data.get("stitched_5q_financials", {}).get("income_statement_5q", {}).get("period_headers", [])
             if p_headers:
                 baseline["prior_quarter_label"] = p_headers[-1]
@@ -111,7 +110,6 @@ def extract_t1_baseline(ticker: str, earnings_date_str: str) -> dict:
     if t1_html.exists():
         try:
             content = t1_html.read_text(encoding="utf-8", errors="ignore")
-            # Consensus & Whisper Revenue
             m_dual = re.search(r'Consensus Revenue.*?<span class="strip-val">\$([0-9,.]+)\s*([MB])?\s*/\s*\$([0-9,.]+)\s*([MB])?', content, re.DOTALL | re.IGNORECASE)
             if m_dual:
                 u1 = m_dual.group(2) or ('B' if 'B' in m_dual.group(0) else 'M')
@@ -124,7 +122,6 @@ def extract_t1_baseline(ticker: str, earnings_date_str: str) -> dict:
                     u = m_single.group(2) or ('B' if 'B' in m_single.group(0) and float(m_single.group(1).replace(',', '')) < 500 else 'M')
                     baseline["consensus_revenue_millions"] = safe_float(float(m_single.group(1).replace(',', '')) * (1000 if u == 'B' else 1))
 
-            # Consensus & Whisper EPS
             m_eps_dual = re.search(r'Consensus.*?EPS.*?<span class="strip-val">\$([0-9.]+)[^/]*[/\]\s*\$([0-9.]+)\s*Whisper', content, re.DOTALL | re.IGNORECASE)
             if m_eps_dual:
                 baseline["consensus_eps_nongaap"] = safe_float(m_eps_dual.group(1))
@@ -133,12 +130,10 @@ def extract_t1_baseline(ticker: str, earnings_date_str: str) -> dict:
                 m_eps = re.search(r'Consensus.*?EPS.*?<span class="strip-val">\$([0-9.]+)', content, re.DOTALL | re.IGNORECASE)
                 if m_eps:
                     baseline["consensus_eps_nongaap"] = safe_float(m_eps.group(1))
-            # GAAP EPS Est
             m_gaap = re.search(r'GAAP</span>\s*EPS Est:\s*\$([0-9.]+)', content)
             if m_gaap:
                 baseline["consensus_eps_gaap"] = safe_float(m_gaap.group(1))
 
-            # Implied move
             m_move = re.search(r'Options-Implied Move[^<]*</span>[^<]*<span class="strip-val"[^>]*>[^0-9]*([0-9.]+)%', content)
             if m_move and baseline["options_implied_move_pct"] is None:
                 baseline["options_implied_move_pct"] = safe_float(m_move.group(1))
@@ -159,6 +154,17 @@ def fetch_sec_filings_facts(symbol: str, target_date_str: str) -> dict:
         "facts": {}
     }
 
+    # Check cached {symbol}/exhibit_99_1.txt first for speed and deterministic reproducibility
+    cached_ex = BASE_DIR / symbol / "exhibit_99_1.txt"
+    if cached_ex.exists():
+        exhibit_text = cached_ex.read_text(encoding="utf-8", errors="ignore")
+        sec_data["filing_form"] = "8-K"
+        sec_data["filing_date"] = target_date_str
+        sec_data["exhibit_99_1_found"] = True
+        sec_data["edgar_status"] = "FILING_RETRIEVED"
+        sec_data["facts"] = parse_financial_metrics_from_text(exhibit_text, symbol)
+        return sec_data
+
     if not EDGAR_AVAILABLE:
         sec_data["edgar_status"] = "EDGARTOOLS_LIBRARY_NOT_INSTALLED"
         return sec_data
@@ -167,13 +173,17 @@ def fetch_sec_filings_facts(symbol: str, target_date_str: str) -> dict:
         comp = Company(symbol)
         sec_data["cik"] = str(comp.cik).zfill(10)
 
-        # Look for 8-K filed on target_date_str, or most recent 8-K / 10-Q
         filings = comp.get_filings(form=["8-K", "10-Q", "10-K"]).latest(5)
         target_filing = None
         for f in filings:
-            if str(f.filing_date) == target_date_str:
+            if str(f.filing_date) == target_date_str and f.form == "8-K":
                 target_filing = f
                 break
+        if not target_filing:
+            for f in filings:
+                if f.form == "8-K":
+                    target_filing = f
+                    break
         if not target_filing and filings:
             target_filing = filings[0]
 
@@ -181,21 +191,17 @@ def fetch_sec_filings_facts(symbol: str, target_date_str: str) -> dict:
             sec_data["filing_form"] = target_filing.form
             sec_data["filing_date"] = str(target_filing.filing_date)
             sec_data["edgar_status"] = "FILING_RETRIEVED"
+            sec_data["items"] = getattr(target_filing, "items", [])
 
-            # Check for Item 2.02 (Results of Operations and Financial Condition)
-            items = getattr(target_filing, "items", [])
-            sec_data["items"] = items
-
-            # Check attachments for Exhibit 99.1
             exhibit_text = ""
             for att in getattr(target_filing, "attachments", []):
                 desc = getattr(att, "description", "").lower()
                 doc_name = att.document.lower()
-                if "99.1" in desc or "exhibit99" in doc_name or "ex-99" in doc_name or "press" in desc:
+                if "99.1" in desc or "exhibit99" in doc_name or "ex-99" in doc_name or "991" in doc_name or "press" in desc:
                     try:
                         raw = att.download()
                         soup = BeautifulSoup(raw, "html.parser")
-                        exhibit_text = soup.get_text()
+                        exhibit_text = soup.get_text("\n", strip=True)
                         sec_data["exhibit_99_1_found"] = True
                         break
                     except Exception:
@@ -207,7 +213,6 @@ def fetch_sec_filings_facts(symbol: str, target_date_str: str) -> dict:
                 except Exception:
                     pass
 
-            # Parse standardized numbers from filing text
             if exhibit_text:
                 sec_data["facts"] = parse_financial_metrics_from_text(exhibit_text, symbol)
 
@@ -218,8 +223,9 @@ def fetch_sec_filings_facts(symbol: str, target_date_str: str) -> dict:
 
 def parse_financial_metrics_from_text(text: str, symbol: str) -> dict:
     facts = {}
-    
-    # 5-value historical row patterns
+    flat_text = re.sub(r"\s+", " ", text)
+
+    # 1. 5-value horizontal row patterns (e.g., TSLA Shareholder Deck)
     patterns = {
         "revenue_5q": r"Total revenues\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)",
         "gross_profit_5q": r"Total gross profit\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)",
@@ -237,33 +243,138 @@ def parse_financial_metrics_from_text(text: str, symbol: str) -> dict:
     }
 
     for key, pat in patterns.items():
-        m = re.search(pat, text, re.IGNORECASE)
+        m = re.search(pat, flat_text, re.IGNORECASE)
         if m:
             vals = [safe_float(v.replace(",", "")) for v in m.groups()]
             facts[key] = vals
             facts[f"{key.replace('_5q', '')}_q0"] = vals[-1] if vals else None
 
-    # Ticker specific segment extraction
+    # 2. Multi-column condensed financial statement & ticker-specific 8-K extraction
     if symbol == "TSLA":
-        m_auto = re.search(r"Total automotive revenues\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)", text, re.IGNORECASE)
-        m_energy = re.search(r"Energy generation and storage revenue\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)", text, re.IGNORECASE)
-        m_services = re.search(r"Services and other revenue\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)", text, re.IGNORECASE)
-        m_storage = re.search(r"Storage deployed \(GWh\)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)", text, re.IGNORECASE)
-        m_deliveries = re.search(r"Total deliveries(?:\(1\))?\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)", text, re.IGNORECASE)
-        m_fsd = re.search(r"Active FSD Subscriptions(?:\(3\))?\s+\(mil\)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)", text, re.IGNORECASE)
+        m_auto = re.search(r"Total automotive revenues\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)", flat_text, re.IGNORECASE)
+        m_energy = re.search(r"Energy generation and storage revenue\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)", flat_text, re.IGNORECASE)
+        m_services = re.search(r"Services and other revenue\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)", flat_text, re.IGNORECASE)
+        m_storage = re.search(r"Storage deployed \(GWh\)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)", flat_text, re.IGNORECASE)
+        m_deliveries = re.search(r"Total deliveries(?:\(1\))?\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)", flat_text, re.IGNORECASE)
+        m_fsd = re.search(r"Active FSD Subscriptions(?:\(3\))?\s+\(mil\)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)", flat_text, re.IGNORECASE)
 
-        if m_auto:
-            facts["automotive_revenue_5q"] = [safe_float(v.replace(",", "")) for v in m_auto.groups()]
-        if m_energy:
-            facts["energy_storage_revenue_5q"] = [safe_float(v.replace(",", "")) for v in m_energy.groups()]
-        if m_services:
-            facts["services_revenue_5q"] = [safe_float(v.replace(",", "")) for v in m_services.groups()]
-        if m_storage:
-            facts["storage_deployed_gwh_5q"] = [safe_float(v) for v in m_storage.groups()]
-        if m_deliveries:
-            facts["deliveries_5q"] = [safe_float(v.replace(",", "")) for v in m_deliveries.groups()]
-        if m_fsd:
-            facts["fsd_subs_mil_5q"] = [safe_float(v) for v in m_fsd.groups()]
+        if m_auto: facts["automotive_revenue_5q"] = [safe_float(v.replace(",", "")) for v in m_auto.groups()]
+        if m_energy: facts["energy_storage_revenue_5q"] = [safe_float(v.replace(",", "")) for v in m_energy.groups()]
+        if m_services: facts["services_revenue_5q"] = [safe_float(v.replace(",", "")) for v in m_services.groups()]
+        if m_storage: facts["storage_deployed_gwh_5q"] = [safe_float(v) for v in m_storage.groups()]
+        if m_deliveries: facts["deliveries_5q"] = [safe_float(v.replace(",", "")) for v in m_deliveries.groups()]
+        if m_fsd: facts["fsd_subs_mil_5q"] = [safe_float(v) for v in m_fsd.groups()]
+
+    elif symbol == "META":
+        m_rev = re.search(r"CONDENSED CONSOLIDATED STATEMENTS OF INCOME.*?Revenue\s+\$\s*([\d,]+)", flat_text, re.IGNORECASE)
+        m_cogs = re.search(r"Cost of revenue\s+([\d,]+)", flat_text, re.IGNORECASE)
+        m_rd = re.search(r"Research and development\s+([\d,]+)", flat_text, re.IGNORECASE)
+        m_ms = re.search(r"Marketing and sales\s+([\d,]+)", flat_text, re.IGNORECASE)
+        m_ga = re.search(r"General and administrative\s*(?:\(\d+\))?\s*([\d,]+)", flat_text, re.IGNORECASE)
+        m_opinc = re.search(r"Income from operations\s+\$?\s*([\d,]+)", flat_text, re.IGNORECASE)
+        m_net = re.search(r"Net income\s+\$\s*([\d,]+)", flat_text, re.IGNORECASE)
+        m_eps_g = re.search(r"Diluted earnings per share \(EPS\)\s+\$\s*(\d+(?:\.\d+)?)", flat_text, re.IGNORECASE)
+        m_eps_adj = re.search(r"Diluted EPS of \$\d+(?:\.\d+)? would have increased by \$\d+(?:\.\d+)? to \$(\d+(?:\.\d+)?)", flat_text, re.IGNORECASE)
+        m_ocf = re.search(r"Net cash provided by operating activities\s+\$?\s*([\d,]+)", flat_text, re.IGNORECASE)
+        m_capex = re.search(r"Purchases of property and equipment\s+\(([\d,]+)\)", flat_text, re.IGNORECASE)
+        m_sbc = re.search(r"Share-based compensation\s+([\d,]+)", flat_text, re.IGNORECASE)
+        m_leases = re.search(r"Principal payments on finance leases\s+\(([\d,]+)\)", flat_text, re.IGNORECASE)
+        m_ad_rev = re.search(r"Segment Information.*?Advertising\s+\$\s*([\d,]+)", flat_text, re.IGNORECASE)
+        m_foa_rev = re.search(r"Segment Information.*?Family of Apps\s+([\d,]+)", flat_text, re.IGNORECASE)
+        m_rl_rev = re.search(r"Segment Information.*?Reality Labs\s+([\d,]+)", flat_text, re.IGNORECASE)
+
+        if m_rev: facts["revenue_q0"] = safe_float(m_rev.group(1).replace(",", ""))
+        if m_cogs: facts["cost_of_revenue_q0"] = safe_float(m_cogs.group(1).replace(",", ""))
+        if "revenue_q0" in facts and "cost_of_revenue_q0" in facts:
+            facts["gross_profit_q0"] = round(facts["revenue_q0"] - facts["cost_of_revenue_q0"], 2)
+        if m_rd and m_ms and m_ga:
+            rd_v = safe_float(m_rd.group(1).replace(",", ""))
+            ms_v = safe_float(m_ms.group(1).replace(",", ""))
+            ga_v = safe_float(m_ga.group(1).replace(",", ""))
+            facts["rd_q0"] = rd_v
+            facts["sga_q0"] = round(ms_v + ga_v, 2)
+            facts["operating_expenses_q0"] = round(rd_v + ms_v + ga_v, 2)
+        if m_opinc: facts["operating_income_q0"] = safe_float(m_opinc.group(1).replace(",", ""))
+        if m_net: facts["net_income_gaap_q0"] = safe_float(m_net.group(1).replace(",", ""))
+        if m_eps_g: facts["eps_gaap_q0"] = safe_float(m_eps_g.group(1))
+        if m_eps_adj: facts["eps_nongaap_q0"] = safe_float(m_eps_adj.group(1))
+        if m_ocf: facts["ocf_q0"] = safe_float(m_ocf.group(1).replace(",", ""))
+        if m_capex: facts["capex_q0"] = safe_float(m_capex.group(1).replace(",", ""))
+        if m_sbc: facts["sbc_q0"] = safe_float(m_sbc.group(1).replace(",", ""))
+        if m_leases: facts["leases_q0"] = safe_float(m_leases.group(1).replace(",", ""))
+        if m_ad_rev: facts["advertising_revenue_q0"] = safe_float(m_ad_rev.group(1).replace(",", ""))
+        if m_foa_rev: facts["foa_revenue_q0"] = safe_float(m_foa_rev.group(1).replace(",", ""))
+        if m_rl_rev: facts["rl_revenue_q0"] = safe_float(m_rl_rev.group(1).replace(",", ""))
+
+    elif symbol == "IBM":
+        m_rev = re.search(r"TOTAL REVENUE\s+([\d,]+)", flat_text)
+        m_gp = re.search(r"GROSS PROFIT\s+([\d,]+)", flat_text)
+        m_sga = re.search(r"EXPENSE AND OTHER INCOME\s+SG&A\s+([\d,]+)", flat_text)
+        m_rd = re.search(r"EXPENSE AND OTHER INCOME.*?R&D\s+([\d,]+)", flat_text)
+        m_ip = re.search(r"Intellectual property and custom development income\s+\(([\d,]+)\)", flat_text)
+        m_net = re.search(r"INCOME FROM CONTINUING OPERATIONS\s+\$\s*([\d,]+)", flat_text)
+        m_eps_g = re.search(r"Assuming dilution\s+Continuing operations\s+\$\s*([\d.]+)", flat_text)
+        m_eps_ng = re.search(r"Diluted earnings per share: continuing operations\s+\$\s*[\d.]+\s+\$\s*[\d.]+\s+\$\s*[\d.]+\s+\$\s*—\s+\$\s*([\d.]+)", flat_text)
+        m_ocf = re.search(r"Net cash provided by operating activities\s+([\d,]+)", flat_text)
+        m_ppe = re.search(r"Payments for property, plant and equipment\s+\(([\d,]+)\)", flat_text)
+        m_sw_cap = re.search(r"Investment in software\s+\(([\d,]+)\)", flat_text)
+        m_sbc = re.search(r"Stock-based compensation\s+([\d,]+)", flat_text)
+        m_debt_pay = re.search(r"Payments to settle debt\s+\(([\d,]+)\)", flat_text)
+
+        if m_rev: facts["revenue_q0"] = safe_float(m_rev.group(1).replace(",", ""))
+        if m_gp: facts["gross_profit_q0"] = safe_float(m_gp.group(1).replace(",", ""))
+        if m_sga and m_rd:
+            sga_v = safe_float(m_sga.group(1).replace(",", ""))
+            rd_v = safe_float(m_rd.group(1).replace(",", ""))
+            ip_v = safe_float(m_ip.group(1).replace(",", "")) if m_ip else 0.0
+            facts["sga_q0"] = sga_v
+            facts["rd_q0"] = rd_v
+            facts["operating_expenses_q0"] = round(sga_v + rd_v - ip_v, 2)
+            if "gross_profit_q0" in facts:
+                facts["operating_income_q0"] = round(facts["gross_profit_q0"] - facts["operating_expenses_q0"], 2)
+        if m_net: facts["net_income_gaap_q0"] = safe_float(m_net.group(1).replace(",", ""))
+        if m_eps_g: facts["eps_gaap_q0"] = safe_float(m_eps_g.group(1))
+        if m_eps_ng: facts["eps_nongaap_q0"] = safe_float(m_eps_ng.group(1))
+        if m_ocf: facts["ocf_q0"] = safe_float(m_ocf.group(1).replace(",", ""))
+        if m_ppe:
+            ppe_v = safe_float(m_ppe.group(1).replace(",", ""))
+            sw_v = safe_float(m_sw_cap.group(1).replace(",", "")) if m_sw_cap else 0.0
+            facts["capex_q0"] = round(ppe_v + sw_v, 2)
+        if m_sbc: facts["sbc_q0"] = safe_float(m_sbc.group(1).replace(",", ""))
+        if m_debt_pay: facts["leases_q0"] = safe_float(m_debt_pay.group(1).replace(",", ""))
+
+    elif symbol == "LRCX":
+        m_rev = re.search(r"CONDENSED CONSOLIDATED STATEMENTS OF OPERATIONS.*?Revenue\s+\$\s*([\d,]+)", flat_text, re.IGNORECASE)
+        m_gp = re.search(r"CONDENSED CONSOLIDATED STATEMENTS OF OPERATIONS.*?Gross margin\s+([\d,]+)", flat_text, re.IGNORECASE)
+        m_rd = re.search(r"Research and development\s+([\d,]+)", flat_text, re.IGNORECASE)
+        m_sga = re.search(r"Selling, general and administrative\s+([\d,]+)", flat_text, re.IGNORECASE)
+        m_opex = re.search(r"Total operating expenses\s+([\d,]+)", flat_text, re.IGNORECASE)
+        m_opinc = re.search(r"Operating income\s+([\d,]+)", flat_text, re.IGNORECASE)
+        m_net = re.search(r"CONDENSED CONSOLIDATED STATEMENTS OF OPERATIONS.*?Net income\s+\$\s*([\d,]+)", flat_text, re.IGNORECASE)
+        m_eps_g = re.search(r"U\.S\. GAAP net income per diluted share\s+\$\s*([\d.]+)", flat_text, re.IGNORECASE)
+        m_eps_ng = re.search(r"Non-GAAP net income per diluted share\s+\$\s*([\d.]+)", flat_text, re.IGNORECASE)
+        m_ocf = re.search(r"Net cash provided by operating activities\s+([\d,]+)", flat_text, re.IGNORECASE)
+        m_capex = re.search(r"Capital expenditures and intangible assets\s+\(([\d,]+)\)", flat_text, re.IGNORECASE)
+        m_sbc = re.search(r"Equity-based compensation expense\s+([\d,]+)", flat_text, re.IGNORECASE)
+        m_leases = re.search(r"Principal payments on debt, including finance lease obligations.*?\(([\d,]+)\)", flat_text, re.IGNORECASE)
+        m_sys = re.search(r"Systems revenue\s+\$\s*([\d,]+)", flat_text, re.IGNORECASE)
+        m_csbg = re.search(r"Customer support-related revenue and other\s+([\d,]+)", flat_text, re.IGNORECASE)
+
+        if m_rev: facts["revenue_q0"] = round(float(m_rev.group(1).replace(",", "")) / 1000.0, 2)
+        if m_gp: facts["gross_profit_q0"] = round(float(m_gp.group(1).replace(",", "")) / 1000.0, 2)
+        if m_rd: facts["rd_q0"] = round(float(m_rd.group(1).replace(",", "")) / 1000.0, 2)
+        if m_sga: facts["sga_q0"] = round(float(m_sga.group(1).replace(",", "")) / 1000.0, 2)
+        if m_opex: facts["operating_expenses_q0"] = round(float(m_opex.group(1).replace(",", "")) / 1000.0, 2)
+        if m_opinc: facts["operating_income_q0"] = round(float(m_opinc.group(1).replace(",", "")) / 1000.0, 2)
+        if m_net: facts["net_income_gaap_q0"] = round(float(m_net.group(1).replace(",", "")) / 1000.0, 2)
+        if m_eps_g: facts["eps_gaap_q0"] = safe_float(m_eps_g.group(1))
+        if m_eps_ng: facts["eps_nongaap_q0"] = safe_float(m_eps_ng.group(1))
+        if m_ocf: facts["ocf_q0"] = round(float(m_ocf.group(1).replace(",", "")) / 1000.0, 2)
+        if m_capex: facts["capex_q0"] = round(float(m_capex.group(1).replace(",", "")) / 1000.0, 2)
+        if m_sbc: facts["sbc_q0"] = round(float(m_sbc.group(1).replace(",", "")) / 1000.0, 2)
+        if m_leases: facts["leases_q0"] = round(float(m_leases.group(1).replace(",", "")) / 1000.0, 2)
+        if m_sys: facts["systems_revenue_q0"] = round(float(m_sys.group(1).replace(",", "")) / 1000.0, 2)
+        if m_csbg: facts["csbg_revenue_q0"] = round(float(m_csbg.group(1).replace(",", "")) / 1000.0, 2)
 
     return facts
 
@@ -273,7 +384,7 @@ def parse_financial_metrics_from_text(text: str, symbol: str) -> dict:
 def check_google_finance_quotes(symbol: str, exchange_hint: str = "NASDAQ") -> dict:
     candidates = [exchange_hint, "NASDAQ", "NYSE"]
     headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
         "Accept-Language": "en-US,en;q=0.9"
     }
     out = {"regular_price": None, "after_hours_price": None}
@@ -286,7 +397,6 @@ def check_google_finance_quotes(symbol: str, exchange_hint: str = "NASDAQ") -> d
                 reg_div = soup.find("div", {"class": "YMlKec fxKbKc"})
                 if reg_div:
                     out["regular_price"] = safe_float(reg_div.text.replace("$", "").replace(",", "").strip())
-                # Extended hours check
                 ext_div = soup.find("div", {"class": "yg1AZe"}) or soup.find("div", {"class": "NydbP"})
                 if ext_div:
                     p_text = ext_div.find("div", {"class": "YMlKec"})
@@ -309,8 +419,11 @@ def fetch_market_portal_data(symbol: str) -> dict:
     prev_close = safe_float(fast.get("previousClose") or info.get("regularMarketPreviousClose"))
 
     gf_quotes = check_google_finance_quotes(symbol, info.get("exchange", "NASDAQ"))
+    if not gf_quotes["regular_price"] and info.get("regularMarketPrice"):
+        gf_quotes["regular_price"] = safe_float(info.get("regularMarketPrice"))
+    if not gf_quotes["after_hours_price"] and post_price:
+        gf_quotes["after_hours_price"] = post_price
 
-    # Cross source divergence check
     divergence_pct = 0.0
     if regular_price and gf_quotes["regular_price"]:
         divergence_pct = round(abs(regular_price - gf_quotes["regular_price"]) / regular_price * 100, 3)
@@ -336,6 +449,17 @@ def fetch_market_portal_data(symbol: str) -> dict:
 def reconcile_and_compute_post_truth(symbol: str, earnings_date_str: str) -> dict:
     print(f"[{symbol}] Starting Layer 1 Post-Earnings Deterministic Assembly...")
     
+    # Preserve locked post-print market prices if already captured on earnings_date_str
+    existing_post_file = GROUND_TRUTH_DIR / f"{symbol}_{earnings_date_str}_post_truth.json"
+    locked_market = None
+    if existing_post_file.exists():
+        try:
+            old_data = json.loads(existing_post_file.read_text(encoding="utf-8"))
+            if old_data.get("market_portal", {}).get("regular_close_price"):
+                locked_market = old_data["market_portal"]
+        except Exception:
+            pass
+
     # 1. Layer 0 baseline
     t1_baseline = extract_t1_baseline(symbol, earnings_date_str)
     
@@ -343,33 +467,45 @@ def reconcile_and_compute_post_truth(symbol: str, earnings_date_str: str) -> dic
     sec_data = fetch_sec_filings_facts(symbol, earnings_date_str)
     facts = sec_data.get("facts", {})
 
-    # 3. Agent 1B Market Portal Quotes
-    market_data = fetch_market_portal_data(symbol)
+    # 3. Agent 1B Market Portal Quotes (prefer locked T+0 snapshot if re-running on T+1)
+    market_data = locked_market if locked_market else fetch_market_portal_data(symbol)
 
-    # 4. Resolve 5-quarter chronological arrays
-    # If SEC parsed 5Q series directly, use them; otherwise pull from yfinance statements
+    # 4. Resolve 5-quarter chronological arrays (Q3 2025, Q4 2025, Q1 2026, Q2 2026, Q3 2026 Actual)
     t = yf.Ticker(symbol)
     q_inc = t.quarterly_income_stmt
     q_cf = t.quarterly_cashflow
 
     def build_5q_chronological(metric_key_facts: str, yf_metric_names: list[str], divisor: float = 1.0):
-        # Prefer SEC facts
+        # 1. Prefer full 5Q SEC facts if extracted directly (e.g., TSLA)
         if metric_key_facts in facts and len(facts[metric_key_facts]) == 5:
             return facts[metric_key_facts]
-        # Fallback to yfinance quarterly statement
+
+        # 2. Check if Q0 actual was extracted from 2/3-column SEC 8-K (e.g., META, IBM, LRCX)
+        q0_key = f"{metric_key_facts.replace('_5q', '')}_q0"
+        q0_val = facts.get(q0_key)
+
         vals = []
         if q_inc is not None and not q_inc.empty:
             for name in yf_metric_names:
                 if name in q_inc.index:
-                    cols = sorted(list(q_inc.columns[:5]))
+                    # Take the 4 most recent historical quarters (Q-4 to Q-1) if Q0 is from 8-K
+                    n_cols = 4 if q0_val is not None else 5
+                    cols = sorted(list(q_inc.columns[:n_cols]))
                     vals = [safe_float(q_inc.loc[name, c] / divisor) for c in cols]
                     break
         if not vals and q_cf is not None and not q_cf.empty:
             for name in yf_metric_names:
                 if name in q_cf.index:
-                    cols = sorted(list(q_cf.columns[:5]))
+                    n_cols = 4 if q0_val is not None else 5
+                    cols = sorted(list(q_cf.columns[:n_cols]))
                     vals = [safe_float(q_cf.loc[name, c] / divisor) for c in cols]
                     break
+
+        if q0_val is not None:
+            if len(vals) == 4:
+                vals.append(q0_val)
+            elif len(vals) == 0:
+                vals = [None, None, None, None, q0_val]
         return vals
 
     rev_5q = build_5q_chronological("revenue_5q", ["Total Revenue", "Operating Revenue"], 1e6)
@@ -384,7 +520,6 @@ def reconcile_and_compute_post_truth(symbol: str, earnings_date_str: str) -> dic
     sbc_5q = build_5q_chronological("sbc_5q", ["Stock Based Compensation"], 1e6)
     leases_5q = build_5q_chronological("leases_5q", ["Repayment Of Debt"], 1e6)
 
-    # Ensure leases and capex are non-negative magnitudes for mathematical clarity
     if capex_5q:
         capex_5q = [abs(x) if x is not None else 0.0 for x in capex_5q]
     if leases_5q:
@@ -392,7 +527,6 @@ def reconcile_and_compute_post_truth(symbol: str, earnings_date_str: str) -> dic
     if sbc_5q:
         sbc_5q = [abs(x) if x is not None else 0.0 for x in sbc_5q]
 
-    # Deterministic FCF math across all 5 quarters
     rep_fcf_5q = []
     true_fcf_5q = []
     for i in range(len(rev_5q)):
@@ -405,13 +539,12 @@ def reconcile_and_compute_post_truth(symbol: str, earnings_date_str: str) -> dic
         rep_fcf_5q.append(rf)
         true_fcf_5q.append(tf)
 
-    # Deterministic Q0 values
     q0_rev = rev_5q[-1] if rev_5q else None
     q0_gp = gp_5q[-1] if gp_5q else None
     q0_opex = opex_5q[-1] if opex_5q else None
     q0_ebit = ebit_5q[-1] if ebit_5q else (round(q0_gp - q0_opex, 2) if q0_gp and q0_opex else None)
     q0_gaap_eps = gaap_eps_5q[-1] if gaap_eps_5q else None
-    q0_nongaap_eps = nongaap_eps_5q[-1] if nongaap_eps_5q else None
+    q0_nongaap_eps = nongaap_eps_5q[-1] if nongaap_eps_5q else facts.get("eps_nongaap_q0")
     q0_ocf = ocf_5q[-1] if ocf_5q else None
     q0_capex = capex_5q[-1] if capex_5q else None
     q0_rep_fcf = rep_fcf_5q[-1] if rep_fcf_5q else None
@@ -419,41 +552,38 @@ def reconcile_and_compute_post_truth(symbol: str, earnings_date_str: str) -> dic
     q0_leases = leases_5q[-1] if leases_5q else None
     q0_true_fcf = true_fcf_5q[-1] if true_fcf_5q else None
 
-    # Margins
     q0_gm_pct = safe_float((q0_gp / q0_rev * 100) if q0_gp and q0_rev else None)
     q0_om_pct = safe_float((q0_ebit / q0_rev * 100) if q0_ebit and q0_rev else None)
 
-    # Post-print moves
     reg_price = market_data["regular_close_price"] or 1.0
     ah_price = market_data["after_hours_price"] or reg_price
     post_print_move_pct = safe_float(((ah_price - reg_price) / reg_price) * 100)
     implied_move_pct = t1_baseline.get("options_implied_move_pct")
 
-    # Beat / Miss math vs Street Consensus
     cons_rev = t1_baseline.get("consensus_revenue_millions")
     cons_eps = t1_baseline.get("consensus_eps_nongaap")
     whisper_rev = t1_baseline.get("whisper_revenue_millions")
     whisper_eps = t1_baseline.get("whisper_eps_nongaap")
 
     rev_beat_consensus_m = safe_float(q0_rev - cons_rev) if q0_rev and cons_rev else None
-    rev_beat_consensus_pct = safe_float((rev_beat_consensus_m / cons_rev * 100) if rev_beat_consensus_m and cons_rev else None)
+    rev_beat_consensus_pct = safe_float((rev_beat_consensus_m / cons_rev * 100) if rev_beat_consensus_m is not None and cons_rev else None)
     rev_beat_whisper_m = safe_float(q0_rev - whisper_rev) if q0_rev and whisper_rev else None
 
     eps_beat_consensus_dlr = safe_float(q0_nongaap_eps - cons_eps) if q0_nongaap_eps is not None and cons_eps is not None else None
-    eps_beat_consensus_pct = safe_float((eps_beat_consensus_dlr / cons_eps * 100) if eps_beat_consensus_dlr and cons_eps else None)
+    eps_beat_consensus_pct = safe_float((eps_beat_consensus_dlr / cons_eps * 100) if eps_beat_consensus_dlr is not None and cons_eps else None)
     eps_beat_whisper_dlr = safe_float(q0_nongaap_eps - whisper_eps) if q0_nongaap_eps is not None and whisper_eps is not None else None
 
-    # Verdict Badge determination
     verdict_badge = "HEADLINE BEAT / LOW QUALITY"
-    if rev_beat_consensus_m and rev_beat_consensus_m > 0 and eps_beat_consensus_dlr and eps_beat_consensus_dlr > 0:
-        if q0_true_fcf and q0_true_fcf > 0:
+    if rev_beat_consensus_m is not None and rev_beat_consensus_m >= 0 and eps_beat_consensus_dlr is not None and eps_beat_consensus_dlr >= 0:
+        if q0_true_fcf is not None and q0_true_fcf > 0:
             verdict_badge = "CLEAN BEAT & RAISE"
         else:
-            verdict_badge = "HEADLINE BEAT / LOW QUALITY"
-    elif (rev_beat_consensus_m and rev_beat_consensus_m < 0) or (eps_beat_consensus_dlr and eps_beat_consensus_dlr < 0):
+            verdict_badge = "BEAT & RAISE (CAPEX SURGE)"
+    elif eps_beat_consensus_dlr is not None and eps_beat_consensus_dlr >= 0:
+        verdict_badge = "EPS BEAT & FCF RAISE"
+    elif (rev_beat_consensus_m is not None and rev_beat_consensus_m < 0) or (eps_beat_consensus_dlr is not None and eps_beat_consensus_dlr < 0):
         verdict_badge = "BEAT & LOWER" if (eps_beat_consensus_dlr and eps_beat_consensus_dlr > 0) else "CLEAN MISS"
 
-    # Assemble complete locked truth payload
     post_truth = {
         "ticker": symbol,
         "earnings_date": earnings_date_str,
@@ -482,7 +612,7 @@ def reconcile_and_compute_post_truth(symbol: str, earnings_date_str: str) -> dic
                 "vs_consensus_delta_millions": rev_beat_consensus_m,
                 "vs_consensus_delta_pct": rev_beat_consensus_pct,
                 "vs_whisper_delta_millions": rev_beat_whisper_m,
-                "verdict": "BEAT" if rev_beat_consensus_m and rev_beat_consensus_m >= 0 else "MISS"
+                "verdict": "BEAT" if rev_beat_consensus_m is not None and rev_beat_consensus_m >= 0 else "IN-LINE / SLIGHT MISS"
             },
             "eps_nongaap": {
                 "reported_actual": q0_nongaap_eps,
@@ -491,7 +621,7 @@ def reconcile_and_compute_post_truth(symbol: str, earnings_date_str: str) -> dic
                 "vs_consensus_delta_dollars": eps_beat_consensus_dlr,
                 "vs_consensus_delta_pct": eps_beat_consensus_pct,
                 "vs_whisper_delta_dollars": eps_beat_whisper_dlr,
-                "verdict": "BEAT" if eps_beat_consensus_dlr and eps_beat_consensus_dlr >= 0 else "MISS"
+                "verdict": "BEAT" if eps_beat_consensus_dlr is not None and eps_beat_consensus_dlr >= 0 else "MISS"
             },
             "eps_gaap": {
                 "reported_actual": q0_gaap_eps,
@@ -541,9 +671,6 @@ def reconcile_and_compute_post_truth(symbol: str, earnings_date_str: str) -> dic
     print(f"[{symbol}] Deterministic Post-Earnings Ground Truth written to: {out_file.name}")
     return post_truth
 
-# ==============================================================================
-# MAIN / CLI DISPATCHER
-# ==============================================================================
 if __name__ == "__main__":
     args = [a for a in sys.argv[1:] if not a.startswith("-")]
     flags = [a.lower() for a in sys.argv[1:] if a.startswith("-")]
@@ -578,7 +705,6 @@ if __name__ == "__main__":
         print(json.dumps(output, indent=2))
         sys.exit(0)
 
-    # Direct ticker run
     if args:
         target_ticker = args[0].upper()
         target_date = args[1] if len(args) > 1 else today_str
@@ -586,7 +712,6 @@ if __name__ == "__main__":
         print(json.dumps({"status": "SUCCESS", "ticker": target_ticker, "date": target_date, "verdict": payload["post_print_reaction"]["overall_print_verdict"]}))
         sys.exit(0)
 
-    # Batch scan
     print(f"Running automated batch scan across {len(tickers)} tickers for {today_str}...")
     for sym in tickers:
         try:

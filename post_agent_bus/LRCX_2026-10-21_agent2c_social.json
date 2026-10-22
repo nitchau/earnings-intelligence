@@ -4,42 +4,41 @@
   "agent_role": "Social_Pulse_Agent",
   "model": "Gemini 3.8 Flash High",
   "social_channels_crawled": [
-    "Reddit (r/stocks, r/investing, r/wallstreetbets, r/semiconductors)",
-    "X (FinTwit / #LRCX / #WFE)",
-    "Threads (threads.net)",
+    "Reddit (r/stocks, r/investing, r/semiconductors)",
+    "X (FinTwit / #LRCX / $LRCX / #Semis)",
     "Stocktwits ($LRCX stream)",
-    "Seeking Alpha post-market semiconductor commentary",
-    "Sell-Side Flash Notes (Cantor Fitzgerald, Bernstein, BofA Global Research, Morgan Stanley)"
+    "Seeking Alpha post-market commentary",
+    "Sell-Side Flash Notes (Bernstein, Cantor Fitzgerald, BofA, Morgan Stanley, Citi)"
   ],
   "retail_vs_institutional_reaction": {
-    "retail_sentiment_summary": "Retail investors across r/stocks and Stocktwits express shock and irritation at the -7.4% after-hours slide to $241.48, which breached the options-implied move boundary (±7.29%). Retail commentary draws comparisons to ASML's recent bookings guidance wobble, with traders questioning whether the semiconductor capital equipment cycle is peaking prematurely or whether this represents an overreaction dip-buying opportunity.",
-    "institutional_sentiment_summary": "Semiconductor long/short equity hedge funds and institutional desks are de-grossing semiconductor capital equipment exposure. The primary catalyst is Lam's Q2 guidance midpoint of $7.00B, which fell $150M short of Street consensus ($7.15B), combined with ongoing anxiety surrounding mature-node China revenue normalization (37% of sales). While structural HBM and 3D NAND long-term tailwinds remain intact, institutional portfolio managers were unwilling to defend a 22x+ forward multiple on a guidance haircut.",
-    "after_hours_movement_driver": "The stock plunged -7.41% to $241.48 (down -$19.33 from $260.81 close), breaking out of the ±7.29% options implied move corridor. Market participants were disappointed by the conservative Q2 FY27 revenue guidance ($7.0B vs $7.15B Street consensus) and China revenue uncertainty."
+    "retail_sentiment_summary": "Retail and FinTwit semiconductor traders were stunned by the divergence between Lam Research's blowout fundamentals—$8.22B Q3 revenue (+54% YoY), 40.2% Non-GAAP operating margin, $3.50B operating cash flow, +27% dividend hike to $0.33/sh, and an $8.60B Q4 revenue guide—and the -7.41% after-hours selloff from $260.81 to $241.48. Traders pointed out that LRCX had already rallied +115% YoY into the print (trading at 45.3x trailing P/E) and that a higher Q3 tax rate ($559M vs $278M in Q2) capped headline Non-GAAP EPS at $2.20 vs $2.18 consensus.",
+    "institutional_sentiment_summary": "Institutional semiconductor PMs universally characterized the print and $8.60B December-quarter guide as a massive operational beat (+35% QoQ Systems growth to $5.73B, Korea 20% / Taiwan 18% leading-edge inflection, $3.09B True FCF). Desks attributed the after-hours pullback to $241.48 (right back to T-1's $238.97 baseline before Wednesday's pre-close run-up) to crowded long positioning and profit-taking after the stock's parabolic run.",
+    "after_hours_movement_driver": "Despite reporting record $8.22B revenue and guiding Q4 to $8.60B, LRCX pulled back -7.41% after hours to $241.48 from a lofty $260.81 close (45.28x trailing P/E) as fast-money longs locked in profits on the modest +$0.02 headline EPS beat ($2.20 vs $2.18, held back by a 16.9% tax rate vs 10.9% in Q2)."
   },
   "four_pillar_post_sentiment_scores": {
     "pillar_1_retail_and_social_pulse": {
-      "score_out_of_100": 38,
-      "classification": "BEARISH / VOLATILITY FRUSTRATION",
-      "key_themes": ["Breakdown below $250 support", "Comparison to ASML earnings shock", "Guidance cut triggers stop-losses", "Dip buyers eyeing $230"],
-      "top_quote": "FinTwit Semi Analyst: 'LRCX guide of $7.0B vs $7.15B consensus isn't a disaster, but at 22x P/E into a China digestion cycle, the market takes no prisoners. -7.4% is a harsh re-rating.'"
+      "score_out_of_100": 68,
+      "classification": "FUNDAMENTALLY BULLISH / VALUATION RESET",
+      "key_themes": ["Record $8.22B revenue & $8.60B Q4 guide", "$3.50B OCF & $3.24B FCF in a single quarter", "16.9% tax rate masked massive $3.30B EBIT beat", "-7.41% AH pullback erases 1-day pre-earnings run-up ($238.97 -> $260.81 -> $241.48)"],
+      "top_quote": "FinTwit Semi PM: 'Lam prints $8.22B rev (+54% YoY), 40.2% op margin, $3.24B FCF, hikes dividend 27%, and guides Q4 to $8.60B, and algos sell it down to $241 because higher taxes kept EPS at $2.20 after the stock ran $22 in 24 hours. Gift for long-term buyers.'"
     },
     "pillar_2_sellside_flash_reactions": {
-      "score_out_of_100": 58,
-      "classification": "NEUTRAL / TEMPORARY DIGESTION",
-      "key_themes": ["Cantor reiterates Overweight on HBM leverage", "Bernstein highlights sticky CSBG cash flows", "BofA trims target to $285 on timing pushouts"],
-      "top_quote": "Cantor Fitzgerald Flash Note: 'While Q2 guidance is light by ~2%, the structural inflection in High-Bandwidth Memory (HBM4) and cryogenic NAND etching in 2027 remains completely uncompromised. We view this pullback as a buying window.'"
+      "score_out_of_100": 84,
+      "classification": "STRONGLY BULLISH / RAISING ESTIMATES",
+      "key_themes": ["Bernstein & BofA raise FY27 WFE and EPS estimates on $8.60B Q4 revenue guide", "Systems revenue up +34.9% QoQ to $5.73B on HBM and GAA etch adoption", "Gross margin guided up to 52.5% and Operating margin to 40.5%"],
+      "top_quote": "Bernstein Flash Note: 'Operationally, this was a monster beat and raise. $8.22B in September and $8.60B guided for December with 40.5% operating margins proves Lam is capturing massive share in Gate-All-Around and HBM etch/deposition.'"
     },
     "pillar_3_management_call_tone": {
-      "score_out_of_100": 74,
-      "classification": "DISCIPLINED & REASSURING",
-      "key_themes": ["Tim Archer confident on technology leadership", "CFO Doug Bettinger sober on China normalization", "Clear articulation of long-term $100B+ WFE inflection"],
-      "top_quote": "Tim Archer on Call: 'Every major semiconductor transition—from GAA to backside power delivery and advanced 3D memory—substantially increases etch and deposition complexity where Lam is best positioned.'"
+      "score_out_of_100": 88,
+      "classification": "EXCEPTIONALLY CONFIDENT",
+      "key_themes": ["CEO Tim Archer highlights record revenue, profit, and EPS on AI semiconductor complexity", "Deferred revenue climbs to $2.66B (+$468M Japan shipments)", "Dividend raised 27% to $0.33/sh alongside $1.02B quarterly buybacks"],
+      "top_quote": "CEO Tim Archer: 'With AI driving higher semiconductor demand and greater device complexity, our focus on operational execution helped Lam deliver record revenue, profit, and earnings per share in the September quarter.'"
     },
     "pillar_4_options_iv_crush_and_skew": {
-      "score_out_of_100": 42,
-      "classification": "BREACHED STRADDLE / ELEVATED SKEW",
-      "key_themes": ["Actual move of -7.41% marginally exceeded the ±7.29% ($19.27) expected move", "Put options buyers in the money", "Implied volatility crushed from 101.6% but downside tail risk priced in"],
-      "top_quote": "Derivatives Desk: 'LRCX is one of the rare prints this cycle to breach its expected move band (-7.41% vs 7.29% implied). Vol sellers face minor losses on down-side strikes, shifting dealer gamma negative below $240.'"
+      "score_out_of_100": 48,
+      "classification": "IMPLIED BAND BREACH & MEAN REVERSION",
+      "key_themes": ["Post-print move of -7.41% (-$19.33 from $260.81 to $241.48) exceeded the ±3.84% straddle band but landed just +1.05% above T-1's $238.97 spot price", "68.5% pre-print ATM IV crushes into the open", "Institutional call buyers reload $240/$265 bull call spreads for December"],
+      "top_quote": "Derivatives Desk: 'LRCX surged +9.1% from $238.97 on T-1 to $260.81 at today's close before giving back -7.41% AH to $241.48. Net 48-hour move is +1.05%, making the $235-$240 zone prime institutional support.'"
     }
   }
 }
