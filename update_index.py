@@ -3,6 +3,7 @@ Enhanced Dashboard Generator for Institutional Earnings Intelligence
 Discovers and displays both:
 - T-1 Pre-Earnings Briefings ({TICKER}_T1_{DATE}.html)
 - T+0 Post-Earnings Forensic Tearsheets ({TICKER}_T0_POST_{DATE}.html)
+Features interactive Pre vs. Post filtering and real-time ticker search.
 """
 
 import json
@@ -83,6 +84,7 @@ def build_cards_html(grouped: dict, link_prefix: str) -> str:
         ticker = item["ticker"]
         e_date = item["earnings_date"]
         is_post = item["is_post"]
+        category_val = "post" if is_post else "pre"
         
         ver_nums = sorted(item["versions"].keys())
         latest_file = item["canonical"] or (item["versions"][ver_nums[-1]] if ver_nums else None)
@@ -101,6 +103,7 @@ def build_cards_html(grouped: dict, link_prefix: str) -> str:
         
         badge_style = "background: rgba(16, 185, 129, 0.2); border-color: rgba(16, 185, 129, 0.4); color: #34d399;" if is_post else "background: rgba(59, 130, 246, 0.15); border-color: rgba(59, 130, 246, 0.3); color: #60a5fa;"
         status_label = "T+0 POST-EARNINGS" if is_post else "T-1 PRE-EARNINGS"
+        price_label = "After-Hours Price" if is_post else "Spot Price"
 
         # Version pills
         v_pills = []
@@ -119,11 +122,11 @@ def build_cards_html(grouped: dict, link_prefix: str) -> str:
         canonical_href = f"{link_prefix}{latest_file.name}"
         
         card = f"""
-        <div class="report-card">
+        <div class="report-card" data-category="{category_val}" data-ticker="{ticker.lower()}" data-company="{company_name.lower()}">
           <div class="card-top">
             <div class="ticker-box">
               <span class="ticker-symbol">{ticker}</span>
-              <span class="version-tag">{latest_ver_label} (Latest)</span>
+              <span class="version-tag">{latest_ver_label}</span>
             </div>
             <span class="badge-status" style="{badge_style}">{status_label}</span>
           </div>
@@ -133,7 +136,7 @@ def build_cards_html(grouped: dict, link_prefix: str) -> str:
 
           <div class="stats-row">
             <div class="stat-item">
-              <span class="stat-label">Spot / AH Price</span>
+              <span class="stat-label">{price_label}</span>
               <span class="stat-val">{spot_price}</span>
             </div>
             <div class="stat-item">
@@ -165,7 +168,11 @@ def build_cards_html(grouped: dict, link_prefix: str) -> str:
 
     return "\n".join(cards_html)
 
-def build_full_page(cards_html: str, total_count: int, public_base: str) -> str:
+def build_full_page(cards_html: str, grouped: dict, public_base: str) -> str:
+    total_count = len(grouped)
+    pre_count = sum(1 for item in grouped.values() if not item["is_post"])
+    post_count = sum(1 for item in grouped.values() if item["is_post"])
+
     last_updated_str = datetime.now().strftime("%B %d, %Y at %I:%M %p")
     tunnel_link_html = ""
     if public_base:
@@ -187,7 +194,9 @@ def build_full_page(cards_html: str, total_count: int, public_base: str) -> str:
       --card-bg: #111827;
       --card-border: rgba(255, 255, 255, 0.08);
       --accent-blue: #3b82f6;
-      --bull-green: #22c55e;
+      --accent-blue-glow: rgba(59, 130, 246, 0.25);
+      --bull-green: #10b981;
+      --bull-green-glow: rgba(16, 185, 129, 0.25);
       --warn-amber: #f59e0b;
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
@@ -210,7 +219,7 @@ def build_full_page(cards_html: str, total_count: int, public_base: str) -> str:
     }}
     .header {{
       text-align: center;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
     }}
     .header h1 {{
       font-size: 34px;
@@ -228,6 +237,132 @@ def build_full_page(cards_html: str, total_count: int, public_base: str) -> str:
       max-width: 720px;
       line-height: 1.5;
     }}
+    .tunnel-bar {{
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.25);
+      border-radius: 8px;
+      padding: 10px 16px;
+      margin-bottom: 20px;
+      font-size: 13px;
+      text-align: center;
+      color: #cbd5e1;
+    }}
+    
+    /* ==========================================================================
+       FILTER NAVIGATION BAR & LIVE SEARCH
+       ========================================================================== */
+    .filter-bar {{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }}
+    .filter-tabs {{
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      background: #0f172a;
+      padding: 5px;
+      border-radius: 10px;
+      border: 1px solid var(--card-border);
+    }}
+    .filter-btn {{
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 7px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: inherit;
+    }}
+    .filter-btn:hover {{
+      color: #f8fafc;
+      background: rgba(255, 255, 255, 0.05);
+    }}
+    .filter-btn.active {{
+      background: #1e293b;
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }}
+    .filter-btn.active[data-filter="pre"] {{
+      border-color: rgba(59, 130, 246, 0.6);
+      color: #93c5fd;
+      background: rgba(59, 130, 246, 0.16);
+    }}
+    .filter-btn.active[data-filter="post"] {{
+      border-color: rgba(16, 185, 129, 0.6);
+      color: #34d399;
+      background: rgba(16, 185, 129, 0.16);
+    }}
+    .filter-count {{
+      background: rgba(255, 255, 255, 0.08);
+      font-size: 11px;
+      padding: 2px 7px;
+      border-radius: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+    }}
+    .filter-btn.active .filter-count {{
+      background: rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+    }}
+    .dot-pre, .dot-post {{
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      display: inline-block;
+    }}
+    .dot-pre {{
+      background-color: var(--accent-blue);
+      box-shadow: 0 0 8px var(--accent-blue-glow);
+    }}
+    .dot-post {{
+      background-color: var(--bull-green);
+      box-shadow: 0 0 8px var(--bull-green-glow);
+    }}
+    .search-box {{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #0f172a;
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 8px 16px;
+      flex-grow: 1;
+      max-width: 320px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }}
+    .search-box:focus-within {{
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 12px var(--accent-blue-glow);
+    }}
+    .search-box svg {{
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }}
+    .search-box input {{
+      background: transparent;
+      border: none;
+      color: #f8fafc;
+      font-size: 13px;
+      font-family: inherit;
+      width: 100%;
+      outline: none;
+    }}
+    .search-box input::placeholder {{
+      color: #64748b;
+    }}
+
+    /* SUMMARY BAR */
     .summary-bar {{
       display: flex;
       justify-content: space-between;
@@ -235,9 +370,11 @@ def build_full_page(cards_html: str, total_count: int, public_base: str) -> str:
       background: #0f172a;
       border: 1px solid var(--card-border);
       border-radius: 10px;
-      padding: 14px 20px;
-      margin-bottom: 26px;
-      font-size: 13.5px;
+      padding: 12px 20px;
+      margin-bottom: 24px;
+      font-size: 13px;
+      flex-wrap: wrap;
+      gap: 10px;
     }}
     .summary-stat {{
       color: var(--text-muted);
@@ -246,16 +383,8 @@ def build_full_page(cards_html: str, total_count: int, public_base: str) -> str:
       color: #60a5fa;
       font-family: 'JetBrains Mono', monospace;
     }}
-    .tunnel-bar {{
-      background: rgba(59, 130, 246, 0.1);
-      border: 1px solid rgba(59, 130, 246, 0.25);
-      border-radius: 8px;
-      padding: 10px 16px;
-      margin-bottom: 24px;
-      font-size: 13px;
-      text-align: center;
-      color: #cbd5e1;
-    }}
+
+    /* REPORT GRID */
     .grid {{
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
@@ -277,6 +406,10 @@ def build_full_page(cards_html: str, total_count: int, public_base: str) -> str:
       transform: translateY(-3px);
       box-shadow: 0 12px 24px -6px rgba(59, 130, 246, 0.25);
     }}
+    .report-card[data-category="post"]:hover {{
+      border-color: rgba(16, 185, 129, 0.45);
+      box-shadow: 0 12px 24px -6px rgba(16, 185, 129, 0.25);
+    }}
     .card-top {{
       display: flex;
       justify-content: space-between;
@@ -294,6 +427,9 @@ def build_full_page(cards_html: str, total_count: int, public_base: str) -> str:
       font-weight: 800;
       color: #60a5fa;
       letter-spacing: -0.02em;
+    }}
+    .report-card[data-category="post"] .ticker-symbol {{
+      color: #34d399;
     }}
     .version-tag {{
       background: rgba(59, 130, 246, 0.15);
@@ -340,13 +476,13 @@ def build_full_page(cards_html: str, total_count: int, public_base: str) -> str:
       gap: 2px;
     }}
     .stat-label {{
-      font-size: 10.5px;
+      font-size: 10px;
       color: var(--text-muted);
       text-transform: uppercase;
       letter-spacing: 0.04em;
     }}
     .stat-val {{
-      font-size: 13.5px;
+      font-size: 13px;
       font-weight: 700;
       font-family: 'JetBrains Mono', monospace;
       color: #f8fafc;
@@ -407,6 +543,29 @@ def build_full_page(cards_html: str, total_count: int, public_base: str) -> str:
       border-color: var(--accent-blue);
       box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
     }}
+    .report-card[data-category="post"] .btn-view:hover {{
+      background: #059669;
+      border-color: #10b981;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+    }}
+
+    /* EMPTY STATE */
+    #empty-state {{
+      display: none;
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 50px 20px;
+      background: var(--card-bg);
+      border: 1px dashed var(--card-border);
+      border-radius: 14px;
+      color: var(--text-muted);
+    }}
+    #empty-state h3 {{
+      color: #f1f5f9;
+      font-size: 18px;
+      margin-bottom: 8px;
+    }}
+
     .footer {{
       margin-top: 40px;
       text-align: center;
@@ -427,20 +586,111 @@ def build_full_page(cards_html: str, total_count: int, public_base: str) -> str:
 
     {tunnel_link_html}
 
-    <div class="summary-bar">
-      <div class="summary-stat">Active Reports: <strong>{total_count}</strong></div>
-      <div class="summary-stat">T-1 / T+0 Dual Mode: <strong>Enabled</strong></div>
-      <div class="summary-stat">Last Updated: <strong>{last_updated_str}</strong></div>
+    <!-- INTERACTIVE FILTER & SEARCH TOOLBAR -->
+    <div class="filter-bar">
+      <div class="filter-tabs">
+        <button class="filter-btn active" data-filter="all" onclick="setFilter('all')">
+          All Reports <span class="filter-count" id="count-all">{total_count}</span>
+        </button>
+        <button class="filter-btn" data-filter="pre" onclick="setFilter('pre')">
+          <span class="dot-pre"></span> T-1 Pre-Earnings <span class="filter-count" id="count-pre">{pre_count}</span>
+        </button>
+        <button class="filter-btn" data-filter="post" onclick="setFilter('post')">
+          <span class="dot-post"></span> T+0 Post-Earnings <span class="filter-count" id="count-post">{post_count}</span>
+        </button>
+      </div>
+
+      <div class="search-box">
+        <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        <input type="text" id="tickerSearch" placeholder="Filter by ticker or name..." oninput="handleSearch(this.value)" />
+      </div>
     </div>
 
-    <div class="grid">
+    <!-- LIVE SUMMARY METRICS -->
+    <div class="summary-bar">
+      <div class="summary-stat">Showing: <strong id="visible-count">{total_count}</strong> of <strong>{total_count}</strong> Tearsheets</div>
+      <div class="summary-stat">Pre-Earnings (T-1): <strong style="color: #60a5fa;">{pre_count}</strong> &bull; Post-Earnings (T+0): <strong style="color: #34d399;">{post_count}</strong></div>
+      <div class="summary-stat">Updated: <strong>{last_updated_str}</strong></div>
+    </div>
+
+    <!-- REPORT CARD GRID -->
+    <div class="grid" id="reportsGrid">
       {cards_html}
+      <div id="empty-state">
+        <h3>No Matching Tearsheets Found</h3>
+        <p>No reports match the current filter selection. Try clearing the search or switching filters.</p>
+      </div>
     </div>
 
     <footer class="footer">
       <div>Antigravity 2.0 Autonomous Financial Research Harness • Deterministic SEC Edgar Ground Truth</div>
     </footer>
   </div>
+
+  <!-- INTERACTIVE FILTERING SCRIPT -->
+  <script>
+    let currentFilter = 'all';
+    let searchQuery = '';
+
+    function applyFilters() {{
+      const cards = document.querySelectorAll('.report-card');
+      let visible = 0;
+      cards.forEach(card => {{
+        const cat = card.getAttribute('data-category');
+        const ticker = (card.getAttribute('data-ticker') || '').toLowerCase();
+        const company = (card.getAttribute('data-company') || '').toLowerCase();
+
+        const matchesCat = (currentFilter === 'all') || (cat === currentFilter);
+        const matchesSearch = !searchQuery || ticker.includes(searchQuery) || company.includes(searchQuery);
+
+        if (matchesCat && matchesSearch) {{
+          card.style.display = 'flex';
+          visible++;
+        }} else {{
+          card.style.display = 'none';
+        }}
+      }});
+
+      const visCountEl = document.getElementById('visible-count');
+      if (visCountEl) visCountEl.textContent = visible;
+
+      const emptyState = document.getElementById('empty-state');
+      if (emptyState) {{
+        emptyState.style.display = (visible === 0) ? 'block' : 'none';
+      }}
+    }}
+
+    function setFilter(filterType) {{
+      currentFilter = filterType;
+      document.querySelectorAll('.filter-btn').forEach(btn => {{
+        if (btn.getAttribute('data-filter') === filterType) {{
+          btn.classList.add('active');
+        }} else {{
+          btn.classList.remove('active');
+        }}
+      }});
+
+      if (window.history && window.history.replaceState) {{
+        const newHash = filterType === 'all' ? '' : '#' + filterType;
+        window.history.replaceState(null, null, window.location.pathname + window.location.search + newHash);
+      }}
+      applyFilters();
+    }}
+
+    function handleSearch(val) {{
+      searchQuery = (val || '').trim().toLowerCase();
+      applyFilters();
+    }}
+
+    window.addEventListener('DOMContentLoaded', () => {{
+      const hash = (window.location.hash || '').replace('#', '').toLowerCase();
+      if (hash === 'pre' || hash === 'post' || hash === 'all') {{
+        setFilter(hash);
+      }} else {{
+        applyFilters();
+      }}
+    }});
+  </script>
 </body>
 </html>
 """
@@ -482,15 +732,17 @@ def update_index_html():
 
     # 1. Generate for published_reports/index.html
     cards_for_reports = build_cards_html(grouped, link_prefix="")
-    html_for_reports = build_full_page(cards_for_reports, total_count, public_base)
+    html_for_reports = build_full_page(cards_for_reports, grouped, public_base)
     (REPORTS_DIR / "index.html").write_text(html_for_reports, encoding="utf-8")
 
     # 2. Generate for root index.html
     cards_for_root = build_cards_html(grouped, link_prefix="published_reports/")
-    html_for_root = build_full_page(cards_for_root, total_count, public_base)
+    html_for_root = build_full_page(cards_for_root, grouped, public_base)
     (BASE_DIR / "index.html").write_text(html_for_root, encoding="utf-8")
 
-    print(f"Successfully updated index.html for {total_count} tracked pre/post reports.")
+    pre_count = sum(1 for item in grouped.values() if not item["is_post"])
+    post_count = sum(1 for item in grouped.values() if item["is_post"])
+    print(f"Successfully updated index.html: {total_count} total ({pre_count} Pre-Earnings, {post_count} Post-Earnings).")
 
 if __name__ == "__main__":
     update_index_html()
