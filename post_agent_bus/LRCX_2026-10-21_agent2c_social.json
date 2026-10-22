@@ -1,0 +1,45 @@
+{
+  "ticker": "LRCX",
+  "earnings_date": "2026-10-21",
+  "agent_role": "Social_Pulse_Agent",
+  "model": "Gemini 3.8 Flash High",
+  "social_channels_crawled": [
+    "Reddit (r/stocks, r/investing, r/wallstreetbets, r/semiconductors)",
+    "X (FinTwit / #LRCX / #WFE)",
+    "Threads (threads.net)",
+    "Stocktwits ($LRCX stream)",
+    "Seeking Alpha post-market semiconductor commentary",
+    "Sell-Side Flash Notes (Cantor Fitzgerald, Bernstein, BofA Global Research, Morgan Stanley)"
+  ],
+  "retail_vs_institutional_reaction": {
+    "retail_sentiment_summary": "Retail investors across r/stocks and Stocktwits express shock and irritation at the -7.4% after-hours slide to $241.48, which breached the options-implied move boundary (±7.29%). Retail commentary draws comparisons to ASML's recent bookings guidance wobble, with traders questioning whether the semiconductor capital equipment cycle is peaking prematurely or whether this represents an overreaction dip-buying opportunity.",
+    "institutional_sentiment_summary": "Semiconductor long/short equity hedge funds and institutional desks are de-grossing semiconductor capital equipment exposure. The primary catalyst is Lam's Q2 guidance midpoint of $7.00B, which fell $150M short of Street consensus ($7.15B), combined with ongoing anxiety surrounding mature-node China revenue normalization (37% of sales). While structural HBM and 3D NAND long-term tailwinds remain intact, institutional portfolio managers were unwilling to defend a 22x+ forward multiple on a guidance haircut.",
+    "after_hours_movement_driver": "The stock plunged -7.41% to $241.48 (down -$19.33 from $260.81 close), breaking out of the ±7.29% options implied move corridor. Market participants were disappointed by the conservative Q2 FY27 revenue guidance ($7.0B vs $7.15B Street consensus) and China revenue uncertainty."
+  },
+  "four_pillar_post_sentiment_scores": {
+    "pillar_1_retail_and_social_pulse": {
+      "score_out_of_100": 38,
+      "classification": "BEARISH / VOLATILITY FRUSTRATION",
+      "key_themes": ["Breakdown below $250 support", "Comparison to ASML earnings shock", "Guidance cut triggers stop-losses", "Dip buyers eyeing $230"],
+      "top_quote": "FinTwit Semi Analyst: 'LRCX guide of $7.0B vs $7.15B consensus isn't a disaster, but at 22x P/E into a China digestion cycle, the market takes no prisoners. -7.4% is a harsh re-rating.'"
+    },
+    "pillar_2_sellside_flash_reactions": {
+      "score_out_of_100": 58,
+      "classification": "NEUTRAL / TEMPORARY DIGESTION",
+      "key_themes": ["Cantor reiterates Overweight on HBM leverage", "Bernstein highlights sticky CSBG cash flows", "BofA trims target to $285 on timing pushouts"],
+      "top_quote": "Cantor Fitzgerald Flash Note: 'While Q2 guidance is light by ~2%, the structural inflection in High-Bandwidth Memory (HBM4) and cryogenic NAND etching in 2027 remains completely uncompromised. We view this pullback as a buying window.'"
+    },
+    "pillar_3_management_call_tone": {
+      "score_out_of_100": 74,
+      "classification": "DISCIPLINED & REASSURING",
+      "key_themes": ["Tim Archer confident on technology leadership", "CFO Doug Bettinger sober on China normalization", "Clear articulation of long-term $100B+ WFE inflection"],
+      "top_quote": "Tim Archer on Call: 'Every major semiconductor transition—from GAA to backside power delivery and advanced 3D memory—substantially increases etch and deposition complexity where Lam is best positioned.'"
+    },
+    "pillar_4_options_iv_crush_and_skew": {
+      "score_out_of_100": 42,
+      "classification": "BREACHED STRADDLE / ELEVATED SKEW",
+      "key_themes": ["Actual move of -7.41% marginally exceeded the ±7.29% ($19.27) expected move", "Put options buyers in the money", "Implied volatility crushed from 101.6% but downside tail risk priced in"],
+      "top_quote": "Derivatives Desk: 'LRCX is one of the rare prints this cycle to breach its expected move band (-7.41% vs 7.29% implied). Vol sellers face minor losses on down-side strikes, shifting dealer gamma negative below $240.'"
+    }
+  }
+}

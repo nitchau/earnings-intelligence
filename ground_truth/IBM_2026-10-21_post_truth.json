@@ -1,0 +1,182 @@
+{
+  "ticker": "IBM",
+  "earnings_date": "2026-10-21",
+  "timestamp_generated": "2026-10-21T18:16:18.897482",
+  "t1_baseline": {
+    "source_found": true,
+    "t1_file": "IBM_2026-10-21_truth.json",
+    "consensus_revenue_millions": 17550.0,
+    "whisper_revenue_millions": null,
+    "consensus_eps_nongaap": 2.87,
+    "consensus_eps_gaap": null,
+    "whisper_eps_nongaap": null,
+    "options_implied_move_pct": 7.11,
+    "atm_straddle_usd": 17.35,
+    "prior_quarter_label": "Q2 2026 (Ended Jun 30, 2026)",
+    "prior_quarter_guidance": {}
+  },
+  "sec_filing_metadata": {
+    "form": "8-K",
+    "filing_date": "2026-10-21",
+    "exhibit_99_1_found": true,
+    "edgar_status": "FILING_RETRIEVED"
+  },
+  "market_portal": {
+    "regular_close_price": 251.46,
+    "after_hours_price": 239.8,
+    "after_hours_volume": null,
+    "previous_close_price": 241.3,
+    "google_finance_regular": null,
+    "google_finance_after_hours": null,
+    "price_divergence_pct": 0.0,
+    "price_divergence_warning": false,
+    "market_cap_millions": 236909.12,
+    "enterprise_value_millions": 294138.12,
+    "trailing_pe": 21.51,
+    "forward_pe": 19.12
+  },
+  "post_print_reaction": {
+    "regular_close_price": 251.46,
+    "after_hours_price": 239.8,
+    "post_print_move_pct": -4.64,
+    "t1_options_implied_move_pct": 7.11,
+    "move_vs_implied_status": "WITHIN_IMPLIED_BAND",
+    "overall_print_verdict": "CLEAN MISS"
+  },
+  "beat_miss_scorecard": {
+    "revenue": {
+      "reported_actual_millions": 17162.0,
+      "street_consensus_millions": 17550.0,
+      "whisper_millions": null,
+      "vs_consensus_delta_millions": -388.0,
+      "vs_consensus_delta_pct": -2.21,
+      "vs_whisper_delta_millions": null,
+      "verdict": "MISS"
+    },
+    "eps_nongaap": {
+      "reported_actual": null,
+      "street_consensus": 2.87,
+      "whisper": null,
+      "vs_consensus_delta_dollars": null,
+      "vs_consensus_delta_pct": null,
+      "vs_whisper_delta_dollars": null,
+      "verdict": "MISS"
+    },
+    "eps_gaap": {
+      "reported_actual": 2.27,
+      "street_consensus": null,
+      "verdict": "REPORTED"
+    },
+    "margins": {
+      "reported_gross_margin_pct": 57.73,
+      "reported_operating_margin_pct": 16.58
+    }
+  },
+  "stitched_5q_chronological": {
+    "period_labels": [
+      "Q3 2025",
+      "Q4 2025",
+      "Q1 2026",
+      "Q2 2026",
+      "Q3 2026 (Actual)"
+    ],
+    "total_revenue": [
+      16977.0,
+      16331.0,
+      19687.0,
+      15917.0,
+      17162.0
+    ],
+    "gross_profit": [
+      9977.0,
+      9360.0,
+      11928.0,
+      8950.0,
+      9907.0
+    ],
+    "operating_expenses": [
+      6891.0,
+      6568.0,
+      7079.0,
+      6731.0,
+      7062.0
+    ],
+    "operating_income": [
+      3086.0,
+      2792.0,
+      4849.0,
+      2219.0,
+      2845.0
+    ],
+    "gaap_net_income": [
+      2194.0,
+      1744.0,
+      5600.0,
+      1216.0,
+      2165.0
+    ],
+    "gaap_diluted_eps": [
+      2.31,
+      1.84,
+      5.88,
+      1.28,
+      2.27
+    ],
+    "nongaap_diluted_eps": [],
+    "operating_cash_flow": [
+      1701.0,
+      3082.0,
+      4040.0,
+      5169.0,
+      2597.0
+    ],
+    "capital_expenditures": [
+      373.0,
+      417.0,
+      553.0,
+      391.0,
+      383.0
+    ],
+    "reported_fcf": [
+      1328.0,
+      2665.0,
+      3487.0,
+      4778.0,
+      2214.0
+    ],
+    "stock_based_compensation": [
+      441.0,
+      443.0,
+      430.0,
+      506.0,
+      498.0
+    ],
+    "finance_leases": [
+      1308.0,
+      1114.0,
+      1810.0,
+      2928.0,
+      4213.0
+    ],
+    "true_fcf": [
+      -421.0,
+      1108.0,
+      1247.0,
+      1344.0,
+      -2497.0
+    ]
+  },
+  "forensic_fcf_bridge_q0": {
+    "ocf": 2597.0,
+    "capex": 383.0,
+    "reported_fcf": 2214.0,
+    "sbc": 498.0,
+    "finance_leases": 4213.0,
+    "true_fcf": -2497.0,
+    "formula_check": {
+      "ocf_minus_capex_equals_reported": true,
+      "reported_minus_sbc_leases_equals_true": true
+    }
+  },
+  "company_specific_facts": {}
+}

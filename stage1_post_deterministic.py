@@ -112,17 +112,27 @@ def extract_t1_baseline(ticker: str, earnings_date_str: str) -> dict:
         try:
             content = t1_html.read_text(encoding="utf-8", errors="ignore")
             # Consensus & Whisper Revenue
-            m_rev = re.search(r'Consensus Revenue</span>\s*/\s*<span[^>]*>Whisper</span></span>\s*<span class="strip-val">\$([0-9,.]+)M?\s*/\s*\$([0-9,.]+)M?', content)
-            if m_rev:
-                baseline["consensus_revenue_millions"] = safe_float(m_rev.group(1).replace(",", ""))
-                baseline["whisper_revenue_millions"] = safe_float(m_rev.group(2).replace(",", ""))
+            m_dual = re.search(r'Consensus Revenue.*?<span class="strip-val">\$([0-9,.]+)\s*([MB])?\s*/\s*\$([0-9,.]+)\s*([MB])?', content, re.DOTALL | re.IGNORECASE)
+            if m_dual:
+                u1 = m_dual.group(2) or ('B' if 'B' in m_dual.group(0) else 'M')
+                u2 = m_dual.group(4) or ('B' if 'B' in m_dual.group(0) else 'M')
+                baseline["consensus_revenue_millions"] = safe_float(float(m_dual.group(1).replace(',', '')) * (1000 if u1 == 'B' else 1))
+                baseline["whisper_revenue_millions"] = safe_float(float(m_dual.group(3).replace(',', '')) * (1000 if u2 == 'B' else 1))
+            else:
+                m_single = re.search(r'Consensus(?: Net)? Revenue.*?<span class="strip-val">\$([0-9,.]+)\s*([MB])?', content, re.DOTALL | re.IGNORECASE)
+                if m_single:
+                    u = m_single.group(2) or ('B' if 'B' in m_single.group(0) and float(m_single.group(1).replace(',', '')) < 500 else 'M')
+                    baseline["consensus_revenue_millions"] = safe_float(float(m_single.group(1).replace(',', '')) * (1000 if u == 'B' else 1))
 
             # Consensus & Whisper EPS
-            m_eps = re.search(r'Consensus[^<]*EPS</span>\s*/\s*Whisper</span>\s*<span class="strip-val">\$([0-9.]+)[^/]*[/\]\s*\$([0-9.]+)\s*Whisper', content)
-            if m_eps:
-                baseline["consensus_eps_nongaap"] = safe_float(m_eps.group(1))
-                baseline["whisper_eps_nongaap"] = safe_float(m_eps.group(2))
-
+            m_eps_dual = re.search(r'Consensus.*?EPS.*?<span class="strip-val">\$([0-9.]+)[^/]*[/\]\s*\$([0-9.]+)\s*Whisper', content, re.DOTALL | re.IGNORECASE)
+            if m_eps_dual:
+                baseline["consensus_eps_nongaap"] = safe_float(m_eps_dual.group(1))
+                baseline["whisper_eps_nongaap"] = safe_float(m_eps_dual.group(2))
+            else:
+                m_eps = re.search(r'Consensus.*?EPS.*?<span class="strip-val">\$([0-9.]+)', content, re.DOTALL | re.IGNORECASE)
+                if m_eps:
+                    baseline["consensus_eps_nongaap"] = safe_float(m_eps.group(1))
             # GAAP EPS Est
             m_gaap = re.search(r'GAAP</span>\s*EPS Est:\s*\$([0-9.]+)', content)
             if m_gaap:

@@ -1,0 +1,89 @@
+{
+  "ticker": "IBM",
+  "earnings_date": "2026-10-21",
+  "agent_role": "KPI_Discovery_Agent",
+  "model": "Gemini 3.8 Flash High",
+  "company_operational_kpis": [
+    {
+      "kpi_name": "Software Revenue ($M)",
+      "definition": "Revenue from Hybrid Cloud, Automation, Data, and Transaction Processing software platforms.",
+      "street_consensus": 7650.0,
+      "t1_whisper": 7720.0,
+      "reported_q0_actual": 7761.0,
+      "qoq_change_pct": 14.1,
+      "yoy_change_pct": 5.06,
+      "vs_consensus_delta": "+$111M (+1.45%)",
+      "verdict": "BEAT"
+    },
+    {
+      "kpi_name": "Red Hat Growth (% YoY)",
+      "definition": "Constant currency annual revenue growth for Red Hat OpenShift and Ansible automation suites.",
+      "street_consensus": 11.5,
+      "t1_whisper": 12.0,
+      "reported_q0_actual": 14.0,
+      "qoq_change_pct": null,
+      "yoy_change_pct": 14.0,
+      "vs_consensus_delta": "+250 bps",
+      "verdict": "BEAT"
+    },
+    {
+      "kpi_name": "Consulting Revenue ($M)",
+      "definition": "Business transformation, technology consulting, and application operations services.",
+      "street_consensus": 5480.0,
+      "t1_whisper": 5520.0,
+      "reported_q0_actual": 5327.0,
+      "qoq_change_pct": 3.2,
+      "yoy_change_pct": 0.24,
+      "vs_consensus_delta": "-$153M (-2.79%)",
+      "verdict": "MISS"
+    },
+    {
+      "kpi_name": "Infrastructure Revenue ($M)",
+      "definition": "Hybrid Infrastructure (IBM Z, Power Systems) and Infrastructure Support.",
+      "street_consensus": 4050.0,
+      "t1_whisper": 4100.0,
+      "reported_q0_actual": 3835.0,
+      "qoq_change_pct": -4.8,
+      "yoy_change_pct": -7.41,
+      "vs_consensus_delta": "-$215M (-5.31%)",
+      "verdict": "MISS"
+    },
+    {
+      "kpi_name": "watsonx GenAI Book of Business ($B)",
+      "definition": "Cumulative book of business for watsonx and generative AI client engagements across Software and Consulting.",
+      "street_consensus": 2.5,
+      "t1_whisper": 2.8,
+      "reported_q0_actual": 3.0,
+      "qoq_change_pct": 50.0,
+      "yoy_change_pct": 200.0,
+      "vs_consensus_delta": "+$0.5B (+20.0%)",
+      "verdict": "BEAT"
+    }
+  ],
+  "reporting_segments_5q_mapping": [
+    {
+      "segment_name": "Software",
+      "q0_revenue_millions": 7761.0,
+      "share_of_revenue_pct": 45.22,
+      "sub_rows": ["Hybrid Cloud", "Automation", "Data", "Transaction Processing"]
+    },
+    {
+      "segment_name": "Consulting",
+      "q0_revenue_millions": 5327.0,
+      "share_of_revenue_pct": 31.04,
+      "sub_rows": ["Strategy and Technology", "Intelligent Operations"]
+    },
+    {
+      "segment_name": "Infrastructure",
+      "q0_revenue_millions": 3835.0,
+      "share_of_revenue_pct": 22.35,
+      "sub_rows": ["Hybrid Infrastructure", "Infrastructure Support"]
+    },
+    {
+      "segment_name": "Financing & Other",
+      "q0_revenue_millions": 238.0,
+      "share_of_revenue_pct": 1.39,
+      "sub_rows": ["Financing", "Other"]
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "ticker": "META",
+  "earnings_date": "2026-10-21",
+  "agent_role": "KPI_Discovery_Agent",
+  "model": "Gemini 3.8 Flash High",
+  "company_operational_kpis": [
+    {
+      "kpi_name": "Advertising Revenue ($M)",
+      "definition": "Direct digital advertising revenue generated across Instagram, Facebook, Reels, and Threads feeds.",
+      "street_consensus": 61000.0,
+      "t1_whisper": 61800.0,
+      "reported_q0_actual": 59363.0,
+      "qoq_change_pct": 8.0,
+      "yoy_change_pct": 27.49,
+      "vs_consensus_delta": "-$1,637M (-2.68%)",
+      "verdict": "MISS"
+    },
+    {
+      "kpi_name": "GAAP Diluted EPS ($)",
+      "definition": "Official U.S. GAAP Diluted Earnings Per Share including all stock compensation and AI infrastructure depreciation.",
+      "street_consensus": 5.64,
+      "t1_whisper": 5.85,
+      "reported_q0_actual": 6.18,
+      "qoq_change_pct": -40.8,
+      "yoy_change_pct": -13.45,
+      "vs_consensus_delta": "+$0.54 (+9.57%)",
+      "verdict": "BEAT"
+    },
+    {
+      "kpi_name": "Family Daily Active People (DAP) (Billions)",
+      "definition": "A registered and logged-in user who visited at least one of Meta's Family products (Facebook, Instagram, Messenger, WhatsApp) on a given day.",
+      "street_consensus": 3.32,
+      "t1_whisper": 3.34,
+      "reported_q0_actual": 3.35,
+      "qoq_change_pct": 0.9,
+      "yoy_change_pct": 4.69,
+      "vs_consensus_delta": "+30M (+0.90%)",
+      "verdict": "BEAT"
+    },
+    {
+      "kpi_name": "Average Price per Ad (% YoY)",
+      "definition": "Blended year-over-year pricing change across total digital ad auction impressions.",
+      "street_consensus": 9.0,
+      "t1_whisper": 10.0,
+      "reported_q0_actual": 11.0,
+      "qoq_change_pct": null,
+      "yoy_change_pct": 11.0,
+      "vs_consensus_delta": "+200 bps",
+      "verdict": "BEAT"
+    },
+    {
+      "kpi_name": "Reality Labs Operating Loss ($M)",
+      "definition": "Operating loss from augmented and virtual reality hardware, Orion AR glasses, and Quest headset ecosystem.",
+      "street_consensus": -4500.0,
+      "t1_whisper": -4600.0,
+      "reported_q0_actual": -4400.0,
+      "qoq_change_pct": null,
+      "yoy_change_pct": null,
+      "vs_consensus_delta": "+$100M (Narrower Loss)",
+      "verdict": "BEAT"
+    }
+  ],
+  "reporting_segments_5q_mapping": [
+    {
+      "segment_name": "Family of Apps",
+      "q0_revenue_millions": 60370.0,
+      "share_of_revenue_pct": 99.29,
+      "sub_rows": ["Advertising", "Other revenue"]
+    },
+    {
+      "segment_name": "Reality Labs",
+      "q0_revenue_millions": 431.0,
+      "share_of_revenue_pct": 0.71,
+      "sub_rows": ["Hardware & Content Ecosystem"]
+    }
+  ]
+}

@@ -37,12 +37,12 @@ end_idx = master_raw.rfind('</div>', 0, master_raw.find('</body>'))
 container_html = master_raw[start_idx:end_idx].strip()
 
 # Ground truth values
-reg_price = truth["post_print_reaction"]["regular_close_price"] # 386.47
-ah_price = truth["post_print_reaction"]["after_hours_price"] # 385.00
-post_move_pct = truth["post_print_reaction"]["post_print_move_pct"] # -0.38
-opt_implied_pct = truth["post_print_reaction"]["t1_options_implied_move_pct"] # 6.13
+reg_price = truth["post_print_reaction"]["regular_close_price"]
+ah_price = truth["post_print_reaction"]["after_hours_price"]
+post_move_pct = truth["post_print_reaction"]["post_print_move_pct"]
+opt_implied_pct = truth["post_print_reaction"]["t1_options_implied_move_pct"]
 opt_straddle = truth["t1_baseline"].get("atm_straddle_usd", 23.70)
-verdict = truth["post_print_reaction"]["overall_print_verdict"] # CLEAN BEAT & RAISE
+verdict = truth["post_print_reaction"]["overall_print_verdict"]
 
 q0_rev = truth["beat_miss_scorecard"]["revenue"]["reported_actual_millions"] # 28046.0
 cons_rev = truth["beat_miss_scorecard"]["revenue"]["street_consensus_millions"] # 27850.0
@@ -411,15 +411,15 @@ if idx_box_start != -1:
     old_box = updated_html[idx_box_start:idx_box_start + closing_divs[8] + len('</div>')]
     updated_html = updated_html.replace(old_box, fcf_bridge_replacement)
 
-# Update PM scenario prices anchored to After-Hours Price ($385.00)
+# Update PM scenario prices anchored to After-Hours Price (${ah_price:.2f})
 # Bull target $425.00, Bear target $345.00
 updated_html = updated_html.replace(
     'Bull Case Target: $435',
-    'Bull Case Target: $425.00 (Anchored above $385.00 AH Price)'
+    f'Bull Case Target: $425.00 (Anchored above ${ah_price:.2f} AH Price)'
 )
 updated_html = updated_html.replace(
     'Bear Case Target: $320',
-    'Bear Case Target: $345.00 (Anchored below $385.00 AH Price)'
+    f'Bear Case Target: $345.00 (Anchored below ${ah_price:.2f} AH Price)'
 )
 
 # Add Call Q&A Forensic Highlights to Section 4 (audit-grid)

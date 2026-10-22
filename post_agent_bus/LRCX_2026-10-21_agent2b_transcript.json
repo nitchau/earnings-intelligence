@@ -1,0 +1,90 @@
+{
+  "ticker": "LRCX",
+  "earnings_date": "2026-10-21",
+  "agent_role": "Transcript_Forensic_Agent",
+  "model": "Gemini 3.8 Flash High",
+  "guidance_accountability_matrix_a": [
+    {
+      "guided_metric": "Q1 FY2027 Revenue Guidance",
+      "prior_quarter_guidance": "$6.6B to $7.2B ($6.9B midpoint)",
+      "reported_q0_actual": "$6,722M reported revenue",
+      "variance_commentary": "Revenue tracked toward the lower half of the guidance corridor as a customer requested a slight delivery timing shift into Q2.",
+      "credibility_grade": "MET GUIDE"
+    },
+    {
+      "guided_metric": "Q1 FY2027 Non-GAAP Gross Margin",
+      "prior_quarter_guidance": "51.0% to 52.5% (51.75% midpoint)",
+      "reported_q0_actual": "Reported 51.75% Non-GAAP gross margin",
+      "variance_commentary": "Delivered exactly at midpoint, benefiting from operational efficiency and favorable memory tool mix.",
+      "credibility_grade": "MET GUIDE"
+    },
+    {
+      "guided_metric": "Q1 FY2027 Operating Margin",
+      "prior_quarter_guidance": "36.5% to 38.0%",
+      "reported_q0_actual": "Reported 37.39% operating margin",
+      "variance_commentary": "Strong operating expense control preserved profitability despite slight revenue timing pushout.",
+      "credibility_grade": "MET GUIDE"
+    },
+    {
+      "guided_metric": "CSBG Recurring Base Trajectory",
+      "prior_quarter_guidance": "Sequential mid-single digit growth in installed base servicing",
+      "reported_q0_actual": "CSBG reached $2,442M (+16.1% QoQ, +27.2% YoY)",
+      "variance_commentary": "Fab utilization rates improved in DRAM and foundry customers, driving spares consumption.",
+      "credibility_grade": "BEAT OWN GUIDE"
+    }
+  ],
+  "forward_guidance_reset_matrix_b": [
+    {
+      "forward_horizon_and_metric": "Q2 FY2027 Revenue Target",
+      "preprint_street_consensus": "$7.15B ($7.0B - $7.3B)",
+      "new_management_guidance": "$7.00B ± $300M ($6.7B - $7.3B)",
+      "delta_vs_street": "-$150M at midpoint (-2.1% vs Street)",
+      "action_badge": "LOWERED",
+      "rationale": "Slight pushouts in mainstream mature-node fab expansions in Asia offset by leading-edge AI etch orders."
+    },
+    {
+      "forward_horizon_and_metric": "Q2 FY2027 Non-GAAP Diluted EPS",
+      "preprint_street_consensus": "$2.32",
+      "new_management_guidance": "$2.25 ± $0.15 ($2.10 - $2.40)",
+      "delta_vs_street": "-$0.07 at midpoint (-3.0% vs Street)",
+      "action_badge": "LOWERED",
+      "rationale": "Reflects higher R&D investments in next-generation high-NA EUV etch chemistry and sub-2nm GAA platforms."
+    },
+    {
+      "forward_horizon_and_metric": "CY2026/2027 WFE Industry Outlook",
+      "preprint_street_consensus": "$98B - $102B total WFE",
+      "new_management_guidance": "Approaching ~$100B WFE with leading-edge memory leading growth",
+      "delta_vs_street": "In-line with broader consensus",
+      "action_badge": "MAINTAINED",
+      "rationale": "HBM3e and HBM4 packaging intensity creates mandatory etch/deposition step expansion per wafer."
+    },
+    {
+      "forward_horizon_and_metric": "Full-Year FY2027 Capital Return Program",
+      "preprint_street_consensus": ">85% of Free Cash Flow returned to shareholders",
+      "new_management_guidance": "Commitment to return 75% to 100% of FCF via dividends and buybacks",
+      "delta_vs_street": "In-line with capital allocation framework",
+      "action_badge": "MAINTAINED",
+      "rationale": "Consistent cash generator with zero structural debt maturities and $5.8B cash and short-term investments."
+    }
+  ],
+  "call_qa_forensic_highlights": [
+    {
+      "analyst_name": "C.J. Muse (Cantor Fitzgerald)",
+      "topic": "HBM Capacity Expansion and Etch Intensity Drivers",
+      "question": "Can you discuss the etch and deposition content multiplier for HBM4 compared to standard DDR5? As packaging shifts to hybrid bonding, how does Lam defend its chamber share?",
+      "executive_response": "CEO Tim Archer explained that HBM requires specialized through-silicon via (TSV) etch steps and ultra-flat chemical mechanical polishing and deposition interfaces. For HBM4, the aspect ratio requirements increase by more than 30%, which directly expands Lam's addressable market per wafer. Lam holds greater than 70% market share in critical memory etch applications."
+    },
+    {
+      "analyst_name": "Stacy Rasgon (Bernstein)",
+      "topic": "China Revenue Sustainability and Export Rule Scrutiny",
+      "question": "China was 37% of revenue this quarter. Given geopolitical headlines, what is your outlook for Chinese domestic spending over the next 4 quarters, and is there any pre-buying pulling demand forward?",
+      "executive_response": "CFO Doug Bettinger emphasized that China shipments are fully compliant with BIS export regulations, primarily concentrated in trailing-edge mature nodes, power semiconductors, and domestic memory fabs. Lam models China revenue moderating to the low-30% range as leading-edge U.S., Taiwanese, and Korean investments accelerate."
+    },
+    {
+      "analyst_name": "Vivek Arya (Bank of America)",
+      "topic": "NAND Inflection and 3D Layer Stacking Roadmap",
+      "question": "NAND customer profitability is rebounding, but Capex remains disciplined. When do you anticipate 300+ layer 3D NAND technology conversions to generate meaningful tool upgrade orders?",
+      "executive_response": "Management stated that customers are currently upgrading existing tools rather than building greenfield shell space. The inflection to 300+ and 400+ layer architectures requires cryogenic etch tools to avoid hole bending and profile distortion, positioning Lam for a pronounced multi-year equipment upgrade cycle starting in mid-2027."
+    }
+  ]
+}

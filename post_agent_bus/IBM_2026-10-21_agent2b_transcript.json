@@ -1,0 +1,90 @@
+{
+  "ticker": "IBM",
+  "earnings_date": "2026-10-21",
+  "agent_role": "Transcript_Forensic_Agent",
+  "model": "Gemini 3.8 Flash High",
+  "guidance_accountability_matrix_a": [
+    {
+      "guided_metric": "FY2026 Full-Year Free Cash Flow Target",
+      "prior_quarter_guidance": "Full-year FCF expected to exceed $12.5B",
+      "reported_q0_actual": "YTD FCF reached $10.48B (Q3 reported FCF of $2,214M), pacing ahead of full-year targets",
+      "variance_commentary": "Working capital discipline and software cash conversion enabled management to comfortably exceed intermediate pacing benchmarks.",
+      "credibility_grade": "BEAT OWN GUIDE"
+    },
+    {
+      "guided_metric": "Constant Currency Revenue Growth Trajectory",
+      "prior_quarter_guidance": "Consistent with mid-single digit revenue growth model (~4% to 5% constant currency)",
+      "reported_q0_actual": "Reported revenue of $17,162M represents +1.5% nominal and +2.0% constant currency",
+      "variance_commentary": "Consulting soft patch and mainframe product cycle decline pulled total top-line growth below the mid-single digit guidance corridor.",
+      "credibility_grade": "MISSED OWN GUIDE"
+    },
+    {
+      "guided_metric": "Software Segment Growth Target",
+      "prior_quarter_guidance": "Sustained high single-digit software growth driven by Red Hat double-digit expansion",
+      "reported_q0_actual": "Software revenue grew +5.1% YoY to $7,761M with Red Hat up +14%",
+      "variance_commentary": "Red Hat delivered on guidance (+14%), but transaction processing software moderation offset some of the cloud tailwind.",
+      "credibility_grade": "MET GUIDE"
+    },
+    {
+      "guided_metric": "Consulting Segment Revenue Pace",
+      "prior_quarter_guidance": "Low single-digit positive growth with enterprise modernization pipeline conversion",
+      "reported_q0_actual": "Consulting revenue of $5,327M was essentially flat (+0.2% YoY)",
+      "variance_commentary": "Clients prioritized short-term cost takeout and GenAI proofs-of-concept over broad discretionary multi-year ERP migrations.",
+      "credibility_grade": "MISSED OWN GUIDE"
+    }
+  ],
+  "forward_guidance_reset_matrix_b": [
+    {
+      "forward_horizon_and_metric": "FY2026 Full-Year Free Cash Flow",
+      "preprint_street_consensus": "$12.5B - $12.7B",
+      "new_management_guidance": "More than $13.0B",
+      "delta_vs_street": "+$300M to +$500M (+2.4% above Street)",
+      "action_badge": "RAISED",
+      "rationale": "Strong operational cash flow conversion in Software and structural cost reductions from internal AI automation."
+    },
+    {
+      "forward_horizon_and_metric": "Q4 2026 Constant Currency Revenue",
+      "preprint_street_consensus": "+5.2% YoY constant currency",
+      "new_management_guidance": "+4.0% to +5.0% YoY constant currency",
+      "delta_vs_street": "-20 to -120 bps below Street mid-point",
+      "action_badge": "LOWERED",
+      "rationale": "Caution on enterprise consulting contract sign-off timing entering calendar year-end."
+    },
+    {
+      "forward_horizon_and_metric": "Software Revenue Momentum (Q4 2026)",
+      "preprint_street_consensus": "+7.5% YoY",
+      "new_management_guidance": "High single-digit constant currency growth",
+      "delta_vs_street": "In-line with consensus",
+      "action_badge": "MAINTAINED",
+      "rationale": "Annual recurring revenue (ARR) renewal rates tracking above 105% in Red Hat OpenShift and hybrid data platforms."
+    },
+    {
+      "forward_horizon_and_metric": "Full-Year 2026 Pre-Tax Margin Expansion",
+      "preprint_street_consensus": "+50 bps YoY",
+      "new_management_guidance": "Expanding ~50 bps YoY",
+      "delta_vs_street": "In-line with Street expectations",
+      "action_badge": "MAINTAINED",
+      "rationale": "Workforce rebalancing savings and internal deployment of watsonx code assistants driving productivity."
+    }
+  ],
+  "call_qa_forensic_highlights": [
+    {
+      "analyst_name": "Toni Sacconaghi (Bernstein)",
+      "topic": "Consulting Demand Softness vs. Competitive Market Share",
+      "question": "Can you unpack the divergence between your solid Software performance and near-flat Consulting growth? Are clients pausing broader IT programs to fund GenAI, or are you losing market share to offshore systems integrators?",
+      "executive_response": "CEO Arvind Krishna clarified that the consulting slowdown is an industry-wide prioritization phenomenon rather than a competitive loss. Clients are scrutinizing discretionary consulting projects and re-allocating capital toward infrastructure readiness. However, IBM's watsonx book of business exceeded $3.0B, roughly 80% of which flows through consulting contracts over a 12-to-18 month implementation cycle."
+    },
+    {
+      "analyst_name": "Erik Woodring (Morgan Stanley)",
+      "topic": "Mainframe Cycle Timing and z17 Launch Expectations",
+      "question": "Infrastructure declined 7% as the z16 cycle heads into its 10th quarter. When do you anticipate the inflection to next-generation mainframe hardware, and how will that alter margin mix in 2027?",
+      "executive_response": "CFO James Kavanaugh highlighted that z16 performance remains one of the strongest mainframe cycles in IBM history, outperforming the prior z15 cycle on cumulative revenue. He noted that hardware cyclicality is normal and anticipated, with next-gen systems typically debuting in a 3-year rhythm, while high-margin software maintenance contracts remain sticky."
+    },
+    {
+      "analyst_name": "Wamsi Mohan (Bank of America)",
+      "topic": "Free Cash Flow Bridge & Finance Lease Obligations",
+      "question": "You raised full-year reported FCF to >$13.0B, yet in Q3 working capital and lease commitments created a substantial delta in True FCF. How should institutional investors model net leverage and capital returns?",
+      "executive_response": "Management reiterated commitment to maintaining its growing dividend (30+ consecutive years of increases) and accelerating debt reduction following strategic acquisitions. The cash generation profile in Q4 is historically the highest of the year, driven by annual enterprise software renewals and deferred revenue collections."
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "ticker": "META",
+  "earnings_date": "2026-10-21",
+  "agent_role": "Social_Pulse_Agent",
+  "model": "Gemini 3.8 Flash High",
+  "social_channels_crawled": [
+    "Reddit (r/stocks, r/investing, r/wallstreetbets)",
+    "X (FinTwit / #META / $META)",
+    "Threads (threads.net / @meta)",
+    "Stocktwits ($META stream)",
+    "Seeking Alpha post-market commentary",
+    "Sell-Side Flash Notes (JPMorgan, Morgan Stanley, Goldman Sachs, Bernstein, Jefferies)"
+  ],
+  "retail_vs_institutional_reaction": {
+    "retail_sentiment_summary": "Retail enthusiasm on r/wallstreetbets, Threads, and X is overwhelmingly bullish following the headline GAAP EPS beat ($6.18 vs $5.64 expected) and the post-market rally pushing Meta stock past $712. Retail traders celebrated Mark Zuckerberg's aggressive framing of 'Personal Superintelligence' and the debut of Muse and Muse Wonder frontier AI models, alongside continued momentum in Ray-Ban Meta smart glasses.",
+    "institutional_sentiment_summary": "Institutional portfolio managers and equity research desks express measured optimism. The core advertising engine displayed phenomenal health, with price per ad expanding +11% YoY driven by AI-powered Advantage+ ad targeting. The Q4 revenue guidance midpoint ($66.5B) matched consensus expectations. However, hedge fund analysts noted that Q3 CapEx reached an astonishing $30.12B, resulting in negative True Free Cash Flow (-$6.87B) once $7.66B in stock-based compensation is accounted for, underscoring Meta's massive infrastructure bet heading into 2027.",
+    "after_hours_movement_driver": "The stock gained +2.12% to $712.31 (up +$14.79 from $697.52 regular close) as investors rewarded the clean GAAP EPS beat ($6.18 vs $5.64), strong ad pricing realization (+11%), and in-line Q4 guidance, despite warnings of significant CapEx expansion in 2027."
+  },
+  "four_pillar_post_sentiment_scores": {
+    "pillar_1_retail_and_social_pulse": {
+      "score_out_of_100": 82,
+      "classification": "STRONGLY BULLISH",
+      "key_themes": ["Clean GAAP EPS beat ($6.18)", "Zuck superintelligence vision", "Threads hits 275M MAUs", "Stock breaks $710 AH"],
+      "top_quote": "FinTwit Tech Analyst: 'Meta is executing on a different planet. +11% ad pricing power while funding the biggest AI supercomputer on earth out of operating cash flow. $700+ is fully justified.'"
+    },
+    "pillar_2_sellside_flash_reactions": {
+      "score_out_of_100": 78,
+      "classification": "CONSTRUCTIVE / RAISING TARGETS",
+      "key_themes": ["JPMorgan raises price target to $760", "Morgan Stanley notes Reels monetization parity", "Goldman Sachs constructive on AI recommendation ROAS"],
+      "top_quote": "JPMorgan Flash Note: 'Meta delivered another high-quality operational print. Core Family of Apps engagement is compounding, ad pricing is accelerating, and AI infrastructure investments are already self-funding through superior advertiser conversion rates.'"
+    },
+    "pillar_3_management_call_tone": {
+      "score_out_of_100": 85,
+      "classification": "VISIONARY & HIGHLY CONFIDENT",
+      "key_themes": ["Zuckerberg visionary on cognitive AI layer", "CFO Susan Li rigorous on ad conversion metrics", "Unapologetic long-term infrastructure investment stance"],
+      "top_quote": "Mark Zuckerberg on Call: 'We hit major milestones this quarter toward delivering personal superintelligence for everyone. Our investments in AI are paying off directly in our core business and establishing the foundation for our future.'"
+    },
+    "pillar_4_options_iv_crush_and_skew": {
+      "score_out_of_100": 60,
+      "classification": "EXTREME VOLATILITY CRUSH",
+      "key_themes": ["ATM Implied Volatility plummeted from 93.2% pre-print to ~36%", "Expected straddle move was ±6.82% (±$48.12), actual post-market move is +2.12% (+$14.79)", "Option sellers pocket maximum decay on front-week weekly straddles and iron condors"],
+      "top_quote": "Derivatives Desk: 'The print was well within the ±$48.12 expected move band at +$14.79. Vol sellers capture massive premium as IV collapses into the open.'"
+    }
+  }
+}
