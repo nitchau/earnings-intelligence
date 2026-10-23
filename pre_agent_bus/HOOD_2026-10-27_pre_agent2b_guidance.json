@@ -1,0 +1,105 @@
+{
+  "ticker": "HOOD",
+  "earnings_date": "2026-10-27",
+  "agent": "Pre_Guidance_Debate_Agent (Agent 2B)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "credibility_score": 85,
+  "credibility_label": "85 / 100 (Prudent Expense Sandbagger & Guidance Outperformer)",
+  "matrix_a_prior_guidance_and_track_record": [
+    {
+      "metric": "Full-Year 2026 Combined OpEx & SBC Guidance Corridor",
+      "tooltip_title": "Management's official full-year 2026 Adjusted OpEx and Share-Based Compensation guidance issued in Q2 2026.",
+      "tooltip_def": "FY2026 OpEx & SBC Corridor: Lowered in Q2 2026 from $2.70B–$2.825B to $2.675B–$2.775B ($2,725M midpoint) even after absorbing WonderFi and Rothera integration overhead.",
+      "prior_q_guidance_for_q0": "$2,675M – $2,775M ($2,725M Midpoint)",
+      "current_street_consensus": "$2,720M Blended ($715M in Q3E)",
+      "historical_4q_beat_rate": "Lowered Cost Envelope 2 Straight Qtrs",
+      "variance_and_sandbag_commentary": "CFO Shiv Verma has consistently undershot internal expense forecasts while funding aggressive growth; Street anticipates FY26 expense guide will hold or drift toward the lower half ($2.68B–$2.72B).",
+      "credibility_grade": "STRONG EXPENSE DISCIPLINE"
+    },
+    {
+      "metric": "Q3 2026E Net Interest Revenue & Rate Sensitivity Corridor",
+      "tooltip_title": "Quarterly net interest income baseline following recent Federal Reserve interest rate adjustments.",
+      "tooltip_def": "Net Interest Revenue Trajectory: Printed $389M in Q2 2026 (+9% YoY); Street models $395M–$405M in Q3 2026E as surging margin loans ($16B+) and sweep balances offset Fed rate reductions.",
+      "prior_q_guidance_for_q0": "Implied Stable: $385M – $400M Q3 Corridor",
+      "current_street_consensus": "$400M Consensus ($410M Whisper)",
+      "historical_4q_beat_rate": "4 / 4 Positive NII Beats",
+      "variance_and_sandbag_commentary": "Robinhood has successfully countered interest rate cuts by growing interest-earning assets by >30% YoY, proving cash sweep and margin balances have outgrown benchmark rate drag.",
+      "credibility_grade": "RESILIENT ASSET SENSITIVITY"
+    },
+    {
+      "metric": "Quarterly Net Deposits & Organic Asset Growth Velocity",
+      "tooltip_title": "Annualized organic customer net deposit growth rate across funded accounts.",
+      "tooltip_def": "Net Deposits Velocity: Q2 2026 printed a record $21.7B in net deposits (>25% annualized growth); management projected Q3 net deposits to sustain a >20% annualized growth pace ($18B–$22B).",
+      "prior_q_guidance_for_q0": ">20% Annualized Net Deposit Growth Pace",
+      "current_street_consensus": "$20.5B Net Deposits ($22.0B Whisper)",
+      "historical_4q_beat_rate": "4 Straight Quarters >$10B Net Inflows",
+      "variance_and_sandbag_commentary": "1-3% IRA match promotions and high-yield cash sweep (5.00% APY for Gold members) continue to siphon wealth from legacy wirehouses like Schwab, Fidelity, and Morgan Stanley.",
+      "credibility_grade": "MARKET SHARE ACCRETION"
+    },
+    {
+      "metric": "4-Quarter Historical EPS Surprise & 1-Day Stock Reaction Track Record",
+      "tooltip_title": "Deterministic 4-quarter historical EPS surprise and 1-day post-earnings stock price move from Stage 1.",
+      "tooltip_def": "4Q Historical Reaction Audit: Over the last 4 quarters, HOOD moved an average of ±9.14% on T+1 (-3.61%, -13.24%, -8.91%, -10.81%), whereas the current weekly straddle prices ±10.13% (±$9.73/sh).",
+      "prior_q_guidance_for_q0": "Last 4Q Moves: -3.61%, -13.24%, -8.91%, -10.81%",
+      "current_street_consensus": "Current ATM Straddle: ±10.13% (±$9.73/sh)",
+      "historical_4q_beat_rate": "3 / 4 EPS Beats (75.0% Beat Rate)",
+      "variance_and_sandbag_commentary": "Despite 3 out of 4 EPS beats averaging +14.4% surprise, HOOD shares dropped on day 1 post-earnings in all 4 prior quarters due to buy-side whisper 'sell-the-news' positioning and elevated retail options skew.",
+      "credibility_grade": "ASYMMETRIC VOLATILITY EDGE"
+    }
+  ],
+  "matrix_b_forward_guidance_bogeys": [
+    {
+      "forward_metric": "Q4 2026E Net Revenue Guidance Corridor",
+      "tooltip_title": "Wall Street hurdle for Q4 2026 revenue guidance given U.S. election trading volumes.",
+      "tooltip_def": "Q4 2026E Revenue Guidance: Street consensus models $1.48B–$1.55B ($1.51B midpoint). A guided midpoint above $1.56B+ triggers immediate institutional re-rating.",
+      "street_consensus_hurdle": "$1.48B – $1.55B ($1.51B Midpoint)",
+      "bull_case_bogey": "$1.58B – $1.65B ($1.61B Midpoint)",
+      "bear_case_breakdown": "Midpoint Below $1.45B",
+      "sensitivity_badge": "PRIMARY T+1 DRIVER",
+      "strategic_rationale": "Fourth quarter trading encompasses high-volume presidential election event contracts, crypto market volatility, and seasonal holiday deposit bonuses that drive peak retail monetization."
+    },
+    {
+      "forward_metric": "FY2026 Total Operating Expense & SBC Ceiling Update",
+      "tooltip_title": "Full-Year 2026 adjusted operating expense ceiling required to maintain operating margin expansion.",
+      "tooltip_def": "FY2026 Expense Ceiling: Management guided $2,675M–$2,775M in Q2. Bulls demand management lower the top end to <$2,725M to prove operating leverage into 2027.",
+      "street_consensus_hurdle": "$2,675M – $2,775M ($2,725M Midpoint)",
+      "bull_case_bogey": "Ceiling Lowered to $2,650M – $2,720M",
+      "bear_case_breakdown": "Ceiling Raised Above $2,800M",
+      "sensitivity_badge": "OPERATING LEVERAGE",
+      "strategic_rationale": "Robinhood has committed to keeping headcount roughly flat while automating customer service and compliance via internal generative AI agents, ensuring top-line growth flows directly to bottom-line EBIT."
+    },
+    {
+      "forward_metric": "Assets Under Custody (AUC) Milestone Targets for Year-End 2026",
+      "tooltip_title": "Institutional targets for year-end 2026 platform Assets Under Custody.",
+      "tooltip_def": "Year-End 2026 AUC Bogey: With Q2 ending at $369B and Q3 pacing toward $395B+, institutional investors want visibility toward crossing $425B+ by year-end 2026.",
+      "street_consensus_hurdle": "$400B – $415B Year-End 2026 AUC",
+      "bull_case_bogey": "$430B+ Year-End 2026 AUC",
+      "bear_case_breakdown": "Deceleration Below $385B AUC",
+      "sensitivity_badge": "AUM EXPANSION",
+      "strategic_rationale": "Reaching $425B+ firmly establishes Robinhood alongside traditional wealth managers and opens the path toward launching proprietary asset management and index products."
+    }
+  ],
+  "section_4b_pre_print_debates": [
+    {
+      "debate_title": "Debate 1: Event Contracts & Prediction Markets — Sustainable Flow or Fleeting Election Bubble?",
+      "border_color": "#3b82f6",
+      "title_color": "#60a5fa",
+      "bull_vs_bear_framing": "Bulls argue Robinhood's prediction market event contracts ($156M revenue in Q2, surging >10x YoY) are a secular new asset class establishing Robinhood as the de facto retail financial entertainment hub, poised to expand into sports, economic data, and corporate earnings bets. Bears contend event contracts are experiencing an ephemeral surge tied purely to the November 2026 U.S. election that will crater in Q1 2027, leaving elevated regulatory scrutiny in its wake.",
+      "call_focus_question": "Analyst Call Question: What percentage of Q3 event contract volume was driven by political contracts versus macroeconomic or financial markets, and how does management plan to sustain engagement post-election?"
+    },
+    {
+      "debate_title": "Debate 2: Net Interest Income Durability in a Fed Easing Cycle vs. Margin Loan Expansion",
+      "border_color": "#10b981",
+      "title_color": "#34d399",
+      "bull_vs_bear_framing": "Bulls note that Robinhood's Net Interest Revenues grew +9% YoY to $389M in Q2 despite initial Fed cuts because interest-earning assets (cash sweep balances, securities lending, and margin books) expanded >32% YoY. Bears argue that cumulative 50–75 bps Fed rate reductions will inevitably compress floating-rate yields on Robinhood's $20B+ cash sweep program, making NII growth mathematically impossible without double-digit margin borrowing expansion.",
+      "call_focus_question": "Analyst Call Question: Can management quantify the exact basis point sensitivity of annualized Net Interest Income to each incremental 25 bps Fed funds rate cut given current customer deposit tiering and margin loan utilization?"
+    },
+    {
+      "debate_title": "Debate 3: Crypto Trading Rebound vs. Regulatory Arbitrage via Bitstamp & WonderFi",
+      "border_color": "#f59e0b",
+      "title_color": "#fbbf24",
+      "bull_vs_bear_framing": "Bulls highlight that crypto revenue fell -38% YoY in Q2 to $100M, setting up an easy YoY comp and major second-half recovery as Bitcoin and altcoin liquidity surged in September/October 2026, enhanced by the European Bitstamp license and WonderFi acquisition in Canada. Bears emphasize that crypto trading take rates remain under pressure from decentralized exchanges and institutional spot ETF alternatives, while regulatory overhang persists.",
+      "call_focus_question": "Analyst Call Question: With Bitstamp integration underway, what is the timeline for rolling out staking, institutional crypto custody, and global derivative products to drive crypto monetization above $150M/quarter?"
+    }
+  ]
+}

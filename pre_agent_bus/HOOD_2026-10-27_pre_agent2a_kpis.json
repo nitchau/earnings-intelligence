@@ -1,0 +1,94 @@
+{
+  "ticker": "HOOD",
+  "earnings_date": "2026-10-27",
+  "agent": "Pre_KPI_Consensus_Agent (Agent 2A)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "upcoming_quarter_label": "Q3 2026E",
+  "latest_reported_quarter_label": "Q2 2026",
+  "headline_and_company_kpis": [
+    {
+      "metric": "Total Net Revenues ($M)",
+      "tooltip_title": "Consolidated Net Revenues across Transaction-Based, Net Interest, and Other Revenues for Q3 2026E.",
+      "tooltip_def": "Total Net Revenues ($M): Wall Street consensus models $1,425M (+11.9% YoY vs $1,274M in Q3 2025); buy-side whisper bogey sits at $1,460M (+14.6% YoY) fueled by record prediction contracts and crypto trading rebound.",
+      "q_minus_1_actual": "$1,308M",
+      "q_minus_4_yoy_baseline": "$1,274M",
+      "street_consensus_q0e": "$1,425M",
+      "whisper_bogey_q0e": "$1,460M",
+      "whisper_spread_display": "+$35M (+2.46% Whisper Hurdle)",
+      "bar_width_pct": 82,
+      "hurdle_badge": "BULL HURDLE >$1,460M"
+    },
+    {
+      "metric": "Diluted EPS (GAAP / Normalized)",
+      "tooltip_title": "Wall Street consensus Diluted EPS for Q3 2026E ($0.55 Yahoo Consensus) vs Buy-Side Whisper ($0.60).",
+      "tooltip_def": "Diluted EPS ($): Consensus stands at $0.55 (range $0.52–$0.59) vs Q2 2026 actual of $0.62; buy-side whisper demands $0.60+ driven by tight headcount discipline and expanding operating leverage.",
+      "q_minus_1_actual": "$0.62",
+      "q_minus_4_yoy_baseline": "$0.61",
+      "street_consensus_q0e": "$0.55",
+      "whisper_bogey_q0e": "$0.60",
+      "whisper_spread_display": "+$0.05 (+9.09% Whisper Hurdle)",
+      "bar_width_pct": 85,
+      "hurdle_badge": "BULL HURDLE >$0.60"
+    },
+    {
+      "metric": "Transaction-Based Revenues ($M)",
+      "tooltip_title": "Total trading transaction revenues across Options, Event Contracts, Equities, and Cryptocurrencies.",
+      "tooltip_def": "Transaction-Based Revenues ($M): Printed $776M (+44% YoY) in Q2 2026; Street consensus models $845M in Q3 2026E with buy-side whisper targeting $875M+ on surging event contract volumes.",
+      "q_minus_1_actual": "$776M",
+      "q_minus_4_yoy_baseline": "$728M",
+      "street_consensus_q0e": "$845M",
+      "whisper_bogey_q0e": "$875M",
+      "whisper_spread_display": "+$30M (+3.55% Whisper Hurdle)",
+      "bar_width_pct": 79,
+      "hurdle_badge": "CORE TRADING ENGINE"
+    },
+    {
+      "metric": "Options Trading Revenue ($M)",
+      "tooltip_title": "Transaction revenue generated from trading equity and index options contracts.",
+      "tooltip_def": "Options Trading Revenue ($M): Robinhood's largest transaction line printed $342M in Q2 2026 (+29% YoY); Street consensus models $365M in Q3 2026E (whisper $380M) driven by multi-leg option index rollouts.",
+      "q_minus_1_actual": "$342M",
+      "q_minus_4_yoy_baseline": "$265M",
+      "street_consensus_q0e": "$365M",
+      "whisper_bogey_q0e": "$380M",
+      "whisper_spread_display": "+$15M (+4.11% Spread)",
+      "bar_width_pct": 84,
+      "hurdle_badge": "HIGHEST MARGIN FLOW"
+    },
+    {
+      "metric": "Event Contracts / Prediction Markets Revenue ($M)",
+      "tooltip_title": "Transaction revenue from Robinhood's newly launched presidential and macroeconomic event contracts.",
+      "tooltip_def": "Event Contracts Revenue ($M): Exploded from $15M in Q2 2025 to $156M in Q2 2026 (>10x YoY); Street models $190M for Q3 2026E ahead of the November U.S. election, with whisper estimates at $215M+.",
+      "q_minus_1_actual": "$156M",
+      "q_minus_4_yoy_baseline": "$15M",
+      "street_consensus_q0e": "$190M",
+      "whisper_bogey_q0e": "$215M",
+      "whisper_spread_display": "+$25M (+13.16% Election Lift)",
+      "bar_width_pct": 92,
+      "hurdle_badge": "PARABOLIC GROWTH"
+    },
+    {
+      "metric": "Total Assets Under Custody (AUC) ($B)",
+      "tooltip_title": "Total value of equities, cryptocurrencies, cash sweep, and options held in user accounts.",
+      "tooltip_def": "Assets Under Custody ($B): Reached a record $369B (+32% YoY) in Q2 2026; Street models $395B in Q3 2026E with buy-side whisper targeting $405B+ on record quarterly net deposits of $20B+.",
+      "q_minus_1_actual": "$369B",
+      "q_minus_4_yoy_baseline": "$279B",
+      "street_consensus_q0e": "$395B",
+      "whisper_bogey_q0e": "$405B",
+      "whisper_spread_display": "+$10B (+2.53% Asset Hurdle)",
+      "bar_width_pct": 88,
+      "hurdle_badge": "BALANCE SHEET SCALE"
+    },
+    {
+      "metric": "Robinhood Gold Paid Subscribers (M)",
+      "tooltip_title": "Total active paying subscribers to the $5/month Robinhood Gold tiered membership program.",
+      "tooltip_def": "Robinhood Gold Subscribers (M): Grew +39% YoY to 4.84M in Q2 2026 (~17% attach rate); consensus models 5.20M in Q3 2026E with whisper looking for 5.35M+ driven by 3% cash-back Gold Card adoption.",
+      "q_minus_1_actual": "4.84M",
+      "q_minus_4_yoy_baseline": "3.48M",
+      "street_consensus_q0e": "5.20M",
+      "whisper_bogey_q0e": "5.35M",
+      "whisper_spread_display": "+0.15M (+2.88% Sub Hurdle)",
+      "bar_width_pct": 76,
+      "hurdle_badge": "SAAS-LIKE ARPU"
+    }
+  ]
+}
