@@ -1,0 +1,101 @@
+{
+  "ticker": "NOK",
+  "earnings_date": "2026-10-22",
+  "agent_role": "KPI_Discovery_Agent",
+  "model": "Gemini 3.8 Flash High",
+  "company_operational_kpis": [
+    {
+      "kpi_name": "Network Infrastructure Net Sales (€M)",
+      "definition": "Net sales from Optical Networks (€933M, +18% CC), IP Networks (€839M, +43% CC), and Fixed Networks (€386M) powering AI data center interconnect and telecom backhaul.",
+      "street_consensus": 2040.0,
+      "t1_whisper": 2060.0,
+      "reported_q0_actual": 2158.0,
+      "qoq_change_pct": 5.94,
+      "yoy_change_pct": 16.65,
+      "vs_consensus_delta": "+€118M (+5.78%)",
+      "verdict": "BEAT"
+    },
+    {
+      "kpi_name": "AI & Cloud Net Sales Growth (% YoY)",
+      "definition": "Direct hardware and optical switching revenue from hyperscale AI data centers and cloud customers, alongside €1.5B in quarterly order intake (+118% YoY).",
+      "street_consensus": 65.0,
+      "t1_whisper": 75.0,
+      "reported_q0_actual": 123.0,
+      "qoq_change_pct": null,
+      "yoy_change_pct": 123.0,
+      "vs_consensus_delta": "+5,800 bps / +€1.5B Orders (+118% YoY)",
+      "verdict": "MASSIVE BEAT"
+    },
+    {
+      "kpi_name": "Mobile Infrastructure Net Sales (€M)",
+      "definition": "Revenue from Radio Networks (€1,958M), Core Software (€519M), and Technology Standards patent licensing (€425M). Benefited from commercial pull-forward and product mix.",
+      "street_consensus": 2820.0,
+      "t1_whisper": 2840.0,
+      "reported_q0_actual": 2902.0,
+      "qoq_change_pct": 27.45,
+      "yoy_change_pct": 5.34,
+      "vs_consensus_delta": "+€82M (+2.91%)",
+      "verdict": "BEAT"
+    },
+    {
+      "kpi_name": "Comparable Operating Profit (€M) & Margin (%)",
+      "definition": "Group operating profit excluding items affecting comparability (€357M restructuring, €46M intangibles amortization). Margin expanded +220 bps YoY to 11.7%.",
+      "street_consensus": 525.0,
+      "t1_whisper": 540.0,
+      "reported_q0_actual": 605.0,
+      "qoq_change_pct": null,
+      "yoy_change_pct": 35.04,
+      "vs_consensus_delta": "+€80M (+15.24%) / +150 bps Margin Beat",
+      "verdict": "BEAT"
+    },
+    {
+      "kpi_name": "Full-Year Free Cash Flow Conversion (%)",
+      "definition": "Free cash flow conversion rate from full-year comparable operating profit, lowered to 35%-55% due to an additional €400M strategic working capital investment for 2027 supply de-risking.",
+      "street_consensus": 55.0,
+      "t1_whisper": 55.0,
+      "reported_q0_actual": 45.0,
+      "qoq_change_pct": null,
+      "yoy_change_pct": -15.0,
+      "vs_consensus_delta": "-1,000 bps (Guide Reset to 35%-55% vs Prior 45%-65%)",
+      "verdict": "GUIDE RESET"
+    }
+  ],
+  "reporting_segments_5q_mapping": [
+    {
+      "segment_name": "Network Infrastructure",
+      "q0_revenue_millions": 2158.0,
+      "share_of_revenue_pct": 41.87,
+      "sub_rows": [
+        "Optical Networks (€933M, +19% reported / +18% CC)",
+        "IP Networks (€839M, +45% reported / +43% CC)",
+        "Fixed Networks (€386M, -21% reported / -21% CC)"
+      ]
+    },
+    {
+      "segment_name": "Mobile Infrastructure",
+      "q0_revenue_millions": 2902.0,
+      "share_of_revenue_pct": 56.31,
+      "sub_rows": [
+        "Radio Networks (€1,958M, +11% reported / +9% CC)",
+        "Core Software (€519M, -13% reported / -12% CC)",
+        "Technology Standards (€425M, +9% reported / +7% CC)"
+      ]
+    },
+    {
+      "segment_name": "Portfolio Businesses",
+      "q0_revenue_millions": 96.0,
+      "share_of_revenue_pct": 1.86,
+      "sub_rows": [
+        "Microwave Radio & Site Implementation (€96M, -1% reported / -2% CC)"
+      ]
+    },
+    {
+      "segment_name": "Group Common and Other",
+      "q0_revenue_millions": -2.0,
+      "share_of_revenue_pct": -0.04,
+      "sub_rows": [
+        "Centrally Managed Corporate Units & Inter-segment Eliminations (-€2M)"
+      ]
+    }
+  ]
+}

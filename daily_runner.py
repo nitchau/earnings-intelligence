@@ -50,7 +50,7 @@ def run_command(cmd: list[str], cwd: Path = BASE_DIR) -> tuple[int, str, str]:
 
 def run_git_sync(ticker: str, earnings_date: str, log_file: Path):
     log_msg(f"Initiating GitHub Pages sync for {ticker} ({earnings_date})...", log_file)
-    run_command(["git", "add", "index.html", "published_reports", "published_ledger.json", "audit_logs", "ground_truth", "drafts", "post_agent_bus"])
+    run_command(["git", "add", "index.html", "published_reports", "published_ledger.json", "audit_logs", "ground_truth", "drafts", "pre_agent_bus", "post_agent_bus"])
     code, stdout, stderr = run_command(["git", "commit", "-m", f"publish: auto-publish {ticker} ({earnings_date}) tearsheet"])
     if code == 0:
         log_msg("Git commit created successfully.", log_file)
@@ -64,7 +64,7 @@ def run_git_sync(ticker: str, earnings_date: str, log_file: Path):
 
 def run_t1_pre_workflow(today_str: str, log_file: Path, stagger_delay: int = DEFAULT_STAGGER_DELAY_SECONDS):
     log_msg("=" * 75, log_file)
-    log_msg(f"STARTING T-1 PRE-EARNINGS HARNESS SCAN — {today_str}", log_file)
+    log_msg(f"STARTING T-1 PRE-EARNINGS 5-LAYER HARNESS SCAN — {today_str}", log_file)
     log_msg("=" * 75, log_file)
 
     log_msg("Running Stage 1 T-1 batch scan across tickers.txt...", log_file)
@@ -106,44 +106,17 @@ def run_t1_pre_workflow(today_str: str, log_file: Path, stagger_delay: int = DEF
         earnings_date = target["earnings_date"]
 
         log_msg("-" * 65, log_file)
-        log_msg(f"[T-1 {idx}/{len(all_targets)}] Processing target: {ticker} (Earnings Date: {earnings_date})", log_file)
+        log_msg(f"[T-1 {idx}/{len(all_targets)}] Running 5-Layer Pre-Earnings Harness for {ticker} ({earnings_date})...", log_file)
 
-        log_msg(f"[{ticker}] Running Stage 1 anchor...", log_file)
-        s1_code, s1_out, s1_err = run_command([sys.executable, "stage1_fetch_truth.py", ticker, "--force"])
-        if s1_code != 0:
-            log_msg(f"[{ticker}] Error during Stage 1: {s1_err.strip()}", log_file)
-            continue
-
-        draft_path = BASE_DIR / "drafts" / f"{ticker}_{earnings_date}_draft.json"
-        builder_script = BASE_DIR / ticker / f"build_{ticker.lower()}_draft.py"
-        if builder_script.exists():
-            log_msg(f"[{ticker}] Found automated T-1 draft builder at {builder_script.name}, running...", log_file)
-            b_code, b_out, b_err = run_command([sys.executable, str(builder_script)])
-            if b_code != 0:
-                log_msg(f"[{ticker}] Draft builder error: {b_err.strip()}", log_file)
-                continue
-
-        if not draft_path.exists():
-            log_msg(f"[{ticker}] Skipping validation: Draft file {draft_path.name} does not exist yet.", log_file)
-            continue
-
-        log_msg(f"[{ticker}] Running Stage 3 validation loop...", log_file)
-        s3_code, s3_out, s3_err = run_command([sys.executable, "stage3_validate_draft.py", ticker, earnings_date])
-        if s3_code != 0:
-            log_msg(f"[{ticker}] Stage 3 validation failed. Details: {s3_err.strip() or s3_out.strip()}", log_file)
-            continue
-
-        log_msg(f"[{ticker}] Stage 3 passed! Running Stage 4 HTML rendering and multi-version publishing...", log_file)
-        s4_code, s4_out, s4_err = run_command([sys.executable, "stage4_render_html.py", ticker, earnings_date])
-        if s4_code == 0:
-            log_msg(f"[{ticker}] Successfully rendered and published T-1 tearsheet.", log_file)
-            run_git_sync(ticker, earnings_date, log_file)
+        h_code, h_out, h_err = run_command([sys.executable, "run_pre_harness.py", ticker, earnings_date])
+        if h_code == 0:
+            log_msg(f"[{ticker}] 5-Layer T-1 Pre-Earnings Harness completed and published.", log_file)
             processed_count += 1
         else:
-            log_msg(f"[{ticker}] Stage 4 publishing error: {s4_err.strip()}", log_file)
+            log_msg(f"[{ticker}] T-1 Pre-Earnings Harness warning/error: {h_err.strip() or h_out.strip()}", log_file)
 
         if idx < len(all_targets):
-            log_msg(f"Pacing: Staggering next report generation by {stagger_delay} seconds...", log_file)
+            log_msg(f"Pacing: Staggering next T-1 report generation by {stagger_delay} seconds...", log_file)
             time.sleep(stagger_delay)
 
     return processed_count

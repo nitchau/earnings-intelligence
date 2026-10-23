@@ -1,0 +1,64 @@
+{
+  "ticker": "NOK",
+  "earnings_date": "2026-10-22",
+  "agent_role": "Social_Pulse_Agent",
+  "model": "Gemini 3.8 Flash High",
+  "social_channels_crawled": [
+    "Reddit (r/stocks, r/wallstreetbets, r/Nok)",
+    "X (FinTwit / #NOK / $NOK)",
+    "Stocktwits ($NOK stream)",
+    "Seeking Alpha post-market commentary",
+    "Sell-Side Flash Notes (Goldman Sachs, UBS, JPMorgan, Barclays, Inderes)"
+  ],
+  "retail_vs_institutional_reaction": {
+    "retail_sentiment_summary": "Retail investors on Reddit and FinTwit cheered Nokia's clean headline beat (€5,154M net sales vs €4,980M consensus, comparable operating profit €605M vs €525M), the +123% explosion in AI & Cloud net sales, and the landmark Google €13B Finland partnership. Community discussion centered on deep-value re-rating, noting trailing P/E compressing to ~16.4x forward, supported by the €0.03/sh quarterly dividend (€0.14 annual authorization) and NVIDIA/T-Mobile AI-RAN validation.",
+    "institutional_sentiment_summary": "Institutional desks zeroed in on Network Infrastructure's re-acceleration (+15% CC), driven by IP Networks (+43% CC) and Optical Networks (+18% CC), and the acceleration of Infinera net synergies (€200M one year early). However, portfolio managers were balanced by the working capital drag (-€560M in Q3, leading to -€99M reported FCF) and management's lowered FY26 FCF conversion guide (35%-55%), which explains why after-hours price action remained disciplined at $7.91 (+0.38%).",
+    "after_hours_movement_driver": "Nokia shares traded tightly in after-hours action at $7.91 (+0.38% vs $7.88 close), well inside the ±4.15% options-implied straddle band. The market balanced a strong operational top-line beat (€5.15B vs €4.98B) and optical margin expansion (+220 bps comparable) against the €400M working capital inventory investment and lowered FCF conversion guide."
+  },
+  "four_pillar_post_sentiment_scores": {
+    "pillar_1_retail_and_social_pulse": {
+      "score_out_of_100": 66,
+      "classification": "BULLISH ACCUMULATION / DEEP VALUE",
+      "key_themes": [
+        "Network Infrastructure beats on AI & Cloud surge (+123% YoY)",
+        "Google €13B Finland partnership & NVIDIA AI-RAN proof-of-concept",
+        "Comparable operating profit up +35% YoY to €605M (11.7% margin)",
+        "€0.03/sh quarterly dividend declared (payable Nov 5, 2026)"
+      ],
+      "top_quote": "FinTwit Telecom Tech Specialist: 'Nokia is morphing into an AI connectivity powerhouse under Justin Hotard. Net sales +9% CC, IP Networks +43% CC, AI/Cloud sales +123%, and Infinera synergies pulled forward 1 full year. The €400M inventory build is just fuel for the 2027 optical ramp.'"
+    },
+    "pillar_2_sellside_flash_reactions": {
+      "score_out_of_100": 70,
+      "classification": "CONSTRUCTIVE ON OPTICAL RATING EXPANSION",
+      "key_themes": [
+        "Goldman Sachs & UBS praise IP Networks (+43% CC) & Optical (+18% CC)",
+        "Infinera €200M net synergies completed by end of 2026 (1 year ahead)",
+        "FY26 CapEx lowered to €750M-€850M provides capital allocation flexibility",
+        "FCF conversion reset to 35%-55% fully understood as customer-backed working capital"
+      ],
+      "top_quote": "Goldman Sachs Flash Note: 'Nokia delivered an impressive operational print with comparable operating profit beating consensus by 15% on strong optical operating leverage. While FCF conversion was lowered to 35%-55%, management clarified that working capital investments are tied to contractually secured 2027 AI hyperscaler orders.'"
+    },
+    "pillar_3_management_call_tone": {
+      "score_out_of_100": 76,
+      "classification": "HIGH CONVICTION & STRATEGIC AGILITY",
+      "key_themes": [
+        "Justin Hotard highlights €1.5B in Q3 AI & Cloud order intake (+118% YoY)",
+        "Optical & IP combined guided to grow 25%-30% in 2027",
+        "World's first live operator AI-RAN call completed with T-Mobile & NVIDIA",
+        "Confidence in delivering full-year operating profit above €2.35B midpoint"
+      ],
+      "top_quote": "CEO Justin Hotard: 'Team Nokia continues to deliver on our commitments. In Q3, we grew net sales by 9% CC and improved comparable operating margin by 220 basis points. In AI & Cloud, net sales more than doubled and we secured EUR 1.5 billion in new orders. We are uniquely suited for AI infrastructure that is larger, more distributed and hyperconnected.'"
+    },
+    "pillar_4_options_iv_crush_and_skew": {
+      "score_out_of_100": 58,
+      "classification": "VOLATILITY CRUSH / SUPPORT SECURED",
+      "key_themes": [
+        "Stock traded within ±0.38% after-hours ($7.91), firmly inside ±4.15% straddle band",
+        "Pre-earnings 30D IV of 69.1% crushes sharply toward ~32%",
+        "Put/Call open interest ratio of 0.52x confirms call premium retention",
+        "Strong institutional support establishing at the $7.50-$7.75 floor"
+      ],
+      "top_quote": "Derivatives Desk: 'The ±4.15% ATM straddle was entirely crushed as NOK printed a clean beat with mild AH movement (+0.38% to $7.91). Implied volatility collapses from 69% to 32%, with put-sellers firmly in control above $7.50 support.'"
+    }
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "ticker": "NOK",
+  "earnings_date": "2026-10-22",
+  "agent_role": "Transcript_Forensic_Agent",
+  "model": "Gemini 3.8 Flash High",
+  "guidance_accountability_matrix_a": [
+    {
+      "guided_metric": "Network Infrastructure Constant Currency Sales Growth",
+      "prior_quarter_guidance": "+10% to +12% constant currency growth for FY26",
+      "reported_q0_actual": "Network Infrastructure grew +15% CC (+17% reported) to €2,158M in Q3",
+      "variance_commentary": "Significantly beat prior growth expectations fueled by IP Networks surging +43% CC and Optical Networks growing +18% CC on hyperscaler AI data center buildouts.",
+      "credibility_grade": "BEAT OWN GUIDE"
+    },
+    {
+      "guided_metric": "Full-Year 2026 Comparable Operating Profit",
+      "prior_quarter_guidance": "EUR 2.1 billion to EUR 2.6 billion full-year guidance range",
+      "reported_q0_actual": "Q3 Comparable Operating Profit surged +35% YoY to €605M (11.7% margin); 9M reached €1,340M (+31% YoY)",
+      "variance_commentary": "Firmly on track to deliver full-year operating profit above the midpoint of the €2.1B-€2.6B outlook, supported by strong Q4 seasonal operating leverage.",
+      "credibility_grade": "MET GUIDE"
+    },
+    {
+      "guided_metric": "Infinera Acquisition Integration & Synergy Capture",
+      "prior_quarter_guidance": "Deliver EUR 200 million net synergies run-rate by end of 2027",
+      "reported_q0_actual": "Integration accelerated to complete by end of 2026 with full EUR 200M net synergies",
+      "variance_commentary": "CEO Justin Hotard confirmed integration is tracking one full year ahead of initial plan, accelerating optical portfolio simplification and cost reductions.",
+      "credibility_grade": "BEAT OWN GUIDE"
+    },
+    {
+      "guided_metric": "Free Cash Flow Conversion from Comparable Operating Profit",
+      "prior_quarter_guidance": "45% to 65% cash conversion from comparable operating profit",
+      "reported_q0_actual": "Lowered guidance corridor to 35% to 55%; Q3 reported FCF was -€99M",
+      "variance_commentary": "Lowered conversion guidance due to €400M strategic working capital investment to buffer optical components for 2027 growth and accelerated restructuring cash outflows (€800M-€900M FY).",
+      "credibility_grade": "LOWERED GUIDE"
+    }
+  ],
+  "forward_guidance_reset_matrix_b": [
+    {
+      "forward_horizon_and_metric": "Full-Year 2026 Comparable Operating Profit Target",
+      "preprint_street_consensus": "EUR 2.35 billion (~midpoint of €2.1B-€2.6B corridor)",
+      "new_management_guidance": "Reaffirmed EUR 2.1B to EUR 2.6B; explicitly guides Q4 to deliver above midpoint",
+      "delta_vs_street": "In-line to slightly above consensus (€2.38B implied midpoint)",
+      "action_badge": "MAINTAINED",
+      "rationale": "Strong optical/IP operating leverage and cost discipline offset macro hesitation in select legacy European mobile networks."
+    },
+    {
+      "forward_horizon_and_metric": "Q4 2026 Net Sales Sequential Seasonality",
+      "preprint_street_consensus": "+18% to +20% QoQ seasonal revenue increase (~€6.10B)",
+      "new_management_guidance": "Assumes +20% to +24% QoQ net sales increase in Q4 (implies €6,185M to €6,391M)",
+      "delta_vs_street": "+€85M to +€290M above Street pre-print expectations",
+      "action_badge": "MAINTAINED / IN-LINE",
+      "rationale": "Supported by €1.5B in Q3 AI & Cloud order intake (+118% YoY) and scheduled year-end optical network deployments."
+    },
+    {
+      "forward_horizon_and_metric": "Network Infrastructure Full-Year Net Sales Growth",
+      "preprint_street_consensus": "+10% to +12% constant currency growth",
+      "new_management_guidance": "Upgraded assumption to 12% to 14% constant currency growth for FY26",
+      "delta_vs_street": "+200 bps guidance upgrade across FY26 run-rate",
+      "action_badge": "RAISED",
+      "rationale": "Combined Optical and IP Networks outperforming prior 18%-20% assumption; hyperscaler demand accelerating into 2027."
+    },
+    {
+      "forward_horizon_and_metric": "Full-Year 2026 Capital Expenditures",
+      "preprint_street_consensus": "EUR 850 million to EUR 900 million",
+      "new_management_guidance": "Reduced assumption to EUR 750 million to EUR 850 million",
+      "delta_vs_street": "-€50M to -€100M CapEx relief (cash-flow accretive)",
+      "action_badge": "LOWERED",
+      "rationale": "Real estate footprint rationalization and shifting timing of certain optical manufacturing equipment cash payments into early 2027."
+    },
+    {
+      "forward_horizon_and_metric": "Free Cash Flow Conversion from Comparable Operating Profit",
+      "preprint_street_consensus": "45% to 55% (~€1.10B to €1.30B FY26 FCF)",
+      "new_management_guidance": "Lowered to 35% to 55% (~€800M to €1.30B FY26 FCF)",
+      "delta_vs_street": "-1,000 bps reduction at lower bound (~€150M cash headwind)",
+      "action_badge": "LOWERED",
+      "rationale": "Committed €400M additional working capital to secure optical transceivers and components ahead of 2027 AI interconnect ramp."
+    }
+  ],
+  "call_qa_forensic_highlights": [
+    {
+      "analyst_name": "Alexander Duval (Goldman Sachs)",
+      "question_focus": "Hyperscaler AI & Cloud order momentum durability (+118% order intake), pipeline visibility, and confidence in 25%-30% combined Optical & IP growth in 2027.",
+      "executive_response": "CEO Justin Hotard explained that cloud hyperscalers are moving from proof-of-concept testing to wide-scale distributed AI data center interconnects. He highlighted the Google €13B Finland partnership as validation of Nokia's differentiated coherent optical switching and routing silicon, confirming high conviction in 25%-30% growth for 2027.",
+      "forensic_assessment": "High conviction; management demonstrated firm pricing power and proprietary DSP silicon advantages without discounting to hyperscalers."
+    },
+    {
+      "analyst_name": "Francois-Xavier Bouvignies (UBS)",
+      "question_focus": "Mobile Infrastructure margin sustainability, the degree of revenue pull-forward from Q4 into Q3, and outlook for 5G radio network upgrades.",
+      "executive_response": "CFO Marco Wirén noted that while roughly €60M-€80M of Mobile Infrastructure revenue was accelerated into Q3 due to carrier deployment milestones, structural gross margins (47.5%) and commercial discipline remain intact. Radio Networks grew +11% reported, benefiting from the global cost-reduction program.",
+      "forensic_assessment": "Realistic calibration; indicates Q4 Mobile Infrastructure operating margins will normalize toward 12%-13% as revenue mix normalizes."
+    },
+    {
+      "analyst_name": "Sandeep Deshpande (JPMorgan)",
+      "question_focus": "Rationale for lowering full-year FCF conversion guidance to 35%-55%, negative Q3 FCF (-€99M), and inventory obsolescence risks associated with the €400M working capital build.",
+      "executive_response": "Justin Hotard and Marco Wirén emphasized that 85%+ of the €400M working capital investment is tied to pre-ordered optical transceivers, coherent line cards, and switching ASICs required for locked-in 2027 customer deliveries. Working capital is planned to normalize as deployments roll out.",
+      "forensic_assessment": "Reassuring; the inventory build is customer-order-backed rather than speculative stock, though cash flow timing pushes recovery into 2027."
+    }
+  ]
+}
