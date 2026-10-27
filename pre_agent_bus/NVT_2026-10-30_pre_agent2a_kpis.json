@@ -1,0 +1,82 @@
+{
+  "ticker": "NVT",
+  "earnings_date": "2026-10-30",
+  "agent": "Pre_KPI_Consensus_Agent (Agent 2A)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "upcoming_quarter_label": "Q3 2026E",
+  "latest_reported_quarter_label": "Q2 2026",
+  "headline_and_company_kpis": [
+    {
+      "metric": "Total Net Sales ($M)",
+      "tooltip_title": "Consolidated quarterly revenue across Systems Protection and Electrical Connections operating segments.",
+      "tooltip_def": "Total Net Sales ($M): Surged +52.77% YoY (+18.46% QoQ) to $1,471.3M in Q2 2026 on hyperscale AI liquid cooling and grid enclosure demand plus Avail EPG integration; Wall Street consensus models $1,540.0M in Q3 2026E (+46.11% YoY vs $1,054.0M in Q3 2025), while buy-side whisper bogeys sit at $1,575.0M+.",
+      "q_minus_1_actual": "$1,471.3M",
+      "q_minus_4_yoy_baseline": "$1,054.0M",
+      "street_consensus_q0e": "$1,540.0M",
+      "whisper_bogey_q0e": "$1,575.0M",
+      "whisper_spread_display": "+$35.0M (+2.27% Whisper Hurdle)",
+      "bar_width_pct": 90,
+      "hurdle_badge": "AI INFRASTRUCTURE SCALE"
+    },
+    {
+      "metric": "Adjusted Diluted EPS ($)",
+      "tooltip_title": "Normalized diluted earnings per share excluding intangible amortization and acquisition integration costs.",
+      "tooltip_def": "Adjusted Diluted EPS ($): Delivered $1.45 in Q2 2026 (beating $1.16 consensus by +24.52%); Street consensus models $1.52 in Q3 2026E (+67.03% YoY vs $0.91 in Q3 2025), with buy-side whisper targeting $1.60+ per share.",
+      "q_minus_1_actual": "$1.45",
+      "q_minus_4_yoy_baseline": "$0.91",
+      "street_consensus_q0e": "$1.52",
+      "whisper_bogey_q0e": "$1.60",
+      "whisper_spread_display": "+$0.08 (+5.26% Beat Bogey)",
+      "bar_width_pct": 92,
+      "hurdle_badge": "EARNINGS ACCELERATION"
+    },
+    {
+      "metric": "Data Solutions & Liquid Cooling Revenue ($M)",
+      "tooltip_title": "High-density data center liquid cooling CDUs, manifolds, rear-door heat exchangers, and intelligent rack enclosures.",
+      "tooltip_def": "Data Solutions & Liquid Cooling Revenue ($M): Expanded to $385.0M in Q2 2026 as hyperscale AI liquid cooling deployments ramped; Street consensus models $430.0M in Q3 2026E with buy-side whisper bogeys demanding $460.0M+ on multi-gigawatt NVIDIA Blackwell rack manifold shipments.",
+      "q_minus_1_actual": "$385.0M",
+      "q_minus_4_yoy_baseline": "$195.0M",
+      "street_consensus_q0e": "$430.0M",
+      "whisper_bogey_q0e": "$460.0M",
+      "whisper_spread_display": "+$30.0M (+6.98% AI Spread)",
+      "bar_width_pct": 94,
+      "hurdle_badge": "LIQUID COOLING ENGINE"
+    },
+    {
+      "metric": "Systems Protection Segment Sales ($M)",
+      "tooltip_title": "Revenue from nVent's largest segment housing critical electronics, liquid cooling solutions, and utility power enclosures.",
+      "tooltip_def": "Systems Protection Segment Sales ($M): Reached $1,012.3M in Q2 2026 (68.8% of total sales); Street models $1,065.0M in Q3 2026E with buy-side whisper bogeys targeting $1,090.0M+.",
+      "q_minus_1_actual": "$1,012.3M",
+      "q_minus_4_yoy_baseline": "$685.1M",
+      "street_consensus_q0e": "$1,065.0M",
+      "whisper_bogey_q0e": "$1,090.0M",
+      "whisper_spread_display": "+$25.0M (+2.35% Segment Spread)",
+      "bar_width_pct": 88,
+      "hurdle_badge": "ENCLOSURE & CDU MOAT"
+    },
+    {
+      "metric": "Electrical Connections Segment Sales ($M)",
+      "tooltip_title": "Revenue from high-voltage electrical fastening, grounding, cable management, and utility power connections.",
+      "tooltip_def": "Electrical Connections Segment Sales ($M): Generated $459.0M in Q2 2026 (31.2% of total sales); Street models $475.0M in Q3 2026E with buy-side whisper bogeys at $485.0M+.",
+      "q_minus_1_actual": "$459.0M",
+      "q_minus_4_yoy_baseline": "$368.9M",
+      "street_consensus_q0e": "$475.0M",
+      "whisper_bogey_q0e": "$485.0M",
+      "whisper_spread_display": "+$10.0M (+2.11% Grid Spread)",
+      "bar_width_pct": 85,
+      "hurdle_badge": "GRID ELECTRIFICATION"
+    },
+    {
+      "metric": "GAAP Operating Margin (%)",
+      "tooltip_title": "Consolidated GAAP Operating Income ($300.7M in Q2 2026) divided by Total Revenue ($1,471.3M).",
+      "tooltip_def": "GAAP Operating Margin (%): Expanded +416 bps YoY to 20.44% in Q2 2026 ($300.7M EBIT); Street consensus models 20.80% in Q3 2026E ($320.3M EBIT) with whisper bogeys targeting 21.40%+ on high-margin liquid cooling mix.",
+      "q_minus_1_actual": "20.44%",
+      "q_minus_4_yoy_baseline": "15.78%",
+      "street_consensus_q0e": "20.80%",
+      "whisper_bogey_q0e": "21.40%",
+      "whisper_spread_display": "+60 bps (Margin Expansion)",
+      "bar_width_pct": 89,
+      "hurdle_badge": "OPERATING LEVERAGE"
+    }
+  ]
+}
