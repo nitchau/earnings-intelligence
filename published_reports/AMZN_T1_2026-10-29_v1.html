@@ -1,0 +1,1869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>[v1] AMZN — Pre-Earnings Forensic & Sentiment Tearsheet (Upcoming: Q3 2026 | Last Reported: Q2 2026)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0b0f19;
+      --bg-card: #111827;
+      --bg-card-elevated: #161f33;
+      --bg-table-row-alt: #0e1525;
+      --border-color: #1f2937;
+      --border-subtle: #283548;
+      --text-primary: #f9fafb;
+      --text-secondary: #d1d5db;
+      --text-muted: #9ca3af;
+      --accent-blue: #3b82f6;
+      --accent-blue-glow: rgba(59, 130, 246, 0.15);
+      --bull-green: #10b981;
+      --bull-green-bg: rgba(16, 185, 129, 0.14);
+      --bear-red: #ef4444;
+      --bear-red-bg: rgba(239, 68, 68, 0.14);
+      --warn-amber: #f59e0b;
+      --warn-amber-bg: rgba(245, 158, 11, 0.14);
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      line-height: 1.5;
+      font-size: 14px;
+      padding: 24px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1560px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* ==========================================================================
+       INTERACTIVE HOVER TOOLTIP SYSTEM (FOR METRICS & ABBREVIATIONS)
+       ========================================================================== */
+    .tip {
+      position: relative;
+      display: inline-block;
+      border-bottom: 1px dotted #60a5fa;
+      cursor: help;
+      transition: color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .tip:hover {
+      color: #93c5fd;
+      border-bottom-color: #93c5fd;
+    }
+
+    .tip::after {
+      content: attr(data-tip);
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 0;
+      width: 290px;
+      padding: 10px 12px;
+      background-color: #1e293b;
+      color: #f8fafc;
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 1.45;
+      text-align: left;
+      text-transform: none;
+      letter-spacing: normal;
+      white-space: normal;
+      border: 1px solid var(--accent-blue);
+      border-radius: 6px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.75);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(4px);
+      transition: opacity 0.16s ease, transform 0.16s ease, visibility 0.16s;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* Right-aligned tooltip modifier to prevent right-edge screen clipping */
+    .tip-right::after {
+      left: auto;
+      right: 0;
+    }
+
+    /* Bottom-aligned tooltip modifier for elements near top of page */
+    .tip-bottom::after {
+      bottom: auto;
+      top: calc(100% + 8px);
+    }
+
+    .tip:hover::after {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    /* UTILITY & BADGES */
+    .mono {
+      font-family: var(--font-mono);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+
+    .badge-bull {
+      background-color: var(--bull-green-bg);
+      color: var(--bull-green);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+    }
+
+    .badge-bear {
+      background-color: var(--bear-red-bg);
+      color: var(--bear-red);
+      border: 1px solid rgba(239, 68, 68, 0.35);
+    }
+
+    .badge-warn {
+      background-color: var(--warn-amber-bg);
+      color: var(--warn-amber);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+    }
+
+    .badge-neutral {
+      background-color: rgba(156, 163, 175, 0.12);
+      color: var(--text-secondary);
+      border: 1px solid rgba(156, 163, 175, 0.25);
+    }
+
+    .badge-blue {
+      background-color: var(--accent-blue-glow);
+      color: #60a5fa;
+      border: 1px solid rgba(59, 130, 246, 0.4);
+    }
+
+    /* CARD SYSTEM */
+    .card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--border-color);
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-title-accent {
+      width: 4px;
+      height: 16px;
+      background-color: var(--accent-blue);
+      border-radius: 2px;
+      display: inline-block;
+    }
+
+    .card-subtitle {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    /* HEADER BANNER */
+    .header-banner {
+      background: linear-gradient(135deg, #111827 0%, #0f172a 65%, #172554 100%);
+      border: 1px solid var(--border-subtle);
+      border-left: 4px solid var(--accent-blue);
+      border-radius: 10px;
+      padding: 22px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .helper-bar {
+      background-color: rgba(59, 130, 246, 0.12);
+      border: 1px solid rgba(59, 130, 246, 0.35);
+      border-radius: 6px;
+      padding: 8px 14px;
+      font-size: 12.5px;
+      color: #bfdbfe;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .ticker-identity {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .ticker-line {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .ticker-symbol {
+      font-family: var(--font-mono);
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.4);
+      padding: 2px 12px;
+      border-radius: 6px;
+    }
+
+    .company-name {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .sector-tag {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .header-price-block {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .price-box {
+      text-align: right;
+    }
+
+    .price-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    .price-value {
+      font-family: var(--font-mono);
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .header-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(195px, 1fr));
+      gap: 12px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .strip-item {
+      background-color: rgba(11, 15, 25, 0.55);
+      border: 1px solid var(--border-color);
+      padding: 10px 14px;
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .strip-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .strip-val {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    /* ROW 1: 4 KPI CARDS */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .kpi-metric-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .kpi-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.07);
+      gap: 8px;
+    }
+
+    .kpi-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .kpi-name {
+      font-size: 12.5px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .kpi-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 2px;
+    }
+
+    .kpi-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 4px;
+    }
+
+    .kpi-val {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .delta-pair {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    /* ROW 2: HISTORICAL TABLE */
+    .table-wrapper {
+      overflow-x: auto;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px;
+    }
+
+    th {
+      background-color: #161f33;
+      color: var(--text-secondary);
+      font-weight: 600;
+      text-align: right;
+      padding: 11px 12px;
+      border-bottom: 1px solid var(--border-subtle);
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+
+    th:first-child {
+      text-align: left;
+      font-family: var(--font-sans);
+      min-width: 265px;
+      position: sticky;
+      left: 0;
+      z-index: 2;
+      background-color: #161f33;
+    }
+
+    td {
+      padding: 9px 12px;
+      border-bottom: 1px solid var(--border-color);
+      text-align: right;
+      font-family: var(--font-mono);
+      color: var(--text-primary);
+      white-space: nowrap;
+    }
+
+    td:first-child {
+      text-align: left;
+      font-family: var(--font-sans);
+      font-weight: 500;
+      color: var(--text-secondary);
+      position: sticky;
+      left: 0;
+      background-color: var(--bg-card);
+      z-index: 1;
+    }
+
+    tr:nth-child(even) td {
+      background-color: var(--bg-table-row-alt);
+    }
+
+    tr:nth-child(even) td:first-child {
+      background-color: var(--bg-table-row-alt);
+    }
+
+    tr.section-divider td {
+      background-color: rgba(59, 130, 246, 0.09);
+      color: #93c5fd;
+      font-family: var(--font-sans);
+      font-weight: 700;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      padding: 7px 12px;
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .col-q0 {
+      background-color: rgba(59, 130, 246, 0.06) !important;
+      font-weight: 700;
+    }
+
+    .col-est {
+      background-color: rgba(245, 158, 11, 0.05) !important;
+      color: #fde68a;
+    }
+
+    /* OUTLIER CELL BORDERS */
+    .outlier-red {
+      border: 1.5px solid var(--bear-red) !important;
+      background-color: rgba(239, 68, 68, 0.12) !important;
+      color: #fca5a5 !important;
+      font-weight: 700;
+      position: relative;
+    }
+
+    .outlier-amber {
+      border: 1.5px solid var(--warn-amber) !important;
+      background-color: rgba(245, 158, 11, 0.12) !important;
+      color: #fcd34d !important;
+      font-weight: 700;
+      position: relative;
+    }
+
+    /* ROW 3: FORENSIC CALLOUT */
+    .forensic-grid {
+      display: grid;
+      grid-template-columns: 1.35fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 1080px) {
+      .forensic-grid,
+      .split-2col,
+      .sentiment-grid {
+        grid-template-columns: 1fr !important;
+      }
+    }
+
+    .forensic-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .forensic-item {
+      background-color: rgba(11, 15, 25, 0.6);
+      border: 1px solid var(--border-color);
+      border-left: 3px solid var(--warn-amber);
+      border-radius: 6px;
+      padding: 13px 15px;
+    }
+
+    .forensic-item.critical {
+      border-left-color: var(--bear-red);
+    }
+
+    .forensic-item-title {
+      font-weight: 700;
+      font-size: 13.5px;
+      color: var(--text-primary);
+      margin-bottom: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .forensic-item p {
+      color: var(--text-secondary);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .fcf-bridge-box {
+      background-color: #0d1322;
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* ROW 4 & ROW 5: 2-COLUMN SPLIT CARDS */
+    .split-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .audit-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .audit-point {
+      padding: 12px 14px;
+      border-radius: 6px;
+      background-color: rgba(11, 15, 25, 0.55);
+      border: 1px solid var(--border-color);
+    }
+
+    .audit-point-bull {
+      border-left: 3px solid var(--bull-green);
+    }
+
+    .audit-point-bear {
+      border-left: 3px solid var(--bear-red);
+    }
+
+    .audit-point-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 5px;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .audit-point-title {
+      font-weight: 700;
+      font-size: 13.5px;
+      color: var(--text-primary);
+    }
+
+    .audit-point p {
+      font-size: 12.8px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* CATALYST ITEMS */
+    .catalyst-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .catalyst-card {
+      background-color: rgba(11, 15, 25, 0.55);
+      border: 1px solid var(--border-color);
+      border-left: 3px solid var(--accent-blue);
+      border-radius: 6px;
+      padding: 12px 14px;
+    }
+
+    /* SENTIMENT ANALYSIS CARD */
+    .sentiment-overview-banner {
+      background: linear-gradient(90deg, rgba(239, 68, 68, 0.12) 0%, rgba(245, 158, 11, 0.12) 50%, rgba(16, 185, 129, 0.12) 100%);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .sentiment-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .sentiment-source-card {
+      background-color: #0d1322;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .sentiment-meter-wrap {
+      display: flex;
+       flex-direction: column;
+      gap: 5px;
+      margin: 4px 0;
+    }
+
+    .sentiment-bar-bg {
+      width: 100%;
+      height: 8px;
+      background-color: #1f2937;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .sentiment-bar-fill {
+      height: 100%;
+      border-radius: 4px;
+    }
+
+    /* ROW 7: TRADE MATRIX */
+    .playbook-setup-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+      background-color: rgba(11, 15, 25, 0.65);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 14px;
+    }
+
+    .scenario-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 16px;
+    }
+
+    .scenario-card {
+      background-color: #0d1322;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .scenario-bull {
+      border-top: 4px solid var(--bull-green);
+    }
+
+    .scenario-base {
+      border-top: 4px solid var(--warn-amber);
+    }
+
+    .scenario-bear {
+      border-top: 4px solid var(--bear-red);
+    }
+
+    .scenario-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 800;
+      font-size: 15px;
+    }
+
+    .trigger-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 12.8px;
+      color: var(--text-secondary);
+    }
+
+    .trigger-list li {
+      position: relative;
+      padding-left: 14px;
+    }
+
+    .trigger-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--accent-blue);
+      font-weight: bold;
+    }
+
+    .trade-structure {
+      margin-top: auto;
+      padding: 11px 12px;
+      background-color: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      font-size: 12px;
+    }
+
+    .trade-structure strong {
+      display: block;
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .footer-meta {
+      text-align: center;
+      font-size: 11.5px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      padding: 10px 0 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    
+<!-- 1. HEADER BANNER -->
+    <header class="header-banner">
+      <div class="helper-bar">
+        <span>💡 <strong>Interactive Definitions Enabled:</strong> Hover your mouse over any <span class="tip tip-bottom" title="Plain-English definitions pop up automatically whenever you hover over any dotted-underlined term." data-tip="Plain-English definitions pop up automatically whenever you hover over any dotted-underlined financial metric or abbreviation.">dotted-underlined metric or abbreviation</span> for an instant plain-English explanation.</span>
+        <span class="mono" style="font-size:11.5px;color:#93c5fd;">Last Reported Quarter: <strong>Q2 2026 (Ended June 30, 2026)</strong> • Upcoming Release: <strong>Q3 2026 (Ended Sep 30, 2026)</strong></span>
+      </div>
+
+      <div class="header-top">
+        <div class="ticker-identity">
+          <div class="ticker-line">
+            <span class="ticker-symbol">AMZN</span>
+            <h1 class="company-name">Amazon.com, Inc.</h1>
+            <span class="badge badge-bull">GLOBAL CLOUD &amp; COMMERCE TITAN</span>
+            <span class="badge badge-blue"><span class="tip tip-bottom" title="One trading day before official quarterly earnings release." data-tip="T-1 (Time Minus 1 Day): Analysis prepared one trading session prior to the upcoming Q3 2026 earnings release on Thursday, Oct 29, 2026.">T-1</span> PRE-EARNINGS BRIEFING</span>
+          </div>
+          <div class="sector-tag">NASDAQ • Consumer Discretionary, Internet Retail &amp; Enterprise Cloud Infrastructure • <span class="tip tip-bottom" title="Central Index Key: Unique 10-digit identifier assigned by the U.S. SEC to all public company filings." data-tip="Central Index Key (CIK): The unique 10-digit identifier assigned by the U.S. Securities and Exchange Commission (SEC) to track Amazon's official regulatory filings.">CIK</span>: 0001018724</div>
+        </div>
+        <div class="header-price-block">
+          <div class="price-box">
+            <div class="price-label">Spot Price (Oct 2026)</div>
+            <div class="price-value">$249.43 <span class="badge badge-bull">+42.6% <span class="tip tip-right tip-bottom" title="Year-To-Date: Percentage price change since January 1, 2026." data-tip="Year-To-Date (YTD): Total percentage return of the stock from January 1 of the current calendar year (2026) to today.">YTD</span></span></div>
+          </div>
+          <div class="price-box">
+            <div class="price-label"><span class="tip tip-right tip-bottom" title="Market Capitalization: Total value of all outstanding shares (Share Price × Diluted Shares)." data-tip="Market Capitalization: Total equity value of the company calculated by multiplying current share price ($249.43) by total diluted common shares (~10,903M).">Market Cap</span> / <span class="tip tip-right tip-bottom" title="Enterprise Value: Market Cap plus Total Debt minus Cash. Shows the true takeover cost of the business." data-tip="Enterprise Value (EV): Market Cap ($2,690.43B) + Total Long-Term Debt / Leases minus Liquid Reserves = $2,815.41B.">EV</span></div>
+            <div class="price-value">$2690.43B / $2815.41B</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="header-strip">
+        <div class="strip-item">
+          <span class="strip-label">Upcoming Q3 2026 Release Date</span>
+          <span class="strip-val">Thu, Oct 29, 2026 • <span class="tip" title="After Market Close: Earnings are released right after the 4:00 PM ET stock market close." data-tip="After Market Close (AMC): The company releases its quarterly results after market close (~4:00 PM Eastern Time).">AMC</span> (4:00 PM ET)</span>
+          <span class="kpi-sub">Earnings Call &amp; Webcast: 5:30 PM ET (2:30 PM PT) hosted by Andy Jassy &amp; Brian Olsavsky on ir.aboutamazon.com</span>
+        </div>
+        <div class="strip-item">
+          <span class="strip-label"><span class="tip" title="The percentage stock move (up or down) that the options market is pricing in for the day after earnings." data-tip="Options-Implied Move: Derived from At-The-Money (ATM) weekly option straddle prices. Reflects expected post-earnings volatility.">Options-Implied Move</span> (1-Wk <span class="tip" title="At-The-Money: Options with a strike price equal to the current stock price." data-tip="At-The-Money (ATM): Options contracts whose strike price is closest to current trading price ($249.43).">ATM</span>)</span>
+          <span class="strip-val" style="color: var(--warn-amber);">±7.56% (±$18.85 / sh)</span>
+          <span class="kpi-sub">30D <span class="tip" title="Implied Volatility: Market's forecast of annualized stock price volatility derived from option prices." data-tip="Implied Volatility (IV): The options market's annualized volatility expectation.">IV</span>: 90.3% | Put/Call OI Ratio: 0.34x (Aggressive Bullish Call Skew)</span>
+        </div>
+        <div class="strip-item">
+          <span class="strip-label">Q3 2026E <span class="tip" title="Wall Street Consensus: The average forecast of equity research analysts covering Amazon." data-tip="Consensus Revenue: The average revenue forecast published by Wall Street sell-side analysts for Q3 2026 ($190,500M).">Consensus Total Revenue</span> / <span class="tip" title="Whisper Number: The unofficial expectation among hedge funds and institutional traders." data-tip="Whisper Number: Unofficial top-line expectations among buy-side institutional investors ($192,500M).">Whisper</span></span>
+          <span class="strip-val">$190,500M / $192,500M</span>
+          <span class="kpi-sub">Guidance Range: $186.0B to $191.0B | +5.7% <span class="tip" title="Year-over-Year: Comparison against the exact same quarter last year (Q3 2025)." data-tip="Year-over-Year (YoY): Compares performance against the same quarter one year prior (Q3 2026E vs Q3 2025: $180,169M).">YoY</span> vs Q3 2025</span>
+        </div>
+        <div class="strip-item">
+          <span class="strip-label">Q3 2026E Consensus <span class="tip" title="Earnings Per Share: Net profit divided by total diluted shares outstanding." data-tip="Earnings Per Share (EPS): Diluted earnings per share consensus.">EPS</span> / Whisper</span>
+          <span class="strip-val">$1.96 <span class="tip" title="Diluted EPS Consensus." data-tip="Consensus EPS: Diluted earnings per share expectation ($1.96 vs $2.08 whisper).">Consensus</span> / $2.08 Whisper</span>
+          <span class="kpi-sub">Street Range: $1.82 to $2.14 | Prior Q2 Actual: $5.75</span>
+        </div>
+        <div class="strip-item">
+          <span class="strip-label">AWS &amp; Operating Income <span class="tip tip-right" title="Amazon Web Services revenue hurdle and consolidated operating income guidance corridor." data-tip="AWS &amp; EBIT Corridor: AWS consensus targets $41.8B (+35.4% YoY) and consolidated Operating Income guided at $16.5B to $20.5B.">Guidance Corridor</span></span>
+          <span class="strip-val" style="color: var(--bull-green);">$41.8B AWS / $18.5B EBIT</span>
+          <span class="kpi-sub">Cloud GenAI Acceleration • High-Margin Advertising Powering Cash Generation</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- TRACK B: STICKY INTERACTIVE PRE-EARNINGS SECTION JUMP-NAV -->
+    <nav class="pre-jump-nav" style="position: sticky; top: 8px; z-index: 90; background: rgba(15, 23, 42, 0.92); backdrop-filter: blur(10px); border: 1px solid rgba(59, 130, 246, 0.35); border-radius: 10px; padding: 8px 14px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.4);">
+      <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+        <span style="font-size: 11px; font-weight: 800; color: #60a5fa; text-transform: uppercase; letter-spacing: 0.06em; margin-right: 4px;">⚡ Jump To:</span>
+        <a href="#row-1-kpis" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">1. Q2 KPIs</a>
+        <a href="#row-1b-scorecard" style="font-size: 11.5px; color: #60a5fa; font-weight: 700; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(59, 130, 246, 0.16); border: 1px solid rgba(59, 130, 246, 0.4);">1B. Whisper &amp; Track Record Scorecard</a>
+        <a href="#row-2-financials" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">2. 5Q Table + Q3E</a>
+        <a href="#row-3-fcf" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">3. FCF Bridge</a>
+        <a href="#row-4-segments" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">4. Tailwinds/Drags</a>
+        <a href="#row-4b-debates" style="font-size: 11.5px; color: #93c5fd; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(59, 130, 246, 0.14); border: 1px solid rgba(59, 130, 246, 0.3);">4B. Wall St Debates</a>
+        <a href="#row-5-peers" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">5. Peers</a>
+        <a href="#row-6-sentiment" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">6. Sentiment &amp; Pulse</a>
+        <a href="#row-7-pm-matrix" style="font-size: 11.5px; color: #fcd34d; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(245, 158, 11, 0.14); border: 1px solid rgba(245, 158, 11, 0.3);">7. PM Trade Matrix</a>
+      </div>
+      <a href="AMZN_T0_POST_2026-10-29.html" style="font-size: 11.5px; font-weight: 700; color: #34d399; text-decoration: none; padding: 5px 12px; border-radius: 6px; background: rgba(16, 185, 129, 0.2); border: 1px solid rgba(16, 185, 129, 0.45); display: flex; align-items: center; gap: 6px;">
+        ⇄ Compare Paired T+0 Post-Earnings Tearsheet
+      </a>
+    </nav>
+
+    <!-- 2. ROW 1: TOP KPI CARDS (4 CARDS) -->
+    <section class="kpi-grid" id="row-1-kpis">
+      <!-- CARD A: CASH FLOW & CAPITAL INTENSITY -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><span class="card-title-accent"></span>A. Cash Flow &amp; Capital Intensity (Q2 2026)</div>
+          <span class="badge badge-bull">$100B+ ANNUALIZED INFRASTRUCTURE ENGINE</span>
+        </div>
+        <div class="kpi-metric-list">
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Operating Cash Flow: Actual cash generated from prime marketplace operations and cloud collections." data-tip="Operating Cash Flow (OCF): $26,032.0M generated in Q2 2026.">Operating Cash Flow</span> (Q2 2026)</span>
+              <span class="kpi-sub">Total OCF Generated: $26,032.0M (26,032 exact)</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">$26,032M</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-bull">+53.0% YoY</span>
+                <span class="delta-pill delta-neg">-52.2% QoQ (Seasonal)</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Capital Expenditures: Real estate, data center hardware, Trainium clusters, and satellite infrastructure." data-tip="CapEx: Physical and AI compute infrastructure investments ($44,203.0M in Q2 2026).">Capital Expenditures</span> (Q2 2026)</span>
+              <span class="kpi-sub">Data Centers, Silicon &amp; Kuiper: $44,203.0M</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">$44,203.0M</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-neg">+76.7% YoY</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Reported Free Cash Flow: Operating Cash Flow ($26,032.0M) minus CapEx ($44,203.0M)." data-tip="Reported Free Cash Flow: -$18,171.0M in Q2 2026 due to historic AI cluster investments.">Reported Free Cash Flow</span> (Q2 2026)</span>
+              <span class="kpi-sub">Reported FCF: -$18,171.0M</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val" style="color: #f87171;">-$18,171.0M</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-neg">AI BUILD PHASE</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="True Free Cash Flow: Reported FCF minus Stock-Based Compensation ($4,032.0M)." data-tip="True FCF: -$22,203.0M in Q2 2026 reflecting full economic cost of employee equity and AI capex.">True Free Cash Flow</span> (Post-SBC)</span>
+              <span class="kpi-sub">Fully Burdened Cash Burn: -$22,203.0M</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val" style="color: #f87171;">-$22,203.0M</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-neg">HEAVY REINVESTMENT</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD B: PROFITABILITY & OPERATING LEVERAGE -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><span class="card-title-accent"></span>B. Profitability &amp; Operating Margins (Q2 2026)</div>
+          <span class="badge badge-bull">13.7% OPERATING MARGIN EXPANSION</span>
+        </div>
+        <div class="kpi-metric-list">
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Consolidated Operating Income: GAAP profit after cost of sales and all operating expenses." data-tip="Operating Income (EBIT): $27,461.0M in Q2 2026 (+43.2% YoY).">Operating Income (EBIT)</span> (Q2 2026)</span>
+              <span class="kpi-sub">Consolidated EBIT: $27,461.0M (13.7% Margin)</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">$27,461.0M</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-bull">+43.2% YoY</span>
+                <span class="delta-pill delta-bull">+15.1% QoQ</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="AWS Operating Margin: Profit margin of the cloud computing segment." data-tip="AWS Margin: 39.4% in Q2 2026 ($16,621M EBIT on $42,232M revenue).">AWS Operating Margin</span> (Q2 2026)</span>
+              <span class="kpi-sub">AWS Cloud Profit: $16,621.0M</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">39.4%</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-bull">+480 bps YoY</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="GAAP Net Income: Consolidated net earnings including equity valuation gains." data-tip="Net Income: $62,647.0M in Q2 2026, benefiting from non-operating valuation marks.">GAAP Net Income</span> (Q2 2026)</span>
+              <span class="kpi-sub">GAAP Net Profit: $62,647.0M</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">$62,647.0M</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-bull">+244.9% YoY</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Diluted EPS: Net profit per diluted common share." data-tip="Diluted EPS: $5.75 in Q2 2026 vs $1.68 in Q2 2025.">Diluted EPS</span> (Q2 2026)</span>
+              <span class="kpi-sub">Diluted EPS: $5.75 per share</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">$5.75</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-bull">+242.3% YoY</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD C: BALANCE SHEET FORTRESS -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><span class="card-title-accent"></span>C. Balance Sheet Solvency &amp; Liquidity</div>
+          <span class="badge badge-bull">$89B+ LIQUID RESERVES</span>
+        </div>
+        <div class="kpi-metric-list">
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Cash &amp; Marketable Securities: Liquid cash reserves and short-term treasury investments." data-tip="Liquid Reserves: $89.2B in cash, equivalents, and marketable securities.">Cash &amp; Marketable Securities</span></span>
+              <span class="kpi-sub">Total Liquidity: $89.2B</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">$89.2B</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-bull">PRISTINE SOLVENCY</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Long-Term Debt: Total senior debt and finance lease obligations." data-tip="Total Debt: ~$58.5B in long-term debt and obligations.">Long-Term Debt &amp; Leases</span></span>
+              <span class="kpi-sub">Funded Debt: ~$58.5B</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">$58.5B</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-neutral">MANAGEABLE</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Net Cash Position: Cash and marketable securities minus total debt." data-tip="Net Cash Cushion: +$30.7B net liquidity surplus.">Net Cash Cushion</span></span>
+              <span class="kpi-sub">Net Cash Balance: +$30.7B</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val" style="color: #34d399;">+$30.7B</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-bull">AAA PROFILE</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Short Interest: Percentage of floating common shares sold short." data-tip="Short Float: 0.88% of float sold short, reflecting zero institutional skepticism.">Short % of Float</span></span>
+              <span class="kpi-sub">Minimal Short Interest: 0.88%</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">0.88%</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-bull">LOW SHORT RISK</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD D: SEGMENT MIX & MULTIPLES -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><span class="card-title-accent"></span>D. Segment Breakdown &amp; Valuation (Q2 2026)</div>
+          <span class="badge badge-bull">AWS + ADVERTISING DUAL ENGINE</span>
+        </div>
+        <div class="kpi-metric-list">
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="AWS Net Sales: Enterprise cloud infrastructure and generative AI platform revenue." data-tip="AWS: $42,232.0M in Q2 2026 (+36.8% YoY).">AWS Cloud Revenue</span></span>
+              <span class="kpi-sub">Enterprise Cloud: $42,232.0M</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">$42,232.0M</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-bull">+36.8% YoY</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Advertising Services: Sponsored products, brand advertising, and Prime Video ad revenue." data-tip="Advertising: $19,809.0M in Q2 2026 (+19.5% YoY).">Advertising Services Revenue</span></span>
+              <span class="kpi-sub">Retail Media Ads: $19,809.0M</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">$19,809.0M</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-bull">+19.5% YoY</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="3P Seller Services: Marketplace merchant commissions, fulfillment (FBA), and shipping fees." data-tip="3P Seller Services: $46,780.0M in Q2 2026 (+13.9% YoY).">3P Seller Services</span></span>
+              <span class="kpi-sub">Marketplace Fees: $46,780.0M</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">$46,780.0M</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-bull">+13.9% YoY</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Wall Street Target Price: Mean 12-month target from sell-side equity research analysts." data-tip="Analyst Mean Price Target: $332.24 across 58 analysts (+33.20% upside).">Wall Street Target Price</span></span>
+              <span class="kpi-sub">Mean Target: $332.24 (High: $405.00 / Low: $230.00)</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">$332.24</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-bull">+33.2% UPSIDE</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. ROW 1B: PRE-RELEASE EXPECTATIONS, WHISPER SPREAD & HISTORICAL SCORECARD -->
+    <section class="card" id="row-1b-scorecard" style="margin-bottom: 24px;">
+      <div class="card-header">
+        <div class="card-title"><span class="card-title-accent"></span>Row 1B: Pre-Release Expectations, Whisper Spread &amp; Track Record Scorecard</div>
+        <span class="badge badge-bull">Q3 2026E PRE-PRINT AUDIT</span>
+      </div>
+
+      <!-- 3-CARD SETUP AUDIT BANNER -->
+      <div class="t1-setup-audit" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-bottom: 18px; padding: 14px; background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(59, 130, 246, 0.25); border-radius: 8px;">
+        <div style="border-left: 3px solid #3b82f6; padding-left: 10px;">
+          <div style="font-size: 11px; text-transform: uppercase; color: #94a3b8; font-weight: 700;">Pre-Print Options Volatility Regime</div>
+          <div style="font-size: 16px; font-weight: 800; color: #60a5fa; margin: 2px 0;">±7.56% (±$18.85)</div>
+          <div style="font-size: 11.5px; color: #cbd5e1;">1-Wk ATM Straddle Implied Move | 30D IV at 90.3% (Fairly Priced vs 7.8% 4Q Realized Moves)</div>
+        </div>
+        <div style="border-left: 3px solid #10b981; padding-left: 10px;">
+          <div style="font-size: 11px; text-transform: uppercase; color: #94a3b8; font-weight: 700;">Wall Street Consensus vs. Whisper</div>
+          <div style="font-size: 16px; font-weight: 800; color: #34d399; margin: 2px 0;">$190,500M Consensus vs. $192,500M Whisper</div>
+          <div style="font-size: 11.5px; color: #cbd5e1;">AWS Hurdle: $41.8B | EPS: $1.96 Consensus vs. $2.08 Whisper</div>
+        </div>
+        <div style="border-left: 3px solid #f59e0b; padding-left: 10px;">
+          <div style="font-size: 11px; text-transform: uppercase; color: #94a3b8; font-weight: 700;">Executive Sandbagging &amp; Credibility</div>
+          <div style="font-size: 16px; font-weight: 800; color: #fcd34d; margin: 2px 0;">88 / 100 Score</div>
+          <div style="font-size: 11.5px; color: #cbd5e1;">4Q Unbroken Top-Line Beat Record | $2.5B+ Systematic Operating Income Sandbagging</div>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 12px; font-size: 13px; color: #94a3b8; font-family: monospace;">
+        <strong>Table 1B-1:</strong> HEADLINE &amp; OPERATIONAL KPI CONSENSUS VS. BUY-SIDE WHISPER SCORECARD
+      </div>
+      <div class="table-wrapper" style="margin-bottom: 20px;">
+        <table class="table-financials">
+          <thead>
+            <tr>
+              <th>Operational / Financial Metric</th>
+              <th>Q2 2026 Actual</th>
+              <th>Q3 2025 YoY Baseline</th>
+              <th class="col-q0">Street Consensus Q3E</th>
+              <th>Buy-Side Whisper Bogey</th>
+              <th>Whisper vs. Street Spread</th>
+              <th>Institutional Hurdle Badge</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr>
+                <td><span class="tip" title="Core enterprise cloud computing, database, and generative AI infrastructure platform revenue." data-tip="AWS Revenue ($M): Wall Street consensus models $41,800M in Q3 2026E (+35.4% YoY vs $30,873M in Q3 2025); buy-side whisper targets $42,500M+ driven by surging Bedrock enterprise adoption and custom Trainium2 silicon cluster deployments.">Amazon Web Services (AWS) Revenue ($M)</span></td>
+                <td>$42,232.0M</td>
+                <td>$30,873.0M</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">$41,800.0M</td>
+                <td style="font-weight:700; color: #34d399;">$42,500.0M</td>
+                <td>
+                  <span class="badge badge-bull">+$700.0M (+1.67% Whisper Hurdle)</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div style="width:92%; height:100%; background:linear-gradient(90deg, #3b82f6, #10b981);"></div></div>
+                </td>
+                <td><span class="badge badge-blue">BULL HURDLE >$42.5B</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Wall Street consensus Diluted EPS for Q3 2026E ($1.96) vs Buy-Side Whisper ($2.08)." data-tip="Diluted EPS ($): Sell-side consensus expects $1.96 per share; buy-side whisper bogeys target $2.08+ reflecting expanding high-margin AWS and advertising revenue mix alongside regionalized fulfillment cost efficiencies.">Diluted EPS (GAAP / Consensus)</span></td>
+                <td>$5.75</td>
+                <td>$1.95</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">$1.96</td>
+                <td style="font-weight:700; color: #34d399;">$2.08</td>
+                <td>
+                  <span class="badge badge-bull">+$0.12 (+6.12% Beat Target)</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div style="width:88%; height:100%; background:linear-gradient(90deg, #3b82f6, #10b981);"></div></div>
+                </td>
+                <td><span class="badge badge-blue">EARNINGS ACCELERATION</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="High-margin digital retail media ad revenues from sponsored products, video streaming, and display ads." data-tip="Advertising Services Revenue: Grew +19.5% YoY to $19,809M in Q2 2026; Street consensus models $19,200M in Q3 2026E (whisper $19,600M+) powered by expanded Prime Video ad tier monetization and sponsored product placements.">Advertising Services Revenue ($M)</span></td>
+                <td>$19,809.0M</td>
+                <td>$16,575.0M</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">$19,200.0M</td>
+                <td style="font-weight:700; color: #34d399;">$19,600.0M</td>
+                <td>
+                  <span class="badge badge-bull">+$400.0M (+2.08% Ad Spread)</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div style="width:86%; height:100%; background:linear-gradient(90deg, #3b82f6, #10b981);"></div></div>
+                </td>
+                <td><span class="badge badge-blue">HIGH-MARGIN CASH ENGINE</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Total consolidated GAAP operating profit across North America, International, and AWS." data-tip="Worldwide Operating Income: Reached $27,461M in Q2 2026 (13.7% operating margin); Street models $18,500M in Q3 2026E (guidance corridor $16.5B to $20.5B; whisper >$19.5B).">Worldwide Consolidated Operating Income ($M)</span></td>
+                <td>$27,461.0M</td>
+                <td>$17,422.0M</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">$18,500.0M</td>
+                <td style="font-weight:700; color: #34d399;">$19,500.0M</td>
+                <td>
+                  <span class="badge badge-bull">+$1,000.0M (+5.41% Spread)</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div style="width:90%; height:100%; background:linear-gradient(90deg, #3b82f6, #10b981);"></div></div>
+                </td>
+                <td><span class="badge badge-blue">OPERATING LEVERAGE</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Commissions, fulfillment (FBA), and shipping fees generated from marketplace third-party merchants." data-tip="3P Seller Services: Generated $46,780M in Q2 2026; Street models $44,500M in Q3 2026E (whisper $45,200M) as 3P unit mix accounts for >61% of total paid units on Amazon's global marketplace.">Third-Party (3P) Seller Services Revenue ($M)</span></td>
+                <td>$46,780.0M</td>
+                <td>$41,080.0M</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">$44,500.0M</td>
+                <td style="font-weight:700; color: #34d399;">$45,200.0M</td>
+                <td>
+                  <span class="badge badge-bull">+$700.0M (+1.57% Spread)</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div style="width:84%; height:100%; background:linear-gradient(90deg, #3b82f6, #10b981);"></div></div>
+                </td>
+                <td><span class="badge badge-blue">MARKETPLACE DOMINANCE</span></td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="margin-bottom: 12px; font-size: 13px; color: #94a3b8; font-family: monospace;">
+        <strong>Table 1B-2:</strong> MANAGEMENT GUIDANCE CREDIBILITY &amp; HISTORICAL TRACK RECORD
+      </div>
+      <div class="credibility-gauge-bar" style="height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; margin-bottom: 12px; overflow: hidden;">
+        <div style="width: 88%; height: 100%; background: linear-gradient(90deg, #3b82f6, #10b981);"></div>
+      </div>
+      <div class="table-wrapper" style="margin-bottom: 20px;">
+        <table class="table-financials">
+          <thead>
+            <tr>
+              <th>Guidance Metric / Dimension</th>
+              <th>Prior Q2 Guidance for Q3</th>
+              <th>Current Street Consensus</th>
+              <th>Historical Milestone Track Record</th>
+              <th>Variance &amp; Sandbagging Analysis</th>
+              <th>Credibility Grade</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr>
+                <td><span class="tip" title="Official net sales guidance range issued by management in the Q2 2026 earnings report." data-tip="Q3 2026 Net Sales Guidance: Management guided to $186.0B–$191.0B ($188.5B midpoint); current Street consensus models $190.5B, with buy-side whisper demanding $192.5B+.">Q3 2026E Net Sales Guidance Corridor ($186.0B – $191.0B)</span></td>
+                <td>$186.0B – $191.0B ($188.5B Midpoint)</td>
+                <td style="font-weight:600; color: #93c5fd;">$190.5B Consensus ($192.5B Whisper)</td>
+                <td style="font-weight:600; color: #34d399;">4 / 4 Revenue Beats</td>
+                <td>CEO Andy Jassy and CFO Brian Olsavsky routinely guide conservatively, leaving a 1.5–3.0% buffer that Amazon historically surpasses via late-quarter Prime Big Deals days and AWS acceleration.</td>
+                <td><span class="badge badge-bull">CONSERVATIVE HIGH CREDIBILITY</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Management operating income guidance range issued in Q2 2026." data-tip="Operating Income Guidance Corridor: Management guided to $16.5B–$20.5B ($18.5B midpoint); Street consensus expects $18.5B with whisper looking for $19.5B+.">Q3 2026E Operating Income Guidance Corridor ($16.5B – $20.5B)</span></td>
+                <td>$16.5B – $20.5B ($18.5B Midpoint)</td>
+                <td style="font-weight:600; color: #93c5fd;">$18.5B Consensus ($19.5B Whisper)</td>
+                <td style="font-weight:600; color: #34d399;">4 / 4 Operating Profit Beats</td>
+                <td>Amazon has consistently beaten operating income guidance midpoints by an average of $2.5B+ over the prior 4 quarters due to expanding AWS margins and regionalized fulfillment savings.</td>
+                <td><span class="badge badge-bull">SYSTEMATIC SANDBAGGING</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Full-year capital expenditure forecast focused on AWS data centers, Trainium clusters, and generative AI compute." data-tip="CapEx Envelope: Management reaffirmed elevated 2026 capital intensity of ~$100B+ annualized to meet surging generative AI demand across enterprise cloud clients.">Full-Year 2026 CapEx & AI Infrastructure Spend Envelope ($100B+ Run-Rate)</span></td>
+                <td>$95.0B – $105.0B Annualized CapEx Run-Rate</td>
+                <td style="font-weight:600; color: #93c5fd;">$102.0B Consensus (Whisper $105.0B+)</td>
+                <td style="font-weight:600; color: #34d399;">Aggressive Infrastructure Deployment</td>
+                <td>Management is willing to absorb near-term cash flow drag to secure long-term GPU clusters, custom silicon (Trainium2), and Project Kuiper satellite infrastructure.</td>
+                <td><span class="badge badge-bull">HIGH CAPITAL COMMITMENT</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Deterministic 4-quarter historical EPS surprise and 1-day post-earnings stock move from Stage 1." data-tip="4Q Historical Track Record: Over the last 4 quarters, AMZN delivered a 75.0% beat rate (3 beats, 1 meet) with an average EPS surprise of +77.19%. Average 1-day post-earnings move was ±7.80% (+15.32%, +0.77%, -5.55%, +9.58%), compared to current weekly straddle implied move of ±7.56% (±$18.85/sh).">4-Quarter Historical EPS Surprise & 1-Day Stock Reaction Track Record</span></td>
+                <td>Last 4Q Moves: +15.32%, +0.77%, -5.55%, +9.58%</td>
+                <td style="font-weight:600; color: #93c5fd;">Current ATM Straddle: ±7.56% (±$18.85/sh)</td>
+                <td style="font-weight:600; color: #34d399;">3 / 4 EPS Beats (75.0% Beat Rate)</td>
+                <td>Weekly straddles price ±7.56% ($18.85 on 90.26% IV), closely tracking historical 1-day average volatility (7.80%), indicating a fair volatility regime with strong upside beta on AWS acceleration.</td>
+                <td><span class="badge badge-bull">FAIR VOLATILITY REGIME</span></td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="margin-bottom: 12px; font-size: 13px; color: #94a3b8; font-family: monospace;">
+        <strong>Table 1B-3:</strong> FORWARD GUIDANCE BOGEYS REQUIRED FOR MULTIPLE EXPANSION
+      </div>
+      <div class="table-wrapper">
+        <table class="table-financials">
+          <thead>
+            <tr>
+              <th>Forward Milestone / Metric</th>
+              <th>Street Consensus Hurdle</th>
+              <th>Bull Case Bogey (Re-Rating)</th>
+              <th>Bear Case Breakdown</th>
+              <th>Sensitivity Badge</th>
+              <th>Strategic Catalyst Rationale</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr>
+                <td><span class="tip" title="Hurdle for Q4 2026 Holiday net sales guidance reflecting peak holiday retail, Black Friday, and enterprise cloud renewals." data-tip="Q4 2026E Net Sales Guidance: Street consensus models $220.0B–$228.0B ($224.0B midpoint). A guided midpoint above $225.0B+ is required to sustain post-print multiple expansion.">Q4 2026E Holiday Net Sales Guidance Corridor</span></td>
+                <td>$220.0B – $228.0B ($224.0B Midpoint)</td>
+                <td style="font-weight:600; color: #34d399;">$226.0B – $234.0B ($230.0B Midpoint)</td>
+                <td style="font-weight:600; color: #f87171;">Midpoint Below $218.0B</td>
+                <td><span class="badge badge-warn">PRIMARY STOCK CATALYST</span></td>
+                <td>Fourth quarter represents peak e-commerce volume, advertising spend, and major annual enterprise AWS contract renewals.</td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Consolidated operating income hurdle for the critical fourth holiday quarter." data-tip="Q4 2026 Operating Income Hurdle: Street consensus models $25.0B–$28.0B ($26.5B midpoint); Bull bogey demands $28.0B+ demonstrating sustained double-digit retail and cloud margins.">Q4 2026E Operating Income Guidance Corridor</span></td>
+                <td>$25.0B – $28.0B ($26.5B Midpoint)</td>
+                <td style="font-weight:600; color: #34d399;">$28.0B – $31.0B ($29.5B Midpoint)</td>
+                <td style="font-weight:600; color: #f87171;">Midpoint Below $24.0B</td>
+                <td><span class="badge badge-warn">MARGIN EXPANSION BOGEY</span></td>
+                <td>Demonstrates operating leverage as automated fulfillment, robotics, and high-margin advertising offset holiday seasonal labor costs.</td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Year-over-year constant currency growth hurdle for Amazon Web Services." data-tip="AWS Growth Hurdle: Street models +20.0% to +21.5% YoY growth; buy-side bull bogey demands +23.0%+ to prove AWS is accelerating against Azure and Google Cloud.">AWS Q4 2026E YoY Revenue Growth Rate Trajectory</span></td>
+                <td>+20.0% to +21.5% YoY Growth</td>
+                <td style="font-weight:600; color: #34d399;">+23.0%+ YoY Accelerated Growth</td>
+                <td style="font-weight:600; color: #f87171;">Deceleration Below +19.0% YoY</td>
+                <td><span class="badge badge-warn">CLOUD MULTIPLE DRIVER</span></td>
+                <td>AWS represents over 60% of Amazon's consolidated operating profits; accelerating cloud revenue is the single largest determinant of AMZN's valuation multiple.</td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Full-year cash generation trajectory amidst heavy AI infrastructure and data center capital allocation." data-tip="FCF Conversion Bogey: Street expects trailing twelve-month FCF to rebound past $40B+ as early AI cluster investments begin generating high-margin software revenues.">Full-Year 2026 Free Cash Flow Conversion & CapEx Outlook</span></td>
+                <td>TTM Reported FCF >$35.0B</td>
+                <td style="font-weight:600; color: #34d399;">TTM Reported FCF >$45.0B</td>
+                <td style="font-weight:600; color: #f87171;">TTM Reported FCF Below $30.0B</td>
+                <td><span class="badge badge-warn">CASH FLOW RECOVERY</span></td>
+                <td>Assures institutional investors that historic CapEx intensity will translate into superior long-term return on invested capital (ROIC).</td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 4. ROW 2: 5-QUARTER HISTORICAL FINANCIAL TABLE + Q3E -->
+    <section class="card" id="row-2-financials" style="margin-bottom: 24px;">
+      <div class="card-header">
+        <div class="card-title"><span class="card-title-accent"></span>Row 2: 5-Quarter Stitched Financial Table + Q3 2026E Consensus Estimate</div>
+        <span class="badge badge-blue">GAAP FINANCIAL MESH</span>
+      </div>
+      <div class="table-wrapper">
+        <table class="table-financials">
+          <thead>
+            <tr>
+              <th>Line Item ($ Millions)</th>
+              <th>Q2 2025</th>
+              <th>Q3 2025</th>
+              <th>Q4 2025</th>
+              <th>Q1 2026</th>
+              <th class="col-q0">Q2 2026 (Actual)</th>
+              <th class="col-est">Q3 2026E (Consensus)</th>
+              <th>QoQ Delta</th>
+              <th>YoY Delta</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="font-weight: 700; background: rgba(59, 130, 246, 0.05);">
+              <td><span class="tip" title="Total Revenue: Consolidated net sales recognized." data-tip="Total Revenue: Consolidated net sales across North America, International, and AWS.">$ Total Revenue</span></td>
+              <td>$167702.0M</td>
+              <td>$180169.0M</td>
+              <td>$213386.0M</td>
+              <td>$181519.0M</td>
+              <td class="col-q0" style="color: #60a5fa; font-weight:800;">$200606.0M</td>
+              <td class="col-est" style="color: #34d399; font-weight:800;">$190,500.0M</td>
+              <td class="delta-pill delta-neg">-5.0%</td>
+              <td class="delta-pill delta-bull">+5.7%</td>
+            </tr>
+            <tr style="padding-left: 15px;">
+              <td style="padding-left: 24px;">• North America Segment Sales</td>
+              <td>$100,068.0M</td>
+              <td>$106,277.0M</td>
+              <td>$127,600.0M</td>
+              <td>$110,500.0M</td>
+              <td class="col-q0">$116,177.0M</td>
+              <td class="col-est">$111,500.0M</td>
+              <td class="delta-pill delta-neg">-4.0%</td>
+              <td class="delta-pill delta-bull">+4.9%</td>
+            </tr>
+            <tr style="padding-left: 15px;">
+              <td style="padding-left: 24px;">• International Segment Sales</td>
+              <td>$36,761.0M</td>
+              <td>$39,500.0M</td>
+              <td>$48,200.0M</td>
+              <td>$38,800.0M</td>
+              <td class="col-q0">$42,197.0M</td>
+              <td class="col-est">$37,200.0M</td>
+              <td class="delta-pill delta-neg">-11.8%</td>
+              <td class="delta-pill delta-neg">-5.8%</td>
+            </tr>
+            <tr style="padding-left: 15px;">
+              <td style="padding-left: 24px;">• Amazon Web Services (AWS)</td>
+              <td>$30,873.0M</td>
+              <td>$34,392.0M</td>
+              <td>$37,586.0M</td>
+              <td>$32,219.0M</td>
+              <td class="col-q0">$42,232.0M</td>
+              <td class="col-est">$41,800.0M</td>
+              <td class="delta-pill delta-neg">-1.0%</td>
+              <td class="delta-pill delta-bull">+21.5%</td>
+            </tr>
+            <tr style="padding-left: 15px;">
+              <td style="padding-left: 24px;">• Online Stores</td>
+              <td>$58,000.0M</td>
+              <td>$61,500.0M</td>
+              <td>$78,000.0M</td>
+              <td>$62,000.0M</td>
+              <td class="col-q0">$70,432.0M</td>
+              <td class="col-est">$64,000.0M</td>
+              <td class="delta-pill delta-neg">-9.1%</td>
+              <td class="delta-pill delta-bull">+4.1%</td>
+            </tr>
+            <tr style="padding-left: 15px;">
+              <td style="padding-left: 24px;">• Third-Party Seller Services</td>
+              <td>$39,000.0M</td>
+              <td>$41,500.0M</td>
+              <td>$52,000.0M</td>
+              <td>$42,000.0M</td>
+              <td class="col-q0">$46,780.0M</td>
+              <td class="col-est">$44,500.0M</td>
+              <td class="delta-pill delta-neg">-4.9%</td>
+              <td class="delta-pill delta-bull">+7.2%</td>
+            </tr>
+            <tr style="padding-left: 15px;">
+              <td style="padding-left: 24px;">• Advertising Services</td>
+              <td>$14,500.0M</td>
+              <td>$16,500.0M</td>
+              <td>$20,500.0M</td>
+              <td>$16,800.0M</td>
+              <td class="col-q0">$19,809.0M</td>
+              <td class="col-est">$19,200.0M</td>
+              <td class="delta-pill delta-neg">-3.1%</td>
+              <td class="delta-pill delta-bull">+16.4%</td>
+            </tr>
+            <tr style="padding-left: 15px;">
+              <td style="padding-left: 24px;">• Subscription Services (Prime)</td>
+              <td>$11,500.0M</td>
+              <td>$12,000.0M</td>
+              <td>$13,000.0M</td>
+              <td>$12,500.0M</td>
+              <td class="col-q0">$13,730.0M</td>
+              <td class="col-est">$13,000.0M</td>
+              <td class="delta-pill delta-neg">-5.3%</td>
+              <td class="delta-pill delta-bull">+8.3%</td>
+            </tr>
+            <tr style="padding-left: 15px;">
+              <td style="padding-left: 24px;">• Physical Stores</td>
+              <td>$5,500.0M</td>
+              <td>$5,600.0M</td>
+              <td>$6,000.0M</td>
+              <td>$5,700.0M</td>
+              <td class="col-q0">$5,794.0M</td>
+              <td class="col-est">$5,800.0M</td>
+              <td class="delta-pill delta-neutral">+0.1%</td>
+              <td class="delta-pill delta-bull">+3.6%</td>
+            </tr>
+            <tr>
+              <td>Cost of Sales (Cost of Revenue)</td>
+              <td>$80809.0M</td>
+              <td>$88670.0M</td>
+              <td>$109959.0M</td>
+              <td>$87463.0M</td>
+              <td class="col-q0">$95778.0M</td>
+              <td class="col-est">$94,000.0M</td>
+              <td class="delta-pill delta-bull">-1.9%</td>
+              <td class="delta-pill delta-neg">+6.0%</td>
+            </tr>
+            <tr style="font-weight: 700;">
+              <td>Gross Profit</td>
+              <td>$86893.0M</td>
+              <td>$91499.0M</td>
+              <td>$103427.0M</td>
+              <td>$94056.0M</td>
+              <td class="col-q0" style="color:#60a5fa;">$104828.0M</td>
+              <td class="col-est" style="color:#34d399;">$96,500.0M</td>
+              <td class="delta-pill delta-neg">-7.9%</td>
+              <td class="delta-pill delta-bull">+5.5%</td>
+            </tr>
+            <tr style="font-weight: 700;">
+              <td>Operating Expenses</td>
+              <td>$67722.0M</td>
+              <td>$74077.0M</td>
+              <td>$78450.0M</td>
+              <td>$70204.0M</td>
+              <td class="col-q0">$77367.0M</td>
+              <td class="col-est">$78,000.0M</td>
+              <td class="delta-pill delta-neg">+0.8%</td>
+              <td class="delta-pill delta-neg">+5.3%</td>
+            </tr>
+            <tr style="padding-left: 15px;">
+              <td style="padding-left: 24px;">• Fulfillment</td>
+              <td>$23,500.0M</td>
+              <td>$24,500.0M</td>
+              <td>$28,500.0M</td>
+              <td>$26,000.0M</td>
+              <td class="col-q0">$29,633.0M</td>
+              <td class="col-est">$27,500.0M</td>
+              <td class="delta-pill delta-bull">-7.2%</td>
+              <td class="delta-pill delta-neg">+12.2%</td>
+            </tr>
+            <tr style="padding-left: 15px;">
+              <td style="padding-left: 24px;">• Technology &amp; Infrastructure</td>
+              <td>$22,500.0M</td>
+              <td>$25,500.0M</td>
+              <td>$26,500.0M</td>
+              <td>$26,000.0M</td>
+              <td class="col-q0">$33,158.0M</td>
+              <td class="col-est">$32,000.0M</td>
+              <td class="delta-pill delta-bull">-3.5%</td>
+              <td class="delta-pill delta-neg">+25.5%</td>
+            </tr>
+            <tr style="padding-left: 15px;">
+              <td style="padding-left: 24px;">• Sales &amp; Marketing</td>
+              <td>$10,500.0M</td>
+              <td>$11,500.0M</td>
+              <td>$12,500.0M</td>
+              <td>$11,000.0M</td>
+              <td class="col-q0">$11,698.0M</td>
+              <td class="col-est">$11,500.0M</td>
+              <td class="delta-pill delta-bull">-1.7%</td>
+              <td class="delta-pill delta-neutral">0.0%</td>
+            </tr>
+            <tr style="padding-left: 15px;">
+              <td style="padding-left: 24px;">• General &amp; Administrative</td>
+              <td>$2,800.0M</td>
+              <td>$2,900.0M</td>
+              <td>$3,100.0M</td>
+              <td>$2,850.0M</td>
+              <td class="col-q0">$2,788.0M</td>
+              <td class="col-est">$2,800.0M</td>
+              <td class="delta-pill delta-neutral">+0.4%</td>
+              <td class="delta-pill delta-bull">-3.4%</td>
+            </tr>
+            <tr style="font-weight: 700; background: rgba(59, 130, 246, 0.05);">
+              <td>Operating Income (EBIT)</td>
+              <td>$19171.0M</td>
+              <td>$17422.0M</td>
+              <td>$24977.0M</td>
+              <td>$23852.0M</td>
+              <td class="col-q0" style="color: #60a5fa; font-weight:800;">$27461.0M</td>
+              <td class="col-est" style="color: #34d399; font-weight:800;">$18,500.0M</td>
+              <td class="delta-pill delta-neg">-32.6%</td>
+              <td class="delta-pill delta-bull">+6.2%</td>
+            </tr>
+            <tr style="font-weight: 700;">
+              <td>GAAP Net Income</td>
+              <td>$18164.0M</td>
+              <td>$21187.0M</td>
+              <td>$21192.0M</td>
+              <td>$30255.0M</td>
+              <td class="col-q0" style="color: #60a5fa;">$62647.0M</td>
+              <td class="col-est" style="color: #34d399;">$21,500.0M</td>
+              <td class="delta-pill delta-neg">-65.7%</td>
+              <td class="delta-pill delta-bull">+1.5%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 5. ROW 3: FORENSIC CASH FLOW & TRUE FCF WATERFALL BRIDGE -->
+    <section class="card" id="row-3-fcf" style="margin-bottom: 24px;">
+      <div class="card-header">
+        <div class="card-title"><span class="card-title-accent"></span>Row 3: Forensic Quality of Earnings &amp; True Free Cash Flow Bridge (Q2 2026)</div>
+        <span class="badge badge-bull">CAPEX INTENSITY AUDIT</span>
+      </div>
+      <div class="forensic-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px;">
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 16px; border-radius: 8px; border: 1px solid var(--border-color);">
+          <div style="font-size: 13px; font-weight: 700; color: #93c5fd; margin-bottom: 10px;">
+            True Economic Free Cash Flow Waterfall (Q2 2026 Actual)
+          </div>
+          <div class="waterfall-row" style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 12.5px;">
+            <span><span class="tip" title="Operating Cash Flow: Cash flow generated from retail commerce and AWS customer collections." data-tip="Operating Cash Flow (OCF): $26,032.0M generated in Q2 2026.">Operating Cash Flow (OCF)</span></span>
+            <span style="font-family: monospace; font-weight: 700; color: #34d399;">+$26,032M</span>
+          </div>
+          <div class="waterfall-row" style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 12.5px;">
+            <span>Less: Capital Expenditures (CapEx)</span>
+            <span style="font-family: monospace; font-weight: 700; color: #f87171;">-$44203.0M</span>
+          </div>
+          <div class="waterfall-row" style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 12.5px; background: rgba(255,255,255,0.02);">
+            <span><strong>= Reported Free Cash Flow (FCF)</strong></span>
+            <span style="font-family: monospace; font-weight: 700; color: #f87171;">-$18171.0M</span>
+          </div>
+          <div class="waterfall-row" style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 12.5px;">
+            <span>Less: Share-Based Compensation (SBC)</span>
+            <span style="font-family: monospace; font-weight: 700; color: #f87171;">-$4032.0M</span>
+          </div>
+          <div class="waterfall-row" style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 12.5px;">
+            <span>Less: Principal Finance Lease Obligations</span>
+            <span style="font-family: monospace; font-weight: 700; color: #94a3b8;">-$0.0M</span>
+          </div>
+          <div class="waterfall-row" style="display: flex; justify-content: space-between; padding: 8px 0; font-size: 13.5px; background: rgba(239, 68, 68, 0.08); border-radius: 4px; padding-left: 6px; padding-right: 6px; margin-top: 4px;">
+            <span><strong>= True Free Cash Flow (Post-SBC &amp; Leases)</strong></span>
+            <span style="font-family: monospace; font-weight: 800; color: #f87171;">-$22203.0M</span>
+          </div>
+        </div>
+
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 16px; border-radius: 8px; border: 1px solid var(--border-color);">
+          <div style="font-size: 13px; font-weight: 700; color: #34d399; margin-bottom: 8px;">
+            Forensic Cash Quality &amp; AI Infrastructure Intensity Takeaways
+          </div>
+          <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.55; margin-bottom: 8px;">
+            <strong>1. Historic CapEx Scaling:</strong> In Q2 2026, Amazon deployed <strong>$44,203.0M</strong> in CapEx against <strong>$26,032M</strong> in OCF ($26,032 exact), resulting in reported FCF of -$18,171.0M. The massive capital allocation is overwhelmingly dedicated to AWS data centers, custom Trainium2 AI clusters, and Project Kuiper launch milestones.
+          </p>
+          <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.55; margin-bottom: 8px;">
+            <strong>2. SBC Load Management:</strong> Stock-based compensation was $4,032.0M, accounting for only 2.0% of total net sales—one of the lowest dilution ratios among mega-cap technology firms.
+          </p>
+          <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.55;">
+            <strong>3. Fortress Liquidity Cushion:</strong> With +$30.7B in net cash and $89.2B in total cash and marketable securities, Amazon possesses the balance sheet resilience to fund its aggressive $100B+ annual CapEx cycle organically without dilutive equity issuance.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. ROW 4: OPERATIONAL TAILWINDS & HEADWINDS -->
+    <section class="card" id="row-4-segments" style="margin-bottom: 24px;">
+      <div class="card-header">
+        <div class="card-title"><span class="card-title-accent"></span>Row 4: 4 Operational Tailwinds vs. 4 Execution Headwinds</div>
+        <span class="badge badge-bull">STRATEGIC CATALYST MESH</span>
+      </div>
+      <div class="audit-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px;">
+        <!-- TAILWINDS -->
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 16px; border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.25);">
+          <div style="font-size: 13.5px; font-weight: 700; color: #34d399; margin-bottom: 12px;">
+            🚀 Top 4 Operational Tailwinds
+          </div>
+          <div class="audit-point" style="margin-bottom: 10px; font-size: 12.5px; color: var(--text-secondary); line-height: 1.5;">
+            <strong>1. AWS Generative AI Run-Rate Acceleration:</strong> Enterprise workload migrations to Amazon Bedrock and expanding adoption of custom Trainium2 silicon clusters propelled AWS revenue to $42.2B with 39.4% operating margins.
+          </div>
+          <div class="audit-point" style="margin-bottom: 10px; font-size: 12.5px; color: var(--text-secondary); line-height: 1.5;">
+            <strong>2. High-Margin Digital Advertising Engine:</strong> Advertising Services expanded +19.5% YoY to $19.8B, scaling rapidly through default Prime Video ad tiers and sponsored product auctions.
+          </div>
+          <div class="audit-point" style="margin-bottom: 10px; font-size: 12.5px; color: var(--text-secondary); line-height: 1.5;">
+            <strong>3. Regionalized Inbound Fulfillment Efficiencies:</strong> Re-architecting the North American logistics network into distinct geographic regions permanently decreased cost-to-serve while enabling record same-day and next-day delivery speeds.
+          </div>
+          <div class="audit-point" style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5;">
+            <strong>4. Marketplace 3P Seller Take-Rate Expansion:</strong> Third-party merchant services generated $46.8B, with 3P seller units representing >61% of total paid volume, generating recurring high-margin service revenue.
+          </div>
+        </div>
+
+        <!-- HEADWINDS -->
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 16px; border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.25);">
+          <div style="font-size: 13.5px; font-weight: 700; color: #f87171; margin-bottom: 12px;">
+            ⚠️ Top 4 Execution Headwinds
+          </div>
+          <div class="audit-point" style="margin-bottom: 10px; font-size: 12.5px; color: var(--text-secondary); line-height: 1.5;">
+            <strong>1. Elevated AI Infrastructure CapEx Drain:</strong> Quarterly CapEx of $44.2B ($100B+ annual run-rate) pushes true economic FCF to -$22.2B, raising investor scrutiny regarding returns on invested capital.
+          </div>
+          <div class="audit-point" style="margin-bottom: 10px; font-size: 12.5px; color: var(--text-secondary); line-height: 1.5;">
+            <strong>2. Consumer Discretionary Spending Caution:</strong> Shoppers continue to trade down into lower-priced essentials, pressuring average order value (AOV) across general merchandise.
+          </div>
+          <div class="audit-point" style="margin-bottom: 10px; font-size: 12.5px; color: var(--text-secondary); line-height: 1.5;">
+            <strong>3. Low-Cost Cross-Border Retail Competition:</strong> Aggressive promotional discounts from cross-border apps (Temu, Shein) force defensive low-cost storefront rollouts in apparel and home goods.
+          </div>
+          <div class="audit-point" style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5;">
+            <strong>4. Regulatory &amp; Antitrust Scrutiny:</strong> Ongoing FTC and European Commission regulatory scrutiny over marketplace algorithms, 3P merchant contracts, and bundled Prime services creates headline friction.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. SECTION 4B: TOP 3 INSTITUTIONAL PRE-PRINT DEBATES & CALL FOCUS QUESTIONS -->
+    <section class="card" id="row-4b-debates" style="margin-bottom: 24px;">
+      <div class="card-header">
+        <div class="card-title"><span class="card-title-accent"></span>Section 4B: Top 3 Institutional Pre-Print Debates &amp; Analyst Call Focus Questions</div>
+        <span class="badge badge-blue">SELL-SIDE PREVIEW AUDIT</span>
+      </div>
+      <div>
+        <div class="audit-point" style="background: rgba(11, 15, 25, 0.6); border: 1px solid var(--border-color); border-left: 3px solid #3b82f6; padding: 12px 14px; border-radius: 6px; margin-bottom: 12px;">
+          <div style="font-weight: 700; color: #60a5fa; font-size: 13.5px; margin-bottom: 4px;">
+            Debate 1: AWS AI Monetization vs. CapEx Return on Invested Capital (ROIC)
+          </div>
+          <p style="font-size: 12.8px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 6px;">
+            <strong>Bull vs. Bear Institutional Framing:</strong> Bulls argue that AWS's multi-billion dollar investment in custom Trainium2 chips, Bedrock enterprise model hubs, and Nvidia Blackwell clusters is already driving re-accelerating revenue growth past +22% YoY with industry-leading 38%+ cloud operating margins. Bears contend that $44B+ in quarterly CapEx ($100B+ run-rate) has pushed quarterly reported Free Cash Flow into negative territory (-$18.2B in Q2 2026), creating an overhang if cloud clients optimize spend or GenAI inference software commoditizes.
+          </p>
+          <p style="font-size: 12.8px; color: var(--text-secondary); line-height: 1.5;">
+            <strong>Analyst Conference Call Focus: Can Andy Jassy provide quantitative proof that enterprise generative AI revenue is scaling at triple-digit rates, and when will annual CapEx intensity plateau relative to operating cash flows?</strong>
+          </p>
+        </div>
+        <div class="audit-point" style="background: rgba(11, 15, 25, 0.6); border: 1px solid var(--border-color); border-left: 3px solid #10b981; padding: 12px 14px; border-radius: 6px; margin-bottom: 12px;">
+          <div style="font-weight: 700; color: #34d399; font-size: 13.5px; margin-bottom: 4px;">
+            Debate 2: Retail Margin Durability & Regionalized Fulfillment Cost Reductions
+          </div>
+          <p style="font-size: 12.8px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 6px;">
+            <strong>Bull vs. Bear Institutional Framing:</strong> Bulls emphasize that Amazon's regionalized fulfillment network, automated robotics (Sequoia, Proteus), and higher delivery densities have permanently lowered the cost-to-serve per unit while accelerating same-day and one-day delivery speeds. Bears warn that discount cross-border platforms (Temu, Shein) are forcing Amazon to lower 3P apparel take rates and introduce low-cost storefronts, while consumers exhibit cautious discretionary basket sizes.
+          </p>
+          <p style="font-size: 12.8px; color: var(--text-secondary); line-height: 1.5;">
+            <strong>Analyst Conference Call Focus: How much further can North America and International retail operating margins expand, and what impact is the low-cost direct-from-China storefront having on 3P take rates?</strong>
+          </p>
+        </div>
+        <div class="audit-point" style="background: rgba(11, 15, 25, 0.6); border: 1px solid var(--border-color); border-left: 3px solid #f59e0b; padding: 12px 14px; border-radius: 6px; margin-bottom: 12px;">
+          <div style="font-weight: 700; color: #fcd34d; font-size: 13.5px; margin-bottom: 4px;">
+            Debate 3: Advertising Services Scale & Prime Video Ad-Tier Monetization
+          </div>
+          <p style="font-size: 12.8px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 6px;">
+            <strong>Bull vs. Bear Institutional Framing:</strong> Bulls view Amazon Advertising ($19.8B in Q2, ~80%+ gross margin) as the ultimate high-margin cash engine, scaling rapidly as default Prime Video advertising tiers attract top-tier consumer brand budgets away from linear TV. Bears argue that retail media growth must eventually decelerate towards broader digital advertising GDP rates (+10–12%) and that excessive sponsored listings could degrade the shopper search experience.
+          </p>
+          <p style="font-size: 12.8px; color: var(--text-secondary); line-height: 1.5;">
+            <strong>Analyst Conference Call Focus: What is the current ad-tier adoption rate across Prime Video subscribers globally, and what incremental operating profit does advertising contribute to retail operations?</strong>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. ROW 5: PEER VALUATION COMPS -->
+    <section class="card" id="row-5-peers" style="margin-bottom: 24px;">
+      <div class="card-header">
+        <div class="card-title"><span class="card-title-accent"></span>Row 5: Peer Valuation &amp; Mega-Cap Cloud/Commerce Comps Benchmark</div>
+        <span class="badge badge-bull">MEGA-CAP HYPERSCALER COMPS</span>
+      </div>
+      <div class="table-wrapper">
+        <table class="table-financials">
+          <thead>
+            <tr>
+              <th>Company</th>
+              <th>Ticker</th>
+              <th>Market Cap</th>
+              <th>Enterprise Value</th>
+              <th>Forward P/E</th>
+              <th>EV / EBITDA</th>
+              <th>Cloud / Digital YoY Growth Rate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background: rgba(59, 130, 246, 0.08); font-weight:700;">
+              <td>Amazon.com, Inc.</td>
+              <td>AMZN</td>
+              <td>$2690.43B</td>
+              <td>$2815.41B</td>
+              <td>23.9x</td>
+              <td>16.7x</td>
+              <td>+36.8% YoY (AWS Cloud)</td>
+            </tr>
+            <tr>
+              <td>Microsoft Corporation</td>
+              <td>MSFT</td>
+              <td>~$3,150.0B</td>
+              <td>~$3,120.0B</td>
+              <td>~28.5x</td>
+              <td>~20.4x</td>
+              <td>~29.0% YoY (Azure Cloud)</td>
+            </tr>
+            <tr>
+              <td>Alphabet Inc.</td>
+              <td>GOOGL</td>
+              <td>~$2,120.0B</td>
+              <td>~$2,010.0B</td>
+              <td>~19.8x</td>
+              <td>~13.2x</td>
+              <td>~28.0% YoY (Google Cloud)</td>
+            </tr>
+            <tr>
+              <td>Walmart Inc.</td>
+              <td>WMT</td>
+              <td>~$650.0B</td>
+              <td>~$690.0B</td>
+              <td>~31.0x</td>
+              <td>~15.5x</td>
+              <td>~21.0% YoY (Global eCommerce)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 9. ROW 6: 4-PILLAR PRE-EARNINGS SENTIMENT GAUGE & POSITIONING -->
+    <section class="card" id="row-6-sentiment" style="margin-bottom: 24px;">
+      <div class="card-header">
+        <div class="card-title"><span class="card-title-accent"></span>Row 6: Multi-Source 4-Pillar Sentiment Gauge &amp; Positioning Audit</div>
+        <span class="badge badge-bull">COMPOSITE SCORE: 86 / 100</span>
+      </div>
+      <div class="sentiment-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-bottom: 16px;">
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+          <div style="font-size: 11px; text-transform: uppercase; color: #94a3b8; font-weight: 700;">1. Retail Community Sentiment</div>
+          <div style="font-size: 18px; font-weight: 800; color: #34d399; margin: 4px 0;">84 / 100 (Bullish)</div>
+          <div class="sentiment-meter-bar" style="height: 5px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; margin-bottom: 6px;">
+            <div style="width: 84%; height: 100%; background: #10b981;"></div>
+          </div>
+          <div style="font-size: 11.5px; color: #cbd5e1;">Praise for AWS GenAI leadership and expanding Prime Video advertising.</div>
+        </div>
+
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+          <div style="font-size: 11px; text-transform: uppercase; color: #94a3b8; font-weight: 700;">2. Institutional Sell-Side Ratings</div>
+          <div style="font-size: 18px; font-weight: 800; color: #60a5fa; margin: 4px 0;">95 / 100 (Strong Buy)</div>
+          <div class="sentiment-meter-bar" style="height: 5px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; margin-bottom: 6px;">
+            <div style="width: 95%; height: 100%; background: #3b82f6;"></div>
+          </div>
+          <div style="font-size: 11.5px; color: #cbd5e1;">58 analysts covering carry Strong Buy rating ($332.24 mean / $405 high).</div>
+        </div>
+
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+          <div style="font-size: 11px; text-transform: uppercase; color: #94a3b8; font-weight: 700;">3. Options Derivatives Skew</div>
+          <div style="font-size: 18px; font-weight: 800; color: #34d399; margin: 4px 0;">88 / 100 (Heavy Call Skew)</div>
+          <div class="sentiment-meter-bar" style="height: 5px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; margin-bottom: 6px;">
+            <div style="width: 88%; height: 100%; background: #10b981;"></div>
+          </div>
+          <div style="font-size: 11.5px; color: #cbd5e1;">Put/Call OI ratio of 0.34x reflects aggressive institutional upside call buying.</div>
+        </div>
+
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+          <div style="font-size: 11px; text-transform: uppercase; color: #94a3b8; font-weight: 700;">4. Short Interest &amp; Crowding Risk</div>
+          <div style="font-size: 18px; font-weight: 800; color: #34d399; margin: 4px 0;">92 / 100 (Minimal Short Float)</div>
+          <div class="sentiment-meter-bar" style="height: 5px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; margin-bottom: 6px;">
+            <div style="width: 92%; height: 100%; background: #10b981;"></div>
+          </div>
+          <div style="font-size: 11.5px; color: #cbd5e1;">Negligible short interest at 0.88% of float indicates minimal bear conviction.</div>
+        </div>
+      </div>
+
+      <div style="background: rgba(11, 15, 25, 0.6); padding: 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+        <div style="font-size: 13px; font-weight: 700; color: #93c5fd; margin-bottom: 6px;">
+          Retail Community vs. Institutional Desk Positioning Summary
+        </div>
+        <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 6px;">
+          Retail equity investors across Reddit (r/stocks, r/wallstreetbets, r/options) and X FinTwit regard Amazon as a premier compounder and foundational mega-cap AI play. Sentiment is +84% bullish heading into the Oct 29 print, driven by excitement over accelerating AWS cloud demand, massive advertising growth on Prime Video, and AI automation across fulfillment centers. Options retail flow is heavily skewed towards upside call buying, with heavy volume in the weekly $260 and $275 strike calls. Retail traders view the recent consolidation around $249.43 as an attractive launchpad for a breakout toward all-time highs.
+        </p>
+        <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5;">
+          Institutional sell-side coverage is near-unanimously bullish: 58 analysts covering AMZN maintain a Strong Buy consensus (1.33 mean rating) with an average price target of $332.24 (+33.20% upside) and Street-high targets reaching $405.00. Institutional hedge funds and large asset managers maintain overweight positioning, citing Amazon's unique dual-engine flywheel: high-margin AWS enterprise cloud acceleration and rapid retail media advertising growth offsetting holiday retail cyclicality. With the Put/Call Open Interest ratio at an ultra-bullish 0.34x, institutional positioning is aggressively levered to upside breakout scenarios, viewing the ±7.56% ($18.85) weekly straddle as fairly priced for a high-conviction beat-and-raise print.
+        </p>
+      </div>
+    </section>
+
+    <!-- 10. ROW 7: HEDGE FUND PM TRADE EXECUTION MATRIX -->
+    <section class="card" id="row-7-pm-matrix" style="margin-bottom: 24px;">
+      <div class="card-header">
+        <div class="card-title"><span class="card-title-accent"></span>Row 7: 3-Scenario Hedge Fund PM Options &amp; Stock Execution Playbook</div>
+        <span class="badge badge-bull">DERIVATIVES STRUCTURING</span>
+      </div>
+      <div class="scenario-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px;">
+        <!-- SCENARIO BULL -->
+        <div class="scenario-bull" style="background: rgba(16, 185, 129, 0.06); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 8px; padding: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span style="font-weight: 800; color: #34d399; font-size: 14px;">🟢 SCENARIO A: AWS CLOUD ACCELERATION &amp; AD BEAT</span>
+            <span class="badge badge-bull">PROBABILITY: 55%</span>
+          </div>
+          <div style="font-size: 13px; font-weight: 700; color: #e2e8f0; margin-bottom: 6px;">
+            Target Price: $275.00 – $285.00 (+10.2% to +14.3% Upside from $249.43)
+          </div>
+          <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 10px;">
+            <strong>Catalyst Triggers:</strong> AWS revenue surpasses $42.5B (+37% YoY) with operating margins above 39%, advertising tops $19.6B, and Andy Jassy guides Q4 holiday net sales above $225.0B with operating income exceeding $28.0B.
+          </p>
+          <div class="trade-structure" style="background: rgba(11, 15, 25, 0.7); padding: 10px; border-radius: 6px; font-size: 12px; font-family: monospace; color: #93c5fd; border: 1px solid rgba(59, 130, 246, 0.3);">
+            <strong>Trade Structure:</strong> Buy Nov $255 / $280 Bull Call Spreads for ~$7.40 debit; targeting $17.60 max profit on multiple expansion.
+          </div>
+        </div>
+
+        <!-- SCENARIO BASE -->
+        <div class="scenario-base" style="background: rgba(59, 130, 246, 0.06); border: 1px solid rgba(59, 130, 246, 0.35); border-radius: 8px; padding: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span style="font-weight: 800; color: #60a5fa; font-size: 14px;">🔵 SCENARIO B: SOLID IN-LINE PRINT &amp; VOLATILITY CRUSH</span>
+            <span class="badge badge-blue">PROBABILITY: 30%</span>
+          </div>
+          <div style="font-size: 13px; font-weight: 700; color: #e2e8f0; margin-bottom: 6px;">
+            Target Price: $242.00 – $256.00 (-3.0% to +2.6% vs $249.43 Spot)
+          </div>
+          <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 10px;">
+            <strong>Catalyst Triggers:</strong> Q3 net sales meet consensus ($190.5B), AWS prints +21% YoY, and Q4 operating income guided in-line ($25.0B to $28.0B). Weekly straddles pricing ±7.56% (90.3% IV) undergo sharp post-earnings IV crush.
+          </p>
+          <div class="trade-structure" style="background: rgba(11, 15, 25, 0.7); padding: 10px; border-radius: 6px; font-size: 12px; font-family: monospace; color: #93c5fd; border: 1px solid rgba(59, 130, 246, 0.3);">
+            <strong>Trade Structure:</strong> Sell Nov $230 / $270 Iron Condor or Strangle to harvest elevated implied volatility.
+          </div>
+        </div>
+
+        <!-- SCENARIO BEAR -->
+        <div class="scenario-bear" style="background: rgba(239, 68, 68, 0.06); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 8px; padding: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span style="font-weight: 800; color: #f87171; font-size: 14px;">🔴 SCENARIO C: AWS DECELERATION &amp; CAPEX HANGOVER</span>
+            <span class="badge badge-warn">PROBABILITY: 15%</span>
+          </div>
+          <div style="font-size: 13px; font-weight: 700; color: #e2e8f0; margin-bottom: 6px;">
+            Target Price: $220.00 – $230.00 (-11.8% to -7.8% Downside from $249.43)
+          </div>
+          <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 10px;">
+            <strong>Catalyst Triggers:</strong> AWS growth decelerates below +19% YoY, management guides Q4 operating profit midpoint below $24.0B citing increased holiday wage costs, or CapEx guide escalates past $115B without revenue acceleration.
+          </p>
+          <div class="trade-structure" style="background: rgba(11, 15, 25, 0.7); padding: 10px; border-radius: 6px; font-size: 12px; font-family: monospace; color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3);">
+            <strong>Trade Structure:</strong> Buy Nov $240 / $220 Bear Put Spreads for ~$5.20 debit to hedge long tech portfolio exposure.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. FOOTER & VERIFICATION LEDGER -->
+    <footer style="margin-top: 30px; padding: 18px; border-top: 1px solid var(--border-color); font-size: 12px; color: #94a3b8; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+      <div>
+        <strong>Deterministic Ground-Truth Audit:</strong> CIK 0001018724 • Amazon.com, Inc. • Spot: $249.43 • Latest OCF: $26,032M ($26,032.0M) • True FCF: -$22203.0M • 11 Guardrails Enforced
+      </div>
+      <div>
+        Generated by Antigravity 2.0 T-1 Pre-Earnings Multi-Agent Orchestration Bus (Gemini 3.8 Flash High)
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

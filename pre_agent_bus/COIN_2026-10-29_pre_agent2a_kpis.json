@@ -1,0 +1,70 @@
+{
+  "ticker": "COIN",
+  "earnings_date": "2026-10-29",
+  "agent": "Pre_KPI_Consensus_Agent (Agent 2A)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "upcoming_quarter_label": "Q3 2026E",
+  "latest_reported_quarter_label": "Q2 2026",
+  "headline_and_company_kpis": [
+    {
+      "metric": "Total Transaction Revenue ($M)",
+      "tooltip_title": "Trading commission fees generated across consumer retail and institutional crypto trading volume.",
+      "tooltip_def": "Total Transaction Revenue ($M): Generated $599.2M in Q2 2026 (-21.6% YoY vs $764.3M in Q2 2025); Street consensus models $640.0M in Q3 2026E (whisper $680.0M+) as crypto volatility picked up late in the third quarter.",
+      "q_minus_1_actual": "$599.2M",
+      "q_minus_4_yoy_baseline": "$764.3M",
+      "street_consensus_q0e": "$640.0M",
+      "whisper_bogey_q0e": "$680.0M",
+      "whisper_spread_display": "+$40.0M (+6.25% Whisper Hurdle)",
+      "bar_width_pct": 82,
+      "hurdle_badge": "VOLATILITY DRIVER"
+    },
+    {
+      "metric": "Diluted EPS (GAAP / Consensus)",
+      "tooltip_title": "Wall Street consensus Diluted EPS for Q3 2026E ($0.07) vs Buy-Side Whisper ($0.15).",
+      "tooltip_def": "Diluted EPS ($): Sell-side consensus expects $0.07 per share; buy-side whisper bogeys target $0.15+ reflecting operational cost discipline and stablecoin interest income margins.",
+      "q_minus_1_actual": "-$1.36",
+      "q_minus_4_yoy_baseline": "$1.50",
+      "street_consensus_q0e": "$0.07",
+      "whisper_bogey_q0e": "$0.15",
+      "whisper_spread_display": "+$0.08 (+114.3% Beat Target)",
+      "bar_width_pct": 78,
+      "hurdle_badge": "PROFITABILITY INFLECTION"
+    },
+    {
+      "metric": "Subscription & Services Revenue ($M)",
+      "tooltip_title": "Recurring non-trading revenues including stablecoin interest share, staking rewards, and custodial fees.",
+      "tooltip_def": "Subscription & Services Revenue: Reached $555.1M in Q2 2026; Street consensus models $575.0M in Q3 2026E (whisper $590.0M+) anchored by resilient USDC market capitalization expansion.",
+      "q_minus_1_actual": "$555.1M",
+      "q_minus_4_yoy_baseline": "$632.2M",
+      "street_consensus_q0e": "$575.0M",
+      "whisper_bogey_q0e": "$590.0M",
+      "whisper_spread_display": "+$15.0M (+2.61% Spread)",
+      "bar_width_pct": 86,
+      "hurdle_badge": "RECURRING MOAT"
+    },
+    {
+      "metric": "Stablecoin Revenue (USDC Interest Share) ($M)",
+      "tooltip_title": "Revenue share earned from interest on fiat reserves backing USD Coin (USDC) in partnership with Circle.",
+      "tooltip_def": "Stablecoin Revenue: Generated $292.1M in Q2 2026; Street consensus models $305.0M in Q3 2026E (whisper $315.0M+) as USDC circulation expanded past $36B amidst high treasury yields.",
+      "q_minus_1_actual": "$292.1M",
+      "q_minus_4_yoy_baseline": "$308.9M",
+      "street_consensus_q0e": "$305.0M",
+      "whisper_bogey_q0e": "$315.0M",
+      "whisper_spread_display": "+$10.0M (+3.28% Spread)",
+      "bar_width_pct": 89,
+      "hurdle_badge": "YIELD BENCHMARK"
+    },
+    {
+      "metric": "Institutional Custody & Trading Volume ($B)",
+      "tooltip_title": "Total trading volume and custody assets administered for spot Bitcoin/Ethereum ETFs and institutions.",
+      "tooltip_def": "Institutional Trading Volume: Reached $189B in Q2 2026; Street models $210B+ in Q3 2026E as institutional adoption and ETF custodial assets reach all-time highs.",
+      "q_minus_1_actual": "$189.0B",
+      "q_minus_4_yoy_baseline": "$198.0B",
+      "street_consensus_q0e": "$210.0B",
+      "whisper_bogey_q0e": "$225.0B",
+      "whisper_spread_display": "+$15.0B (+7.14% Spread)",
+      "bar_width_pct": 85,
+      "hurdle_badge": "INSTITUTIONAL EXPANSION"
+    }
+  ]
+}

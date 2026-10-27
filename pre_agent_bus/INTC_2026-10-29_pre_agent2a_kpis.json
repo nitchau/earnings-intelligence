@@ -1,0 +1,70 @@
+{
+  "ticker": "INTC",
+  "earnings_date": "2026-10-29",
+  "agent": "Pre_KPI_Consensus_Agent (Agent 2A)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "upcoming_quarter_label": "Q3 2026E",
+  "latest_reported_quarter_label": "Q2 2026",
+  "headline_and_company_kpis": [
+    {
+      "metric": "Client Computing Group (CCPG) Revenue ($M)",
+      "tooltip_title": "Core PC processor and AI PC chipset revenues (Core Ultra Lunar Lake & Arrow Lake).",
+      "tooltip_def": "Client Computing Group Revenue ($M): Grew to $8,877.0M in Q2 2026 (+12.8% YoY vs $7,871.0M in Q2 2025); Street consensus models $8,400.0M in Q3 2026E (whisper $8,650.0M+) fueled by enterprise AI PC upgrade cycles.",
+      "q_minus_1_actual": "$8,877.0M",
+      "q_minus_4_yoy_baseline": "$7,871.0M",
+      "street_consensus_q0e": "$8,400.0M",
+      "whisper_bogey_q0e": "$8,650.0M",
+      "whisper_spread_display": "+$250.0M (+2.98% Whisper Hurdle)",
+      "bar_width_pct": 86,
+      "hurdle_badge": "AI PC MOMENTUM"
+    },
+    {
+      "metric": "Diluted EPS (Non-GAAP / Consensus)",
+      "tooltip_title": "Wall Street consensus Non-GAAP Diluted EPS for Q3 2026E ($0.40) vs Buy-Side Whisper ($0.46).",
+      "tooltip_def": "Diluted EPS ($): Sell-side consensus expects $0.40 per share; buy-side whisper bogeys target $0.46+ reflecting lower operating cost structures following 15%+ workforce restructuring and manufacturing cost controls.",
+      "q_minus_1_actual": "$0.42",
+      "q_minus_4_yoy_baseline": "$0.23",
+      "street_consensus_q0e": "$0.40",
+      "whisper_bogey_q0e": "$0.46",
+      "whisper_spread_display": "+$0.06 (+15.0% Beat Target)",
+      "bar_width_pct": 89,
+      "hurdle_badge": "PROFIT SURGE"
+    },
+    {
+      "metric": "Data Center & AI (DCAI) Revenue ($M)",
+      "tooltip_title": "Enterprise server Xeon processors, Gaudi 3 AI accelerators, and cloud compute platform sales.",
+      "tooltip_def": "Data Center & AI Revenue: Reached $6,262.0M in Q2 2026 (+59.0% YoY vs $3,939.0M in Q2 2025); Street consensus models $4,600.0M in Q3 2026E (whisper $4,850.0M+) as Xeon 6 (Sierra Forest / Granite Rapids) server ramps expand.",
+      "q_minus_1_actual": "$6,262.0M",
+      "q_minus_4_yoy_baseline": "$3,939.0M",
+      "street_consensus_q0e": "$4,600.0M",
+      "whisper_bogey_q0e": "$4,850.0M",
+      "whisper_spread_display": "+$250.0M (+5.43% Enterprise Spread)",
+      "bar_width_pct": 88,
+      "hurdle_badge": "XEON 6 ACCELERATION"
+    },
+    {
+      "metric": "Intel Foundry External & Internal Revenue ($M)",
+      "tooltip_title": "Semiconductor manufacturing foundry services revenue across internal Intel Product divisions and external fab customers.",
+      "tooltip_def": "Intel Foundry Revenue: Reached $5,765.0M in Q2 2026; Street consensus models $4,800.0M in Q3 2026E (whisper $5,050.0M) with operating loss narrowing as high-volume 18A manufacturing yield milestones progress.",
+      "q_minus_1_actual": "$5,765.0M",
+      "q_minus_4_yoy_baseline": "$4,417.0M",
+      "street_consensus_q0e": "$4,800.0M",
+      "whisper_bogey_q0e": "$5,050.0M",
+      "whisper_spread_display": "+$250.0M (+5.21% Spread)",
+      "bar_width_pct": 83,
+      "hurdle_badge": "18A YIELD TRANSITION"
+    },
+    {
+      "metric": "Adjusted Gross Margin (Non-GAAP %)",
+      "tooltip_title": "Non-GAAP gross profit margin reflecting fab utilization and packaging cost absorption.",
+      "tooltip_def": "Adjusted Gross Margin: Reached 40.4% in Q2 2026 ($6,509M GP on $16,128M revenue); Street models 40.5% in Q3 2026E (whisper 41.5%+) as wafer transition costs normalize.",
+      "q_minus_1_actual": "40.4%",
+      "q_minus_4_yoy_baseline": "27.5%",
+      "street_consensus_q0e": "40.5%",
+      "whisper_bogey_q0e": "41.5%",
+      "whisper_spread_display": "+100 bps (Margin Recovery)",
+      "bar_width_pct": 85,
+      "hurdle_badge": "CORE FAB ABSORPTION"
+    }
+  ]
+}

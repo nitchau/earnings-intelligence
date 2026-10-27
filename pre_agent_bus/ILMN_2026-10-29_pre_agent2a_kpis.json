@@ -1,0 +1,70 @@
+{
+  "ticker": "ILMN",
+  "earnings_date": "2026-10-29",
+  "agent": "Pre_KPI_Consensus_Agent (Agent 2A)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "upcoming_quarter_label": "Q3 2026E",
+  "latest_reported_quarter_label": "Q2 2026",
+  "headline_and_company_kpis": [
+    {
+      "metric": "Sequencing Consumables Revenue ($M)",
+      "tooltip_title": "Recurring high-margin chemical reagent kits and flow cells used on installed NovaSeq X sequencing systems.",
+      "tooltip_def": "Sequencing Consumables Revenue ($M): Reached $775.0M in Q2 2026 (+4.7% YoY vs $740.0M in Q2 2025); Street consensus models $780.0M in Q3 2026E (whisper $795.0M+) as NovaSeq X high-throughput sequencing utilization expands.",
+      "q_minus_1_actual": "$775.0M",
+      "q_minus_4_yoy_baseline": "$740.0M",
+      "street_consensus_q0e": "$780.0M",
+      "whisper_bogey_q0e": "$795.0M",
+      "whisper_spread_display": "+$15.0M (+1.92% Whisper Hurdle)",
+      "bar_width_pct": 88,
+      "hurdle_badge": "RECURRING RAZOR-BLADE"
+    },
+    {
+      "metric": "Diluted EPS (Non-GAAP / Consensus)",
+      "tooltip_title": "Wall Street consensus Non-GAAP Diluted EPS for Q3 2026E ($1.36) vs Buy-Side Whisper ($1.42).",
+      "tooltip_def": "Diluted EPS ($): Sell-side consensus expects $1.36 per share; buy-side whisper bogeys target $1.42+ reflecting post-Grail divestiture margin recovery and operating cost reduction programs.",
+      "q_minus_1_actual": "$1.35",
+      "q_minus_4_yoy_baseline": "$1.49",
+      "street_consensus_q0e": "$1.36",
+      "whisper_bogey_q0e": "$1.42",
+      "whisper_spread_display": "+$0.06 (+4.41% Beat Target)",
+      "bar_width_pct": 84,
+      "hurdle_badge": "MARGIN RECOVERY"
+    },
+    {
+      "metric": "Sequencing Instrument Placements & Revenue ($M)",
+      "tooltip_title": "Capital equipment sales of NovaSeq X, NextSeq, and MiSeq genomic sequencers to academic and clinical labs.",
+      "tooltip_def": "Sequencing Instrument Revenue: Generated $125.0M in Q2 2026 (+30.2% YoY); Street consensus models $120.0M in Q3 2026E (whisper $128.0M+) with steady NovaSeq X upgrade cycle momentum.",
+      "q_minus_1_actual": "$125.0M",
+      "q_minus_4_yoy_baseline": "$96.0M",
+      "street_consensus_q0e": "$120.0M",
+      "whisper_bogey_q0e": "$128.0M",
+      "whisper_spread_display": "+$8.0M (+6.67% Capital Hurdle)",
+      "bar_width_pct": 82,
+      "hurdle_badge": "CAPEX RECOVERY"
+    },
+    {
+      "metric": "Total Core Illumina Revenue ($M)",
+      "tooltip_title": "Consolidated core genomics platform revenue across sequencing, microarrays, and clinical oncology workflows.",
+      "tooltip_def": "Total Revenue: Reached $1,159.0M in Q2 2026 (+9.4% YoY); Street consensus models $1,120.0M in Q3 2026E (whisper $1,135.0M+) within management's full-year flat-to-modest growth corridor.",
+      "q_minus_1_actual": "$1,159.0M",
+      "q_minus_4_yoy_baseline": "$1,059.0M",
+      "street_consensus_q0e": "$1,120.0M",
+      "whisper_bogey_q0e": "$1,135.0M",
+      "whisper_spread_display": "+$15.0M (+1.34% Spread)",
+      "bar_width_pct": 86,
+      "hurdle_badge": "CORE GENOMICS REVENUE"
+    },
+    {
+      "metric": "Consolidated Operating Margin (Non-GAAP %)",
+      "tooltip_title": "Core operating profitability margin following complete corporate separation from Grail.",
+      "tooltip_def": "Operating Margin: Reached 21.1% in Q2 2026 ($245.0M EBIT); Street expects 21.5% in Q3 2026E (whisper 22.2%+) as cost efficiencies and manufacturing yields take hold.",
+      "q_minus_1_actual": "21.1%",
+      "q_minus_4_yoy_baseline": "20.2%",
+      "street_consensus_q0e": "21.5%",
+      "whisper_bogey_q0e": "22.2%",
+      "whisper_spread_display": "+70 bps (Efficiency Expansion)",
+      "bar_width_pct": 89,
+      "hurdle_badge": "OPERATING LEVERAGE"
+    }
+  ]
+}

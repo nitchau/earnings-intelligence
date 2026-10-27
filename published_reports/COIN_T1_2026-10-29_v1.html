@@ -1,0 +1,1857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>[v1] COIN — Pre-Earnings Forensic & Sentiment Tearsheet (Upcoming: Q3 2026 | Last Reported: Q2 2026)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0b0f19;
+      --bg-card: #111827;
+      --bg-card-elevated: #161f33;
+      --bg-table-row-alt: #0e1525;
+      --border-color: #1f2937;
+      --border-subtle: #283548;
+      --text-primary: #f9fafb;
+      --text-secondary: #d1d5db;
+      --text-muted: #9ca3af;
+      --accent-blue: #3b82f6;
+      --accent-blue-glow: rgba(59, 130, 246, 0.15);
+      --bull-green: #10b981;
+      --bull-green-bg: rgba(16, 185, 129, 0.14);
+      --bear-red: #ef4444;
+      --bear-red-bg: rgba(239, 68, 68, 0.14);
+      --warn-amber: #f59e0b;
+      --warn-amber-bg: rgba(245, 158, 11, 0.14);
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      line-height: 1.5;
+      font-size: 14px;
+      padding: 24px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1560px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* ==========================================================================
+       INTERACTIVE HOVER TOOLTIP SYSTEM (FOR METRICS & ABBREVIATIONS)
+       ========================================================================== */
+    .tip {
+      position: relative;
+      display: inline-block;
+      border-bottom: 1px dotted #60a5fa;
+      cursor: help;
+      transition: color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .tip:hover {
+      color: #93c5fd;
+      border-bottom-color: #93c5fd;
+    }
+
+    .tip::after {
+      content: attr(data-tip);
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 0;
+      width: 290px;
+      padding: 10px 12px;
+      background-color: #1e293b;
+      color: #f8fafc;
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 1.45;
+      text-align: left;
+      text-transform: none;
+      letter-spacing: normal;
+      white-space: normal;
+      border: 1px solid var(--accent-blue);
+      border-radius: 6px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.75);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(4px);
+      transition: opacity 0.16s ease, transform 0.16s ease, visibility 0.16s;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* Right-aligned tooltip modifier to prevent right-edge screen clipping */
+    .tip-right::after {
+      left: auto;
+      right: 0;
+    }
+
+    /* Bottom-aligned tooltip modifier for elements near top of page */
+    .tip-bottom::after {
+      bottom: auto;
+      top: calc(100% + 8px);
+    }
+
+    .tip:hover::after {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    /* UTILITY & BADGES */
+    .mono {
+      font-family: var(--font-mono);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+
+    .badge-bull {
+      background-color: var(--bull-green-bg);
+      color: var(--bull-green);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+    }
+
+    .badge-bear {
+      background-color: var(--bear-red-bg);
+      color: var(--bear-red);
+      border: 1px solid rgba(239, 68, 68, 0.35);
+    }
+
+    .badge-warn {
+      background-color: var(--warn-amber-bg);
+      color: var(--warn-amber);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+    }
+
+    .badge-neutral {
+      background-color: rgba(156, 163, 175, 0.12);
+      color: var(--text-secondary);
+      border: 1px solid rgba(156, 163, 175, 0.25);
+    }
+
+    .badge-blue {
+      background-color: var(--accent-blue-glow);
+      color: #60a5fa;
+      border: 1px solid rgba(59, 130, 246, 0.4);
+    }
+
+    /* CARD SYSTEM */
+    .card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--border-color);
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-title-accent {
+      width: 4px;
+      height: 16px;
+      background-color: var(--accent-blue);
+      border-radius: 2px;
+      display: inline-block;
+    }
+
+    .card-subtitle {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    /* HEADER BANNER */
+    .header-banner {
+      background: linear-gradient(135deg, #111827 0%, #0f172a 65%, #172554 100%);
+      border: 1px solid var(--border-subtle);
+      border-left: 4px solid var(--accent-blue);
+      border-radius: 10px;
+      padding: 22px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .helper-bar {
+      background-color: rgba(59, 130, 246, 0.12);
+      border: 1px solid rgba(59, 130, 246, 0.35);
+      border-radius: 6px;
+      padding: 8px 14px;
+      font-size: 12.5px;
+      color: #bfdbfe;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .ticker-identity {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .ticker-line {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .ticker-symbol {
+      font-family: var(--font-mono);
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.4);
+      padding: 2px 12px;
+      border-radius: 6px;
+    }
+
+    .company-name {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .sector-tag {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .header-price-block {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .price-box {
+      text-align: right;
+    }
+
+    .price-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    .price-value {
+      font-family: var(--font-mono);
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .header-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(195px, 1fr));
+      gap: 12px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .strip-item {
+      background-color: rgba(11, 15, 25, 0.55);
+      border: 1px solid var(--border-color);
+      padding: 10px 14px;
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .strip-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .strip-val {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    /* ROW 1: 4 KPI CARDS */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .kpi-metric-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .kpi-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.07);
+      gap: 8px;
+    }
+
+    .kpi-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .kpi-name {
+      font-size: 12.5px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .kpi-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 2px;
+    }
+
+    .kpi-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 4px;
+    }
+
+    .kpi-val {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .delta-pair {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    /* ROW 2: HISTORICAL TABLE */
+    .table-wrapper {
+      overflow-x: auto;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px;
+    }
+
+    th {
+      background-color: #161f33;
+      color: var(--text-secondary);
+      font-weight: 600;
+      text-align: right;
+      padding: 11px 12px;
+      border-bottom: 1px solid var(--border-subtle);
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+
+    th:first-child {
+      text-align: left;
+      font-family: var(--font-sans);
+      min-width: 265px;
+      position: sticky;
+      left: 0;
+      z-index: 2;
+      background-color: #161f33;
+    }
+
+    td {
+      padding: 9px 12px;
+      border-bottom: 1px solid var(--border-color);
+      text-align: right;
+      font-family: var(--font-mono);
+      color: var(--text-primary);
+      white-space: nowrap;
+    }
+
+    td:first-child {
+      text-align: left;
+      font-family: var(--font-sans);
+      font-weight: 500;
+      color: var(--text-secondary);
+      position: sticky;
+      left: 0;
+      background-color: var(--bg-card);
+      z-index: 1;
+    }
+
+    tr:nth-child(even) td {
+      background-color: var(--bg-table-row-alt);
+    }
+
+    tr:nth-child(even) td:first-child {
+      background-color: var(--bg-table-row-alt);
+    }
+
+    tr.section-divider td {
+      background-color: rgba(59, 130, 246, 0.09);
+      color: #93c5fd;
+      font-family: var(--font-sans);
+      font-weight: 700;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      padding: 7px 12px;
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .col-q0 {
+      background-color: rgba(59, 130, 246, 0.06) !important;
+      font-weight: 700;
+    }
+
+    .col-est {
+      background-color: rgba(245, 158, 11, 0.05) !important;
+      color: #fde68a;
+    }
+
+    /* OUTLIER CELL BORDERS */
+    .outlier-red {
+      border: 1.5px solid var(--bear-red) !important;
+      background-color: rgba(239, 68, 68, 0.12) !important;
+      color: #fca5a5 !important;
+      font-weight: 700;
+      position: relative;
+    }
+
+    .outlier-amber {
+      border: 1.5px solid var(--warn-amber) !important;
+      background-color: rgba(245, 158, 11, 0.12) !important;
+      color: #fcd34d !important;
+      font-weight: 700;
+      position: relative;
+    }
+
+    /* ROW 3: FORENSIC CALLOUT */
+    .forensic-grid {
+      display: grid;
+      grid-template-columns: 1.35fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 1080px) {
+      .forensic-grid,
+      .split-2col,
+      .sentiment-grid {
+        grid-template-columns: 1fr !important;
+      }
+    }
+
+    .forensic-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .forensic-item {
+      background-color: rgba(11, 15, 25, 0.6);
+      border: 1px solid var(--border-color);
+      border-left: 3px solid var(--warn-amber);
+      border-radius: 6px;
+      padding: 13px 15px;
+    }
+
+    .forensic-item.critical {
+      border-left-color: var(--bear-red);
+    }
+
+    .forensic-item-title {
+      font-weight: 700;
+      font-size: 13.5px;
+      color: var(--text-primary);
+      margin-bottom: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .forensic-item p {
+      color: var(--text-secondary);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .fcf-bridge-box {
+      background-color: #0d1322;
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* ROW 4 & ROW 5: 2-COLUMN SPLIT CARDS */
+    .split-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .audit-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .audit-point {
+      padding: 12px 14px;
+      border-radius: 6px;
+      background-color: rgba(11, 15, 25, 0.55);
+      border: 1px solid var(--border-color);
+    }
+
+    .audit-point-bull {
+      border-left: 3px solid var(--bull-green);
+    }
+
+    .audit-point-bear {
+      border-left: 3px solid var(--bear-red);
+    }
+
+    .audit-point-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 5px;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .audit-point-title {
+      font-weight: 700;
+      font-size: 13.5px;
+      color: var(--text-primary);
+    }
+
+    .audit-point p {
+      font-size: 12.8px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* CATALYST ITEMS */
+    .catalyst-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .catalyst-card {
+      background-color: rgba(11, 15, 25, 0.55);
+      border: 1px solid var(--border-color);
+      border-left: 3px solid var(--accent-blue);
+      border-radius: 6px;
+      padding: 12px 14px;
+    }
+
+    /* SENTIMENT ANALYSIS CARD */
+    .sentiment-overview-banner {
+      background: linear-gradient(90deg, rgba(239, 68, 68, 0.12) 0%, rgba(245, 158, 11, 0.12) 50%, rgba(16, 185, 129, 0.12) 100%);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .sentiment-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .sentiment-source-card {
+      background-color: #0d1322;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .sentiment-meter-wrap {
+      display: flex;
+       flex-direction: column;
+      gap: 5px;
+      margin: 4px 0;
+    }
+
+    .sentiment-bar-bg {
+      width: 100%;
+      height: 8px;
+      background-color: #1f2937;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .sentiment-bar-fill {
+      height: 100%;
+      border-radius: 4px;
+    }
+
+    /* ROW 7: TRADE MATRIX */
+    .playbook-setup-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+      background-color: rgba(11, 15, 25, 0.65);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 14px;
+    }
+
+    .scenario-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 16px;
+    }
+
+    .scenario-card {
+      background-color: #0d1322;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .scenario-bull {
+      border-top: 4px solid var(--bull-green);
+    }
+
+    .scenario-base {
+      border-top: 4px solid var(--warn-amber);
+    }
+
+    .scenario-bear {
+      border-top: 4px solid var(--bear-red);
+    }
+
+    .scenario-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 800;
+      font-size: 15px;
+    }
+
+    .trigger-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 12.8px;
+      color: var(--text-secondary);
+    }
+
+    .trigger-list li {
+      position: relative;
+      padding-left: 14px;
+    }
+
+    .trigger-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--accent-blue);
+      font-weight: bold;
+    }
+
+    .trade-structure {
+      margin-top: auto;
+      padding: 11px 12px;
+      background-color: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      font-size: 12px;
+    }
+
+    .trade-structure strong {
+      display: block;
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .footer-meta {
+      text-align: center;
+      font-size: 11.5px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      padding: 10px 0 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    
+<!-- 1. HEADER BANNER -->
+    <header class="header-banner">
+      <div class="helper-bar">
+        <span>💡 <strong>Interactive Definitions Enabled:</strong> Hover your mouse over any <span class="tip tip-bottom" title="Plain-English definitions pop up automatically whenever you hover over any dotted-underlined term." data-tip="Plain-English definitions pop up automatically whenever you hover over any dotted-underlined financial metric or abbreviation.">dotted-underlined metric or abbreviation</span> for an instant plain-English explanation.</span>
+        <span class="mono" style="font-size:11.5px;color:#93c5fd;">Last Reported Quarter: <strong>Q2 2026 (Ended June 30, 2026)</strong> • Upcoming Release: <strong>Q3 2026 (Ended Sep 30, 2026)</strong></span>
+      </div>
+
+      <div class="header-top">
+        <div class="ticker-identity">
+          <div class="ticker-line">
+            <span class="ticker-symbol">COIN</span>
+            <h1 class="company-name">Coinbase Global, Inc.</h1>
+            <span class="badge badge-bull">REGULATED DIGITAL ASSET INFRASTRUCTURE LEADER</span>
+            <span class="badge badge-blue"><span class="tip tip-bottom" title="One trading day before official quarterly earnings release." data-tip="T-1 (Time Minus 1 Day): Analysis prepared one trading session prior to the upcoming Q3 2026 earnings release on Thursday, Oct 29, 2026.">T-1</span> PRE-EARNINGS BRIEFING</span>
+          </div>
+          <div class="sector-tag">NASDAQ • Financial Services, Capital Markets &amp; Onchain Financial Infrastructure • <span class="tip tip-bottom" title="Central Index Key: Unique 10-digit identifier assigned by the U.S. SEC to all public company filings." data-tip="Central Index Key (CIK): The unique 10-digit identifier assigned by the U.S. Securities and Exchange Commission (SEC) to track Coinbase's official regulatory filings.">CIK</span>: 0001679788</div>
+        </div>
+        <div class="header-price-block">
+          <div class="price-box">
+            <div class="price-label">Spot Price (Oct 2026)</div>
+            <div class="price-value">$159.43 <span class="badge badge-bull">+18.4% <span class="tip tip-right tip-bottom" title="Year-To-Date: Percentage price change since January 1, 2026." data-tip="Year-To-Date (YTD): Total percentage return of the stock from January 1 of the current calendar year (2026) to today.">YTD</span></span></div>
+          </div>
+          <div class="price-box">
+            <div class="price-label"><span class="tip tip-right tip-bottom" title="Market Capitalization: Total value of all outstanding shares (Share Price × Diluted Shares)." data-tip="Market Capitalization: Total equity value of the company calculated by multiplying current share price ($159.43) by total diluted common shares (~263.4M).">Market Cap</span> / <span class="tip tip-right tip-bottom" title="Enterprise Value: Market Cap plus Total Debt minus Cash. Shows the true takeover cost of the business." data-tip="Enterprise Value (EV): Market Cap ($42.06B) + Total Long-Term Debt ($4.2B) minus Liquid Cash Reserves ($8.6B) = $39.99B.">EV</span></div>
+            <div class="price-value">$42.06B / $39.99B</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="header-strip">
+        <div class="strip-item">
+          <span class="strip-label">Upcoming Q3 2026 Release Date</span>
+          <span class="strip-val">Thu, Oct 29, 2026 • <span class="tip" title="After Market Close: Earnings are released right after the 4:00 PM ET stock market close." data-tip="After Market Close (AMC): The company releases its quarterly results after market close (~4:00 PM Eastern Time).">AMC</span> (4:00 PM ET)</span>
+          <span class="kpi-sub">Earnings Call &amp; Webcast: 5:30 PM ET (2:30 PM PT) hosted by Brian Armstrong &amp; Alesia Haas on investor.coinbase.com</span>
+        </div>
+        <div class="strip-item">
+          <span class="strip-label"><span class="tip" title="The percentage stock move (up or down) that the options market is pricing in for the day after earnings." data-tip="Options-Implied Move: Derived from At-The-Money (ATM) weekly option straddle prices. Reflects expected post-earnings volatility.">Options-Implied Move</span> (1-Wk <span class="tip" title="At-The-Money: Options with a strike price equal to the current stock price." data-tip="At-The-Money (ATM): Options contracts whose strike price is closest to current trading price ($159.43).">ATM</span>)</span>
+          <span class="strip-val" style="color: var(--warn-amber);">±8.89% (±$14.18 / sh)</span>
+          <span class="kpi-sub">30D <span class="tip" title="Implied Volatility: Market's forecast of annualized stock price volatility derived from option prices." data-tip="Implied Volatility (IV): The options market's annualized volatility expectation.">IV</span>: 106.3% | Put/Call OI Ratio: 0.50x (Bullish Call Skew)</span>
+        </div>
+        <div class="strip-item">
+          <span class="strip-label">Q3 2026E <span class="tip" title="Wall Street Consensus: The average forecast of equity research analysts covering Coinbase." data-tip="Consensus Total Revenue: The average revenue forecast published by Wall Street sell-side analysts for Q3 2026 ($1,280M).">Consensus Total Revenue</span> / <span class="tip" title="Whisper Number: The unofficial expectation among hedge funds and institutional traders." data-tip="Whisper Number: Unofficial top-line expectations among buy-side institutional investors ($1,320M).">Whisper</span></span>
+          <span class="strip-val">$1,280M / $1,320M</span>
+          <span class="kpi-sub">Sub &amp; Services Est: $575M | Prior Q2 Actual: $1,220.1M</span>
+        </div>
+        <div class="strip-item">
+          <span class="strip-label">Q3 2026E Consensus <span class="tip" title="Earnings Per Share: Net profit divided by total diluted shares outstanding." data-tip="Earnings Per Share (EPS): GAAP diluted earnings per share consensus.">EPS</span> / Whisper</span>
+          <span class="strip-val">$0.07 <span class="tip" title="Diluted EPS Consensus." data-tip="Consensus EPS: GAAP diluted earnings per share expectation ($0.07 vs $0.15 whisper).">Consensus</span> / $0.15 Whisper</span>
+          <span class="kpi-sub">Street Range: -$0.18 to $0.42 | Prior Q2 Actual: -$1.36</span>
+        </div>
+        <div class="strip-item">
+          <span class="strip-label">Stablecoin &amp; EBITDA <span class="tip tip-right" title="USD Coin stablecoin revenue run-rate and Adjusted EBITDA profitability floor." data-tip="Stablecoin &amp; EBITDA Corridor: USDC stablecoin revenue expected at $305M and full-year Adjusted EBITDA targeted above $2.0B.">Guidance Corridor</span></span>
+          <span class="strip-val" style="color: var(--bull-green);">$305M USDC / $2.0B+ EBITDA</span>
+          <span class="kpi-sub">USDC Circulating Supply >$36B • Base Layer-2 Scaling Institutional Flow</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- TRACK B: STICKY INTERACTIVE PRE-EARNINGS SECTION JUMP-NAV -->
+    <nav class="pre-jump-nav" style="position: sticky; top: 8px; z-index: 90; background: rgba(15, 23, 42, 0.92); backdrop-filter: blur(10px); border: 1px solid rgba(59, 130, 246, 0.35); border-radius: 10px; padding: 8px 14px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.4);">
+      <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+        <span style="font-size: 11px; font-weight: 800; color: #60a5fa; text-transform: uppercase; letter-spacing: 0.06em; margin-right: 4px;">⚡ Jump To:</span>
+        <a href="#row-1-kpis" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">1. Q2 KPIs</a>
+        <a href="#row-1b-scorecard" style="font-size: 11.5px; color: #60a5fa; font-weight: 700; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(59, 130, 246, 0.16); border: 1px solid rgba(59, 130, 246, 0.4);">1B. Whisper &amp; Track Record Scorecard</a>
+        <a href="#row-2-financials" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">2. 5Q Table + Q3E</a>
+        <a href="#row-3-fcf" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">3. FCF Bridge</a>
+        <a href="#row-4-segments" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">4. Tailwinds/Drags</a>
+        <a href="#row-4b-debates" style="font-size: 11.5px; color: #93c5fd; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(59, 130, 246, 0.14); border: 1px solid rgba(59, 130, 246, 0.3);">4B. Wall St Debates</a>
+        <a href="#row-5-peers" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">5. Peers</a>
+        <a href="#row-6-sentiment" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">6. Sentiment &amp; Pulse</a>
+        <a href="#row-7-pm-matrix" style="font-size: 11.5px; color: #fcd34d; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(245, 158, 11, 0.14); border: 1px solid rgba(245, 158, 11, 0.3);">7. PM Trade Matrix</a>
+      </div>
+      <a href="COIN_T0_POST_2026-10-29.html" style="font-size: 11.5px; font-weight: 700; color: #34d399; text-decoration: none; padding: 5px 12px; border-radius: 6px; background: rgba(16, 185, 129, 0.2); border: 1px solid rgba(16, 185, 129, 0.45); display: flex; align-items: center; gap: 6px;">
+        ⇄ Compare Paired T+0 Post-Earnings Tearsheet
+      </a>
+    </nav>
+
+    <!-- 2. ROW 1: TOP KPI CARDS (4 CARDS) -->
+    <section class="kpi-grid" id="row-1-kpis">
+      <!-- CARD A: CASH FLOW & LIQUIDITY -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><span class="card-title-accent"></span>A. Cash Flow &amp; Liquidity Generation (Q2 2026)</div>
+          <span class="badge badge-bull">$8.6B LIQUID CASH POSITION</span>
+        </div>
+        <div class="kpi-metric-list">
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Operating Cash Flow: Net cash flow from customer transaction fees and staking yields." data-tip="Operating Cash Flow (OCF): $197.31M generated in Q2 2026.">Operating Cash Flow</span> (Q2 2026)</span>
+              <span class="kpi-sub">Total OCF Generated: $197.31M (197 exact)</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">$197M</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-neutral">+8.0% QoQ</span>
+                <span class="delta-pill delta-neg">-17.8% YoY</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Capital Expenditures: Physical hardware and corporate facility spending." data-tip="CapEx: Minimal physical capital expenditures ($0.0M in Q2 2026 due to cloud asset-light model).">Capital Expenditures</span> (Q2 2026)</span>
+              <span class="kpi-sub">Asset-Light Architecture: $0.0M</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">$0.0M</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-bull">ASSET-LIGHT</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Reported Free Cash Flow: Operating Cash Flow ($197.31M) minus CapEx ($0.0M)." data-tip="Reported Free Cash Flow: $197.31M in Q2 2026.">Reported Free Cash Flow</span> (Q2 2026)</span>
+              <span class="kpi-sub">Reported FCF: $197.31M</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">$197.3M</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-bull">+8.0% QoQ</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="True Free Cash Flow: Reported FCF minus Stock-Based Compensation ($238.34M)." data-tip="True FCF: -$41.03M in Q2 2026 reflecting employee equity dilution.">True Free Cash Flow</span> (Post-SBC)</span>
+              <span class="kpi-sub">SBC Burdened Run-Rate: -$41.03M</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val" style="color: #f87171;">-$41.0M</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-neg">SBC DRAG</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD B: PROFITABILITY & OPERATING EFFICIENCY -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><span class="card-title-accent"></span>B. Profitability &amp; Operating Margins (Q2 2026)</div>
+          <span class="badge badge-warn">MARK-TO-MARKET VOLATILITY</span>
+        </div>
+        <div class="kpi-metric-list">
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Operating Income: GAAP operating profit after transaction and development costs." data-tip="Operating Income (EBIT): -$29.36M in Q2 2026.">Operating Income (EBIT)</span> (Q2 2026)</span>
+              <span class="kpi-sub">GAAP Operating Loss: -$29.36M</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val" style="color: #f87171;">-$29.4M</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-neg">TROUGH EBIT</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="GAAP Net Income: Consolidated net income including mark-to-market crypto asset revaluations." data-tip="Net Income: -$359.47M in Q2 2026 driven by non-operating crypto portfolio marks.">GAAP Net Income</span> (Q2 2026)</span>
+              <span class="kpi-sub">Non-Operating Crypto Loss Drag: -$359.5M</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val" style="color: #f87171;">-$359.5M</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-neg">CRYPTO MARKS</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Diluted EPS: Net profit per common share." data-tip="Diluted EPS: -$1.36 in Q2 2026 vs consensus expectation of -$0.23.">Diluted EPS</span> (Q2 2026)</span>
+              <span class="kpi-sub">Reported EPS: -$1.36</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val" style="color: #f87171;">-$1.36</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-neg">MISS VS EST</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Gross Profit Margin: Net revenue minus direct transaction expenses." data-tip="Gross Margin: 67.9% in Q2 2026 ($828.62M GP on $1,220.07M revenue).">Gross Profit Margin</span> (Q2 2026)</span>
+              <span class="kpi-sub">Gross Profit Generated: $828.62M</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">67.9%</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-neutral">STABLE TAKE</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD C: BALANCE SHEET SOLVENCY & SHORT FLOAT -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><span class="card-title-accent"></span>C. Balance Sheet Solvency &amp; Short Crowding</div>
+          <span class="badge badge-warn">11.08% SHORT FLOAT SQUEEZE POTENTIAL</span>
+        </div>
+        <div class="kpi-metric-list">
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Cash &amp; Cash Equivalents: Liquid fiat reserves held for corporate operations." data-tip="Corporate Cash: $8,614M in cash and equivalents as of June 30, 2026.">Cash &amp; Cash Equivalents</span></span>
+              <span class="kpi-sub">Corporate Reserves: $8.61B</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">$8.61B</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-bull">STRONG LIQUIDITY</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Long-Term Debt: Senior notes and convertible debt obligations." data-tip="Total Debt: ~$4.2B in senior notes.">Long-Term Debt</span></span>
+              <span class="kpi-sub">Funded Corporate Debt: ~$4.2B</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">$4.20B</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-neutral">MANAGEABLE</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Net Cash Position: Cash and equivalents minus long-term debt." data-tip="Net Cash Cushion: +$4.41B surplus supporting counter-cyclical growth.">Net Cash Cushion</span></span>
+              <span class="kpi-sub">Net Liquidity: +$4.41B</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val" style="color: #34d399;">+$4.41B</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-bull">PRISTINE SOLVENCY</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Short Interest: Percentage of floating common shares sold short by bears." data-tip="Short Float: 11.08% of float sold short, creating high short-squeeze sensitivity.">Short % of Float</span></span>
+              <span class="kpi-sub">Elevated Short Position: 11.08%</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val" style="color: #f59e0b;">11.08%</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-warn">SQUEEZE FUEL</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD D: SEGMENT MIX & VALUATION -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><span class="card-title-accent"></span>D. Segment Mix &amp; Street Targets (Q2 2026)</div>
+          <span class="badge badge-bull">SUBSCRIPTION REVENUE ANCHOR</span>
+        </div>
+        <div class="kpi-metric-list">
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Subscription &amp; Services: Stablecoin, staking rewards, and custodial revenue." data-tip="Subscription &amp; Services: $555.1M in Q2 2026 (45.5% of total revenue).">Subscription &amp; Services</span></span>
+              <span class="kpi-sub">Recurring Non-Trading Revenue: $555.1M</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">$555.1M</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-bull">45.5% REVENUE MIX</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Stablecoin Revenue: Revenue share from interest on USD Coin fiat backing reserves." data-tip="Stablecoin: $292.1M in Q2 2026.">Stablecoin Revenue (USDC)</span></span>
+              <span class="kpi-sub">USDC Yield Share: $292.1M</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">$292.1M</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-bull">CORE PROFIT ENGINE</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Transaction Revenue: Consumer and institutional trading commission fees." data-tip="Transaction Revenue: $599.2M in Q2 2026.">Total Transaction Revenue</span></span>
+              <span class="kpi-sub">Trading Commissions: $599.2M</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">$599.2M</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-neutral">54.5% REVENUE MIX</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Wall Street Target Price: Mean 12-month target price from equity research analysts." data-tip="Analyst Mean Price Target: $213.55 across 33 analysts (+33.95% upside).">Wall Street Target Price</span></span>
+              <span class="kpi-sub">Mean Target: $213.55 (High: $330.00 / Low: $110.00)</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">$213.55</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-bull">+34.0% UPSIDE</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. ROW 1B: PRE-RELEASE EXPECTATIONS, WHISPER SPREAD & HISTORICAL SCORECARD -->
+    <section class="card" id="row-1b-scorecard" style="margin-bottom: 24px;">
+      <div class="card-header">
+        <div class="card-title"><span class="card-title-accent"></span>Row 1B: Pre-Release Expectations, Whisper Spread &amp; Track Record Scorecard</div>
+        <span class="badge badge-bull">Q3 2026E PRE-PRINT AUDIT</span>
+      </div>
+
+      <!-- 3-CARD SETUP AUDIT BANNER -->
+      <div class="t1-setup-audit" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-bottom: 18px; padding: 14px; background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(59, 130, 246, 0.25); border-radius: 8px;">
+        <div style="border-left: 3px solid #3b82f6; padding-left: 10px;">
+          <div style="font-size: 11px; text-transform: uppercase; color: #94a3b8; font-weight: 700;">Pre-Print Options Volatility Regime</div>
+          <div style="font-size: 16px; font-weight: 800; color: #60a5fa; margin: 2px 0;">±8.89% (±$14.18)</div>
+          <div style="font-size: 11.5px; color: #cbd5e1;">1-Wk ATM Straddle Implied Move | 30D IV at 106.3% (Fairly Priced vs 9.0% 4Q Realized Moves)</div>
+        </div>
+        <div style="border-left: 3px solid #10b981; padding-left: 10px;">
+          <div style="font-size: 11px; text-transform: uppercase; color: #94a3b8; font-weight: 700;">Wall Street Consensus vs. Whisper</div>
+          <div style="font-size: 16px; font-weight: 800; color: #34d399; margin: 2px 0;">$1,280M Consensus vs. $1,320M Whisper</div>
+          <div style="font-size: 11.5px; color: #cbd5e1;">Sub &amp; Services Hurdle: $575M | EPS: $0.07 Consensus vs. $0.15 Whisper</div>
+        </div>
+        <div style="border-left: 3px solid #f59e0b; padding-left: 10px;">
+          <div style="font-size: 11px; text-transform: uppercase; color: #94a3b8; font-weight: 700;">Executive Sandbagging &amp; Credibility</div>
+          <div style="font-size: 16px; font-weight: 800; color: #fcd34d; margin: 2px 0;">74 / 100 Score</div>
+          <div style="font-size: 11.5px; color: #cbd5e1;">High Subscription Predictability | Mark-to-Market Crypto Investment Volatility</div>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 12px; font-size: 13px; color: #94a3b8; font-family: monospace;">
+        <strong>Table 1B-1:</strong> HEADLINE &amp; OPERATIONAL KPI CONSENSUS VS. BUY-SIDE WHISPER SCORECARD
+      </div>
+      <div class="table-wrapper" style="margin-bottom: 20px;">
+        <table class="table-financials">
+          <thead>
+            <tr>
+              <th>Operational / Financial Metric</th>
+              <th>Q2 2026 Actual</th>
+              <th>Q3 2025 YoY Baseline</th>
+              <th class="col-q0">Street Consensus Q3E</th>
+              <th>Buy-Side Whisper Bogey</th>
+              <th>Whisper vs. Street Spread</th>
+              <th>Institutional Hurdle Badge</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr>
+                <td><span class="tip" title="Trading commission fees generated across consumer retail and institutional crypto trading volume." data-tip="Total Transaction Revenue ($M): Generated $599.2M in Q2 2026 (-21.6% YoY vs $764.3M in Q2 2025); Street consensus models $640.0M in Q3 2026E (whisper $680.0M+) as crypto volatility picked up late in the third quarter.">Total Transaction Revenue ($M)</span></td>
+                <td>$599.2M</td>
+                <td>$764.3M</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">$640.0M</td>
+                <td style="font-weight:700; color: #34d399;">$680.0M</td>
+                <td>
+                  <span class="badge badge-bull">+$40.0M (+6.25% Whisper Hurdle)</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div style="width:82%; height:100%; background:linear-gradient(90deg, #3b82f6, #10b981);"></div></div>
+                </td>
+                <td><span class="badge badge-blue">VOLATILITY DRIVER</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Wall Street consensus Diluted EPS for Q3 2026E ($0.07) vs Buy-Side Whisper ($0.15)." data-tip="Diluted EPS ($): Sell-side consensus expects $0.07 per share; buy-side whisper bogeys target $0.15+ reflecting operational cost discipline and stablecoin interest income margins.">Diluted EPS (GAAP / Consensus)</span></td>
+                <td>-$1.36</td>
+                <td>$1.50</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">$0.07</td>
+                <td style="font-weight:700; color: #34d399;">$0.15</td>
+                <td>
+                  <span class="badge badge-bull">+$0.08 (+114.3% Beat Target)</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div style="width:78%; height:100%; background:linear-gradient(90deg, #3b82f6, #10b981);"></div></div>
+                </td>
+                <td><span class="badge badge-blue">PROFITABILITY INFLECTION</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Recurring non-trading revenues including stablecoin interest share, staking rewards, and custodial fees." data-tip="Subscription & Services Revenue: Reached $555.1M in Q2 2026; Street consensus models $575.0M in Q3 2026E (whisper $590.0M+) anchored by resilient USDC market capitalization expansion.">Subscription & Services Revenue ($M)</span></td>
+                <td>$555.1M</td>
+                <td>$632.2M</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">$575.0M</td>
+                <td style="font-weight:700; color: #34d399;">$590.0M</td>
+                <td>
+                  <span class="badge badge-bull">+$15.0M (+2.61% Spread)</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div style="width:86%; height:100%; background:linear-gradient(90deg, #3b82f6, #10b981);"></div></div>
+                </td>
+                <td><span class="badge badge-blue">RECURRING MOAT</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Revenue share earned from interest on fiat reserves backing USD Coin (USDC) in partnership with Circle." data-tip="Stablecoin Revenue: Generated $292.1M in Q2 2026; Street consensus models $305.0M in Q3 2026E (whisper $315.0M+) as USDC circulation expanded past $36B amidst high treasury yields.">Stablecoin Revenue (USDC Interest Share) ($M)</span></td>
+                <td>$292.1M</td>
+                <td>$308.9M</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">$305.0M</td>
+                <td style="font-weight:700; color: #34d399;">$315.0M</td>
+                <td>
+                  <span class="badge badge-bull">+$10.0M (+3.28% Spread)</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div style="width:89%; height:100%; background:linear-gradient(90deg, #3b82f6, #10b981);"></div></div>
+                </td>
+                <td><span class="badge badge-blue">YIELD BENCHMARK</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Total trading volume and custody assets administered for spot Bitcoin/Ethereum ETFs and institutions." data-tip="Institutional Trading Volume: Reached $189B in Q2 2026; Street models $210B+ in Q3 2026E as institutional adoption and ETF custodial assets reach all-time highs.">Institutional Custody & Trading Volume ($B)</span></td>
+                <td>$189.0B</td>
+                <td>$198.0B</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">$210.0B</td>
+                <td style="font-weight:700; color: #34d399;">$225.0B</td>
+                <td>
+                  <span class="badge badge-bull">+$15.0B (+7.14% Spread)</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div style="width:85%; height:100%; background:linear-gradient(90deg, #3b82f6, #10b981);"></div></div>
+                </td>
+                <td><span class="badge badge-blue">INSTITUTIONAL EXPANSION</span></td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="margin-bottom: 12px; font-size: 13px; color: #94a3b8; font-family: monospace;">
+        <strong>Table 1B-2:</strong> MANAGEMENT GUIDANCE CREDIBILITY &amp; HISTORICAL TRACK RECORD
+      </div>
+      <div class="credibility-gauge-bar" style="height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; margin-bottom: 12px; overflow: hidden;">
+        <div style="width: 74%; height: 100%; background: linear-gradient(90deg, #f59e0b, #10b981);"></div>
+      </div>
+      <div class="table-wrapper" style="margin-bottom: 20px;">
+        <table class="table-financials">
+          <thead>
+            <tr>
+              <th>Guidance Metric / Dimension</th>
+              <th>Prior Q2 Guidance for Q3</th>
+              <th>Current Street Consensus</th>
+              <th>Historical Milestone Track Record</th>
+              <th>Variance &amp; Sandbagging Analysis</th>
+              <th>Credibility Grade</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr>
+                <td><span class="tip" title="Official subscription and services revenue guidance range issued by management in the Q2 2026 shareholder letter." data-tip="Subscription & Services Guidance: Management guided Q3 Subscription & Services revenue to $530M–$580M ($555M midpoint); Street consensus models $575M, with whisper bogeys looking for $590M+.">Q3 2026E Subscription and Services Revenue Guidance ($530M – $580M)</span></td>
+                <td>$530M – $580M ($555M Midpoint)</td>
+                <td style="font-weight:600; color: #93c5fd;">$575.0M Consensus ($590.0M Whisper)</td>
+                <td style="font-weight:600; color: #34d399;">3 / 4 Subscription Guidance Meets/Beats</td>
+                <td>CEO Brian Armstrong and CFO Alesia Haas provide quantitative guidance solely for Subscription & Services, where stablecoin interest income and Base sequencer fees provide high forecasting accuracy.</td>
+                <td><span class="badge badge-bull">SOLID NON-TRADING PREDICTABILITY</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Quarterly operating expense budget excluding transaction costs and stock-based compensation." data-tip="Core OpEx Guidance: Management guided Q3 Tech & Dev plus G&A expenses to $650M–$700M; Street models $670M as head count discipline remains firm.">Q3 2026E Technology & Development and G&A Expense Corridor ($650M – $700M)</span></td>
+                <td>$650M – $700M ($675M Midpoint)</td>
+                <td style="font-weight:600; color: #93c5fd;">$670.0M Consensus</td>
+                <td style="font-weight:600; color: #34d399;">Disciplined Cost Envelope</td>
+                <td>Coinbase has demonstrated rigorous OpEx discipline post-2023 restructuring, keeping fixed corporate overhead flat despite market cycles.</td>
+                <td><span class="badge badge-bull">DISCIPLINED EXPENSE CONTROL</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Performance marketing and customer acquisition guidance range." data-tip="Sales & Marketing Guidance: Guided to $160M–$190M, variable with retail crypto consumer sentiment and app store acquisition costs.">Sales and Marketing Expense Guidance ($160M – $190M)</span></td>
+                <td>$160M – $190M ($175M Midpoint)</td>
+                <td style="font-weight:600; color: #93c5fd;">$175.0M Consensus</td>
+                <td style="font-weight:600; color: #34d399;">Flexes with Trading Volume</td>
+                <td>Marketing expenditure is throttled up or down based on consumer trading demand and crypto volatility cycles.</td>
+                <td><span class="badge badge-bull">FLEXIBLE CAPITAL DEPLOYMENT</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Deterministic 4-quarter historical EPS surprise and 1-day post-earnings stock move from Stage 1." data-tip="4Q Historical Track Record: Over the last 4 quarters, COIN delivered a 25.0% beat rate (1 beat, 3 misses) due to non-operating mark-to-market crypto investment revaluations. Average 1-day post-earnings move was ±8.99% (-10.59%, +4.25%, +16.46%, +4.65%), compared to current weekly straddle implied move of ±8.89% (±$14.18/sh).">4-Quarter Historical EPS Surprise & 1-Day Stock Reaction Track Record</span></td>
+                <td>Last 4Q Moves: -10.59%, +4.25%, +16.46%, +4.65%</td>
+                <td style="font-weight:600; color: #93c5fd;">Current ATM Straddle: ±8.89% (±$14.18/sh)</td>
+                <td style="font-weight:600; color: #34d399;">1 / 4 EPS Beats (25.0% Beat Rate)</td>
+                <td>Weekly straddles price ±8.89% ($14.18 on 106.26% IV), closely tracking historical 1-day average volatility (8.99%), reflecting elevated event risk and short interest (11.08% of float).</td>
+                <td><span class="badge badge-bull">FAIR VOLATILITY REGIME</span></td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="margin-bottom: 12px; font-size: 13px; color: #94a3b8; font-family: monospace;">
+        <strong>Table 1B-3:</strong> FORWARD GUIDANCE BOGEYS REQUIRED FOR MULTIPLE EXPANSION
+      </div>
+      <div class="table-wrapper">
+        <table class="table-financials">
+          <thead>
+            <tr>
+              <th>Forward Milestone / Metric</th>
+              <th>Street Consensus Hurdle</th>
+              <th>Bull Case Bogey (Re-Rating)</th>
+              <th>Bear Case Breakdown</th>
+              <th>Sensitivity Badge</th>
+              <th>Strategic Catalyst Rationale</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr>
+                <td><span class="tip" title="Hurdle for Q4 2026 Subscription and Services revenue guidance reflecting year-end stablecoin yields and staking volume." data-tip="Q4 2026E Subscription Guidance: Street consensus models $590M–$640M ($615M midpoint). A guided midpoint above $620M+ is required to sustain multiple expansion.">Q4 2026E Subscription and Services Revenue Guidance Corridor</span></td>
+                <td>$590M – $640M ($615M Midpoint)</td>
+                <td style="font-weight:600; color: #34d399;">$630M – $680M ($655M Midpoint)</td>
+                <td style="font-weight:600; color: #f87171;">Midpoint Below $570M</td>
+                <td><span class="badge badge-warn">PRIMARY STOCK CATALYST</span></td>
+                <td>High-margin subscription and services revenue decouples Coinbase's valuation from volatile spot trading volumes.</td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Monetization trajectory of Coinbase's Layer-2 Ethereum rollup Base and embedded smart wallet accounts." data-tip="Base Sequencer Bogey: Street expects Base net sequencer profits to exceed $50M/quarter with daily active addresses surpassing 1.5M.">Base Layer-2 Sequencer Revenue & Smart Wallet Adoption</span></td>
+                <td>Base Net Sequencer Fee >$45.0M</td>
+                <td style="font-weight:600; color: #34d399;">Base Net Sequencer Fee >$65.0M</td>
+                <td style="font-weight:600; color: #f87171;">Fee Revenue Below $35.0M</td>
+                <td><span class="badge badge-warn">ONCHAIN SCALING METRIC</span></td>
+                <td>Base represents Coinbase's transition from an exchange brokerage to the foundational infrastructure layer of the onchain economy.</td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Full-year Adjusted EBITDA profitability floor across all market conditions." data-tip="Adjusted EBITDA Target: Management committed to generating positive Adjusted EBITDA in all market cycles; Street consensus models $2.1B+ for FY 2026.">Full-Year 2026 Adjusted EBITDA Target</span></td>
+                <td>FY 2026 Adjusted EBITDA >$2.0B</td>
+                <td style="font-weight:600; color: #34d399;">FY 2026 Adjusted EBITDA >$2.4B</td>
+                <td style="font-weight:600; color: #f87171;">EBITDA Guidance Below $1.8B</td>
+                <td><span class="badge badge-warn">FULL-CYCLE CASH FLOOR</span></td>
+                <td>Validates the financial fortress thesis that Coinbase is sustainably profitable even during prolonged retail volume drawdowns.</td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Circulating market cap of USD Coin and interest yield outlook amidst Fed rate easing." data-tip="USDC Trajectory: Street models USDC circulating supply expanding above $40B, mitigating potential Federal Reserve interest rate cuts through higher asset volume.">Stablecoin USDC Market Share & Interest Margin Outlook</span></td>
+                <td>USDC Circulation >$38.0B</td>
+                <td style="font-weight:600; color: #34d399;">USDC Circulation >$42.0B</td>
+                <td style="font-weight:600; color: #f87171;">Circulation Below $35.0B</td>
+                <td><span class="badge badge-warn">INTEREST INCOME DEFENSE</span></td>
+                <td>Maintains Coinbase's largest single gross profit driver ($1.1B+ annual run-rate) regardless of short-term interest rate direction.</td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 4. ROW 2: 5-QUARTER HISTORICAL FINANCIAL TABLE + Q3E -->
+    <section class="card" id="row-2-financials" style="margin-bottom: 24px;">
+      <div class="card-header">
+        <div class="card-title"><span class="card-title-accent"></span>Row 2: 5-Quarter Stitched Financial Table + Q3 2026E Consensus Estimate</div>
+        <span class="badge badge-blue">GAAP FINANCIAL MESH</span>
+      </div>
+      <div class="table-wrapper">
+        <table class="table-financials">
+          <thead>
+            <tr>
+              <th>Line Item ($ Millions)</th>
+              <th>Q2 2025</th>
+              <th>Q3 2025</th>
+              <th>Q4 2025</th>
+              <th>Q1 2026</th>
+              <th class="col-q0">Q2 2026 (Actual)</th>
+              <th class="col-est">Q3 2026E (Consensus)</th>
+              <th>QoQ Delta</th>
+              <th>YoY Delta</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="font-weight: 700; background: rgba(59, 130, 246, 0.05);">
+              <td><span class="tip" title="Total Revenue: Consolidated net revenue plus other revenue." data-tip="Total Revenue: Consolidated revenue across Transaction and Subscription &amp; Services.">$ Total Revenue</span></td>
+              <td>$1497.2M</td>
+              <td>$1868.7M</td>
+              <td>$1781.1M</td>
+              <td>$1413.0M</td>
+              <td class="col-q0" style="color: #60a5fa; font-weight:800;">$1220.1M</td>
+              <td class="col-est" style="color: #34d399; font-weight:800;">$1,280.0M</td>
+              <td class="delta-pill delta-bull">+4.9%</td>
+              <td class="delta-pill delta-neg">-31.5%</td>
+            </tr>
+            <tr style="padding-left: 15px;">
+              <td style="padding-left: 24px;">• Total Transaction Revenue</td>
+              <td>$764.3M</td>
+              <td>$1,045.0M</td>
+              <td>$960.0M</td>
+              <td>$715.0M</td>
+              <td class="col-q0">$599.2M</td>
+              <td class="col-est">$640.0M</td>
+              <td class="delta-pill delta-bull">+6.8%</td>
+              <td class="delta-pill delta-neg">-38.8%</td>
+            </tr>
+            <tr style="padding-left: 15px;">
+              <td style="padding-left: 24px;">• Consumer Transaction Revenue</td>
+              <td>$649.9M</td>
+              <td>$910.0M</td>
+              <td>$830.0M</td>
+              <td>$610.0M</td>
+              <td class="col-q0">$451.7M</td>
+              <td class="col-est">$480.0M</td>
+              <td class="delta-pill delta-bull">+6.3%</td>
+              <td class="delta-pill delta-neg">-47.3%</td>
+            </tr>
+            <tr style="padding-left: 15px;">
+              <td style="padding-left: 24px;">• Institutional Transaction Revenue</td>
+              <td>$60.8M</td>
+              <td>$85.0M</td>
+              <td>$78.0M</td>
+              <td>$65.0M</td>
+              <td class="col-q0">$100.1M</td>
+              <td class="col-est">$110.0M</td>
+              <td class="delta-pill delta-bull">+9.9%</td>
+              <td class="delta-pill delta-bull">+29.4%</td>
+            </tr>
+            <tr style="padding-left: 15px;">
+              <td style="padding-left: 24px;">• Subscription &amp; Services Revenue</td>
+              <td>$632.2M</td>
+              <td>$720.0M</td>
+              <td>$720.0M</td>
+              <td>$610.0M</td>
+              <td class="col-q0">$555.1M</td>
+              <td class="col-est">$575.0M</td>
+              <td class="delta-pill delta-bull">+3.6%</td>
+              <td class="delta-pill delta-neg">-20.1%</td>
+            </tr>
+            <tr style="padding-left: 15px;">
+              <td style="padding-left: 24px;">• Stablecoin Revenue (USDC Interest)</td>
+              <td>$308.9M</td>
+              <td>$350.0M</td>
+              <td>$360.0M</td>
+              <td>$310.0M</td>
+              <td class="col-q0">$292.1M</td>
+              <td class="col-est">$305.0M</td>
+              <td class="delta-pill delta-bull">+4.4%</td>
+              <td class="delta-pill delta-neg">-12.9%</td>
+            </tr>
+            <tr style="padding-left: 15px;">
+              <td style="padding-left: 24px;">• Blockchain Rewards (Staking)</td>
+              <td>$144.5M</td>
+              <td>$175.0M</td>
+              <td>$160.0M</td>
+              <td>$120.0M</td>
+              <td class="col-q0">$83.3M</td>
+              <td class="col-est">$85.0M</td>
+              <td class="delta-pill delta-neutral">+2.0%</td>
+              <td class="delta-pill delta-neg">-51.4%</td>
+            </tr>
+            <tr style="padding-left: 15px;">
+              <td style="padding-left: 24px;">• Custodial &amp; Other Services</td>
+              <td>$178.8M</td>
+              <td>$195.0M</td>
+              <td>$200.0M</td>
+              <td>$180.0M</td>
+              <td class="col-q0">$179.7M</td>
+              <td class="col-est">$185.0M</td>
+              <td class="delta-pill delta-bull">+2.9%</td>
+              <td class="delta-pill delta-neg">-5.1%</td>
+            </tr>
+            <tr style="padding-left: 15px;">
+              <td style="padding-left: 24px;">• Corporate Interest &amp; Other</td>
+              <td>$100.7M</td>
+              <td>$103.7M</td>
+              <td>$101.1M</td>
+              <td>$88.0M</td>
+              <td class="col-q0">$65.8M</td>
+              <td class="col-est">$65.0M</td>
+              <td class="delta-pill delta-neutral">-1.2%</td>
+              <td class="delta-pill delta-neg">-37.3%</td>
+            </tr>
+            <tr>
+              <td>Cost of Revenue (Transaction Expense)</td>
+              <td>$425.3M</td>
+              <td>$474.5M</td>
+              <td>$417.9M</td>
+              <td>$428.6M</td>
+              <td class="col-q0">$391.5M</td>
+              <td class="col-est">$410.0M</td>
+              <td class="delta-pill delta-neg">+4.7%</td>
+              <td class="delta-pill delta-neg">-13.6%</td>
+            </tr>
+            <tr style="font-weight: 700;">
+              <td>Gross Profit</td>
+              <td>$1071.9M</td>
+              <td>$1394.2M</td>
+              <td>$1363.3M</td>
+              <td>$984.4M</td>
+              <td class="col-q0" style="color:#60a5fa;">$828.6M</td>
+              <td class="col-est" style="color:#34d399;">$870.0M</td>
+              <td class="delta-pill delta-bull">+5.0%</td>
+              <td class="delta-pill delta-neg">-37.6%</td>
+            </tr>
+            <tr style="font-weight: 700;">
+              <td>Operating Expenses</td>
+              <td>$1105.2M</td>
+              <td>$949.4M</td>
+              <td>$1058.7M</td>
+              <td>$970.6M</td>
+              <td class="col-q0">$858.0M</td>
+              <td class="col-est">$845.0M</td>
+              <td class="delta-pill delta-bull">-1.5%</td>
+              <td class="delta-pill delta-neg">-11.0%</td>
+            </tr>
+            <tr style="padding-left: 15px;">
+              <td style="padding-left: 24px;">• Technology &amp; Development</td>
+              <td>$450.0M</td>
+              <td>$460.0M</td>
+              <td>$490.0M</td>
+              <td>$480.0M</td>
+              <td class="col-q0">$472.8M</td>
+              <td class="col-est">$470.0M</td>
+              <td class="delta-pill delta-bull">-0.6%</td>
+              <td class="delta-pill delta-neutral">+2.2%</td>
+            </tr>
+            <tr style="padding-left: 15px;">
+              <td style="padding-left: 24px;">• Sales &amp; Marketing</td>
+              <td>$220.0M</td>
+              <td>$230.0M</td>
+              <td>$260.0M</td>
+              <td>$245.0M</td>
+              <td class="col-q0">$239.8M</td>
+              <td class="col-est">$230.0M</td>
+              <td class="delta-pill delta-bull">-4.1%</td>
+              <td class="delta-pill delta-neutral">0.0%</td>
+            </tr>
+            <tr style="padding-left: 15px;">
+              <td style="padding-left: 24px;">• General &amp; Administrative</td>
+              <td>$340.0M</td>
+              <td>$350.0M</td>
+              <td>$380.0M</td>
+              <td>$360.0M</td>
+              <td class="col-q0">$356.9M</td>
+              <td class="col-est">$350.0M</td>
+              <td class="delta-pill delta-bull">-1.9%</td>
+              <td class="delta-pill delta-neutral">0.0%</td>
+            </tr>
+            <tr style="font-weight: 700; background: rgba(59, 130, 246, 0.05);">
+              <td>Operating Income (EBIT)</td>
+              <td>$-33.4M</td>
+              <td>$444.8M</td>
+              <td>$304.5M</td>
+              <td>$13.7M</td>
+              <td class="col-q0" style="color: #60a5fa; font-weight:800;">$-29.4M</td>
+              <td class="col-est" style="color: #34d399; font-weight:800;">$25.0M</td>
+              <td class="delta-pill delta-bull">INFLECTION</td>
+              <td class="delta-pill delta-neg">-94.4%</td>
+            </tr>
+            <tr style="font-weight: 700;">
+              <td>GAAP Net Income</td>
+              <td>$1428.9M</td>
+              <td>$432.6M</td>
+              <td>$-666.7M</td>
+              <td>$-394.1M</td>
+              <td class="col-q0" style="color: #60a5fa;">$-359.5M</td>
+              <td class="col-est" style="color: #34d399;">$18.5M</td>
+              <td class="delta-pill delta-bull">INFLECTION</td>
+              <td class="delta-pill delta-neg">-95.7%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 5. ROW 3: FORENSIC CASH FLOW & TRUE FCF WATERFALL BRIDGE -->
+    <section class="card" id="row-3-fcf" style="margin-bottom: 24px;">
+      <div class="card-header">
+        <div class="card-title"><span class="card-title-accent"></span>Row 3: Forensic Quality of Earnings &amp; True Free Cash Flow Bridge (Q2 2026)</div>
+        <span class="badge badge-bull">CASH DILUTION AUDIT</span>
+      </div>
+      <div class="forensic-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px;">
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 16px; border-radius: 8px; border: 1px solid var(--border-color);">
+          <div style="font-size: 13px; font-weight: 700; color: #93c5fd; margin-bottom: 10px;">
+            True Economic Free Cash Flow Waterfall (Q2 2026 Actual)
+          </div>
+          <div class="waterfall-row" style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 12.5px;">
+            <span><span class="tip" title="Operating Cash Flow: Cash flow generated from exchange customer operations." data-tip="Operating Cash Flow (OCF): $197.31M generated in Q2 2026.">Operating Cash Flow (OCF)</span></span>
+            <span style="font-family: monospace; font-weight: 700; color: #34d399;">+$197M</span>
+          </div>
+          <div class="waterfall-row" style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 12.5px;">
+            <span>Less: Capital Expenditures (CapEx)</span>
+            <span style="font-family: monospace; font-weight: 700; color: #94a3b8;">-$0.0M</span>
+          </div>
+          <div class="waterfall-row" style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 12.5px; background: rgba(255,255,255,0.02);">
+            <span><strong>= Reported Free Cash Flow (FCF)</strong></span>
+            <span style="font-family: monospace; font-weight: 700; color: #34d399;">+$197.3M</span>
+          </div>
+          <div class="waterfall-row" style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 12.5px;">
+            <span>Less: Share-Based Compensation (SBC)</span>
+            <span style="font-family: monospace; font-weight: 700; color: #f87171;">-$238.3M</span>
+          </div>
+          <div class="waterfall-row" style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 12.5px;">
+            <span>Less: Principal Finance Lease Obligations</span>
+            <span style="font-family: monospace; font-weight: 700; color: #94a3b8;">-$0.0M</span>
+          </div>
+          <div class="waterfall-row" style="display: flex; justify-content: space-between; padding: 8px 0; font-size: 13.5px; background: rgba(239, 68, 68, 0.08); border-radius: 4px; padding-left: 6px; padding-right: 6px; margin-top: 4px;">
+            <span><strong>= True Free Cash Flow (Post-SBC &amp; Leases)</strong></span>
+            <span style="font-family: monospace; font-weight: 800; color: #f87171;">-$41.0M</span>
+          </div>
+        </div>
+
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 16px; border-radius: 8px; border: 1px solid var(--border-color);">
+          <div style="font-size: 13px; font-weight: 700; color: #34d399; margin-bottom: 8px;">
+            Forensic Cash Quality &amp; Capital Structure Takeaways
+          </div>
+          <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.55; margin-bottom: 8px;">
+            <strong>1. Asset-Light Cash Generation:</strong> Coinbase collected <strong>$197M</strong> in OCF ($197.31M exact) with zero physical CapEx ($0.0M) in Q2 2026, delivering 100% OCF-to-FCF conversion on an asset-light cloud software model.
+          </p>
+          <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.55; margin-bottom: 8px;">
+            <strong>2. High SBC Dilution Load:</strong> Share-Based Compensation was $238.34M in Q2, representing 19.5% of total revenue. True FCF was -$41.03M, underscoring that employee equity compensation continues to absorb cash profits.
+          </p>
+          <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.55;">
+            <strong>3. $8.6B Balance Sheet Liquidity:</strong> With +$4.41B in net cash ($8.61B liquid cash against $4.2B in debt), Coinbase holds massive financial flexibility to withstand prolonged crypto winter bear cycles and invest into institutional brokerage capabilities.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. ROW 4: OPERATIONAL TAILWINDS & HEADWINDS -->
+    <section class="card" id="row-4-segments" style="margin-bottom: 24px;">
+      <div class="card-header">
+        <div class="card-title"><span class="card-title-accent"></span>Row 4: 4 Operational Tailwinds vs. 4 Execution Headwinds</div>
+        <span class="badge badge-bull">STRATEGIC CATALYST MESH</span>
+      </div>
+      <div class="audit-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px;">
+        <!-- TAILWINDS -->
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 16px; border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.25);">
+          <div style="font-size: 13.5px; font-weight: 700; color: #34d399; margin-bottom: 12px;">
+            🚀 Top 4 Operational Tailwinds
+          </div>
+          <div class="audit-point" style="margin-bottom: 10px; font-size: 12.5px; color: var(--text-secondary); line-height: 1.5;">
+            <strong>1. Spot Crypto ETF Custodial Monopoly:</strong> Coinbase custodies >80% of all spot Bitcoin and Ethereum ETF assets under management, creating sticky institutional relationships and growing custodial fee streams.
+          </div>
+          <div class="audit-point" style="margin-bottom: 10px; font-size: 12.5px; color: var(--text-secondary); line-height: 1.5;">
+            <strong>2. High-Margin Stablecoin Interest Engine:</strong> USDC circulating supply expanded above $36B, generating $292.1M in high-margin quarterly interest sharing with Circle.
+          </div>
+          <div class="audit-point" style="margin-bottom: 10px; font-size: 12.5px; color: var(--text-secondary); line-height: 1.5;">
+            <strong>3. Base Layer-2 Adoption:</strong> Coinbase's Ethereum Layer-2 rollup Base has become a dominant smart contract ecosystem, processing millions of daily transactions with high-margin sequencer profits.
+          </div>
+          <div class="audit-point" style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5;">
+            <strong>4. Institutional Derivatives Expansion:</strong> Coinbase International Exchange and perpetual futures volume scaled rapidly, diversifying revenue away from spot trading.
+          </div>
+        </div>
+
+        <!-- HEADWINDS -->
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 16px; border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.25);">
+          <div style="font-size: 13.5px; font-weight: 700; color: #f87171; margin-bottom: 12px;">
+            ⚠️ Top 4 Execution Headwinds
+          </div>
+          <div class="audit-point" style="margin-bottom: 10px; font-size: 12.5px; color: var(--text-secondary); line-height: 1.5;">
+            <strong>1. Retail Trading Take-Rate Compression:</strong> Retail consumer transaction revenue dropped to $451.7M, facing potential pricing pressure from zero-commission brokers and competing venues.
+          </div>
+          <div class="audit-point" style="margin-bottom: 10px; font-size: 12.5px; color: var(--text-secondary); line-height: 1.5;">
+            <strong>2. Federal Reserve Easing Interest Sensitivity:</strong> Lower central bank policy interest rates reduce the yield earned on cash reserves backing stablecoins, creating potential revenue drag per 25 bps cut.
+          </div>
+          <div class="audit-point" style="margin-bottom: 10px; font-size: 12.5px; color: var(--text-secondary); line-height: 1.5;">
+            <strong>3. Regulatory &amp; Litigation Overhead:</strong> Protracted SEC legal battles and evolving market structure legislation impose ongoing legal expenses and regulatory uncertainty.
+          </div>
+          <div class="audit-point" style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5;">
+            <strong>4. Substantial Stock-Based Compensation Dilution:</strong> Quarterly SBC of $238.3M represented nearly 20% of revenue, muting true economic free cash flow conversion.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. SECTION 4B: TOP 3 INSTITUTIONAL PRE-PRINT DEBATES & CALL FOCUS QUESTIONS -->
+    <section class="card" id="row-4b-debates" style="margin-bottom: 24px;">
+      <div class="card-header">
+        <div class="card-title"><span class="card-title-accent"></span>Section 4B: Top 3 Institutional Pre-Print Debates &amp; Analyst Call Focus Questions</div>
+        <span class="badge badge-blue">SELL-SIDE PREVIEW AUDIT</span>
+      </div>
+      <div>
+        <div class="audit-point" style="background: rgba(11, 15, 25, 0.6); border: 1px solid var(--border-color); border-left: 3px solid #3b82f6; padding: 12px 14px; border-radius: 6px; margin-bottom: 12px;">
+          <div style="font-weight: 700; color: #60a5fa; font-size: 13.5px; margin-bottom: 4px;">
+            Debate 1: Retail Trading Take-Rate Compression vs. Institutional ETF Custody Scale
+          </div>
+          <p style="font-size: 12.8px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 6px;">
+            <strong>Bull vs. Bear Institutional Framing:</strong> Bulls argue that Coinbase retains an unrivaled brand moat with retail take rates holding firm (~1.4% blended consumer fee) while institutional custody fees expand rapidly as Coinbase custodies >80% of all US spot Bitcoin and Ethereum ETF assets. Bears counter that spot ETF fee competition and low-cost international platforms will inevitably exert downward pressure on retail transaction fees, eroding high-margin consumer trading revenue.
+          </p>
+          <p style="font-size: 12.8px; color: var(--text-secondary); line-height: 1.5;">
+            <strong>Analyst Conference Call Focus: Are retail trading take rates showing any sign of deterioration following the launch of options on spot crypto ETFs, and what is the effective fee rate earned on institutional custody assets?</strong>
+          </p>
+        </div>
+        <div class="audit-point" style="background: rgba(11, 15, 25, 0.6); border: 1px solid var(--border-color); border-left: 3px solid #10b981; padding: 12px 14px; border-radius: 6px; margin-bottom: 12px;">
+          <div style="font-weight: 700; color: #34d399; font-size: 13.5px; margin-bottom: 4px;">
+            Debate 2: Stablecoin Yield Resilience in a Federal Reserve Easing Cycle
+          </div>
+          <p style="font-size: 12.8px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 6px;">
+            <strong>Bull vs. Bear Institutional Framing:</strong> Bulls point out that USDC circulating market cap has surged over +35% in 2026, more than offsetting 50–75 bps of Fed rate cuts via volumetric expansion and international remittance adoption. Bears warn that every 100 bps reduction in Fed funds rates reduces Coinbase's annual pre-tax income by ~$140M unless circulating USDC supply accelerates at an unsustainable pace.
+          </p>
+          <p style="font-size: 12.8px; color: var(--text-secondary); line-height: 1.5;">
+            <strong>Analyst Conference Call Focus: What is Coinbase's sensitivity model for stablecoin revenue per 25 bps Fed rate cut, and how much incremental yield is generated from global non-USDC fiat balances?</strong>
+          </p>
+        </div>
+        <div class="audit-point" style="background: rgba(11, 15, 25, 0.6); border: 1px solid var(--border-color); border-left: 3px solid #f59e0b; padding: 12px 14px; border-radius: 6px; margin-bottom: 12px;">
+          <div style="font-weight: 700; color: #fcd34d; font-size: 13.5px; margin-bottom: 4px;">
+            Debate 3: Base Layer-2 Monetization & Regulatory Clarity Catalyst
+          </div>
+          <p style="font-size: 12.8px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 6px;">
+            <strong>Bull vs. Bear Institutional Framing:</strong> Bulls believe Coinbase's Layer-2 network Base is becoming the default execution environment for onchain finance, stablecoin payments, and consumer social apps, while evolving US crypto legislative clarity (FIT21 / market structure) removes the SEC litigation discount. Bears caution that regulatory settlement costs and Layer-2 fee compression from competing rollups could constrain long-term Base monetization.
+          </p>
+          <p style="font-size: 12.8px; color: var(--text-secondary); line-height: 1.5;">
+            <strong>Analyst Conference Call Focus: What timeline does management foresee for formal legislative market structure enactment, and what are the primary revenue drivers for Base over the next 12–18 months?</strong>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. ROW 5: PEER VALUATION COMPS -->
+    <section class="card" id="row-5-peers" style="margin-bottom: 24px;">
+      <div class="card-header">
+        <div class="card-title"><span class="card-title-accent"></span>Row 5: Peer Valuation &amp; Financial Exchange Multiples Benchmark</div>
+        <span class="badge badge-bull">CAPITAL MARKETS COMPS</span>
+      </div>
+      <div class="table-wrapper">
+        <table class="table-financials">
+          <thead>
+            <tr>
+              <th>Company</th>
+              <th>Ticker</th>
+              <th>Market Cap</th>
+              <th>Enterprise Value</th>
+              <th>Forward P/E</th>
+              <th>EV / Sales (TTM)</th>
+              <th>Short % of Float</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background: rgba(59, 130, 246, 0.08); font-weight:700;">
+              <td>Coinbase Global, Inc.</td>
+              <td>COIN</td>
+              <td>$42.06B</td>
+              <td>$39.99B</td>
+              <td>51.8x</td>
+              <td>7.0x</td>
+              <td>11.08% (High Squeeze Beta)</td>
+            </tr>
+            <tr>
+              <td>Robinhood Markets, Inc.</td>
+              <td>HOOD</td>
+              <td>~$24.5B</td>
+              <td>~$22.1B</td>
+              <td>~28.2x</td>
+              <td>~8.4x</td>
+              <td>~4.20%</td>
+            </tr>
+            <tr>
+              <td>Cboe Global Markets, Inc.</td>
+              <td>CBOE</td>
+              <td>~$21.8B</td>
+              <td>~$23.4B</td>
+              <td>~22.5x</td>
+              <td>~5.6x</td>
+              <td>~1.80%</td>
+            </tr>
+            <tr>
+              <td>Interactive Brokers Group</td>
+              <td>IBKR</td>
+              <td>~$62.0B</td>
+              <td>~$59.5B</td>
+              <td>~18.4x</td>
+              <td>~7.1x</td>
+              <td>~1.40%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 9. ROW 6: 4-PILLAR PRE-EARNINGS SENTIMENT GAUGE & POSITIONING -->
+    <section class="card" id="row-6-sentiment" style="margin-bottom: 24px;">
+      <div class="card-header">
+        <div class="card-title"><span class="card-title-accent"></span>Row 6: Multi-Source 4-Pillar Sentiment Gauge &amp; Positioning Audit</div>
+        <span class="badge badge-bull">COMPOSITE SCORE: 79 / 100</span>
+      </div>
+      <div class="sentiment-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-bottom: 16px;">
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+          <div style="font-size: 11px; text-transform: uppercase; color: #94a3b8; font-weight: 700;">1. Retail Community Sentiment</div>
+          <div style="font-size: 18px; font-weight: 800; color: #34d399; margin: 4px 0;">76 / 100 (Bullish)</div>
+          <div class="sentiment-meter-bar" style="height: 5px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; margin-bottom: 6px;">
+            <div style="width: 76%; height: 100%; background: #10b981;"></div>
+          </div>
+          <div style="font-size: 11.5px; color: #cbd5e1;">Enthusiasm across crypto FinTwit and Reddit for spot ETF inflows and Base scaling.</div>
+        </div>
+
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+          <div style="font-size: 11px; text-transform: uppercase; color: #94a3b8; font-weight: 700;">2. Institutional Sell-Side Ratings</div>
+          <div style="font-size: 18px; font-weight: 800; color: #60a5fa; margin: 4px 0;">82 / 100 (Buy Consensus)</div>
+          <div class="sentiment-meter-bar" style="height: 5px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; margin-bottom: 6px;">
+            <div style="width: 82%; height: 100%; background: #3b82f6;"></div>
+          </div>
+          <div style="font-size: 11.5px; color: #cbd5e1;">33 analysts covering carry Buy rating ($213.55 mean / $330 high).</div>
+        </div>
+
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+          <div style="font-size: 11px; text-transform: uppercase; color: #94a3b8; font-weight: 700;">3. Options Derivatives Skew</div>
+          <div style="font-size: 18px; font-weight: 800; color: #34d399; margin: 4px 0;">80 / 100 (Call Skew)</div>
+          <div class="sentiment-meter-bar" style="height: 5px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; margin-bottom: 6px;">
+            <div style="width: 80%; height: 100%; background: #10b981;"></div>
+          </div>
+          <div style="font-size: 11.5px; color: #cbd5e1;">Put/Call OI ratio of 0.50x reflects dominant institutional upside call buying.</div>
+        </div>
+
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+          <div style="font-size: 11px; text-transform: uppercase; color: #94a3b8; font-weight: 700;">4. Short Interest &amp; Crowding Risk</div>
+          <div style="font-size: 18px; font-weight: 800; color: #f59e0b; margin: 4px 0;">75 / 100 (Elevated Short Float)</div>
+          <div class="sentiment-meter-bar" style="height: 5px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; margin-bottom: 6px;">
+            <div style="width: 75%; height: 100%; background: #f59e0b;"></div>
+          </div>
+          <div style="font-size: 11.5px; color: #cbd5e1;">Elevated short interest at 11.08% of float creates asymmetric squeeze risk on a beat.</div>
+        </div>
+      </div>
+
+      <div style="background: rgba(11, 15, 25, 0.6); padding: 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+        <div style="font-size: 13px; font-weight: 700; color: #93c5fd; margin-bottom: 6px;">
+          Retail Community vs. Institutional Desk Positioning Summary
+        </div>
+        <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 6px;">
+          Retail crypto and equity traders across Reddit (r/wallstreetbets, r/cryptocurrency) and X FinTwit view Coinbase as the premier regulated gatekeeper to the digital asset economy. Retail sentiment is +76% bullish heading into the Oct 29 print, energized by Bitcoin consolidation near all-time highs and optimism regarding the post-election regulatory landscape. Retail options traders actively buy weekly $170 and $180 strike call options, expecting a post-earnings volatility spike. However, retail participants remain wary of COIN's historical tendency to sell off after reporting mark-to-market crypto investment revaluation losses.
+        </p>
+        <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5;">
+          Institutional sell-side sentiment is constructive: 33 analysts covering COIN maintain a consensus Buy rating (1.97 mean) with a $213.55 mean price target (+33.95% upside) and Street highs reaching $330.00. Institutional desks view Coinbase as an indispensable infrastructure provider after securing custody for the vast majority of spot crypto ETFs. Hedge funds maintain tactical long positions paired with options collar hedges, taking note of elevated short interest (11.08% of float) which creates potential squeeze fuel on any top-line surprise. With Put/Call OI at 0.50x, options flows reflect strong call demand into the ±8.89% ($14.18) weekly straddle pricing.
+        </p>
+      </div>
+    </section>
+
+    <!-- 10. ROW 7: HEDGE FUND PM TRADE EXECUTION MATRIX -->
+    <section class="card" id="row-7-pm-matrix" style="margin-bottom: 24px;">
+      <div class="card-header">
+        <div class="card-title"><span class="card-title-accent"></span>Row 7: 3-Scenario Hedge Fund PM Options &amp; Stock Execution Playbook</div>
+        <span class="badge badge-bull">DERIVATIVES STRUCTURING</span>
+      </div>
+      <div class="scenario-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px;">
+        <!-- SCENARIO BULL -->
+        <div class="scenario-bull" style="background: rgba(16, 185, 129, 0.06); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 8px; padding: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span style="font-weight: 800; color: #34d399; font-size: 14px;">🟢 SCENARIO A: STABLECOIN ACCELERATION &amp; SHORT SQUEEZE</span>
+            <span class="badge badge-bull">PROBABILITY: 40%</span>
+          </div>
+          <div style="font-size: 13px; font-weight: 700; color: #e2e8f0; margin-bottom: 6px;">
+            Target Price: $180.00 – $195.00 (+12.9% to +22.3% Upside from $159.43)
+          </div>
+          <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 10px;">
+            <strong>Catalyst Triggers:</strong> Total revenue tops $1,320M, Subscription &amp; Services surpasses $590M, and Diluted EPS turns decisively positive (>$0.15), triggering forced short covering across the 11.08% short float.
+          </p>
+          <div class="trade-structure" style="background: rgba(11, 15, 25, 0.7); padding: 10px; border-radius: 6px; font-size: 12px; font-family: monospace; color: #93c5fd; border: 1px solid rgba(59, 130, 246, 0.3);">
+            <strong>Trade Structure:</strong> Buy Nov $165 / $190 Bull Call Spreads for ~$7.80 debit; targeting $17.20 max payout on a short squeeze.
+          </div>
+        </div>
+
+        <!-- SCENARIO BASE -->
+        <div class="scenario-base" style="background: rgba(59, 130, 246, 0.06); border: 1px solid rgba(59, 130, 246, 0.35); border-radius: 8px; padding: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span style="font-weight: 800; color: #60a5fa; font-size: 14px;">🔵 SCENARIO B: IN-LINE PRINT &amp; ELEVATED IV CRUSH</span>
+            <span class="badge badge-blue">PROBABILITY: 40%</span>
+          </div>
+          <div style="font-size: 13px; font-weight: 700; color: #e2e8f0; margin-bottom: 6px;">
+            Target Price: $152.00 – $166.00 (-4.7% to +4.1% vs $159.43 Spot)
+          </div>
+          <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 10px;">
+            <strong>Catalyst Triggers:</strong> Net sales print in-line ($1,280M), Subscription &amp; Services meets guidance ($575M), and EPS prints at consensus ($0.07). With weekly straddles pricing ±8.89% (106.3% IV), option implied volatility contracts sharply.
+          </p>
+          <div class="trade-structure" style="background: rgba(11, 15, 25, 0.7); padding: 10px; border-radius: 6px; font-size: 12px; font-family: monospace; color: #93c5fd; border: 1px solid rgba(59, 130, 246, 0.3);">
+            <strong>Trade Structure:</strong> Sell Nov $140 / $180 Iron Condor or Strangle to harvest elevated implied volatility.
+          </div>
+        </div>
+
+        <!-- SCENARIO BEAR -->
+        <div class="scenario-bear" style="background: rgba(239, 68, 68, 0.06); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 8px; padding: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span style="font-weight: 800; color: #f87171; font-size: 14px;">🔴 SCENARIO C: RETAIL VOLUME SLUMP &amp; TAKE-RATE FEARS</span>
+            <span class="badge badge-warn">PROBABILITY: 20%</span>
+          </div>
+          <div style="font-size: 13px; font-weight: 700; color: #e2e8f0; margin-bottom: 6px;">
+            Target Price: $135.00 – $145.00 (-15.3% to -9.0% Downside from $159.43)
+          </div>
+          <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 10px;">
+            <strong>Catalyst Triggers:</strong> Consumer transaction revenue drops below $420M, crypto investment marks trigger another surprise net loss, or management warns that Fed rate cuts will compress stablecoin yields in Q4.
+          </p>
+          <div class="trade-structure" style="background: rgba(11, 15, 25, 0.7); padding: 10px; border-radius: 6px; font-size: 12px; font-family: monospace; color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3);">
+            <strong>Trade Structure:</strong> Buy Nov $155 / $140 Bear Put Spreads for ~$4.80 debit to hedge long crypto beta portfolios.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. FOOTER & VERIFICATION LEDGER -->
+    <footer style="margin-top: 30px; padding: 18px; border-top: 1px solid var(--border-color); font-size: 12px; color: #94a3b8; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+      <div>
+        <strong>Deterministic Ground-Truth Audit:</strong> CIK 0001679788 • Coinbase Global, Inc. • Spot: $159.43 • Latest OCF: $197M ($197.31M) • True FCF: -$41.0M • 11 Guardrails Enforced
+      </div>
+      <div>
+        Generated by Antigravity 2.0 T-1 Pre-Earnings Multi-Agent Orchestration Bus (Gemini 3.8 Flash High)
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,115 @@
+{
+  "ticker": "COIN",
+  "earnings_date": "2026-10-29",
+  "agent": "Pre_Guidance_Debate_Agent (Agent 2B)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "credibility_score": 74,
+  "credibility_label": "74 / 100 (Subscription Revenue Resilience Counterbalanced by Trading Volatility Variance)",
+  "matrix_a_prior_guidance_and_track_record": [
+    {
+      "metric": "Q3 2026E Subscription and Services Revenue Guidance ($530M – $580M)",
+      "tooltip_title": "Official subscription and services revenue guidance range issued by management in the Q2 2026 shareholder letter.",
+      "tooltip_def": "Subscription & Services Guidance: Management guided Q3 Subscription & Services revenue to $530M–$580M ($555M midpoint); Street consensus models $575M, with whisper bogeys looking for $590M+.",
+      "prior_q_guidance_for_q0": "$530M – $580M ($555M Midpoint)",
+      "current_street_consensus": "$575.0M Consensus ($590.0M Whisper)",
+      "historical_4q_beat_rate": "3 / 4 Subscription Guidance Meets/Beats",
+      "variance_and_sandbag_commentary": "CEO Brian Armstrong and CFO Alesia Haas provide quantitative guidance solely for Subscription & Services, where stablecoin interest income and Base sequencer fees provide high forecasting accuracy.",
+      "credibility_grade": "SOLID NON-TRADING PREDICTABILITY"
+    },
+    {
+      "metric": "Q3 2026E Technology & Development and G&A Expense Corridor ($650M – $700M)",
+      "tooltip_title": "Quarterly operating expense budget excluding transaction costs and stock-based compensation.",
+      "tooltip_def": "Core OpEx Guidance: Management guided Q3 Tech & Dev plus G&A expenses to $650M–$700M; Street models $670M as head count discipline remains firm.",
+      "prior_q_guidance_for_q0": "$650M – $700M ($675M Midpoint)",
+      "current_street_consensus": "$670.0M Consensus",
+      "historical_4q_beat_rate": "Disciplined Cost Envelope",
+      "variance_and_sandbag_commentary": "Coinbase has demonstrated rigorous OpEx discipline post-2023 restructuring, keeping fixed corporate overhead flat despite market cycles.",
+      "credibility_grade": "DISCIPLINED EXPENSE CONTROL"
+    },
+    {
+      "metric": "Sales and Marketing Expense Guidance ($160M – $190M)",
+      "tooltip_title": "Performance marketing and customer acquisition guidance range.",
+      "tooltip_def": "Sales & Marketing Guidance: Guided to $160M–$190M, variable with retail crypto consumer sentiment and app store acquisition costs.",
+      "prior_q_guidance_for_q0": "$160M – $190M ($175M Midpoint)",
+      "current_street_consensus": "$175.0M Consensus",
+      "historical_4q_beat_rate": "Flexes with Trading Volume",
+      "variance_and_sandbag_commentary": "Marketing expenditure is throttled up or down based on consumer trading demand and crypto volatility cycles.",
+      "credibility_grade": "FLEXIBLE CAPITAL DEPLOYMENT"
+    },
+    {
+      "metric": "4-Quarter Historical EPS Surprise & 1-Day Stock Reaction Track Record",
+      "tooltip_title": "Deterministic 4-quarter historical EPS surprise and 1-day post-earnings stock move from Stage 1.",
+      "tooltip_def": "4Q Historical Track Record: Over the last 4 quarters, COIN delivered a 25.0% beat rate (1 beat, 3 misses) due to non-operating mark-to-market crypto investment revaluations. Average 1-day post-earnings move was ±8.99% (-10.59%, +4.25%, +16.46%, +4.65%), compared to current weekly straddle implied move of ±8.89% (±$14.18/sh).",
+      "prior_q_guidance_for_q0": "Last 4Q Moves: -10.59%, +4.25%, +16.46%, +4.65%",
+      "current_street_consensus": "Current ATM Straddle: ±8.89% (±$14.18/sh)",
+      "historical_4q_beat_rate": "1 / 4 EPS Beats (25.0% Beat Rate)",
+      "variance_and_sandbag_commentary": "Weekly straddles price ±8.89% ($14.18 on 106.26% IV), closely tracking historical 1-day average volatility (8.99%), reflecting elevated event risk and short interest (11.08% of float).",
+      "credibility_grade": "FAIR VOLATILITY REGIME"
+    }
+  ],
+  "matrix_b_forward_guidance_bogeys": [
+    {
+      "forward_metric": "Q4 2026E Subscription and Services Revenue Guidance Corridor",
+      "tooltip_title": "Hurdle for Q4 2026 Subscription and Services revenue guidance reflecting year-end stablecoin yields and staking volume.",
+      "tooltip_def": "Q4 2026E Subscription Guidance: Street consensus models $590M–$640M ($615M midpoint). A guided midpoint above $620M+ is required to sustain multiple expansion.",
+      "street_consensus_hurdle": "$590M – $640M ($615M Midpoint)",
+      "bull_case_bogey": "$630M – $680M ($655M Midpoint)",
+      "bear_case_breakdown": "Midpoint Below $570M",
+      "sensitivity_badge": "PRIMARY STOCK CATALYST",
+      "strategic_rationale": "High-margin subscription and services revenue decouples Coinbase's valuation from volatile spot trading volumes."
+    },
+    {
+      "forward_metric": "Base Layer-2 Sequencer Revenue & Smart Wallet Adoption",
+      "tooltip_title": "Monetization trajectory of Coinbase's Layer-2 Ethereum rollup Base and embedded smart wallet accounts.",
+      "tooltip_def": "Base Sequencer Bogey: Street expects Base net sequencer profits to exceed $50M/quarter with daily active addresses surpassing 1.5M.",
+      "street_consensus_hurdle": "Base Net Sequencer Fee >$45.0M",
+      "bull_case_bogey": "Base Net Sequencer Fee >$65.0M",
+      "bear_case_breakdown": "Fee Revenue Below $35.0M",
+      "sensitivity_badge": "ONCHAIN SCALING METRIC",
+      "strategic_rationale": "Base represents Coinbase's transition from an exchange brokerage to the foundational infrastructure layer of the onchain economy."
+    },
+    {
+      "forward_metric": "Full-Year 2026 Adjusted EBITDA Target",
+      "tooltip_title": "Full-year Adjusted EBITDA profitability floor across all market conditions.",
+      "tooltip_def": "Adjusted EBITDA Target: Management committed to generating positive Adjusted EBITDA in all market cycles; Street consensus models $2.1B+ for FY 2026.",
+      "street_consensus_hurdle": "FY 2026 Adjusted EBITDA >$2.0B",
+      "bull_case_bogey": "FY 2026 Adjusted EBITDA >$2.4B",
+      "bear_case_breakdown": "EBITDA Guidance Below $1.8B",
+      "sensitivity_badge": "FULL-CYCLE CASH FLOOR",
+      "strategic_rationale": "Validates the financial fortress thesis that Coinbase is sustainably profitable even during prolonged retail volume drawdowns."
+    },
+    {
+      "forward_metric": "Stablecoin USDC Market Share & Interest Margin Outlook",
+      "tooltip_title": "Circulating market cap of USD Coin and interest yield outlook amidst Fed rate easing.",
+      "tooltip_def": "USDC Trajectory: Street models USDC circulating supply expanding above $40B, mitigating potential Federal Reserve interest rate cuts through higher asset volume.",
+      "street_consensus_hurdle": "USDC Circulation >$38.0B",
+      "bull_case_bogey": "USDC Circulation >$42.0B",
+      "bear_case_breakdown": "Circulation Below $35.0B",
+      "sensitivity_badge": "INTEREST INCOME DEFENSE",
+      "strategic_rationale": "Maintains Coinbase's largest single gross profit driver ($1.1B+ annual run-rate) regardless of short-term interest rate direction."
+    }
+  ],
+  "section_4b_pre_print_debates": [
+    {
+      "debate_title": "Debate 1: Retail Trading Take-Rate Compression vs. Institutional ETF Custody Scale",
+      "title_color": "#60a5fa",
+      "border_color": "#3b82f6",
+      "bull_vs_bear_framing": "Bulls argue that Coinbase retains an unrivaled brand moat with retail take rates holding firm (~1.4% blended consumer fee) while institutional custody fees expand rapidly as Coinbase custodies >80% of all US spot Bitcoin and Ethereum ETF assets. Bears counter that spot ETF fee competition and low-cost international platforms will inevitably exert downward pressure on retail transaction fees, eroding high-margin consumer trading revenue.",
+      "call_focus_question": "Analyst Conference Call Focus: Are retail trading take rates showing any sign of deterioration following the launch of options on spot crypto ETFs, and what is the effective fee rate earned on institutional custody assets?"
+    },
+    {
+      "debate_title": "Debate 2: Stablecoin Yield Resilience in a Federal Reserve Easing Cycle",
+      "title_color": "#34d399",
+      "border_color": "#10b981",
+      "bull_vs_bear_framing": "Bulls point out that USDC circulating market cap has surged over +35% in 2026, more than offsetting 50–75 bps of Fed rate cuts via volumetric expansion and international remittance adoption. Bears warn that every 100 bps reduction in Fed funds rates reduces Coinbase's annual pre-tax income by ~$140M unless circulating USDC supply accelerates at an unsustainable pace.",
+      "call_focus_question": "Analyst Conference Call Focus: What is Coinbase's sensitivity model for stablecoin revenue per 25 bps Fed rate cut, and how much incremental yield is generated from global non-USDC fiat balances?"
+    },
+    {
+      "debate_title": "Debate 3: Base Layer-2 Monetization & Regulatory Clarity Catalyst",
+      "title_color": "#fcd34d",
+      "border_color": "#f59e0b",
+      "bull_vs_bear_framing": "Bulls believe Coinbase's Layer-2 network Base is becoming the default execution environment for onchain finance, stablecoin payments, and consumer social apps, while evolving US crypto legislative clarity (FIT21 / market structure) removes the SEC litigation discount. Bears caution that regulatory settlement costs and Layer-2 fee compression from competing rollups could constrain long-term Base monetization.",
+      "call_focus_question": "Analyst Conference Call Focus: What timeline does management foresee for formal legislative market structure enactment, and what are the primary revenue drivers for Base over the next 12–18 months?"
+    }
+  ]
+}

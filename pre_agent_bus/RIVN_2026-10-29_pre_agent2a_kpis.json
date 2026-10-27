@@ -1,0 +1,70 @@
+{
+  "ticker": "RIVN",
+  "earnings_date": "2026-10-29",
+  "agent": "Pre_KPI_Consensus_Agent (Agent 2A)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "upcoming_quarter_label": "Q3 2026E",
+  "latest_reported_quarter_label": "Q2 2026",
+  "headline_and_company_kpis": [
+    {
+      "metric": "Total Vehicle Deliveries (Units)",
+      "tooltip_title": "Quarterly customer vehicle delivery volume across R1T, R1S, and Electric Commercial Vans (RCV/EDV).",
+      "tooltip_def": "Vehicle Deliveries: Reached 13,790 units in Q2 2026 (+9.1% YoY vs 12,640 in Q2 2025); Street consensus models 12,500 units in Q3 2026E (whisper 13,000+) reflecting transient component supplier bottlenecks.",
+      "q_minus_1_actual": "13,790 Units",
+      "q_minus_4_yoy_baseline": "12,640 Units",
+      "street_consensus_q0e": "12,500 Units",
+      "whisper_bogey_q0e": "13,000 Units",
+      "whisper_spread_display": "+500 Units (+4.00% Delivery Hurdle)",
+      "bar_width_pct": 86,
+      "hurdle_badge": "DELIVERY TRACTION"
+    },
+    {
+      "metric": "Gross Profit Margin Inflection (% of Revenue)",
+      "tooltip_title": "GAAP Gross profit margin reflecting Gen 2 vehicle bill-of-materials cost reductions and manufacturing efficiency.",
+      "tooltip_def": "Gross Profit Margin: Inflected to positive +10.8% in Q2 2026 ($179.0M GP on $1,658.0M revenue vs -15.8% in Q2 2025); Street consensus models +8.5% in Q3 2026E (whisper +11.0%+) driven by Gen 2 simplification.",
+      "q_minus_1_actual": "+10.8%",
+      "q_minus_4_yoy_baseline": "-15.8%",
+      "street_consensus_q0e": "+8.5%",
+      "whisper_bogey_q0e": "+11.0%",
+      "whisper_spread_display": "+250 bps (Margin Expansion)",
+      "bar_width_pct": 89,
+      "hurdle_badge": "POSITIVE GROSS MARGIN"
+    },
+    {
+      "metric": "Diluted EPS (Non-GAAP / Consensus)",
+      "tooltip_title": "Wall Street consensus Non-GAAP Diluted EPS for Q3 2026E (-$0.72) vs Buy-Side Whisper (-$0.65).",
+      "tooltip_def": "Diluted EPS: Consensus models a net loss of -$0.72 per share; buy-side whisper bogeys look for -$0.65 or better as commercial delivery van volume and software monetization scale.",
+      "q_minus_1_actual": "-$0.63",
+      "q_minus_4_yoy_baseline": "-$0.97",
+      "street_consensus_q0e": "-$0.72",
+      "whisper_bogey_q0e": "-$0.65",
+      "whisper_spread_display": "+$0.07 (+9.72% Loss Narrowing)",
+      "bar_width_pct": 87,
+      "hurdle_badge": "LOSS NARROWING"
+    },
+    {
+      "metric": "Software and Services Revenue ($M)",
+      "tooltip_title": "High-margin revenue from vehicle software connectivity (Connect+), service labor, accessories, and regulatory credits.",
+      "tooltip_def": "Software and Services: Expanded to $515.0M in Q2 2026 (+37.0% YoY vs $376.0M in Q2 2025); Street consensus models $530.0M in Q3 2026E (whisper $560.0M+) as fleet telematics expand.",
+      "q_minus_1_actual": "$515.0M",
+      "q_minus_4_yoy_baseline": "$376.0M",
+      "street_consensus_q0e": "$530.0M",
+      "whisper_bogey_q0e": "$560.0M",
+      "whisper_spread_display": "+$30.0M (+5.66% High-Margin Expansion)",
+      "bar_width_pct": 84,
+      "hurdle_badge": "SOFTWARE SCALE"
+    },
+    {
+      "metric": "Automotive Vehicle Revenue ($M)",
+      "tooltip_title": "Revenue generated directly from new R1T, R1S, and commercial electric delivery van sales.",
+      "tooltip_def": "Automotive Revenue: Reached $1,143.0M in Q2 2026 (+23.3% YoY vs $927.0M in Q2 2025); Street consensus models $1,050.0M in Q3 2026E (whisper $1,100.0M+) on refreshed R1 mix.",
+      "q_minus_1_actual": "$1,143.0M",
+      "q_minus_4_yoy_baseline": "$927.0M",
+      "street_consensus_q0e": "$1,050.0M",
+      "whisper_bogey_q0e": "$1,100.0M",
+      "whisper_spread_display": "+$50.0M (+4.76% Core Auto Spread)",
+      "bar_width_pct": 85,
+      "hurdle_badge": "CORE VEHICLE REVENUE"
+    }
+  ]
+}

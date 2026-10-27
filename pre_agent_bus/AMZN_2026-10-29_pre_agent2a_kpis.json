@@ -1,0 +1,70 @@
+{
+  "ticker": "AMZN",
+  "earnings_date": "2026-10-29",
+  "agent": "Pre_KPI_Consensus_Agent (Agent 2A)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "upcoming_quarter_label": "Q3 2026E",
+  "latest_reported_quarter_label": "Q2 2026",
+  "headline_and_company_kpis": [
+    {
+      "metric": "Amazon Web Services (AWS) Revenue ($M)",
+      "tooltip_title": "Core enterprise cloud computing, database, and generative AI infrastructure platform revenue.",
+      "tooltip_def": "AWS Revenue ($M): Wall Street consensus models $41,800M in Q3 2026E (+35.4% YoY vs $30,873M in Q3 2025); buy-side whisper targets $42,500M+ driven by surging Bedrock enterprise adoption and custom Trainium2 silicon cluster deployments.",
+      "q_minus_1_actual": "$42,232.0M",
+      "q_minus_4_yoy_baseline": "$30,873.0M",
+      "street_consensus_q0e": "$41,800.0M",
+      "whisper_bogey_q0e": "$42,500.0M",
+      "whisper_spread_display": "+$700.0M (+1.67% Whisper Hurdle)",
+      "bar_width_pct": 92,
+      "hurdle_badge": "BULL HURDLE >$42.5B"
+    },
+    {
+      "metric": "Diluted EPS (GAAP / Consensus)",
+      "tooltip_title": "Wall Street consensus Diluted EPS for Q3 2026E ($1.96) vs Buy-Side Whisper ($2.08).",
+      "tooltip_def": "Diluted EPS ($): Sell-side consensus expects $1.96 per share; buy-side whisper bogeys target $2.08+ reflecting expanding high-margin AWS and advertising revenue mix alongside regionalized fulfillment cost efficiencies.",
+      "q_minus_1_actual": "$5.75",
+      "q_minus_4_yoy_baseline": "$1.95",
+      "street_consensus_q0e": "$1.96",
+      "whisper_bogey_q0e": "$2.08",
+      "whisper_spread_display": "+$0.12 (+6.12% Beat Target)",
+      "bar_width_pct": 88,
+      "hurdle_badge": "EARNINGS ACCELERATION"
+    },
+    {
+      "metric": "Advertising Services Revenue ($M)",
+      "tooltip_title": "High-margin digital retail media ad revenues from sponsored products, video streaming, and display ads.",
+      "tooltip_def": "Advertising Services Revenue: Grew +19.5% YoY to $19,809M in Q2 2026; Street consensus models $19,200M in Q3 2026E (whisper $19,600M+) powered by expanded Prime Video ad tier monetization and sponsored product placements.",
+      "q_minus_1_actual": "$19,809.0M",
+      "q_minus_4_yoy_baseline": "$16,575.0M",
+      "street_consensus_q0e": "$19,200.0M",
+      "whisper_bogey_q0e": "$19,600.0M",
+      "whisper_spread_display": "+$400.0M (+2.08% Ad Spread)",
+      "bar_width_pct": 86,
+      "hurdle_badge": "HIGH-MARGIN CASH ENGINE"
+    },
+    {
+      "metric": "Worldwide Consolidated Operating Income ($M)",
+      "tooltip_title": "Total consolidated GAAP operating profit across North America, International, and AWS.",
+      "tooltip_def": "Worldwide Operating Income: Reached $27,461M in Q2 2026 (13.7% operating margin); Street models $18,500M in Q3 2026E (guidance corridor $16.5B to $20.5B; whisper >$19.5B).",
+      "q_minus_1_actual": "$27,461.0M",
+      "q_minus_4_yoy_baseline": "$17,422.0M",
+      "street_consensus_q0e": "$18,500.0M",
+      "whisper_bogey_q0e": "$19,500.0M",
+      "whisper_spread_display": "+$1,000.0M (+5.41% Spread)",
+      "bar_width_pct": 90,
+      "hurdle_badge": "OPERATING LEVERAGE"
+    },
+    {
+      "metric": "Third-Party (3P) Seller Services Revenue ($M)",
+      "tooltip_title": "Commissions, fulfillment (FBA), and shipping fees generated from marketplace third-party merchants.",
+      "tooltip_def": "3P Seller Services: Generated $46,780M in Q2 2026; Street models $44,500M in Q3 2026E (whisper $45,200M) as 3P unit mix accounts for >61% of total paid units on Amazon's global marketplace.",
+      "q_minus_1_actual": "$46,780.0M",
+      "q_minus_4_yoy_baseline": "$41,080.0M",
+      "street_consensus_q0e": "$44,500.0M",
+      "whisper_bogey_q0e": "$45,200.0M",
+      "whisper_spread_display": "+$700.0M (+1.57% Spread)",
+      "bar_width_pct": 84,
+      "hurdle_badge": "MARKETPLACE DOMINANCE"
+    }
+  ]
+}
