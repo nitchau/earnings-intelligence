@@ -1,0 +1,82 @@
+{
+  "ticker": "FTNT",
+  "earnings_date": "2026-10-28",
+  "agent": "Pre_KPI_Consensus_Agent (Agent 2A)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "upcoming_quarter_label": "Q3 2026E",
+  "latest_reported_quarter_label": "Q2 2026",
+  "headline_and_company_kpis": [
+    {
+      "metric": "Total Net Revenue ($M)",
+      "tooltip_title": "Consolidated quarterly revenue across Product and Service lines.",
+      "tooltip_def": "Total Net Revenue ($M): Wall Street consensus models $2,120M in Q3 2026E (+22.9% YoY vs $1,724.9M in Q3 2025); buy-side whisper targets $2,150M fueled by acceleration in enterprise Secure Networking refreshes and Unified SASE adoptions.",
+      "q_minus_1_actual": "$2,047.9M",
+      "q_minus_4_yoy_baseline": "$1,724.9M",
+      "street_consensus_q0e": "$2,120.0M",
+      "whisper_bogey_q0e": "$2,150.0M",
+      "whisper_spread_display": "+$30.0M (+1.42% Whisper Hurdle)",
+      "bar_width_pct": 84,
+      "hurdle_badge": "BULL HURDLE >$2.15B"
+    },
+    {
+      "metric": "Diluted EPS (Non-GAAP / Consensus)",
+      "tooltip_title": "Wall Street consensus Non-GAAP Diluted EPS for Q3 2026E ($0.86) vs Buy-Side Whisper ($0.92).",
+      "tooltip_def": "Diluted EPS ($): Sell-side consensus expects $0.86 per share; buy-side whisper bogeys target $0.92+ reflecting Fortinet's industry-leading 35%+ operating margin structure and ASIC-driven hardware profitability.",
+      "q_minus_1_actual": "$0.90",
+      "q_minus_4_yoy_baseline": "$0.74",
+      "street_consensus_q0e": "$0.86",
+      "whisper_bogey_q0e": "$0.92",
+      "whisper_spread_display": "+$0.06 (+6.98% Beat Target)",
+      "bar_width_pct": 88,
+      "hurdle_badge": "EARNINGS POWER"
+    },
+    {
+      "metric": "Service Revenue ($M)",
+      "tooltip_title": "High-margin recurring revenue from FortiGuard AI security subscriptions, Unified SASE, and FortiCare support.",
+      "tooltip_def": "Service Revenue ($M): Printed $1,385.2M in Q2 2026 (+21.0% YoY); consensus models $1,440.0M for Q3 2026E with whisper looking for $1,460.0M+ on accelerating SecOps adoption.",
+      "q_minus_1_actual": "$1,385.2M",
+      "q_minus_4_yoy_baseline": "$1,145.0M",
+      "street_consensus_q0e": "$1,440.0M",
+      "whisper_bogey_q0e": "$1,460.0M",
+      "whisper_spread_display": "+$20.0M (+1.39% Spread)",
+      "bar_width_pct": 82,
+      "hurdle_badge": "RECURRING SAAS ENGINE"
+    },
+    {
+      "metric": "Product Revenue ($M)",
+      "tooltip_title": "Revenue from sales of FortiGate network security appliances, custom ASIC chips, and hardware firewalls.",
+      "tooltip_def": "Product Revenue ($M): Printed $662.7M in Q2 2026; Street consensus models $680.0M in Q3 2026E with whisper at $690.0M as customer firewall refresh cycles normalize.",
+      "q_minus_1_actual": "$662.7M",
+      "q_minus_4_yoy_baseline": "$579.9M",
+      "street_consensus_q0e": "$680.0M",
+      "whisper_bogey_q0e": "$690.0M",
+      "whisper_spread_display": "+$10.0M (+1.47% Spread)",
+      "bar_width_pct": 79,
+      "hurdle_badge": "HARDWARE REFRESH CYCLE"
+    },
+    {
+      "metric": "Total Billings ($M)",
+      "tooltip_title": "Gross billings generated during the quarter across all product and multi-year service contracts.",
+      "tooltip_def": "Total Billings ($M): Printed $2,185.0M in Q2 2026 (+15.2% YoY); Street models $2,240.0M in Q3 2026E with whisper requiring $2,280.0M+ to sustain forward multiple expansion.",
+      "q_minus_1_actual": "$2,185.0M",
+      "q_minus_4_yoy_baseline": "$1,895.0M",
+      "street_consensus_q0e": "$2,240.0M",
+      "whisper_bogey_q0e": "$2,280.0M",
+      "whisper_spread_display": "+$40.0M (+1.79% Spread)",
+      "bar_width_pct": 86,
+      "hurdle_badge": "FORWARD DEMAND GAUGE"
+    },
+    {
+      "metric": "Unified SASE Annual Recurring Revenue (SASE ARR) ($M)",
+      "tooltip_title": "Annual recurring revenue specifically derived from cloud-delivered Secure Access Service Edge offerings.",
+      "tooltip_def": "Unified SASE ARR ($M): Fortinet's strategic growth vector grew to over $450M ARR in Q2 2026; Street consensus models $520M ARR in Q3 2026E (+35% YoY) competing directly with Palo Alto Networks and Zscaler.",
+      "q_minus_1_actual": "$450.0M",
+      "q_minus_4_yoy_baseline": "$330.0M",
+      "street_consensus_q0e": "$520.0M",
+      "whisper_bogey_q0e": "$545.0M",
+      "whisper_spread_display": "+$25.0M (+4.81% Spread)",
+      "bar_width_pct": 91,
+      "hurdle_badge": "STRATEGIC EXPANSION"
+    }
+  ]
+}

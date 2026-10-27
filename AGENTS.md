@@ -2,60 +2,61 @@
 
 ## Core Operating Rules
 1. **NEVER modify or overwrite `Stock_Analysis_v2.html` or `published_reports/TSLA_T1_2026-10-21.html`.** They are our read-only structural and CSS master references.
-2. **NEVER invent or alter numbers from `ground_truth/{TICKER}_{DATE}_truth.json` (T-1) or `ground_truth/{TICKER}_{DATE}_post_truth.json` (T+0).** All pre-computed 5-quarter numbers, QoQ/YoY deltas, spot/after-hours prices, beat/miss deltas, and options-implied moves from Stage 1 are immutable ground truth.
+2. **NEVER invent or alter numbers from `ground_truth/{TICKER}_{DATE}_truth.json` (T-1) or `ground_truth/{TICKER}_{DATE}_post_truth.json` (T+0).** All pre-computed 5-quarter numbers, QoQ/YoY deltas, spot/after-hours prices, historical beat/miss track records, analyst price targets, beat/miss deltas, and options-implied moves from Stage 1 are immutable ground truth.
 3. **Ticker-Specific Directory Isolation**: Any intermediate scripts, inspection utilities, cached SEC exhibits, or ticker-specific helper files (e.g. `inspect_{ticker}.py`, `build_{ticker}_draft.py`, `build_{ticker}_post_draft.py`, `exhibit_99_1.txt`) MUST be created inside a dedicated ticker folder: `{TICKER}/` (e.g., `ISRG/`, `TSLA/`, `META/`). If the directory does not exist, create it before writing the file. Never place symbol-specific files in the repository root.
-4. **Model Standard**: All specialized agents in the multi-agent orchestration harness MUST use **Gemini 3.8 Flash High**.
+4. **Model Standard**: All specialized agents in both the T-1 and T+0 multi-agent orchestration harnesses MUST use **Gemini 3.8 Flash High**.
 
 ---
 
-## PART I: T-1 Pre-Earnings 4-Stage Execution Workflow
+## PART I: T-1 Pre-Earnings 5-Layer Multi-Agent Orchestration Harness (Track A + Track B Standard)
 
-### Stage 1: Deterministic Ground-Truth Anchor
-Run `python stage1_fetch_truth.py` for batch scanning across `tickers.txt`.
-- The engine automatically filters for tickers with earnings strictly in the T-1 window (upcoming in 1-2 trading days, or released within the last 24 hours).
-- If checking an individual symbol: `python stage1_fetch_truth.py {TICKER}`. If the symbol's earnings date is outside the T-1 window, it will be skipped unless forced explicitly with `--force` (e.g. `python stage1_fetch_truth.py {TICKER} --force`).
-- Inspect `schedule_verification.confirmation_flag` in `ground_truth/{TICKER}_{DATE}_truth.json`. Confirm the exact investor relations webcast date and BMO/AMC release time via web search.
+Every Pre-Earnings (`T-1`) workflow (`python run_pre_harness.py {TICKER} {DATE}`) executes:
 
-### Stage 2: Forensic Research & Synthesis Agent
-Using `ground_truth/{TICKER}_{DATE}_truth.json` and live web search for 10-Q/10-K footnote disclosures, segment revenue breakdowns, consensus/whisper estimates, and 4-pillar sentiment:
-- If creating intermediate inspection or draft builder scripts, place them inside `{TICKER}/` (create the directory if it does not exist).
-- Map `{TICKER}`'s actual reporting segments into the sub-rows under `Total Revenue ($M)` in the 5-quarter table (do not leave Tesla segment names for non-Tesla tickers).
-- Preserve at least 20 interactive `.tip` hover tooltips with `data-tip="..."` plain-English definitions across the HTML.
-- Save `drafts/{TICKER}_{DATE}_draft.json` containing:
-  - `"header"`: `{"page_title": "...", "spot_price_num": <float>}`
-  - `"historical_table_5q_nums"`: Array of 5 dicts `[{"gross_profit": <float>, "operating_expenses": <float>, "operating_income": <float>}, ...]`
-  - `"forensic_callout"`: `{"fcf_bridge_q0_nums": {"ocf": <float>, "capex": <float>, "reported_fcf": <float>, "sbc": <float>, "finance_leases": <float>, "true_fcf": <float>}}`
-  - `"trade_matrix"`: `{"bull_target_low_num": <float>, "bear_target_high_num": <float>}`
-  - `"rendered_container_html"`: Complete inner HTML of `<div class="container">...</div>` matching `Stock_Analysis_v2.html` 1:1.
+### Layer 1: Deterministic Ground-Truth Data Mesh (`stage1_fetch_truth.py`)
+- Run `python stage1_fetch_truth.py` for batch scanning across `tickers.txt` (strictly upcoming earnings in the `T-1` window: today + next 1–2 trading days; excludes already-released yesterday prints) or `python stage1_fetch_truth.py {TICKER} {DATE}` for an individual symbol.
+- Deterministically computes and writes `ground_truth/{TICKER}_{DATE}_truth.json`:
+  - `schedule_verification`: Release date, BMO/AMC timing hint, and consensus EPS.
+  - `price_validation` & `valuation_and_market`: Cross-validated Yahoo/Google spot price, Market Cap, EV, P/E, EV/EBITDA, short float (locked if re-run on/after release date).
+  - `options_positioning`: 1-Wk ATM weekly straddle USD & implied move %, 30D IV, and Put/Call OI ratio.
+  - `historical_earnings_track_record`: Last 4 reported quarters' EPS consensus vs actual, surprise %, beat rate %, and actual 1-day post-earnings stock move % vs current options-implied move (`options_vol_regime`).
+  - `street_consensus_and_targets`: Wall Street analyst mean, median, high, and low price targets, upside %, analyst count, and recommendation key.
+  - `forensic_fcf_bridge_latest`: Pre-computed latest reported quarter (`Q-1`) FCF waterfall (`ocf`, `capex`, `reported_fcf`, `sbc`, `finance_leases`, `true_fcf`).
+  - `stitched_5q_financials`: 5 historical quarters with Q4 10-K isolation and pre-computed QoQ/YoY deltas.
 
-### Stage 3: Adversarial Critic & Deterministic Validator Loop
-Run `python stage3_validate_draft.py {TICKER} {DATE}`.
-- If `"passed": false`, fix every error listed in `errors` inside `drafts/{TICKER}_{DATE}_draft.json` and re-run Stage 3 until `"passed": true`.
-- **Mandatory Guardrails Enforced**:
-  1. **Content Depth**: `rendered_container_html` length must be $\ge 45,000$ characters.
-  2. **8-Card Institutional Structure**: Strictly verifies presence of all 8 core cards:
-     - Header banner (`header-banner`) & header strip (`header-strip`)
-     - Card 1: KPI strip (`kpi-grid` with 4 metric cards)
-     - Card 2: 5-Quarter Financial Table (`table-wrapper`, 5Q columns)
-     - Card 3: Free Cash Flow Bridge & Capital Intensity (`forensic-grid`, `waterfall-row`)
-     - Card 4: Forensic Breakdown (Segment Analysis & Capital Return)
-     - Card 5: Qualitative Audit (`audit-grid` with 4 operational tailwinds/wins & 4 execution headwinds/drags)
-     - Card 6: Peer Benchmarking / Relative Valuation Matrix
-     - Card 7: 4-Pillar Multi-Source Sentiment Gauge (`sentiment-grid`, `sentiment-meter-bar`)
-     - Card 8: Portfolio Manager Decision Matrix / 3-Scenario Trade Playbook (`scenario-grid`, `scenario-bull`, `scenario-base`, `scenario-bear`, `trade-structure`)
-  3. **Template Purity**: Explicitly rejects shorthand templates (`grid-2`, `grid-4`, `<section class="section">`).
-  4. **Interactive Tooltips**: Enforces $\ge 20$ `.tip` classes and $\ge 20$ `data-tip="..."` definitions.
-  5. **Segment Leak Prevention**: Zero foreign-ticker terminology (e.g. Tesla terms in non-TSLA reports).
-  6. **Deterministic Accounting Math**: 5Q P&L subtraction (Gross Profit - OpEx = Operating Income) and FCF waterfall bridge balance (tolerance $\le \$2.0\text{M}$).
-  7. **Prose Grounding**: Ground-truth spot price and latest OCF must appear explicitly in prose.
-  8. **PM Strike Sanity**: Bull case target > Spot Price > Bear case target.
+### Layer 2: Parallel Specialized Pre-Earnings Research Bus (`pre_agent_bus/`)
+- **Agent 2A (`Pre_KPI_Consensus_Agent`)**: `pre_agent_bus/{TICKER}_{DATE}_pre_agent2a_kpis.json`
+  - Identifies 3–5 company-specific operational KPIs that Wall Street trades on (with `Q-1 Actual`, `Q-4 YoY Baseline`, `Street Consensus Q0E`, `Buy-Side Whisper Bogey`, `Whisper vs Street Spread`, and visual bar widths).
+  - Maps `{TICKER}`'s reporting segments across all 5 historical quarters + `Q0E (Consensus)` and defines $\ge 20$ `.tip` tooltips.
+- **Agent 2B (`Pre_Guidance_Debate_Agent`)**: `pre_agent_bus/{TICKER}_{DATE}_pre_agent2b_guidance.json`
+  - **Matrix A (Table 1B-2)**: Management Prior Guidance issued in `Q-1` for upcoming `Q0` vs Current Street Consensus, 4Q Historical Beat Rate, and Executive Sandbagging / Credibility Score (`0–100`).
+  - **Matrix B (Table 1B-3)**: Forward `Q+1E` & Full-Year Guidance Bogeys Required for Re-Rating (Street Consensus Hurdle vs Buy-Side Bull Bogey vs Bear Breakdown).
+  - **Section 4B (`#row-4b-debates`)**: Top 3 Institutional Pre-Print Debates & Analyst Conference Call Focus Questions.
+- **Agent 2C (`Pre_Whisper_Sentiment_Agent`)**: `pre_agent_bus/{TICKER}_{DATE}_pre_agent2c_sentiment.json`
+  - Verifies live product & architecture releases (preventing stale training-data product naming drift).
+  - Triangulates Retail trader positioning (Reddit `r/wallstreetbets`, X/FinTwit, Threads) vs Institutional desk positioning (sell-side preview notes, hedge fund crowding, options skew) and 4-Pillar Pre-Earnings Sentiment scores.
 
-### Stage 4: Read-Only HTML Injection, Multi-Versioning & Publishing
-Run `python stage4_render_html.py {TICKER} {DATE}`.
-- **Pre-Publish Size Gatekeeper**: Verifies total rendered HTML size is $\ge 75,000$ bytes (aborts publication immediately if truncated).
-- **Automatic Multi-Versioning**: Automatically generates versioned files (`{TICKER}_T1_{DATE}_v{N}.html`) and updates the canonical latest file (`{TICKER}_T1_{DATE}.html`). A version banner is embedded at the top of the tearsheet linking directly to prior versions for gap analysis.
-- **Automatic Index Updating**: Automatically regenerates `published_reports/index.html` and root `index.html` displaying all reports, live metrics, and version comparison pills.
-- Records all version links and public tunnel URLs in `published_ledger.json`. Always populate and display these active public browser links in the final report summary.
+### Layer 3: 9-Section Pre-Earnings Synthesis & Track A + Track B Standards (`{TICKER}/build_{ticker}_draft.py` -> `drafts/{TICKER}_{DATE}_draft.json`)
+- **9 Institutional Sections**:
+  1. **Header Banner & Strip**: `T-1 PRE-EARNINGS BRIEFING`, Spot Price, Market Cap/EV, Release Date, ATM Straddle Implied Move, Consensus vs Whisper Revenue & EPS, Guidance Corridor.
+  2. **Track B Sticky Jump-Nav (`.pre-jump-nav`)**: Quick-jump pills to all 9 sections + one-click switcher to paired `T+0 Post-Earnings` tearsheet (`{TICKER}_T0_POST_{DATE}.html`).
+  3. **Row 1 (`#row-1-kpis`)**: 4 Executive KPI Cards (Cash Flow & CapEx, Profitability, Balance Sheet Fortress, Segment Mix & Multiples).
+  4. **Row 1B (`#row-1b-scorecard`)**: Pre-Release Expectations, Whisper Spread & Historical Track Record Scorecard:
+     - `.t1-setup-audit` 3-card Pre-Print Setup & Implied vs Historical Move Audit Banner.
+     - `Table 1B-1`: Headline & Company KPI Consensus vs Buy-Side Whisper Scorecard (with `.beat-bar-track` visual bars).
+     - `Table 1B-2`: Management Guidance Credibility & 4Q Historical Beat/Miss Track Record (with `.credibility-gauge-bar` 0–100 score).
+     - `Table 1B-3`: Forward `Q+1E` & FY Guidance Bogeys Required for Post-Print Multiple Expansion.
+  5. **Row 2 (`#row-2-financials`)**: 5-Quarter Historical Financials (`col-q0` on latest actual quarter) + Upcoming Quarter Consensus (`col-est` on `Q0E`).
+  6. **Row 3 (`#row-3-fcf`)**: Forensic Quality-of-Earnings & True FCF Waterfall Bridge (`OCF - CapEx - SBC - Leases = True FCF`).
+  7. **Row 4 (`#row-4-segments`) & Section 4B (`#row-4b-debates`)**: 4 Operational Tailwinds vs 4 Execution Headwinds + Top 3 Institutional Pre-Print Debates & Call Focus Questions.
+  8. **Row 5 (`#row-5-peers`) & Row 6 (`#row-6-sentiment`)**: Peer Valuation Comps + 4-Pillar Pre-Earnings Sentiment Gauge & Agent 2C Retail/Institutional Positioning Cards.
+  9. **Row 7 (`#row-7-pm-matrix`) & Footer**: 3-Scenario Hedge Fund PM Options Playbook (`Bull > Spot > Bear`) + Verbatim Ground-Truth Verification Ledger.
+
+### Layer 4: Deterministic 11-Guardrail Validator & HTML Cloner (`stage3_validate_draft.py` & `stage4_render_html.py`)
+- `python stage3_validate_draft.py {TICKER} {DATE}` enforces all **11 Guardrails** (`pre_agent_bus/` existence, $\ge 45,000$ chars, all 9 sections + `Table 1B-1..3` + `#row-4b-debates`, template purity, $\ge 20$ `.tip` tooltips, zero foreign ticker leaks, 5Q P&L math, FCF bridge math, verbatim Spot/OCF grounding, `Bull > Spot > Bear`, Track A headers & zero duplicate banners, Track B `.pre-jump-nav`, `.t1-setup-audit`, `.beat-bar-track`, `.credibility-gauge-bar`).
+- `python stage4_render_html.py {TICKER} {DATE}` enforces the **75,000-byte pre-publish gatekeeper**, generates multi-versioned tearsheets (`{TICKER}_T1_{DATE}_v{N}.html` and canonical `{TICKER}_T1_{DATE}.html`), and updates `index.html`.
+
+### Layer 5: Chief Pre-Earnings HTML Auditor & Publisher (`agent5_pre_chief_auditor.py` & `run_pre_harness.py`)
+- `python agent5_pre_chief_auditor.py {TICKER} {DATE}` cross-validates the rendered HTML against `truth.json` and all 3 `pre_agent_bus/` files, with targeted back-routing (`LAYER_1_DETERMINISTIC`, `AGENT_2A_KPIS`, `AGENT_2B_GUIDANCE`, `AGENT_2C_SENTIMENT`, `AGENT_4B_FINALIZER`), writing `audit_logs/{TICKER}_{DATE}_pre_agent5_signoff.json` (`"status": "APPROVED"`).
 
 ---
 

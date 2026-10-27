@@ -1,0 +1,82 @@
+{
+  "ticker": "NOW",
+  "earnings_date": "2026-10-28",
+  "agent": "Pre_KPI_Consensus_Agent (Agent 2A)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "upcoming_quarter_label": "Q3 2026E",
+  "latest_reported_quarter_label": "Q2 2026",
+  "headline_and_company_kpis": [
+    {
+      "metric": "Subscription Revenues ($M)",
+      "tooltip_title": "Core recurring subscription revenues generated from the Now Platform across enterprise workflows.",
+      "tooltip_def": "Subscription Revenues ($M): Wall Street consensus models $4,050M in Q3 2026E (+22.2% YoY vs $3,315M in Q3 2025); buy-side whisper targets $4,100M fueled by rapid enterprise adoption of Pro Plus and Now Assist GenAI tiers.",
+      "q_minus_1_actual": "$3,875.0M",
+      "q_minus_4_yoy_baseline": "$3,315.0M",
+      "street_consensus_q0e": "$4,050.0M",
+      "whisper_bogey_q0e": "$4,100.0M",
+      "whisper_spread_display": "+$50.0M (+1.23% Whisper Hurdle)",
+      "bar_width_pct": 84,
+      "hurdle_badge": "BULL HURDLE >$4.10B"
+    },
+    {
+      "metric": "Diluted EPS (Non-GAAP / Consensus)",
+      "tooltip_title": "Wall Street consensus Non-GAAP Diluted EPS for Q3 2026E ($1.02) vs Buy-Side Whisper ($1.08).",
+      "tooltip_def": "Diluted EPS ($): Sell-side consensus expects $1.02 per share; buy-side whisper bogeys target $1.08+ reflecting expanding subscription gross margins and strong operating leverage.",
+      "q_minus_1_actual": "$0.90",
+      "q_minus_4_yoy_baseline": "$0.96",
+      "street_consensus_q0e": "$1.02",
+      "whisper_bogey_q0e": "$1.08",
+      "whisper_spread_display": "+$0.06 (+5.88% Beat Target)",
+      "bar_width_pct": 87,
+      "hurdle_badge": "PROFITABILITY SURGE"
+    },
+    {
+      "metric": "Current Remaining Performance Obligations (cRPO) Growth (YoY %)",
+      "tooltip_title": "Contracted revenue expected to be recognized over the next 12 months, the primary leading indicator of SaaS growth.",
+      "tooltip_def": "cRPO Growth Rate: Grew +21.5% YoY in constant currency to $9.85B in Q2 2026; Street consensus models +20.5% YoY in Q3 2026E (whisper +21.5%+) as enterprise multi-year consolidations accelerate.",
+      "q_minus_1_actual": "+21.5%",
+      "q_minus_4_yoy_baseline": "+22.0%",
+      "street_consensus_q0e": "+20.5%",
+      "whisper_bogey_q0e": "+21.5%",
+      "whisper_spread_display": "+1.0% (Leading Indicator)",
+      "bar_width_pct": 89,
+      "hurdle_badge": "CORE BOOKING SPEED"
+    },
+    {
+      "metric": "Generative AI Now Assist Net New ACV ($M)",
+      "tooltip_title": "Annual contract value added specifically from generative AI Now Assist SKU upsells across ITSM, CSM, and HRSD.",
+      "tooltip_def": "Now Assist GenAI Net New ACV: Exploded past $120M net new ACV in Q2 2026, marking the fastest-ramping product family in ServiceNow history; Street targets $160M+ in Q3 2026E.",
+      "q_minus_1_actual": "$120.0M",
+      "q_minus_4_yoy_baseline": "$25.0M",
+      "street_consensus_q0e": "$160.0M",
+      "whisper_bogey_q0e": "$180.0M",
+      "whisper_spread_display": "+$20.0M (+12.5% AI Lift)",
+      "bar_width_pct": 94,
+      "hurdle_badge": "AI MONETIZATION"
+    },
+    {
+      "metric": "Enterprise Customers With >$5M in ACV (Count)",
+      "tooltip_title": "Large enterprise organizations generating more than $5 million in annualized contract value.",
+      "tooltip_def": "Large Customer ACV Base: Reached 385 enterprise accounts in Q2 2026 (+24% YoY); Street models 410 accounts in Q3 2026E as Global 2000 companies standardize on ServiceNow as their central AI operating platform.",
+      "q_minus_1_actual": "385 Accounts",
+      "q_minus_4_yoy_baseline": "310 Accounts",
+      "street_consensus_q0e": "410 Accounts",
+      "whisper_bogey_q0e": "425 Accounts",
+      "whisper_spread_display": "+15 Accounts (+3.66% Spread)",
+      "bar_width_pct": 82,
+      "hurdle_badge": "ENTERPRISE MOAT"
+    },
+    {
+      "metric": "Total Net Revenue ($M)",
+      "tooltip_title": "Consolidated quarterly revenue across Subscription and Professional Services.",
+      "tooltip_def": "Total Net Revenue ($M): Printed $3,987M in Q2 2026; Street consensus models $4,180M in Q3 2026E (+22.7% YoY) with whisper bogeys looking for $4,225M+.",
+      "q_minus_1_actual": "$3,987.0M",
+      "q_minus_4_yoy_baseline": "$3,407.0M",
+      "street_consensus_q0e": "$4,180.0M",
+      "whisper_bogey_q0e": "$4,225.0M",
+      "whisper_spread_display": "+$45.0M (+1.08% Spread)",
+      "bar_width_pct": 83,
+      "hurdle_badge": "SCALE LEADERSHIP"
+    }
+  ]
+}

@@ -1,0 +1,1784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>[v1] NOW — Pre-Earnings Forensic & Sentiment Tearsheet (Upcoming: Q3 2026 | Last Reported: Q2 2026)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0b0f19;
+      --bg-card: #111827;
+      --bg-card-elevated: #161f33;
+      --bg-table-row-alt: #0e1525;
+      --border-color: #1f2937;
+      --border-subtle: #283548;
+      --text-primary: #f9fafb;
+      --text-secondary: #d1d5db;
+      --text-muted: #9ca3af;
+      --accent-blue: #3b82f6;
+      --accent-blue-glow: rgba(59, 130, 246, 0.15);
+      --bull-green: #10b981;
+      --bull-green-bg: rgba(16, 185, 129, 0.14);
+      --bear-red: #ef4444;
+      --bear-red-bg: rgba(239, 68, 68, 0.14);
+      --warn-amber: #f59e0b;
+      --warn-amber-bg: rgba(245, 158, 11, 0.14);
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      line-height: 1.5;
+      font-size: 14px;
+      padding: 24px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1560px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* ==========================================================================
+       INTERACTIVE HOVER TOOLTIP SYSTEM (FOR METRICS & ABBREVIATIONS)
+       ========================================================================== */
+    .tip {
+      position: relative;
+      display: inline-block;
+      border-bottom: 1px dotted #60a5fa;
+      cursor: help;
+      transition: color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .tip:hover {
+      color: #93c5fd;
+      border-bottom-color: #93c5fd;
+    }
+
+    .tip::after {
+      content: attr(data-tip);
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 0;
+      width: 290px;
+      padding: 10px 12px;
+      background-color: #1e293b;
+      color: #f8fafc;
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 1.45;
+      text-align: left;
+      text-transform: none;
+      letter-spacing: normal;
+      white-space: normal;
+      border: 1px solid var(--accent-blue);
+      border-radius: 6px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.75);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(4px);
+      transition: opacity 0.16s ease, transform 0.16s ease, visibility 0.16s;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* Right-aligned tooltip modifier to prevent right-edge screen clipping */
+    .tip-right::after {
+      left: auto;
+      right: 0;
+    }
+
+    /* Bottom-aligned tooltip modifier for elements near top of page */
+    .tip-bottom::after {
+      bottom: auto;
+      top: calc(100% + 8px);
+    }
+
+    .tip:hover::after {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    /* UTILITY & BADGES */
+    .mono {
+      font-family: var(--font-mono);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+
+    .badge-bull {
+      background-color: var(--bull-green-bg);
+      color: var(--bull-green);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+    }
+
+    .badge-bear {
+      background-color: var(--bear-red-bg);
+      color: var(--bear-red);
+      border: 1px solid rgba(239, 68, 68, 0.35);
+    }
+
+    .badge-warn {
+      background-color: var(--warn-amber-bg);
+      color: var(--warn-amber);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+    }
+
+    .badge-neutral {
+      background-color: rgba(156, 163, 175, 0.12);
+      color: var(--text-secondary);
+      border: 1px solid rgba(156, 163, 175, 0.25);
+    }
+
+    .badge-blue {
+      background-color: var(--accent-blue-glow);
+      color: #60a5fa;
+      border: 1px solid rgba(59, 130, 246, 0.4);
+    }
+
+    /* CARD SYSTEM */
+    .card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--border-color);
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-title-accent {
+      width: 4px;
+      height: 16px;
+      background-color: var(--accent-blue);
+      border-radius: 2px;
+      display: inline-block;
+    }
+
+    .card-subtitle {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    /* HEADER BANNER */
+    .header-banner {
+      background: linear-gradient(135deg, #111827 0%, #0f172a 65%, #172554 100%);
+      border: 1px solid var(--border-subtle);
+      border-left: 4px solid var(--accent-blue);
+      border-radius: 10px;
+      padding: 22px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .helper-bar {
+      background-color: rgba(59, 130, 246, 0.12);
+      border: 1px solid rgba(59, 130, 246, 0.35);
+      border-radius: 6px;
+      padding: 8px 14px;
+      font-size: 12.5px;
+      color: #bfdbfe;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .ticker-identity {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .ticker-line {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .ticker-symbol {
+      font-family: var(--font-mono);
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.4);
+      padding: 2px 12px;
+      border-radius: 6px;
+    }
+
+    .company-name {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .sector-tag {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .header-price-block {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .price-box {
+      text-align: right;
+    }
+
+    .price-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    .price-value {
+      font-family: var(--font-mono);
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .header-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(195px, 1fr));
+      gap: 12px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .strip-item {
+      background-color: rgba(11, 15, 25, 0.55);
+      border: 1px solid var(--border-color);
+      padding: 10px 14px;
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .strip-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .strip-val {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    /* ROW 1: 4 KPI CARDS */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .kpi-metric-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .kpi-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.07);
+      gap: 8px;
+    }
+
+    .kpi-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .kpi-name {
+      font-size: 12.5px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .kpi-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 2px;
+    }
+
+    .kpi-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 4px;
+    }
+
+    .kpi-val {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .delta-pair {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    /* ROW 2: HISTORICAL TABLE */
+    .table-wrapper {
+      overflow-x: auto;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px;
+    }
+
+    th {
+      background-color: #161f33;
+      color: var(--text-secondary);
+      font-weight: 600;
+      text-align: right;
+      padding: 11px 12px;
+      border-bottom: 1px solid var(--border-subtle);
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+
+    th:first-child {
+      text-align: left;
+      font-family: var(--font-sans);
+      min-width: 265px;
+      position: sticky;
+      left: 0;
+      z-index: 2;
+      background-color: #161f33;
+    }
+
+    td {
+      padding: 9px 12px;
+      border-bottom: 1px solid var(--border-color);
+      text-align: right;
+      font-family: var(--font-mono);
+      color: var(--text-primary);
+      white-space: nowrap;
+    }
+
+    td:first-child {
+      text-align: left;
+      font-family: var(--font-sans);
+      font-weight: 500;
+      color: var(--text-secondary);
+      position: sticky;
+      left: 0;
+      background-color: var(--bg-card);
+      z-index: 1;
+    }
+
+    tr:nth-child(even) td {
+      background-color: var(--bg-table-row-alt);
+    }
+
+    tr:nth-child(even) td:first-child {
+      background-color: var(--bg-table-row-alt);
+    }
+
+    tr.section-divider td {
+      background-color: rgba(59, 130, 246, 0.09);
+      color: #93c5fd;
+      font-family: var(--font-sans);
+      font-weight: 700;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      padding: 7px 12px;
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .col-q0 {
+      background-color: rgba(59, 130, 246, 0.06) !important;
+      font-weight: 700;
+    }
+
+    .col-est {
+      background-color: rgba(245, 158, 11, 0.05) !important;
+      color: #fde68a;
+    }
+
+    /* OUTLIER CELL BORDERS */
+    .outlier-red {
+      border: 1.5px solid var(--bear-red) !important;
+      background-color: rgba(239, 68, 68, 0.12) !important;
+      color: #fca5a5 !important;
+      font-weight: 700;
+      position: relative;
+    }
+
+    .outlier-amber {
+      border: 1.5px solid var(--warn-amber) !important;
+      background-color: rgba(245, 158, 11, 0.12) !important;
+      color: #fcd34d !important;
+      font-weight: 700;
+      position: relative;
+    }
+
+    /* ROW 3: FORENSIC CALLOUT */
+    .forensic-grid {
+      display: grid;
+      grid-template-columns: 1.35fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 1080px) {
+      .forensic-grid,
+      .split-2col,
+      .sentiment-grid {
+        grid-template-columns: 1fr !important;
+      }
+    }
+
+    .forensic-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .forensic-item {
+      background-color: rgba(11, 15, 25, 0.6);
+      border: 1px solid var(--border-color);
+      border-left: 3px solid var(--warn-amber);
+      border-radius: 6px;
+      padding: 13px 15px;
+    }
+
+    .forensic-item.critical {
+      border-left-color: var(--bear-red);
+    }
+
+    .forensic-item-title {
+      font-weight: 700;
+      font-size: 13.5px;
+      color: var(--text-primary);
+      margin-bottom: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .forensic-item p {
+      color: var(--text-secondary);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .fcf-bridge-box {
+      background-color: #0d1322;
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* ROW 4 & ROW 5: 2-COLUMN SPLIT CARDS */
+    .split-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .audit-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .audit-point {
+      padding: 12px 14px;
+      border-radius: 6px;
+      background-color: rgba(11, 15, 25, 0.55);
+      border: 1px solid var(--border-color);
+    }
+
+    .audit-point-bull {
+      border-left: 3px solid var(--bull-green);
+    }
+
+    .audit-point-bear {
+      border-left: 3px solid var(--bear-red);
+    }
+
+    .audit-point-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 5px;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .audit-point-title {
+      font-weight: 700;
+      font-size: 13.5px;
+      color: var(--text-primary);
+    }
+
+    .audit-point p {
+      font-size: 12.8px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* CATALYST ITEMS */
+    .catalyst-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .catalyst-card {
+      background-color: rgba(11, 15, 25, 0.55);
+      border: 1px solid var(--border-color);
+      border-left: 3px solid var(--accent-blue);
+      border-radius: 6px;
+      padding: 12px 14px;
+    }
+
+    /* SENTIMENT ANALYSIS CARD */
+    .sentiment-overview-banner {
+      background: linear-gradient(90deg, rgba(239, 68, 68, 0.12) 0%, rgba(245, 158, 11, 0.12) 50%, rgba(16, 185, 129, 0.12) 100%);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .sentiment-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .sentiment-source-card {
+      background-color: #0d1322;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .sentiment-meter-wrap {
+      display: flex;
+       flex-direction: column;
+      gap: 5px;
+      margin: 4px 0;
+    }
+
+    .sentiment-bar-bg {
+      width: 100%;
+      height: 8px;
+      background-color: #1f2937;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .sentiment-bar-fill {
+      height: 100%;
+      border-radius: 4px;
+    }
+
+    /* ROW 7: TRADE MATRIX */
+    .playbook-setup-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+      background-color: rgba(11, 15, 25, 0.65);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 14px;
+    }
+
+    .scenario-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 16px;
+    }
+
+    .scenario-card {
+      background-color: #0d1322;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .scenario-bull {
+      border-top: 4px solid var(--bull-green);
+    }
+
+    .scenario-base {
+      border-top: 4px solid var(--warn-amber);
+    }
+
+    .scenario-bear {
+      border-top: 4px solid var(--bear-red);
+    }
+
+    .scenario-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 800;
+      font-size: 15px;
+    }
+
+    .trigger-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 12.8px;
+      color: var(--text-secondary);
+    }
+
+    .trigger-list li {
+      position: relative;
+      padding-left: 14px;
+    }
+
+    .trigger-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--accent-blue);
+      font-weight: bold;
+    }
+
+    .trade-structure {
+      margin-top: auto;
+      padding: 11px 12px;
+      background-color: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      font-size: 12px;
+    }
+
+    .trade-structure strong {
+      display: block;
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .footer-meta {
+      text-align: center;
+      font-size: 11.5px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      padding: 10px 0 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    
+<!-- 1. HEADER BANNER -->
+    <header class="header-banner">
+      <div class="helper-bar">
+        <span>💡 <strong>Interactive Definitions Enabled:</strong> Hover your mouse over any <span class="tip tip-bottom" title="Plain-English definitions pop up automatically whenever you hover over any dotted-underlined term." data-tip="Plain-English definitions pop up automatically whenever you hover over any dotted-underlined financial metric or abbreviation.">dotted-underlined metric or abbreviation</span> for an instant plain-English explanation.</span>
+        <span class="mono" style="font-size:11.5px;color:#93c5fd;">Last Reported Quarter: <strong>Q2 2026 (Ended June 30, 2026)</strong> • Upcoming Release: <strong>Q3 2026 (Ended Sep 30, 2026)</strong></span>
+      </div>
+
+      <div class="header-top">
+        <div class="ticker-identity">
+          <div class="ticker-line">
+            <span class="ticker-symbol">NOW</span>
+            <h1 class="company-name">ServiceNow, Inc.</h1>
+            <span class="badge badge-bull">ENTERPRISE AI &amp; WORKFLOW CLOUD LEADER</span>
+            <span class="badge badge-blue"><span class="tip tip-bottom" title="One trading day before official quarterly earnings release." data-tip="T-1 (Time Minus 1 Day): Analysis prepared one trading session prior to the upcoming Q3 2026 earnings release on Wednesday, Oct 28, 2026.">T-1</span> PRE-EARNINGS BRIEFING</span>
+          </div>
+          <div class="sector-tag">NYSE • Technology, Enterprise Application Software &amp; Cloud Automation • <span class="tip tip-bottom" title="Central Index Key: Unique 10-digit identifier assigned by the U.S. SEC to all public company filings." data-tip="Central Index Key (CIK): The unique 10-digit identifier assigned by the U.S. Securities and Exchange Commission (SEC) to track ServiceNow's official regulatory filings.">CIK</span>: 0001373715</div>
+        </div>
+        <div class="header-price-block">
+          <div class="price-box">
+            <div class="price-label">Spot Price (Oct 2026)</div>
+            <div class="price-value">$157.00 <span class="badge badge-bull">+62.8% <span class="tip tip-right tip-bottom" title="Year-To-Date: Percentage price change since January 1, 2026." data-tip="Year-To-Date (YTD): Total percentage return of the stock from January 1 of the current calendar year (2026) to today.">YTD</span></span></div>
+          </div>
+          <div class="price-box">
+            <div class="price-label"><span class="tip tip-right tip-bottom" title="Market Capitalization: Total value of all outstanding shares (Share Price × Diluted Shares)." data-tip="Market Capitalization: Total equity value of the company calculated by multiplying current share price ($157.00) by total diluted common shares (~1,034M).">Market Cap</span> / <span class="tip tip-right tip-bottom" title="Enterprise Value: Market Cap plus Total Debt minus Cash. Shows the true takeover cost of the business." data-tip="Enterprise Value (EV): Market Cap ($162.31B) + Total Long-Term Debt / Leases minus Liquid Reserves = $168.13B.">EV</span></div>
+            <div class="price-value">$162.31B / $168.13B</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="header-strip">
+        <div class="strip-item">
+          <span class="strip-label">Upcoming Q3 2026 Release Date</span>
+          <span class="strip-val">Wed, Oct 28, 2026 • <span class="tip" title="After Market Close: Earnings are released right after the 4:00 PM ET stock market close." data-tip="After Market Close (AMC): The company releases its quarterly results after market close (~4:05 PM Eastern Time).">AMC</span> (4:05 PM ET)</span>
+          <span class="kpi-sub">Earnings Call &amp; Webcast: 5:00 PM ET (2:00 PM PT) hosted by Bill McDermott &amp; Gina Mastantuono on investor.servicenow.com</span>
+        </div>
+        <div class="strip-item">
+          <span class="strip-label"><span class="tip" title="The percentage stock move (up or down) that the options market is pricing in for the day after earnings." data-tip="Options-Implied Move: Derived from At-The-Money (ATM) weekly option straddle prices. Reflects expected post-earnings volatility.">Options-Implied Move</span> (1-Wk <span class="tip" title="At-The-Money: Options with a strike price equal to the current stock price." data-tip="At-The-Money (ATM): Options contracts whose strike price is closest to current trading price ($157.00).">ATM</span>)</span>
+          <span class="strip-val" style="color: var(--warn-amber);">±10.20% (±$16.02 / sh)</span>
+          <span class="kpi-sub">30D <span class="tip" title="Implied Volatility: Market's forecast of annualized stock price volatility derived from option prices." data-tip="Implied Volatility (IV): The options market's annualized volatility expectation.">IV</span>: 108.5% | Put/Call OI Ratio: 1.02x (Balanced Hedging Skew)</span>
+        </div>
+        <div class="strip-item">
+          <span class="strip-label">Q3 2026E <span class="tip" title="Wall Street Consensus: The average forecast of equity research analysts covering ServiceNow." data-tip="Consensus Subscription Revenue: The average subscription forecast published by Wall Street sell-side analysts for Q3 2026 ($4,050M).">Consensus Subscription Revenue</span> / <span class="tip" title="Whisper Number: The unofficial expectation among hedge funds and institutional traders." data-tip="Whisper Number: Unofficial top-line expectations among buy-side institutional investors ($4,100M).">Whisper</span></span>
+          <span class="strip-val">$4,050M / $4,100M</span>
+          <span class="kpi-sub">Total Revenue Est: $4,180M | +22.7% <span class="tip" title="Year-over-Year: Comparison against the exact same quarter last year (Q3 2025)." data-tip="Year-over-Year (YoY): Compares performance against the same quarter one year prior (Q3 2026E vs Q3 2025: $3,407M).">YoY</span> vs Q3 2025</span>
+        </div>
+        <div class="strip-item">
+          <span class="strip-label">Q3 2026E Consensus <span class="tip" title="Earnings Per Share: Net profit divided by total diluted shares outstanding." data-tip="Earnings Per Share (EPS): Non-GAAP diluted earnings per share consensus.">EPS</span> / Whisper</span>
+          <span class="strip-val">$1.02 <span class="tip" title="Non-GAAP Diluted EPS Consensus." data-tip="Consensus EPS: Non-GAAP diluted earnings per share expectation ($1.02 vs $1.08 whisper).">Consensus</span> / $1.08 Whisper</span>
+          <span class="kpi-sub">Street Range: $0.98 to $1.06 | Prior Q2 Actual: $0.90</span>
+        </div>
+        <div class="strip-item">
+          <span class="strip-label">cRPO &amp; Full-Year <span class="tip tip-right" title="Current Remaining Performance Obligations constant-currency growth target and full-year Free Cash Flow margin guidance." data-tip="cRPO &amp; FCF Margin Guidance: Guided to 20.0% constant-currency cRPO growth and 31.0% full-year FCF margin.">Guidance Corridor</span></span>
+          <span class="strip-val" style="color: var(--bull-green);">20.0% cRPO / 31.0% FCF</span>
+          <span class="kpi-sub">Rule of 50+ Enterprise Performance • Now Assist GenAI Fast-Tracking Enterprise Upgrades</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- TRACK B: STICKY INTERACTIVE PRE-EARNINGS SECTION JUMP-NAV -->
+    <nav class="pre-jump-nav" style="position: sticky; top: 8px; z-index: 90; background: rgba(15, 23, 42, 0.92); backdrop-filter: blur(10px); border: 1px solid rgba(59, 130, 246, 0.35); border-radius: 10px; padding: 8px 14px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.4);">
+      <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+        <span style="font-size: 11px; font-weight: 800; color: #60a5fa; text-transform: uppercase; letter-spacing: 0.06em; margin-right: 4px;">⚡ Jump To:</span>
+        <a href="#row-1-kpis" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">1. Q2 KPIs</a>
+        <a href="#row-1b-scorecard" style="font-size: 11.5px; color: #60a5fa; font-weight: 700; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(59, 130, 246, 0.16); border: 1px solid rgba(59, 130, 246, 0.4);">1B. Whisper &amp; Track Record Scorecard</a>
+        <a href="#row-2-financials" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">2. 5Q Table + Q3E</a>
+        <a href="#row-3-fcf" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">3. FCF Bridge</a>
+        <a href="#row-4-segments" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">4. Tailwinds/Drags</a>
+        <a href="#row-4b-debates" style="font-size: 11.5px; color: #93c5fd; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(59, 130, 246, 0.14); border: 1px solid rgba(59, 130, 246, 0.3);">4B. Wall St Debates</a>
+        <a href="#row-5-peers" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">5. Peers</a>
+        <a href="#row-6-sentiment" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">6. Sentiment &amp; Pulse</a>
+        <a href="#row-7-pm-matrix" style="font-size: 11.5px; color: #fcd34d; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(245, 158, 11, 0.14); border: 1px solid rgba(245, 158, 11, 0.3);">7. PM Trade Matrix</a>
+      </div>
+      <a href="NOW_T0_POST_2026-10-28.html" style="font-size: 11.5px; font-weight: 700; color: #34d399; text-decoration: none; padding: 5px 12px; border-radius: 6px; background: rgba(16, 185, 129, 0.2); border: 1px solid rgba(16, 185, 129, 0.45); display: flex; align-items: center; gap: 6px;">
+        ⇄ Compare Paired T+0 Post-Earnings Tearsheet
+      </a>
+    </nav>
+
+    <!-- 2. ROW 1: TOP KPI CARDS (4 CARDS) -->
+    <section class="kpi-grid" id="row-1-kpis">
+      <!-- CARD A: CASH FLOW & CAPITAL INTENSITY -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><span class="card-title-accent"></span>A. Cash Flow &amp; FCF Conversion (Q2 2026)</div>
+          <span class="badge badge-bull">31% FULL-YEAR FCF MARGIN TARGET</span>
+        </div>
+        <div class="kpi-metric-list">
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Operating Cash Flow: Actual cash generated from subscription customer collections." data-tip="Operating Cash Flow (OCF): $587.0M generated in Q2 2026.">Operating Cash Flow</span> (Q2 2026)</span>
+              <span class="kpi-sub">Total OCF Generated: $587.0M (Seasonal trough quarter / 587 exact)</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">$587M</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-neutral">+4.2% YoY</span>
+                <span class="delta-pill delta-neg">-73.5% QoQ (Seasonal)</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Capital Expenditures: Real estate and data center hosting infrastructure investments." data-tip="CapEx: Physical compute infrastructure investments ($114.0M in Q2 2026).">Capital Expenditures</span> (Q2 2026)</span>
+              <span class="kpi-sub">Data Center &amp; Hosting: $114.0M</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">$114.0M</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-neutral">+2.7% QoQ</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Reported Free Cash Flow: Operating Cash Flow ($587.0M) minus CapEx ($114.0M)." data-tip="Reported Free Cash Flow: $473.0M in Q2 2026.">Reported Free Cash Flow</span> (Q2 2026)</span>
+              <span class="kpi-sub">Reported FCF: $473.0M</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">$473.0M</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-neutral">+4.6% YoY</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="True Free Cash Flow: Reported FCF ($473.0M) minus SBC ($652.0M) minus Leases ($0.0M)." data-tip="True Free Cash Flow: -$179.0M economic cash in Q2 2026 after deducting share-based compensation.">True FCF (Post-SBC)</span> (Q2 2026)</span>
+              <span class="kpi-sub">True Economic Cash Flow: -$179.0M</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">-$179.0M</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-neg">-12.5% YoY</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD B: PROFITABILITY & MARGIN STRUCTURE -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><span class="card-title-accent"></span>B. Operating Profitability &amp; Scale Efficiency (Q2 2026)</div>
+          <span class="badge badge-bull">EXPANDING SAAS MARGINS</span>
+        </div>
+        <div class="kpi-metric-list">
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Gross Profit: Total revenue minus cost of hosting and customer support." data-tip="Gross Profit: Reached $2,818.0M in Q2 2026 (70.7% gross margin).">Gross Profit</span> (Q2 2026)</span>
+              <span class="kpi-sub">Consolidated Gross Profit: $2,818.0M</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">$2,818.0M</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-bull">+13.1% YoY</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Operating Income: Gross profit ($2818M) minus total OpEx ($2656M)." data-tip="Operating Income: Printed $162.0M GAAP in Q2 2026 (over 28% Non-GAAP operating margin).">Operating Income (EBIT)</span></span>
+              <span class="kpi-sub">GAAP Operating Profit: $162.0M</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">$162.0M</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-neg">-67.8% QoQ</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="GAAP Net Income: Consolidated bottom-line net profit." data-tip="GAAP Net Income: $298.0M in Q2 2026.">GAAP Net Income</span> (Q2 2026)</span>
+              <span class="kpi-sub">Diluted Non-GAAP EPS: $0.90</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">$298.0M</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-neg">-22.6% YoY</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Research &amp; Development: Core software engineering investment in Now Platform and GenAI foundation." data-tip="R&amp;D Spend: $720.0M in Q2 2026 (18.1% of Revenue).">R&amp;D Innovation Investment</span></span>
+              <span class="kpi-sub">R&amp;D Spend: $720.0M (18.1% of Rev)</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">$720.0M</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-neutral">+12.5% QoQ</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD C: BALANCE SHEET FORTRESS & LIQUIDITY -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><span class="card-title-accent"></span>C. Balance Sheet Fortress &amp; Capital Structure (Q2 2026)</div>
+          <span class="badge badge-bull">PRISTINE SOLVENCY</span>
+        </div>
+        <div class="kpi-metric-list">
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Liquid Cash &amp; Short-Term Investments: Capital available for operations." data-tip="Liquid Reserves: ~$5.2B in cash, equivalents, and short-term investments as of June 30, 2026.">Cash &amp; Liquid Investments</span></span>
+              <span class="kpi-sub">Liquid Fortress: ~$5.2B</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">~$5.2B</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-bull">STRONG BUFFER</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Total Debt: Notes and borrowings." data-tip="Total Debt: ~$1.5B in senior notes, comfortably covered by liquid reserves.">Total Debt Obligations</span></span>
+              <span class="kpi-sub">Senior Notes: ~$1.5B (Net Cash: +$3.7B)</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">~$1.5B</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-bull">PRISTINE NET CASH</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Stockholders' Equity: Total assets minus total liabilities." data-tip="Stockholders' Equity: ~$9.1B in net equity value as of June 30, 2026.">Stockholders' Equity</span> (Q2 2026)</span>
+              <span class="kpi-sub">Equity Base: ~$9.1B</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">~$9.1B</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-bull">+22.4% YoY</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Short Interest: Percentage of freely floating shares sold short by bearish funds." data-tip="Short Float: 2.87% of float held short, showing minimal short seller pressure.">Short Percent of Float</span></span>
+              <span class="kpi-sub">Short Float: 2.87% (Low Short Interest)</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">2.87%</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-bull">LOW SHORT SQUEEZE</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD D: SEGMENT MIX & OPERATIONAL KPIS -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><span class="card-title-accent"></span>D. Segment Breakdown &amp; Cloud Trajectory (Q2 2026)</div>
+          <span class="badge badge-bull">SUBSCRIPTION +24.6% YOY</span>
+        </div>
+        <div class="kpi-metric-list">
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Subscription Revenue: Core recurring workflow software licenses." data-tip="Subscription Revenue: $3,875.0M in Q2 2026 (97.2% of Total Revenue).">Subscription Revenues</span></span>
+              <span class="kpi-sub">Core Platform Subscriptions: $3,875.0M (+24.6% YoY)</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">$3,875.0M</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-bull">+5.9% QoQ</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Professional Services: Implementation consulting and educational services." data-tip="Professional Services: $112.0M in Q2 2026.">Professional Services &amp; Other</span></span>
+              <span class="kpi-sub">Implementation Consulting: $112.0M</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">$112.0M</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-neutral">+1.8% QoQ</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="cRPO: Current Remaining Performance Obligations contracted for next 12 months." data-tip="cRPO: $9.85B in Q2 2026 (+21.5% YoY in constant currency).">Current RPO (cRPO)</span> (Q2 2026)</span>
+              <span class="kpi-sub">Contracted Backlog: $9.85B (+21.5% YoY CC)</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">$9.85B</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-bull">+21.5% YoY CC</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Wall Street Target Price: Mean 12-month target from sell-side analysts." data-tip="Analyst Mean Price Target: $156.54 across 46 analysts (High: $266.00).">Wall Street Target Price</span></span>
+              <span class="kpi-sub">Mean Target: $156.54 (High: $266.00 / Low: $72.00)</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">$156.54</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-neutral">AT VALUATION</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. ROW 1B: PRE-RELEASE EXPECTATIONS, WHISPER SPREAD & HISTORICAL SCORECARD -->
+    <section class="card" id="row-1b-scorecard" style="margin-bottom: 24px;">
+      <div class="card-header">
+        <div class="card-title"><span class="card-title-accent"></span>Row 1B: Pre-Release Expectations, Whisper Spread &amp; Track Record Scorecard</div>
+        <span class="badge badge-bull">Q3 2026E PRE-PRINT AUDIT</span>
+      </div>
+
+      <!-- 3-CARD SETUP AUDIT BANNER -->
+      <div class="t1-setup-audit" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-bottom: 18px; padding: 14px; background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(59, 130, 246, 0.25); border-radius: 8px;">
+        <div style="border-left: 3px solid #3b82f6; padding-left: 10px;">
+          <div style="font-size: 11px; text-transform: uppercase; color: #94a3b8; font-weight: 700;">Pre-Print Options Volatility Regime</div>
+          <div style="font-size: 16px; font-weight: 800; color: #60a5fa; margin: 2px 0;">±10.20% (±$16.02)</div>
+          <div style="font-size: 11.5px; color: #cbd5e1;">1-Wk ATM Straddle Implied Move | 30D IV at 108.5% (Overpriced vs History)</div>
+        </div>
+        <div style="border-left: 3px solid #10b981; padding-left: 10px;">
+          <div style="font-size: 11px; text-transform: uppercase; color: #94a3b8; font-weight: 700;">Wall Street Consensus vs. Whisper</div>
+          <div style="font-size: 16px; font-weight: 800; color: #34d399; margin: 2px 0;">$4,050M Consensus vs. $4,100M Whisper</div>
+          <div style="font-size: 11.5px; color: #cbd5e1;">Subscription Rev Hurdle: $4.05B | EPS: $1.02 Consensus vs. $1.08 Whisper</div>
+        </div>
+        <div style="border-left: 3px solid #f59e0b; padding-left: 10px;">
+          <div style="font-size: 11px; text-transform: uppercase; color: #94a3b8; font-weight: 700;">Executive Sandbagging &amp; Credibility</div>
+          <div style="font-size: 16px; font-weight: 800; color: #fcd34d; margin: 2px 0;">89 / 100 Score</div>
+          <div style="font-size: 11.5px; color: #cbd5e1;">Unbroken Subscription Revenue Beat Record | Rule of 50+ Performance</div>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 12px; font-size: 13px; color: #94a3b8; font-family: monospace;">
+        <strong>Table 1B-1:</strong> HEADLINE &amp; OPERATIONAL KPI CONSENSUS VS. BUY-SIDE WHISPER SCORECARD
+      </div>
+      <div class="table-wrapper" style="margin-bottom: 20px;">
+        <table class="table-financials">
+          <thead>
+            <tr>
+              <th>Operational / Financial Metric</th>
+              <th>Q2 2026 Actual</th>
+              <th>Q3 2025 YoY Baseline</th>
+              <th class="col-q0">Street Consensus Q3E</th>
+              <th>Buy-Side Whisper Bogey</th>
+              <th>Whisper vs. Street Spread</th>
+              <th>Institutional Hurdle Badge</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr>
+                <td><span class="tip" title="Core recurring subscription revenues generated from the Now Platform across enterprise workflows." data-tip="Subscription Revenues ($M): Wall Street consensus models $4,050M in Q3 2026E (+22.2% YoY vs $3,315M in Q3 2025); buy-side whisper targets $4,100M fueled by rapid enterprise adoption of Pro Plus and Now Assist GenAI tiers.">Subscription Revenues ($M)</span></td>
+                <td>$3,875.0M</td>
+                <td>$3,315.0M</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">$4,050.0M</td>
+                <td style="font-weight:700; color: #34d399;">$4,100.0M</td>
+                <td>
+                  <span class="badge badge-bull">+$50.0M (+1.23% Whisper Hurdle)</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div style="width:84%; height:100%; background:linear-gradient(90deg, #3b82f6, #10b981);"></div></div>
+                </td>
+                <td><span class="badge badge-blue">BULL HURDLE >$4.10B</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Wall Street consensus Non-GAAP Diluted EPS for Q3 2026E ($1.02) vs Buy-Side Whisper ($1.08)." data-tip="Diluted EPS ($): Sell-side consensus expects $1.02 per share; buy-side whisper bogeys target $1.08+ reflecting expanding subscription gross margins and strong operating leverage.">Diluted EPS (Non-GAAP / Consensus)</span></td>
+                <td>$0.90</td>
+                <td>$0.96</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">$1.02</td>
+                <td style="font-weight:700; color: #34d399;">$1.08</td>
+                <td>
+                  <span class="badge badge-bull">+$0.06 (+5.88% Beat Target)</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div style="width:87%; height:100%; background:linear-gradient(90deg, #3b82f6, #10b981);"></div></div>
+                </td>
+                <td><span class="badge badge-blue">PROFITABILITY SURGE</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Contracted revenue expected to be recognized over the next 12 months, the primary leading indicator of SaaS growth." data-tip="cRPO Growth Rate: Grew +21.5% YoY in constant currency to $9.85B in Q2 2026; Street consensus models +20.5% YoY in Q3 2026E (whisper +21.5%+) as enterprise multi-year consolidations accelerate.">Current Remaining Performance Obligations (cRPO) Growth (YoY %)</span></td>
+                <td>+21.5%</td>
+                <td>+22.0%</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">+20.5%</td>
+                <td style="font-weight:700; color: #34d399;">+21.5%</td>
+                <td>
+                  <span class="badge badge-bull">+1.0% (Leading Indicator)</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div style="width:89%; height:100%; background:linear-gradient(90deg, #3b82f6, #10b981);"></div></div>
+                </td>
+                <td><span class="badge badge-blue">CORE BOOKING SPEED</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Annual contract value added specifically from generative AI Now Assist SKU upsells across ITSM, CSM, and HRSD." data-tip="Now Assist GenAI Net New ACV: Exploded past $120M net new ACV in Q2 2026, marking the fastest-ramping product family in ServiceNow history; Street targets $160M+ in Q3 2026E.">Generative AI Now Assist Net New ACV ($M)</span></td>
+                <td>$120.0M</td>
+                <td>$25.0M</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">$160.0M</td>
+                <td style="font-weight:700; color: #34d399;">$180.0M</td>
+                <td>
+                  <span class="badge badge-bull">+$20.0M (+12.5% AI Lift)</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div style="width:94%; height:100%; background:linear-gradient(90deg, #3b82f6, #10b981);"></div></div>
+                </td>
+                <td><span class="badge badge-blue">AI MONETIZATION</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Large enterprise organizations generating more than $5 million in annualized contract value." data-tip="Large Customer ACV Base: Reached 385 enterprise accounts in Q2 2026 (+24% YoY); Street models 410 accounts in Q3 2026E as Global 2000 companies standardize on ServiceNow as their central AI operating platform.">Enterprise Customers With >$5M in ACV (Count)</span></td>
+                <td>385 Accounts</td>
+                <td>310 Accounts</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">410 Accounts</td>
+                <td style="font-weight:700; color: #34d399;">425 Accounts</td>
+                <td>
+                  <span class="badge badge-bull">+15 Accounts (+3.66% Spread)</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div style="width:82%; height:100%; background:linear-gradient(90deg, #3b82f6, #10b981);"></div></div>
+                </td>
+                <td><span class="badge badge-blue">ENTERPRISE MOAT</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Consolidated quarterly revenue across Subscription and Professional Services." data-tip="Total Net Revenue ($M): Printed $3,987M in Q2 2026; Street consensus models $4,180M in Q3 2026E (+22.7% YoY) with whisper bogeys looking for $4,225M+.">Total Net Revenue ($M)</span></td>
+                <td>$3,987.0M</td>
+                <td>$3,407.0M</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">$4,180.0M</td>
+                <td style="font-weight:700; color: #34d399;">$4,225.0M</td>
+                <td>
+                  <span class="badge badge-bull">+$45.0M (+1.08% Spread)</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div style="width:83%; height:100%; background:linear-gradient(90deg, #3b82f6, #10b981);"></div></div>
+                </td>
+                <td><span class="badge badge-blue">SCALE LEADERSHIP</span></td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="margin-bottom: 12px; font-size: 13px; color: #94a3b8; font-family: monospace;">
+        <strong>Table 1B-2:</strong> MANAGEMENT GUIDANCE CREDIBILITY &amp; HISTORICAL TRACK RECORD
+      </div>
+      <div class="credibility-gauge-bar" style="height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; margin-bottom: 12px; overflow: hidden;">
+        <div style="width: 89%; height: 100%; background: linear-gradient(90deg, #3b82f6, #10b981);"></div>
+      </div>
+      <div class="table-wrapper" style="margin-bottom: 20px;">
+        <table class="table-financials">
+          <thead>
+            <tr>
+              <th>Guidance Metric / Dimension</th>
+              <th>Prior Q2 Guidance for Q3</th>
+              <th>Current Street Consensus</th>
+              <th>Historical Milestone Track Record</th>
+              <th>Variance &amp; Sandbagging Analysis</th>
+              <th>Credibility Grade</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr>
+                <td><span class="tip" title="Official subscription revenue guidance range issued by management in Q2 2026." data-tip="Q3 2026 Subscription Guidance: Management guided to $4,020M–$4,060M ($4,040M midpoint); current Street consensus models $4,050M, with buy-side whisper demanding $4,090M–$4,110M.">Q3 2026E Subscription Revenue Guidance Corridor</span></td>
+                <td>$4,020M – $4,060M ($4,040M Midpoint)</td>
+                <td style="font-weight:600; color: #93c5fd;">$4,050.0M Consensus ($4,100.0M Whisper)</td>
+                <td style="font-weight:600; color: #34d399;">4 / 4 Subscription Revenue Beats</td>
+                <td>CEO Bill McDermott and CFO Gina Mastantuono have an unbroken multi-year track record of beating subscription revenue guidance midpoints by 1.0–2.0% every quarter.</td>
+                <td><span class="badge badge-bull">FLAWLESS GUIDANCE EXECUTION</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Management's official constant-currency cRPO growth guidance for the upcoming quarter." data-tip="cRPO Guidance Hurdle: Guided to 20.0% constant-currency growth; Street models 20.5% with whisper looking for 21.0%+.">Q3 2026E cRPO Constant Currency Growth Guidance (20.0% Hurdle)</span></td>
+                <td>20.0% Constant-Currency Growth</td>
+                <td style="font-weight:600; color: #93c5fd;">20.5% Consensus (21.5% Whisper)</td>
+                <td style="font-weight:600; color: #34d399;">Consistently Exceeded cRPO Targets</td>
+                <td>ServiceNow has maintained >20% cRPO growth despite macroeconomic enterprise IT scrutiny, demonstrating mission-critical platform status.</td>
+                <td><span class="badge badge-bull">MISSION-CRITICAL RESILIENCE</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Management full-year FCF margin target envelope." data-tip="FCF Margin Target: Reaffirmed full-year 2026 Free Cash Flow margin target of 31.0%, reflecting strong seasonal Q4 cash collections.">Full-Year 2026 Free Cash Flow Margin Guidance (31.0% Target)</span></td>
+                <td>31.0% Full-Year FCF Margin Target</td>
+                <td style="font-weight:600; color: #93c5fd;">31.2% Consensus (Whisper >32.0%)</td>
+                <td style="font-weight:600; color: #34d399;">Rule of 50+ Performance</td>
+                <td>ServiceNow is one of the only enterprise software companies operating at a 20%+ growth rate with >30% free cash flow margins (Rule of 50+ metric).</td>
+                <td><span class="badge badge-bull">TOP-DECILE CASH ENGINE</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Deterministic 4-quarter historical EPS surprise and 1-day post-earnings stock move from Stage 1." data-tip="4Q Historical Track Record: Over the last 4 quarters, NOW delivered a 75.0% beat rate (1 meet) with an average EPS surprise of +5.59%. Average 1-day post-earnings move was ±8.47% (-3.69%, -17.75%, -9.94%, +2.52%), compared to current weekly straddle implied move of ±10.20% (±$16.02/sh).">4-Quarter Historical EPS Surprise & 1-Day Stock Reaction Track Record</span></td>
+                <td>Last 4Q Moves: -3.69%, -17.75%, -9.94%, +2.52%</td>
+                <td style="font-weight:600; color: #93c5fd;">Current ATM Straddle: ±10.20% (±$16.02/sh)</td>
+                <td style="font-weight:600; color: #34d399;">3 / 4 EPS Beats (75.0% Beat Rate)</td>
+                <td>Weekly straddles price ±10.20% (108.51% IV), reflecting elevated event risk after a sharp -17.75% selloff in Q1 2026, though Q2 post-earnings reaction stabilized to -3.69%.</td>
+                <td><span class="badge badge-bull">HIGH VOLATILITY REGIME</span></td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="margin-bottom: 12px; font-size: 13px; color: #94a3b8; font-family: monospace;">
+        <strong>Table 1B-3:</strong> FORWARD GUIDANCE BOGEYS REQUIRED FOR MULTIPLE EXPANSION
+      </div>
+      <div class="table-wrapper">
+        <table class="table-financials">
+          <thead>
+            <tr>
+              <th>Forward Milestone / Metric</th>
+              <th>Street Consensus Hurdle</th>
+              <th>Bull Case Bogey (Re-Rating)</th>
+              <th>Bear Case Breakdown</th>
+              <th>Sensitivity Badge</th>
+              <th>Strategic Catalyst Rationale</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr>
+                <td><span class="tip" title="Hurdle for Q4 2026 subscription revenue guidance reflecting year-end enterprise budget completions." data-tip="Q4 2026E Subscription Guidance: Street consensus models $4,220M–$4,280M ($4,250M midpoint). A guided midpoint above $4,270M+ is required to sustain post-print multiple expansion.">Q4 2026E Subscription Revenue Guidance Corridor</span></td>
+                <td>$4,220M – $4,280M ($4,250M Midpoint)</td>
+                <td style="font-weight:600; color: #34d399;">$4,300M – $4,360M ($4,330M Midpoint)</td>
+                <td style="font-weight:600; color: #f87171;">Midpoint Below $4,200M</td>
+                <td><span class="badge badge-warn">PRIMARY STOCK CATALYST</span></td>
+                <td>Fourth quarter represents peak multi-year contract renewals and enterprise IT software consolidation budget flushes.</td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Full-year constant currency cRPO growth rate expectation." data-tip="FY26 cRPO Guidance Bogey: Street expects management to raise full-year cRPO constant currency growth target from 20.5% to 21.0%–21.5%.">Full-Year 2026 cRPO Reaffirmation / Guidance Raise</span></td>
+                <td>Affirm Full-Year cRPO Growth >= 20.5%</td>
+                <td style="font-weight:600; color: #34d399;">Raise Full-Year cRPO Target to 21.5%+</td>
+                <td style="font-weight:600; color: #f87171;">Lowering cRPO Growth Below 20.0%</td>
+                <td><span class="badge badge-warn">GROWTH VISIBILITY</span></td>
+                <td>cRPO is the lifeblood of ServiceNow's forward valuation multiple; any deceleration below 20% triggers multiple compression.</td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Milestone guidance on generative AI product family monetization." data-tip="GenAI Run-Rate Bogey: Qualitative confirmation that Now Assist Pro Plus SKU additions are accelerating toward a $200M+ net new ACV annual run-rate.">Generative AI Now Assist Net New ACV Target (> $200M Run-Rate)</span></td>
+                <td>Affirm Accelerated Pro Plus Attach Rates</td>
+                <td style="font-weight:600; color: #34d399;">Announce GenAI ACV Pipeline Surpassing $250M+</td>
+                <td style="font-weight:600; color: #f87171;">Commentary Signaling Pilot Churn or Slower Enterprise Rollout</td>
+                <td><span class="badge badge-warn">AI MULTIPLE EXPANSION</span></td>
+                <td>ServiceNow is valued as the premier enterprise workflow layer orchestrating multi-LLM agents; proof of direct GenAI monetization justifies premium software multiples.</td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 4. ROW 2: 5-QUARTER HISTORICAL FINANCIAL TABLE + Q3E -->
+    <section class="card" id="row-2-financials" style="margin-bottom: 24px;">
+      <div class="card-header">
+        <div class="card-title"><span class="card-title-accent"></span>Row 2: 5-Quarter Stitched Financial Table + Q3 2026E Consensus Estimate</div>
+        <span class="badge badge-blue">GAAP FINANCIAL MESH</span>
+      </div>
+      <div class="table-wrapper">
+        <table class="table-financials">
+          <thead>
+            <tr>
+              <th>Line Item ($ Millions)</th>
+              <th>Q2 2025</th>
+              <th>Q3 2025</th>
+              <th>Q4 2025</th>
+              <th>Q1 2026</th>
+              <th class="col-q0">Q2 2026 (Actual)</th>
+              <th class="col-est">Q3 2026E (Consensus)</th>
+              <th>QoQ Delta</th>
+              <th>YoY Delta</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="font-weight: 700; background: rgba(59, 130, 246, 0.05);">
+              <td><span class="tip" title="Total Revenue: Consolidated revenue recognized." data-tip="Total Revenue: Consolidated revenue across Subscription and Professional Services.">$ Total Revenue</span></td>
+              <td>$3215.0M</td>
+              <td>$3407.0M</td>
+              <td>$3568.0M</td>
+              <td>$3770.0M</td>
+              <td class="col-q0" style="color: #60a5fa; font-weight:800;">$3987.0M</td>
+              <td class="col-est" style="color: #34d399; font-weight:800;">$4,180.0M</td>
+              <td class="delta-pill delta-bull">+5.8%</td>
+              <td class="delta-pill delta-bull">+24.0%</td>
+            </tr>
+            <tr style="padding-left: 15px;">
+              <td style="padding-left: 24px;">• Subscription Revenues</td>
+              <td>$3110.0M</td>
+              <td>$3315.0M</td>
+              <td>$3470.0M</td>
+              <td>$3660.0M</td>
+              <td class="col-q0">$3875.0M</td>
+              <td class="col-est">$4,050.0M</td>
+              <td class="delta-pill delta-bull">+5.9%</td>
+              <td class="delta-pill delta-bull">+24.6%</td>
+            </tr>
+            <tr style="padding-left: 15px;">
+              <td style="padding-left: 24px;">• Professional Services &amp; Other</td>
+              <td>$105.0M</td>
+              <td>$92.0M</td>
+              <td>$98.0M</td>
+              <td>$110.0M</td>
+              <td class="col-q0">$112.0M</td>
+              <td class="col-est">$130.0M</td>
+              <td class="delta-pill delta-neutral">+1.8%</td>
+              <td class="delta-pill delta-bull">+6.7%</td>
+            </tr>
+            <tr>
+              <td>Cost of Revenue</td>
+              <td>$724.0M</td>
+              <td>$774.0M</td>
+              <td>$834.0M</td>
+              <td>$940.0M</td>
+              <td class="col-q0">$1169.0M</td>
+              <td class="col-est">$1,220.0M</td>
+              <td class="delta-pill delta-neg">+24.4%</td>
+              <td class="delta-pill delta-neg">+61.5%</td>
+            </tr>
+            <tr style="font-weight: 700;">
+              <td>Gross Profit</td>
+              <td>$2491.0M</td>
+              <td>$2633.0M</td>
+              <td>$2734.0M</td>
+              <td>$2830.0M</td>
+              <td class="col-q0" style="color:#60a5fa;">$2818.0M</td>
+              <td class="col-est" style="color:#34d399;">$2,960.0M</td>
+              <td class="delta-pill delta-neg">-0.4%</td>
+              <td class="delta-pill delta-bull">+13.1%</td>
+            </tr>
+            <tr style="font-weight: 700;">
+              <td>Operating Expenses</td>
+              <td>$2133.0M</td>
+              <td>$2061.0M</td>
+              <td>$2291.0M</td>
+              <td>$2327.0M</td>
+              <td class="col-q0">$2656.0M</td>
+              <td class="col-est">$2,450.0M</td>
+              <td class="delta-pill delta-neg">+14.1%</td>
+              <td class="delta-pill delta-neg">+24.5%</td>
+            </tr>
+            <tr style="padding-left: 15px;">
+              <td style="padding-left: 24px;">• Research &amp; Development (R&amp;D)</td>
+              <td>$550.0M</td>
+              <td>$560.0M</td>
+              <td>$610.0M</td>
+              <td>$640.0M</td>
+              <td class="col-q0">$720.0M</td>
+              <td class="col-est">$740.0M</td>
+              <td class="delta-pill delta-neg">+12.5%</td>
+              <td class="delta-pill delta-neg">+30.9%</td>
+            </tr>
+            <tr style="padding-left: 15px;">
+              <td style="padding-left: 24px;">• Selling, General &amp; Administrative (SG&amp;A)</td>
+              <td>$1583.0M</td>
+              <td>$1501.0M</td>
+              <td>$1681.0M</td>
+              <td>$1687.0M</td>
+              <td class="col-q0">$1936.0M</td>
+              <td class="col-est">$1,710.0M</td>
+              <td class="delta-pill delta-neg">+14.8%</td>
+              <td class="delta-pill delta-neg">+22.3%</td>
+            </tr>
+            <tr style="font-weight: 700; background: rgba(59, 130, 246, 0.05);">
+              <td>Operating Income (EBIT)</td>
+              <td>$358.0M</td>
+              <td>$572.0M</td>
+              <td>$443.0M</td>
+              <td>$503.0M</td>
+              <td class="col-q0" style="color: #60a5fa; font-weight:800;">$162.0M</td>
+              <td class="col-est" style="color: #34d399; font-weight:800;">$510.0M</td>
+              <td class="delta-pill delta-neg">-67.8%</td>
+              <td class="delta-pill delta-neg">-54.7%</td>
+            </tr>
+            <tr style="font-weight: 700;">
+              <td>GAAP Net Income</td>
+              <td>$385.0M</td>
+              <td>$502.0M</td>
+              <td>$401.0M</td>
+              <td>$469.0M</td>
+              <td class="col-q0" style="color: #60a5fa;">$298.0M</td>
+              <td class="col-est" style="color: #34d399;">$475.0M</td>
+              <td class="delta-pill delta-neg">-36.5%</td>
+              <td class="delta-pill delta-neg">-22.6%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 5. ROW 3: FORENSIC CASH FLOW & TRUE FCF WATERFALL BRIDGE -->
+    <section class="card" id="row-3-fcf" style="margin-bottom: 24px;">
+      <div class="card-header">
+        <div class="card-title"><span class="card-title-accent"></span>Row 3: Forensic Quality of Earnings &amp; True Free Cash Flow Bridge (Q2 2026)</div>
+        <span class="badge badge-bull">SEASONAL CASH CONVERSION AUDIT</span>
+      </div>
+      <div class="forensic-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px;">
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 16px; border-radius: 8px; border: 1px solid var(--border-color);">
+          <div style="font-size: 13px; font-weight: 700; color: #93c5fd; margin-bottom: 10px;">
+            True Economic Free Cash Flow Waterfall (Q2 2026 Actual)
+          </div>
+          <div class="waterfall-row" style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 12.5px;">
+            <span><span class="tip" title="Operating Cash Flow: Net cash generated from operating activities." data-tip="Operating Cash Flow (OCF): $587.0M in Q2 2026.">Operating Cash Flow (OCF)</span></span>
+            <span style="font-family: monospace; font-weight: 700; color: #34d399;">+$587M</span>
+          </div>
+          <div class="waterfall-row" style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 12.5px;">
+            <span>Less: Capital Expenditures (CapEx)</span>
+            <span style="font-family: monospace; font-weight: 700; color: #f87171;">-$114.0M</span>
+          </div>
+          <div class="waterfall-row" style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 12.5px; background: rgba(255,255,255,0.02);">
+            <span><strong>= Reported Free Cash Flow (FCF)</strong></span>
+            <span style="font-family: monospace; font-weight: 700; color: #34d399;">+$473.0M</span>
+          </div>
+          <div class="waterfall-row" style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 12.5px;">
+            <span>Less: Share-Based Compensation (SBC)</span>
+            <span style="font-family: monospace; font-weight: 700; color: #f87171;">-$652.0M</span>
+          </div>
+          <div class="waterfall-row" style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 12.5px;">
+            <span>Less: Principal Finance Lease Obligations</span>
+            <span style="font-family: monospace; font-weight: 700; color: #94a3b8;">-$0.0M</span>
+          </div>
+          <div class="waterfall-row" style="display: flex; justify-content: space-between; padding: 8px 0; font-size: 13.5px; background: rgba(239, 68, 68, 0.08); border-radius: 4px; padding-left: 6px; padding-right: 6px; margin-top: 4px;">
+            <span><strong>= True Free Cash Flow (Post-SBC &amp; Leases)</strong></span>
+            <span style="font-family: monospace; font-weight: 800; color: #f87171;">-$179.0M</span>
+          </div>
+        </div>
+
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 16px; border-radius: 8px; border: 1px solid var(--border-color);">
+          <div style="font-size: 13px; font-weight: 700; color: #34d399; margin-bottom: 8px;">
+            Forensic Cash Quality &amp; Seasonality Takeaways
+          </div>
+          <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.55; margin-bottom: 8px;">
+            <strong>1. Q2 Seasonal Cash Trough:</strong> In Q2 2026, ServiceNow collected <strong>$587.0M</strong> in OCF and reported $473.0M in FCF. ServiceNow's cash collection cycle is heavily Q4- and Q1-weighted, with full-year FCF conversion consistently tracking toward the guided <strong>31.0% full-year margin target</strong>.
+          </p>
+          <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.55; margin-bottom: 8px;">
+            <strong>2. SBC Dilution Load:</strong> Share-Based Compensation ($652.0M) represented 16.4% of total revenue, reflecting equity incentives for elite AI and platform software engineers.
+          </p>
+          <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.55;">
+            <strong>3. Pristine Balance Sheet Solvency:</strong> Backed by ~$5.2B in liquid reserves against $1.5B in debt, ServiceNow operates with a fortress +$3.7B net cash cushion supporting ongoing share repurchases.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. ROW 4: OPERATIONAL TAILWINDS & HEADWINDS -->
+    <section class="card" id="row-4-segments" style="margin-bottom: 24px;">
+      <div class="card-header">
+        <div class="card-title"><span class="card-title-accent"></span>Row 4: 4 Operational Tailwinds vs. 4 Execution Headwinds</div>
+        <span class="badge badge-bull">STRATEGIC CATALYST MESH</span>
+      </div>
+      <div class="audit-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px;">
+        <!-- TAILWINDS -->
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 16px; border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.25);">
+          <div style="font-size: 13.5px; font-weight: 700; color: #34d399; margin-bottom: 12px;">
+            🚀 Top 4 Operational Tailwinds
+          </div>
+          <div class="audit-point" style="margin-bottom: 10px; font-size: 12.5px; color: var(--text-secondary); line-height: 1.5;">
+            <strong>1. Now Assist GenAI Hypergrowth:</strong> Net new ACV crossed $120M in Q2, representing the fastest-ramping product SKU in company history.
+          </div>
+          <div class="audit-point" style="margin-bottom: 10px; font-size: 12.5px; color: var(--text-secondary); line-height: 1.5;">
+            <strong>2. Enterprise Platform Consolidation:</strong> CIOs standardizing on ServiceNow to eliminate fragmented legacy software point solutions drive 120%+ Net Expansion Rates.
+          </div>
+          <div class="audit-point" style="margin-bottom: 10px; font-size: 12.5px; color: var(--text-secondary); line-height: 1.5;">
+            <strong>3. Resilient 20%+ cRPO Growth:</strong> Contracted backlog of $9.85B (+21.5% YoY constant currency) provides exceptional forward revenue visibility.
+          </div>
+          <div class="audit-point" style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5;">
+            <strong>4. Rule of 50+ Financial Power:</strong> Delivering 20%+ top-line growth alongside 31%+ full-year FCF margins establishes ServiceNow as a top-decile software compounder.
+          </div>
+        </div>
+
+        <!-- HEADWINDS -->
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 16px; border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.25);">
+          <div style="font-size: 13.5px; font-weight: 700; color: #f87171; margin-bottom: 12px;">
+            ⚠️ Top 4 Execution Headwinds
+          </div>
+          <div class="audit-point" style="margin-bottom: 10px; font-size: 12.5px; color: var(--text-secondary); line-height: 1.5;">
+            <strong>1. Enterprise Sales Scrutiny:</strong> Multi-million-dollar digital transformation deals face extensive CFO budget reviews, causing contract timing variance.
+          </div>
+          <div class="audit-point" style="margin-bottom: 10px; font-size: 12.5px; color: var(--text-secondary); line-height: 1.5;">
+            <strong>2. Post-Earnings Volatility Gap Risks:</strong> Shares dropped -17.75% following Q1 2026 results despite beating estimates, creating post-print nervousness.
+          </div>
+          <div class="audit-point" style="margin-bottom: 10px; font-size: 12.5px; color: var(--text-secondary); line-height: 1.5;">
+            <strong>3. Substantial SBC Drag on GAAP EPS:</strong> $652M in quarterly share-based compensation tempers GAAP net income expansion ($298M in Q2).
+          </div>
+          <div class="audit-point" style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5;">
+            <strong>4. European &amp; Public Sector Budget Timing:</strong> Extended approval cycles across international and government contracts create potential quarterly lumpiness.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. SECTION 4B: TOP 3 INSTITUTIONAL PRE-PRINT DEBATES & CALL FOCUS QUESTIONS -->
+    <section class="card" id="row-4b-debates" style="margin-bottom: 24px;">
+      <div class="card-header">
+        <div class="card-title"><span class="card-title-accent"></span>Section 4B: Top 3 Institutional Pre-Print Debates &amp; Analyst Call Focus Questions</div>
+        <span class="badge badge-blue">SELL-SIDE PREVIEW AUDIT</span>
+      </div>
+      <div>
+        <div class="audit-point" style="background: rgba(11, 15, 25, 0.6); border: 1px solid var(--border-color); border-left: 3px solid #3b82f6; padding: 12px 14px; border-radius: 6px; margin-bottom: 12px;">
+          <div style="font-weight: 700; color: #60a5fa; font-size: 13.5px; margin-bottom: 4px;">
+            Debate 1: Now Assist GenAI Monetization — Is AI an Incremental Growth Engine or Commodity Feature?
+          </div>
+          <p style="font-size: 12.8px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 6px;">
+            <strong>Bull vs. Bear Institutional Framing:</strong> Bulls argue ServiceNow's proprietary enterprise domain data and workflow context make Now Assist the most valuable generative AI application in enterprise software, allowing the company to charge a 50-60% pricing premium on Pro Plus licenses with over 100 Global 2000 customers already upgrading. Bears contend that commoditized LLMs from OpenAI, Anthropic, and Microsoft could allow enterprise clients to build their own internal agent workflows, threatening long-term software seat expansion.
+          </p>
+          <p style="font-size: 12.8px; color: var(--text-secondary); line-height: 1.5;">
+            <strong>Analyst Focus Question: 'What percentage of total ACV renewals in Q3 included Pro Plus or Now Assist SKUs, and how does customer net expansion rate trend for accounts that adopt GenAI capabilities?'</strong>
+          </p>
+        </div>
+        <div class="audit-point" style="background: rgba(11, 15, 25, 0.6); border: 1px solid var(--border-color); border-left: 3px solid #10b981; padding: 12px 14px; border-radius: 6px; margin-bottom: 12px;">
+          <div style="font-weight: 700; color: #34d399; font-size: 13.5px; margin-bottom: 4px;">
+            Debate 2: Enterprise IT Budget Consolidation — Is Platform Consolidation Offsetting Macro Cautiousness?
+          </div>
+          <p style="font-size: 12.8px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 6px;">
+            <strong>Bull vs. Bear Institutional Framing:</strong> Bulls highlight that CIOs are actively reducing vendor sprawl, standardizing on ServiceNow to consolidate ITSM, CSM, HR, and custom applications onto a single architecture, driving deal sizes and multi-product attach rates to all-time highs. Bears note that enterprise software procurement processes remain rigorous with CFO sign-offs required for 7-figure deals, occasionally extending sales cycles.
+          </p>
+          <p style="font-size: 12.8px; color: var(--text-secondary); line-height: 1.5;">
+            <strong>Analyst Focus Question: 'How are enterprise deal closure velocity and 12-month pipeline conversions pacing heading into Q4, particularly across Federal and European enterprise accounts?'</strong>
+          </p>
+        </div>
+        <div class="audit-point" style="background: rgba(11, 15, 25, 0.6); border: 1px solid var(--border-color); border-left: 3px solid #f59e0b; padding: 12px 14px; border-radius: 6px; margin-bottom: 12px;">
+          <div style="font-weight: 700; color: #fcd34d; font-size: 13.5px; margin-bottom: 4px;">
+            Debate 3: Free Cash Flow Margin & SBC Dilution — Balancing R&D Scale Against GAAP Bottom-Line?
+          </div>
+          <p style="font-size: 12.8px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 6px;">
+            <strong>Bull vs. Bear Institutional Framing:</strong> Bulls point to ServiceNow's elite 31%+ full-year FCF margin target and disciplined capital allocation as evidence of exceptional software compounding power. Bears point out that in Q2 2026, True FCF was -$179.0M post-SBC due to $652M in share-based compensation, arguing that GAAP profitability needs to expand faster to support current trading multiples.
+          </p>
+          <p style="font-size: 12.8px; color: var(--text-secondary); line-height: 1.5;">
+            <strong>Analyst Focus Question: 'What are management's long-term targets for Share-Based Compensation as a percentage of revenue, and how is operating margin leverage expected to unfold into 2027?'</strong>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. ROW 5: PEER VALUATION COMPS -->
+    <section class="card" id="row-5-peers" style="margin-bottom: 24px;">
+      <div class="card-header">
+        <div class="card-title"><span class="card-title-accent"></span>Row 5: Peer Valuation &amp; Enterprise SaaS Multiples Benchmark</div>
+        <span class="badge badge-bull">ENTERPRISE APPLICATION COMPS</span>
+      </div>
+      <div class="table-wrapper">
+        <table class="table-financials">
+          <thead>
+            <tr>
+              <th>Company</th>
+              <th>Ticker</th>
+              <th>Market Cap</th>
+              <th>Enterprise Value</th>
+              <th>Forward P/E</th>
+              <th>EV / Sales (TTM)</th>
+              <th>cRPO / ARR Growth Rate</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background: rgba(59, 130, 246, 0.08); font-weight:700;">
+              <td>ServiceNow, Inc.</td>
+              <td>NOW</td>
+              <td>$162.31B</td>
+              <td>$168.13B</td>
+              <td>31.4x</td>
+              <td>11.0x</td>
+              <td>+21.5% YoY CC (Rule of 50+)</td>
+            </tr>
+            <tr>
+              <td>Salesforce, Inc.</td>
+              <td>CRM</td>
+              <td>~$285.0B</td>
+              <td>~$280.5B</td>
+              <td>~26.4x</td>
+              <td>~7.8x</td>
+              <td>~10.0% YoY (cRPO)</td>
+            </tr>
+            <tr>
+              <td>Workday, Inc.</td>
+              <td>WDAY</td>
+              <td>~$68.5B</td>
+              <td>~$66.2B</td>
+              <td>~31.2x</td>
+              <td>~8.5x</td>
+              <td>~16.0% YoY (12-Mo Backlog)</td>
+            </tr>
+            <tr>
+              <td>Atlassian Corporation</td>
+              <td>TEAM</td>
+              <td>~$48.2B</td>
+              <td>~$47.5B</td>
+              <td>~38.5x</td>
+              <td>~10.2x</td>
+              <td>~20.5% YoY (Cloud Rev)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 9. ROW 6: 4-PILLAR PRE-EARNINGS SENTIMENT GAUGE & POSITIONING -->
+    <section class="card" id="row-6-sentiment" style="margin-bottom: 24px;">
+      <div class="card-header">
+        <div class="card-title"><span class="card-title-accent"></span>Row 6: Multi-Source 4-Pillar Sentiment Gauge &amp; Positioning Audit</div>
+        <span class="badge badge-bull">COMPOSITE SCORE: 80 / 100</span>
+      </div>
+      <div class="sentiment-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-bottom: 16px;">
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+          <div style="font-size: 11px; text-transform: uppercase; color: #94a3b8; font-weight: 700;">1. Retail Community Sentiment</div>
+          <div style="font-size: 18px; font-weight: 800; color: #34d399; margin: 4px 0;">78 / 100 (Bullish)</div>
+          <div class="sentiment-meter-bar" style="height: 5px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; margin-bottom: 6px;">
+            <div style="width: 78%; height: 100%; background: #10b981;"></div>
+          </div>
+          <div style="font-size: 11.5px; color: #cbd5e1;">Praise for Bill McDermott's leadership and AI workflow automation.</div>
+        </div>
+
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+          <div style="font-size: 11px; text-transform: uppercase; color: #94a3b8; font-weight: 700;">2. Institutional Sell-Side Ratings</div>
+          <div style="font-size: 18px; font-weight: 800; color: #60a5fa; margin: 4px 0;">90 / 100 (Strong Buy)</div>
+          <div class="sentiment-meter-bar" style="height: 5px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; margin-bottom: 6px;">
+            <div style="width: 90%; height: 100%; background: #3b82f6;"></div>
+          </div>
+          <div style="font-size: 11.5px; color: #cbd5e1;">46 analysts covering carry Strong Buy rating ($156.54 mean / $266 high).</div>
+        </div>
+
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+          <div style="font-size: 11px; text-transform: uppercase; color: #94a3b8; font-weight: 700;">3. Options Derivatives Skew</div>
+          <div style="font-size: 18px; font-weight: 800; color: #f59e0b; margin: 4px 0;">72 / 100 (Balanced Flow)</div>
+          <div class="sentiment-meter-bar" style="height: 5px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; margin-bottom: 6px;">
+            <div style="width: 72%; height: 100%; background: #f59e0b;"></div>
+          </div>
+          <div style="font-size: 11.5px; color: #cbd5e1;">Put/Call OI ratio of 1.02x reflects disciplined hedging ahead of print.</div>
+        </div>
+
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+          <div style="font-size: 11px; text-transform: uppercase; color: #94a3b8; font-weight: 700;">4. Short Interest &amp; Crowding Risk</div>
+          <div style="font-size: 18px; font-weight: 800; color: #34d399; margin: 4px 0;">88 / 100 (Low Short Interest)</div>
+          <div class="sentiment-meter-bar" style="height: 5px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; margin-bottom: 6px;">
+            <div style="width: 88%; height: 100%; background: #10b981;"></div>
+          </div>
+          <div style="font-size: 11.5px; color: #cbd5e1;">Low short interest at 2.87% of float reflects strong institutional confidence.</div>
+        </div>
+      </div>
+
+      <div style="background: rgba(11, 15, 25, 0.6); padding: 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+        <div style="font-size: 13px; font-weight: 700; color: #93c5fd; margin-bottom: 6px;">
+          Retail Community vs. Institutional Desk Positioning Summary
+        </div>
+        <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 6px;">
+          Retail software investors across Reddit (r/stocks, r/investing) and X FinTwit regard ServiceNow as the premier enterprise cloud workflow platform, admiring CEO Bill McDermott's energetic sales leadership and ServiceNow's aggressive generative AI product integration. Retail sentiment is +78% bullish, though options traders remember the sharp post-earnings gap down in Q1 (-17.75%), leading many retail traders to structure defined-risk call vertical spreads rather than outright long calls. With Put/Call OI at 1.02x, derivatives activity exhibits balanced two-way interest across the $150 and $170 strike corridors.
+        </p>
+        <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5;">
+          Institutional sell-side coverage is overwhelmingly favorable (46 analysts covering carry a Strong Buy 1.45 rating with a $156.54 mean target and high targets reaching $266.00). Institutional desks view ServiceNow as an essential software foundation alongside Microsoft and Salesforce. Buy-side whisper hurdles target $4,100M for Subscription Revenue and +21.5% for constant-currency cRPO. Large asset managers and software-focused hedge funds have established core long positions, utilizing collar structures and selling elevated weekly straddles (pricing ±10.20% / $16.02 on 108.51% IV) to protect downside exposure while participating in potential multiple expansion on an AI ACV upside surprise.
+        </p>
+      </div>
+    </section>
+
+    <!-- 10. ROW 7: HEDGE FUND PM TRADE EXECUTION MATRIX -->
+    <section class="card" id="row-7-pm-matrix" style="margin-bottom: 24px;">
+      <div class="card-header">
+        <div class="card-title"><span class="card-title-accent"></span>Row 7: 3-Scenario Hedge Fund PM Options &amp; Stock Execution Playbook</div>
+        <span class="badge badge-bull">DERIVATIVES STRUCTURING</span>
+      </div>
+      <div class="scenario-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px;">
+        <!-- SCENARIO BULL -->
+        <div class="scenario-bull" style="background: rgba(16, 185, 129, 0.06); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 8px; padding: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span style="font-weight: 800; color: #34d399; font-size: 14px;">🟢 SCENARIO A: NOW ASSIST AI ACCELERATION &amp; CRPO BEAT</span>
+            <span class="badge badge-bull">PROBABILITY: 45%</span>
+          </div>
+          <div style="font-size: 13px; font-weight: 700; color: #e2e8f0; margin-bottom: 6px;">
+            Target Price: $175.00 – $185.00 (+11.5% to +17.8% Upside from $157.00)
+          </div>
+          <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 10px;">
+            <strong>Catalyst Triggers:</strong> Subscription revenue tops $4,100M, cRPO growth accelerates to +22.0% CC, and Now Assist net new ACV crosses $180M with management raising full-year subscription and FCF margin targets above 31.5%.
+          </p>
+          <div class="trade-structure" style="background: rgba(11, 15, 25, 0.7); padding: 10px; border-radius: 6px; font-size: 12px; font-family: monospace; color: #93c5fd; border: 1px solid rgba(59, 130, 246, 0.3);">
+            <strong>Trade Structure:</strong> Buy Nov $160 / $180 Call Vertical Spreads for ~$6.80 debit; targeting $13.20 profit on multiple expansion.
+          </div>
+        </div>
+
+        <!-- SCENARIO BASE -->
+        <div class="scenario-base" style="background: rgba(59, 130, 246, 0.06); border: 1px solid rgba(59, 130, 246, 0.35); border-radius: 8px; padding: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span style="font-weight: 800; color: #60a5fa; font-size: 14px;">🔵 SCENARIO B: SOLID IN-LINE BEAT &amp; THETA HARVEST</span>
+            <span class="badge badge-blue">PROBABILITY: 35%</span>
+          </div>
+          <div style="font-size: 13px; font-weight: 700; color: #e2e8f0; margin-bottom: 6px;">
+            Target Price: $152.00 – $164.00 (-3.2% to +4.5% vs $157.00 Spot)
+          </div>
+          <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 10px;">
+            <strong>Catalyst Triggers:</strong> Subscription revenue meets consensus ($4,055M), cRPO prints +20.5% constant currency, full-year guidance affirmed. With implied move at ±10.20% (108.5% IV), weekly option premium collapses quickly post-earnings.
+          </p>
+          <div class="trade-structure" style="background: rgba(11, 15, 25, 0.7); padding: 10px; border-radius: 6px; font-size: 12px; font-family: monospace; color: #93c5fd; border: 1px solid rgba(59, 130, 246, 0.3);">
+            <strong>Trade Structure:</strong> Sell Nov $140 / $175 Iron Condor or Strangle to harvest elevated implied volatility.
+          </div>
+        </div>
+
+        <!-- SCENARIO BEAR -->
+        <div class="scenario-bear" style="background: rgba(239, 68, 68, 0.06); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 8px; padding: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span style="font-weight: 800; color: #f87171; font-size: 14px;">🔴 SCENARIO C: CRPO DECELERATION &amp; POST-PRINT GAP</span>
+            <span class="badge badge-warn">PROBABILITY: 20%</span>
+          </div>
+          <div style="font-size: 13px; font-weight: 700; color: #e2e8f0; margin-bottom: 6px;">
+            Target Price: $135.00 – $145.00 (-14.0% to -7.6% Downside from $157.00)
+          </div>
+          <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 10px;">
+            <strong>Catalyst Triggers:</strong> cRPO growth slows below +19.5% constant currency, management cites extended federal procurement review cycles, or GenAI ACV additions fail to meet lofty buy-side whisper targets ($<140M).
+          </p>
+          <div class="trade-structure" style="background: rgba(11, 15, 25, 0.7); padding: 10px; border-radius: 6px; font-size: 12px; font-family: monospace; color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3);">
+            <strong>Trade Structure:</strong> Buy Nov $150 / $135 Bear Put Spreads for ~$4.60 debit to hedge long software portfolio holdings.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. FOOTER & VERIFICATION LEDGER -->
+    <footer style="margin-top: 30px; padding: 18px; border-top: 1px solid var(--border-color); font-size: 12px; color: #94a3b8; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+      <div>
+        <strong>Deterministic Ground-Truth Audit:</strong> CIK 0001373715 • ServiceNow, Inc. • Spot: $157.00 • Latest OCF: $587M ($587.0M) • True FCF: -$179.0M • 11 Guardrails Enforced
+      </div>
+      <div>
+        Generated by Antigravity 2.0 T-1 Pre-Earnings Multi-Agent Orchestration Bus (Gemini 3.8 Flash High)
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
