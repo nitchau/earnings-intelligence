@@ -1,0 +1,92 @@
+{
+  "ticker": "HOOD",
+  "earnings_date": "2026-10-27",
+  "agent_role": "KPI_Discovery_Agent",
+  "model": "Gemini 3.8 Flash High",
+  "company_operational_kpis": [
+    {
+      "kpi_name": "Transaction-Based Revenues ($M)",
+      "definition": "Total revenue generated from order execution routing and transaction fees across Options, Event Contracts, Equities, and Cryptocurrencies.",
+      "street_consensus": 845.0,
+      "t1_whisper": 860.0,
+      "reported_q0_actual": 867.0,
+      "qoq_change_pct": 11.73,
+      "yoy_change_pct": 18.77,
+      "vs_consensus_delta": "+$22.0M (+2.60%)",
+      "verdict": "BEAT"
+    },
+    {
+      "kpi_name": "Event Contracts Revenue ($M)",
+      "definition": "Net revenues generated from prediction markets and event contract trading volume through the Robinhood Derivatives platform.",
+      "street_consensus": 145.0,
+      "t1_whisper": 160.0,
+      "reported_q0_actual": 173.0,
+      "qoq_change_pct": 10.9,
+      "yoy_change_pct": 592.0,
+      "vs_consensus_delta": "+$28.0M (+19.31%)",
+      "verdict": "BEAT"
+    },
+    {
+      "kpi_name": "Adjusted Diluted EPS (Non-GAAP) ($)",
+      "definition": "Diluted earnings per share adjusted for unrealized mark-to-market losses on RVI fund investments ($0.07/sh) and restructuring charges.",
+      "street_consensus": 0.55,
+      "t1_whisper": 0.58,
+      "reported_q0_actual": 0.6,
+      "qoq_change_pct": -3.23,
+      "yoy_change_pct": -3.23,
+      "vs_consensus_delta": "+$0.05 (+9.09%)",
+      "verdict": "BEAT"
+    },
+    {
+      "kpi_name": "Robinhood Gold Subscribers (Millions)",
+      "definition": "Total paid subscribers to Robinhood Gold premium tiers receiving 5% APY cash sweep, margin discounts, and 3% IRA match.",
+      "street_consensus": 5.0,
+      "t1_whisper": 5.1,
+      "reported_q0_actual": 5.2,
+      "qoq_change_pct": 7.44,
+      "yoy_change_pct": 62.5,
+      "vs_consensus_delta": "+0.20M (+4.00%)",
+      "verdict": "BEAT"
+    },
+    {
+      "kpi_name": "Adjusted EBITDA ($M) & Margin (%)",
+      "definition": "Net income adjusted for interest, taxes, depreciation, amortization, SBC, restructuring charges, and RVI investment valuation marks.",
+      "street_consensus": 765.0,
+      "t1_whisper": 780.0,
+      "reported_q0_actual": 808.0,
+      "qoq_change_pct": 9.04,
+      "yoy_change_pct": 8.89,
+      "vs_consensus_delta": "+$43.0M (+5.62%)",
+      "verdict": "BEAT"
+    }
+  ],
+  "reporting_segments_5q_mapping": [
+    {
+      "segment_name": "Transaction-Based Revenues",
+      "q0_revenue_millions": 867.0,
+      "share_of_revenue_pct": 60.88,
+      "sub_rows": [
+        "Options ($399M, +31% YoY)",
+        "Event Contracts ($173M, up >6x YoY)",
+        "Equities ($121M, +41% YoY)",
+        "Cryptocurrencies ($120M, -55% YoY)"
+      ]
+    },
+    {
+      "segment_name": "Net Interest Revenues",
+      "q0_revenue_millions": 415.0,
+      "share_of_revenue_pct": 29.14,
+      "sub_rows": [
+        "Interest-Earning Assets ($415M, -9% YoY / +7% QoQ)"
+      ]
+    },
+    {
+      "segment_name": "Other Revenues",
+      "q0_revenue_millions": 142.0,
+      "share_of_revenue_pct": 9.97,
+      "sub_rows": [
+        "Robinhood Gold & Trump Accounts ($142M, +61% YoY)"
+      ]
+    }
+  ]
+}

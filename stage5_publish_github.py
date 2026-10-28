@@ -90,7 +90,7 @@ def publish_to_github(ticker: str, earnings_date: str):
 
     # 4. Git commit and push
     print(f"[{ticker}] Staging files and pushing to GitHub...")
-    run_cmd(["git", "add", "published_reports/", "index.html", "published_ledger.json", "audit_logs/"])
+    run_cmd(["git", "add", "published_reports/", "index.html", *(["news.html"] if (BASE_DIR / "news.html").exists() else []), "published_ledger.json", "audit_logs/"])
     commit_msg = f"Auto-publish T+0 Post-Earnings Tearsheet for {ticker} ({earnings_date})"
     code, out, err = run_cmd(["git", "commit", "-m", commit_msg])
     if code == 0:

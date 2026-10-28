@@ -1,0 +1,90 @@
+{
+  "ticker": "HOOD",
+  "earnings_date": "2026-10-27",
+  "agent_role": "Transcript_Forensic_Agent",
+  "model": "Gemini 3.8 Flash High",
+  "guidance_accountability_matrix_a": [
+    {
+      "guided_metric": "Full-Year 2026 Adjusted OpEx & SBC Corridor",
+      "prior_quarter_guidance": "$2.675B to $2.775B ($2.725B midpoint)",
+      "reported_q0_actual": "Q3 Adjusted OpEx & SBC of $664M ($1,912M YTD); FY26 lowered top end by $25M to $2.675B-$2.750B",
+      "variance_commentary": "Management demonstrated operational discipline, tightening the full-year expense corridor lower to reflect sustained cost efficiencies across brokerage clearing and technology hosting.",
+      "credibility_grade": "BEAT OWN GUIDE"
+    },
+    {
+      "guided_metric": "Q3 2026 Net Revenues & Product Scaling",
+      "prior_quarter_guidance": "Sustained revenue momentum driven by multi-product cross-selling and new business cylinders",
+      "reported_q0_actual": "Record $1,424M total net revenue (+12% YoY, +9% QoQ), reaching 14 business lines with $100M+ run rate",
+      "variance_commentary": "Delivered record quarterly revenue as Rothera JV scaled over $100M in annualized revenues and event contracts surged past $173M.",
+      "credibility_grade": "BEAT OWN GUIDE"
+    },
+    {
+      "guided_metric": "Funded Customer & Net Deposit Growth",
+      "prior_quarter_guidance": "Targeting sustained high-single-digit annualized organic net deposit growth",
+      "reported_q0_actual": "Net Deposits hit $16B in Q3; October MTD Net Deposits already topped $13B ($6B from Dell family)",
+      "variance_commentary": "Significantly exceeded underlying deposit expectations with high-net-worth institutional inflows into Trump Accounts and retail deposit acceleration.",
+      "credibility_grade": "BEAT OWN GUIDE"
+    },
+    {
+      "guided_metric": "Robinhood Gold Subscription Adoption",
+      "prior_quarter_guidance": "Expand Gold subscription base above 5.0 million subscribers",
+      "reported_q0_actual": "Reached record 5.2 million Gold subscribers (+0.36M QoQ, +62.5% YoY)",
+      "variance_commentary": "Gold subscriber adoption accelerated ahead of projections, driven by the 5% APY cash sweep and Robinhood Legend rollout.",
+      "credibility_grade": "BEAT OWN GUIDE"
+    }
+  ],
+  "forward_guidance_reset_matrix_b": [
+    {
+      "forward_horizon_and_metric": "Full-Year 2026 Adjusted OpEx & SBC Corridor",
+      "preprint_street_consensus": "$2,725M midpoint ($2,675M - $2,775M)",
+      "new_management_guidance": "$2,675M to $2,750M ($2,712.5M midpoint)",
+      "delta_vs_street": "-$12.5M lower midpoint (-0.46% cost cut)",
+      "action_badge": "LOWERED EXPENSES",
+      "rationale": "Efficiency gains in clearing, automated customer operations, and disciplined marketing expenditures."
+    },
+    {
+      "forward_horizon_and_metric": "Q4 2026 Net Deposit Inflows & Organic Assets",
+      "preprint_street_consensus": "$12.0B to $14.0B for entire Q4",
+      "new_management_guidance": "October MTD already exceeded $13.0B; Q4 pace tracking to record >$25B+",
+      "delta_vs_street": "+$10.0B+ above Street quarterly pace",
+      "action_badge": "RAISED",
+      "rationale": "High-net-worth onboarding via Trump Accounts ($6B initial anchor from Dell family) and corporate retirement match."
+    },
+    {
+      "forward_horizon_and_metric": "Q4 2026 Total Net Revenue Trajectory",
+      "preprint_street_consensus": "$1,450M to $1,500M ($1,475M midpoint)",
+      "new_management_guidance": "Tracking sequentially higher supported by election event trading and record AUC",
+      "delta_vs_street": "+$25M above prior Street expectations",
+      "action_badge": "EXPANDING",
+      "rationale": "Peak election event contract trading volume and sustained options contract market share gains."
+    },
+    {
+      "forward_horizon_and_metric": "New Product Cylinders: Perpetual Futures & Robinhood Chain (2027)",
+      "preprint_street_consensus": "Core equities and options brokerage with credit card ramp",
+      "new_management_guidance": "Planned launch of perpetual futures in U.S. and Robinhood Chain tokenization rollout",
+      "delta_vs_street": "Major institutional derivatives catalyst",
+      "action_badge": "NEW CATALYST",
+      "rationale": "Expands derivatives addressable market into institutional offshore crypto/futures volume."
+    }
+  ],
+  "call_qa_forensic_highlights": [
+    {
+      "analyst_name": "Devin Ryan (Citizens JMP)",
+      "topic": "Event Contracts Explosion (>6x YoY to $173M) & Post-Election Longevity",
+      "question": "Vlad, event contracts surged over 6x YoY to $173M this quarter. How much of this volume is tied to the upcoming U.S. Presidential election versus permanent macro and single-stock event contracts, and what does the post-election decay curve look like?",
+      "executive_response": "CEO Vlad Tenev emphasized that while the U.S. election is driving peak engagement, Robinhood has rapidly expanded event contracts into economic data releases (CPI, Fed rate cuts), sports outcomes, and quarterly earnings prints. The platform is seeing 65% of event traders cross-trade equities and options, transforming prediction markets into a sticky top-of-funnel customer acquisition channel that continues well past the election cycle."
+    },
+    {
+      "analyst_name": "Dan Dolev (Mizuho Securities)",
+      "topic": "Cryptocurrency Revenue Decline (-55% YoY) vs Multi-Asset Diversification",
+      "question": "Shiv, crypto transaction revenue declined to $120M from $268M last year and $134M in Q1. Given the broader crypto market backdrop, how should we think about crypto's contribution to total revenue going forward?",
+      "executive_response": "CFO Shiv Verma explained that Robinhood's multi-cylinder strategy is designed precisely to absorb crypto cyclicality. Despite crypto revenue softening -55% YoY, total net revenue reached an all-time record $1,424M because Options (+31% YoY to $399M), Event Contracts (up >6x to $173M), and Equities (+41% YoY to $121M) more than offset the drop. Robinhood is now running 14 business lines at $100M+ annualized revenue, insulating margins."
+    },
+    {
+      "analyst_name": "Brennan Hawken (UBS)",
+      "topic": "October Net Deposits Surging Past $13B & Wealth Management Strategy",
+      "question": "You disclosed that October Net Deposits have already topped $13 billion month-to-date, including $6 billion from the Dell family into Trump Accounts. What does this mean for your average account size, margin lending demand, and long-term net interest income?",
+      "executive_response": "Vlad Tenev noted that the Dell family contribution marks Robinhood's emergence as a premier platform for high-net-worth wealth preservation. Bringing massive institutional deposits into Trump Accounts significantly lowers Robinhood's effective cost of capital, drives premium Gold subscription uptake, and creates a large, sticky pool of interest-earning assets that will support net interest revenue even in a declining Fed funds rate environment."
+    }
+  ]
+}

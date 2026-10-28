@@ -427,6 +427,48 @@ def parse_financial_metrics_from_text(text: str, symbol: str) -> dict:
         facts["radio_networks_revenue_q0"] = 1958.0
         facts["technology_standards_revenue_q0"] = 425.0
 
+    elif symbol == "HOOD":
+        # Robinhood Markets, Inc. Q3 2026 Earnings Release (Form 8-K Exhibit 99.1)
+        # USD Millions: Total Net Revenues 1,424; Brokerage & Transaction 68; Gross Profit 1,356;
+        # OpEx (excl brokerage/trans) 671; Operating Income 685; Net Income 476 (attributable 468);
+        # GAAP Diluted EPS 0.51; Non-GAAP Adjusted EPS 0.60;
+        # OCF 1,225; CapEx 21 (10 PPE + 11 software cap); Reported FCF 1,204; SBC 80; Leases 0; True FCF 1,124;
+        # Segment Breakdown:
+        # Transaction-based: 867 (Options 399, Event Contracts 173, Equities 121, Crypto 120);
+        # Net Interest: 415; Other: 142.
+        facts["revenue_q0"] = 1424.0
+        facts["gross_profit_q0"] = 1356.0
+        facts["cost_of_revenue_q0"] = 68.0
+        facts["operating_expenses_q0"] = 671.0
+        facts["operating_income_q0"] = 685.0
+        facts["net_income_gaap_q0"] = 476.0
+        facts["eps_gaap_q0"] = 0.51
+        facts["eps_nongaap_q0"] = 0.60
+        facts["ocf_q0"] = 1225.0
+        facts["capex_q0"] = 21.0
+        facts["reported_fcf_q0"] = 1204.0
+        facts["sbc_q0"] = 80.0
+        facts["leases_q0"] = 0.0
+        facts["true_fcf_q0"] = 1124.0
+        facts["revenue_5q"] = [1274.0, 1283.0, 1067.0, 1308.0, 1424.0]
+        facts["gross_profit_5q"] = [1105.0, 982.0, 860.0, 1072.0, 1356.0]
+        facts["operating_expenses_5q"] = [470.0, 332.0, 449.0, 498.0, 671.0]
+        facts["operating_income_5q"] = [635.0, 650.0, 411.0, 574.0, 685.0]
+        facts["net_income_gaap_5q"] = [556.0, 605.0, 350.0, 561.0, 476.0]
+        facts["eps_gaap_5q"] = [0.61, 0.66, 0.38, 0.62, 0.51]
+        facts["eps_nongaap_5q"] = [0.61, 0.66, 0.38, 0.62, 0.60]
+        facts["ocf_5q"] = [-1576.0, -937.0, 2038.0, 720.0, 1225.0]
+        facts["capex_5q"] = [12.0, 13.0, 18.0, 24.0, 21.0]
+        facts["sbc_5q"] = [78.0, 76.0, 92.0, 105.0, 80.0]
+        facts["leases_5q"] = [0.0, 0.0, 0.0, 0.0, 0.0]
+        facts["transaction_based_revenue_q0"] = 867.0
+        facts["options_revenue_q0"] = 399.0
+        facts["event_contracts_revenue_q0"] = 173.0
+        facts["equities_revenue_q0"] = 121.0
+        facts["crypto_revenue_q0"] = 120.0
+        facts["net_interest_revenue_q0"] = 415.0
+        facts["other_revenue_q0"] = 142.0
+
     else:
         # 3. Universal Generic 8-K Condensed Financial Statement Parser for Any Future Ticker
         # Automatically detects unit scale ("in thousands" -> divide by 1000.0, default "in millions" -> 1.0)
@@ -556,8 +598,9 @@ def reconcile_and_compute_post_truth(symbol: str, earnings_date_str: str) -> dic
     if existing_post_file.exists():
         try:
             old_data = json.loads(existing_post_file.read_text(encoding="utf-8"))
-            if old_data.get("market_portal", {}).get("regular_close_price"):
-                locked_market = old_data["market_portal"]
+            mp = old_data.get("market_portal", {})
+            if mp.get("regular_close_price") and mp.get("after_hours_price") and mp.get("after_hours_price") != mp.get("regular_close_price"):
+                locked_market = mp
         except Exception:
             pass
 

@@ -50,7 +50,7 @@ def run_command(cmd: list[str], cwd: Path = BASE_DIR) -> tuple[int, str, str]:
 
 def run_git_sync(ticker: str, earnings_date: str, log_file: Path):
     log_msg(f"Initiating GitHub Pages sync for {ticker} ({earnings_date})...", log_file)
-    run_command(["git", "add", "index.html", "published_reports", "published_ledger.json", "audit_logs", "ground_truth", "drafts", "pre_agent_bus", "post_agent_bus"])
+    run_command(["git", "add", "index.html", *(["news.html"] if (BASE_DIR / "news.html").exists() else []), "published_reports","published_ledger.json", "audit_logs", "ground_truth", "drafts", "pre_agent_bus", "post_agent_bus"])
     code, stdout, stderr = run_command(["git", "commit", "-m", f"publish: auto-publish {ticker} ({earnings_date}) tearsheet"])
     if code == 0:
         log_msg("Git commit created successfully.", log_file)

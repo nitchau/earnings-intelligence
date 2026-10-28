@@ -1,0 +1,64 @@
+{
+  "ticker": "HOOD",
+  "earnings_date": "2026-10-27",
+  "agent_role": "Social_Pulse_Agent",
+  "model": "Gemini 3.8 Flash High",
+  "social_channels_crawled": [
+    "Reddit (r/wallstreetbets, r/Robinhood, r/stocks, r/investing)",
+    "X (FinTwit / #HOOD / $HOOD)",
+    "Threads (threads.net / @vladtenev)",
+    "Stocktwits ($HOOD sentiment stream)",
+    "Seeking Alpha post-market commentary",
+    "Sell-Side Flash Notes (Goldman Sachs, Morgan Stanley, JPMorgan, Piper Sandler, Mizuho, Citizens JMP)"
+  ],
+  "retail_vs_institutional_reaction": {
+    "retail_sentiment_summary": "Retail traders on r/wallstreetbets and FinTwit cheered the breakout growth in prediction market event contracts (>6x YoY to $173M), the record 5.2M Gold subscribers, and the $0.60 Adjusted EPS beat. However, retail sentiment experienced near-term friction over the post-market price drop and questions regarding cryptocurrency volume declines (-55% YoY to $120M). Active retail options traders noted they are heavily using Robinhood Legend and loading election event contracts.",
+    "institutional_sentiment_summary": "Institutional desks praised management's full-year expense discipline ($25M cut to the high end of Adjusted OpEx guidance) and robust cash generation ($1,225M OCF and $1,124M True FCF). However, fast-money macro funds and hedge fund desks used the print for liquidity to take profits following the stock's massive run-up from $50 into the mid-$90s. Institutional analysts also noted the headline GAAP EPS of $0.51 was dragged down by a $67M unrealized mark-to-market loss on Robinhood Ventures Fund I (RVI), creating optical headline confusion against the $0.60 non-GAAP adjusted beat.",
+    "after_hours_movement_driver": "HOOD declined -7.64% after-hours to $87.34 (down -$7.22 from the $94.56 regular close) as profit taking on crypto revenue normalization ($120M vs $268M YoY) and optical headline GAAP EPS noise ($0.51 GAAP vs $0.55 consensus due to $0.07 RVI investment markdowns) triggered algorithmic selling, overshadowing record $1,424M revenue, $0.60 Adjusted EPS, and surging October deposits ($13B MTD)."
+  },
+  "four_pillar_post_sentiment_scores": {
+    "pillar_1_retail_and_social_pulse": {
+      "score_out_of_100": 74,
+      "classification": "CONSTRUCTIVE / BUYING THE DIP",
+      "key_themes": [
+        "Event contracts explosion to $173M (>6x YoY)",
+        "Gold subscriber milestone of 5.2M",
+        "October $13B deposit surge with Dell family Trump Accounts",
+        "Frustration with -7.6% after-hours dip seen as dip-buying opportunity"
+      ],
+      "top_quote": "FinTwit Derivatives Desk: 'HOOD prints record $1.42B rev, beats on $0.60 adj EPS, True FCF at $1.12B, and election contracts are printing money. Market dumping it -7% because of a paper loss on venture fund markdowns is a classic post-earnings gift.'"
+    },
+    "pillar_2_sellside_flash_reactions": {
+      "score_out_of_100": 79,
+      "classification": "CONSTRUCTIVE / RAISING TARGETS",
+      "key_themes": [
+        "Citizens JMP and Piper Sandler reiterate Overweight with price targets $120+",
+        "Management lowered FY26 OpEx guidance ceiling by $25M",
+        "Rothera JV scales into 14th $100M+ business line",
+        "Cash fortress with $14.75B in cash, segregated funds, and restricted cash"
+      ],
+      "top_quote": "Piper Sandler Flash Note: 'Robinhood delivered record revenue and non-GAAP EPS beat ($0.60 vs $0.55). Lowering the FY26 expense guide reinforces operating leverage, while October's $13B deposit momentum provides massive visibility into Q4.'"
+    },
+    "pillar_3_management_call_tone": {
+      "score_out_of_100": 85,
+      "classification": "CONFIDENT & OPERATIONALLY DISCIPLINED",
+      "key_themes": [
+        "Vlad Tenev highlights vision of broad ownership and wealth democratization",
+        "14 business cylinders generating $100M+ annualized revenue",
+        "Disciplined expense management and operating leverage",
+        "Expanding derivatives to perpetual futures and Robinhood Chain"
+      ],
+      "top_quote": "Shiv Verma on Call: 'The business is firing on all cylinders. Our product velocity continues to deliver new products, with Rothera scaling rapidly and October Net Deposits already topping $13 billion month-to-date.'"
+    },
+    "pillar_4_options_iv_crush_and_skew": {
+      "score_out_of_100": 70,
+      "classification": "POST-PRINT VOL CRUSH / WITHIN BAND",
+      "key_themes": [
+        "After-hours drop of -7.64% (-$7.22 to $87.34) stayed comfortably within the ±10.13% (±$9.73) weekly straddle band",
+        "Front-week ATM IV compresses from 86.13% to ~45% at the open",
+        "Put/Call open interest ratio of 1.15 provided substantial put dealer hedging support near $85"
+      ],
+      "top_quote": "Derivatives Floor Trader: 'The -7.64% after-hours move was fully anticipated and digested well inside the ±10.1% straddle implied cone. Premium sellers capture maximum theta crush while long-term buyers step in at the 50-day moving average.'"
+    }
+  }
+}
