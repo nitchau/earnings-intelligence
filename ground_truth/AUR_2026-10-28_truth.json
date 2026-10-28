@@ -10,7 +10,7 @@
     "yahoo_consensus_eps": null
   },
   "price_validation": {
-    "yahoo_spot_price": 4.83,
+    "yahoo_spot_price": 5.12,
     "google_finance_spot_price": null,
     "cross_source_divergence_pct": 0.0,
     "status": "VERIFIED"
@@ -33,15 +33,55 @@
     "put_call_oi_ratio": 0.14
   },
   "historical_earnings_track_record": {
-    "track_record_error": "Failed to perform, curl: (35) Recv failure: Connection was reset. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
-    "prior_4q_releases": []
+    "quarters_evaluated": 4,
+    "beats_count": 3,
+    "beat_rate_pct": 75.0,
+    "avg_eps_surprise_pct": 13.17,
+    "avg_historical_1d_move_abs_pct": 2.82,
+    "current_implied_move_pct": 13.46,
+    "implied_vs_historical_move_delta_pct": 10.64,
+    "options_vol_regime": "OVERPRICED_VS_HISTORY (SHORT VOLATILITY / THETA HARVEST EDGE)",
+    "prior_4q_releases": [
+      {
+        "earnings_date": "2026-07-29",
+        "eps_estimate": -0.12,
+        "eps_actual": -0.14,
+        "surprise_pct": -18.87,
+        "verdict": "MISS",
+        "actual_1d_move_pct": 4.35
+      },
+      {
+        "earnings_date": "2026-05-06",
+        "eps_estimate": -0.12,
+        "eps_actual": -0.11,
+        "surprise_pct": 5.72,
+        "verdict": "BEAT",
+        "actual_1d_move_pct": -1.79
+      },
+      {
+        "earnings_date": "2026-02-11",
+        "eps_estimate": -0.12,
+        "eps_actual": -0.08,
+        "surprise_pct": 31.92,
+        "verdict": "BEAT",
+        "actual_1d_move_pct": -3.21
+      },
+      {
+        "earnings_date": "2025-10-28",
+        "eps_estimate": -0.12,
+        "eps_actual": -0.08,
+        "surprise_pct": 33.92,
+        "verdict": "BEAT",
+        "actual_1d_move_pct": -1.92
+      }
+    ]
   },
   "street_consensus_and_targets": {
     "target_mean_price": 12.13,
     "target_median_price": 12.5,
     "target_high_price": 18.0,
     "target_low_price": 3.59,
-    "implied_upside_to_mean_pct": 151.14,
+    "implied_upside_to_mean_pct": 136.91,
     "analyst_count": 12,
     "recommendation_key": "none",
     "recommendation_mean": null,

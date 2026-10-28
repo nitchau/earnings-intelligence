@@ -1,0 +1,1796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>[v2] FTNT — Pre-Earnings Forensic & Sentiment Tearsheet (Upcoming: Q3 2026 | Last Reported: Q2 2026)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0b0f19;
+      --bg-card: #111827;
+      --bg-card-elevated: #161f33;
+      --bg-table-row-alt: #0e1525;
+      --border-color: #1f2937;
+      --border-subtle: #283548;
+      --text-primary: #f9fafb;
+      --text-secondary: #d1d5db;
+      --text-muted: #9ca3af;
+      --accent-blue: #3b82f6;
+      --accent-blue-glow: rgba(59, 130, 246, 0.15);
+      --bull-green: #10b981;
+      --bull-green-bg: rgba(16, 185, 129, 0.14);
+      --bear-red: #ef4444;
+      --bear-red-bg: rgba(239, 68, 68, 0.14);
+      --warn-amber: #f59e0b;
+      --warn-amber-bg: rgba(245, 158, 11, 0.14);
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      line-height: 1.5;
+      font-size: 14px;
+      padding: 24px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1560px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* ==========================================================================
+       INTERACTIVE HOVER TOOLTIP SYSTEM (FOR METRICS & ABBREVIATIONS)
+       ========================================================================== */
+    .tip {
+      position: relative;
+      display: inline-block;
+      border-bottom: 1px dotted #60a5fa;
+      cursor: help;
+      transition: color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .tip:hover {
+      color: #93c5fd;
+      border-bottom-color: #93c5fd;
+    }
+
+    .tip::after {
+      content: attr(data-tip);
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 0;
+      width: 290px;
+      padding: 10px 12px;
+      background-color: #1e293b;
+      color: #f8fafc;
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 1.45;
+      text-align: left;
+      text-transform: none;
+      letter-spacing: normal;
+      white-space: normal;
+      border: 1px solid var(--accent-blue);
+      border-radius: 6px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.75);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(4px);
+      transition: opacity 0.16s ease, transform 0.16s ease, visibility 0.16s;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* Right-aligned tooltip modifier to prevent right-edge screen clipping */
+    .tip-right::after {
+      left: auto;
+      right: 0;
+    }
+
+    /* Bottom-aligned tooltip modifier for elements near top of page */
+    .tip-bottom::after {
+      bottom: auto;
+      top: calc(100% + 8px);
+    }
+
+    .tip:hover::after {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    /* UTILITY & BADGES */
+    .mono {
+      font-family: var(--font-mono);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+
+    .badge-bull {
+      background-color: var(--bull-green-bg);
+      color: var(--bull-green);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+    }
+
+    .badge-bear {
+      background-color: var(--bear-red-bg);
+      color: var(--bear-red);
+      border: 1px solid rgba(239, 68, 68, 0.35);
+    }
+
+    .badge-warn {
+      background-color: var(--warn-amber-bg);
+      color: var(--warn-amber);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+    }
+
+    .badge-neutral {
+      background-color: rgba(156, 163, 175, 0.12);
+      color: var(--text-secondary);
+      border: 1px solid rgba(156, 163, 175, 0.25);
+    }
+
+    .badge-blue {
+      background-color: var(--accent-blue-glow);
+      color: #60a5fa;
+      border: 1px solid rgba(59, 130, 246, 0.4);
+    }
+
+    /* CARD SYSTEM */
+    .card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--border-color);
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-title-accent {
+      width: 4px;
+      height: 16px;
+      background-color: var(--accent-blue);
+      border-radius: 2px;
+      display: inline-block;
+    }
+
+    .card-subtitle {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    /* HEADER BANNER */
+    .header-banner {
+      background: linear-gradient(135deg, #111827 0%, #0f172a 65%, #172554 100%);
+      border: 1px solid var(--border-subtle);
+      border-left: 4px solid var(--accent-blue);
+      border-radius: 10px;
+      padding: 22px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .helper-bar {
+      background-color: rgba(59, 130, 246, 0.12);
+      border: 1px solid rgba(59, 130, 246, 0.35);
+      border-radius: 6px;
+      padding: 8px 14px;
+      font-size: 12.5px;
+      color: #bfdbfe;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .ticker-identity {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .ticker-line {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .ticker-symbol {
+      font-family: var(--font-mono);
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.4);
+      padding: 2px 12px;
+      border-radius: 6px;
+    }
+
+    .company-name {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .sector-tag {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .header-price-block {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .price-box {
+      text-align: right;
+    }
+
+    .price-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    .price-value {
+      font-family: var(--font-mono);
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .header-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(195px, 1fr));
+      gap: 12px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .strip-item {
+      background-color: rgba(11, 15, 25, 0.55);
+      border: 1px solid var(--border-color);
+      padding: 10px 14px;
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .strip-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .strip-val {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    /* ROW 1: 4 KPI CARDS */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .kpi-metric-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .kpi-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.07);
+      gap: 8px;
+    }
+
+    .kpi-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .kpi-name {
+      font-size: 12.5px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .kpi-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 2px;
+    }
+
+    .kpi-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 4px;
+    }
+
+    .kpi-val {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .delta-pair {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    /* ROW 2: HISTORICAL TABLE */
+    .table-wrapper {
+      overflow-x: auto;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px;
+    }
+
+    th {
+      background-color: #161f33;
+      color: var(--text-secondary);
+      font-weight: 600;
+      text-align: right;
+      padding: 11px 12px;
+      border-bottom: 1px solid var(--border-subtle);
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+
+    th:first-child {
+      text-align: left;
+      font-family: var(--font-sans);
+      min-width: 265px;
+      position: sticky;
+      left: 0;
+      z-index: 2;
+      background-color: #161f33;
+    }
+
+    td {
+      padding: 9px 12px;
+      border-bottom: 1px solid var(--border-color);
+      text-align: right;
+      font-family: var(--font-mono);
+      color: var(--text-primary);
+      white-space: nowrap;
+    }
+
+    td:first-child {
+      text-align: left;
+      font-family: var(--font-sans);
+      font-weight: 500;
+      color: var(--text-secondary);
+      position: sticky;
+      left: 0;
+      background-color: var(--bg-card);
+      z-index: 1;
+    }
+
+    tr:nth-child(even) td {
+      background-color: var(--bg-table-row-alt);
+    }
+
+    tr:nth-child(even) td:first-child {
+      background-color: var(--bg-table-row-alt);
+    }
+
+    tr.section-divider td {
+      background-color: rgba(59, 130, 246, 0.09);
+      color: #93c5fd;
+      font-family: var(--font-sans);
+      font-weight: 700;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      padding: 7px 12px;
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .col-q0 {
+      background-color: rgba(59, 130, 246, 0.06) !important;
+      font-weight: 700;
+    }
+
+    .col-est {
+      background-color: rgba(245, 158, 11, 0.05) !important;
+      color: #fde68a;
+    }
+
+    /* OUTLIER CELL BORDERS */
+    .outlier-red {
+      border: 1.5px solid var(--bear-red) !important;
+      background-color: rgba(239, 68, 68, 0.12) !important;
+      color: #fca5a5 !important;
+      font-weight: 700;
+      position: relative;
+    }
+
+    .outlier-amber {
+      border: 1.5px solid var(--warn-amber) !important;
+      background-color: rgba(245, 158, 11, 0.12) !important;
+      color: #fcd34d !important;
+      font-weight: 700;
+      position: relative;
+    }
+
+    /* ROW 3: FORENSIC CALLOUT */
+    .forensic-grid {
+      display: grid;
+      grid-template-columns: 1.35fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 1080px) {
+      .forensic-grid,
+      .split-2col,
+      .sentiment-grid {
+        grid-template-columns: 1fr !important;
+      }
+    }
+
+    .forensic-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .forensic-item {
+      background-color: rgba(11, 15, 25, 0.6);
+      border: 1px solid var(--border-color);
+      border-left: 3px solid var(--warn-amber);
+      border-radius: 6px;
+      padding: 13px 15px;
+    }
+
+    .forensic-item.critical {
+      border-left-color: var(--bear-red);
+    }
+
+    .forensic-item-title {
+      font-weight: 700;
+      font-size: 13.5px;
+      color: var(--text-primary);
+      margin-bottom: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .forensic-item p {
+      color: var(--text-secondary);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .fcf-bridge-box {
+      background-color: #0d1322;
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* ROW 4 & ROW 5: 2-COLUMN SPLIT CARDS */
+    .split-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .audit-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .audit-point {
+      padding: 12px 14px;
+      border-radius: 6px;
+      background-color: rgba(11, 15, 25, 0.55);
+      border: 1px solid var(--border-color);
+    }
+
+    .audit-point-bull {
+      border-left: 3px solid var(--bull-green);
+    }
+
+    .audit-point-bear {
+      border-left: 3px solid var(--bear-red);
+    }
+
+    .audit-point-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 5px;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .audit-point-title {
+      font-weight: 700;
+      font-size: 13.5px;
+      color: var(--text-primary);
+    }
+
+    .audit-point p {
+      font-size: 12.8px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* CATALYST ITEMS */
+    .catalyst-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .catalyst-card {
+      background-color: rgba(11, 15, 25, 0.55);
+      border: 1px solid var(--border-color);
+      border-left: 3px solid var(--accent-blue);
+      border-radius: 6px;
+      padding: 12px 14px;
+    }
+
+    /* SENTIMENT ANALYSIS CARD */
+    .sentiment-overview-banner {
+      background: linear-gradient(90deg, rgba(239, 68, 68, 0.12) 0%, rgba(245, 158, 11, 0.12) 50%, rgba(16, 185, 129, 0.12) 100%);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .sentiment-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .sentiment-source-card {
+      background-color: #0d1322;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .sentiment-meter-wrap {
+      display: flex;
+       flex-direction: column;
+      gap: 5px;
+      margin: 4px 0;
+    }
+
+    .sentiment-bar-bg {
+      width: 100%;
+      height: 8px;
+      background-color: #1f2937;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .sentiment-bar-fill {
+      height: 100%;
+      border-radius: 4px;
+    }
+
+    /* ROW 7: TRADE MATRIX */
+    .playbook-setup-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+      background-color: rgba(11, 15, 25, 0.65);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 14px;
+    }
+
+    .scenario-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 16px;
+    }
+
+    .scenario-card {
+      background-color: #0d1322;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .scenario-bull {
+      border-top: 4px solid var(--bull-green);
+    }
+
+    .scenario-base {
+      border-top: 4px solid var(--warn-amber);
+    }
+
+    .scenario-bear {
+      border-top: 4px solid var(--bear-red);
+    }
+
+    .scenario-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 800;
+      font-size: 15px;
+    }
+
+    .trigger-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 12.8px;
+      color: var(--text-secondary);
+    }
+
+    .trigger-list li {
+      position: relative;
+      padding-left: 14px;
+    }
+
+    .trigger-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--accent-blue);
+      font-weight: bold;
+    }
+
+    .trade-structure {
+      margin-top: auto;
+      padding: 11px 12px;
+      background-color: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      font-size: 12px;
+    }
+
+    .trade-structure strong {
+      display: block;
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .footer-meta {
+      text-align: center;
+      font-size: 11.5px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      padding: 10px 0 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    
+    <!-- VERSION COMPARISON BANNER -->
+    <div style="background: #0f172a; border: 1px solid rgba(59, 130, 246, 0.35); border-radius: 10px; padding: 10px 18px; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center; font-size: 13px;">
+      <div style="display:flex; align-items:center; gap: 8px;">
+        <span style="background: rgba(59, 130, 246, 0.2); color: #60a5fa; font-weight: 800; font-family: monospace; padding: 3px 8px; border-radius: 5px; border: 1px solid rgba(59, 130, 246, 0.3);">v2 (Active)</span>
+        <span style="color: #cbd5e1;">Generated on <strong>Oct 28, 2026 at 07:22 AM</strong></span>
+      </div>
+      <div style="display:flex; align-items:center; gap: 8px;">
+        <span style="color: #94a3b8; font-size: 12px;">Compare prior iterations:</span>
+        <a href="FTNT_T1_2026-10-28_v1.html" style="background: rgba(255,255,255,0.08); color: #93c5fd; padding: 2px 8px; border-radius: 4px; font-size: 11.5px; text-decoration: none; font-family: monospace; border: 1px solid rgba(255,255,255,0.15);">v1</a>
+      </div>
+    </div>
+        
+<!-- 1. HEADER BANNER -->
+    <header class="header-banner">
+      <div class="helper-bar">
+        <span>💡 <strong>Interactive Definitions Enabled:</strong> Hover your mouse over any <span class="tip tip-bottom" title="Plain-English definitions pop up automatically whenever you hover over any dotted-underlined term." data-tip="Plain-English definitions pop up automatically whenever you hover over any dotted-underlined financial metric or abbreviation.">dotted-underlined metric or abbreviation</span> for an instant plain-English explanation.</span>
+        <span class="mono" style="font-size:11.5px;color:#93c5fd;">Last Reported Quarter: <strong>Q2 2026 (Ended June 30, 2026)</strong> • Upcoming Release: <strong>Q3 2026 (Ended Sep 30, 2026)</strong></span>
+      </div>
+
+      <div class="header-top">
+        <div class="ticker-identity">
+          <div class="ticker-line">
+            <span class="ticker-symbol">FTNT</span>
+            <h1 class="company-name">Fortinet, Inc.</h1>
+            <span class="badge badge-bull">CYBERSECURITY &amp; UNIFIED SASE LEADER</span>
+            <span class="badge badge-blue"><span class="tip tip-bottom" title="One trading day before official quarterly earnings release." data-tip="T-1 (Time Minus 1 Day): Analysis prepared one trading session prior to the upcoming Q3 2026 earnings release on Wednesday, Oct 28, 2026.">T-1</span> PRE-EARNINGS BRIEFING</span>
+          </div>
+          <div class="sector-tag">NASDAQ Global Select • Technology, Infrastructure Software &amp; Cybersecurity • <span class="tip tip-bottom" title="Central Index Key: Unique 10-digit identifier assigned by the U.S. SEC to all public company filings." data-tip="Central Index Key (CIK): The unique 10-digit identifier assigned by the U.S. Securities and Exchange Commission (SEC) to track Fortinet's official regulatory filings.">CIK</span>: 0001262039</div>
+        </div>
+        <div class="header-price-block">
+          <div class="price-box">
+            <div class="price-label">Spot Price (Oct 2026)</div>
+            <div class="price-value">$185.00 <span class="badge badge-bull">+88.5% <span class="tip tip-right tip-bottom" title="Year-To-Date: Percentage price change since January 1, 2026." data-tip="Year-To-Date (YTD): Total percentage return of the stock from January 1 of the current calendar year (2026) to today.">YTD</span></span></div>
+          </div>
+          <div class="price-box">
+            <div class="price-label"><span class="tip tip-right tip-bottom" title="Market Capitalization: Total value of all outstanding shares (Share Price × Diluted Shares)." data-tip="Market Capitalization: Total equity value of the company calculated by multiplying current share price ($185.00) by total diluted common shares (~734M).">Market Cap</span> / <span class="tip tip-right tip-bottom" title="Enterprise Value: Market Cap plus Total Debt minus Cash. Shows the true takeover cost of the business." data-tip="Enterprise Value (EV): Market Cap ($132.52B) - Net Cash Reserves (~$3.96B net liquid balance) = $128.55B.">EV</span></div>
+            <div class="price-value">$132.52B / $128.55B</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="header-strip">
+        <div class="strip-item">
+          <span class="strip-label">Upcoming Q3 2026 Release Date</span>
+          <span class="strip-val">Wed, Oct 28, 2026 • <span class="tip" title="After Market Close: Earnings are released right after the 4:00 PM ET stock market close." data-tip="After Market Close (AMC): The company releases its quarterly results after market close (~4:05 PM Eastern Time).">AMC</span> (4:05 PM ET)</span>
+          <span class="kpi-sub">Conference Call &amp; Webcast: 4:30 PM ET (1:30 PM PT) hosted by Ken Xie &amp; John Whittle on investor.fortinet.com</span>
+        </div>
+        <div class="strip-item">
+          <span class="strip-label"><span class="tip" title="The percentage stock move (up or down) that the options market is pricing in for the day after earnings." data-tip="Options-Implied Move: Derived from At-The-Money (ATM) weekly option straddle prices. Reflects expected post-earnings volatility.">Options-Implied Move</span> (1-Wk <span class="tip" title="At-The-Money: Options with a strike price equal to the current stock price." data-tip="At-The-Money (ATM): Options contracts whose strike price is closest to current trading price ($185.00).">ATM</span>)</span>
+          <span class="strip-val" style="color: var(--warn-amber);">±11.61% (±$20.97 / sh)</span>
+          <span class="kpi-sub">30D <span class="tip" title="Implied Volatility: Market's forecast of annualized stock price volatility derived from option prices." data-tip="Implied Volatility (IV): The options market's annualized volatility expectation.">IV</span>: 127.6% | Put/Call OI Ratio: 0.85x (Balanced Hedging Skew)</span>
+        </div>
+        <div class="strip-item">
+          <span class="strip-label">Q3 2026E <span class="tip" title="Wall Street Consensus: The average forecast of equity research analysts covering Fortinet." data-tip="Consensus Revenue: The average top-line sales forecast published by Wall Street sell-side analysts for Q3 2026 ($2,120M).">Consensus Revenue</span> / <span class="tip" title="Whisper Number: The unofficial expectation among hedge funds and institutional traders." data-tip="Whisper Number: Unofficial top-line expectations among buy-side institutional investors ($2,150M).">Whisper</span></span>
+          <span class="strip-val">$2,120M / $2,150M</span>
+          <span class="kpi-sub">Midpoint: $2,120.0M | +22.9% <span class="tip" title="Year-over-Year: Comparison against the exact same quarter last year (Q3 2025)." data-tip="Year-over-Year (YoY): Compares performance against the same quarter one year prior (Q3 2026E vs Q3 2025: $1,724.9M).">YoY</span> vs Q3 2025</span>
+        </div>
+        <div class="strip-item">
+          <span class="strip-label">Q3 2026E Consensus <span class="tip" title="Earnings Per Share: Net profit divided by total diluted shares outstanding." data-tip="Earnings Per Share (EPS): Net profit allocated to each share of common stock.">EPS</span> / Whisper</span>
+          <span class="strip-val">$0.86 <span class="tip" title="Generally Accepted Accounting Principles / Non-GAAP Consensus." data-tip="Consensus EPS: Non-GAAP diluted earnings per share expectation ($0.86 vs $0.92 whisper).">Consensus</span> / $0.92 Whisper</span>
+          <span class="kpi-sub">Street Range: $0.84 to $0.89 | Prior Q2 Actual: $0.90</span>
+        </div>
+        <div class="strip-item">
+          <span class="strip-label">Full-Year 2026 <span class="tip tip-right" title="Management guidance on full-year gross billings across product and service contracts." data-tip="FY2026 Billings Envelope: Raised in Q2 2026 to $8,900M–$9,100M ($9,000M midpoint).">Billings Guidance Corridor</span></span>
+          <span class="strip-val" style="color: var(--bull-green);">$8,900M – $9,100M</span>
+          <span class="kpi-sub">Non-GAAP Operating Margin Envelope: 34.0%–35.5% • Elite Rule of 45+ Performance</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- TRACK B: STICKY INTERACTIVE PRE-EARNINGS SECTION JUMP-NAV -->
+    <nav class="pre-jump-nav" style="position: sticky; top: 8px; z-index: 90; background: rgba(15, 23, 42, 0.92); backdrop-filter: blur(10px); border: 1px solid rgba(59, 130, 246, 0.35); border-radius: 10px; padding: 8px 14px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.4);">
+      <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+        <span style="font-size: 11px; font-weight: 800; color: #60a5fa; text-transform: uppercase; letter-spacing: 0.06em; margin-right: 4px;">⚡ Jump To:</span>
+        <a href="#row-1-kpis" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">1. Q2 KPIs</a>
+        <a href="#row-1b-scorecard" style="font-size: 11.5px; color: #60a5fa; font-weight: 700; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(59, 130, 246, 0.16); border: 1px solid rgba(59, 130, 246, 0.4);">1B. Whisper &amp; Track Record Scorecard</a>
+        <a href="#row-2-financials" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">2. 5Q Table + Q3E</a>
+        <a href="#row-3-fcf" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">3. FCF Bridge</a>
+        <a href="#row-4-segments" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">4. Tailwinds/Drags</a>
+        <a href="#row-4b-debates" style="font-size: 11.5px; color: #93c5fd; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(59, 130, 246, 0.14); border: 1px solid rgba(59, 130, 246, 0.3);">4B. Wall St Debates</a>
+        <a href="#row-5-peers" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">5. Peers</a>
+        <a href="#row-6-sentiment" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">6. Sentiment &amp; Pulse</a>
+        <a href="#row-7-pm-matrix" style="font-size: 11.5px; color: #fcd34d; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(245, 158, 11, 0.14); border: 1px solid rgba(245, 158, 11, 0.3);">7. PM Trade Matrix</a>
+      </div>
+      <a href="FTNT_T0_POST_2026-10-28.html" style="font-size: 11.5px; font-weight: 700; color: #34d399; text-decoration: none; padding: 5px 12px; border-radius: 6px; background: rgba(16, 185, 129, 0.2); border: 1px solid rgba(16, 185, 129, 0.45); display: flex; align-items: center; gap: 6px;">
+        ⇄ Compare Paired T+0 Post-Earnings Tearsheet
+      </a>
+    </nav>
+
+    <!-- 2. ROW 1: TOP KPI CARDS (4 CARDS) -->
+    <section class="kpi-grid" id="row-1-kpis">
+      <!-- CARD A: CASH FLOW & CAPITAL INTENSITY -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><span class="card-title-accent"></span>A. Cash Flow &amp; Free Cash Flow Power (Q2 2026)</div>
+          <span class="badge badge-bull">ELITE FCF CONVERSION</span>
+        </div>
+        <div class="kpi-metric-list">
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Operating Cash Flow: Actual cash generated from customer billings and service subscriptions." data-tip="Operating Cash Flow (OCF): Cash inflow generated from cybersecurity operations ($1,044M in Q2 2026).">Operating Cash Flow</span> (Q2 2026)</span>
+              <span class="kpi-sub">Total OCF Generated: $1,044M ($1043.6M exact / 51.0% OCF margin)</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">$1,044M</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-bull">+28.5% YoY</span>
+                <span class="delta-pill delta-bull">+14.2% QoQ</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Capital Expenditures: Physical investments in data center points of presence, ASIC tooling, and IT infrastructure." data-tip="CapEx: Physical facilities and data center SASE infrastructure ($78.0M in Q2 2026).">Capital Expenditures</span> (Q2 2026)</span>
+              <span class="kpi-sub">Data Center &amp; Tooling: $78.0M</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">$78.0M</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-neutral">+4.0% QoQ</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Reported Free Cash Flow: Operating Cash Flow ($1043.6M) minus CapEx ($78.0M)." data-tip="Reported Free Cash Flow: $965.6M in Q2 2026 (47.2% FCF margin).">Reported Free Cash Flow</span> (Q2 2026)</span>
+              <span class="kpi-sub">Reported FCF: $965.6M</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">$965.6M</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-bull">+15.1% QoQ</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="True Free Cash Flow: Reported FCF ($965.6M) minus SBC ($79.3M) minus Leases ($0.0M)." data-tip="True Free Cash Flow: $886.3M economic cash generated in Q2 2026 after deducting share-based compensation.">True FCF (Post-SBC)</span> (Q2 2026)</span>
+              <span class="kpi-sub">True Economic Cash Flow: $886.3M</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">$886.3M</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-bull">+16.2% QoQ</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD B: PROFITABILITY & MARGIN STRUCTURE -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><span class="card-title-accent"></span>B. Operating Profitability &amp; ASIC Advantage (Q2 2026)</div>
+          <span class="badge badge-bull">35%+ OPERATING MARGINS</span>
+        </div>
+        <div class="kpi-metric-list">
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Gross Profit: Total revenue minus cost of appliances and cloud infrastructure." data-tip="Gross Profit: Printed $1,643.2M in Q2 2026 (80.2% gross margin).">Gross Profit</span> (Q2 2026)</span>
+              <span class="kpi-sub">Consolidated Gross Margin: 80.2%</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">$1,643.2M</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-bull">+10.6% QoQ</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Operating Income: Gross profit ($1643.2M) minus total OpEx ($953.9M)." data-tip="Operating Income: Reached $689.3M in Q2 2026 (33.7% GAAP operating margin / 35.8% Non-GAAP).">Operating Income (EBIT)</span></span>
+              <span class="kpi-sub">Operating Profit: $689.3M</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">$689.3M</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-bull">+18.8% QoQ</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="GAAP Net Income: Consolidated bottom-line net profit." data-tip="GAAP Net Income: $606.3M in Q2 2026 (+37.8% YoY vs $440.1M in Q2 2025).">GAAP Net Income</span> (Q2 2026)</span>
+              <span class="kpi-sub">Diluted GAAP EPS: $0.82 (Non-GAAP $0.90)</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">$606.3M</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-bull">+13.4% QoQ</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Research &amp; Development: Ongoing investment in FortiOS operating system and custom SP5/NP7 security processors." data-tip="R&amp;D Spend: $245.0M in Q2 2026 (12.0% of Revenue).">R&amp;D Innovation Investment</span></span>
+              <span class="kpi-sub">R&amp;D Spend: $245.0M (12.0% of Rev)</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">$245.0M</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-neutral">+6.5% QoQ</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD C: BALANCE SHEET FORTRESS & LIQUIDITY -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><span class="card-title-accent"></span>C. Balance Sheet Fortress &amp; Capital Structure (Q2 2026)</div>
+          <span class="badge badge-bull">PRISTINE CAPITAL STRUCTURE</span>
+        </div>
+        <div class="kpi-metric-list">
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Liquid Cash &amp; Short-Term Investments: Total liquid reserves held across interest-bearing cash and short-term debt securities." data-tip="Liquid Reserves: ~$3.96B in liquid cash and short-term investments as of June 30, 2026.">Cash &amp; Liquid Investments</span></span>
+              <span class="kpi-sub">Liquid Fortress: ~$3.96B (Net Cash Position)</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">~$3.96B</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-bull">MASSIVE RESERVES</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Total Debt: Bank loans, notes, and debt obligations." data-tip="Total Debt: $990M in senior notes, comfortably eclipsed by $3.96B in liquid assets.">Total Debt Obligations</span></span>
+              <span class="kpi-sub">Senior Notes: $990M (Net Cash: +$2.97B)</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">$990M</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-bull">PRISTINE SOLVENCY</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Stockholders' Equity: Net equity value of the enterprise." data-tip="Stockholders' Equity: ~$1.85B in book equity as of June 30, 2026.">Stockholders' Equity</span> (Q2 2026)</span>
+              <span class="kpi-sub">Equity Base: ~$1.85B</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">~$1.85B</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-bull">+18.0% YoY</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Short Interest: Percentage of freely floating shares sold short by bearish funds." data-tip="Short Float: 2.06% of float is held short, demonstrating low bearish conviction.">Short Percent of Float</span></span>
+              <span class="kpi-sub">Short Float: 2.06% (Low Short Crowding)</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">2.06%</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-bull">LOW SHORT RISK</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CARD D: SEGMENT MIX & OPERATIONAL KPIS -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title"><span class="card-title-accent"></span>D. Segment Breakdown &amp; Strategic ARR (Q2 2026)</div>
+          <span class="badge badge-bull">UNIFIED SASE EXPANSION</span>
+        </div>
+        <div class="kpi-metric-list">
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Service Revenue: Recurring cloud and FortiGuard subscriptions." data-tip="Service Revenue: $1,385.2M in Q2 2026 (67.6% of Total Revenue).">Service Revenue (Subscriptions)</span></span>
+              <span class="kpi-sub">Recurring Subscriptions: $1,385.2M (+21.0% YoY)</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">$1,385.2M</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-bull">+9.8% QoQ</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Product Revenue: Sales of FortiGate appliances and hardware switches." data-tip="Product Revenue: $662.7M in Q2 2026 (32.4% of Total Revenue).">Product Revenue (Hardware)</span></span>
+              <span class="kpi-sub">Appliance Sales: $662.7M (+14.3% YoY)</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">$662.7M</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-bull">+12.8% QoQ</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Total Billings: Gross contract value invoiced during the quarter." data-tip="Total Billings: $2,185.0M in Q2 2026 (+15.2% YoY).">Total Billings</span> (Q2 2026)</span>
+              <span class="kpi-sub">Quarterly Billings: $2,185.0M</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">$2,185.0M</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-bull">+15.2% YoY</span>
+              </div>
+            </div>
+          </div>
+          <div class="kpi-row">
+            <div>
+              <span class="kpi-name"><span class="tip" title="Unified SASE ARR: Annual recurring revenue from Secure Access Service Edge offerings." data-tip="Unified SASE ARR: Grew to $450.0M ARR in Q2 2026 (+36% YoY).">Unified SASE ARR Run-Rate</span></span>
+              <span class="kpi-sub">SASE ARR: $450.0M (Targeting $520M in Q3E)</span>
+            </div>
+            <div class="kpi-right">
+              <span class="kpi-val">$450.0M</span>
+              <div class="delta-pair">
+                <span class="delta-pill delta-bull">+36.4% YoY</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. ROW 1B: PRE-RELEASE EXPECTATIONS, WHISPER SPREAD & HISTORICAL SCORECARD -->
+    <section class="card" id="row-1b-scorecard" style="margin-bottom: 24px;">
+      <div class="card-header">
+        <div class="card-title"><span class="card-title-accent"></span>Row 1B: Pre-Release Expectations, Whisper Spread &amp; Track Record Scorecard</div>
+        <span class="badge badge-bull">Q3 2026E PRE-PRINT AUDIT</span>
+      </div>
+
+      <!-- 3-CARD SETUP AUDIT BANNER -->
+      <div class="t1-setup-audit" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-bottom: 18px; padding: 14px; background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(59, 130, 246, 0.25); border-radius: 8px;">
+        <div style="border-left: 3px solid #3b82f6; padding-left: 10px;">
+          <div style="font-size: 11px; text-transform: uppercase; color: #94a3b8; font-weight: 700;">Pre-Print Options Volatility Regime</div>
+          <div style="font-size: 16px; font-weight: 800; color: #60a5fa; margin: 2px 0;">±11.61% (±$20.97)</div>
+          <div style="font-size: 11.5px; color: #cbd5e1;">1-Wk ATM Straddle Implied Move | 30D IV at 127.6% (Overpriced vs History)</div>
+        </div>
+        <div style="border-left: 3px solid #10b981; padding-left: 10px;">
+          <div style="font-size: 11px; text-transform: uppercase; color: #94a3b8; font-weight: 700;">Wall Street Consensus vs. Whisper</div>
+          <div style="font-size: 16px; font-weight: 800; color: #34d399; margin: 2px 0;">$2,120M Consensus vs. $2,150M Whisper</div>
+          <div style="font-size: 11.5px; color: #cbd5e1;">EPS: $0.86 Consensus vs. $0.92 Buy-Side Whisper Bogey</div>
+        </div>
+        <div style="border-left: 3px solid #f59e0b; padding-left: 10px;">
+          <div style="font-size: 11px; text-transform: uppercase; color: #94a3b8; font-weight: 700;">Executive Sandbagging &amp; Credibility</div>
+          <div style="font-size: 16px; font-weight: 800; color: #fcd34d; margin: 2px 0;">90 / 100 Score</div>
+          <div style="font-size: 11.5px; color: #cbd5e1;">Flawless 4/4 Beat Record (100% Beat Rate / +19.8% Avg EPS Surprise)</div>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 12px; font-size: 13px; color: #94a3b8; font-family: monospace;">
+        <strong>Table 1B-1:</strong> HEADLINE &amp; OPERATIONAL KPI CONSENSUS VS. BUY-SIDE WHISPER SCORECARD
+      </div>
+      <div class="table-wrapper" style="margin-bottom: 20px;">
+        <table class="table-financials">
+          <thead>
+            <tr>
+              <th>Operational / Financial Metric</th>
+              <th>Q2 2026 Actual</th>
+              <th>Q3 2025 YoY Baseline</th>
+              <th class="col-q0">Street Consensus Q3E</th>
+              <th>Buy-Side Whisper Bogey</th>
+              <th>Whisper vs. Street Spread</th>
+              <th>Institutional Hurdle Badge</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr>
+                <td><span class="tip" title="Consolidated quarterly revenue across Product and Service lines." data-tip="Total Net Revenue ($M): Wall Street consensus models $2,120M in Q3 2026E (+22.9% YoY vs $1,724.9M in Q3 2025); buy-side whisper targets $2,150M fueled by acceleration in enterprise Secure Networking refreshes and Unified SASE adoptions.">Total Net Revenue ($M)</span></td>
+                <td>$2,047.9M</td>
+                <td>$1,724.9M</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">$2,120.0M</td>
+                <td style="font-weight:700; color: #34d399;">$2,150.0M</td>
+                <td>
+                  <span class="badge badge-bull">+$30.0M (+1.42% Whisper Hurdle)</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div style="width:84%; height:100%; background:linear-gradient(90deg, #3b82f6, #10b981);"></div></div>
+                </td>
+                <td><span class="badge badge-blue">BULL HURDLE >$2.15B</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Wall Street consensus Non-GAAP Diluted EPS for Q3 2026E ($0.86) vs Buy-Side Whisper ($0.92)." data-tip="Diluted EPS ($): Sell-side consensus expects $0.86 per share; buy-side whisper bogeys target $0.92+ reflecting Fortinet's industry-leading 35%+ operating margin structure and ASIC-driven hardware profitability.">Diluted EPS (Non-GAAP / Consensus)</span></td>
+                <td>$0.90</td>
+                <td>$0.74</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">$0.86</td>
+                <td style="font-weight:700; color: #34d399;">$0.92</td>
+                <td>
+                  <span class="badge badge-bull">+$0.06 (+6.98% Beat Target)</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div style="width:88%; height:100%; background:linear-gradient(90deg, #3b82f6, #10b981);"></div></div>
+                </td>
+                <td><span class="badge badge-blue">EARNINGS POWER</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="High-margin recurring revenue from FortiGuard AI security subscriptions, Unified SASE, and FortiCare support." data-tip="Service Revenue ($M): Printed $1,385.2M in Q2 2026 (+21.0% YoY); consensus models $1,440.0M for Q3 2026E with whisper looking for $1,460.0M+ on accelerating SecOps adoption.">Service Revenue ($M)</span></td>
+                <td>$1,385.2M</td>
+                <td>$1,145.0M</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">$1,440.0M</td>
+                <td style="font-weight:700; color: #34d399;">$1,460.0M</td>
+                <td>
+                  <span class="badge badge-bull">+$20.0M (+1.39% Spread)</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div style="width:82%; height:100%; background:linear-gradient(90deg, #3b82f6, #10b981);"></div></div>
+                </td>
+                <td><span class="badge badge-blue">RECURRING SAAS ENGINE</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Revenue from sales of FortiGate network security appliances, custom ASIC chips, and hardware firewalls." data-tip="Product Revenue ($M): Printed $662.7M in Q2 2026; Street consensus models $680.0M in Q3 2026E with whisper at $690.0M as customer firewall refresh cycles normalize.">Product Revenue ($M)</span></td>
+                <td>$662.7M</td>
+                <td>$579.9M</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">$680.0M</td>
+                <td style="font-weight:700; color: #34d399;">$690.0M</td>
+                <td>
+                  <span class="badge badge-bull">+$10.0M (+1.47% Spread)</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div style="width:79%; height:100%; background:linear-gradient(90deg, #3b82f6, #10b981);"></div></div>
+                </td>
+                <td><span class="badge badge-blue">HARDWARE REFRESH CYCLE</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Gross billings generated during the quarter across all product and multi-year service contracts." data-tip="Total Billings ($M): Printed $2,185.0M in Q2 2026 (+15.2% YoY); Street models $2,240.0M in Q3 2026E with whisper requiring $2,280.0M+ to sustain forward multiple expansion.">Total Billings ($M)</span></td>
+                <td>$2,185.0M</td>
+                <td>$1,895.0M</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">$2,240.0M</td>
+                <td style="font-weight:700; color: #34d399;">$2,280.0M</td>
+                <td>
+                  <span class="badge badge-bull">+$40.0M (+1.79% Spread)</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div style="width:86%; height:100%; background:linear-gradient(90deg, #3b82f6, #10b981);"></div></div>
+                </td>
+                <td><span class="badge badge-blue">FORWARD DEMAND GAUGE</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Annual recurring revenue specifically derived from cloud-delivered Secure Access Service Edge offerings." data-tip="Unified SASE ARR ($M): Fortinet's strategic growth vector grew to over $450M ARR in Q2 2026; Street consensus models $520M ARR in Q3 2026E (+35% YoY) competing directly with Palo Alto Networks and Zscaler.">Unified SASE Annual Recurring Revenue (SASE ARR) ($M)</span></td>
+                <td>$450.0M</td>
+                <td>$330.0M</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">$520.0M</td>
+                <td style="font-weight:700; color: #34d399;">$545.0M</td>
+                <td>
+                  <span class="badge badge-bull">+$25.0M (+4.81% Spread)</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div style="width:91%; height:100%; background:linear-gradient(90deg, #3b82f6, #10b981);"></div></div>
+                </td>
+                <td><span class="badge badge-blue">STRATEGIC EXPANSION</span></td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="margin-bottom: 12px; font-size: 13px; color: #94a3b8; font-family: monospace;">
+        <strong>Table 1B-2:</strong> MANAGEMENT GUIDANCE CREDIBILITY &amp; HISTORICAL TRACK RECORD
+      </div>
+      <div class="credibility-gauge-bar" style="height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; margin-bottom: 12px; overflow: hidden;">
+        <div style="width: 90%; height: 100%; background: linear-gradient(90deg, #3b82f6, #10b981);"></div>
+      </div>
+      <div class="table-wrapper" style="margin-bottom: 20px;">
+        <table class="table-financials">
+          <thead>
+            <tr>
+              <th>Guidance Metric / Dimension</th>
+              <th>Prior Q2 Guidance for Q3</th>
+              <th>Current Street Consensus</th>
+              <th>Historical Milestone Track Record</th>
+              <th>Variance &amp; Sandbagging Analysis</th>
+              <th>Credibility Grade</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr>
+                <td><span class="tip" title="Official quarterly revenue guidance issued by management during Q2 2026 earnings." data-tip="Q3 2026 Revenue Corridor: Management guided to $2,090M–$2,150M ($2,120M midpoint); current Street consensus sits exactly at the $2,120M midpoint, with buy-side whisper targeting the top half ($2,140M–$2,160M).">Q3 2026E Revenue Guidance Corridor</span></td>
+                <td>$2,090M – $2,150M ($2,120M Midpoint)</td>
+                <td style="font-weight:600; color: #93c5fd;">$2,120.0M Consensus ($2,150.0M Whisper)</td>
+                <td style="font-weight:600; color: #34d399;">4 / 4 Revenue Beats (100% Rate)</td>
+                <td>Ken Xie and CFO have consistently posted conservative guidance ranges, beating top-line targets by an average of 1.5–3.0% over the last four quarters.</td>
+                <td><span class="badge badge-bull">PRUDENT CONSERVATISM</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Management's annual billings forecast updated during Q2 2026." data-tip="FY2026 Billings Guidance: Raised in Q2 2026 to $8,900M–$9,100M ($9,000M midpoint); Street consensus models $9,040M, expecting an additional guidance hike of $50M–$100M.">Full-Year 2026 Total Billings Guidance Corridor</span></td>
+                <td>$8,900M – $9,100M ($9,000M Midpoint)</td>
+                <td style="font-weight:600; color: #93c5fd;">$9,040M Consensus ($9,120M Whisper)</td>
+                <td style="font-weight:600; color: #34d399;">Raised Billings Twice in 2026</td>
+                <td>Strong enterprise renewal rates and multi-year SASE bundling have allowed Fortinet to raise billings targets sequentially.</td>
+                <td><span class="badge badge-bull">GUIDANCE OUTPERFORMER</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Management's full-year non-GAAP operating margin target envelope." data-tip="Non-GAAP Operating Margin: Fortinet delivered an exceptional 35.8% operating margin in Q2 2026, leading the entire cybersecurity sector.">Non-GAAP Operating Margin Guidance (>35% Target)</span></td>
+                <td>34.0% – 35.5% Operating Margin Envelope</td>
+                <td style="font-weight:600; color: #93c5fd;">35.2% Consensus (Whisper >36.0%)</td>
+                <td style="font-weight:600; color: #34d399;">4 / 4 Margin Beats</td>
+                <td>Proprietary FortiASIC architecture delivers 3x–5x performance per watt advantage over commodity CPU architectures, insulating margins from cloud infrastructure cost inflation.</td>
+                <td><span class="badge badge-bull">ELITE PROFITABILITY</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Deterministic 4-quarter historical EPS surprise and 1-day post-earnings stock move from Stage 1." data-tip="4Q Historical Track Record: Over the last 4 quarters, FTNT achieved a 100.0% beat rate with an average EPS surprise of +19.76%. Average 1-day post-earnings move was ±7.97% (+0.67%, +20.03%, +4.85%, -6.34%), compared to current weekly straddle implied move of ±11.61% (±$20.97/sh).">4-Quarter Historical EPS Surprise & 1-Day Stock Reaction Track Record</span></td>
+                <td>Last 4Q Moves: +0.67%, +20.03%, +4.85%, -6.34%</td>
+                <td style="font-weight:600; color: #93c5fd;">Current ATM Straddle: ±11.61% (±$20.97/sh)</td>
+                <td style="font-weight:600; color: #34d399;">4 / 4 EPS Beats (100.0% Beat Rate)</td>
+                <td>Options pricing reflects an elevated volatility regime (127.57% IV), overpricing realized post-earnings moves by +3.64% and offering an attractive premium selling edge.</td>
+                <td><span class="badge badge-bull">VOLATILITY HARVEST EDGE</span></td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="margin-bottom: 12px; font-size: 13px; color: #94a3b8; font-family: monospace;">
+        <strong>Table 1B-3:</strong> FORWARD GUIDANCE BOGEYS REQUIRED FOR MULTIPLE EXPANSION
+      </div>
+      <div class="table-wrapper">
+        <table class="table-financials">
+          <thead>
+            <tr>
+              <th>Forward Milestone / Metric</th>
+              <th>Street Consensus Hurdle</th>
+              <th>Bull Case Bogey (Re-Rating)</th>
+              <th>Bear Case Breakdown</th>
+              <th>Sensitivity Badge</th>
+              <th>Strategic Catalyst Rationale</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr>
+                <td><span class="tip" title="Hurdle for Q4 2026 revenue guidance given fourth-quarter seasonal enterprise budget flushes." data-tip="Q4 2026E Revenue Guidance: Street consensus models $2,250M–$2,320M ($2,285M midpoint). A guided midpoint above $2,300M+ is required to sustain post-print multiple expansion.">Q4 2026E Total Revenue Guidance Corridor</span></td>
+                <td>$2,250M – $2,320M ($2,285M Midpoint)</td>
+                <td style="font-weight:600; color: #34d399;">$2,320M – $2,380M ($2,350M Midpoint)</td>
+                <td style="font-weight:600; color: #f87171;">Midpoint Below $2,240M</td>
+                <td><span class="badge badge-warn">PRIMARY STOCK DRIVER</span></td>
+                <td>Fourth quarter represents peak hardware firewall refresh and multi-year enterprise license renewals across Fortune 500 accounts.</td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Full-year operating profitability floor expected by institutional buy-side desks." data-tip="Operating Margin Bogey: Institutional funds demand affirmation that operating margins will remain comfortably above 35.0% despite investments in cloud SASE points of presence.">FY2026 Non-GAAP Operating Margin Hurdle (>35.5%)</span></td>
+                <td>Affirm FY26 Operating Margin >= 35.0%</td>
+                <td style="font-weight:600; color: #34d399;">Raise Full-Year Margin Guide to 35.5% – 36.5%</td>
+                <td style="font-weight:600; color: #f87171;">Margin Compression Below 34.0%</td>
+                <td><span class="badge badge-warn">MARGIN PRESERVATION</span></td>
+                <td>Fortinet trades at an elite valuation multiple specifically due to its unique combination of 20%+ growth and 35%+ operating margins.</td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Forward visibility into customer upgrades from legacy firewalls to Wi-Fi 7 and SASE platforms." data-tip="Firewall Refresh Horizon: Management commentary on the magnitude of the upcoming 2027 enterprise hardware upgrade cycle.">FY2027 Secure Networking Refresh Cycle Pipeline</span></td>
+                <td>Qualitative Confirmation of Strong Enterprise Refresh Demand</td>
+                <td style="font-weight:600; color: #34d399;">Quantified Backlog Acceleration into Early 2027</td>
+                <td style="font-weight:600; color: #f87171;">Lengthened Sales Cycles or Hardware Deferrals</td>
+                <td><span class="badge badge-warn">GROWTH LONGEVITY</span></td>
+                <td>Enterprise customers typically operate on a 4-year firewall refresh cycle; early indicators for the 2027 cycle will dictate whether billings can re-accelerate toward 20%.</td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 4. ROW 2: 5-QUARTER HISTORICAL FINANCIAL TABLE + Q3E -->
+    <section class="card" id="row-2-financials" style="margin-bottom: 24px;">
+      <div class="card-header">
+        <div class="card-title"><span class="card-title-accent"></span>Row 2: 5-Quarter Stitched Financial Table + Q3 2026E Consensus Estimate</div>
+        <span class="badge badge-blue">GAAP FINANCIAL MESH</span>
+      </div>
+      <div class="table-wrapper">
+        <table class="table-financials">
+          <thead>
+            <tr>
+              <th>Line Item ($ Millions)</th>
+              <th>Q2 2025</th>
+              <th>Q3 2025</th>
+              <th>Q4 2025</th>
+              <th>Q1 2026</th>
+              <th class="col-q0">Q2 2026 (Actual)</th>
+              <th class="col-est">Q3 2026E (Consensus)</th>
+              <th>QoQ Delta</th>
+              <th>YoY Delta</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="font-weight: 700; background: rgba(59, 130, 246, 0.05);">
+              <td><span class="tip" title="Total Revenue: Consolidated revenue recognized." data-tip="Total Revenue: Combined product appliance and recurring service revenues.">$ Total Revenue</span></td>
+              <td>$1630.0M</td>
+              <td>$1724.9M</td>
+              <td>$1905.0M</td>
+              <td>$1849.6M</td>
+              <td class="col-q0" style="color: #60a5fa; font-weight:800;">$2047.9M</td>
+              <td class="col-est" style="color: #34d399; font-weight:800;">$2,120.0M</td>
+              <td class="delta-pill delta-bull">+10.7%</td>
+              <td class="delta-pill delta-bull">+25.6%</td>
+            </tr>
+            <tr style="padding-left: 15px;">
+              <td style="padding-left: 24px;">• Service Revenue (FortiGuard &amp; SASE)</td>
+              <td>$1085.0M</td>
+              <td>$1145.0M</td>
+              <td>$1240.0M</td>
+              <td>$1262.0M</td>
+              <td class="col-q0">$1385.2M</td>
+              <td class="col-est">$1,440.0M</td>
+              <td class="delta-pill delta-bull">+9.8%</td>
+              <td class="delta-pill delta-bull">+27.7%</td>
+            </tr>
+            <tr style="padding-left: 15px;">
+              <td style="padding-left: 24px;">• Product Revenue (FortiGate Appliances)</td>
+              <td>$545.0M</td>
+              <td>$579.9M</td>
+              <td>$665.0M</td>
+              <td>$587.6M</td>
+              <td class="col-q0">$662.7M</td>
+              <td class="col-est">$680.0M</td>
+              <td class="delta-pill delta-bull">+12.8%</td>
+              <td class="delta-pill delta-bull">+21.6%</td>
+            </tr>
+            <tr>
+              <td>Cost of Revenue</td>
+              <td>$314.9M</td>
+              <td>$331.7M</td>
+              <td>$389.2M</td>
+              <td>$364.5M</td>
+              <td class="col-q0">$404.7M</td>
+              <td class="col-est">$415.0M</td>
+              <td class="delta-pill delta-neg">+11.0%</td>
+              <td class="delta-pill delta-neg">+28.5%</td>
+            </tr>
+            <tr style="font-weight: 700;">
+              <td>Gross Profit</td>
+              <td>$1315.1M</td>
+              <td>$1393.2M</td>
+              <td>$1515.8M</td>
+              <td>$1485.1M</td>
+              <td class="col-q0" style="color:#60a5fa;">$1643.2M</td>
+              <td class="col-est" style="color:#34d399;">$1,705.0M</td>
+              <td class="delta-pill delta-bull">+10.6%</td>
+              <td class="delta-pill delta-bull">+24.9%</td>
+            </tr>
+            <tr style="font-weight: 700;">
+              <td>Operating Expenses</td>
+              <td>$857.1M</td>
+              <td>$845.9M</td>
+              <td>$890.2M</td>
+              <td>$905.1M</td>
+              <td class="col-q0">$953.9M</td>
+              <td class="col-est">$985.0M</td>
+              <td class="delta-pill delta-neutral">+5.4%</td>
+              <td class="delta-pill delta-neutral">+11.3%</td>
+            </tr>
+            <tr style="padding-left: 15px;">
+              <td style="padding-left: 24px;">• Research &amp; Development (R&amp;D)</td>
+              <td>$210.0M</td>
+              <td>$215.0M</td>
+              <td>$225.0M</td>
+              <td>$230.0M</td>
+              <td class="col-q0">$245.0M</td>
+              <td class="col-est">$255.0M</td>
+              <td class="delta-pill delta-neutral">+6.5%</td>
+              <td class="delta-pill delta-neutral">+16.7%</td>
+            </tr>
+            <tr style="padding-left: 15px;">
+              <td style="padding-left: 24px;">• Selling, General &amp; Administrative (SG&amp;A)</td>
+              <td>$647.1M</td>
+              <td>$630.9M</td>
+              <td>$665.2M</td>
+              <td>$675.1M</td>
+              <td class="col-q0">$708.9M</td>
+              <td class="col-est">$730.0M</td>
+              <td class="delta-pill delta-neutral">+5.0%</td>
+              <td class="delta-pill delta-neutral">+9.5%</td>
+            </tr>
+            <tr style="font-weight: 700; background: rgba(59, 130, 246, 0.05);">
+              <td>Operating Income (EBIT)</td>
+              <td>$458.0M</td>
+              <td>$547.3M</td>
+              <td>$625.6M</td>
+              <td>$580.0M</td>
+              <td class="col-q0" style="color: #60a5fa; font-weight:800;">$689.3M</td>
+              <td class="col-est" style="color: #34d399; font-weight:800;">$720.0M</td>
+              <td class="delta-pill delta-bull">+18.8%</td>
+              <td class="delta-pill delta-bull">+50.5%</td>
+            </tr>
+            <tr style="font-weight: 700;">
+              <td>GAAP Net Income</td>
+              <td>$440.1M</td>
+              <td>$473.9M</td>
+              <td>$506.0M</td>
+              <td>$534.5M</td>
+              <td class="col-q0" style="color: #60a5fa;">$606.3M</td>
+              <td class="col-est" style="color: #34d399;">$635.0M</td>
+              <td class="delta-pill delta-bull">+13.4%</td>
+              <td class="delta-pill delta-bull">+37.8%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 5. ROW 3: FORENSIC CASH FLOW & TRUE FCF WATERFALL BRIDGE -->
+    <section class="card" id="row-3-fcf" style="margin-bottom: 24px;">
+      <div class="card-header">
+        <div class="card-title"><span class="card-title-accent"></span>Row 3: Forensic Quality of Earnings &amp; True Free Cash Flow Bridge (Q2 2026)</div>
+        <span class="badge badge-bull">ELITE CASH CONVERSION AUDIT</span>
+      </div>
+      <div class="forensic-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px;">
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 16px; border-radius: 8px; border: 1px solid var(--border-color);">
+          <div style="font-size: 13px; font-weight: 700; color: #93c5fd; margin-bottom: 10px;">
+            True Economic Free Cash Flow Waterfall (Q2 2026 Actual)
+          </div>
+          <div class="waterfall-row" style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 12.5px;">
+            <span><span class="tip" title="Operating Cash Flow: Net cash generated from operating activities." data-tip="Operating Cash Flow (OCF): $1,044M in Q2 2026 ($1043.6M exact).">Operating Cash Flow (OCF)</span></span>
+            <span style="font-family: monospace; font-weight: 700; color: #34d399;">+$1,044M</span>
+          </div>
+          <div class="waterfall-row" style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 12.5px;">
+            <span>Less: Capital Expenditures (CapEx)</span>
+            <span style="font-family: monospace; font-weight: 700; color: #f87171;">-$78.0M</span>
+          </div>
+          <div class="waterfall-row" style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 12.5px; background: rgba(255,255,255,0.02);">
+            <span><strong>= Reported Free Cash Flow (FCF)</strong></span>
+            <span style="font-family: monospace; font-weight: 700; color: #34d399;">+$965.6M</span>
+          </div>
+          <div class="waterfall-row" style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 12.5px;">
+            <span>Less: Share-Based Compensation (SBC)</span>
+            <span style="font-family: monospace; font-weight: 700; color: #f87171;">-$79.3M</span>
+          </div>
+          <div class="waterfall-row" style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 12.5px;">
+            <span>Less: Principal Finance Lease Obligations</span>
+            <span style="font-family: monospace; font-weight: 700; color: #94a3b8;">-$0.0M</span>
+          </div>
+          <div class="waterfall-row" style="display: flex; justify-content: space-between; padding: 8px 0; font-size: 13.5px; background: rgba(16, 185, 129, 0.08); border-radius: 4px; padding-left: 6px; padding-right: 6px; margin-top: 4px;">
+            <span><strong>= True Free Cash Flow (Post-SBC &amp; Leases)</strong></span>
+            <span style="font-family: monospace; font-weight: 800; color: #34d399;">+$886.3M</span>
+          </div>
+        </div>
+
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 16px; border-radius: 8px; border: 1px solid var(--border-color);">
+          <div style="font-size: 13px; font-weight: 700; color: #34d399; margin-bottom: 8px;">
+            Forensic Cash Quality &amp; Margin Integrity Takeaways
+          </div>
+          <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.55; margin-bottom: 8px;">
+            <strong>1. Elite Free Cash Flow Conversion:</strong> Fortinet generated <strong>$886.3M</strong> in True Free Cash Flow during Q2 2026, representing an exceptional <strong>43.3% True FCF margin</strong> on revenue. This cash power places Fortinet among the top 1% of profitable software enterprises globally.
+          </p>
+          <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.55; margin-bottom: 8px;">
+            <strong>2. Exceptional SBC Restraint:</strong> Share-based compensation of $79.3M was only 3.9% of total revenue and 8.3% of operating expenses, vastly lower than industry peers like PANW (15%+) and CrowdStrike (20%+).
+          </p>
+          <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.55;">
+            <strong>3. Proprietary ASIC Cost Architecture:</strong> Fortinet's in-house designed SP5 and NP7 Security Processors allow FortiGate appliances to deliver up to 5x higher compute throughput at a fraction of the silicon cost of standard Intel/AMD server chips.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. ROW 4: OPERATIONAL TAILWINDS & HEADWINDS -->
+    <section class="card" id="row-4-segments" style="margin-bottom: 24px;">
+      <div class="card-header">
+        <div class="card-title"><span class="card-title-accent"></span>Row 4: 4 Operational Tailwinds vs. 4 Execution Headwinds</div>
+        <span class="badge badge-bull">STRATEGIC CATALYST MESH</span>
+      </div>
+      <div class="audit-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px;">
+        <!-- TAILWINDS -->
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 16px; border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.25);">
+          <div style="font-size: 13.5px; font-weight: 700; color: #34d399; margin-bottom: 12px;">
+            🚀 Top 4 Operational Tailwinds
+          </div>
+          <div class="audit-point" style="margin-bottom: 10px; font-size: 12.5px; color: var(--text-secondary); line-height: 1.5;">
+            <strong>1. Hardware Firewall Refresh Acceleration:</strong> Customers upgrading aging 2021/2022 firewalls are driving solid product revenue rebound (+14.3% YoY in Q2 to $662.7M).
+          </div>
+          <div class="audit-point" style="margin-bottom: 10px; font-size: 12.5px; color: var(--text-secondary); line-height: 1.5;">
+            <strong>2. Unified SASE Hypergrowth:</strong> Fortinet's single-vendor SASE platform reached $450M ARR (+36% YoY), winning large branch network and hybrid-work enterprise displacements.
+          </div>
+          <div class="audit-point" style="margin-bottom: 10px; font-size: 12.5px; color: var(--text-secondary); line-height: 1.5;">
+            <strong>3. Elite Cash &amp; Operating Margin Leadership:</strong> Over 35% non-GAAP operating margin and $886.3M quarterly True FCF provide immense financial flexibility and buyback capacity.
+          </div>
+          <div class="audit-point" style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5;">
+            <strong>4. FortiASIC Structural Moat:</strong> Custom silicon delivers 3x–5x performance per watt advantages, allowing customers to reduce data center power and rack footprints.
+          </div>
+        </div>
+
+        <!-- HEADWINDS -->
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 16px; border-radius: 8px; border: 1px solid rgba(239, 68, 68, 0.25);">
+          <div style="font-size: 13.5px; font-weight: 700; color: #f87171; margin-bottom: 12px;">
+            ⚠️ Top 4 Execution Headwinds
+          </div>
+          <div class="audit-point" style="margin-bottom: 10px; font-size: 12.5px; color: var(--text-secondary); line-height: 1.5;">
+            <strong>1. Extended Enterprise Sales Cycles:</strong> Large Fortune 500 deals involve multi-layered committee scrutiny, occasionally shifting contract signing timing across quarterly cutoffs.
+          </div>
+          <div class="audit-point" style="margin-bottom: 10px; font-size: 12.5px; color: var(--text-secondary); line-height: 1.5;">
+            <strong>2. Intense Cloud SASE Competition:</strong> Competing directly against pure-cloud vendors Palo Alto Networks and Zscaler requires heavy sales enablement in high-end enterprise accounts.
+          </div>
+          <div class="audit-point" style="margin-bottom: 10px; font-size: 12.5px; color: var(--text-secondary); line-height: 1.5;">
+            <strong>3. Full Valuation Multiple at $180:</strong> Trading at 47.6x forward earnings leaves minimal buffer for any billings guidance deceleration.
+          </div>
+          <div class="audit-point" style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5;">
+            <strong>4. FX and European Macro Headwinds:</strong> Substantial international footprint exposes top-line growth to currency volatility across EMEA enterprise accounts.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. SECTION 4B: TOP 3 INSTITUTIONAL PRE-PRINT DEBATES & CALL FOCUS QUESTIONS -->
+    <section class="card" id="row-4b-debates" style="margin-bottom: 24px;">
+      <div class="card-header">
+        <div class="card-title"><span class="card-title-accent"></span>Section 4B: Top 3 Institutional Pre-Print Debates &amp; Analyst Call Focus Questions</div>
+        <span class="badge badge-blue">SELL-SIDE PREVIEW AUDIT</span>
+      </div>
+      <div>
+        <div class="audit-point" style="background: rgba(11, 15, 25, 0.6); border: 1px solid var(--border-color); border-left: 3px solid #3b82f6; padding: 12px 14px; border-radius: 6px; margin-bottom: 12px;">
+          <div style="font-weight: 700; color: #60a5fa; font-size: 13.5px; margin-bottom: 4px;">
+            Debate 1: Unified SASE & SecOps vs. Palo Alto Networks — Can Fortinet Capture Premium Market Share?
+          </div>
+          <p style="font-size: 12.8px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 6px;">
+            <strong>Bull vs. Bear Institutional Framing:</strong> Bulls argue Fortinet's single-operating-system (FortiOS) architecture and Unified SASE platform offer massive total-cost-of-ownership (TCO) advantages over fragmented multi-vendor solutions from Palo Alto Networks (PANW) and Zscaler (ZS), driving 30%+ ARR growth in software security. Bears counter that enterprise CIOs still perceive Fortinet primarily as a distributed branch/mid-market firewall vendor, limiting penetration into large Fortune 100 enterprise core networks.
+          </p>
+          <p style="font-size: 12.8px; color: var(--text-secondary); line-height: 1.5;">
+            <strong>Analyst Focus Question: 'What portion of new Unified SASE billings in Q3 originated from net-new enterprise accounts versus existing FortiGate customer cross-sells, and how is competitive displacement against PANW Prisma Access trending?'</strong>
+          </p>
+        </div>
+        <div class="audit-point" style="background: rgba(11, 15, 25, 0.6); border: 1px solid var(--border-color); border-left: 3px solid #10b981; padding: 12px 14px; border-radius: 6px; margin-bottom: 12px;">
+          <div style="font-weight: 700; color: #34d399; font-size: 13.5px; margin-bottom: 4px;">
+            Debate 2: Firewall Product Revenue Normalization — Is the Hardware Cycle Truly Re-accelerating?
+          </div>
+          <p style="font-size: 12.8px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 6px;">
+            <strong>Bull vs. Bear Institutional Framing:</strong> Bulls contend that product revenue digestion is completely in the rear-view mirror, with Q2 product growth (+14% YoY to $662.7M) proving that AI-driven data center bandwidth demands are forcing companies to upgrade to high-throughput FortiGate hardware. Bears note that enterprise budgeting remains cautious, and software-defined WAN (SD-WAN) and pure cloud architectures could dampen long-term on-premises appliance demand.
+          </p>
+          <p style="font-size: 12.8px; color: var(--text-secondary); line-height: 1.5;">
+            <strong>Analyst Focus Question: 'How are enterprise customer order lead times and channel inventory levels behaving ahead of calendar 2027, and do you see early evidence of AI cluster deployments driving high-end FortiGate demand?'</strong>
+          </p>
+        </div>
+        <div class="audit-point" style="background: rgba(11, 15, 25, 0.6); border: 1px solid var(--border-color); border-left: 3px solid #f59e0b; padding: 12px 14px; border-radius: 6px; margin-bottom: 12px;">
+          <div style="font-weight: 700; color: #fcd34d; font-size: 13.5px; margin-bottom: 4px;">
+            Debate 3: Valuation Multiple Headwinds at $180 — Does 48x Forward P/E Leave Room for Upside?
+          </div>
+          <p style="font-size: 12.8px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 6px;">
+            <strong>Bull vs. Bear Institutional Framing:</strong> Bulls emphasize that Fortinet generates unmatched free cash flow ($886M+ True FCF in Q2 alone) and operates with zero long-term debt, justifying a premium multiple as a premier compounder in enterprise software. Bears highlight that with Wall Street's mean price target at $169.45 (-6.2% below the $180.61 spot price), any quarterly print lacking a decisive billings beat-and-raise could trigger immediate valuation multiple compression.
+          </p>
+          <p style="font-size: 12.8px; color: var(--text-secondary); line-height: 1.5;">
+            <strong>Analyst Focus Question: 'Given robust cash flow generation and over $3B in liquid reserves, what are the company's capital allocation priorities regarding accelerated share repurchases versus strategic M&A in cloud security?'</strong>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. ROW 5: PEER VALUATION COMPS -->
+    <section class="card" id="row-5-peers" style="margin-bottom: 24px;">
+      <div class="card-header">
+        <div class="card-title"><span class="card-title-accent"></span>Row 5: Peer Valuation &amp; Cybersecurity Multiples Benchmark</div>
+        <span class="badge badge-bull">ENTERPRISE CYBERSECURITY COMPS</span>
+      </div>
+      <div class="table-wrapper">
+        <table class="table-financials">
+          <thead>
+            <tr>
+              <th>Company</th>
+              <th>Ticker</th>
+              <th>Market Cap</th>
+              <th>Enterprise Value</th>
+              <th>Forward P/E</th>
+              <th>EV / Sales (TTM)</th>
+              <th>Operating Margin (Non-GAAP)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background: rgba(59, 130, 246, 0.08); font-weight:700;">
+              <td>Fortinet, Inc.</td>
+              <td>FTNT</td>
+              <td>$132.52B</td>
+              <td>$128.55B</td>
+              <td>47.6x</td>
+              <td>17.6x</td>
+              <td>35.8% (Sector Leader)</td>
+            </tr>
+            <tr>
+              <td>Palo Alto Networks, Inc.</td>
+              <td>PANW</td>
+              <td>~$118.5B</td>
+              <td>~$115.2B</td>
+              <td>~52.4x</td>
+              <td>~14.2x</td>
+              <td>~28.5%</td>
+            </tr>
+            <tr>
+              <td>CrowdStrike Holdings, Inc.</td>
+              <td>CRWD</td>
+              <td>~$74.2B</td>
+              <td>~$71.8B</td>
+              <td>~68.5x</td>
+              <td>~18.5x</td>
+              <td>~24.0%</td>
+            </tr>
+            <tr>
+              <td>Check Point Software</td>
+              <td>CHKP</td>
+              <td>~$21.4B</td>
+              <td>~$19.1B</td>
+              <td>~21.5x</td>
+              <td>~8.2x</td>
+              <td>~44.0%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 9. ROW 6: 4-PILLAR PRE-EARNINGS SENTIMENT GAUGE & POSITIONING -->
+    <section class="card" id="row-6-sentiment" style="margin-bottom: 24px;">
+      <div class="card-header">
+        <div class="card-title"><span class="card-title-accent"></span>Row 6: Multi-Source 4-Pillar Sentiment Gauge &amp; Positioning Audit</div>
+        <span class="badge badge-bull">COMPOSITE SCORE: 79 / 100</span>
+      </div>
+      <div class="sentiment-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-bottom: 16px;">
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+          <div style="font-size: 11px; text-transform: uppercase; color: #94a3b8; font-weight: 700;">1. Retail Tech &amp; Reddit Sentiment</div>
+          <div style="font-size: 18px; font-weight: 800; color: #34d399; margin: 4px 0;">75 / 100 (Bullish)</div>
+          <div class="sentiment-meter-bar" style="height: 5px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; margin-bottom: 6px;">
+            <div style="width: 75%; height: 100%; background: #10b981;"></div>
+          </div>
+          <div style="font-size: 11.5px; color: #cbd5e1;">High respect for cash flow compounder model and ASIC advantage.</div>
+        </div>
+
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+          <div style="font-size: 11px; text-transform: uppercase; color: #94a3b8; font-weight: 700;">2. Institutional Sell-Side Ratings</div>
+          <div style="font-size: 18px; font-weight: 800; color: #60a5fa; margin: 4px 0;">68 / 100 (Hold Consensus)</div>
+          <div class="sentiment-meter-bar" style="height: 5px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; margin-bottom: 6px;">
+            <div style="width: 68%; height: 100%; background: #3b82f6;"></div>
+          </div>
+          <div style="font-size: 11.5px; color: #cbd5e1;">37 analysts covering with $169.45 mean target (-6.18% upside from $180.61).</div>
+        </div>
+
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+          <div style="font-size: 11px; text-transform: uppercase; color: #94a3b8; font-weight: 700;">3. Options Derivatives Skew</div>
+          <div style="font-size: 18px; font-weight: 800; color: #34d399; margin: 4px 0;">82 / 100 (Balanced Flow)</div>
+          <div class="sentiment-meter-bar" style="height: 5px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; margin-bottom: 6px;">
+            <div style="width: 82%; height: 100%; background: #10b981;"></div>
+          </div>
+          <div style="font-size: 11.5px; color: #cbd5e1;">PCR OI at 0.85x reflects steady institutional call overwriting.</div>
+        </div>
+
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 12px 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+          <div style="font-size: 11px; text-transform: uppercase; color: #94a3b8; font-weight: 700;">4. Short Interest &amp; Crowding Risk</div>
+          <div style="font-size: 18px; font-weight: 800; color: #34d399; margin: 4px 0;">90 / 100 (Minimal Squeeze)</div>
+          <div class="sentiment-meter-bar" style="height: 5px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; margin-bottom: 6px;">
+            <div style="width: 90%; height: 100%; background: #10b981;"></div>
+          </div>
+          <div style="font-size: 11.5px; color: #cbd5e1;">Low short interest at 2.06% of float signals lack of institutional short interest.</div>
+        </div>
+      </div>
+
+      <div style="background: rgba(11, 15, 25, 0.6); padding: 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+        <div style="font-size: 13px; font-weight: 700; color: #93c5fd; margin-bottom: 6px;">
+          Retail Community vs. Institutional Desk Positioning Summary
+        </div>
+        <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 6px;">
+          Retail investors and cybersecurity tech enthusiasts across Reddit (r/cybersecurity, r/stocks) and X FinTwit regard Fortinet as a blue-chip cybersecurity cash generator with unassailable operating margins. Retail sentiment sits at +75% bullish, with traders praising Ken Xie's conservative management and consistent execution. In options markets, retail traders have been accumulating calls near the $190 and $200 strikes, though weekly straddles pricing ±11.61% (±$20.97/share) with Put/Call OI at 0.85x show balanced two-way positioning and respect for post-earnings gap risks.
+        </p>
+        <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5;">
+          Sell-side institutional equity research coverage is extensive (37 analysts covering, with a Hold consensus rating and $169.45 mean target, alongside top-tier bull targets at $225.00). Institutional desks view Fortinet as a foundational infrastructure holding with elite free cash flow generation (>30% FCF margins), but note that trading at ~48x forward earnings leaves little room for execution missteps. Long/short hedge funds have structured long equity positions against out-of-the-money call spreads or sold high-IV weekly straddles (127.57% IV) to capitalize on the historical tendency of FTNT's realized moves (average ±7.97%) to undershoot options-implied volatility.
+        </p>
+      </div>
+    </section>
+
+    <!-- 10. ROW 7: HEDGE FUND PM TRADE EXECUTION MATRIX -->
+    <section class="card" id="row-7-pm-matrix" style="margin-bottom: 24px;">
+      <div class="card-header">
+        <div class="card-title"><span class="card-title-accent"></span>Row 7: 3-Scenario Hedge Fund PM Options &amp; Stock Execution Playbook</div>
+        <span class="badge badge-bull">DERIVATIVES STRUCTURING</span>
+      </div>
+      <div class="scenario-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px;">
+        <!-- SCENARIO BULL -->
+        <div class="scenario-bull" style="background: rgba(16, 185, 129, 0.06); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 8px; padding: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span style="font-weight: 800; color: #34d399; font-size: 14px;">🟢 SCENARIO A: SASE ACCELERATION &amp; BILLINGS BEAT</span>
+            <span class="badge badge-bull">PROBABILITY: 45%</span>
+          </div>
+          <div style="font-size: 13px; font-weight: 700; color: #e2e8f0; margin-bottom: 6px;">
+            Target Price: $205.00 – $215.00 (+13.5% to +19.0% Upside from $185.00)
+          </div>
+          <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 10px;">
+            <strong>Catalyst Triggers:</strong> Fortinet delivers a clean beat across revenue (>$2,150M) and billings (>$2,280M), with Unified SASE ARR crossing $540M (+38% YoY) and full-year billings guidance raised above $9.15B. Non-GAAP operating margin guidance holds above 35.5%.
+          </p>
+          <div class="trade-structure" style="background: rgba(11, 15, 25, 0.7); padding: 10px; border-radius: 6px; font-size: 12px; font-family: monospace; color: #93c5fd; border: 1px solid rgba(59, 130, 246, 0.3);">
+            <strong>Trade Structure:</strong> Buy Nov $185 / $205 Call Vertical Spreads for ~$6.20 debit; targeting $13.80 profit on multiple expansion.
+          </div>
+        </div>
+
+        <!-- SCENARIO BASE -->
+        <div class="scenario-base" style="background: rgba(59, 130, 246, 0.06); border: 1px solid rgba(59, 130, 246, 0.35); border-radius: 8px; padding: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span style="font-weight: 800; color: #60a5fa; font-size: 14px;">🔵 SCENARIO B: IN-LINE BEAT &amp; THETA CRUSH</span>
+            <span class="badge badge-blue">PROBABILITY: 35%</span>
+          </div>
+          <div style="font-size: 13px; font-weight: 700; color: #e2e8f0; margin-bottom: 6px;">
+            Target Price: $175.00 – $188.00 (-3.1% to +4.1% vs $185.00 Spot)
+          </div>
+          <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 10px;">
+            <strong>Catalyst Triggers:</strong> Modest revenue and EPS beat ($2,125M / $0.88), full-year billings reiterated, operating margins stable at 35.2%. With implied move at ±11.61% and 127.6% IV, options premium collapses rapidly.
+          </p>
+          <div class="trade-structure" style="background: rgba(11, 15, 25, 0.7); padding: 10px; border-radius: 6px; font-size: 12px; font-family: monospace; color: #93c5fd; border: 1px solid rgba(59, 130, 246, 0.3);">
+            <strong>Trade Structure:</strong> Sell Nov $160 / $205 Iron Condor or Weekly Strangle to harvest elevated implied volatility.
+          </div>
+        </div>
+
+        <!-- SCENARIO BEAR -->
+        <div class="scenario-bear" style="background: rgba(239, 68, 68, 0.06); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 8px; padding: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span style="font-weight: 800; color: #f87171; font-size: 14px;">🔴 SCENARIO C: BILLINGS MISS &amp; VALUATION COMPRESSION</span>
+            <span class="badge badge-warn">PROBABILITY: 20%</span>
+          </div>
+          <div style="font-size: 13px; font-weight: 700; color: #e2e8f0; margin-bottom: 6px;">
+            Target Price: $155.00 – $165.00 (-14.2% to -8.6% Downside from $185.00)
+          </div>
+          <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 10px;">
+            <strong>Catalyst Triggers:</strong> Product revenue growth stumbles below +10% YoY, billings fail to reach whisper expectations ($<2,220M), or management cites cautious European enterprise deal closures heading into Q4.
+          </p>
+          <div class="trade-structure" style="background: rgba(11, 15, 25, 0.7); padding: 10px; border-radius: 6px; font-size: 12px; font-family: monospace; color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3);">
+            <strong>Trade Structure:</strong> Buy Nov $175 / $160 Bear Put Spreads for ~$4.50 debit to hedge long tech exposure.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. FOOTER & VERIFICATION LEDGER -->
+    <footer style="margin-top: 30px; padding: 18px; border-top: 1px solid var(--border-color); font-size: 12px; color: #94a3b8; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+      <div>
+        <strong>Deterministic Ground-Truth Audit:</strong> CIK 0001262039 • Fortinet, Inc. • Spot: $185.00 • Latest OCF: $1,044M ($1043.6M) • True FCF: $886.3M • 11 Guardrails Enforced
+      </div>
+      <div>
+        Generated by Antigravity 2.0 T-1 Pre-Earnings Multi-Agent Orchestration Bus (Gemini 3.8 Flash High)
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

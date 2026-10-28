@@ -1,6 +1,21 @@
 {
   "ticker": "NOK",
   "earnings_date": "2026-10-22",
-  "passed": true,
-  "errors": []
+  "passed": false,
+  "character_count": 65704,
+  "tooltips_count": 52,
+  "errors": [
+    "Missing Layer 2 Pre-Earnings bus file from Agent 2A: NOK_2026-10-22_pre_agent2a_kpis.json",
+    "Missing Layer 2 Pre-Earnings bus file from Agent 2B: NOK_2026-10-22_pre_agent2b_guidance.json",
+    "Missing Layer 2 Pre-Earnings bus file from Agent 2C: NOK_2026-10-22_pre_agent2c_sentiment.json",
+    "Missing Required Section: Section 2B: Row 1B Pre-Release Expectations, Whisper & Track Record Scorecard (#row-1b-scorecard) is missing from rendered HTML.",
+    "Missing Required Section: Section 5B: Top 3 Institutional Pre-Print Debates & Call Focus Questions (#row-4b-debates) is missing from rendered HTML.",
+    "Missing Row 1B Sub-table: Table 1B-1 Headline & Company KPI Consensus vs. Buy-Side Whisper Scorecard.",
+    "Missing Row 1B Sub-table: Table 1B-2 Management Guidance Credibility & 4Q Historical Track Record.",
+    "Missing Row 1B Sub-table: Table 1B-3 Forward Guidance Bogeys & Re-Rating Hurdles.",
+    "Missing Track B Pre-Earnings UX Component: '.pre-jump-nav' missing from rendered HTML.",
+    "Missing Track B Pre-Earnings UX Component: '.t1-setup-audit' missing from rendered HTML.",
+    "Missing Track B Pre-Earnings UX Component: '.beat-bar-track' missing from rendered HTML.",
+    "Missing Track B Pre-Earnings UX Component: '.credibility-gauge-bar' missing from rendered HTML."
+  ]
 }

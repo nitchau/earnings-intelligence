@@ -5,47 +5,87 @@
   "industry": "Electrical Equipment & Parts",
   "schedule_verification": {
     "earnings_date": "2026-10-30",
-    "confirmation_flag": "UNCONFIRMED_ESTIMATE_MUST_VERIFY_VIA_SEARCH",
-    "release_timing_hint": "UNKNOWN_CHECK_BMO_OR_AMC",
-    "yahoo_consensus_eps": null
+    "confirmation_flag": "SCHEDULED_IN_EARNINGS_CALENDAR_VERIFY_WEBCAST_TIME",
+    "release_timing_hint": "BMO (Before Market Open)",
+    "yahoo_consensus_eps": 1.4
   },
   "price_validation": {
-    "yahoo_spot_price": 134.38,
+    "yahoo_spot_price": 138.91,
     "google_finance_spot_price": null,
     "cross_source_divergence_pct": 0.0,
     "status": "VERIFIED"
   },
   "valuation_and_market": {
-    "market_cap_millions": 21750.47,
-    "enterprise_value_millions": 22285.71,
-    "trailing_pe": 37.22,
-    "forward_pe": 19.84,
-    "price_to_sales_ttm": 4.5,
-    "ev_to_ebitda": 21.23,
-    "short_percent_of_float": 3.38
+    "market_cap_millions": 22482.88,
+    "enterprise_value_millions": 23151.65,
+    "trailing_pe": 38.48,
+    "forward_pe": 20.51,
+    "price_to_sales_ttm": 4.65,
+    "ev_to_ebitda": 22.06,
+    "short_percent_of_float": 3.45
   },
   "options_positioning": {
     "expiry_strictly_after_earnings": "2026-11-20",
     "pricing_method_used": "BID_ASK_MIDPOINT / BID_ASK_MIDPOINT",
-    "atm_straddle_usd": 18.8,
-    "atm_implied_move_pct": 13.99,
-    "atm_implied_volatility_pct": 66.91,
-    "put_call_oi_ratio": 0.54
+    "atm_straddle_usd": 19.5,
+    "atm_implied_move_pct": 14.04,
+    "atm_implied_volatility_pct": 68.37,
+    "put_call_oi_ratio": 0.46
   },
   "historical_earnings_track_record": {
-    "track_record_error": "Failed to perform, curl: (28) Failed to connect to guce.yahoo.com:443 after 21474 ms: Could not connect to server. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
-    "prior_4q_releases": []
+    "quarters_evaluated": 4,
+    "beats_count": 3,
+    "beat_rate_pct": 75.0,
+    "avg_eps_surprise_pct": 10.87,
+    "avg_historical_1d_move_abs_pct": 7.03,
+    "current_implied_move_pct": 14.04,
+    "implied_vs_historical_move_delta_pct": 7.01,
+    "options_vol_regime": "OVERPRICED_VS_HISTORY (SHORT VOLATILITY / THETA HARVEST EDGE)",
+    "prior_4q_releases": [
+      {
+        "earnings_date": "2026-07-31",
+        "eps_estimate": 1.16,
+        "eps_actual": 1.45,
+        "surprise_pct": 24.52,
+        "verdict": "BEAT",
+        "actual_1d_move_pct": 6.24
+      },
+      {
+        "earnings_date": "2026-05-01",
+        "eps_estimate": 0.94,
+        "eps_actual": 1.09,
+        "surprise_pct": 15.71,
+        "verdict": "BEAT",
+        "actual_1d_move_pct": 11.21
+      },
+      {
+        "earnings_date": "2026-02-06",
+        "eps_estimate": 0.9,
+        "eps_actual": 0.9,
+        "surprise_pct": 0.31,
+        "verdict": "MET",
+        "actual_1d_move_pct": -1.08
+      },
+      {
+        "earnings_date": "2025-10-31",
+        "eps_estimate": 0.88,
+        "eps_actual": 0.91,
+        "surprise_pct": 2.94,
+        "verdict": "BEAT",
+        "actual_1d_move_pct": 9.58
+      }
+    ]
   },
   "street_consensus_and_targets": {
     "target_mean_price": 203.29,
     "target_median_price": 208.0,
     "target_high_price": 240.0,
     "target_low_price": 136.0,
-    "implied_upside_to_mean_pct": 51.28,
+    "implied_upside_to_mean_pct": 46.35,
     "analyst_count": 17,
     "recommendation_key": "strong_buy",
     "recommendation_mean": 1.3,
-    "yahoo_consensus_eps_q0e": null
+    "yahoo_consensus_eps_q0e": 1.4
   },
   "forensic_fcf_bridge_latest": {
     "period_label": "Q2 2026 (Ended Jun 30, 2026)",

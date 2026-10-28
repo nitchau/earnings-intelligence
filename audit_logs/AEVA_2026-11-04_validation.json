@@ -1,6 +1,24 @@
 {
   "ticker": "AEVA",
   "earnings_date": "2026-11-04",
-  "passed": true,
-  "errors": []
+  "passed": false,
+  "character_count": 68346,
+  "tooltips_count": 60,
+  "errors": [
+    "Missing Layer 2 Pre-Earnings bus file from Agent 2A: AEVA_2026-11-04_pre_agent2a_kpis.json",
+    "Missing Layer 2 Pre-Earnings bus file from Agent 2B: AEVA_2026-11-04_pre_agent2b_guidance.json",
+    "Missing Layer 2 Pre-Earnings bus file from Agent 2C: AEVA_2026-11-04_pre_agent2c_sentiment.json",
+    "Missing Required Section: Section 2B: Row 1B Pre-Release Expectations, Whisper & Track Record Scorecard (#row-1b-scorecard) is missing from rendered HTML.",
+    "Missing Required Section: Section 4: True FCF Waterfall Bridge rows (<div class='waterfall-row'>) is missing from rendered HTML.",
+    "Missing Required Section: Section 5: Row 4 Segment Execution Audit Grid (<div class='audit-grid'>) is missing from rendered HTML.",
+    "Missing Required Section: Section 5B: Top 3 Institutional Pre-Print Debates & Call Focus Questions (#row-4b-debates) is missing from rendered HTML.",
+    "Missing Required Section: Section 7: Visual Sentiment Meter Bars (<div class='sentiment-meter-bar'>) is missing from rendered HTML.",
+    "Missing Row 1B Sub-table: Table 1B-1 Headline & Company KPI Consensus vs. Buy-Side Whisper Scorecard.",
+    "Missing Row 1B Sub-table: Table 1B-2 Management Guidance Credibility & 4Q Historical Track Record.",
+    "Missing Row 1B Sub-table: Table 1B-3 Forward Guidance Bogeys & Re-Rating Hurdles.",
+    "Missing Track B Pre-Earnings UX Component: '.pre-jump-nav' missing from rendered HTML.",
+    "Missing Track B Pre-Earnings UX Component: '.t1-setup-audit' missing from rendered HTML.",
+    "Missing Track B Pre-Earnings UX Component: '.beat-bar-track' missing from rendered HTML.",
+    "Missing Track B Pre-Earnings UX Component: '.credibility-gauge-bar' missing from rendered HTML."
+  ]
 }
