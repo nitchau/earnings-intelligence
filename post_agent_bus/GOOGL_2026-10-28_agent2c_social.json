@@ -1,0 +1,64 @@
+{
+  "ticker": "GOOGL",
+  "earnings_date": "2026-10-28",
+  "agent_role": "Social_Pulse_Agent",
+  "model": "Gemini 3.8 Flash High",
+  "social_channels_crawled": [
+    "Reddit (r/wallstreetbets, r/stocks, r/investing, r/Google, r/Bard)",
+    "X (FinTwit / #GOOG / $GOOG / $GOOGL / #Alphabet)",
+    "Threads (threads.net / @sundarpichai)",
+    "Stocktwits ($GOOG / $GOOGL sentiment stream)",
+    "Seeking Alpha post-market earnings call transcripts & commentary",
+    "Sell-Side Flash Notes (JPMorgan, Morgan Stanley, Barclays, Goldman Sachs, Bernstein)"
+  ],
+  "retail_vs_institutional_reaction": {
+    "retail_sentiment_summary": "Retail investors and tech enthusiasts on r/wallstreetbets, r/stocks, and FinTwit were awed by Google Cloud doubling (+103% YoY to $30.7B) and the Gemini app reaching 1 billion users. However, retail traders expressed extreme frustration with the -9.75% after-hours stock drop to $290.52, pointing out that headline GAAP EPS ($2.12 vs $2.97 consensus) was artificially distorted by an $8.2B non-operating paper loss on equity investments.",
+    "institutional_sentiment_summary": "Institutional desks focused intensely on the CapEx acceleration. With Q3 CapEx hitting $23.95B and management guiding Q4 CapEx even higher ($24B+), algorithmic macro models reacted negatively to the compression of Free Cash Flow ($12.7B True FCF vs $24.4B standard). Long-only institutional managers, however, noted that Cloud growing 103% YoY with 5-year high Search query growth completely invalidates the AI search disruption narrative.",
+    "after_hours_movement_driver": "GOOGL tumbled -9.97% after-hours to $290.50 (down -$31.37 from the $321.89 regular close) as headline optical EPS dilution from -$8.2B in venture portfolio valuation marks and surging AI infrastructure CapEx ($24B+/quarter) triggered algorithmic de-risking, overshadowing record $127.6B revenues and Cloud doubling to $30.7B."
+  },
+  "four_pillar_post_sentiment_scores": {
+    "pillar_1_retail_and_social_pulse": {
+      "score_out_of_100": 70,
+      "classification": "CONSTRUCTIVE / CONFUSED BY POST-MARKET DROP",
+      "key_themes": [
+        "Awe over Cloud doubling to $30.7B and Gemini hitting 1B users",
+        "Frustration over headline GAAP EPS distortion from $8.2B paper losses",
+        "Discussions comparing Google's TPU moat favorably against competitors",
+        "High retail conviction to buy the dip below $300"
+      ],
+      "top_quote": "FinTwit Tech Analyst: 'Alphabet just reported $127.6B in revenue, Cloud grew 103% to $30.7B, Search query growth hit a 5-year high, and Gemini has 1B users. Selling this down -9.7% because of paper marks on venture investments is the gift of the decade.'"
+    },
+    "pillar_2_sellside_flash_reactions": {
+      "score_out_of_100": 82,
+      "classification": "BULLISH ON MONETIZATION / ACCEPTING CAPEX CYCLE",
+      "key_themes": [
+        "JPMorgan and Morgan Stanley reiterate Overweight, raising Cloud targets",
+        "Search query growth at 5-year high permanently dispels search erosion fears",
+        "CapEx of $24B+ is directly backed by enterprise contracted compute demand",
+        "Operating margin of 31.8% proves efficiency despite massive AI infrastructure buildout"
+      ],
+      "top_quote": "Morgan Stanley Flash Note: 'Alphabet's Q3 results deliver the definitive proof that Google is winning the enterprise AI race. Cloud revenue doubling to $30.7B and accelerating Search queries show AI is net-additive. We view the post-print multiple pullback as a compelling buying opportunity.'"
+    },
+    "pillar_3_management_call_tone": {
+      "score_out_of_100": 88,
+      "classification": "CONFIDENT, ENERGIZED & STRATEGICALLY DOMINANT",
+      "key_themes": [
+        "Sundar Pichai emphasizes entering the half-trillion-dollar revenue run rate era",
+        "Full-stack AI integration from custom TPU silicon to Gemini 4 models",
+        "Rapid 90%+ decline in Gemini inference costs per query",
+        "Ruth Porat clearly articulating technical infrastructure ROI and contract backlog"
+      ],
+      "top_quote": "Sundar Pichai on Call: 'We had a strong quarter and are now on a half-trillion dollar revenue run rate. Our deep full-stack approach is driving momentum across the business, with Google Cloud revenues growing 103% powered by huge demand for our AI infrastructure.'"
+    },
+    "pillar_4_options_iv_crush_and_skew": {
+      "score_out_of_100": 60,
+      "classification": "OUTSIZED REACTION / EXCEEDED IMPLIED BAND",
+      "key_themes": [
+        "After-hours drop of -9.75% (-$31.37 to $290.52) exceeded the pre-earnings \u00b15.78% (\u00b1$18.27) straddle band",
+        "Front-week IV expands into the open as institutional downside put delta is re-hedged",
+        "Heavy put open interest support expected at the $290 and $285 psychological levels"
+      ],
+      "top_quote": "Derivatives Floor Trader: 'GOOG traded well outside its \u00b15.8% implied straddle band, breaking down to $290.52. Market makers are short gamma below $300, but expect strong institutional accumulation to establish a firm bid near the 100-day moving average.'"
+    }
+  }
+}

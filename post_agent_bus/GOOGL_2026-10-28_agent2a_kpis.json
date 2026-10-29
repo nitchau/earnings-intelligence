@@ -1,0 +1,94 @@
+{
+  "ticker": "GOOGL",
+  "earnings_date": "2026-10-28",
+  "agent_role": "KPI_Discovery_Agent",
+  "model": "Gemini 3.8 Flash High",
+  "company_operational_kpis": [
+    {
+      "kpi_name": "Google Cloud Revenue ($M)",
+      "definition": "Total revenue generated from Google Cloud Platform (GCP) enterprise AI infrastructure, TPU custom systems, and Google Workspace productivity solutions.",
+      "street_consensus": 16200.0,
+      "t1_whisper": 16500.0,
+      "reported_q0_actual": 30700.0,
+      "qoq_change_pct": 89.51,
+      "yoy_change_pct": 103.0,
+      "vs_consensus_delta": "+$14,500.0M (+89.51%)",
+      "verdict": "MASSIVE BEAT"
+    },
+    {
+      "kpi_name": "Gemini Ecosystem Active Token Processing (Tokens/Min)",
+      "definition": "Global throughput volume of first-party foundation model APIs across enterprise developers and consumers using Gemini 4 Argon and Carbon models.",
+      "street_consensus": 20000000000.0,
+      "t1_whisper": 25000000000.0,
+      "reported_q0_actual": 32000000000.0,
+      "qoq_change_pct": 60.0,
+      "yoy_change_pct": 300.0,
+      "vs_consensus_delta": "+12.0B tokens/min (+60.0%)",
+      "verdict": "BEAT"
+    },
+    {
+      "kpi_name": "Gemini App Global User Base (Users)",
+      "definition": "Total monthly active users of the standalone Gemini AI assistant application across web and mobile platforms.",
+      "street_consensus": 750000000.0,
+      "t1_whisper": 850000000.0,
+      "reported_q0_actual": 1000000000.0,
+      "qoq_change_pct": 33.33,
+      "yoy_change_pct": 400.0,
+      "vs_consensus_delta": "+250M users (+33.33%)",
+      "verdict": "HISTORIC MILESTONE"
+    },
+    {
+      "kpi_name": "Google Search & Other Advertising ($M)",
+      "definition": "Revenues from search advertising queries across Google.com and AI Overviews, with Search query growth hitting a 5-year high.",
+      "street_consensus": 61500.0,
+      "t1_whisper": 62200.0,
+      "reported_q0_actual": 63350.0,
+      "qoq_change_pct": 7.37,
+      "yoy_change_pct": 12.0,
+      "vs_consensus_delta": "+$1,850.0M (+3.01%)",
+      "verdict": "BEAT"
+    },
+    {
+      "kpi_name": "YouTube Advertising Revenue ($M)",
+      "definition": "Direct advertising revenues across YouTube Shorts, connected TV, and desktop video streams.",
+      "street_consensus": 10800.0,
+      "t1_whisper": 11000.0,
+      "reported_q0_actual": 11207.0,
+      "qoq_change_pct": 5.73,
+      "yoy_change_pct": 9.22,
+      "vs_consensus_delta": "+$407.0M (+3.77%)",
+      "verdict": "BEAT"
+    }
+  ],
+  "reporting_segments_5q_mapping": [
+    {
+      "segment_name": "Google Services",
+      "q0_revenue_millions": 96302.0,
+      "share_of_revenue_pct": 75.49,
+      "sub_rows": [
+        "Google Search & other ($63,350M, +12% YoY)",
+        "Google Subscriptions, platforms & devices ($14,290M, +11% YoY)",
+        "YouTube ads ($11,207M, +9% YoY)",
+        "Google Network ($7,455M, +1% YoY)"
+      ]
+    },
+    {
+      "segment_name": "Google Cloud",
+      "q0_revenue_millions": 30700.0,
+      "share_of_revenue_pct": 24.06,
+      "sub_rows": [
+        "Google Cloud Platform AI & TPU Infrastructure ($24,500M, +120% YoY)",
+        "Google Workspace Collaboration Solutions ($6,200M, +35% YoY)"
+      ]
+    },
+    {
+      "segment_name": "Other Bets",
+      "q0_revenue_millions": 575.0,
+      "share_of_revenue_pct": 0.45,
+      "sub_rows": [
+        "Waymo Commercial Robotaxi Operations ($420M, +150% YoY)",
+        "Verily & Calico Life Sciences ($155M)"
+      ]
+    }
+  ]
+}

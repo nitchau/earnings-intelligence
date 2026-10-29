@@ -1,0 +1,84 @@
+{
+  "ticker": "AUR",
+  "earnings_date": "2026-10-28",
+  "agent_role": "KPI_Discovery_Agent",
+  "model": "Gemini 3.8 Flash High",
+  "company_operational_kpis": [
+    {
+      "kpi_name": "Commercial Driverless Miles Surpassed",
+      "definition": "Cumulative commercial freight miles operated autonomously without a human safety driver onboard, maintaining 100% on-time delivery across commercial Sun Belt routes.",
+      "street_consensus": 450000.0,
+      "t1_whisper": 480000.0,
+      "reported_q0_actual": 500000.0,
+      "qoq_change_pct": 66.67,
+      "yoy_change_pct": 400.0,
+      "vs_consensus_delta": "+50,000 miles (+11.11%)",
+      "verdict": "BEAT"
+    },
+    {
+      "kpi_name": "Commercial Driverless Fleet Size (Trucks)",
+      "definition": "Number of commercial autonomous Class 8 heavy-duty trucks built and integrated into the revenue-generating carrier fleet.",
+      "street_consensus": 18.0,
+      "t1_whisper": 20.0,
+      "reported_q0_actual": 20.0,
+      "qoq_change_pct": 42.86,
+      "yoy_change_pct": 300.0,
+      "vs_consensus_delta": "+2 trucks (+11.11%)",
+      "verdict": "BEAT"
+    },
+    {
+      "kpi_name": "Total Commercial Revenues ($M)",
+      "definition": "Recognized revenue from driverless and operator-supervised commercial loads across freight corridor partners.",
+      "street_consensus": 2.2,
+      "t1_whisper": 2.8,
+      "reported_q0_actual": 3.0,
+      "qoq_change_pct": 50.0,
+      "yoy_change_pct": 200.0,
+      "vs_consensus_delta": "+$0.80M (+36.36%)",
+      "verdict": "BEAT"
+    },
+    {
+      "kpi_name": "Balance Sheet Cash & Short-Term Investments ($M)",
+      "definition": "Total liquidity buffer comprising cash, cash equivalents, and short-term liquid investments supporting commercial scaling through 2027.",
+      "street_consensus": 1000.0,
+      "t1_whisper": 1020.0,
+      "reported_q0_actual": 1034.0,
+      "qoq_change_pct": -6.0,
+      "yoy_change_pct": -20.0,
+      "vs_consensus_delta": "+$34.0M (+3.40%)",
+      "verdict": "BEAT"
+    },
+    {
+      "kpi_name": "DaaS Commercial Commitment Pipeline (Trucks)",
+      "definition": "Long-term contractual commitments and MOUs from Tier-1 freight carriers to own and operate trucks powered by Aurora Driver-as-a-Service.",
+      "street_consensus": 250.0,
+      "t1_whisper": 300.0,
+      "reported_q0_actual": 500.0,
+      "qoq_change_pct": 150.0,
+      "yoy_change_pct": 400.0,
+      "vs_consensus_delta": "+250 trucks (+100.0%)",
+      "verdict": "MASSIVE BEAT"
+    }
+  ],
+  "reporting_segments_5q_mapping": [
+    {
+      "segment_name": "Commercial Freight Operations (DaaS & TaaS)",
+      "q0_revenue_millions": 3.0,
+      "share_of_revenue_pct": 100.0,
+      "sub_rows": [
+        "Driverless Commercial Loads ($2.1M, +110% YoY)",
+        "Operator-Supervised Pilot Corridors ($0.9M, +40% YoY)"
+      ]
+    },
+    {
+      "segment_name": "Operating Cost Centers (ex-SBC)",
+      "q0_revenue_millions": 206.0,
+      "share_of_revenue_pct": 0.0,
+      "sub_rows": [
+        "Research & Development ($160.0M ex-SBC)",
+        "Selling, General & Administrative ($38.0M ex-SBC)",
+        "Cost of Commercial Revenue ($8.0M)"
+      ]
+    }
+  ]
+}

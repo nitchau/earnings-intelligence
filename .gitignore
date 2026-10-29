@@ -16,3 +16,7 @@ tunnel_url.json
 # System files
 .DS_Store
 Thumbs.db
+
+# Runtime caches & browser QA artifacts (regenerated each build)
+market_snapshot.json
+.playwright-mcp/

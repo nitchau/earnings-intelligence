@@ -1,0 +1,64 @@
+{
+  "ticker": "NOW",
+  "earnings_date": "2026-10-28",
+  "agent_role": "Social_Pulse_Agent",
+  "model": "Gemini 3.8 Flash High",
+  "social_channels_crawled": [
+    "Reddit (r/wallstreetbets, r/stocks, r/investing, r/SaaS)",
+    "X (FinTwit / #NOW / $NOW / #ServiceNow)",
+    "Threads (threads.net / @billmcdermott)",
+    "Stocktwits ($NOW sentiment stream)",
+    "Seeking Alpha post-market transcripts & commentary",
+    "Sell-Side Flash Notes (Evercore ISI, UBS, Bank of America, Morgan Stanley, Goldman Sachs)"
+  ],
+  "retail_vs_institutional_reaction": {
+    "retail_sentiment_summary": "Retail investors on Reddit r/wallstreetbets and FinTwit reacted with profound astonishment to NOW's -18.10% after-hours plunge to $122.95, given that the company beat across all metrics, raised full-year subscription guidance, and raised AI ACV to $1.7B. Retail option traders debated whether this represents a rare generational buying opportunity for enterprise software's premier compounder or a sign of broader SaaS multiple contraction.",
+    "institutional_sentiment_summary": "Institutional portfolio managers pointed to high pre-earnings crowding and multiple re-calibration. Heading into the release at $150.13, NOW carried a premium SaaS multiple. When Q4 subscription guidance midpoint ($4.16B) landed slightly below aggressive whisper expectations ($4.20B+), algorithmic macro models and systematic funds liquidated positions, triggering stop-losses across growth software mandates.",
+    "after_hours_movement_driver": "NOW dropped -18.10% after-hours to $122.95 (down -$27.18 from the $150.13 regular close), breaching the ±10.20% options straddle band as valuation friction and conservative Q4 guidance triggered algorithmic de-risking despite an outstanding Q3 beat and raised full-year FCF margin targets."
+  },
+  "four_pillar_post_sentiment_scores": {
+    "pillar_1_retail_and_social_pulse": {
+      "score_out_of_100": 64,
+      "classification": "DISBELIEF & AGGRESSIVE DIP ACCUMULATION",
+      "key_themes": [
+        "Widespread shock over -18% drop following a beat-and-raise print",
+        "Bullish conviction on AI ACV raised to $1.7B (up 70% YTD)",
+        "Retail tech investors calling $122-$125 an obvious long-term entry point",
+        "Frustration over systematic algorithms punishing guidance conservatism"
+      ],
+      "top_quote": "FinTwit Cloud Portfolio Manager: 'ServiceNow reports 21% subscription growth, $30B in RPO, raises AI ACV to $1.7B, raises FCF margin to 36%, and the stock dumps -18% to $122? McDermott is running a Rule of 57 titan. This is an absolute gift for long-term investors.'"
+    },
+    "pillar_2_sellside_flash_reactions": {
+      "score_out_of_100": 80,
+      "classification": "CONSTRUCTIVE / HIGHLIGHTING PLATFORM MONOPOLY",
+      "key_themes": [
+        "Evercore ISI and UBS maintain Outperform / Buy ratings",
+        "cRPO acceleration to 21% c/c confirms durable enterprise demand",
+        "Free cash flow margin expansion (+100 bps to 36%) proves operating leverage",
+        "OpenAI and NVIDIA partnerships solidify governance moat"
+      ],
+      "top_quote": "Evercore ISI Flash Note: 'ServiceNow delivered another flawless quarter of operational execution. With RPO reaching $30B and AI ACV pacing toward $1.7B, the thesis as enterprise AI's central control tower is stronger than ever. We view the post-market pullback as an exceptional accumulation opportunity.'"
+    },
+    "pillar_3_management_call_tone": {
+      "score_out_of_100": 89,
+      "classification": "PASSIONATE, ENERGIZED & DEFIANT",
+      "key_themes": [
+        "Bill McDermott declaring ServiceNow the 'Super Intelligence Control Tower'",
+        "Highlighting zero compute or capital constraints as a Rule of 57 grower",
+        "Gina Mastantuono detailing 13x increase in production agentic consumption",
+        "Clear articulation of Action Fabric and AI Passport monetization"
+      ],
+      "top_quote": "Bill McDermott on Call: 'Our customers have validated our strategic relevance as the single harness for enterprise intelligence and security. The Control Tower is the elixir that simplifies tech debt, limits token overload and manages risk. This is a one-of-one company firing on all cylinders.'"
+    },
+    "pillar_4_options_iv_crush_and_skew": {
+      "score_out_of_100": 55,
+      "classification": "VOLATILITY OVERSHOOT / EXCEEDED IMPLIED BAND",
+      "key_themes": [
+        "After-hours decline of -18.10% (-$27.18 to $122.95) overshot the ±10.20% (±$12.35) straddle band",
+        "Downside gamma expansion forced rapid dealer delta hedging below $135",
+        "Institutional put walls provide solid technical support in the $120-$125 range"
+      ],
+      "top_quote": "Derivatives Floor Trader: 'NOW breached its ±10.2% straddle implied cone on aggressive systematic liquidation. Puts were heavily bid into the close, but we expect deep institutional bid support to absorb selling at the 200-day moving average around $120.'"
+    }
+  }
+}

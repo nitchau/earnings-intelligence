@@ -1,0 +1,90 @@
+{
+  "ticker": "FTNT",
+  "earnings_date": "2026-10-28",
+  "agent_role": "Transcript_Forensic_Agent",
+  "model": "Gemini 3.8 Flash High",
+  "guidance_accountability_matrix_a": [
+    {
+      "guided_metric": "Q3 2026 Total Revenue & Growth Rate",
+      "prior_quarter_guidance": "$2.010B to $2.070B ($2.040B midpoint, +18% YoY)",
+      "reported_q0_actual": "Delivered $2.08B (+20% YoY, +37% Product revenue growth), beating the high end of prior guide",
+      "variance_commentary": "Revenue exceeded the guided ceiling by $10M, powered by accelerating enterprise network refreshes and FortiOS 8.0 AI adoption.",
+      "credibility_grade": "BEAT OWN GUIDE"
+    },
+    {
+      "guided_metric": "Q3 2026 Quarterly Billings Corridor",
+      "prior_quarter_guidance": "$2.200B to $2.260B ($2.230B midpoint, +22% YoY)",
+      "reported_q0_actual": "Billings surged 29% YoY to $2.34B ($110M above guidance midpoint)",
+      "variance_commentary": "Exceptional billings performance driven by multi-year enterprise SASE consolidations and large enterprise secure SD-WAN deals.",
+      "credibility_grade": "BEAT OWN GUIDE"
+    },
+    {
+      "guided_metric": "Q3 2026 Non-GAAP Operating Margin",
+      "prior_quarter_guidance": "34.5% to 35.5% (35.0% midpoint)",
+      "reported_q0_actual": "Delivered 38.0% Non-GAAP operating margin (+300 bps above guidance midpoint)",
+      "variance_commentary": "Strong operating leverage derived from proprietary FortiASIC architecture and disciplined SG&A spend.",
+      "credibility_grade": "BEAT OWN GUIDE"
+    },
+    {
+      "guided_metric": "Q3 2026 Diluted Non-GAAP EPS",
+      "prior_quarter_guidance": "$0.84 to $0.86 ($0.85 midpoint)",
+      "reported_q0_actual": "Reported $0.91 per share (+6.0 cents above midpoint)",
+      "variance_commentary": "Profitability beat driven by high-margin product mix and lower effective tax rate.",
+      "credibility_grade": "BEAT OWN GUIDE"
+    }
+  ],
+  "forward_guidance_reset_matrix_b": [
+    {
+      "forward_horizon_and_metric": "Full-Year 2026 Revenue Guidance",
+      "preprint_street_consensus": "$8.050B to $8.150B ($8.100B midpoint)",
+      "new_management_guidance": "Raised to $8.125B to $8.215B ($8.170B midpoint, 20% YoY growth)",
+      "delta_vs_street": "+$70M lift at midpoint (+0.86% raise)",
+      "action_badge": "RAISED",
+      "rationale": "Sustained momentum in FortiGate firewall upgrades and growing cloud security contributions."
+    },
+    {
+      "forward_horizon_and_metric": "Full-Year 2026 Billings Guidance",
+      "preprint_street_consensus": "$9.450B to $9.550B ($9.500B midpoint)",
+      "new_management_guidance": "Raised for third consecutive time to $9.568B to $9.718B ($9.643B midpoint)",
+      "delta_vs_street": "+$143M above Street expectations",
+      "action_badge": "RAISED",
+      "rationale": "Third consecutive annual billings increase reflecting expanding enterprise SASE and AI security pipeline."
+    },
+    {
+      "forward_horizon_and_metric": "Q4 2026 Revenue & EPS Expectations",
+      "preprint_street_consensus": "Revenue $2.22B; Non-GAAP EPS $0.95",
+      "new_management_guidance": "Revenue $2.155B - $2.245B ($2.200B mid); Non-GAAP EPS $0.93 - $0.95 ($0.94 mid)",
+      "delta_vs_street": "-$20M revenue midpoint / -1.0 cent EPS midpoint vs elevated whisper expectations",
+      "action_badge": "PRUDENT GUIDE",
+      "rationale": "Management incorporates conservative macro timing on large federal and telecom multi-year deal closures."
+    },
+    {
+      "forward_horizon_and_metric": "Capital Return: Share Repurchase Authorization",
+      "preprint_street_consensus": "$800M remaining authorization",
+      "new_management_guidance": "Board authorized additional $1.2B, bringing total remaining authorization to $2.0B",
+      "delta_vs_street": "+$1.2B expanded buyback capacity",
+      "action_badge": "EXPANDED BUYBACK",
+      "rationale": "Management deploys excess free cash flow ($865M in Q3) into aggressive share repurchases."
+    }
+  ],
+  "call_qa_forensic_highlights": [
+    {
+      "analyst_name": "Saket Kalia (Barclays)",
+      "topic": "After-Hours Stock Reaction (-25.7%) vs. Q4 Guidance Optics",
+      "question": "Ken, Q3 was a standout print with billings up 29% and product revenue up 37%, yet the stock is down over 25% in the aftermarket. Is this purely multiple compression from Q4 revenue guidance ($2.20B mid) coming in slightly below whisper expectations, or are you seeing any lengthening sales cycles in enterprise refresh deals?",
+      "executive_response": "CEO Ken Xie explained that the underlying demand fundamentals remain exceptionally robust, as evidenced by raising full-year billings for the third time this year. The Q4 guidance reflects traditional management conservatism around large enterprise deal timing across the December fiscal year-end. With product gross margins expanding and the AI firewall upgrade cycle just beginning, Fortinet's market share gains in secure networking remain completely intact."
+    },
+    {
+      "analyst_name": "Hamza Fodderwala (Morgan Stanley)",
+      "topic": "Product Revenue Acceleration (+37% YoY) & AI Security Convergence",
+      "question": "Christian, product revenue grew 37% to $765 million, which is the strongest growth in over two years. How much of this acceleration is driven by the FortiOS 8.0 cycle and NVIDIA OpenShell partnerships, and how sustainable is this product run-rate into 2027?",
+      "executive_response": "CFO Christian Schenk noted that the product acceleration is broad-based across enterprise tiers. Customers are consolidating disparate point products into Fortinet's unified platform. The partnership with NVIDIA to secure AI infrastructure with FortiASIC-powered appliances is opening up enterprise AI data center deployments that previously did not exist, creating a multi-year hardware refresh runway."
+    },
+    {
+      "analyst_name": "Tal Liani (Bank of America)",
+      "topic": "Gross Margin Sustainability (80%) & Free Cash Flow Generation",
+      "question": "You delivered $865 million in free cash flow and a 38% operating margin while boosting the buyback authorization by $1.2 billion. How are you balancing investments into SASE and sovereign cloud partnerships while maintaining these 80% gross margins?",
+      "executive_response": "Ken Xie highlighted that Fortinet's proprietary FortiASIC architecture delivers a structural 3x to 5x cost advantage over commodity CPU-based security appliances. This architectural moat allows Fortinet to invest heavily in cloud SASE points-of-presence and generative AI security features while consistently generating ~40% free cash flow margins and funding $2 billion in share buybacks."
+    }
+  ]
+}

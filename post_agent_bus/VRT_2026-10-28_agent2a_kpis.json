@@ -1,0 +1,127 @@
+{
+  "ticker": "VRT",
+  "earnings_date": "2026-10-28",
+  "agent_role": "KPI_Discovery_Agent",
+  "model": "gemini-3.8-flash-high",
+  "company_operational_kpis": [
+    {
+      "kpi_name": "Organic Orders Growth YoY (%)",
+      "definition": "Growth in booked equipment and infrastructure orders excluding foreign currency and acquisition effects, reflecting forward AI data center buildout velocity.",
+      "street_consensus": 45.0,
+      "t1_whisper": 60.0,
+      "reported_q0_actual": 100.0,
+      "qoq_change_pct": 35.0,
+      "yoy_change_pct": 100.0,
+      "vs_consensus_delta": "+55.0% pts vs Consensus",
+      "verdict": "BEAT"
+    },
+    {
+      "kpi_name": "Net Sales ($M)",
+      "definition": "Total consolidated revenue across critical power, thermal management, modular solutions, and lifecycle services.",
+      "street_consensus": 3760.0,
+      "t1_whisper": 3950.0,
+      "reported_q0_actual": 4312.8,
+      "qoq_change_pct": 31.7,
+      "yoy_change_pct": 61.2,
+      "vs_consensus_delta": "+$552.8M (+14.70%)",
+      "verdict": "BEAT"
+    },
+    {
+      "kpi_name": "Adjusted Operating Margin (%)",
+      "definition": "Non-GAAP operating profit divided by net sales, excluding corporate transaction costs, amortization, and restructuring.",
+      "street_consensus": 23.0,
+      "t1_whisper": 24.0,
+      "reported_q0_actual": 25.2,
+      "qoq_change_pct": 1.9,
+      "yoy_change_pct": 2.9,
+      "vs_consensus_delta": "+220 bps vs Consensus",
+      "verdict": "BEAT"
+    },
+    {
+      "kpi_name": "Americas Net Sales ($M)",
+      "definition": "Revenue delivered to hyperscale, colocation, and enterprise customers across North and South America, driven by high-density liquid cooling deployments.",
+      "street_consensus": 2500.0,
+      "t1_whisper": 2650.0,
+      "reported_q0_actual": 2988.8,
+      "qoq_change_pct": 35.5,
+      "yoy_change_pct": 74.5,
+      "vs_consensus_delta": "+$488.8M (+19.55%)",
+      "verdict": "BEAT"
+    },
+    {
+      "kpi_name": "Full-Year 2026 Adjusted FCF Guidance ($M)",
+      "definition": "Management forecasted free cash flow generation for FY26 reflecting robust operational conversion minus elevated growth CapEx for liquid cooling capacity.",
+      "street_consensus": 2500.0,
+      "t1_whisper": 2600.0,
+      "reported_q0_actual": 2700.0,
+      "qoq_change_pct": 15.0,
+      "yoy_change_pct": 48.0,
+      "vs_consensus_delta": "+$200.0M raise at midpoint",
+      "verdict": "BEAT"
+    }
+  ],
+  "reporting_segments_5q_mapping": {
+    "headers": [
+      "Q3 2025",
+      "Q4 2025",
+      "Q1 2026",
+      "Q2 2026",
+      "Q3 2026 (Actual)",
+      "Q4 2026E (Guided / Street)"
+    ],
+    "segments": [
+      {
+        "name": "Americas (AMER)",
+        "values": [
+          1712.4,
+          1850.0,
+          1690.0,
+          2195.2,
+          2988.8,
+          3050.0
+        ],
+        "yoy_growth_q0": "+74.5% (+66.2% organic)",
+        "adj_op_margin_q0": "29.4%"
+      },
+      {
+        "name": "Asia Pacific (APAC)",
+        "values": [
+          519.8,
+          560.0,
+          525.0,
+          708.6,
+          779.3,
+          800.0
+        ],
+        "yoy_growth_q0": "+49.9% (+48.3% organic)",
+        "adj_op_margin_q0": "17.0%"
+      },
+      {
+        "name": "Europe, Middle East & Africa (EMEA)",
+        "values": [
+          443.6,
+          470.0,
+          434.5,
+          370.5,
+          544.7,
+          563.0
+        ],
+        "yoy_growth_q0": "+22.8% (+19.3% organic)",
+        "adj_op_margin_q0": "28.0%"
+      },
+      {
+        "name": "Consolidated Net Sales",
+        "values": [
+          2675.8,
+          2880.0,
+          2649.5,
+          3274.3,
+          4312.8,
+          4413.0
+        ],
+        "yoy_growth_q0": "+61.2% (+55.0% organic)",
+        "adj_op_margin_q0": "25.2%"
+      }
+    ]
+  }
+}

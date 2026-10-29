@@ -1,0 +1,83 @@
+{
+  "ticker": "VRT",
+  "earnings_date": "2026-10-28",
+  "agent_role": "Transcript_Forensic_Agent",
+  "model": "gemini-3.8-flash-high",
+  "guidance_accountability_matrix_a": [
+    {
+      "guided_metric": "Q3 2026 Net Sales ($M)",
+      "prior_quarter_guidance": "$3,700M to $3,850M ($3,775M midpoint)",
+      "reported_q0_actual": "Delivered $4,312.8M (+61.2% YoY, 55% organic growth)",
+      "variance_commentary": "Crushed prior guided top-end by $462.8M (+12.0%) fueled by unprecedented hyperscale AI data center infrastructure acceleration.",
+      "credibility_grade": "BEAT OWN GUIDE"
+    },
+    {
+      "guided_metric": "Q3 2026 Adjusted Diluted EPS ($)",
+      "prior_quarter_guidance": "$1.75 to $1.85 ($1.80 midpoint)",
+      "reported_q0_actual": "Reported $2.21 adjusted diluted EPS ($1.95 GAAP EPS)",
+      "variance_commentary": "Exceeded the high end of prior guidance by $0.36 (+19.5%) on powerful operating leverage and gross margin expansion.",
+      "credibility_grade": "BEAT OWN GUIDE"
+    },
+    {
+      "guided_metric": "Q3 2026 Adjusted Operating Margin (%)",
+      "prior_quarter_guidance": "22.5% to 23.5% (23.0% midpoint)",
+      "reported_q0_actual": "Expanded to 25.2% (+290 bps YoY)",
+      "variance_commentary": "Exceeded upper guidance range by 170 bps via operational efficiency, fixed cost absorption, and higher mix of proprietary thermal systems.",
+      "credibility_grade": "BEAT OWN GUIDE"
+    }
+  ],
+  "forward_guidance_reset_matrix_b": [
+    {
+      "forward_horizon_and_metric": "Full-Year 2026 Net Sales Guidance ($M)",
+      "preprint_street_consensus": "$13,800M to $14,100M ($13,950M midpoint)",
+      "new_management_guidance": "Raised to $14,450M to $14,850M ($14,650M midpoint, +38% organic growth)",
+      "delta_vs_street": "+$700M lift vs Street consensus (+5.0% raise)",
+      "action_badge": "RAISED",
+      "rationale": "Massive backlog expansion, record hyperscale orders, and rapid conversion of direct-to-chip liquid cooling deployments."
+    },
+    {
+      "forward_horizon_and_metric": "Full-Year 2026 Adjusted Diluted EPS ($)",
+      "preprint_street_consensus": "$6.60 to $6.80 ($6.70 midpoint)",
+      "new_management_guidance": "Raised to $7.10 to $7.20 ($7.15 midpoint, +70% YoY growth)",
+      "delta_vs_street": "+$0.45 per share lift at midpoint (+6.7% raise)",
+      "action_badge": "RAISED",
+      "rationale": "High operating conversion and factory efficiency gains across North America and APAC manufacturing lines."
+    },
+    {
+      "forward_horizon_and_metric": "Q4 2026 Net Sales Guidance ($M)",
+      "preprint_street_consensus": "$4,050M to $4,200M ($4,125M midpoint)",
+      "new_management_guidance": "Guide set at $4,313M to $4,513M ($4,413M midpoint, 50% organic growth)",
+      "delta_vs_street": "+$288M above consensus at midpoint",
+      "action_badge": "ABOVE CONSENSUS",
+      "rationale": "Uninterrupted shipment ramp for NVIDIA Blackwell GB200/NVL72 data center thermal architecture."
+    },
+    {
+      "forward_horizon_and_metric": "Full-Year 2026 Adjusted Free Cash Flow ($M)",
+      "preprint_street_consensus": "$2,450M to $2,550M ($2,500M midpoint)",
+      "new_management_guidance": "Raised to $2,600M to $2,800M ($2,700M midpoint, +50% YoY)",
+      "delta_vs_street": "+$200M increase at midpoint",
+      "action_badge": "RAISED",
+      "rationale": "Strong working capital discipline and cash conversion despite accelerated CapEx expansion."
+    }
+  ],
+  "call_qa_forensic_highlights": [
+    {
+      "analyst_name": "Amit Daryanani (Evercore ISI)",
+      "topic": "Organic Order Growth >100% and Liquid Cooling Capacity",
+      "question": "Giordano, congratulations on organic orders doubling year-over-year. Could you give us more granularity on how much of this order surge is driven by liquid cooling versus traditional power/thermal, and what is your current manufacturing lead time for complete converged modular infrastructure?",
+      "executive_response": "CEO Giordano Albertazzi explained that while liquid cooling demand is growing exponentially with high-density AI clusters, traditional air and hybrid power systems also saw immense growth because customers are retrofitting existing facilities. Lead times for standardized modular power solutions have actually compressed by 30% due to capacity additions in North America and Europe, while Vertiv's proprietary CoolTera CDUs and manifold systems are scaling rapidly to meet hyperscaler deployment deadlines."
+    },
+    {
+      "analyst_name": "Mark Delaney (Goldman Sachs)",
+      "topic": "After-Hours Digestion (-2.8%) vs. Supply Chain & Margins into 2027",
+      "question": "David, the print was exceptional across every single metric, yet the stock is taking a modest breather in the aftermarket (-2.8%). Is there any concern that gross margin at 29.97% or adjusted operating margin at 25.2% is nearing a cyclical peak as more hardware volume ramps, or do you see structural operating leverage continuing into 2027?",
+      "executive_response": "CFO David Fallon addressed margin dynamics directly: 'We do not see 25% adjusted operating margin as a ceiling. As our product mix continues to tilt toward integrated high-value liquid-to-air heat exchangers, busways, and converged power pods, software monitoring, and lifecycle spares, our value capture expands. The aftermarket reaction simply reflects a stock that has appreciated tremendously year-to-date digesting a monster quarter.'"
+    },
+    {
+      "analyst_name": "Andrew Obin (Bank of America)",
+      "topic": "Hyperscaler CapEx Trajectory & Backlog Visibility",
+      "question": "With Microsoft, Alphabet, and Meta all signaling sustained CapEx increases through 2027, how far out does Vertiv's current backlog extend, and are you seeing any signs of double-ordering or capacity hoarding among colocation providers?",
+      "executive_response": "Albertazzi stated that Vertiv's order validation process requires firm customer site engineering approvals and financial commitments, preventing speculative phantom backlog. Visibility extends comfortably through the entirety of 2027, with multi-gigawatt pipeline discussions underway for modular installations scheduled for late 2027 and 2028."
+    }
+  ]
+}

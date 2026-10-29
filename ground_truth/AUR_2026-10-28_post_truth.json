@@ -1,7 +1,7 @@
 {
   "ticker": "AUR",
   "earnings_date": "2026-10-28",
-  "timestamp_generated": "2026-10-28T06:00:29.196401",
+  "timestamp_generated": "2026-10-28T18:07:08.151187",
   "t1_baseline": {
     "source_found": true,
     "t1_file": "AUR_2026-10-28_truth.json",
@@ -17,41 +17,41 @@
   },
   "sec_filing_metadata": {
     "form": "8-K",
-    "filing_date": "2026-09-23",
+    "filing_date": "2026-10-28",
     "exhibit_99_1_found": true,
     "edgar_status": "FILING_RETRIEVED"
   },
   "market_portal": {
-    "regular_close_price": 5.12,
-    "after_hours_price": 5.12,
+    "regular_close_price": 5.09,
+    "after_hours_price": 4.8,
     "after_hours_volume": null,
     "previous_close_price": 5.16,
-    "google_finance_regular": 5.12,
-    "google_finance_after_hours": 5.12,
+    "google_finance_regular": 5.09,
+    "google_finance_after_hours": 4.8,
     "price_divergence_pct": 0.0,
     "price_divergence_warning": false,
-    "market_cap_millions": 10261.27,
-    "enterprise_value_millions": 9126.28,
+    "market_cap_millions": 10201.15,
+    "enterprise_value_millions": 9066.15,
     "trailing_pe": null,
-    "forward_pe": -11.38
+    "forward_pe": -11.31
   },
   "post_print_reaction": {
-    "regular_close_price": 5.12,
-    "after_hours_price": 5.12,
-    "post_print_move_pct": 0.0,
+    "regular_close_price": 5.09,
+    "after_hours_price": 4.8,
+    "post_print_move_pct": -5.7,
     "t1_options_implied_move_pct": 13.46,
     "move_vs_implied_status": "WITHIN_IMPLIED_BAND",
-    "overall_print_verdict": "CLEAN MISS"
+    "overall_print_verdict": "HEADLINE BEAT / LOW QUALITY"
   },
   "beat_miss_scorecard": {
     "revenue": {
-      "reported_actual_millions": 2.0,
+      "reported_actual_millions": 3.0,
       "street_consensus_millions": 2.2,
       "whisper_millions": 2.8,
-      "vs_consensus_delta_millions": -0.2,
-      "vs_consensus_delta_pct": -9.09,
-      "vs_whisper_delta_millions": -0.8,
-      "verdict": "IN-LINE / SLIGHT MISS"
+      "vs_consensus_delta_millions": 0.8,
+      "vs_consensus_delta_pct": 36.36,
+      "vs_whisper_delta_millions": 0.2,
+      "verdict": "BEAT"
     },
     "eps_nongaap": {
       "reported_actual": null,
@@ -68,8 +68,8 @@
       "verdict": "REPORTED"
     },
     "margins": {
-      "reported_gross_margin_pct": -250.0,
-      "reported_operating_margin_pct": -13300.0
+      "reported_gross_margin_pct": -166.67,
+      "reported_operating_margin_pct": -8866.67
     }
   },
   "stitched_5q_chronological": {
@@ -85,8 +85,8 @@
       1.0,
       1.0,
       1.0,
-      1.0,
-      2.0
+      2.0,
+      3.0
     ],
     "gross_profit": [
       -4.0,
@@ -132,46 +132,50 @@
       -225.0
     ],
     "capital_expenditures": [
-      7.0,
       8.0,
       8.0,
       25.0,
-      31.0
+      31.0,
+      92.0
     ],
     "reported_fcf": [
-      -151.0,
+      -152.0,
       -157.0,
-      -154.0,
-      -184.0,
-      -256.0
+      -171.0,
+      -190.0,
+      -317.0
     ],
     "stock_based_compensation": [
-      55.0,
       51.0,
       48.0,
       46.0,
-      60.0
+      60.0,
+      160.0
     ],
     "finance_leases": [],
     "true_fcf": [
-      -206.0,
-      -208.0,
-      -202.0,
-      -230.0,
-      -316.0
+      -203.0,
+      -205.0,
+      -217.0,
+      -250.0,
+      -477.0
     ]
   },
   "forensic_fcf_bridge_q0": {
     "ocf": -225.0,
-    "capex": 31.0,
-    "reported_fcf": -256.0,
-    "sbc": 60.0,
+    "capex": 92.0,
+    "reported_fcf": -317.0,
+    "sbc": 160.0,
     "finance_leases": null,
-    "true_fcf": -316.0,
+    "true_fcf": -477.0,
     "formula_check": {
       "ocf_minus_capex_equals_reported": true,
       "reported_minus_sbc_leases_equals_true": true
     }
   },
-  "company_specific_facts": {}
+  "company_specific_facts": {
+    "revenue_q0": 3.0,
+    "capex_q0": 92.0,
+    "sbc_q0": 160.0
+  }
 }

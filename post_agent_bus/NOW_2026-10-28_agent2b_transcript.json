@@ -1,0 +1,90 @@
+{
+  "ticker": "NOW",
+  "earnings_date": "2026-10-28",
+  "agent_role": "Transcript_Forensic_Agent",
+  "model": "Gemini 3.8 Flash High",
+  "guidance_accountability_matrix_a": [
+    {
+      "guided_metric": "Q3 2026 Subscription Revenues",
+      "prior_quarter_guidance": "$3.925B to $3.935B (20.0% YoY growth)",
+      "reported_q0_actual": "Reported $3,988M (+21.0% YoY, 20.5% c/c), beating high end by $53M",
+      "variance_commentary": "Top-line delivery exceeded the high end of guidance, driven by broad-based enterprise expansions and AI Pro tier upgrades.",
+      "credibility_grade": "BEAT OWN GUIDE"
+    },
+    {
+      "guided_metric": "Q3 2026 Current RPO (cRPO) Growth",
+      "prior_quarter_guidance": "19.5% year-over-year constant currency growth",
+      "reported_q0_actual": "Reported $13.65B (+20.5% YoY, 21.0% c/c), outperforming guide by 150 bps",
+      "variance_commentary": "Strong enterprise renewal rates and multi-year contract expansions propelled cRPO acceleration.",
+      "credibility_grade": "BEAT OWN GUIDE"
+    },
+    {
+      "guided_metric": "Full-Year 2026 AI Annual Contract Value Target",
+      "prior_quarter_guidance": "Targeted $1.0B at start of year, raised to $1.3B in Q2",
+      "reported_q0_actual": "Raised target again to $1.7B (+70% from initial year-end target)",
+      "variance_commentary": "Rapid customer transition from experimental GenAI to production agentic workflows drove massive ACV expansion.",
+      "credibility_grade": "BEAT OWN GUIDE"
+    },
+    {
+      "guided_metric": "Full-Year 2026 Free Cash Flow Margin",
+      "prior_quarter_guidance": "Targeted 35.0% full-year free cash flow margin",
+      "reported_q0_actual": "Raised full-year free cash flow margin target by 100 bps to 36.0%",
+      "variance_commentary": "Capital-efficient operating model enabled margin expansion while reducing CapEx.",
+      "credibility_grade": "BEAT OWN GUIDE"
+    }
+  ],
+  "forward_guidance_reset_matrix_b": [
+    {
+      "forward_horizon_and_metric": "Full-Year 2026 Subscription Revenue Guidance",
+      "preprint_street_consensus": "$15.80B to $15.85B",
+      "new_management_guidance": "Raised to $15.875B to $15.890B ($15.88B midpoint)",
+      "delta_vs_street": "+$50M raise at midpoint (+21.0% YoY)",
+      "action_badge": "RAISED",
+      "rationale": "High visibility from $13.65B cRPO backlog and accelerating enterprise agentic AI deployments."
+    },
+    {
+      "forward_horizon_and_metric": "Full-Year 2026 Free Cash Flow Margin",
+      "preprint_street_consensus": "35.0% FCF margin",
+      "new_management_guidance": "Raised by 100 basis points to 36.0%",
+      "delta_vs_street": "+100 bps cash profitability expansion",
+      "action_badge": "RAISED",
+      "rationale": "Disciplined cost execution and lower infrastructure compute capex."
+    },
+    {
+      "forward_horizon_and_metric": "Q4 2026 Subscription Revenue Hurdle",
+      "preprint_street_consensus": "$4.18B to $4.22B ($4.20B midpoint)",
+      "new_management_guidance": "Guided to $4.150B to $4.170B ($4.160B midpoint, +20% c/c)",
+      "delta_vs_street": "-$40M revenue midpoint vs elevated buy-side whisper expectations",
+      "action_badge": "PRUDENT GUIDE",
+      "rationale": "Conservative assumptions regarding large Q4 federal and EMEA enterprise contract closure timing."
+    },
+    {
+      "forward_horizon_and_metric": "Agentic AI Strategic Partnerships (OpenAI & NVIDIA)",
+      "preprint_street_consensus": "Core enterprise ITSM and workflow orchestration",
+      "new_management_guidance": "Announced ChatGPT plugin with Action Fabric, Control Tower Alliance, and NVIDIA OpenShell governance",
+      "delta_vs_street": "Major strategic expansion into enterprise AI governance",
+      "action_badge": "NEW CATALYST",
+      "rationale": "Positions ServiceNow as the single Super Intelligence Control Tower for governing autonomous AI agents."
+    }
+  ],
+  "call_qa_forensic_highlights": [
+    {
+      "analyst_name": "Karl Keirstead (UBS)",
+      "topic": "After-Hours Multiple Compression (-18.1%) vs Q4 Guidance Optics",
+      "question": "Bill, Q3 was a clean beat across revenue, cRPO, and FCF margins, yet the stock is down 18% aftermarket to $122.95. Is the market overreacting to Q4 subscription guidance ($4.16B mid) being a hair below whisper numbers, or are you seeing any softening in new customer pipeline conversion?",
+      "executive_response": "Chairman & CEO Bill McDermott stated unequivocally that the pipeline is the strongest in ServiceNow's history. The business generated 19 transactions over $5 million in net new ACV, up 135% YoY. The Q4 guide represents standard executive prudence on year-end deal timing. ServiceNow is operating as a 'Rule of 57' enterprise with no compute or capital constraints, and the after-hours price reaction is completely disconnected from business reality."
+    },
+    {
+      "analyst_name": "Kirk Materne (Evercore ISI)",
+      "topic": "AI ACV Target Raised to $1.7B & Agentic Workflow Production Ramp",
+      "question": "Gina, raising the year-end AI ACV target to $1.7 billion—up 70% from your initial target—is impressive. Where is this incremental demand originating, and how does the monetization transition from Pro Plus seats to autonomous agent consumption?",
+      "executive_response": "President & CFO Gina Mastantuono explained that customer adoption has shifted from assistant-based seat add-ons to autonomous agentic workflows. Production consumption of AI agents is up more than 13x year-over-year. Through Action Fabric and AI Passport, ServiceNow meters and governs every agent action, enabling the company to capture value on compute, governance, and workflow outcomes."
+    },
+    {
+      "analyst_name": "Brad Sills (Bank of America)",
+      "topic": "Control Tower Alliance with OpenAI & NVIDIA Governance Layer",
+      "question": "Bill, could you speak to the Control Tower Alliance announced today with OpenAI, NVIDIA, and AWS? How does ServiceNow ensure it remains the central control plane rather than being commoditized by underlying model providers?",
+      "executive_response": "Bill McDermott emphasized that model providers like OpenAI and Anthropic are powerful engines of intelligence, but enterprises cannot deploy autonomous agents without governance, audit trails, and kill switches. ServiceNow provides the essential 'Super Intelligence Control Tower'—the single harness that connects reasoning to governed enterprise action across software and silicon, creating an unassailable moat."
+    }
+  ]
+}

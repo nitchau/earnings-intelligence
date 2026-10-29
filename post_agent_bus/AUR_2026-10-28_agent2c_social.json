@@ -1,0 +1,64 @@
+{
+  "ticker": "AUR",
+  "earnings_date": "2026-10-28",
+  "agent_role": "Social_Pulse_Agent",
+  "model": "Gemini 3.8 Flash High",
+  "social_channels_crawled": [
+    "Reddit (r/wallstreetbets, r/autonomousvehicles, r/stocks, r/investing)",
+    "X (FinTwit / #AUR / $AUR / #AutonomousTrucking)",
+    "Threads (threads.net / @chrisurmson)",
+    "Stocktwits ($AUR sentiment stream)",
+    "Seeking Alpha post-market transcripts & commentary",
+    "Sell-Side Flash Notes (Goldman Sachs, Canaccord Genuity, TD Cowen, JPMorgan, Evercore ISI)"
+  ],
+  "retail_vs_institutional_reaction": {
+    "retail_sentiment_summary": "Retail traders on r/wallstreetbets and FinTwit cheered the landmark 500-truck Charger Logistics deal, the 500,000 driverless commercial miles milestone, and the positive federal AV regulatory momentum under Sean Duffy's DOT. However, retail expressed near-term frustration with the -5.70% after-hours pullback to $4.80 following the disclosure of the 6-week production ramp delay at Roush and full-year revenue realignment to $9M.",
+    "institutional_sentiment_summary": "Institutional desks viewed the print as an operationally solid commercial validation checkpoint. Institutional portfolio managers emphasized the substantial $1.03B cash cushion ($1,034M in cash and short-term investments), which provides comfortable funding runway through the commercial hockey-stick inflection in 2027. Sell-side analysts noted that while the 6-week delay in Roush upfitting slightly shifts Q4 revenue timing, the commercial demand inflection (500 trucks with Charger, 300+ with Volvo) confirms the multi-year DaaS thesis.",
+    "after_hours_movement_driver": "AUR declined -5.70% in after-hours trading to $4.80 (down -$0.29 from the $5.09 regular close) as algorithmic traders reacted to the 6-week Roush manufacturing delay and $9M FY26 revenue guide, before stabilizing well inside the options-implied straddle band (±13.46% / ±$0.65/sh) as long-term buyers stepped in around the $1.03B cash floor."
+  },
+  "four_pillar_post_sentiment_scores": {
+    "pillar_1_retail_and_social_pulse": {
+      "score_out_of_100": 72,
+      "classification": "CONSTRUCTIVE / DIP-BUYING INTEREST",
+      "key_themes": [
+        "Charger Logistics 500-truck DaaS MOU seen as massive commercial breakthrough",
+        "500,000 driverless miles milestone proving safety reliability",
+        "USDOT AV framework and FMCSA warning beacon exemption validating moat",
+        "Mild irritation over 6-week manufacturing delay at Roush"
+      ],
+      "top_quote": "FinTwit Autonomous Mobility Desk: 'AUR prints 500k commercial driverless miles, signs 500-truck DaaS deal with Charger Logistics, and sits on $1.03B cash. Down -5.7% after hours on a 6-week Roush delay is an incredible buying opportunity for an AV monopoly in the making.'"
+    },
+    "pillar_2_sellside_flash_reactions": {
+      "score_out_of_100": 78,
+      "classification": "CONSTRUCTIVE / FOCUSING ON 2027 HOCKEY STICK",
+      "key_themes": [
+        "Canaccord Genuity and TD Cowen reiterate Buy with $10-$12 price targets",
+        "Strong liquidity runway with $1.03B cash ending balance",
+        "Charger Logistics DaaS shift proves asset-light software economics",
+        "Production reaching 20 trucks/week in early December eliminates overhang"
+      ],
+      "top_quote": "Canaccord Flash Note: 'Aurora's Q3 shareholder letter demonstrates clear commercial inflection. The 500-truck Charger MOU unlocks multi-hundred-million pipeline potential, while $1.03B in liquidity fully funds the company through the 2027 commercial deployment scale.'"
+    },
+    "pillar_3_management_call_tone": {
+      "score_out_of_100": 82,
+      "classification": "CONFIDENT & OPERATIONALLY PRAGMATIC",
+      "key_themes": [
+        "Chris Urmson highlights standing at true commercial inflection point",
+        "Transparent disclosure of 6-week Roush bottleneck and rapid resolution",
+        "Volvo and PACCAR OEM partnerships progressing on schedule",
+        "Focus on safety leadership, 100% on-time delivery, and Verifiable AI"
+      ],
+      "top_quote": "Chris Urmson on Webcast: 'With Verifiable AI proven on public roads, automotive-grade hardware, accelerating manufacturing, and growing commercial demand, Aurora is standing at a true commercial inflection point.'"
+    },
+    "pillar_4_options_iv_crush_and_skew": {
+      "score_out_of_100": 68,
+      "classification": "VOLATILITY CRUSH / WITHIN BAND",
+      "key_themes": [
+        "After-hours move of -5.70% (-$0.29 to $4.80) was well within the ±13.46% (±$0.65/sh) straddle cone",
+        "Implied volatility crushes from 92.5% toward 50% post-earnings",
+        "Put/Call open interest ratio of 0.88 shows bullish underlying positioning"
+      ],
+      "top_quote": "Derivatives Floor Trader: 'AUR traded cleanly inside its ±13.5% implied vol band. The -5.7% dip into $4.80 meets heavy dealer gamma support and strong institutional buy walls around $4.50.'"
+    }
+  }
+}

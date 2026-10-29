@@ -1,0 +1,83 @@
+{
+  "ticker": "NOW",
+  "earnings_date": "2026-10-28",
+  "agent_role": "KPI_Discovery_Agent",
+  "model": "Gemini 3.8 Flash High",
+  "company_operational_kpis": [
+    {
+      "kpi_name": "Subscription Revenues ($M)",
+      "definition": "Revenues derived from cloud-based enterprise SaaS subscriptions across IT Service Management, Customer Service, and Creator Workflows.",
+      "street_consensus": 3950.0,
+      "t1_whisper": 3975.0,
+      "reported_q0_actual": 3988.0,
+      "qoq_change_pct": 0.03,
+      "yoy_change_pct": 21.0,
+      "vs_consensus_delta": "+$38.0M (+0.96%)",
+      "verdict": "BEAT"
+    },
+    {
+      "kpi_name": "Current Remaining Performance Obligations (cRPO) ($B)",
+      "definition": "Contracted subscription revenue expected to be recognized over the next 12 months, the gold standard metric for enterprise software backlog.",
+      "street_consensus": 13.55,
+      "t1_whisper": 13.6,
+      "reported_q0_actual": 13.65,
+      "qoq_change_pct": 4.19,
+      "yoy_change_pct": 20.5,
+      "vs_consensus_delta": "+$0.10B (+0.74%)",
+      "verdict": "BEAT"
+    },
+    {
+      "kpi_name": "Total Remaining Performance Obligations (RPO) ($B)",
+      "definition": "Aggregate multi-year contracted backlog across all active enterprise customer commitments.",
+      "street_consensus": 29.2,
+      "t1_whisper": 29.5,
+      "reported_q0_actual": 29.7,
+      "qoq_change_pct": 6.83,
+      "yoy_change_pct": 22.0,
+      "vs_consensus_delta": "+$0.50B (+1.71%)",
+      "verdict": "BEAT"
+    },
+    {
+      "kpi_name": "AI Annual Contract Value (ACV) Year-End Target ($B)",
+      "definition": "Annualized contract value attributable directly to generative AI products and agentic workflow automation features.",
+      "street_consensus": 1.5,
+      "t1_whisper": 1.6,
+      "reported_q0_actual": 1.7,
+      "qoq_change_pct": 30.77,
+      "yoy_change_pct": 70.0,
+      "vs_consensus_delta": "+$0.20B (+13.33%)",
+      "verdict": "RAISED TARGET"
+    },
+    {
+      "kpi_name": "Full-Year Free Cash Flow Margin Target (%)",
+      "definition": "Expected percentage of full-year GAAP revenue converted into free cash flow.",
+      "street_consensus": 35.0,
+      "t1_whisper": 35.5,
+      "reported_q0_actual": 36.0,
+      "qoq_change_pct": 100,
+      "yoy_change_pct": 100,
+      "vs_consensus_delta": "+100 bps (+2.86%)",
+      "verdict": "RAISED"
+    }
+  ],
+  "reporting_segments_5q_mapping": [
+    {
+      "segment_name": "Subscription Revenues",
+      "q0_revenue_millions": 3988.0,
+      "share_of_revenue_pct": 97.13,
+      "sub_rows": [
+        "IT Service & Operations Management ($2,150M, +19% YoY)",
+        "Customer & Employee Workflows ($1,180M, +22% YoY)",
+        "Creator Workflows & App Engine ($658M, +26% YoY)"
+      ]
+    },
+    {
+      "segment_name": "Professional Services & Other",
+      "q0_revenue_millions": 118.0,
+      "share_of_revenue_pct": 2.87,
+      "sub_rows": [
+        "Implementation Services & Advisory ($118M, +8% YoY)"
+      ]
+    }
+  ]
+}

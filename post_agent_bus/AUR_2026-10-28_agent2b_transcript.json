@@ -1,0 +1,90 @@
+{
+  "ticker": "AUR",
+  "earnings_date": "2026-10-28",
+  "agent_role": "Transcript_Forensic_Agent",
+  "model": "Gemini 3.8 Flash High",
+  "guidance_accountability_matrix_a": [
+    {
+      "guided_metric": "Commercial Driverless Milestones & Safety Reliability",
+      "prior_quarter_guidance": "Scale commercial driverless miles toward 500,000 threshold with 100% on-time delivery across Sun Belt routes",
+      "reported_q0_actual": "Surpassed 500,000 commercial driverless miles with zero human intervention and 100% on-time arrival rate",
+      "variance_commentary": "Management fully delivered on safety and reliability hurdles, achieving flawless commercial delivery execution across active customer freight lanes.",
+      "credibility_grade": "BEAT OWN GUIDE"
+    },
+    {
+      "guided_metric": "Tier-1 Carrier Commercial Partnerships (DaaS Expansion)",
+      "prior_quarter_guidance": "Expand commercial carrier engagements beyond pilot agreements into multi-hundred truck DaaS fleet commitments",
+      "reported_q0_actual": "Signed landmark DaaS MOU with Charger Logistics for 500 autonomous trucks, unlocking hundreds of millions in multi-year pipeline",
+      "variance_commentary": "Significantly exceeded partnership expectations by securing a 500-truck commitment along the high-volume Dallas-to-Laredo freight artery.",
+      "credibility_grade": "BEAT OWN GUIDE"
+    },
+    {
+      "guided_metric": "Manufacturing Integration & Weekly Output Ramp at Roush",
+      "prior_quarter_guidance": "Scale Roush manufacturing facility toward annualized rate of >1,000 trucks (20 trucks/week by October/November)",
+      "reported_q0_actual": "Weekly ramp delayed ~6 weeks due to material availability and component quality; now reaching 20 trucks/week steady-state in early December",
+      "variance_commentary": "Management resolved pre-production bottlenecks and confirmed Roush is staffed 16 hours daily, but acknowledged a 6-week schedule slippage.",
+      "credibility_grade": "MET GUIDE"
+    },
+    {
+      "guided_metric": "Quarterly Cash Burn & Fortress Liquidity Buffer",
+      "prior_quarter_guidance": "Maintain quarterly operating cash spend within communicating average target range of ~$170M to $180M",
+      "reported_q0_actual": "Used $170M in operating cash with $36M in CapEx; ended Q3 with $1,034M ($1.03B) in cash & short-term investments",
+      "variance_commentary": "Disciplined capital allocation met target parameters, bolstered by $41M net proceeds from the ATM equity program.",
+      "credibility_grade": "MET GUIDE"
+    }
+  ],
+  "forward_guidance_reset_matrix_b": [
+    {
+      "forward_horizon_and_metric": "Full-Year 2026 Commercial Revenue Target",
+      "preprint_street_consensus": "$10.0M to $12.0M prior Street expectation",
+      "new_management_guidance": "Approximately $9.0M full-year revenue",
+      "delta_vs_street": "-$1.0M to -$3.0M adjustment due to 6-week manufacturing ramp delay",
+      "action_badge": "REALIGNED",
+      "rationale": "Reflects measured upfitting ramp at Roush as production reaches 20 trucks/week in early December."
+    },
+    {
+      "forward_horizon_and_metric": "Fleet Scaling Milestone: 200 Driverless Trucks",
+      "preprint_street_consensus": "Q4 2026 / Q1 2027 fleet deployment milestone",
+      "new_management_guidance": "Anticipate surpassing 200 driverless trucks in operation by end of February 2027",
+      "delta_vs_street": "Clear line-of-sight to commercial fleet inflection",
+      "action_badge": "REAFFIRMED",
+      "rationale": "Roush contract manufacturing lines fully validated and running two shifts per day."
+    },
+    {
+      "forward_horizon_and_metric": "Exit 2027 Commercial Scale Hurdle",
+      "preprint_street_consensus": "Targeting 800 to 1,000 trucks in commercial service",
+      "new_management_guidance": "On track to exit 2027 with >1,000 driverless trucks in commercial operation",
+      "delta_vs_street": "Maintains multi-year commercial scaling trajectory",
+      "action_badge": "REAFFIRMED",
+      "rationale": "Volvo deployment of 300+ driverless trucks in 2027 alongside Roush upfitting and PACCAR integration."
+    },
+    {
+      "forward_horizon_and_metric": "Q4 2026 Cash Use & CapEx Projection",
+      "preprint_street_consensus": "$180M to $200M quarterly cash burn",
+      "new_management_guidance": "Cash use of approximately $250M in Q4 2026 to fund fleet scaling",
+      "delta_vs_street": "+$50M higher cash investment into fleet assets",
+      "action_badge": "CAPEX RAMP",
+      "rationale": "Funding inventory purchases, Roush production acceleration, and site-to-site terminal automation."
+    }
+  ],
+  "call_qa_forensic_highlights": [
+    {
+      "analyst_name": "Mark Delaney (Goldman Sachs)",
+      "topic": "Charger Logistics 500-Truck MOU & DaaS Economic Model",
+      "question": "Chris, the 500-truck commitment with Charger Logistics is significant. Can you walk through the revenue recognition cadence for these trucks between 2027 and 2028, and how the DaaS per-mile fee structure scales relative to your initial TaaS model?",
+      "executive_response": "CEO Chris Urmson explained that the Charger Logistics MOU transitions Aurora from capital-intensive fleet ownership (TaaS) to asset-light software licensing (DaaS). Charger will own and maintain the trucks, paying Aurora an ongoing software subscription and per-mile autonomy utilization fee. Delivery will phase across 2027 and 2028 along the Dallas-to-Laredo corridor, delivering high-margin recurring software revenues and unlocking hundreds of millions in cumulative value."
+    },
+    {
+      "analyst_name": "George Gianarikas (Canaccord Genuity)",
+      "topic": "Roush 6-Week Manufacturing Lag & Component Quality Resolution",
+      "question": "David, you cited a six-week delay in the manufacturing ramp at Roush due to material availability and end-of-line testing. Are those component shortages fully behind you now, and what gives you confidence in achieving 20 trucks per week by early December?",
+      "executive_response": "CFO David Maday and VP Brad Rzetelny confirmed that the initial bottlenecks were related to specialized harness connectors and sensor calibration fixtures during initial line bring-up. The engineering team redesigned the testing protocols, all tooling is now validated, and the facility is running 16 hours a day with validated inventory on-site, providing complete confidence in hitting the 20-trucks-per-week run rate in early December."
+    },
+    {
+      "analyst_name": "Brian Ossenbeck (JPMorgan)",
+      "topic": "Federal AV Regulatory Framework & FMCSA Warning Beacon Exemption",
+      "question": "Chris, could you elaborate on the regulatory progress with USDOT's Automated Vehicles National Strategy and the recent FMCSA five-year exemption for cab-mounted warning beacons?",
+      "executive_response": "Chris Urmson emphasized that federal regulatory momentum is inflecting positively. The FMCSA five-year exemption formally validates that cab-mounted automated beacons eliminate roadside hazards for commercial drivers. Furthermore, Secretary Sean Duffy and the Trump Administration's AV National Strategy establish federal safety standards and corridor interoperability, providing regulatory certainty that reinforces Aurora's multi-state commercial rollout."
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "ticker": "FTNT",
+  "earnings_date": "2026-10-28",
+  "agent_role": "Social_Pulse_Agent",
+  "model": "Gemini 3.8 Flash High",
+  "social_channels_crawled": [
+    "Reddit (r/wallstreetbets, r/cybersecurity, r/stocks, r/investing)",
+    "X (FinTwit / #FTNT / $FTNT / #Cybersecurity)",
+    "Threads (threads.net / @fortinet)",
+    "Stocktwits ($FTNT sentiment stream)",
+    "Seeking Alpha post-market earnings call transcripts",
+    "Sell-Side Flash Notes (Barclays, Morgan Stanley, Bank of America, Goldman Sachs, Piper Sandler)"
+  ],
+  "retail_vs_institutional_reaction": {
+    "retail_sentiment_summary": "Retail traders on r/wallstreetbets and FinTwit expressed utter shock and disbelief at the severe -25.71% after-hours stock crash to $129.33, especially following what looked like a stellar headline beat (Product revenue +37%, billings +29%, EPS $0.91 vs $0.86, and a $1.2B buyback boost). Dip-buyers on social platforms argued the sell-off is an extreme overreaction to conservative Q4 guidance, while momentum option traders suffered severe losses on long call positions.",
+    "institutional_sentiment_summary": "Institutional desks pointed to multiple compression and elevated pre-print hedge fund positioning as the primary catalyst. Heading into the print at $174, FTNT was trading near historic valuation peaks (>48x forward earnings). With Q4 revenue guidance midpoint ($2.20B) falling slightly short of aggressive buy-side whisper numbers ($2.24B+), systematic algorithms and fast-money hedge funds triggered massive liquidation, triggering trailing stop-losses across cybersecurity portfolios.",
+    "after_hours_movement_driver": "FTNT collapsed -25.71% in after-hours trading to $129.33 (down -$44.75 from the $174.08 close), blowing past the options-implied move (±11.61%) as high valuation expectations collided with conservative Q4 guidance ($2.20B mid vs $2.24B whisper), sparking aggressive multiple de-rating despite a record Q3 beat and $2B authorized buyback."
+  },
+  "four_pillar_post_sentiment_scores": {
+    "pillar_1_retail_and_social_pulse": {
+      "score_out_of_100": 58,
+      "classification": "SHOCK & AGGRESSIVE DIP-BUYING DEBATE",
+      "key_themes": [
+        "Shock over -25.7% plunge on an earnings beat",
+        "Disbelief at multiple compression after 37% product growth",
+        "Aggressive debate over buying the $125-$130 dip",
+        "Pain among retail options buyers hit by delta collapse"
+      ],
+      "top_quote": "FinTwit Cyber Desk: 'FTNT beats EPS ($0.91 vs $0.86), beats rev ($2.08B vs $2.04B), raises full year billings for the 3rd time, adds $1.2B to buyback, and the stock gets murdered -25% to $129 because Q4 guide was 1% below whisper? Peak market insanity.'"
+    },
+    "pillar_2_sellside_flash_reactions": {
+      "score_out_of_100": 74,
+      "classification": "CONSTRUCTIVE ON FUNDAMENTALS / LOWERING MULTIPLES",
+      "key_themes": [
+        "Morgan Stanley and Barclays maintain Overweight, calling the dip an overreaction",
+        "Product revenue growth of 37% confirms firewall refresh thesis",
+        "Prudent Q4 guidance reflects classic Ken Xie conservatism",
+        "Free cash flow machine ($865M in Q3, 41% margin) supports $2B buyback floor"
+      ],
+      "top_quote": "Barclays Flash Note: 'While Q4 revenue guidance midpoint is modestly shy of elevated whisper bogeys, the underlying business is re-accelerating. Product revenue grew 37% YoY and operating margin expanded to 38%. We view this 25% post-market dislocation as a rare entry point.'"
+    },
+    "pillar_3_management_call_tone": {
+      "score_out_of_100": 84,
+      "classification": "CONFIDENT, DISCIPLINED & VALUE-FOCUSED",
+      "key_themes": [
+        "Ken Xie highlights leadership in AI security and FortiASIC cost advantages",
+        "Christian Schenk defends guidance conservatism and operational leverage",
+        "Expanded $1.2B share repurchase signals strong board confidence in intrinsic value",
+        "NVIDIA and sovereign cloud partnerships expanding TAM"
+      ],
+      "top_quote": "Ken Xie on Call: 'Network Security remains the critical foundation of AI Security. Powered by our proprietary FortiASIC technology, our unified platform secures AI infrastructure while delivering significantly lower total cost of ownership.'"
+    },
+    "pillar_4_options_iv_crush_and_skew": {
+      "score_out_of_100": 52,
+      "classification": "EXTREME VOLATILITY EXPANSION / BREACHED BAND",
+      "key_themes": [
+        "Stock tumbled -25.71% (-$44.75), vastly exceeding the pre-print ±11.61% (±$19.46) implied move",
+        "Rare 2-sigma downside outlier event punishing option straddle sellers",
+        "Put skew exploded as downside hedges were exercised en masse below $140"
+      ],
+      "top_quote": "Derivatives Floor Trader: 'FTNT suffered a massive vol blowout. Straddles were pricing ±$19.46 and the stock dumped -$44.75. Deep OTM puts from $150 down to $130 printed 10x to 25x returns, catching institutional market makers offside.'"
+    }
+  }
+}

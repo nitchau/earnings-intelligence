@@ -73,5 +73,19 @@ python stage4_render_html.py TSLA 2026-10-21
 ├── stage1_fetch_truth.py        # Stage 1 fetcher
 ├── stage3_validate_draft.py     # Stage 3 deterministic validator
 ├── stage4_render_html.py        # Stage 4 multi-version publisher
-└── update_index.py              # Root & subfolder dashboard index generator
+├── update_index.py              # Root & subfolder dashboard index generator (also rebuilds the news portal)
+├── news.html                    # AI Discover news portal (standalone; also embedded in index.html)
+├── build_news_portal.py         # News portal builder: earnings scorecard, catalyst calendar, theme & portfolio briefs
+├── news_facts.py                # Fact ledger: every portal figure -> source file + JSON path
+├── validate_news_portal.py      # Portal guardrail: re-resolves every figure from ground truth (exit 1 on drift)
+├── market_snapshot.py           # US Markets strip data (yfinance; cache in market_snapshot.json, git-ignored)
+└── serve_reports.py             # Local server + /api/market-snapshot live feed + Cloudflare quick tunnel
 ```
+
+### AI Discover News Portal
+
+`python update_index.py` regenerates `index.html`, `news.html` and their `published_reports/` copies. Every number in
+the portal is read from `ground_truth/`, the agent bus or `{TICKER}/exhibit_99_1.txt` through `news_facts.Ledger`;
+run `python validate_news_portal.py` to re-verify all of them (the page footer shows the result of the same check).
+The US Markets strip is a build-time snapshot on GitHub Pages and refreshes live every 60s when served by
+`python serve_reports.py`.

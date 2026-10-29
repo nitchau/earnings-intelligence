@@ -1,0 +1,83 @@
+{
+  "ticker": "FTNT",
+  "earnings_date": "2026-10-28",
+  "agent_role": "KPI_Discovery_Agent",
+  "model": "Gemini 3.8 Flash High",
+  "company_operational_kpis": [
+    {
+      "kpi_name": "Quarterly Billings ($M)",
+      "definition": "Total billings invoiced to enterprise customers for cybersecurity hardware, FortiOS subscriptions, and cloud services, reflecting underlying future contract momentum.",
+      "street_consensus": 2250.0,
+      "t1_whisper": 2280.0,
+      "reported_q0_actual": 2340.0,
+      "qoq_change_pct": 14.15,
+      "yoy_change_pct": 29.0,
+      "vs_consensus_delta": "+$90.0M (+4.00%)",
+      "verdict": "BEAT"
+    },
+    {
+      "kpi_name": "Product Revenue ($M)",
+      "definition": "Revenue derived from FortiGate network security appliances, custom FortiASIC hardware, and converged AI-firewall systems.",
+      "street_consensus": 720.0,
+      "t1_whisper": 735.0,
+      "reported_q0_actual": 765.0,
+      "qoq_change_pct": 17.69,
+      "yoy_change_pct": 37.0,
+      "vs_consensus_delta": "+$45.0M (+6.25%)",
+      "verdict": "BEAT"
+    },
+    {
+      "kpi_name": "Non-GAAP Operating Margin (%)",
+      "definition": "Operating income margin excluding stock-based compensation and acquired intangible asset amortization, showing core platform leverage.",
+      "street_consensus": 35.5,
+      "t1_whisper": 36.0,
+      "reported_q0_actual": 38.0,
+      "qoq_change_pct": 200,
+      "yoy_change_pct": 300,
+      "vs_consensus_delta": "+250 bps (+7.04%)",
+      "verdict": "BEAT"
+    },
+    {
+      "kpi_name": "Diluted Non-GAAP EPS ($)",
+      "definition": "Diluted earnings per share adjusted for non-cash stock compensation and intellectual property tax adjustments.",
+      "street_consensus": 0.86,
+      "t1_whisper": 0.88,
+      "reported_q0_actual": 0.91,
+      "qoq_change_pct": 10.98,
+      "yoy_change_pct": 24.66,
+      "vs_consensus_delta": "+$0.05 (+5.81%)",
+      "verdict": "BEAT"
+    },
+    {
+      "kpi_name": "Free Cash Flow ($M)",
+      "definition": "Operating cash flow minus capital expenditures, demonstrating high cash conversion from long-term subscription billings.",
+      "street_consensus": 780.0,
+      "t1_whisper": 810.0,
+      "reported_q0_actual": 865.0,
+      "qoq_change_pct": 21.83,
+      "yoy_change_pct": 33.08,
+      "vs_consensus_delta": "+$85.0M (+10.90%)",
+      "verdict": "BEAT"
+    }
+  ],
+  "reporting_segments_5q_mapping": [
+    {
+      "segment_name": "Service Revenue",
+      "q0_revenue_millions": 1315.0,
+      "share_of_revenue_pct": 63.22,
+      "sub_rows": [
+        "FortiGuard AI Security Services ($890M, +22% YoY)",
+        "FortiCare Technical Support & Professional ($425M, +12% YoY)"
+      ]
+    },
+    {
+      "segment_name": "Product Revenue",
+      "q0_revenue_millions": 765.0,
+      "share_of_revenue_pct": 36.78,
+      "sub_rows": [
+        "FortiGate Next-Gen Firewalls ($610M, +35% YoY)",
+        "Secure Connectivity & FortiSwitch/AP ($155M, +45% YoY)"
+      ]
+    }
+  ]
+}
