@@ -111,9 +111,9 @@ quarters = [
     "Q2 2026 (Ended Jun 30, 2026)"
 ]
 total_rev = [96428.0, 102346.0, 113829.0, 109896.0, 119796.0]
-services_rev = [86000.0, 91600.0, 101500.0, 97200.0, 105700.0]
-cloud_rev = [10100.0, 10350.0, 11950.0, 12280.0, 13650.0]
-other_bets_rev = [328.0, 396.0, 379.0, 416.0, 446.0]
+services_rev = [82650.0, 87052.0, 95700.0, 88300.0, 94500.0]
+cloud_rev = [13624.0, 15157.0, 17740.0, 21200.0, 24800.0]
+other_bets_rev = [154.0, 137.0, 389.0, 396.0, 496.0]
 
 cost_of_rev = [39039.0, 41369.0, 45767.0, 41271.0, 45943.0]
 gross_profit = [57389.0, 60977.0, 68062.0, 68625.0, 73853.0]
@@ -173,9 +173,9 @@ html = f"""
           <span class="kpi-sub">30D <span class="tip" title="Implied Volatility: Market's forecast of annualized stock price volatility derived from option prices." data-tip="Implied Volatility (IV): The options market's annualized volatility expectation.">IV</span>: {iv_pct:.1f}% | Put/Call OI Ratio: {pcr_oi:.2f}x (Constructive Call Skew)</span>
         </div>
         <div class="strip-item">
-          <span class="strip-label">Q3 2026E <span class="tip" title="Wall Street Consensus: The average forecast of equity research analysts covering Alphabet." data-tip="Consensus Revenue: The average top-line sales forecast published by Wall Street sell-side analysts for Q3 2026 ($122,500M).">Consensus Revenue</span> / <span class="tip" title="Whisper Number: The unofficial expectation among hedge funds and institutional traders." data-tip="Whisper Number: Unofficial top-line expectations among buy-side institutional investors ($125,000M).">Whisper</span></span>
-          <span class="strip-val">$122,500M / $125,000M</span>
-          <span class="kpi-sub">Street Estimate: $122.50B | +19.7% <span class="tip" title="Year-over-Year: Comparison against the exact same quarter last year (Q3 2025)." data-tip="Year-over-Year (YoY): Compares performance against the same quarter one year prior (Q3 2026E vs Q3 2025: $102,346M).">YoY</span> vs Q3 2025</span>
+          <span class="strip-label">Q3 2026E <span class="tip" title="Wall Street Consensus: The average forecast of equity research analysts covering Alphabet." data-tip="Consensus Revenue: The average top-line sales forecast published by Wall Street sell-side analysts (LSEG) for Q3 2026 ($128,220M / $128.22B).">Consensus Revenue</span> / <span class="tip" title="Whisper Number: The unofficial expectation among hedge funds and institutional traders." data-tip="Whisper Number: Unofficial top-line expectations among buy-side institutional investors ($130,000M / $130.0B).">Whisper</span></span>
+          <span class="strip-val">$128,220M / $130,000M</span>
+          <span class="kpi-sub">Street Estimate: $128.22B | +25.3% <span class="tip" title="Year-over-Year: Comparison against the exact same quarter last year (Q3 2025)." data-tip="Year-over-Year (YoY): Compares performance against the same quarter one year prior (Q3 2026E vs Q3 2025: $102,346M).">YoY</span> vs Q3 2025</span>
         </div>
         <div class="strip-item">
           <span class="strip-label">Q3 2026E Consensus <span class="tip" title="Earnings Per Share: Net profit divided by total diluted shares outstanding." data-tip="Earnings Per Share (EPS): Net profit allocated to each share of Class A common stock.">EPS</span> / Whisper</span>
@@ -390,30 +390,30 @@ html = f"""
       <div class="card">
         <div class="card-header">
           <div class="card-title"><span class="card-title-accent"></span>D. Segment Breakdown &amp; Cloud Trajectory (Q2 2026)</div>
-          <span class="badge badge-bull">GOOGLE CLOUD +32% YOY</span>
+          <span class="badge badge-bull">GOOGLE CLOUD +82% YOY</span>
         </div>
         <div class="kpi-metric-list">
           <div class="kpi-row">
             <div>
-              <span class="kpi-name"><span class="tip" title="Google Services: Search, YouTube, Network ads, and Subscriptions/Devices." data-tip="Google Services Revenue: $105,700.0M in Q2 2026 (88.2% of Total Revenue).">Google Services Revenue</span></span>
-              <span class="kpi-sub">Core Services: $105,700.0M (+22.9% YoY)</span>
+              <span class="kpi-name"><span class="tip" title="Google Services: Search, YouTube, Network ads, and Subscriptions/Devices." data-tip="Google Services Revenue: $94,500.0M in Q2 2026 (78.9% of Total Revenue).">Google Services Revenue</span></span>
+              <span class="kpi-sub">Core Services: $94,500.0M (+14.3% YoY)</span>
             </div>
             <div class="kpi-right">
-              <span class="kpi-val">$105,700.0M</span>
+              <span class="kpi-val">$94,500.0M</span>
               <div class="delta-pair">
-                <span class="delta-pill delta-bull">+8.7% QoQ</span>
+                <span class="delta-pill delta-bull">+7.0% QoQ</span>
               </div>
             </div>
           </div>
           <div class="kpi-row">
             <div>
-              <span class="kpi-name"><span class="tip" title="Google Cloud: Cloud Platform (GCP) and Workspace collaboration suite." data-tip="Google Cloud Revenue: $13,650.0M in Q2 2026 (+31.9% YoY).">Google Cloud Revenue</span></span>
-              <span class="kpi-sub">Cloud Platform &amp; AI: $13,650.0M (+31.9% YoY)</span>
+              <span class="kpi-name"><span class="tip" title="Google Cloud: Cloud Platform (GCP) and Workspace collaboration suite." data-tip="Google Cloud Revenue: $24,800.0M in Q2 2026 (+82.0% YoY).">Google Cloud Revenue</span></span>
+              <span class="kpi-sub">Cloud Platform &amp; AI: $24,800.0M (+82.0% YoY)</span>
             </div>
             <div class="kpi-right">
-              <span class="kpi-val">$13,650.0M</span>
+              <span class="kpi-val">$24,800.0M</span>
               <div class="delta-pair">
-                <span class="delta-pill delta-bull">+11.2% QoQ</span>
+                <span class="delta-pill delta-bull">+17.0% QoQ</span>
               </div>
             </div>
           </div>
@@ -461,7 +461,7 @@ html = f"""
         </div>
         <div style="border-left: 3px solid #10b981; padding-left: 10px;">
           <div style="font-size: 11px; text-transform: uppercase; color: #94a3b8; font-weight: 700;">Wall Street Consensus vs. Whisper</div>
-          <div style="font-size: 16px; font-weight: 800; color: #34d399; margin: 2px 0;">$122.5B Consensus vs. $125.0B Whisper</div>
+          <div style="font-size: 16px; font-weight: 800; color: #34d399; margin: 2px 0;">$128.22B Consensus vs. $130.0B Whisper</div>
           <div style="font-size: 11.5px; color: #cbd5e1;">Class A EPS: $3.00 Consensus vs. $3.15 Buy-Side Whisper Bogey</div>
         </div>
         <div style="border-left: 3px solid #f59e0b; padding-left: 10px;">
@@ -568,9 +568,9 @@ html = f"""
               <td>${total_rev[2]:.1f}M</td>
               <td>${total_rev[3]:.1f}M</td>
               <td class="col-q0" style="color: #60a5fa; font-weight:800;">${total_rev[4]:.1f}M</td>
-              <td class="col-est" style="color: #34d399; font-weight:800;">$122,500.0M</td>
+              <td class="col-est" style="color: #34d399; font-weight:800;">$128,220.0M</td>
               <td class="delta-pill delta-bull">+9.0%</td>
-              <td class="delta-pill delta-bull">+17.0%</td>
+              <td class="delta-pill delta-bull">+24.2%</td>
             </tr>
             <tr style="padding-left: 15px;">
               <td style="padding-left: 24px;">• Google Services (Search, YouTube, Ads, Devices)</td>
@@ -579,9 +579,9 @@ html = f"""
               <td>${services_rev[2]:.1f}M</td>
               <td>${services_rev[3]:.1f}M</td>
               <td class="col-q0">${services_rev[4]:.1f}M</td>
-              <td class="col-est">$107,200.0M</td>
-              <td class="delta-pill delta-bull">+8.7%</td>
-              <td class="delta-pill delta-bull">+16.5%</td>
+              <td class="col-est">$99,020.0M</td>
+              <td class="delta-pill delta-bull">+7.0%</td>
+              <td class="delta-pill delta-bull">+14.3%</td>
             </tr>
             <tr style="padding-left: 15px;">
               <td style="padding-left: 24px;">• Google Cloud (GCP &amp; Workspace)</td>
@@ -590,20 +590,20 @@ html = f"""
               <td>${cloud_rev[2]:.1f}M</td>
               <td>${cloud_rev[3]:.1f}M</td>
               <td class="col-q0">${cloud_rev[4]:.1f}M</td>
-              <td class="col-est">$14,800.0M</td>
-              <td class="delta-pill delta-bull">+11.2%</td>
-              <td class="delta-pill delta-bull">+31.9%</td>
+              <td class="col-est">$28,700.0M</td>
+              <td class="delta-pill delta-bull">+17.0%</td>
+              <td class="delta-pill delta-bull">+82.0%</td>
             </tr>
             <tr style="padding-left: 15px;">
-              <td style="padding-left: 24px;">• Other Bets (Waymo &amp; Life Sciences)</td>
+              <td style="padding-left: 24px;">• Other Bets &amp; Hedging (Waymo &amp; Life Sciences)</td>
               <td>${other_bets_rev[0]:.1f}M</td>
               <td>${other_bets_rev[1]:.1f}M</td>
               <td>${other_bets_rev[2]:.1f}M</td>
               <td>${other_bets_rev[3]:.1f}M</td>
               <td class="col-q0">${other_bets_rev[4]:.1f}M</td>
               <td class="col-est">$500.0M</td>
-              <td class="delta-pill delta-bull">+7.2%</td>
-              <td class="delta-pill delta-bull">+12.6%</td>
+              <td class="delta-pill delta-bull">+25.3%</td>
+              <td class="delta-pill delta-bull">+36.0%</td>
             </tr>
             <tr>
               <td>Cost of Revenue (TAC &amp; Data Centers)</td>
@@ -612,9 +612,9 @@ html = f"""
               <td>${cost_of_rev[2]:.1f}M</td>
               <td>${cost_of_rev[3]:.1f}M</td>
               <td class="col-q0">${cost_of_rev[4]:.1f}M</td>
-              <td class="col-est">$47,500.0M</td>
+              <td class="col-est">$51,220.0M</td>
               <td class="delta-pill delta-neutral">+11.3%</td>
-              <td class="delta-pill delta-neutral">+11.1%</td>
+              <td class="delta-pill delta-neutral">+17.7%</td>
             </tr>
             <tr style="font-weight: 700;">
               <td>Gross Profit</td>
@@ -623,7 +623,7 @@ html = f"""
               <td>${gross_profit[2]:.1f}M</td>
               <td>${gross_profit[3]:.1f}M</td>
               <td class="col-q0" style="color:#60a5fa;">${gross_profit[4]:.1f}M</td>
-              <td class="col-est" style="color:#34d399;">$75,000.0M</td>
+              <td class="col-est" style="color:#34d399;">$77,000.0M</td>
               <td class="delta-pill delta-bull">+7.6%</td>
               <td class="delta-pill delta-bull">+21.1%</td>
             </tr>
@@ -754,7 +754,7 @@ html = f"""
             🚀 Top 4 Operational Tailwinds
           </div>
           <div class="audit-point" style="margin-bottom: 10px; font-size: 12.5px; color: var(--text-secondary); line-height: 1.5;">
-            <strong>1. Google Cloud AI Hypergrowth:</strong> Google Cloud grew +32% YoY to $13.65B, outpacing AWS and Azure as enterprise customers deploy Gemini models on proprietary Trillium TPUs.
+            <strong>1. Google Cloud AI Hypergrowth:</strong> Google Cloud surged +82% YoY to $24.80B in Q2 2026 (with Street modeling $28.70B in Q3), outpacing AWS and Azure as enterprise customers deploy Gemini models on proprietary TPUs.
           </div>
           <div class="audit-point" style="margin-bottom: 10px; font-size: 12.5px; color: var(--text-secondary); line-height: 1.5;">
             <strong>2. Search Monetization Resiliency:</strong> AI Overviews have increased query volumes and click satisfaction, disproving fears of search ad cannibalization.
@@ -951,7 +951,7 @@ html = f"""
             Target Price: $312.00 – $330.00 (-2.3% to +3.3% vs ${spot_price:.2f} Spot)
           </div>
           <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 10px;">
-            <strong>Catalyst Triggers:</strong> Revenue matches consensus ($122.8B), Cloud grows +30%, CapEx remains heavy ($43B+), and operating margins remain stable at 34%. Implied weekly straddle volatility (62.4% IV) collapses quickly post-print.
+            <strong>Catalyst Triggers:</strong> Revenue matches consensus ($128.22B), Cloud prints ~$28.7B (+89% YoY), CapEx remains heavy ($45B+), and operating margins remain stable above 31%. Implied weekly straddle volatility (62.4% IV) collapses quickly post-print.
           </p>
           <div class="trade-structure" style="background: rgba(11, 15, 25, 0.7); padding: 10px; border-radius: 6px; font-size: 12px; font-family: monospace; color: #93c5fd; border: 1px solid rgba(59, 130, 246, 0.3);">
             <strong>Trade Structure:</strong> Sell Nov $295 / $345 Iron Condor to capture overpriced post-earnings implied volatility.

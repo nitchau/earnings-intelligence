@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>[v2] GOOGL — Pre-Earnings Forensic & Sentiment Tearsheet (Upcoming: Q3 2026 | Last Reported: Q2 2026)</title>
+  <title>GOOGL — Pre-Earnings Forensic & Sentiment Tearsheet (Upcoming: Q3 2026 | Last Reported: Q2 2026)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -779,18 +779,67 @@
 <body>
   <div class="container">
     
-    <!-- VERSION COMPARISON BANNER -->
-    <div style="background: #0f172a; border: 1px solid rgba(59, 130, 246, 0.35); border-radius: 10px; padding: 10px 18px; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center; font-size: 13px;">
-      <div style="display:flex; align-items:center; gap: 8px;">
-        <span style="background: rgba(59, 130, 246, 0.2); color: #60a5fa; font-weight: 800; font-family: monospace; padding: 3px 8px; border-radius: 5px; border: 1px solid rgba(59, 130, 246, 0.3);">v2 (Active)</span>
-        <span style="color: #cbd5e1;">Generated on <strong>Oct 28, 2026 at 07:22 AM</strong></span>
+    <!-- HISTORICAL QUARTER ARCHIVE TOPBAR -->
+    <div class="archive-topbar" style="background: rgba(15, 23, 42, 0.92); border: 1px solid rgba(59, 130, 246, 0.32); border-radius: 10px; padding: 10px 16px; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; font-size: 12.5px;">
+      <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+        <a href="index.html" style="color: #93c5fd; text-decoration: none; font-weight: 600; padding: 4px 10px; border-radius: 6px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.12);">← Portal Home</a>
+        <span style="background: rgba(59, 130, 246, 0.18); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); font-weight: 700; font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 3px 9px; border-radius: 5px;">T-1 Pre-Earnings Briefing</span>
+        <a id="archive-paired-stage-link" href="GOOGL_T0_POST_2026-10-28.html" style="display: none; color: #cbd5e1; text-decoration: none; font-size: 11.5px; padding: 3px 9px; border-radius: 5px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12);">Switch to T+0 Post-Earnings Report →</a>
       </div>
-      <div style="display:flex; align-items:center; gap: 8px;">
-        <span style="color: #94a3b8; font-size: 12px;">Compare prior iterations:</span>
-        <a href="GOOGL_T1_2026-10-28_v1.html" style="background: rgba(255,255,255,0.08); color: #93c5fd; padding: 2px 8px; border-radius: 4px; font-size: 11.5px; text-decoration: none; font-family: monospace; border: 1px solid rgba(255,255,255,0.15);">v1</a>
+      <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+        <label for="quarter-archive-select" style="color: #94a3b8; font-size: 12px; font-weight: 600;">📅 Historical Quarter:</label>
+        <select id="quarter-archive-select" data-ticker="GOOGL" data-date="2026-10-28" data-stage="t1" style="background: #090d16; color: #f8fafc; border: 1px solid rgba(59, 130, 246, 0.45); border-radius: 6px; padding: 5px 10px; font-size: 12px; font-family: 'Inter', sans-serif; font-weight: 600; cursor: pointer; outline: none;">
+          <option value="GOOGL_T1_2026-10-28.html" selected>Q3 2026 (Oct 28, 2026) — Latest</option>
+          <option value="" disabled>No prior quarters archived yet (history initiated Q3 2026)</option>
+        </select>
       </div>
     </div>
-        
+    <script src="history_catalog.js"></script>
+    <script>
+      (function() {
+        var sel = document.getElementById('quarter-archive-select');
+        if (!sel) return;
+        var tk = sel.getAttribute('data-ticker');
+        var curDate = sel.getAttribute('data-date');
+        var stage = sel.getAttribute('data-stage');
+        var cat = (window.EARNINGS_HISTORY_CATALOG || {})[tk];
+        if (Array.isArray(cat) && cat.length > 0) {
+          sel.innerHTML = '';
+          cat.forEach(function(entry, idx) {
+            var targetFile = (stage === 't0') ? (entry.t0 || entry.t1) : (entry.t1 || entry.t0);
+            if (!targetFile) return;
+            var opt = document.createElement('option');
+            opt.value = targetFile;
+            var suffix = (idx === 0) ? ' — Latest' : '';
+            var stageHint = (stage === 't0' && !entry.t0) ? ' [T-1 Only]' : ((stage === 't1' && !entry.t1) ? ' [T+0 Only]' : '');
+            opt.textContent = entry.quarter + ' (' + entry.date_display + ')' + stageHint + suffix;
+            if (entry.date === curDate) opt.selected = true;
+            sel.appendChild(opt);
+          });
+          if (cat.length === 1) {
+            var note = document.createElement('option');
+            note.value = '';
+            note.disabled = true;
+            note.textContent = '── Prior quarters will appear here starting next quarter ──';
+            sel.appendChild(note);
+          }
+          var curEntry = cat.find(function(e) { return e.date === curDate; });
+          var pairedLink = document.getElementById('archive-paired-stage-link');
+          if (curEntry && pairedLink) {
+            var pairedHref = (stage === 't0') ? curEntry.t1 : curEntry.t0;
+            if (pairedHref) {
+              pairedLink.href = pairedHref;
+              pairedLink.style.display = 'inline-block';
+            }
+          }
+        }
+        sel.addEventListener('change', function() {
+          if (this.value && !window.location.pathname.endsWith('/' + this.value)) {
+            window.location.href = this.value;
+          }
+        });
+      })();
+    </script>
 <!-- 1. HEADER BANNER -->
     <header class="header-banner">
       <div class="helper-bar">
@@ -832,9 +881,9 @@
           <span class="kpi-sub">30D <span class="tip" title="Implied Volatility: Market's forecast of annualized stock price volatility derived from option prices." data-tip="Implied Volatility (IV): The options market's annualized volatility expectation.">IV</span>: 62.4% | Put/Call OI Ratio: 0.69x (Constructive Call Skew)</span>
         </div>
         <div class="strip-item">
-          <span class="strip-label">Q3 2026E <span class="tip" title="Wall Street Consensus: The average forecast of equity research analysts covering Alphabet." data-tip="Consensus Revenue: The average top-line sales forecast published by Wall Street sell-side analysts for Q3 2026 ($122,500M).">Consensus Revenue</span> / <span class="tip" title="Whisper Number: The unofficial expectation among hedge funds and institutional traders." data-tip="Whisper Number: Unofficial top-line expectations among buy-side institutional investors ($125,000M).">Whisper</span></span>
-          <span class="strip-val">$122,500M / $125,000M</span>
-          <span class="kpi-sub">Street Estimate: $122.50B | +19.7% <span class="tip" title="Year-over-Year: Comparison against the exact same quarter last year (Q3 2025)." data-tip="Year-over-Year (YoY): Compares performance against the same quarter one year prior (Q3 2026E vs Q3 2025: $102,346M).">YoY</span> vs Q3 2025</span>
+          <span class="strip-label">Q3 2026E <span class="tip" title="Wall Street Consensus: The average forecast of equity research analysts covering Alphabet." data-tip="Consensus Revenue: The average top-line sales forecast published by Wall Street sell-side analysts (LSEG) for Q3 2026 ($128,220M / $128.22B).">Consensus Revenue</span> / <span class="tip" title="Whisper Number: The unofficial expectation among hedge funds and institutional traders." data-tip="Whisper Number: Unofficial top-line expectations among buy-side institutional investors ($130,000M / $130.0B).">Whisper</span></span>
+          <span class="strip-val">$128,220M / $130,000M</span>
+          <span class="kpi-sub">Street Estimate: $128.22B | +25.3% <span class="tip" title="Year-over-Year: Comparison against the exact same quarter last year (Q3 2025)." data-tip="Year-over-Year (YoY): Compares performance against the same quarter one year prior (Q3 2026E vs Q3 2025: $102,346M).">YoY</span> vs Q3 2025</span>
         </div>
         <div class="strip-item">
           <span class="strip-label">Q3 2026E Consensus <span class="tip" title="Earnings Per Share: Net profit divided by total diluted shares outstanding." data-tip="Earnings Per Share (EPS): Net profit allocated to each share of Class A common stock.">EPS</span> / Whisper</span>
@@ -1049,30 +1098,30 @@
       <div class="card">
         <div class="card-header">
           <div class="card-title"><span class="card-title-accent"></span>D. Segment Breakdown &amp; Cloud Trajectory (Q2 2026)</div>
-          <span class="badge badge-bull">GOOGLE CLOUD +32% YOY</span>
+          <span class="badge badge-bull">GOOGLE CLOUD +82% YOY</span>
         </div>
         <div class="kpi-metric-list">
           <div class="kpi-row">
             <div>
-              <span class="kpi-name"><span class="tip" title="Google Services: Search, YouTube, Network ads, and Subscriptions/Devices." data-tip="Google Services Revenue: $105,700.0M in Q2 2026 (88.2% of Total Revenue).">Google Services Revenue</span></span>
-              <span class="kpi-sub">Core Services: $105,700.0M (+22.9% YoY)</span>
+              <span class="kpi-name"><span class="tip" title="Google Services: Search, YouTube, Network ads, and Subscriptions/Devices." data-tip="Google Services Revenue: $94,500.0M in Q2 2026 (78.9% of Total Revenue).">Google Services Revenue</span></span>
+              <span class="kpi-sub">Core Services: $94,500.0M (+14.3% YoY)</span>
             </div>
             <div class="kpi-right">
-              <span class="kpi-val">$105,700.0M</span>
+              <span class="kpi-val">$94,500.0M</span>
               <div class="delta-pair">
-                <span class="delta-pill delta-bull">+8.7% QoQ</span>
+                <span class="delta-pill delta-bull">+7.0% QoQ</span>
               </div>
             </div>
           </div>
           <div class="kpi-row">
             <div>
-              <span class="kpi-name"><span class="tip" title="Google Cloud: Cloud Platform (GCP) and Workspace collaboration suite." data-tip="Google Cloud Revenue: $13,650.0M in Q2 2026 (+31.9% YoY).">Google Cloud Revenue</span></span>
-              <span class="kpi-sub">Cloud Platform &amp; AI: $13,650.0M (+31.9% YoY)</span>
+              <span class="kpi-name"><span class="tip" title="Google Cloud: Cloud Platform (GCP) and Workspace collaboration suite." data-tip="Google Cloud Revenue: $24,800.0M in Q2 2026 (+82.0% YoY).">Google Cloud Revenue</span></span>
+              <span class="kpi-sub">Cloud Platform &amp; AI: $24,800.0M (+82.0% YoY)</span>
             </div>
             <div class="kpi-right">
-              <span class="kpi-val">$13,650.0M</span>
+              <span class="kpi-val">$24,800.0M</span>
               <div class="delta-pair">
-                <span class="delta-pill delta-bull">+11.2% QoQ</span>
+                <span class="delta-pill delta-bull">+17.0% QoQ</span>
               </div>
             </div>
           </div>
@@ -1120,7 +1169,7 @@
         </div>
         <div style="border-left: 3px solid #10b981; padding-left: 10px;">
           <div style="font-size: 11px; text-transform: uppercase; color: #94a3b8; font-weight: 700;">Wall Street Consensus vs. Whisper</div>
-          <div style="font-size: 16px; font-weight: 800; color: #34d399; margin: 2px 0;">$122.5B Consensus vs. $125.0B Whisper</div>
+          <div style="font-size: 16px; font-weight: 800; color: #34d399; margin: 2px 0;">$128.22B Consensus vs. $130.0B Whisper</div>
           <div style="font-size: 11.5px; color: #cbd5e1;">Class A EPS: $3.00 Consensus vs. $3.15 Buy-Side Whisper Bogey</div>
         </div>
         <div style="border-left: 3px solid #f59e0b; padding-left: 10px;">
@@ -1148,16 +1197,16 @@
           </thead>
           <tbody>
               <tr>
-                <td><span class="tip" title="Total consolidated net revenue across Google Services, Google Cloud, and Other Bets." data-tip="Consolidated Net Revenue ($M): Wall Street consensus models $122,500M in Q3 2026E (+19.7% YoY vs $102,346M in Q3 2025); buy-side whisper targets $125,000M fueled by acceleration in Google Cloud AI workloads and YouTube subscriptions.">Consolidated Net Revenues ($M)</span></td>
+                <td><span class="tip" title="Total consolidated net revenue across Google Services, Google Cloud, and Other Bets." data-tip="Consolidated Net Revenue ($M): Wall Street consensus (LSEG) models $128,220M ($128.22B) in Q3 2026E (+25.3% YoY vs $102,346M in Q3 2025); buy-side whisper targets $130,000M ($130.0B) fueled by hyper-growth in Google Cloud AI compute and YouTube subscriptions.">Consolidated Net Revenues ($M)</span></td>
                 <td>$119,796.0M</td>
                 <td>$102,346.0M</td>
-                <td class="col-q0" style="font-weight:700; color: #60a5fa;">$122,500.0M</td>
-                <td style="font-weight:700; color: #34d399;">$125,000.0M</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">$128,220.0M</td>
+                <td style="font-weight:700; color: #34d399;">$130,000.0M</td>
                 <td>
-                  <span class="badge badge-bull">+$2,500.0M (+2.04% Whisper Hurdle)</span>
+                  <span class="badge badge-bull">+$1,780.0M (+1.39% Whisper Hurdle)</span>
                   <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div style="width:85%; height:100%; background:linear-gradient(90deg, #3b82f6, #10b981);"></div></div>
                 </td>
-                <td><span class="badge badge-blue">BULL HURDLE >$125B</span></td>
+                <td><span class="badge badge-blue">BULL HURDLE >$130B</span></td>
               </tr>
               <tr>
                 <td><span class="tip" title="Wall Street consensus Diluted EPS for Class A voting shares Q3 2026E ($3.00) vs Buy-Side Whisper ($3.15)." data-tip="Diluted EPS ($): Sell-side consensus expects $3.00 per Class A share; buy-side whisper bogeys target $3.15+ driven by operating leverage across Google Services and expanding Cloud operating margins.">Diluted EPS (Class A GAAP / Consensus)</span></td>
@@ -1172,49 +1221,49 @@
                 <td><span class="badge badge-blue">EARNINGS POWER</span></td>
               </tr>
               <tr>
-                <td><span class="tip" title="Total revenue generated by Google Cloud Platform (GCP) and Google Workspace enterprise accounts." data-tip="Google Cloud Revenue ($M): Printed $13,650M in Q2 2026 (+32% YoY); Street consensus models $14,800M for Q3 2026E with whisper looking for $15,200M+ on surging generative AI infrastructure demand and TPU v5e/v5p/Trillium deployments.">Google Cloud Revenue ($M)</span></td>
-                <td>$13,650.0M</td>
-                <td>$10,350.0M</td>
-                <td class="col-q0" style="font-weight:700; color: #60a5fa;">$14,800.0M</td>
-                <td style="font-weight:700; color: #34d399;">$15,200.0M</td>
+                <td><span class="tip" title="Total revenue generated by Google Cloud Platform (GCP) and Google Workspace enterprise accounts." data-tip="Google Cloud Revenue ($M): Printed $24,800M ($24.8B) in Q2 2026 (+82% YoY); Street consensus models $28,700M for Q3 2026E (+89.4% YoY vs $15,157M in Q3 2025) with buy-side whisper looking for $29,500M+ on surging generative AI infrastructure demand and custom TPU deployments.">Google Cloud Revenue ($M)</span></td>
+                <td>$24,800.0M</td>
+                <td>$15,157.0M</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">$28,700.0M</td>
+                <td style="font-weight:700; color: #34d399;">$29,500.0M</td>
                 <td>
-                  <span class="badge badge-bull">+$400.0M (+2.70% Spread)</span>
+                  <span class="badge badge-bull">+$800.0M (+2.79% Spread)</span>
                   <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div style="width:92%; height:100%; background:linear-gradient(90deg, #3b82f6, #10b981);"></div></div>
                 </td>
                 <td><span class="badge badge-blue">CLOUD AI ENGINE</span></td>
               </tr>
               <tr>
-                <td><span class="tip" title="Core advertising revenue generated on Google Search, Maps, and AI Overviews query surfaces." data-tip="Google Search Revenue ($M): Core search engine printed $61,200M in Q2 2026; Street consensus models $63,500M in Q3 2026E (whisper $64,500M) as AI Overviews ads successfully monetize commercial queries.">Google Search & Other Advertising Revenue ($M)</span></td>
-                <td>$61,200.0M</td>
-                <td>$54,100.0M</td>
-                <td class="col-q0" style="font-weight:700; color: #60a5fa;">$63,500.0M</td>
-                <td style="font-weight:700; color: #34d399;">$64,500.0M</td>
+                <td><span class="tip" title="Core advertising revenue generated on Google Search, Maps, and AI Overviews query surfaces." data-tip="Google Search Revenue ($M): Core search engine printed $63,300M in Q2 2026; Street consensus models $64,850M in Q3 2026E (+14.6% YoY vs $56,567M in Q3 2025; whisper $65,500M) as AI Overviews ads monetize commercial queries.">Google Search & Other Advertising Revenue ($M)</span></td>
+                <td>$63,300.0M</td>
+                <td>$56,567.0M</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">$64,850.0M</td>
+                <td style="font-weight:700; color: #34d399;">$65,500.0M</td>
                 <td>
-                  <span class="badge badge-bull">+$1,000.0M (+1.57% Spread)</span>
+                  <span class="badge badge-bull">+$650.0M (+1.00% Spread)</span>
                   <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div style="width:82%; height:100%; background:linear-gradient(90deg, #3b82f6, #10b981);"></div></div>
                 </td>
                 <td><span class="badge badge-blue">CORE MONETIZATION MOAT</span></td>
               </tr>
               <tr>
-                <td><span class="tip" title="Total revenue generated across YouTube ad placements, YouTube Music, and YouTube Premium subscriptions." data-tip="YouTube Total Revenue ($M): Combined advertising and subscription run-rate printed $11,500M in Q2 2026; Street models $12,200M in Q3 2026E with whisper at $12,600M fueled by Shorts monetization and connected TV market share.">YouTube Advertising & Subscription Revenue ($M)</span></td>
-                <td>$11,500.0M</td>
-                <td>$9,800.0M</td>
-                <td class="col-q0" style="font-weight:700; color: #60a5fa;">$12,200.0M</td>
-                <td style="font-weight:700; color: #34d399;">$12,600.0M</td>
+                <td><span class="tip" title="Advertising revenue generated across YouTube video placements and Shorts." data-tip="YouTube Advertising Revenue ($M): Printed $11,100M in Q2 2026; Street models $11,400M in Q3 2026E (+11.1% YoY vs $10,261M in Q3 2025) with whisper at $11,650M fueled by Shorts monetization and connected TV share.">YouTube Advertising Revenue ($M)</span></td>
+                <td>$11,100.0M</td>
+                <td>$10,261.0M</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">$11,400.0M</td>
+                <td style="font-weight:700; color: #34d399;">$11,650.0M</td>
                 <td>
-                  <span class="badge badge-bull">+$400.0M (+3.28% Spread)</span>
+                  <span class="badge badge-bull">+$250.0M (+2.19% Spread)</span>
                   <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div style="width:84%; height:100%; background:linear-gradient(90deg, #3b82f6, #10b981);"></div></div>
                 </td>
                 <td><span class="badge badge-blue">STREAMING & SHORTS SCALE</span></td>
               </tr>
               <tr>
-                <td><span class="tip" title="Capital expenditures deployed toward AI servers, custom TPUs, networking, and data center buildouts." data-tip="AI Infrastructure CapEx ($M): Exploded to $44,924M in Q2 2026 as Alphabet aggressively scaled data centers; Street expects Q3 CapEx around $42,000M–$45,000M to support Gemini 2.5/3.0 foundation model training and cloud customer inference.">Quarterly AI CapEx Infrastructure Investment ($M)</span></td>
+                <td><span class="tip" title="Capital expenditures deployed toward AI servers, custom TPUs, networking, and data center buildouts." data-tip="AI Infrastructure CapEx ($M): Reached $44,924M in Q2 2026 as Alphabet aggressively scaled data centers; Street expects Q3 CapEx around $45,000M–$48,000M to support Gemini foundation model training and GCP customer inference.">Quarterly AI CapEx Infrastructure Investment ($M)</span></td>
                 <td>$44,924.0M</td>
-                <td>$13,061.0M</td>
-                <td class="col-q0" style="font-weight:700; color: #60a5fa;">$43,500.0M</td>
-                <td style="font-weight:700; color: #34d399;">$44,000.0M</td>
+                <td>$23,953.0M</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">$46,000.0M</td>
+                <td style="font-weight:700; color: #34d399;">$47,500.0M</td>
                 <td>
-                  <span class="badge badge-bull">+$500.0M (CapEx Discipline)</span>
+                  <span class="badge badge-bull">+$1,500.0M (CapEx Scale)</span>
                   <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div style="width:96%; height:100%; background:linear-gradient(90deg, #3b82f6, #10b981);"></div></div>
                 </td>
                 <td><span class="badge badge-blue">AI HORIZON INVESTMENT</span></td>
@@ -1352,42 +1401,42 @@
               <td>$113829.0M</td>
               <td>$109896.0M</td>
               <td class="col-q0" style="color: #60a5fa; font-weight:800;">$119796.0M</td>
-              <td class="col-est" style="color: #34d399; font-weight:800;">$122,500.0M</td>
+              <td class="col-est" style="color: #34d399; font-weight:800;">$128,220.0M</td>
               <td class="delta-pill delta-bull">+9.0%</td>
-              <td class="delta-pill delta-bull">+17.0%</td>
+              <td class="delta-pill delta-bull">+24.2%</td>
             </tr>
             <tr style="padding-left: 15px;">
               <td style="padding-left: 24px;">• Google Services (Search, YouTube, Ads, Devices)</td>
-              <td>$86000.0M</td>
-              <td>$91600.0M</td>
-              <td>$101500.0M</td>
-              <td>$97200.0M</td>
-              <td class="col-q0">$105700.0M</td>
-              <td class="col-est">$107,200.0M</td>
-              <td class="delta-pill delta-bull">+8.7%</td>
-              <td class="delta-pill delta-bull">+16.5%</td>
+              <td>$82650.0M</td>
+              <td>$87052.0M</td>
+              <td>$95700.0M</td>
+              <td>$88300.0M</td>
+              <td class="col-q0">$94500.0M</td>
+              <td class="col-est">$99,020.0M</td>
+              <td class="delta-pill delta-bull">+7.0%</td>
+              <td class="delta-pill delta-bull">+14.3%</td>
             </tr>
             <tr style="padding-left: 15px;">
               <td style="padding-left: 24px;">• Google Cloud (GCP &amp; Workspace)</td>
-              <td>$10100.0M</td>
-              <td>$10350.0M</td>
-              <td>$11950.0M</td>
-              <td>$12280.0M</td>
-              <td class="col-q0">$13650.0M</td>
-              <td class="col-est">$14,800.0M</td>
-              <td class="delta-pill delta-bull">+11.2%</td>
-              <td class="delta-pill delta-bull">+31.9%</td>
+              <td>$13624.0M</td>
+              <td>$15157.0M</td>
+              <td>$17740.0M</td>
+              <td>$21200.0M</td>
+              <td class="col-q0">$24800.0M</td>
+              <td class="col-est">$28,700.0M</td>
+              <td class="delta-pill delta-bull">+17.0%</td>
+              <td class="delta-pill delta-bull">+82.0%</td>
             </tr>
             <tr style="padding-left: 15px;">
-              <td style="padding-left: 24px;">• Other Bets (Waymo &amp; Life Sciences)</td>
-              <td>$328.0M</td>
+              <td style="padding-left: 24px;">• Other Bets &amp; Hedging (Waymo &amp; Life Sciences)</td>
+              <td>$154.0M</td>
+              <td>$137.0M</td>
+              <td>$389.0M</td>
               <td>$396.0M</td>
-              <td>$379.0M</td>
-              <td>$416.0M</td>
-              <td class="col-q0">$446.0M</td>
+              <td class="col-q0">$496.0M</td>
               <td class="col-est">$500.0M</td>
-              <td class="delta-pill delta-bull">+7.2%</td>
-              <td class="delta-pill delta-bull">+12.6%</td>
+              <td class="delta-pill delta-bull">+25.3%</td>
+              <td class="delta-pill delta-bull">+36.0%</td>
             </tr>
             <tr>
               <td>Cost of Revenue (TAC &amp; Data Centers)</td>
@@ -1396,9 +1445,9 @@
               <td>$45767.0M</td>
               <td>$41271.0M</td>
               <td class="col-q0">$45943.0M</td>
-              <td class="col-est">$47,500.0M</td>
+              <td class="col-est">$51,220.0M</td>
               <td class="delta-pill delta-neutral">+11.3%</td>
-              <td class="delta-pill delta-neutral">+11.1%</td>
+              <td class="delta-pill delta-neutral">+17.7%</td>
             </tr>
             <tr style="font-weight: 700;">
               <td>Gross Profit</td>
@@ -1407,7 +1456,7 @@
               <td>$68062.0M</td>
               <td>$68625.0M</td>
               <td class="col-q0" style="color:#60a5fa;">$73853.0M</td>
-              <td class="col-est" style="color:#34d399;">$75,000.0M</td>
+              <td class="col-est" style="color:#34d399;">$77,000.0M</td>
               <td class="delta-pill delta-bull">+7.6%</td>
               <td class="delta-pill delta-bull">+21.1%</td>
             </tr>
@@ -1538,7 +1587,7 @@
             🚀 Top 4 Operational Tailwinds
           </div>
           <div class="audit-point" style="margin-bottom: 10px; font-size: 12.5px; color: var(--text-secondary); line-height: 1.5;">
-            <strong>1. Google Cloud AI Hypergrowth:</strong> Google Cloud grew +32% YoY to $13.65B, outpacing AWS and Azure as enterprise customers deploy Gemini models on proprietary Trillium TPUs.
+            <strong>1. Google Cloud AI Hypergrowth:</strong> Google Cloud surged +82% YoY to $24.80B in Q2 2026 (with Street modeling $28.70B in Q3), outpacing AWS and Azure as enterprise customers deploy Gemini models on proprietary TPUs.
           </div>
           <div class="audit-point" style="margin-bottom: 10px; font-size: 12.5px; color: var(--text-secondary); line-height: 1.5;">
             <strong>2. Search Monetization Resiliency:</strong> AI Overviews have increased query volumes and click satisfaction, disproving fears of search ad cannibalization.
@@ -1767,7 +1816,7 @@
             Target Price: $312.00 – $330.00 (-2.3% to +3.3% vs $320.58 Spot)
           </div>
           <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 10px;">
-            <strong>Catalyst Triggers:</strong> Revenue matches consensus ($122.8B), Cloud grows +30%, CapEx remains heavy ($43B+), and operating margins remain stable at 34%. Implied weekly straddle volatility (62.4% IV) collapses quickly post-print.
+            <strong>Catalyst Triggers:</strong> Revenue matches consensus ($128.22B), Cloud prints ~$28.7B (+89% YoY), CapEx remains heavy ($45B+), and operating margins remain stable above 31%. Implied weekly straddle volatility (62.4% IV) collapses quickly post-print.
           </p>
           <div class="trade-structure" style="background: rgba(11, 15, 25, 0.7); padding: 10px; border-radius: 6px; font-size: 12px; font-family: monospace; color: #93c5fd; border: 1px solid rgba(59, 130, 246, 0.3);">
             <strong>Trade Structure:</strong> Sell Nov $295 / $345 Iron Condor to capture overpriced post-earnings implied volatility.

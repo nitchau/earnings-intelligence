@@ -27,7 +27,7 @@ def run_step(cmd: list[str], step_name: str) -> bool:
 def sync_pre_to_github(ticker: str, earnings_date: str):
     print(f"\n>>> RUNNING: Stage 5 GitHub Pages Sync for {ticker} ({earnings_date})...")
     subprocess.run(
-        ["git", "add", "published_reports/", "index.html", "published_ledger.json", "audit_logs/", "ground_truth/", "drafts/", "pre_agent_bus/"],
+        ["git", "add", "published_reports/", "index.html", *(["news.html"] if (BASE_DIR / "news.html").exists() else []), "published_ledger.json", "audit_logs/", "ground_truth/", "drafts/", "pre_agent_bus/"],
         cwd=str(BASE_DIR),
         text=True
     )

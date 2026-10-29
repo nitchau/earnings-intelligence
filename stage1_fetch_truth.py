@@ -191,7 +191,15 @@ def compute_historical_earnings_track_record(t: yf.Ticker, target_date_str: str,
     }
 
 # --- NEW FEATURE 1B: Wall Street Analyst Consensus Price Targets & Ratings ---
-def extract_street_consensus_and_targets(info: dict, spot_price: float | None, yahoo_consensus_eps: float | None) -> dict:
+def extract_street_consensus_and_targets(
+    t: yf.Ticker,
+    info: dict,
+    spot_price: float | None,
+    yahoo_consensus_eps: float | None,
+    existing_targets: dict | None = None,
+    stitched_5q: dict | None = None,
+    earnings_date_str: str | None = None,
+) -> dict:
     mean_pt = safe_float(info.get("targetMeanPrice"))
     median_pt = safe_float(info.get("targetMedianPrice"))
     high_pt = safe_float(info.get("targetHighPrice"))
@@ -199,6 +207,71 @@ def extract_street_consensus_and_targets(info: dict, spot_price: float | None, y
     upside_pct = None
     if mean_pt and spot_price and spot_price > 0:
         upside_pct = round(((mean_pt - spot_price) / spot_price) * 100, 2)
+
+    # Deterministic period-aligned revenue consensus extraction from yfinance revenue_estimate / calendar
+    rev_avg = None
+    rev_low = None
+    rev_high = None
+    rev_growth = None
+    period_mismatch_warning = False
+
+    q_minus_4_rev = None
+    if stitched_5q:
+        rev_hist = (
+            stitched_5q.get("income_statement_5q", {})
+            .get("metrics_millions", {})
+            .get("Total Revenue", {})
+            .get("values_5q_chronological", [])
+        )
+        if len(rev_hist) == 5 and rev_hist[1]:
+            q_minus_4_rev = float(rev_hist[1])
+
+    # If historical rerun, preserve locked T-1 consensus revenue to prevent rolling to Q+1
+    if existing_targets and existing_targets.get("yahoo_consensus_revenue_q0e") is not None:
+        rev_avg = existing_targets.get("yahoo_consensus_revenue_q0e")
+        rev_low = existing_targets.get("yahoo_revenue_low_q0e")
+        rev_high = existing_targets.get("yahoo_revenue_high_q0e")
+        rev_growth = existing_targets.get("yahoo_revenue_growth_q0e_pct")
+    else:
+        already_released = bool(earnings_date_str and earnings_date_str < date.today().isoformat())
+        try:
+            re_df = t.revenue_estimate
+            if re_df is not None and not re_df.empty and "0q" in re_df.index:
+                row_0q = re_df.loc["0q"]
+                yr_ago_est = None
+                if row_0q.get("yearAgoRevenue") is not None and not pd.isna(row_0q.get("yearAgoRevenue")):
+                    yr_ago_est = safe_float(row_0q.get("yearAgoRevenue") / 1e6)
+
+                # Guardrail: Period-alignment check prevents locking Q+1 consensus if Yahoo '0q' already rolled
+                if yr_ago_est and q_minus_4_rev and abs(yr_ago_est - q_minus_4_rev) / q_minus_4_rev > 0.10:
+                    period_mismatch_warning = True
+                elif already_released and yr_ago_est is None:
+                    period_mismatch_warning = True
+
+                if not period_mismatch_warning:
+                    if row_0q.get("avg") is not None and not pd.isna(row_0q.get("avg")):
+                        rev_avg = safe_float(row_0q.get("avg") / 1e6)
+                    if row_0q.get("low") is not None and not pd.isna(row_0q.get("low")):
+                        rev_low = safe_float(row_0q.get("low") / 1e6)
+                    if row_0q.get("high") is not None and not pd.isna(row_0q.get("high")):
+                        rev_high = safe_float(row_0q.get("high") / 1e6)
+                    if row_0q.get("growth") is not None and not pd.isna(row_0q.get("growth")):
+                        rev_growth = safe_float(row_0q.get("growth") * 100)
+        except Exception:
+            pass
+
+        if rev_avg is None and not period_mismatch_warning and not already_released:
+            try:
+                cal = t.calendar or {}
+                if cal.get("Revenue Average"):
+                    rev_avg = safe_float(cal.get("Revenue Average") / 1e6)
+                if cal.get("Revenue Low"):
+                    rev_low = safe_float(cal.get("Revenue Low") / 1e6)
+                if cal.get("Revenue High"):
+                    rev_high = safe_float(cal.get("Revenue High") / 1e6)
+            except Exception:
+                pass
+
     return {
         "target_mean_price": mean_pt,
         "target_median_price": median_pt,
@@ -208,7 +281,11 @@ def extract_street_consensus_and_targets(info: dict, spot_price: float | None, y
         "analyst_count": info.get("numberOfAnalystOpinions"),
         "recommendation_key": info.get("recommendationKey", ""),
         "recommendation_mean": safe_float(info.get("recommendationMean")),
-        "yahoo_consensus_eps_q0e": yahoo_consensus_eps
+        "yahoo_consensus_eps_q0e": yahoo_consensus_eps,
+        "yahoo_consensus_revenue_q0e": rev_avg,
+        "yahoo_revenue_low_q0e": rev_low,
+        "yahoo_revenue_high_q0e": rev_high,
+        "yahoo_revenue_growth_q0e_pct": rev_growth
     }
 
 # --- FIX #3: 7:00 AM Pre-Market Options Implied Move (Bid/Ask -> ±2.5% Vol-Weighted -> IV Fallback) ---
@@ -425,9 +502,13 @@ def pull_ground_truth_for_ticker(symbol: str, earnings_date_str: str) -> dict:
 
     implied_move_pct = opt_pos.get("atm_implied_move_pct")
     hist_track = compute_historical_earnings_track_record(t, earnings_date_str, implied_move_pct)
+    existing_targets = existing_truth.get("street_consensus_and_targets") if is_historical_rerun else None
     street_targets = extract_street_consensus_and_targets(
-        info, yf_price, sched_ver.get("yahoo_consensus_eps")
+        t, info, yf_price, sched_ver.get("yahoo_consensus_eps"), existing_targets,
+        stitched_5q=stitched_5q, earnings_date_str=earnings_date_str,
     )
+    if street_targets.get("yahoo_consensus_revenue_q0e") is not None:
+        sched_ver["yahoo_consensus_revenue"] = street_targets.get("yahoo_consensus_revenue_q0e")
     fcf_bridge = compute_forensic_fcf_bridge_latest(stitched_5q)
 
     payload = {
@@ -446,6 +527,11 @@ def pull_ground_truth_for_ticker(symbol: str, earnings_date_str: str) -> dict:
     }
 
     out_file.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+    try:
+        import earnings_db
+        earnings_db.ingest_t1_truth(symbol, earnings_date_str)
+    except Exception as db_err:
+        print(f"  [WARN] SQLite warehouse T-1 ingest warning for {symbol}: {db_err}")
     return payload
 
 if __name__ == "__main__":

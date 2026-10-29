@@ -2,15 +2,15 @@
 Stage 4 Post-Earnings (T+0) Read-Only CSS Cloner & Candidate HTML Assembler
 - Clones locked CSS from published_reports/TSLA_T1_2026-10-21.html in read-only mode.
 - Wraps rendered_container_html into published_reports/{TICKER}_T0_POST_{DATE}.html
+- Injects Historical Quarter Archive Topbar (zero v1/v2 iteration clutter).
 - Pre-publish size check: Enforces rendered HTML >= 75,000 bytes.
-- Supports multi-versioning (_v1, _v2, etc.) and canonical latest file.
 """
 
 import sys
 import re
 import json
-from datetime import datetime
 from pathlib import Path
+from archive_topbar import build_archive_topbar_html
 
 BASE_DIR = Path(__file__).parent.resolve()
 REPORTS_DIR = BASE_DIR / "published_reports"
@@ -18,6 +18,7 @@ AUDIT_DIR = BASE_DIR / "audit_logs"
 DRAFTS_DIR = BASE_DIR / "drafts"
 MASTER_HTML = REPORTS_DIR / "TSLA_T1_2026-10-21.html"
 FALLBACK_MASTER = BASE_DIR / "Stock_Analysis_v2.html"
+
 
 def get_master_css() -> str:
     ref_file = MASTER_HTML if MASTER_HTML.exists() else FALLBACK_MASTER
@@ -29,6 +30,7 @@ def get_master_css() -> str:
     if start == -1 or end == -1:
         raise RuntimeError("Could not isolate <style> block in master reference HTML.")
     return content[start:end]
+
 
 def determine_post_version(ticker: str, earnings_date: str) -> tuple[int, list[int]]:
     REPORTS_DIR.mkdir(exist_ok=True)
@@ -49,6 +51,7 @@ def determine_post_version(ticker: str, earnings_date: str) -> tuple[int, list[i
     next_ver = (existing_versions[-1] + 1) if existing_versions else 1
     return next_ver, existing_versions
 
+
 def render_post_html(ticker: str, earnings_date: str) -> Path:
     ticker = ticker.upper()
     audit_file = AUDIT_DIR / f"{ticker}_{earnings_date}_post_validation.json"
@@ -62,34 +65,11 @@ def render_post_html(ticker: str, earnings_date: str) -> Path:
     draft = json.loads(draft_file.read_text(encoding="utf-8"))
 
     locked_css = get_master_css()
-    version_num, prior_versions = determine_post_version(ticker, earnings_date)
-    ver_str = f"v{version_num}"
-    timestamp_display = datetime.now().strftime("%b %d, %Y at %I:%M %p")
+    version_num, _ = determine_post_version(ticker, earnings_date)
 
-    # Version comparison banner
-    version_banner_html = ""
-    if prior_versions:
-        pills = []
-        for pv in prior_versions:
-            pv_file = f"{ticker}_T0_POST_{earnings_date}_v{pv}.html"
-            pills.append(f'<a href="{pv_file}" style="background: rgba(255,255,255,0.08); color: #93c5fd; padding: 2px 8px; border-radius: 4px; font-size: 11.5px; text-decoration: none; font-family: monospace; border: 1px solid rgba(255,255,255,0.15);">v{pv}</a>')
-        pills_str = " ".join(pills)
-        version_banner_html = f"""
-    <!-- VERSION COMPARISON BANNER -->
-    <div style="background: #0f172a; border: 1px solid rgba(59, 130, 246, 0.35); border-radius: 10px; padding: 10px 18px; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center; font-size: 13px;">
-      <div style="display:flex; align-items:center; gap: 8px;">
-        <span style="background: rgba(16, 185, 129, 0.2); color: #34d399; font-weight: 800; font-family: monospace; padding: 3px 8px; border-radius: 5px; border: 1px solid rgba(16, 185, 129, 0.4);">{ver_str} (Active Post-Print)</span>
-        <span style="color: #cbd5e1;">Generated on <strong>{timestamp_display}</strong></span>
-      </div>
-      <div style="display:flex; align-items:center; gap: 8px;">
-        <span style="color: #94a3b8; font-size: 12px;">Compare prior iterations:</span>
-        {pills_str}
-      </div>
-    </div>
-        """
-
+    archive_topbar_html = build_archive_topbar_html(ticker, earnings_date, is_post=True)
     container_html = draft["rendered_container_html"]
-    container_with_ver = f"{version_banner_html}\n{container_html}"
+    container_with_topbar = f"{archive_topbar_html}\n{container_html}"
 
     page_title = draft.get("header", {}).get("page_title", f"{ticker} T+0 Post-Earnings Forensic Tearsheet")
 
@@ -98,7 +78,7 @@ def render_post_html(ticker: str, earnings_date: str) -> Path:
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>[{ver_str}] {page_title}</title>
+  <title>{page_title}</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -106,7 +86,7 @@ def render_post_html(ticker: str, earnings_date: str) -> Path:
 </head>
 <body>
   <div class="container">
-    {container_with_ver}
+    {container_with_topbar}
   </div>
 </body>
 </html>
@@ -121,7 +101,7 @@ def render_post_html(ticker: str, earnings_date: str) -> Path:
             f"(minimum requirement: {MIN_HTML_BYTES:,} bytes). Publication aborted."
         )
 
-    # Write versioned file and canonical file
+    # Write versioned backup file and canonical file
     versioned_path = REPORTS_DIR / f"{ticker}_T0_POST_{earnings_date}_v{version_num}.html"
     canonical_path = REPORTS_DIR / f"{ticker}_T0_POST_{earnings_date}.html"
 
@@ -132,6 +112,7 @@ def render_post_html(ticker: str, earnings_date: str) -> Path:
     print(f"  - Versioned: {versioned_path.name} ({len(html_bytes):,} bytes)")
     print(f"  - Canonical: {canonical_path.name}")
     return canonical_path
+
 
 if __name__ == "__main__":
     if len(sys.argv) < 3:

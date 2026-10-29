@@ -19,6 +19,7 @@ import re
 import json
 from datetime import datetime
 from pathlib import Path
+from stage4_validate_post import audit_rendered_tables_against_truth
 
 BASE_DIR = Path(__file__).parent.resolve()
 REPORTS_DIR = BASE_DIR / "published_reports"
@@ -94,20 +95,22 @@ def audit_rendered_post_html(ticker: str, earnings_date: str) -> dict:
         defects.append(f"Insufficient interactive tooltips: Found {tip_matches}, require >= 18.")
         route_to = "AGENT_4B_FINALIZER"
 
-    # Check 6: Track A & Track B Zero-Bleed & Rolling 5Q Audit
+    # Check 6: Track A & Track B Zero-Bleed, Dynamic Rolling 5Q & Deep HTML Table Cell Parity Audit
     if "T-1 PRE-EARNINGS" in html_content:
         defects.append("T-1 PRE-EARNINGS badge bleed-through detected in T+0 post-earnings tearsheet.")
         route_to = "AGENT_4B_FINALIZER"
-    if html_content.count("VERSION COMPARISON BANNER") > 1:
-        defects.append("Duplicate VERSION COMPARISON BANNER detected in rendered HTML.")
+    if "VERSION COMPARISON BANNER" in html_content:
+        defects.append("Legacy VERSION COMPARISON BANNER detected in rendered HTML (must use clean Historical Quarter Archive topbar).")
         route_to = "AGENT_4B_FINALIZER"
-    if '<th class="col-q0">Q3 2026 (Actual)' not in html_content or '<th class="col-est">Q4 2026E' not in html_content:
-        defects.append("Row 2 5-Quarter table is not rolled forward to Q3 2026 (Actual) + Q4 2026E.")
-        route_to = "LAYER_1_DETERMINISTIC"
     for tb_cls in ["post-jump-nav", "t1-vs-t0-audit", "beat-bar-track", "credibility-gauge-bar"]:
         if tb_cls not in html_content:
             defects.append(f"Missing Track B interactive component: .{tb_cls}")
             route_to = "AGENT_4B_FINALIZER"
+
+    parity_defects = audit_rendered_tables_against_truth(html_content, truth)
+    if parity_defects:
+        defects.extend(parity_defects)
+        route_to = route_to or "AGENT_4B_FINALIZER"
 
     # Final verdict determination
     status = "APPROVED" if not defects else "REJECTED"

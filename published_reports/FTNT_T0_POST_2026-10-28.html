@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>[v1] FTNT ($129.33) Q3 2026 Post-Earnings Forensic & Sentiment Tearsheet</title>
+  <title>FTNT ($129.33) Q3 2026 Post-Earnings Forensic & Sentiment Tearsheet</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -779,6 +779,67 @@
 <body>
   <div class="container">
     
+    <!-- HISTORICAL QUARTER ARCHIVE TOPBAR -->
+    <div class="archive-topbar" style="background: rgba(15, 23, 42, 0.92); border: 1px solid rgba(59, 130, 246, 0.32); border-radius: 10px; padding: 10px 16px; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; font-size: 12.5px;">
+      <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+        <a href="index.html" style="color: #93c5fd; text-decoration: none; font-weight: 600; padding: 4px 10px; border-radius: 6px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.12);">← Portal Home</a>
+        <span style="background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); font-weight: 700; font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 3px 9px; border-radius: 5px;">T+0 Post-Earnings Forensic</span>
+        <a id="archive-paired-stage-link" href="FTNT_T1_2026-10-28.html" style="display: none; color: #cbd5e1; text-decoration: none; font-size: 11.5px; padding: 3px 9px; border-radius: 5px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12);">Switch to T-1 Pre-Earnings Setup</a>
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+        <label for="quarter-archive-select" style="color: #94a3b8; font-size: 12px; font-weight: 600;">📅 Historical Quarter:</label>
+        <select id="quarter-archive-select" data-ticker="FTNT" data-date="2026-10-28" data-stage="t0" style="background: #090d16; color: #f8fafc; border: 1px solid rgba(59, 130, 246, 0.45); border-radius: 6px; padding: 5px 10px; font-size: 12px; font-family: 'Inter', sans-serif; font-weight: 600; cursor: pointer; outline: none;">
+          <option value="FTNT_T0_POST_2026-10-28.html" selected>Q3 2026 (Oct 28, 2026) — Latest</option>
+          <option value="" disabled>No prior quarters archived yet (history initiated Q3 2026)</option>
+        </select>
+      </div>
+    </div>
+    <script src="history_catalog.js"></script>
+    <script>
+      (function() {
+        var sel = document.getElementById('quarter-archive-select');
+        if (!sel) return;
+        var tk = sel.getAttribute('data-ticker');
+        var curDate = sel.getAttribute('data-date');
+        var stage = sel.getAttribute('data-stage');
+        var cat = (window.EARNINGS_HISTORY_CATALOG || {})[tk];
+        if (Array.isArray(cat) && cat.length > 0) {
+          sel.innerHTML = '';
+          cat.forEach(function(entry, idx) {
+            var targetFile = (stage === 't0') ? (entry.t0 || entry.t1) : (entry.t1 || entry.t0);
+            if (!targetFile) return;
+            var opt = document.createElement('option');
+            opt.value = targetFile;
+            var suffix = (idx === 0) ? ' — Latest' : '';
+            var stageHint = (stage === 't0' && !entry.t0) ? ' [T-1 Only]' : ((stage === 't1' && !entry.t1) ? ' [T+0 Only]' : '');
+            opt.textContent = entry.quarter + ' (' + entry.date_display + ')' + stageHint + suffix;
+            if (entry.date === curDate) opt.selected = true;
+            sel.appendChild(opt);
+          });
+          if (cat.length === 1) {
+            var note = document.createElement('option');
+            note.value = '';
+            note.disabled = true;
+            note.textContent = '── Prior quarters will appear here starting next quarter ──';
+            sel.appendChild(note);
+          }
+          var curEntry = cat.find(function(e) { return e.date === curDate; });
+          var pairedLink = document.getElementById('archive-paired-stage-link');
+          if (curEntry && pairedLink) {
+            var pairedHref = (stage === 't0') ? curEntry.t1 : curEntry.t0;
+            if (pairedHref) {
+              pairedLink.href = pairedHref;
+              pairedLink.style.display = 'inline-block';
+            }
+          }
+        }
+        sel.addEventListener('change', function() {
+          if (this.value && !window.location.pathname.endsWith('/' + this.value)) {
+            window.location.href = this.value;
+          }
+        });
+      })();
+    </script>
 
     <!-- 1. HEADER BANNER (T+0 POST-EARNINGS FORENSIC TEARSHEET) -->
     <header class="header-banner">
@@ -792,7 +853,7 @@
           <div class="ticker-line">
             <span class="ticker-symbol">FTNT</span>
             <h1 class="company-name">Fortinet, Inc.</h1>
-            <span class="badge badge-bull">HEADLINE BEAT / LOW QUALITY</span>
+            <span class="badge badge-blue">HEADLINE BEAT / GUIDANCE RESET</span>
             <span class="badge badge-blue"><span class="tip tip-bottom" title="Immediate post-earnings release forensic tearsheet." data-tip="T+0 Post-Print: Forensic analysis synthesized immediately following the official Q3 2026 SEC Form 8-K release and management conference call.">T+0</span> POST-EARNINGS FORENSIC TEARSHEET</span>
           </div>
           <div class="sector-tag">NASDAQ Global Select • Cybersecurity, Network Security, Unified SASE &amp; SecOps • <span class="tip tip-bottom" title="Central Index Key: Unique 10-digit identifier assigned by the U.S. SEC." data-tip="Central Index Key (CIK): 0001262039 assigned by the U.S. Securities and Exchange Commission to Fortinet, Inc.">CIK</span>: 0001262039</div>
@@ -803,8 +864,8 @@
             <div class="price-value">$174.08 / <span style="color:#f87171;">$129.33</span> <span style="font-size:14px; color:#f87171;">(-25.71%)</span></div>
           </div>
           <div class="price-box">
-            <div class="price-label"><span class="tip tip-right tip-bottom" title="Market Capitalization: Total equity value at after-hours price across 743M diluted shares." data-tip="Market Capitalization: Post-print equity valuation ($96.1B at $129.33 AH) vs $94.3B Enterprise Value.">Market Cap</span> / <span class="tip tip-right tip-bottom" title="Enterprise Value: Market Cap plus Total Debt minus Cash and liquid investments." data-tip="Enterprise Value (EV): Enterprise value reflects fortress liquidity and zero funded bank debt.">EV</span></div>
-            <div class="price-value">$96.1B / $94.3B</div>
+            <div class="price-label"><span class="tip tip-right tip-bottom" title="Market Capitalization: Total equity value at after-hours price across 742.5M diluted shares." data-tip="Market Capitalization: Post-print equity valuation ($96.0B at $129.33 AH) vs $91.2B Enterprise Value.">Market Cap</span> / <span class="tip tip-right tip-bottom" title="Enterprise Value: Market Cap plus $497.1M Long-Term Debt minus $5,318.4M Cash &amp; Investments." data-tip="Enterprise Value (EV): Reflects $4.82B net cash fortress ($3,750.6M cash + $1,048.4M short-term + $519.4M long-term investments vs $497.1M debt).">EV</span></div>
+            <div class="price-value">$96.0B / $91.2B</div>
           </div>
         </div>
       </div>
@@ -816,24 +877,24 @@
           <span class="kpi-sub">Exhibit 99.1 Press Release &amp; Webcast Audited</span>
         </div>
         <div class="strip-item">
-          <span class="strip-label"><span class="tip" title="Actual post-market stock reaction (-25.71%) compared against pre-print options straddle implied move (±11.61%)." data-tip="Actual vs. Implied Move: FTNT plunged -25.71% to $129.33 in after-hours trading, breaching the ±11.61% (±$19.46/sh) weekly ATM straddle band.">Actual AH Move vs. Implied</span></span>
-          <span class="strip-val" style="color: var(--warn-amber);">-25.71% (vs ±11.61% Est)</span>
-          <span class="kpi-sub">$-44.75/sh Actual vs ±$20.97/sh <span class="tip" title="At-The-Money weekly straddle price prior to earnings." data-tip="ATM Straddle: Pre-earnings weekly option straddle priced at ±$19.46/sh (11.61% implied move).">ATM Straddle</span></span>
+          <span class="strip-label"><span class="tip" title="Actual post-market stock reaction (-25.71%) compared against pre-print options straddle implied move (±11.61%)." data-tip="Actual vs. Implied Move: FTNT plunged -25.71% to $129.33 in after-hours trading, breaching the ±11.61% (±$20.97/sh) weekly ATM straddle band.">Actual AH Move vs. Implied</span></span>
+          <span class="strip-val" style="color: #f87171;">-25.71% (vs ±11.61% Est)</span>
+          <span class="kpi-sub">$-44.75/sh Actual vs ±$20.97/sh <span class="tip" title="At-The-Money weekly straddle price prior to earnings." data-tip="ATM Straddle: Pre-earnings weekly option straddle priced at ±$20.97/sh (11.61% implied move).">ATM Straddle</span></span>
         </div>
         <div class="strip-item">
-          <span class="strip-label">Q3 2026 Actual <span class="tip" title="Reported Q3 2026 Total Recognized Revenue ($3,961M / $2,080M net) vs Consensus ($2,120M)." data-tip="Q3 2026 Net Revenues: Reported $3,961M recognized revenue ($2,080M net quarterly, +20% YoY), led by Product revenue surge (+37% YoY to $765M).">Recognized Revenue vs. Street</span></span>
-          <span class="strip-val" style="color: var(--bull-green);">$3,961M <span style="font-size:12px;">(+37% Product | +$1,841M Beat)</span></span>
-          <span class="kpi-sub">Street Est: $2,120M | Billings: $2,340M (+29% YoY)</span>
+          <span class="strip-label">Q3 2026 Actual <span class="tip" title="Reported Q3 2026 Total Net Revenue ($2,078.4M) vs Street Consensus ($2,065.0M)." data-tip="Q3 2026 Net Revenues: Reported $2,078.4M (+20.49% YoY), beating $2,065.0M Street consensus (+0.65%) while trailing $2,150.0M elevated buy-side whisper.">Net Revenue vs. Street</span></span>
+          <span class="strip-val" style="color: var(--bull-green);">$2,078.4M <span style="font-size:12px;">(+0.65% Beat | +20.5% YoY)</span></span>
+          <span class="kpi-sub">Street Est: $2,065.0M | Billings: $2,336.3M (+28.8% YoY)</span>
         </div>
         <div class="strip-item">
-          <span class="strip-label">Q3 2026 Actual <span class="tip" title="Reported Q3 2026 Non-GAAP Diluted EPS ($0.91) and GAAP EPS ($0.82) vs Consensus ($0.86)." data-tip="Q3 2026 EPS Beat: Reported $0.91 Non-GAAP EPS, beating $0.86 consensus by +$0.05 (+5.8%). GAAP EPS was $0.82.">EPS (Non-GAAP / GAAP)</span></span>
-          <span class="strip-val" style="color: var(--bull-green);">$0.91 Non-GAAP / $0.82 GAAP</span>
-          <span class="kpi-sub">Beat $0.86 Consensus (+5.8%) | Non-GAAP Op Margin: 38%</span>
+          <span class="strip-label">Q3 2026 Actual <span class="tip" title="Reported Q3 2026 Non-GAAP Diluted EPS ($0.91) and GAAP EPS ($0.86) vs Consensus ($0.86)." data-tip="Q3 2026 EPS Beat: Reported $0.91 Non-GAAP EPS (+5.81% beat vs $0.86 consensus) and $0.86 GAAP Diluted EPS.">EPS (Non-GAAP / GAAP)</span></span>
+          <span class="strip-val" style="color: var(--bull-green);">$0.91 Non-GAAP / $0.86 GAAP</span>
+          <span class="kpi-sub">Beat $0.86 Consensus (+5.81%) | Non-GAAP Op Margin: 38.0%</span>
         </div>
         <div class="strip-item">
-          <span class="strip-label">FY2026 <span class="tip tip-right" title="Official Full-Year 2026 guidance assumptions updated in the Q3 2026 release." data-tip="FY2026 Guidance Raised: Management raised FY26 revenue to $8.125B-$8.215B and raised billings for the 3rd time to $9.568B-$9.718B.">Guidance Stance</span></span>
-          <span class="strip-val" style="color: var(--bull-green);">FY26 Billings Raised 3rd Time</span>
-          <span class="kpi-sub">FY26 Rev $8.17B Mid | $1.2B Added to Buyback ($2B Total)</span>
+          <span class="strip-label">FY2026 <span class="tip tip-right" title="Official Q4 2026 &amp; Full-Year 2026 guidance assumptions updated in the Q3 2026 release." data-tip="FY2026 Billings Raised 3rd Time: FY26 revenue raised to $8.125B-$8.215B ($8.170B mid); Q4 revenue guided to $2.155B-$2.245B ($2.200B mid vs $2.22B Street).">Guidance Stance</span></span>
+          <span class="strip-val" style="color: #fcd34d;">FY26 Raised / Q4 Prudent</span>
+          <span class="kpi-sub">Q4 Rev Mid $2.20B (vs $2.22B Est) | $2.0B Buyback</span>
         </div>
       </div>
     </header>
@@ -859,24 +920,24 @@
     <!-- SECTION 1: EXECUTIVE KPI GRID -->
     <section class="kpi-grid" id="row-1-kpis">
       <div class="kpi-card">
-        <div class="kpi-title"><span class="tip" title="Quarterly Billings: Total invoicing to customers across products and services." data-tip="Quarterly Billings: $2.34B (+29% YoY) exceeded guidance midpoint by $110M.">Quarterly Billings</span></div>
-        <div class="kpi-value">$2,340M</div>
-        <div class="kpi-sub">+29% YoY • Raised Full-Year Guide 3rd Time</div>
+        <div class="kpi-title"><span class="tip" title="Quarterly Billings: Total invoicing to customers across products and services ($2,336.3M)." data-tip="Quarterly Billings: $2,336.3M (+28.8% YoY) exceeded management's $2,230.0M guidance midpoint by +$106.3M.">Quarterly Billings</span></div>
+        <div class="kpi-value">$2,336.3M</div>
+        <div class="kpi-sub">+28.8% YoY • FY26 Billings Raised 3rd Time</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-title"><span class="tip" title="Product Revenue: Revenue from FortiGate firewall appliances." data-tip="Product Revenue: $765M (+37% YoY) marks the fastest hardware re-acceleration in over two years.">Product Revenue Surge</span></div>
-        <div class="kpi-value">$765M</div>
-        <div class="kpi-sub">+37% YoY Re-acceleration • FortiOS 8.0 &amp; AI Adoption</div>
+        <div class="kpi-title"><span class="tip" title="Product Revenue: Revenue from FortiGate firewall appliances ($765.0M vs $559.3M in Q3 2025)." data-tip="Product Revenue: $765.0M (+36.8% YoY) marks the fastest hardware refresh re-acceleration in over two years.">Product Revenue Surge</span></div>
+        <div class="kpi-value">$765.0M</div>
+        <div class="kpi-sub">+36.8% YoY Re-acceleration • FortiASIC &amp; AI Security</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-title"><span class="tip" title="Non-GAAP Operating Margin: Operational profitability before stock compensation." data-tip="Operating Margin: 38.0% Non-GAAP margin demonstrates elite structural cost leverage from custom FortiASIC chips.">Operating Margin</span></div>
-        <div class="kpi-value">38.0%</div>
-        <div class="kpi-sub">+300 bps vs Midpoint • 34% GAAP Operating Margin</div>
+        <div class="kpi-title"><span class="tip" title="Non-GAAP Operating Margin (38.0%) and GAAP Operating Margin (33.89%)." data-tip="Operating Margin: 38.0% Non-GAAP margin (+300 bps vs guide midpoint) and $704.3M GAAP EBIT (33.89% GAAP margin).">Operating Margin</span></div>
+        <div class="kpi-value">38.0% Non-GAAP</div>
+        <div class="kpi-sub">33.89% GAAP Margin ($704.3M EBIT) • $0.86 GAAP EPS</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-title"><span class="tip" title="Free Cash Flow: Organic cash generated after CapEx." data-tip="Free Cash Flow: Generated $865M quarterly FCF (41% FCF margin) / $2,623M cumulative True FCF.">Quarterly Free Cash Flow</span></div>
-        <div class="kpi-value">$865M</div>
-        <div class="kpi-sub">41% FCF Margin • Buyback Boosted by $1.2B ($2.0B Remaining)</div>
+        <div class="kpi-title"><span class="tip" title="3-Month Q3 2026 Operating Cash Flow ($946.0M) and Standard Reported FCF ($881.8M)." data-tip="3-Month Q3 Cash Flow: $946.0M OCF less $64.2M CapEx = $881.8M Standard FCF ($864.8M ex-$17.0M escrow proceeds) and $799.8M True FCF.">3M Q3 Free Cash Flow</span></div>
+        <div class="kpi-value">$881.8M FCF</div>
+        <div class="kpi-sub">$946.0M Q3 OCF • $799.8M True FCF • $2.0B Buyback</div>
       </div>
     </section>
 
@@ -891,20 +952,20 @@
           <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 12px;">
             <div style="font-size: 11.5px; color: #94a3b8; font-weight: 700; text-transform: uppercase;">1. Pre-Print T-1 Setup</div>
             <div style="font-size: 13px; color: #f1f5f9; margin-top: 4px; line-height: 1.4;">
-              FTNT was priced at $174.08 near all-time valuation highs (>48x forward earnings). Street expected $2.12B revenue, $0.86 EPS, and ±11.61% options straddle move.
+              FTNT entered Q3 priced at $174.08 (>45x forward P/E) with Street consensus at $2,065.0M revenue ($2,150.0M buy-side whisper), $0.86 Non-GAAP EPS, and ±11.61% (±$20.97/sh) weekly ATM straddle move.
             </div>
           </div>
           <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 12px;">
             <div style="font-size: 11.5px; color: #34d399; font-weight: 700; text-transform: uppercase;">2. Actual T+0 Delivery</div>
             <div style="font-size: 13px; color: #34d399; margin-top: 4px; line-height: 1.4;">
-              Beat across every metric ($2.08B rev, $0.91 EPS, billings +29%, product +37%, $865M FCF). However, Q4 revenue guidance ($2.20B mid) fell 1% short of aggressive buy-side whisper bogeys ($2.24B).
+              Beat Street consensus across headline metrics: $2,078.4M revenue (+0.65% beat, +20.5% YoY), $0.91 Non-GAAP EPS (+5.81% beat; $0.86 GAAP EPS), $2,336.3M billings (+28.8% YoY), $765.0M product (+36.8% YoY), and $946.0M Q3 OCF.
             </div>
           </div>
           <div style="background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 8px; padding: 12px;">
             <div style="font-size: 11.5px; color: #f87171; font-weight: 800; text-transform: uppercase;">3. Multiple Compression Verdict</div>
             <div style="font-size: 13px; color: #f1f5f9; margin-top: 4px; line-height: 1.4;">
-              <span class="badge badge-bear" style="margin-right: 6px;">VALUATION RESET (-25.7%)</span>
-              Severe valuation reset as momentum funds liquidated crowded longs. Fundamental business remains elite with expanding margins and $2B buyback floor supporting the $125-$130 level.
+              <span class="badge badge-bear" style="margin-right: 6px;">VALUATION RESET (-25.71%)</span>
+              Q3 revenue trailed the $2,150.0M whisper and Q4 revenue guidance ($2.200B mid vs $2.22B Street) triggered violent multiple compression from 46x to ~36x despite an expanded $2.0B buyback floor.
             </div>
           </div>
         </div>
@@ -930,31 +991,67 @@
             </thead>
             <tbody>
               <tr>
-                <td><span class="tip" title="Total billings invoiced across hardware and subscriptions." data-tip="Quarterly Billings: Total enterprise invoicing ($2.34B vs $2.25B consensus, +29% YoY).">Quarterly Billings ($M)</span></td>
+                <td><span class="tip" title="Reported Total Net Revenues ($2,078.4M, +20.49% YoY) vs $2,065.0M Street Consensus." data-tip="Total Revenues: $2,078.4M (+20.49% YoY vs $1,724.9M in Q3 2025), beating $2,065.0M Street consensus by +$13.4M (+0.65%) and topping management's $2,010M-$2,070M guide.">Total Net Revenue ($M)</span></td>
+                <td>$2,047.9M</td>
+                <td>$1,724.9M</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">$2,065.0M</td>
+                <td style="font-weight:700; color: #34d399;">$2,078.4M</td>
+                <td>
+                  <span class="badge badge-bull">+$13.4M (+0.65%)</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div class="beat-bar-fill" style="width:68%; height:100%; background:linear-gradient(90deg, #3b82f6, #10b981);"></div></div>
+                </td>
+                <td><span class="badge badge-bull">BEAT</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Diluted Non-GAAP earnings per share ($0.91 vs $0.86 Street Consensus; GAAP Diluted EPS $0.86)." data-tip="Non-GAAP Diluted EPS: $0.91 (+5.81% beat vs $0.86 consensus; GAAP Diluted EPS was $0.86 across 742.5M diluted shares).">Diluted Non-GAAP EPS ($)</span></td>
+                <td>$0.82</td>
+                <td>$0.73</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">$0.86</td>
+                <td style="font-weight:700; color: #34d399;">$0.91</td>
+                <td>
+                  <span class="badge badge-bull">+$0.05 (+5.81%)</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div class="beat-bar-fill" style="width:82%; height:100%; background:linear-gradient(90deg, #3b82f6, #10b981);"></div></div>
+                </td>
+                <td><span class="badge badge-bull">BEAT</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Total billings invoiced across hardware appliances and FortiGuard/SASE subscriptions." data-tip="Quarterly Billings: $2,336.3M ($2.34B, +28.8% YoY), beating $2,250.0M consensus by +$86.3M (+3.84%).">Quarterly Billings ($M)</span></td>
                 <td>$2,050.0M</td>
                 <td>$1,814.0M</td>
                 <td class="col-q0" style="font-weight:700; color: #60a5fa;">$2,250.0M</td>
-                <td style="font-weight:700; color: #34d399;">$2,340.0M</td>
+                <td style="font-weight:700; color: #34d399;">$2,336.3M</td>
                 <td>
-                  <span class="badge badge-bull">+$90.0M (+4.00%)</span>
+                  <span class="badge badge-bull">+$86.3M (+3.84%)</span>
                   <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div class="beat-bar-fill" style="width:78%; height:100%; background:linear-gradient(90deg, #3b82f6, #10b981);"></div></div>
                 </td>
                 <td><span class="badge badge-bull">BEAT</span></td>
               </tr>
               <tr>
-                <td><span class="tip" title="Revenue derived from FortiGate firewall hardware appliances." data-tip="Product Revenue: Hardware security appliances powered by FortiASIC chips ($765M vs $720M consensus, +37% YoY).">Product Revenue ($M)</span></td>
-                <td>$650.0M</td>
-                <td>$558.0M</td>
+                <td><span class="tip" title="Revenue derived from FortiGate firewall hardware appliances and custom FortiASIC systems." data-tip="Product Revenue: $765.0M (+36.78% YoY vs $559.3M in Q3 2025), beating $720.0M Street consensus by +$45.0M (+6.25%).">Product Revenue ($M)</span></td>
+                <td>$755.0M</td>
+                <td>$559.3M</td>
                 <td class="col-q0" style="font-weight:700; color: #60a5fa;">$720.0M</td>
                 <td style="font-weight:700; color: #34d399;">$765.0M</td>
                 <td>
                   <span class="badge badge-bull">+$45.0M (+6.25%)</span>
-                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div class="beat-bar-fill" style="width:85%; height:100%; background:linear-gradient(90deg, #3b82f6, #10b981);"></div></div>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div class="beat-bar-fill" style="width:86%; height:100%; background:linear-gradient(90deg, #3b82f6, #10b981);"></div></div>
                 </td>
                 <td><span class="badge badge-bull">ACCELERATING</span></td>
               </tr>
               <tr>
-                <td><span class="tip" title="Non-GAAP operating profitability margin." data-tip="Non-GAAP Operating Margin: 38.0% margin (+250 bps beat vs 35.5% consensus) driven by FortiASIC gross margin efficiency.">Non-GAAP Operating Margin</span></td>
+                <td><span class="tip" title="Service revenue across FortiGuard AI security subscriptions and FortiCare support ($1,313.4M, +12.68% YoY)." data-tip="Service Revenue: $1,313.4M (+12.68% YoY vs $1,165.6M in Q3 2025) vs $1,345.0M Street consensus.">Service Revenue ($M)</span></td>
+                <td>$1,292.9M</td>
+                <td>$1,165.6M</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">$1,345.0M</td>
+                <td style="font-weight:700; color: #fcd34d;">$1,313.4M</td>
+                <td>
+                  <span class="badge badge-bear">-$31.6M (-2.35%)</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div class="beat-bar-fill" style="width:45%; height:100%; background:linear-gradient(90deg, #f59e0b, #ef4444);"></div></div>
+                </td>
+                <td><span class="badge badge-bear">SLIGHT LAG</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Non-GAAP operating profitability margin (38.0% vs 35.5% consensus; GAAP operating margin 33.89%)." data-tip="Non-GAAP Operating Margin: 38.0% (+250 bps beat vs 35.5% consensus; GAAP operating income was $704.3M / 33.89% margin).">Non-GAAP Operating Margin</span></td>
                 <td>36.0%</td>
                 <td>35.0%</td>
                 <td class="col-q0" style="font-weight:700; color: #60a5fa;">35.5%</td>
@@ -964,30 +1061,6 @@
                   <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div class="beat-bar-fill" style="width:90%; height:100%; background:linear-gradient(90deg, #3b82f6, #10b981);"></div></div>
                 </td>
                 <td><span class="badge badge-bull">BEAT</span></td>
-              </tr>
-              <tr>
-                <td><span class="tip" title="Diluted Non-GAAP earnings per share." data-tip="Non-GAAP EPS: $0.91 per share (+5.8% beat vs $0.86 consensus) supported by high-margin product mix.">Diluted Non-GAAP EPS ($)</span></td>
-                <td>$0.82</td>
-                <td>$0.73</td>
-                <td class="col-q0" style="font-weight:700; color: #60a5fa;">$0.86</td>
-                <td style="font-weight:700; color: #34d399;">$0.91</td>
-                <td>
-                  <span class="badge badge-bull">+$0.05 (+5.81%)</span>
-                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div class="beat-bar-fill" style="width:80%; height:100%; background:linear-gradient(90deg, #3b82f6, #10b981);"></div></div>
-                </td>
-                <td><span class="badge badge-bull">BEAT</span></td>
-              </tr>
-              <tr>
-                <td><span class="tip" title="Reported Total Net Revenues ($3,961M cumulative / $2,080M Q3 net)." data-tip="Total Revenues: $3,961M reported recognized revenue across products and subscriptions.">Total Recognized Revenue ($M)</span></td>
-                <td>$2,047.9M</td>
-                <td>$1,724.9M</td>
-                <td class="col-q0" style="font-weight:700; color: #60a5fa;">$2,120.0M</td>
-                <td style="font-weight:700; color: #34d399;">$3,961.0M</td>
-                <td>
-                  <span class="badge badge-bull">+$1,841.0M (+86.84%)</span>
-                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div class="beat-bar-fill" style="width:100%; height:100%; background:linear-gradient(90deg, #3b82f6, #10b981);"></div></div>
-                </td>
-                <td><span class="badge badge-bull">MASSIVE BEAT</span></td>
               </tr>
             </tbody>
           </table>
@@ -1092,7 +1165,7 @@
                 <td>Revenue $2.22B; Non-GAAP EPS $0.95</td>
                 <td style="font-weight:600; color: #60a5fa;">Revenue $2.155B - $2.245B ($2.200B mid); Non-GAAP EPS $0.93 - $0.95 ($0.94 mid)</td>
                 <td style="font-weight:600; color: #34d399;">-$20M revenue midpoint / -1.0 cent EPS midpoint vs elevated whisper expectations</td>
-                <td><span class="badge badge-bull">PRUDENT GUIDE</span></td>
+                <td><span class="badge badge-blue">PRUDENT GUIDE</span></td>
                 <td>Management incorporates conservative macro timing on large federal and telecom multi-year deal closures.</td>
               </tr>
               <tr>
@@ -1129,148 +1202,166 @@
           </thead>
           <tbody>
             <tr style="font-weight: 700; background: rgba(59, 130, 246, 0.06);">
-              <td><span class="tip" title="Total recognized net revenue." data-tip="Total Recognized Revenue: $3,961M cumulative recognized revenue ($2,080M net quarterly, +20% YoY).">Total Revenue ($M)</span></td>
+              <td><span class="tip" title="Total recognized net revenue per SEC Form 8-K Exhibit 99.1." data-tip="Total Recognized Revenue: $2,078.4M in Q3 2026 (+20.49% YoY vs $1,724.9M in Q3 2025).">Total Revenue ($M)</span></td>
               <td>$1,724.9M</td>
               <td>$1,905.0M</td>
               <td>$1,849.6M</td>
               <td>$2,047.9M</td>
-              <td class="col-q0" style="font-weight:800; color:#34d399;">$3,961.0M</td>
+              <td class="col-q0" style="font-weight:800; color:#34d399;">$2,078.4M</td>
               <td class="col-est" style="font-weight:700; color:#60a5fa;">$2,200.0M</td>
             </tr>
             <tr class="sub-row">
-              <td style="padding-left: 20px;">↳ Service Revenue (FortiGuard &amp; FortiCare)</td>
-              <td>$1,166.9M</td>
+              <td style="padding-left: 20px;">↳ Service Revenue (FortiGuard AI Security &amp; FortiCare)</td>
+              <td>$1,165.6M</td>
               <td>$1,255.0M</td>
-              <td>$1,291.6M</td>
-              <td>$1,327.9M</td>
-              <td class="col-q0">$1,315.0M</td>
-              <td class="col-est">$1,360.0M</td>
+              <td>$1,186.5M</td>
+              <td>$1,292.9M</td>
+              <td class="col-q0">$1,313.4M</td>
+              <td class="col-est">$1,365.0M</td>
             </tr>
             <tr class="sub-row">
-              <td style="padding-left: 20px;">↳ Product Revenue (FortiGate Firewalls)</td>
-              <td>$558.0M</td>
+              <td style="padding-left: 20px;">↳ Product Revenue (FortiGate Next-Gen Firewalls)</td>
+              <td>$559.3M</td>
               <td>$650.0M</td>
-              <td>$558.0M</td>
-              <td>$720.0M</td>
+              <td>$663.1M</td>
+              <td>$755.0M</td>
               <td class="col-q0">$765.0M</td>
-              <td class="col-est">$840.0M</td>
+              <td class="col-est">$835.0M</td>
             </tr>
             <tr>
-              <td><span class="tip" title="Cost of revenues for products and service operations." data-tip="Cost of Revenue: Cost of hardware manufacturing and cloud data centers ($2,321M cumulative / $440M net in Q3).">Cost of Revenue</span></td>
+              <td><span class="tip" title="Total cost of revenues across Product ($272.6M) and Service ($164.9M) in Q3 2026." data-tip="Cost of Revenue: $437.5M in Q3 2026 ($272.6M Product + $164.9M Service).">Cost of Revenue</span></td>
               <td>$331.7M</td>
               <td>$389.2M</td>
               <td>$364.5M</td>
               <td>$404.7M</td>
-              <td class="col-q0">$2,321.0M</td>
-              <td class="col-est">$460.0M</td>
+              <td class="col-q0">$437.5M</td>
+              <td class="col-est">$462.0M</td>
             </tr>
             <tr style="font-weight: 700;">
-              <td><span class="tip" title="Gross Profit: Revenue minus cost of revenue." data-tip="Gross Profit: $1,640.0M gross profit in Q3 2026 with 80% non-GAAP gross margin.">Total Gross Profit</span></td>
+              <td><span class="tip" title="GAAP Gross Profit: Revenue minus Cost of Revenue (78.95% GAAP gross margin in Q3 2026)." data-tip="Gross Profit: $1,640.9M GAAP gross profit in Q3 2026 (78.95% GAAP / 80.0% Non-GAAP gross margin).">Total Gross Profit</span></td>
               <td>$1,393.2M</td>
               <td>$1,515.8M</td>
               <td>$1,485.1M</td>
               <td>$1,643.2M</td>
-              <td class="col-q0" style="color: #34d399;">$1,640.0M</td>
-              <td class="col-est">$1,740.0M</td>
+              <td class="col-q0" style="color: #34d399;">$1,640.9M</td>
+              <td class="col-est">$1,738.0M</td>
             </tr>
             <tr>
-              <td><span class="tip" title="Operating expenses including R&amp;D, Sales &amp; Marketing, and G&amp;A." data-tip="Operating Expenses: $936.0M in Q3 2026 reflecting disciplined operational execution.">Total Operating Expenses ($M)</span></td>
+              <td><span class="tip" title="Total GAAP Operating Expenses ($936.6M = $213.4M R&amp;D + $665.0M S&amp;M + $59.6M G&amp;A - $1.4M IP Gain)." data-tip="Operating Expenses: $936.6M exact GAAP OpEx in Q3 2026 per Condensed Consolidated Statements of Income.">Total Operating Expenses ($M)</span></td>
               <td>$845.9M</td>
               <td>$890.2M</td>
               <td>$905.1M</td>
               <td>$953.9M</td>
-              <td class="col-q0">$936.0M</td>
-              <td class="col-est">$980.0M</td>
+              <td class="col-q0">$936.6M</td>
+              <td class="col-est">$978.0M</td>
+            </tr>
+            <tr class="sub-row">
+              <td style="padding-left: 20px;">↳ Research &amp; Development (R&amp;D)</td>
+              <td>$202.4M</td>
+              <td>$212.0M</td>
+              <td>$216.0M</td>
+              <td>$223.0M</td>
+              <td class="col-q0">$213.4M</td>
+              <td class="col-est">$225.0M</td>
             </tr>
             <tr class="sub-row">
               <td style="padding-left: 20px;">↳ Sales &amp; Marketing</td>
-              <td>$570.0M</td>
-              <td>$600.0M</td>
-              <td>$615.0M</td>
-              <td>$645.0M</td>
-              <td class="col-q0">$630.0M</td>
-              <td class="col-est">$660.0M</td>
-            </tr>
-            <tr class="sub-row">
-              <td style="padding-left: 20px;">↳ Research &amp; Development</td>
-              <td>$205.0M</td>
-              <td>$215.0M</td>
-              <td>$218.0M</td>
-              <td>$230.0M</td>
-              <td class="col-q0">$235.0M</td>
-              <td class="col-est">$245.0M</td>
+              <td>$583.5M</td>
+              <td>$618.0M</td>
+              <td>$631.0M</td>
+              <td>$674.4M</td>
+              <td class="col-q0">$665.0M</td>
+              <td class="col-est">$692.0M</td>
             </tr>
             <tr class="sub-row">
               <td style="padding-left: 20px;">↳ General &amp; Administrative</td>
-              <td>$70.9M</td>
-              <td>$75.2M</td>
-              <td>$72.1M</td>
-              <td>$78.9M</td>
-              <td class="col-q0">$71.0M</td>
-              <td class="col-est">$75.0M</td>
+              <td>$61.4M</td>
+              <td>$61.6M</td>
+              <td>$59.4M</td>
+              <td>$57.9M</td>
+              <td class="col-q0">$59.6M</td>
+              <td class="col-est">$61.0M</td>
+            </tr>
+            <tr class="sub-row">
+              <td style="padding-left: 20px;">↳ Gain on Intellectual Property Matters</td>
+              <td>-$1.4M</td>
+              <td>-$1.4M</td>
+              <td>-$1.3M</td>
+              <td>-$1.4M</td>
+              <td class="col-q0">-$1.4M</td>
+              <td class="col-est">$0.0M</td>
             </tr>
             <tr style="font-weight: 800; background: rgba(16, 185, 129, 0.05);">
-              <td><span class="tip" title="Operating Income: Gross Profit minus Operating Expenses." data-tip="Operating Income: $1,640.0M GP - $936.0M OpEx = $704.0M GAAP operating income in Q3 2026.">Operating Income (EBIT)</span></td>
+              <td><span class="tip" title="GAAP Operating Income: Gross Profit minus Operating Expenses ($704.3M, 33.89% GAAP margin)." data-tip="Operating Income: $1,640.9M GP - $936.6M OpEx = $704.3M GAAP operating income (+28.69% YoY).">Operating Income (EBIT)</span></td>
               <td>$547.3M</td>
               <td>$625.6M</td>
               <td>$580.0M</td>
               <td>$689.3M</td>
-              <td class="col-q0" style="color:#34d399;">$704.0M</td>
+              <td class="col-q0" style="color:#34d399;">$704.3M</td>
               <td class="col-est" style="color:#34d399;">$760.0M</td>
             </tr>
             <tr>
-              <td><span class="tip" title="GAAP Net Income attributable to common stockholders." data-tip="GAAP Net Income: $630.0M in Q3 2026 supported by high operating margin.">GAAP Net Income</span></td>
-              <td>$450.0M</td>
-              <td>$510.0M</td>
-              <td>$480.0M</td>
-              <td>$580.0M</td>
-              <td class="col-q0">$630.0M</td>
-              <td class="col-est">$670.0M</td>
+              <td><span class="tip" title="GAAP Net Income attributable to Fortinet, Inc. ($635.5M in Q3 2026)." data-tip="GAAP Net Income: $635.5M in Q3 2026 (+34.10% YoY vs $473.9M in Q3 2025).">GAAP Net Income</span></td>
+              <td>$473.9M</td>
+              <td>$506.0M</td>
+              <td>$534.5M</td>
+              <td>$606.3M</td>
+              <td class="col-q0">$635.5M</td>
+              <td class="col-est">$665.0M</td>
             </tr>
             <tr>
-              <td><span class="tip" title="Diluted Earnings Per Share." data-tip="Diluted EPS: $0.82 GAAP EPS / $0.91 Non-GAAP EPS across 743M diluted shares.">Diluted Earnings Per Share ($)</span></td>
-              <td>$0.58</td>
-              <td>$0.66</td>
+              <td><span class="tip" title="GAAP Diluted Net Income Per Share ($0.86 in Q3 2026 across 742.5M diluted shares)." data-tip="GAAP Diluted EPS: $0.86 in Q3 2026 (+38.7% YoY vs $0.62 in Q3 2025).">GAAP Diluted EPS ($)</span></td>
               <td>$0.62</td>
-              <td>$0.76</td>
-              <td class="col-q0">$0.82</td>
+              <td>$0.68</td>
+              <td>$0.72</td>
+              <td>$0.82</td>
+              <td class="col-q0">$0.86</td>
+              <td class="col-est">$0.89</td>
+            </tr>
+            <tr>
+              <td><span class="tip" title="Non-GAAP Diluted Net Income Per Share ($0.91 in Q3 2026 vs $0.86 Street consensus)." data-tip="Non-GAAP Diluted EPS: $0.91 in Q3 2026; Q4 2026 guided to $0.93-$0.95 ($0.94 midpoint).">Non-GAAP Diluted EPS ($)</span></td>
+              <td>$0.73</td>
+              <td>$0.79</td>
+              <td>$0.81</td>
+              <td>$0.82</td>
+              <td class="col-q0" style="font-weight:700; color:#34d399;">$0.91</td>
               <td class="col-est">$0.94</td>
             </tr>
             <tr style="font-weight: 700; background: rgba(59, 130, 246, 0.04);">
-              <td><span class="tip" title="Operating Cash Flow generated from operations." data-tip="Operating Cash Flow: $3,066.0M cumulative / $946M quarterly operating cash flow.">Operating Cash Flow (OCF)</span></td>
-              <td>$650.0M</td>
-              <td>$720.0M</td>
-              <td>$750.0M</td>
-              <td>$880.0M</td>
-              <td class="col-q0">$3,066.0M</td>
-              <td class="col-est">$950.0M</td>
+              <td><span class="tip" title="3-Month Quarterly Operating Cash Flow isolated from SEC filings ($946.0M in Q3 2026)." data-tip="Operating Cash Flow: $946.0M in Q3 2026 (isolated from $3,066.7M 9M YTD minus $2,120.7M 6M H1).">Operating Cash Flow (OCF)</span></td>
+              <td>$655.2M</td>
+              <td>$620.2M</td>
+              <td>$1,077.1M</td>
+              <td>$1,043.6M</td>
+              <td class="col-q0">$946.0M</td>
+              <td class="col-est">$1,020.0M</td>
             </tr>
             <tr>
-              <td><span class="tip" title="Capital Expenditures for data centers and campus tooling." data-tip="Capital Expenditures: $212.0M cumulative / $81M quarterly CapEx.">Capital Expenditures (CapEx)</span></td>
-              <td>$50.0M</td>
-              <td>$55.0M</td>
-              <td>$60.0M</td>
-              <td>$75.0M</td>
-              <td class="col-q0">$212.0M</td>
-              <td class="col-est">$85.0M</td>
+              <td><span class="tip" title="3-Month Quarterly Capital Expenditures ($64.2M in Q3 2026)." data-tip="Capital Expenditures: $64.2M in Q3 2026 (isolated from $212.8M 9M YTD minus $148.6M 6M H1).">Capital Expenditures (CapEx)</span></td>
+              <td>$87.7M</td>
+              <td>$42.8M</td>
+              <td>$70.6M</td>
+              <td>$78.0M</td>
+              <td class="col-q0">$64.2M</td>
+              <td class="col-est">$70.0M</td>
             </tr>
             <tr style="font-weight: 700;">
-              <td><span class="tip" title="Standard Free Cash Flow: OCF minus CapEx." data-tip="Reported FCF: $3,066.0M OCF - $212.0M CapEx = $2,854.0M ($865M quarterly FCF).">Reported Free Cash Flow (FCF)</span></td>
-              <td>$600.0M</td>
-              <td>$665.0M</td>
-              <td>$690.0M</td>
-              <td>$805.0M</td>
-              <td class="col-q0">$2,854.0M</td>
-              <td class="col-est">$865.0M</td>
+              <td><span class="tip" title="Standard Reported Free Cash Flow: OCF minus CapEx ($881.8M in Q3 2026; $864.8M ex-$17.0M escrow settlement proceeds)." data-tip="Standard Reported FCF: $946.0M OCF - $64.2M CapEx = $881.8M.">Reported Free Cash Flow (FCF)</span></td>
+              <td>$567.5M</td>
+              <td>$577.4M</td>
+              <td>$1,006.5M</td>
+              <td>$965.6M</td>
+              <td class="col-q0">$881.8M</td>
+              <td class="col-est">$950.0M</td>
             </tr>
             <tr style="font-weight: 800; background: rgba(16, 185, 129, 0.05);">
-              <td><span class="tip" title="True Free Cash Flow: Reported FCF minus Stock-Based Compensation." data-tip="True FCF: $2,854.0M Reported FCF - $231.0M SBC = $2,623.0M organic free cash flow.">Forensic True FCF (ex-SBC)</span></td>
-              <td>$540.0M</td>
-              <td>$600.0M</td>
-              <td>$620.0M</td>
-              <td>$730.0M</td>
-              <td class="col-q0" style="color:#34d399;">$2,623.0M</td>
-              <td class="col-est" style="color:#34d399;">$785.0M</td>
+              <td><span class="tip" title="Forensic True Free Cash Flow: Reported FCF minus 3-Month Stock-Based Compensation ($82.0M in Q3 2026)." data-tip="True FCF: $881.8M Reported FCF - $82.0M Q3 SBC = $799.8M organic economic cash flow.">Forensic True FCF (ex-SBC &amp; Leases)</span></td>
+              <td>$495.7M</td>
+              <td>$504.9M</td>
+              <td>$434.0M</td>
+              <td>$886.3M</td>
+              <td class="col-q0" style="color:#34d399;">$799.8M</td>
+              <td class="col-est" style="color:#34d399;">$865.0M</td>
             </tr>
           </tbody>
         </table>
@@ -1280,31 +1371,35 @@
     <!-- SECTION 4: ROW 3 FORENSIC QUALITY OF EARNINGS & FCF BRIDGE -->
     <section class="section" id="sec-fcf" style="margin-bottom: 26px;">
       <h2 style="font-size: 16px; font-weight: 800; color: #f1f5f9; margin-bottom: 12px; letter-spacing: 0.02em;">
-        3. Forensic Quality-of-Earnings &amp; True Free Cash Flow Waterfall Bridge
+        3. Forensic Quality-of-Earnings &amp; True Free Cash Flow Waterfall Bridge (3-Month Q3 2026 Isolated)
       </h2>
       <div class="forensic-grid" style="display: grid; grid-template-columns: 1fr; gap: 14px; background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border-color); border-radius: 8px; padding: 16px;">
         <div style="font-size: 13.5px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 8px;">
-          <strong>Forensic Bridge Reconciliation:</strong> Operating Cash Flow of <strong>$3066.0M ($3,066M)</strong> minus CapEx of <strong>$212.0M ($212M)</strong> yields Reported Free Cash Flow of <strong>$2854.0M ($2,854M)</strong>. Subtracting non-cash Stock-Based Compensation of <strong>$231.0M</strong> and Finance Leases of <strong>$0.0M</strong> bridges directly to True Free Cash Flow of <strong>$2623.0M ($2,623M)</strong>.
+          <strong>Forensic 3-Month Q3 Cash-Flow Reconciliation:</strong> Isolating Q3 2026 from Fortinet's 9-Month YTD Cash Flow Statement yields standalone Q3 Operating Cash Flow of <strong>$946.0M</strong> minus standalone Q3 CapEx of <strong>$64.2M</strong> = Standard Reported Free Cash Flow of <strong>$881.8M</strong> (note Fortinet's Non-GAAP FCF table also excludes $17.0M of escrow settlement proceeds to report $864.8M). Deducting 3-Month Q3 non-cash Stock-Based Compensation of <strong>$82.0M</strong> and Finance Leases of <strong>$0.0M</strong> bridges directly to Forensic True Free Cash Flow of <strong>$799.8M</strong> (38.5% True FCF margin).
         </div>
         <div class="waterfall-row" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; border-radius: 6px; background: rgba(255,255,255,0.03);">
-          <span><span class="tip" title="Operating Cash Flow: Cash generated from operations." data-tip="Operating Cash Flow: $3,066.0M demonstrating industry-leading cash conversion.">Operating Cash Flow (OCF)</span></span>
-          <span class="mono" style="font-weight: 700; color: #34d399;">$3066.0M ($3,066M)</span>
+          <span><span class="tip" title="3-Month Q3 2026 Operating Cash Flow ($946.0M)." data-tip="Operating Cash Flow: $946.0M in Q3 2026 (45.5% OCF margin).">Operating Cash Flow (OCF)</span></span>
+          <span class="mono" style="font-weight: 700; color: #34d399;">$946.0M ($946M)</span>
         </div>
         <div class="waterfall-row" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; border-radius: 6px; background: rgba(255,255,255,0.03);">
-          <span><span class="tip" title="Capital Expenditures: Investment in physical facilities and test beds." data-tip="CapEx: $212.0M invested into computing hardware and labs.">Less: Capital Expenditures (CapEx)</span></span>
-          <span class="mono" style="font-weight: 700; color: #f87171;">-$212.0M</span>
+          <span><span class="tip" title="3-Month Q3 2026 Capital Expenditures ($64.2M)." data-tip="CapEx: $64.2M invested in Q3 2026.">Less: Capital Expenditures (CapEx)</span></span>
+          <span class="mono" style="font-weight: 700; color: #f87171;">-$64.2M</span>
         </div>
         <div class="waterfall-row" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; border-radius: 6px; background: rgba(59, 130, 246, 0.08); font-weight: 700;">
           <span>Standard Reported Free Cash Flow</span>
-          <span class="mono" style="color: #34d399;">$2854.0M</span>
+          <span class="mono" style="color: #34d399;">$881.8M</span>
         </div>
         <div class="waterfall-row" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; border-radius: 6px; background: rgba(255,255,255,0.03);">
-          <span><span class="tip" title="Stock-Based Compensation: Non-cash equity compensation." data-tip="Stock-Based Compensation: $231.0M equity incentive charge.">Less: Non-Cash Stock-Based Compensation (SBC)</span></span>
-          <span class="mono" style="font-weight: 700; color: #f87171;">-$231.0M</span>
+          <span><span class="tip" title="3-Month Q3 2026 Stock-Based Compensation ($82.0M per Non-GAAP reconciliation table)." data-tip="Stock-Based Compensation: $82.0M in Q3 2026 ($233.8M 9M YTD).">Less: Non-Cash Stock-Based Compensation (SBC)</span></span>
+          <span class="mono" style="font-weight: 700; color: #f87171;">-$82.0M</span>
+        </div>
+        <div class="waterfall-row" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; border-radius: 6px; background: rgba(255,255,255,0.03);">
+          <span><span class="tip" title="Finance Leases: $0.0M in Q3 2026." data-tip="Finance Leases: $0.0M in Q3 2026.">Less: Capital &amp; Finance Lease Principal</span></span>
+          <span class="mono" style="color: var(--text-muted);">$0.0M</span>
         </div>
         <div class="waterfall-row" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; border-radius: 6px; background: rgba(16, 185, 129, 0.1); font-weight: 800; border: 1px solid rgba(16, 185, 129, 0.3);">
           <span style="color: #f1f5f9;">True Free Cash Flow (Organic FCF ex-SBC)</span>
-          <span class="mono" style="color: #34d399;">$2623.0M</span>
+          <span class="mono" style="color: #34d399;">$799.8M</span>
         </div>
       </div>
     </section>
@@ -1320,10 +1415,10 @@
             ✅ What Management Did Right (Operational Tailwinds)
           </h3>
           <ul style="font-size: 13px; color: var(--text-secondary); line-height: 1.6; padding-left: 18px; margin: 0;">
-            <li><strong>Product Revenue Acceleration (+37% YoY):</strong> Hardware appliances surged to $765M, driven by strong enterprise demand for FortiGate appliances running FortiOS 8.0.</li>
-            <li><strong>Operating Margin Expansion (38%):</strong> Delivered 38.0% Non-GAAP operating margin (+250 bps beat), showcasing the structural cost advantage of proprietary FortiASIC silicon.</li>
-            <li><strong>Billings Raised 3rd Time ($9.64B Mid):</strong> Raised full-year billings guidance for the third consecutive quarter to $9.568B-$9.718B on robust enterprise SASE adoption.</li>
-            <li><strong>Capital Return Machine ($2.0B Buyback):</strong> Board boosted share repurchase authorization by $1.2B ($2.0B remaining) to aggressively take advantage of market mispricings.</li>
+            <li><strong>Product Revenue Acceleration (+36.8% YoY to $765.0M):</strong> FortiGate hardware refresh and AI data-center firewalls crushed $720.0M consensus by +$45.0M.</li>
+            <li><strong>Operating Margin Expansion (38.0% Non-GAAP / 33.89% GAAP):</strong> Delivered $704.3M GAAP EBIT and $0.91 Non-GAAP EPS (+5.81% beat vs $0.86 consensus).</li>
+            <li><strong>FY26 Billings Raised 3rd Time ($9.643B Mid):</strong> Raised full-year billings guidance to $9.568B-$9.718B after Q3 billings jumped +28.8% YoY to $2,336.3M.</li>
+            <li><strong>Elite Cash Conversion &amp; $2.0B Buyback Floor:</strong> Generated $946.0M Q3 OCF ($799.8M True FCF) and added $1.2B to share repurchase authorization ($2.0B remaining).</li>
           </ul>
         </div>
         <div style="background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 8px; padding: 14px;">
@@ -1331,16 +1426,16 @@
             ⚠️ What Management Did Wrong (Execution Headwinds)
           </h3>
           <ul style="font-size: 13px; color: var(--text-secondary); line-height: 1.6; padding-left: 18px; margin: 0;">
-            <li><strong>Conservative Q4 Guidance Stance:</strong> Guided Q4 revenue midpoint to $2.20B ($2.155B-$2.245B), falling 1% shy of elevated buy-side whisper bogeys ($2.24B+).</li>
-            <li><strong>Valuation Friction at Peak Multiples:</strong> Entering earnings priced at $174 (>48x P/E), the stock offered zero margin of safety for even minor guidance conservatism.</li>
-            <li><strong>Federal Deal Lumpy Timing:</strong> Management noted prudence around year-end government budget approvals and telecom multi-year contract recognition schedules.</li>
-            <li><strong>Downside Volatility Spillover:</strong> Stock tumbled -25.71% in after-hours trading, triggering cascading stop-loss selling across momentum funds.</li>
+            <li><strong>Prudent Q4 Revenue Guidance ($2.200B Mid):</strong> Guided Q4 revenue to $2.155B-$2.245B, trailing $2.22B Street consensus and $2.24B+ buy-side whisper bogeys.</li>
+            <li><strong>Service Revenue Modest Deceleration (+12.7% YoY):</strong> Service revenue of $1,313.4M trailed $1,345.0M consensus as deferred service attach lags hardware shipments by 1-2 quarters.</li>
+            <li><strong>Valuation Friction at Peak Multiples:</strong> Entering earnings at $174.08 (>45x forward P/E), crowded momentum positioning left zero tolerance for conservative Q4 guidance.</li>
+            <li><strong>2.2x Implied Move Volatility Breach:</strong> Shares fell -25.71% (-$44.75/sh to $129.33), more than doubling the ±11.61% (±$20.97) weekly ATM straddle band.</li>
           </ul>
         </div>
       </div>
 
       <h3 style="font-size: 14.5px; font-weight: 700; color: #f1f5f9; margin-bottom: 12px;">
-        Institutional Conference Call &amp; Analyst Q&A Forensic Highlights (Hardest Analyst Questions)
+        Institutional Conference Call &amp; Analyst Q&amp;A Forensic Highlights (Hardest Analyst Questions)
       </h3>
         <div class="audit-point" style="background: rgba(11, 15, 25, 0.6); border: 1px solid var(--border-color); border-left: 3px solid #3b82f6; padding: 14px 16px; border-radius: 6px; margin-bottom: 12px;">
           <div style="font-weight: 700; color: #60a5fa; font-size: 14px; margin-bottom: 4px;">
@@ -1401,10 +1496,10 @@
               <td>Fortinet, Inc.</td>
               <td>FTNT</td>
               <td style="color: #60a5fa;">$129.33</td>
-              <td>$96.1B</td>
-              <td>$94.3B</td>
-              <td>11.5x</td>
-              <td>36.5x</td>
+              <td>$96.0B</td>
+              <td>$91.2B</td>
+              <td>10.4x</td>
+              <td>36.3x</td>
               <td style="color: #34d399;">38.0%</td>
             </tr>
             <tr>
@@ -1457,7 +1552,7 @@
             <div style="width: 58%; height: 100%; background: linear-gradient(90deg, #f87171, #fbbf24);"></div>
           </div>
           <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5; margin: 0;">
-            Retail traders on Reddit r/wallstreetbets and FinTwit voiced extreme shock over the -25.7% plunge despite an earnings beat, sparking heated debate over dip-buying at $129.
+            Retail traders on r/wallstreetbets and FinTwit voiced shock over the -25.71% plunge despite a Q3 beat ($2,078.4M rev, $0.91 EPS), debating aggressive dip-buying near $129.
           </p>
         </div>
 
@@ -1470,7 +1565,7 @@
             <div style="width: 74%; height: 100%; background: linear-gradient(90deg, #3b82f6, #10b981);"></div>
           </div>
           <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5; margin: 0;">
-            Morgan Stanley and Barclays maintained Overweight ratings, viewing the 25% post-market sell-off as an unjustified multiple contraction on an accelerating business.
+            Morgan Stanley and Barclays maintained Overweight ratings, noting 36.8% product growth and 28.8% billings growth point to accelerating service attach in 2027.
           </p>
         </div>
 
@@ -1483,7 +1578,7 @@
             <div style="width: 84%; height: 100%; background: linear-gradient(90deg, #3b82f6, #10b981);"></div>
           </div>
           <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5; margin: 0;">
-            Ken Xie delivered a composed, authoritative defense of Fortinet's AI security leadership, emphasizing FortiASIC TCO advantages and expanding buyback support.
+            CEO Ken Xie and CFO Christian Schenk emphasized NVIDIA OpenShell, Oracle OCI, and Microsoft Sovereign AI partnerships alongside $2.0B buyback capacity.
           </p>
         </div>
 
@@ -1496,7 +1591,7 @@
             <div style="width: 52%; height: 100%; background: linear-gradient(90deg, #ef4444, #f59e0b);"></div>
           </div>
           <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5; margin: 0;">
-            Downside move of -25.71% (-$44.75) blew past the ±11.61% options straddle band, causing massive losses for straddle sellers and surging put dealer gamma.
+            Downside move of -25.71% (-$44.75/sh) blew past the ±11.61% (±$20.97) straddle band, forcing short-gamma put hedging ahead of Thursday's open.
           </p>
         </div>
       </div>
@@ -1505,7 +1600,7 @@
     <!-- SECTION 8: ROW 7 HEDGE FUND PM TRADE EXECUTION MATRIX -->
     <section class="section" id="sec-trade" style="margin-bottom: 26px;">
       <h2 style="font-size: 16px; font-weight: 800; color: #f1f5f9; margin-bottom: 12px; letter-spacing: 0.02em;">
-        7. Hedge Fund PM Post-Earnings Trade Execution Matrix
+        7. Hedge Fund PM Post-Earnings Trade Execution Matrix (Anchored to $129.33 AH Price)
       </h2>
       <div class="scenario-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 16px;">
         <!-- BULL CASE -->
@@ -1515,24 +1610,24 @@
             <span class="badge badge-bull">PROBABILITY: 50%</span>
           </div>
           <p style="font-size: 12.8px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 10px;">
-            <strong>Violent Mean-Reversion Dip:</strong> The market recognizes that a 20% revenue grower with 38% operating margins and 37% product re-acceleration is mispriced at $129. Institutional buyers and $2B buyback drive a rebound toward $155.
+            <strong>Buyback-Backed Mean Reversion:</strong> Institutional buyers step in at ~36x forward EPS for a Rule-of-60 cyber leader growing product +36.8% YoY with $2.0B active buyback firepower, driving recovery toward $155.00.
           </p>
           <div class="trade-structure" style="background: rgba(16, 185, 129, 0.1); border-left: 3px solid #34d399; padding: 8px 10px; font-size: 12.2px; color: #f1f5f9; border-radius: 4px;">
-            <strong>Actionable Options Structure:</strong> Buy <strong>Jan 15, 2027 $135.00 / $160.00 Bull Call Spread</strong> for ~$5.20 debit to capture mean-reversion over the next 80 days.
+            <strong>Actionable Options Structure:</strong> Buy <strong>Jan 15, 2027 $135.00 / $160.00 Bull Call Spread</strong> for ~$5.20 debit once T+1 opening dealer gamma clears.
           </div>
         </div>
 
         <!-- BASE CASE -->
         <div class="scenario-base" style="background: rgba(59, 130, 246, 0.05); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 8px; padding: 14px;">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
-            <span style="font-weight: 800; color: #60a5fa; font-size: 14px;">🔵 BASE CASE (Consolidation: $125 - $138)</span>
+            <span style="font-weight: 800; color: #60a5fa; font-size: 14px;">🔵 BASE CASE (Consolidation: $124 - $138)</span>
             <span class="badge badge-blue">PROBABILITY: 35%</span>
           </div>
           <p style="font-size: 12.8px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 10px;">
-            <strong>Multiple Digestion Floor:</strong> FTNT consolidates in the $125 to $138 zone as fast-money overhang clears and systematic funds re-benchmark position weights ahead of Q4 enterprise execution.
+            <strong>Multiple Digestion Floor:</strong> FTNT consolidates between $124 and $138 as momentum overhang clears and corporate treasury deploys buybacks below $130.
           </p>
           <div class="trade-structure" style="background: rgba(59, 130, 246, 0.1); border-left: 3px solid #60a5fa; padding: 8px 10px; font-size: 12.2px; color: #f1f5f9; border-radius: 4px;">
-            <strong>Actionable Options Structure:</strong> Sell <strong>Dec 18, 2026 $120.00 Cash-Secured Puts</strong> for ~$3.50 credit, accumulating shares at an effective $116.50 cost basis or capturing 2.9% yield.
+            <strong>Actionable Options Structure:</strong> Sell <strong>Dec 18, 2026 $120.00 Cash-Secured Puts</strong> for ~$3.50 credit (effective $116.50 entry basis).
           </div>
         </div>
 
@@ -1543,10 +1638,10 @@
             <span class="badge badge-bear">PROBABILITY: 15%</span>
           </div>
           <p style="font-size: 12.8px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 10px;">
-            <strong>Further Valuation De-Rating:</strong> Continued sector-wide cyber multiple compression and further deceleration in service revenue push the stock down toward the 200-week moving average at $110.00.
+            <strong>Continued Cyber Multiple Compression:</strong> Broader software/cyber multiple contraction and slower service attach push FTNT toward $110.00 (~31x FY26 EPS).
           </p>
           <div class="trade-structure" style="background: rgba(239, 68, 68, 0.1); border-left: 3px solid #f87171; padding: 8px 10px; font-size: 12.2px; color: #f1f5f9; border-radius: 4px;">
-            <strong>Actionable Options Structure:</strong> Buy <strong>Dec 18, 2026 $120.00 / $105.00 Bear Put Spread</strong> only if the stock decisively breaks $125 support on heavy morning volume.
+            <strong>Actionable Options Structure:</strong> Buy <strong>Dec 18, 2026 $122.00 / $108.00 Bear Put Spread</strong> only if $124 support breaks on high volume.
           </div>
         </div>
       </div>
@@ -1554,7 +1649,7 @@
 
     <!-- VERBATIM GROUND-TRUTH GROUNDING LEDGER -->
     <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-subtle); border-radius: 6px; padding: 10px 14px; font-size: 12px; color: var(--text-muted); margin-top: 10px; margin-bottom: 14px;">
-      <strong>Deterministic Grounding Verification:</strong> Regular Close Price: <span class="mono" style="color:#f8fafc;">$174.08</span> • After-Hours Price: <span class="mono" style="color:#34d399;">$129.33</span> • Reported Q3 2026 Recognized Revenue: <span class="mono" style="color:#60a5fa;">$3,961M ($3961.0M)</span> • Reported Q3 2026 Operating Cash Flow (OCF): <span class="mono" style="color:#34d399;">$3066.0M ($3,066M)</span> • Standard Reported FCF: <span class="mono" style="color:#fcd34d;">$2,854M</span> • Forensic True Free Cash Flow: <span class="mono" style="color:#34d399;">$2,623M</span> • Post-Print Move: <span class="mono" style="color:#f87171;">-25.71%</span> vs Expected <span class="mono">±11.61%</span>.
+      <strong>Deterministic Grounding Verification:</strong> Regular Close Price: <span class="mono" style="color:#f8fafc;">$174.08</span> • After-Hours Price: <span class="mono" style="color:#f87171;">$129.33</span> • Street Consensus Revenue: <span class="mono">$2,065.0M</span> • Reported Q3 2026 Recognized Revenue: <span class="mono" style="color:#60a5fa;">$2078.4M</span> • Non-GAAP EPS: <span class="mono">$0.91</span> (GAAP EPS: <span class="mono">$0.86</span>) • 3-Month Q3 2026 Operating Cash Flow (OCF): <span class="mono" style="color:#34d399;">$946.0M ($946M)</span> • Q3 CapEx: <span class="mono">$64.2M</span> • Standard Reported FCF: <span class="mono" style="color:#fcd34d;">$881.8M</span> • Q3 SBC: <span class="mono">$82.0M</span> • Forensic True Free Cash Flow: <span class="mono" style="color:#34d399;">$799.8M</span> • Post-Print Move: <span class="mono" style="color:#f87171;">-25.71%</span> vs Expected <span class="mono">±11.61%</span>.
     </div>
 
     <!-- 10. FOOTER -->

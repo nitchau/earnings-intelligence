@@ -186,6 +186,48 @@ def validate_draft(ticker: str, earnings_date: str) -> dict:
         if ocf_int_str not in html_body and str(int(round(bridge["ocf"]))) not in html_body:
             errors.append(f"Latest Operating Cash Flow (${ocf_int_str}M) missing or mismatched between FCF bridge and HTML.")
 
+    # Consensus Revenue & EPS Grounding Check (Prevents $122.5B vs $128.22B Consensus Drift)
+    gt_cons_rev = truth.get("schedule_verification", {}).get("yahoo_consensus_revenue")
+    if gt_cons_rev is None:
+        gt_cons_rev = truth.get("street_consensus_and_targets", {}).get("yahoo_consensus_revenue_q0e")
+    if gt_cons_rev:
+        m_crev = re.search(
+            r'Consensus(?:\s+Net)?\s+(?:Revenue|Sales).*?<span class="strip-val">\$([0-9,.]+)\s*([MB])?',
+            html_body,
+            re.DOTALL | re.IGNORECASE,
+        )
+        if m_crev:
+            raw_v = float(m_crev.group(1).replace(",", ""))
+            unit = (m_crev.group(2) or ("B" if raw_v < 500 and gt_cons_rev >= 1000 else "M")).upper()
+            html_cons_m = raw_v * (1000.0 if unit == "B" else 1.0)
+            if abs(html_cons_m - float(gt_cons_rev)) / float(gt_cons_rev) > 0.015:
+                errors.append(
+                    f"Consensus Revenue Drift: Header strip displays ${html_cons_m:,.1f}M, "
+                    f"diverging >1.5% from Ground-Truth Consensus (${float(gt_cons_rev):,.1f}M)!"
+                )
+        elif (
+            f"{gt_cons_rev:,.0f}" not in html_body
+            and f"{gt_cons_rev:,.1f}" not in html_body
+            and f"{gt_cons_rev / 1000:.2f}B" not in html_body
+            and f"{gt_cons_rev / 1000:.1f}B" not in html_body
+        ):
+            errors.append(f"Ground-Truth Consensus Revenue (${gt_cons_rev:,.1f}M) does not appear in rendered T-1 HTML.")
+
+    gt_cons_eps = truth.get("schedule_verification", {}).get("yahoo_consensus_eps")
+    if gt_cons_eps is not None:
+        m_ceps = re.search(
+            r'Consensus.*?EPS.*?<span class="strip-val">(-?\$?[0-9.]+|\$-?[0-9.]+)',
+            html_body,
+            re.DOTALL | re.IGNORECASE,
+        )
+        if m_ceps:
+            html_eps = float(m_ceps.group(1).replace("$", ""))
+            if abs(html_eps - float(gt_cons_eps)) > 0.05:
+                errors.append(
+                    f"Consensus EPS Drift: Header strip displays ${html_eps:.2f}, "
+                    f"diverging >$0.05 from Ground-Truth Consensus EPS (${float(gt_cons_eps):.2f})!"
+                )
+
     # =========================================================================
     # GUARDRAIL 9: Trade Matrix Strike Sanity vs Spot Price
     # =========================================================================

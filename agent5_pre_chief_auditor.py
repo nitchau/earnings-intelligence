@@ -77,6 +77,23 @@ def audit_rendered_pre_html(ticker: str, earnings_date: str) -> dict:
         defects.append(f"Latest Reported OCF (${latest_ocf:,.0f}M) missing in rendered HTML.")
         route_to = "LAYER_1_DETERMINISTIC"
 
+    gt_cons_rev = truth.get("schedule_verification", {}).get("yahoo_consensus_revenue") or truth.get("street_consensus_and_targets", {}).get("yahoo_consensus_revenue_q0e")
+    if gt_cons_rev:
+        m_crev = re.search(
+            r'Consensus(?:\s+Net)?\s+(?:Revenue|Sales).*?<span class="strip-val">\$([0-9,.]+)\s*([MB])?',
+            html_content,
+            re.DOTALL | re.IGNORECASE,
+        )
+        if m_crev:
+            raw_v = float(m_crev.group(1).replace(",", ""))
+            unit = (m_crev.group(2) or ("B" if raw_v < 500 and gt_cons_rev >= 1000 else "M")).upper()
+            html_cons_m = raw_v * (1000.0 if unit == "B" else 1.0)
+            if abs(html_cons_m - float(gt_cons_rev)) / float(gt_cons_rev) > 0.015:
+                defects.append(
+                    f"Consensus Revenue Drift in T-1 HTML (${html_cons_m:,.1f}M vs truth.json ${float(gt_cons_rev):,.1f}M)."
+                )
+                route_to = "AGENT_2A_KPIS"
+
     # Check 2: Row 1B Pre-Release Scorecard Table 1B-1, 1B-2, 1B-3
     if "Table 1B-1" not in html_content:
         defects.append("Missing Table 1B-1: Headline & Company KPI Consensus vs. Buy-Side Whisper Scorecard.")
@@ -105,8 +122,8 @@ def audit_rendered_pre_html(ticker: str, earnings_date: str) -> dict:
         route_to = "AGENT_4B_FINALIZER"
 
     # Check 6: Track A & Track B Zero-Bleed & UX Component Audit
-    if html_content.count("VERSION COMPARISON BANNER") > 1:
-        defects.append("Duplicate VERSION COMPARISON BANNER detected in rendered HTML.")
+    if html_content.count("VERSION COMPARISON BANNER") >= 1:
+        defects.append("Legacy VERSION COMPARISON BANNER detected in rendered HTML (must use clean Historical Quarter Archive topbar).")
         route_to = "AGENT_4B_FINALIZER"
     if '<th class="col-q0">' not in html_content or '<th class="col-est">' not in html_content:
         defects.append("Row 2 5-Quarter table missing col-q0 (Latest Actual) or col-est (Upcoming Consensus) column headers.")

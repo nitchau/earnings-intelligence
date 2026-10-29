@@ -4,6 +4,7 @@ import json
 from datetime import datetime
 from pathlib import Path
 from update_index import update_index_html
+from archive_topbar import build_archive_topbar_html
 
 BASE_DIR = Path(__file__).parent.resolve()
 REPORTS_DIR = BASE_DIR / "published_reports"
@@ -79,39 +80,17 @@ def publish_report(ticker: str, earnings_date: str):
     timestamp_display = datetime.now().strftime("%b %d, %Y at %I:%M %p")
     iso_timestamp = datetime.now().isoformat()
 
-    # Build comparison banner if prior versions exist
-    version_banner_html = ""
-    if prior_versions:
-        pills = []
-        for pv in prior_versions:
-            pv_file = f"{ticker}_T1_{earnings_date}_v{pv}.html"
-            pills.append(f'<a href="{pv_file}" style="background: rgba(255,255,255,0.08); color: #93c5fd; padding: 2px 8px; border-radius: 4px; font-size: 11.5px; text-decoration: none; font-family: monospace; border: 1px solid rgba(255,255,255,0.15);">v{pv}</a>')
-        pills_str = " ".join(pills)
-        version_banner_html = f"""
-    <!-- VERSION COMPARISON BANNER -->
-    <div style="background: #0f172a; border: 1px solid rgba(59, 130, 246, 0.35); border-radius: 10px; padding: 10px 18px; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center; font-size: 13px;">
-      <div style="display:flex; align-items:center; gap: 8px;">
-        <span style="background: rgba(59, 130, 246, 0.2); color: #60a5fa; font-weight: 800; font-family: monospace; padding: 3px 8px; border-radius: 5px; border: 1px solid rgba(59, 130, 246, 0.3);">{ver_str} (Active)</span>
-        <span style="color: #cbd5e1;">Generated on <strong>{timestamp_display}</strong></span>
-      </div>
-      <div style="display:flex; align-items:center; gap: 8px;">
-        <span style="color: #94a3b8; font-size: 12px;">Compare prior iterations:</span>
-        {pills_str}
-      </div>
-    </div>
-        """
-
-    # Inject version banner into rendered container HTML
+    # Inject Historical Quarter Archive topbar (replacing legacy v1/v2 version banner)
+    archive_topbar_html = build_archive_topbar_html(ticker, earnings_date, is_post=False)
     container_html = draft['rendered_container_html']
-    # Insert right at the top of container
-    container_html_with_ver = f"{version_banner_html}\n{container_html}"
+    container_html_with_ver = f"{archive_topbar_html}\n{container_html}"
 
     final_html = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>[{ver_str}] {draft['header']['page_title']}</title>
+  <title>{draft['header']['page_title']}</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">

@@ -16,6 +16,7 @@ import time
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from zoneinfo import ZoneInfo
+from archive_topbar import resolve_quarter_label, format_short_date
 
 # The news portal is optional: a portal bug must never fail a tearsheet publish (Stage 4 imports this module).
 try:
@@ -273,20 +274,7 @@ def build_cards_html(grouped: dict, link_prefix: str) -> str:
             hc_id = esc(f"hovercard-{ticker}")
             hc_attrs = f' interestfor="{hc_id}" data-hovercard-id="{hc_id}" data-ticker="{esc(ticker)}"'
 
-        # Version pills
-        v_pills = []
-        if ver_nums:
-            for v in ver_nums:
-                v_file = item["versions"][v]
-                v_name = f"v{v}"
-                v_href = f"{link_prefix}{v_file.name}"
-                is_curr = (v == ver_nums[-1])
-                curr_style = "background: rgba(59, 130, 246, 0.3); border-color: #3b82f6; color: #93c5fd; font-weight: 700;" if is_curr else "background: rgba(255, 255, 255, 0.05); color: #94a3b8;"
-                v_pills.append(f'<a href="{esc(v_href)}" class="v-pill" style="{esc(curr_style)}">{esc(v_name)}</a>')
-        else:
-            v_pills.append('<span class="v-pill" style="background: rgba(59, 130, 246, 0.2); color: #93c5fd;">v1</span>')
-
-        versions_html = " ".join(v_pills)
+        q_label = resolve_quarter_label(ticker, e_date)
         canonical_href = esc(f"{link_prefix}{latest_file.name}")
 
         card = f"""
@@ -294,7 +282,7 @@ def build_cards_html(grouped: dict, link_prefix: str) -> str:
           <div class="card-top">
             <div class="ticker-box">
               <a href="{canonical_href}"{hc_attrs} class="ticker-symbol" style="text-decoration:none;">{esc(ticker)}</a>
-              <span class="version-tag">{esc(latest_ver_label)}</span>
+              <span class="version-tag">{esc(q_label)}</span>
             </div>
             <span class="badge-status" style="{esc(badge_style)}">{esc(status_label)}</span>
           </div>
@@ -314,13 +302,6 @@ def build_cards_html(grouped: dict, link_prefix: str) -> str:
             <div class="stat-item">
               <span class="stat-label">Updated</span>
               <span class="stat-val" style="font-size: 11.5px; color: #94a3b8;">{esc(mod_time)}</span>
-            </div>
-          </div>
-
-          <div class="version-section">
-            <span class="version-label">Iterations:</span>
-            <div class="v-pill-group">
-              {versions_html}
             </div>
           </div>
 
@@ -1084,20 +1065,69 @@ def update_index_html():
             else:
                 grouped[key]["canonical"] = f
 
-    total_count = len(grouped)
+    # Sync SQLite System-of-Record (earnings_warehouse.db) & export static manifests (history_catalog.js + warehouse_summary.json)
+    try:
+        import earnings_db
+        earnings_db.backfill_all()
+        history_catalog = earnings_db.export_static_manifests()
+    except Exception as db_err:
+        print(f"  [WARN] Falling back to file-scan history_catalog builder ({db_err})")
+        catalog_by_tk_date: dict[str, dict[str, dict]] = {}
+        for item in grouped.values():
+            tk = item["ticker"]
+            dt = item["earnings_date"]
+            ver_nums = sorted(item["versions"].keys())
+            best_file = item["canonical"] or (item["versions"][ver_nums[-1]] if ver_nums else None)
+            if not best_file:
+                continue
+            slot = catalog_by_tk_date.setdefault(tk, {}).setdefault(
+                dt,
+                {
+                    "date": dt,
+                    "quarter": resolve_quarter_label(tk, dt),
+                    "date_display": format_short_date(dt),
+                    "t1": None,
+                    "t0": None,
+                },
+            )
+            if item["is_post"]:
+                slot["t0"] = best_file.name
+            else:
+                slot["t1"] = best_file.name
+
+        history_catalog = {
+            tk: [ by_dt[dt] for dt in sorted(by_dt.keys(), reverse=True) ]
+            for tk, by_dt in sorted(catalog_by_tk_date.items())
+        }
+        catalog_js = (
+            "// Auto-generated Historical Quarter Archive Catalog for In-Page Tearsheet Dropdowns\n"
+            f"window.EARNINGS_HISTORY_CATALOG = {json.dumps(history_catalog, indent=2)};\n"
+        )
+        (REPORTS_DIR / "history_catalog.js").write_text(catalog_js, encoding="utf-8")
+
+    # Deduplicate dashboard tiles: ONLY show the single latest quarter/version per (ticker, stage)
+    latest_by_tk_stage: dict[tuple[str, bool], str] = {}
+    for k, item in grouped.items():
+        pair = (item["ticker"], item["is_post"])
+        prev_k = latest_by_tk_stage.get(pair)
+        if prev_k is None or item["earnings_date"] > grouped[prev_k]["earnings_date"]:
+            latest_by_tk_stage[pair] = k
+
+    latest_grouped = {k: grouped[k] for k in latest_by_tk_stage.values()}
+    total_count = len(latest_grouped)
 
     # 1. Generate for published_reports/index.html
-    cards_for_reports = build_cards_html(grouped, link_prefix="")
-    html_for_reports = build_full_page(cards_for_reports, grouped, public_base, link_prefix="", snapshot=snapshot)
+    cards_for_reports = build_cards_html(latest_grouped, link_prefix="")
+    html_for_reports = build_full_page(cards_for_reports, latest_grouped, public_base, link_prefix="", snapshot=snapshot)
     (REPORTS_DIR / "index.html").write_text(html_for_reports, encoding="utf-8")
 
     # 2. Generate for root index.html
-    cards_for_root = build_cards_html(grouped, link_prefix="published_reports/")
-    html_for_root = build_full_page(cards_for_root, grouped, public_base, link_prefix="published_reports/", snapshot=snapshot)
+    cards_for_root = build_cards_html(latest_grouped, link_prefix="published_reports/")
+    html_for_root = build_full_page(cards_for_root, latest_grouped, public_base, link_prefix="published_reports/", snapshot=snapshot)
     (BASE_DIR / "index.html").write_text(html_for_root, encoding="utf-8")
 
-    pre_count = sum(1 for item in grouped.values() if not item["is_post"])
-    post_count = sum(1 for item in grouped.values() if item["is_post"])
+    pre_count = sum(1 for item in latest_grouped.values() if not item["is_post"])
+    post_count = sum(1 for item in latest_grouped.values() if item["is_post"])
     totals = f"{total_count} total ({pre_count} Pre-Earnings, {post_count} Post-Earnings)"
     if news_ok is False:
         print(f"index.html updated; news.html NOT regenerated (see warning above): {totals}.")
