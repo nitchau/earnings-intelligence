@@ -13,7 +13,7 @@ Stage 1 Pre-Earnings (T-1) Deterministic Financial Data Mesh
 import sys
 import json
 import math
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 from pathlib import Path
 import requests
 import pandas as pd
