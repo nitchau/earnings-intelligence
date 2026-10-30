@@ -1,0 +1,105 @@
+{
+  "ticker": "TEM",
+  "earnings_date": "2026-11-02",
+  "agent": "Pre_Guidance_Debate_Agent (Agent 2B)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "credibility_score": 92,
+  "credibility_label": "92 / 100 (Unblemished 100% 4Q Beat Rate, +42.07% Avg Surprise & Approaching GAAP Operating Breakeven)",
+  "matrix_a_prior_guidance_and_track_record": [
+    {
+      "metric": "Q3 2026E Revenue Guidance ($400M – $412M)",
+      "tooltip_title": "Management prior quarter revenue guidance range for Q3 2026.",
+      "tooltip_def": "Q3 2026 Revenue Guidance: Management guided Q3 2026 revenue to $400M–$412M ($406M midpoint); Street consensus models $409.30M, while buy-side whisper sits at $418.0M+.",
+      "prior_q_guidance_for_q0": "$400M – $412M ($406M Midpoint)",
+      "current_street_consensus": "$409.30M Consensus ($418.0M Whisper)",
+      "historical_4q_beat_rate": "4 / 4 Revenue Beats (100%)",
+      "variance_and_sandbag_commentary": "CEO Eric Lefkofsky and CFO Jim Rogers have consistently exceeded top-line guidance since the IPO, expanding diagnostic sequencing volumes while layering high-margin pharma licensing.",
+      "credibility_grade": "CONSISTENT OVER-DELIVERY"
+    },
+    {
+      "metric": "Q3 2026E Adjusted EBITDA Guidance & Breakeven Horizon",
+      "tooltip_title": "Official Adjusted EBITDA guidance corridor.",
+      "tooltip_def": "Adjusted EBITDA Guidance: Guided to positive $40M–$50M for Q3 2026; Street consensus models $48.0M with whisper targeting $55.0M+ following Q2's positive $56.73M Normalized EBITDA.",
+      "prior_q_guidance_for_q0": "Positive $40M – $50M Adj EBITDA",
+      "current_street_consensus": "$48.0M Consensus ($55.0M Whisper)",
+      "historical_4q_beat_rate": "4 / 4 EBITDA Beats (100%)",
+      "variance_and_sandbag_commentary": "Tempus has achieved an inflection in Adjusted EBITDA profitability, posting $56.73M in Normalized EBITDA in Q2 2026.",
+      "credibility_grade": "PROFITABILITY INFLECTION"
+    },
+    {
+      "metric": "Cash Burn Moderation & Path to Self-Funding",
+      "tooltip_title": "Operating cash burn and capital requirements.",
+      "tooltip_def": "Cash Burn Runway: Operating cash flow improved dramatically to -$7.53M (-$8M rounded) in Q2 2026 with CapEx of $11.09M, driving Reported FCF to -$18.62M; liquidity stands at ~$420M, eliminating near-term dilution risk.",
+      "prior_q_guidance_for_q0": "Approaching Operating Cash Flow Breakeven in H2",
+      "current_street_consensus": "OCF Neutral by Q4 2026",
+      "historical_4q_beat_rate": "Ahead of Cash Plan",
+      "variance_and_sandbag_commentary": "Operating cash outflow shrank from -$60M+ in prior quarters to just -$7.53M in Q2 2026, demonstrating rapid operational leverage.",
+      "credibility_grade": "CASH DISCIPLINE"
+    },
+    {
+      "metric": "4-Quarter Historical EPS Surprise & 1-Day Stock Reaction Track Record",
+      "tooltip_title": "Deterministic 4-quarter historical EPS surprise and 1-day post-earnings stock move from Stage 1.",
+      "tooltip_def": "4Q Historical Track Record: Over the last 4 quarters, TEM delivered a 100.0% beat rate (4 beats, 0 misses) with an average EPS surprise of +42.07%. Average 1-day post-earnings move was ±2.99% (-0.95%, -1.05%, -7.32%, -2.64%), compared to current ATM straddle implied move of ±12.40% (±$9.05/sh).",
+      "prior_q_guidance_for_q0": "Last 4Q Moves: -0.95%, -1.05%, -7.32%, -2.64%",
+      "current_street_consensus": "Current ATM Straddle: ±12.40% (±$9.05/sh)",
+      "historical_4q_beat_rate": "100.0% Beat Rate (+42.07% Avg Surprise)",
+      "variance_and_sandbag_commentary": "Options pricing reflects a ±12.40% implied move (105.71% IV), which is +9.41% wider than the 4-quarter historical average realized 1-day move of ±2.99%, placing TEM in an OVERPRICED_VS_HISTORY (SHORT VOLATILITY / THETA HARVEST EDGE) regime.",
+      "credibility_grade": "OVERPRICED VOLATILITY EDGE"
+    }
+  ],
+  "matrix_b_forward_guidance_bogeys": [
+    {
+      "forward_metric": "Full-Year 2026 Total Revenue Guidance Raise",
+      "tooltip_title": "Full-year 2026 revenue guidance revision hurdle.",
+      "tooltip_def": "FY26 Revenue Guidance Raise: Street consensus looks for management to raise full-year 2026 revenue to $1,530M–$1,560M (+25% YoY); bulls want $1,575M+.",
+      "street_consensus_hurdle": "Raise FY26 Revenue to $1,530M – $1,560M",
+      "bull_case_bogey": "Raise FY26 Revenue to $1,575M – $1,600M+ & Affirm 30%+ Data Licensing Growth",
+      "bear_case_breakdown": "Reaffirming Prior Guidance Without Top-Line Raise",
+      "sensitivity_badge": "PRIMARY RE-RATING DRIVER",
+      "strategic_rationale": "With 24.95% of float held short, a definitive guidance raise provides the catalyst for an aggressive institutional short squeeze."
+    },
+    {
+      "forward_metric": "Full-Year 2026 Positive Free Cash Flow Inflection Timeline",
+      "tooltip_title": "Guidance on exact quarter for sustainable positive operating and Free Cash Flow generation.",
+      "tooltip_def": "FCF Inflection: Investors seek formal confirmation that Q4 2026 or Q1 2027 will achieve sustained positive Free Cash Flow.",
+      "street_consensus_hurdle": "Guide FCF Breakeven by Q4 2026 / Q1 2027",
+      "bull_case_bogey": "Achieve Operating Cash Flow Positive in Q3 2026 Ahead of Schedule",
+      "bear_case_breakdown": "Extending Cash Burn Projections Deep into 2027",
+      "sensitivity_badge": "FINANCIAL SUSTAINABILITY",
+      "strategic_rationale": "Crossing into cash self-sufficiency permanently dismantles the short thesis alleging future equity dilution."
+    },
+    {
+      "forward_metric": "Pharma Multimodal Data Partnerships & Algorithmic Diagnostics (Tempus One)",
+      "tooltip_title": "Growth in multi-year pharmaceutical enterprise data licensing contracts and Tempus One clinical assistant adoption.",
+      "tooltip_def": "Data Pipeline: Addition of new top-20 pharma sponsors and expansion of AI-enabled clinical trial matching algorithms.",
+      "street_consensus_hurdle": "Announce 2+ New Tier-1 Biopharma Multi-Year Data Licensing Deals",
+      "bull_case_bogey": "Announce Major AI Diagnostic Co-Development Deal with Tech/Pharma Giant",
+      "bear_case_breakdown": "Deceleration in Data Licensing Contract Renewals",
+      "sensitivity_badge": "AI MULTIPLE EXPANSION",
+      "strategic_rationale": "Data licensing carries >80% gross margins; expanding this segment drives both gross margin expansion and software-like valuation multiples."
+    }
+  ],
+  "section_4b_pre_print_debates": [
+    {
+      "debate_title": "Debate 1: Multimodal Clinical Data Moat vs. Traditional Genomic Labs — Is Tempus an AI Software Platform or a Testing Lab?",
+      "title_color": "#60a5fa",
+      "border_color": "#3b82f6",
+      "bull_vs_bear_framing": "Bulls argue Tempus is fundamentally an AI data compounding engine, not a commodity diagnostics lab. Every genomic assay sequenced feeds into a proprietary library of over 7+ million de-identified patient records, creating an unmatched multimodal dataset that 19 of the top 20 oncology biopharma companies license to accelerate clinical trial recruitment and drug discovery. Bears counter that 67% of revenue still comes from diagnostic testing, where reimbursement pressures, lab overhead, and raw sequencing costs cap operating margins below pure-play software multiples.",
+      "call_focus_question": "Analyst Focus Question: 'What percentage of your biopharma clients are expanding their annual data contract values into multi-year recurring subscriptions, and how is the gross margin on data licensing evolving relative to your clinical genomics business?'"
+    },
+    {
+      "debate_title": "Debate 2: High Short Interest (25% of Float) vs. Operating Leverage Inflection — Will Breakeven Trigger a Short Squeeze?",
+      "title_color": "#34d399",
+      "border_color": "#10b981",
+      "bull_vs_bear_framing": "Bulls highlight that with 24.95% of float sold short, TEM has one of the highest short-interest concentrations in the Russell 2000 / mid-cap tech index. Short sellers have historically bet on persistent cash burn and high post-IPO share lockup dilution. However, with Q2 2026 operating cash burn dropping to -$7.53M and GAAP net income turning positive to $5.64M, bulls contend that any top-line beat-and-raise will ignite a violent short-covering rally toward the Street high target ($100.00). Bears argue the stock at $73.00 trades at ~9.3x sales for an unprofitable biotech asset.",
+      "call_focus_question": "Analyst Focus Question: 'Given that your operating cash flow approached breakeven in Q2, do you anticipate generating positive operating cash flow during the second half of 2026 without any external financing?'"
+    },
+    {
+      "debate_title": "Debate 3: Options Volatility Mispricing — Why Is the ATM Straddle Pricing ±12.4% vs. ±3.0% Historical Move?",
+      "title_color": "#fcd34d",
+      "border_color": "#f59e0b",
+      "bull_vs_bear_framing": "Bulls and market makers point out that the Nov 06 weekly ATM straddle is pricing a massive ±12.40% swing (105.71% IV), reflecting acute uncertainty and short-covering hedging. However, quantitative analysts note that over the past four quarters, TEM's actual 1-day earnings moves have averaged a modest ±2.99% (-0.95%, -1.05%, -7.32%, -2.64%). This +9.41% volatility spread offers sophisticated institutional PMs an exceptional short-volatility theta harvesting opportunity or a structured defined-risk collar.",
+      "call_focus_question": "Analyst Focus Question: 'Can management comment on the visibility of your fourth-quarter testing volumes and biopharma contract timing heading into the year-end budget flush?'"
+    }
+  ]
+}

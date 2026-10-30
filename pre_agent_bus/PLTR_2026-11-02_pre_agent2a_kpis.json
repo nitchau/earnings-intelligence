@@ -1,0 +1,70 @@
+{
+  "ticker": "PLTR",
+  "earnings_date": "2026-11-02",
+  "agent": "Pre_KPI_Consensus_Agent (Agent 2A)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "upcoming_quarter_label": "Q3 2026E",
+  "latest_reported_quarter_label": "Q2 2026",
+  "headline_and_company_kpis": [
+    {
+      "metric": "Total GAAP Revenue ($M)",
+      "tooltip_title": "Consolidated quarterly GAAP revenue across Commercial and Government segments.",
+      "tooltip_def": "Total GAAP Revenue ($M): Surged +92.83% YoY (+18.55% QoQ) to $1,935.46M in Q2 2026 powered by AIP enterprise adoption; Wall Street consensus models $2,180.44M in Q3 2026E (+84.61% YoY vs $1,181.09M in Q3 2025), with buy-side whisper bogeys demanding $2,240.0M+.",
+      "q_minus_1_actual": "$1,935.46M",
+      "q_minus_4_yoy_baseline": "$1,181.09M",
+      "street_consensus_q0e": "$2,180.44M",
+      "whisper_bogey_q0e": "$2,240.0M",
+      "whisper_spread_display": "+$59.56M (+2.73% Whisper Hurdle)",
+      "bar_width_pct": 94,
+      "hurdle_badge": "AIP HYPERGROWTH SCALE"
+    },
+    {
+      "metric": "Adjusted Diluted EPS ($)",
+      "tooltip_title": "Normalized diluted earnings per share excluding stock-based compensation and employer payroll taxes.",
+      "tooltip_def": "Adjusted Diluted EPS ($): Delivered $0.41 in Q2 2026 (beating $0.35 consensus by +18.51%); Street consensus models $0.41 in Q3 2026E with buy-side whisper targeting $0.45+ per share.",
+      "q_minus_1_actual": "$0.41",
+      "q_minus_4_yoy_baseline": "$0.21",
+      "street_consensus_q0e": "$0.41",
+      "whisper_bogey_q0e": "$0.45",
+      "whisper_spread_display": "+$0.04 (+9.76% Beat Bogey)",
+      "bar_width_pct": 95,
+      "hurdle_badge": "OPERATING LEVERAGE"
+    },
+    {
+      "metric": "U.S. Commercial Revenue ($M)",
+      "tooltip_title": "Revenue generated from United States enterprise and commercial clients utilizing AIP and Foundry.",
+      "tooltip_def": "U.S. Commercial Revenue ($M): Grew +115% YoY to $710.0M in Q2 2026 as AIP bootcamps converted to enterprise contracts; Street models $825.0M in Q3 2026E with whisper bogeys targeting $860.0M+.",
+      "q_minus_1_actual": "$710.0M",
+      "q_minus_4_yoy_baseline": "$330.0M",
+      "street_consensus_q0e": "$825.0M",
+      "whisper_bogey_q0e": "$860.0M",
+      "whisper_spread_display": "+$35.0M (+4.24% Commercial Spread)",
+      "bar_width_pct": 96,
+      "hurdle_badge": "ENTERPRISE MONETIZATION"
+    },
+    {
+      "metric": "U.S. Government Revenue ($M)",
+      "tooltip_title": "Defense, intelligence, and federal civilian agencies deploying Palantir Gotham, Maven, and TITAN.",
+      "tooltip_def": "U.S. Government Revenue ($M): Reached $730.0M in Q2 2026 (+78% YoY) on expanded DoD Project Maven and TITAN vehicle contracts; Street models $810.0M in Q3 2026E with whisper bogeys at $835.0M+.",
+      "q_minus_1_actual": "$730.0M",
+      "q_minus_4_yoy_baseline": "$410.0M",
+      "street_consensus_q0e": "$810.0M",
+      "whisper_bogey_q0e": "$835.0M",
+      "whisper_spread_display": "+$25.0M (+3.09% Defense Spread)",
+      "bar_width_pct": 90,
+      "hurdle_badge": "DEFENSE AI PRIMACY"
+    },
+    {
+      "metric": "Adjusted Free Cash Flow ($M)",
+      "tooltip_title": "Operating cash flow minus capital expenditures and principal lease repayments.",
+      "tooltip_def": "Adjusted Free Cash Flow ($M): Generated an unprecedented $1,201.62M in Q2 2026 (62.08% FCF margin) and $936.41M in True FCF after $265.21M SBC; Street models $1,250.0M in Q3 2026E with whisper bogeys at $1,300.0M+.",
+      "q_minus_1_actual": "$1,201.62M",
+      "q_minus_4_yoy_baseline": "$450.0M",
+      "street_consensus_q0e": "$1,250.0M",
+      "whisper_bogey_q0e": "$1,300.0M",
+      "whisper_spread_display": "+$50.0M (+4.00% Cash Spread)",
+      "bar_width_pct": 93,
+      "hurdle_badge": "CASH ENGINE"
+    }
+  ]
+}

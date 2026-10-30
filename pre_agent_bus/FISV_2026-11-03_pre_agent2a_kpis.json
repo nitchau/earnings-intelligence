@@ -1,0 +1,70 @@
+{
+  "ticker": "FISV",
+  "earnings_date": "2026-11-03",
+  "agent": "Pre_KPI_Consensus_Agent (Agent 2A)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "upcoming_quarter_label": "Q3 2026E",
+  "latest_reported_quarter_label": "Q2 2026",
+  "headline_and_company_kpis": [
+    {
+      "metric": "Total GAAP Revenue ($M)",
+      "tooltip_title": "Consolidated quarterly GAAP net sales across Merchant Solutions and Financial Solutions operating segments.",
+      "tooltip_def": "Total GAAP Revenue ($M): Delivered $5,292.0M in Q2 2026 (-4.06% YoY vs $5,516.0M in Q2 2025); Wall Street consensus models $4,844.24M in Q3 2026E (-7.96% YoY vs $5,263.0M in Q3 2025), with buy-side whisper bogeys sitting at $4,910.0M+.",
+      "q_minus_1_actual": "$5,292.0M",
+      "q_minus_4_yoy_baseline": "$5,263.0M",
+      "street_consensus_q0e": "$4,844.24M",
+      "whisper_bogey_q0e": "$4,910.0M",
+      "whisper_spread_display": "+$65.76M (+1.36% Whisper Hurdle)",
+      "bar_width_pct": 82,
+      "hurdle_badge": "TOP-LINE NORMALIZATION"
+    },
+    {
+      "metric": "Adjusted Diluted EPS ($)",
+      "tooltip_title": "Normalized diluted earnings per share excluding intangible amortization and restructuring charges.",
+      "tooltip_def": "Adjusted Diluted EPS ($): Delivered $1.84 in Q2 2026 (-3.85% miss vs $1.91 estimate); Wall Street consensus models $1.71 in Q3 2026E with buy-side whisper targeting $1.76+ per share.",
+      "q_minus_1_actual": "$1.84",
+      "q_minus_4_yoy_baseline": "$2.04",
+      "street_consensus_q0e": "$1.71",
+      "whisper_bogey_q0e": "$1.76",
+      "whisper_spread_display": "+$0.05 (+2.92% Beat Bogey)",
+      "bar_width_pct": 85,
+      "hurdle_badge": "EARNINGS STABILITY"
+    },
+    {
+      "metric": "Merchant Solutions Segment Revenue ($M)",
+      "tooltip_title": "Point-of-sale terminal acquiring, Clover ecosystem, Carat enterprise omnichannel, and merchant processing volume.",
+      "tooltip_def": "Merchant Solutions Revenue ($M): Generated $2,710.0M in Q2 2026 (-1.0% YoY); Street consensus models $2,580.0M in Q3 2026E with buy-side whisper bogeys demanding $2,630.0M+ driven by Clover SaaS and payment volume expansion.",
+      "q_minus_1_actual": "$2,710.0M",
+      "q_minus_4_yoy_baseline": "$2,640.0M",
+      "street_consensus_q0e": "$2,580.0M",
+      "whisper_bogey_q0e": "$2,630.0M",
+      "whisper_spread_display": "+$50.0M (+1.94% Segment Spread)",
+      "bar_width_pct": 88,
+      "hurdle_badge": "CLOVER SAAS ENGINE"
+    },
+    {
+      "metric": "Financial Solutions Segment Revenue ($M)",
+      "tooltip_title": "Core banking account processing, digital payments, card issuing, and financial institution software services.",
+      "tooltip_def": "Financial Solutions Revenue ($M): Generated $2,245.0M in Q2 2026 (-8.0% YoY); Street consensus models $2,050.0M in Q3 2026E with buy-side whisper bogeys at $2,090.0M+ as community bank IT spending moderates.",
+      "q_minus_1_actual": "$2,245.0M",
+      "q_minus_4_yoy_baseline": "$2,310.0M",
+      "street_consensus_q0e": "$2,050.0M",
+      "whisper_bogey_q0e": "$2,090.0M",
+      "whisper_spread_display": "+$40.0M (+1.95% Core Spread)",
+      "bar_width_pct": 80,
+      "hurdle_badge": "CORE BANKING PROCESSING"
+    },
+    {
+      "metric": "Operating Margin (%)",
+      "tooltip_title": "GAAP Operating Income divided by Total GAAP Revenue.",
+      "tooltip_def": "GAAP Operating Margin (%): Rebounded to 19.07% in Q2 2026 ($1,009.0M Operating Income on $5,292.0M Revenue) up +246 bps QoQ from 16.61% in Q1 2026; Street models 20.20% in Q3 2026E with whisper bogeys targeting 20.80%+.",
+      "q_minus_1_actual": "19.07%",
+      "q_minus_4_yoy_baseline": "25.38%",
+      "street_consensus_q0e": "20.20%",
+      "whisper_bogey_q0e": "20.80%",
+      "whisper_spread_display": "+60 bps (Margin Expansion)",
+      "bar_width_pct": 83,
+      "hurdle_badge": "MARGIN EXPANSION"
+    }
+  ]
+}

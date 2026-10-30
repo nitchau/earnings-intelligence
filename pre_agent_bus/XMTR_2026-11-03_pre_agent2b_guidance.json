@@ -1,0 +1,105 @@
+{
+  "ticker": "XMTR",
+  "earnings_date": "2026-11-03",
+  "agent": "Pre_Guidance_Debate_Agent (Agent 2B)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "credibility_score": 88,
+  "credibility_label": "88 / 100 (Strong 75% 4Q Beat Rate, +18.69% Avg Surprise & Rapid Marketplace Operating Leverage)",
+  "matrix_a_prior_guidance_and_track_record": [
+    {
+      "metric": "Q3 2026E Revenue Guidance Corridor ($233M – $237M)",
+      "tooltip_title": "Management prior quarter revenue guidance range for Q3 2026.",
+      "tooltip_def": "Q3 2026 Revenue Guidance: Guided to $233M–$237M ($235M midpoint); Street consensus models $235.58M with buy-side whisper sitting at $241.0M+ on accelerating enterprise accounts.",
+      "prior_q_guidance_for_q0": "$233M – $237M ($235.0M Midpoint)",
+      "current_street_consensus": "$235.58M Consensus ($241.0M Whisper)",
+      "historical_4q_beat_rate": "3 Beats / 1 Met (75.0% Beat Rate)",
+      "variance_and_sandbag_commentary": "CEO Randy Altschuler and CFO James Miln have consistently delivered at or above top-line guidance, expanding active buyer counts across Fortune 500 industrial enterprises.",
+      "credibility_grade": "HIGH VISIBILITY"
+    },
+    {
+      "metric": "Q3 2026E Adjusted EBITDA Guidance ($8M – $11M)",
+      "tooltip_title": "Official Q3 2026 Adjusted EBITDA guidance corridor.",
+      "tooltip_def": "Adjusted EBITDA Guidance: Guided to $8M–$11M ($9.5M midpoint); Street models $10.2M with whisper targeting $12.5M+ as AI pricing algorithms improve take rates.",
+      "prior_q_guidance_for_q0": "$8.0M – $11.0M ($9.5M Midpoint)",
+      "current_street_consensus": "$10.2M Consensus ($12.5M Whisper)",
+      "historical_4q_beat_rate": "3 Beats / 1 Met (75.0% Beat Rate)",
+      "variance_and_sandbag_commentary": "Adjusted EBITDA turned sustainably positive in early 2026, with Q2 delivering $2.13M on the path toward double-digit margins.",
+      "credibility_grade": "PROFITABILITY EXPANSION"
+    },
+    {
+      "metric": "Operating Cash Flow Inflection & Working Capital Stability",
+      "tooltip_title": "Cash generation from marketplace operations and supplier payment terms.",
+      "tooltip_def": "Cash Generation: Q2 2026 delivered positive $2.92M in OCF ($3M integer) and -$10.46M in Reported FCF (-$21.81M True FCF after $11.35M SBC); cash and liquidity stand at ~$260M with zero debt maturities.",
+      "prior_q_guidance_for_q0": "Sustainable Operating Cash Flow Generation in H2",
+      "current_street_consensus": "Positive Operating Cash Flow Across FY26",
+      "historical_4q_beat_rate": "Cash Flow Turning Positive",
+      "variance_and_sandbag_commentary": "Working capital has stabilized as supplier financing programs self-fund through ThomasNet and payment networks.",
+      "credibility_grade": "SELF-FUNDING TRAJECTORY"
+    },
+    {
+      "metric": "4-Quarter Historical EPS Surprise & 1-Day Stock Reaction Track Record",
+      "tooltip_title": "Deterministic 4-quarter historical EPS surprise and 1-day post-earnings stock move from Stage 1.",
+      "tooltip_def": "4Q Historical Track Record: Over the last 4 quarters, XMTR delivered a 75.0% beat rate (3 beats, 1 met, 0 misses) with an average EPS surprise of +18.69%. Average 1-day post-earnings move was ±23.92% (+5.34%, +39.18%, -22.24%, +28.93%), compared to current ATM straddle implied move of ±21.31% (±$19.55/sh).",
+      "prior_q_guidance_for_q0": "Last 4Q Moves: +5.34%, +39.18%, -22.24%, +28.93%",
+      "current_street_consensus": "Current ATM Straddle: ±21.31% (±$19.55/sh)",
+      "historical_4q_beat_rate": "75.0% Beat Rate (+18.69% Avg Surprise)",
+      "variance_and_sandbag_commentary": "Options pricing reflects a ±21.31% implied move (109.91% IV), tightly aligned (-2.61% delta) with the 4-quarter historical average realized move of ±23.92%, placing XMTR in a FAIRLY_PRICED_VS_HISTORY regime with wide expected dispersion.",
+      "credibility_grade": "FAIRLY PRICED HIGH BETA"
+    }
+  ],
+  "matrix_b_forward_guidance_bogeys": [
+    {
+      "forward_metric": "Full-Year 2026 Revenue Guidance Raise",
+      "tooltip_title": "Full-year 2026 revenue guidance raise hurdle.",
+      "tooltip_def": "FY26 Revenue Guidance Raise: Street consensus looks for management to lift FY26 revenue to $875M–$890M (+28%+ YoY); bulls want $900M+.",
+      "street_consensus_hurdle": "Raise FY26 Revenue to $875M – $890M",
+      "bull_case_bogey": "Raise FY26 Revenue to $900M – $915M+ & Guide Marketplace Growth >35%",
+      "bear_case_breakdown": "Reaffirming Prior FY26 Revenue Guidance Without Raise",
+      "sensitivity_badge": "PRIMARY RE-RATING DRIVER",
+      "strategic_rationale": "Trading at 71.78x forward P/E, Xometry requires clear top-line acceleration to justify its AI B2B marketplace multiple."
+    },
+    {
+      "forward_metric": "Full-Year 2026 Adjusted EBITDA Guidance Corridor",
+      "tooltip_title": "Full-year Adjusted EBITDA revision expectations.",
+      "tooltip_def": "FY26 Adjusted EBITDA Bogey: Street models FY26 Adjusted EBITDA of $32M–$36M; bulls look for a raise to $38M–$42M+.",
+      "street_consensus_hurdle": "Raise FY26 Adj EBITDA to $32M – $36M",
+      "bull_case_bogey": "Raise FY26 Adj EBITDA to $38M – $42M+",
+      "bear_case_breakdown": "Guidance Midpoint Below $30M",
+      "sensitivity_badge": "EARNINGS LEVERAGE",
+      "strategic_rationale": "Fixed-cost leverage in Xometry's digital software architecture means incremental gross profit drops straight to Adjusted EBITDA."
+    },
+    {
+      "forward_metric": "Enterprise Buyer Expansion & AI Instant Quoting Take Rates",
+      "tooltip_title": "Growth in Fortune 500 accounts spending >$50k annually on custom parts.",
+      "tooltip_def": "Enterprise Buyer Account Growth: Scrutiny on accounts spending >$50k ARR (historically growing >25% YoY) and international marketplace expansion into Europe.",
+      "street_consensus_hurdle": "Report 25%+ YoY Growth in Enterprise Accounts >$50k",
+      "bull_case_bogey": "Report 35%+ YoY Enterprise Account Growth & International Growth >50%",
+      "bear_case_breakdown": "Deceleration in Enterprise Account Additions",
+      "sensitivity_badge": "ENTERPRISE QUALITY",
+      "strategic_rationale": "Enterprise accounts generate sticky, high-volume repeatable order flow, de-risking Xometry from small machine shop cyclicality."
+    }
+  ],
+  "section_4b_pre_print_debates": [
+    {
+      "debate_title": "Debate 1: AI Instant Quoting Engine & Supplier Network Density — Can Xometry Defend its Gross Margins Against Traditional Machine Shops?",
+      "title_color": "#60a5fa",
+      "border_color": "#3b82f6",
+      "bull_vs_bear_framing": "Bulls argue Xometry has built an insurmountable two-sided network effect powered by machine learning algorithms trained on hundreds of millions of CAD files and machining operations. By dynamically pricing custom manufacturing jobs and matching them with thousands of global manufacturing suppliers, Xometry delivers 38%+ gross margins without owning costly physical factories. Bears counter that larger contract manufacturers (Protolabs, Jabil) and industrial distributors could replicate automated quoting tools, putting downward pressure on Xometry's take rate.",
+      "call_focus_question": "Analyst Focus Question: 'How are your machine learning pricing algorithms adapting to raw materials price swings in aluminum and titanium, and what is your current win rate on complex aerospace and defense CNC machining bids?'"
+    },
+    {
+      "debate_title": "Debate 2: High Post-Earnings Volatility (±24% Historical Move) — Is the November Options Straddle Mispriced?",
+      "title_color": "#34d399",
+      "border_color": "#10b981",
+      "bull_vs_bear_framing": "Bulls and derivatives traders note that XMTR is one of the highest-beta post-earnings movers in the industrial technology space, with realized 1-day moves of +5.34%, +39.18%, -22.24%, and +28.93% over the last four releases (±23.92% average). The current weekly straddle prices ±21.31% (109.91% IV). Bulls argue an upside guidance raise will spark a massive short covering rally toward the Street high target ($126.00). Bears caution that any hiccup in supplier fulfillment or gross margin compression could prompt another -20%+ drawdown.",
+      "call_focus_question": "Analyst Focus Question: 'Can you provide color on your international marketplace ramp in Europe and Asia, and how does the unit economics of European orders compare to your domestic U.S. marketplace?'"
+    },
+    {
+      "debate_title": "Debate 3: ThomasNet Monetization & SaaS Synergies — Is Industrial Advertising Resilient Amid Manufacturing Cyclicality?",
+      "title_color": "#fcd34d",
+      "border_color": "#f59e0b",
+      "bull_vs_bear_framing": "Bulls emphasize that ThomasNet provides Xometry with an organic top-of-funnel customer acquisition channel that would cost tens of millions to build from scratch. By cross-selling Thomas industrial advertisers into the Xometry supplier network, Xometry drives high-margin advertising and marketing SaaS revenue ($26.28M in Q2). Bears argue that general industrial manufacturing PMI softness could cause small suppliers to cut digital advertising budgets, creating an unexpected top-line drag on non-marketplace revenue.",
+      "call_focus_question": "Analyst Focus Question: 'What is the retention rate among ThomasNet digital marketing clients, and what percentage of Thomas suppliers are now actively fulfilling orders through the core Xometry marketplace?'"
+    }
+  ]
+}

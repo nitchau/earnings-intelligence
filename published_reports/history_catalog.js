@@ -84,6 +84,20 @@ window.EARNINGS_HISTORY_CATALOG = {
       "currency": "$"
     }
   ],
+  "FISV": [
+    {
+      "date": "2026-11-03",
+      "quarter": "Q3 2026",
+      "date_display": "Nov 3, 2026",
+      "t1": "FISV_T1_2026-11-03.html",
+      "t0": null,
+      "verdict": null,
+      "post_move_pct": null,
+      "rev_actual_m": null,
+      "rev_consensus_m": 4844.24,
+      "currency": "$"
+    }
+  ],
   "FTNT": [
     {
       "date": "2026-10-28",
@@ -273,10 +287,24 @@ window.EARNINGS_HISTORY_CATALOG = {
       "date_display": "Oct 30, 2026",
       "t1": "NVT_T1_2026-10-30.html",
       "t0": null,
+      "verdict": "EPS BEAT / REVENUE MISS",
+      "post_move_pct": 0.0,
+      "rev_actual_m": null,
+      "rev_consensus_m": 1540.0,
+      "currency": "$"
+    }
+  ],
+  "PLTR": [
+    {
+      "date": "2026-11-02",
+      "quarter": "Q3 2026",
+      "date_display": "Nov 2, 2026",
+      "t1": "PLTR_T1_2026-11-02.html",
+      "t0": null,
       "verdict": null,
       "post_move_pct": null,
       "rev_actual_m": null,
-      "rev_consensus_m": 1540.0,
+      "rev_consensus_m": 2180.44,
       "currency": "$"
     }
   ],
@@ -291,6 +319,20 @@ window.EARNINGS_HISTORY_CATALOG = {
       "post_move_pct": 5.59,
       "rev_actual_m": 2155.0,
       "rev_consensus_m": 1450.0,
+      "currency": "$"
+    }
+  ],
+  "TEM": [
+    {
+      "date": "2026-11-02",
+      "quarter": "Q3 2026",
+      "date_display": "Nov 2, 2026",
+      "t1": "TEM_T1_2026-11-02.html",
+      "t0": null,
+      "verdict": null,
+      "post_move_pct": null,
+      "rev_actual_m": null,
+      "rev_consensus_m": 409.3,
       "currency": "$"
     }
   ],
@@ -333,6 +375,20 @@ window.EARNINGS_HISTORY_CATALOG = {
       "post_move_pct": -2.82,
       "rev_actual_m": 4312.8,
       "rev_consensus_m": 3760.0,
+      "currency": "$"
+    }
+  ],
+  "XMTR": [
+    {
+      "date": "2026-11-03",
+      "quarter": "Q3 2026",
+      "date_display": "Nov 3, 2026",
+      "t1": "XMTR_T1_2026-11-03.html",
+      "t0": null,
+      "verdict": null,
+      "post_move_pct": null,
+      "rev_actual_m": null,
+      "rev_consensus_m": 235.58,
       "currency": "$"
     }
   ]

@@ -1,0 +1,70 @@
+{
+  "ticker": "XMTR",
+  "earnings_date": "2026-11-03",
+  "agent": "Pre_KPI_Consensus_Agent (Agent 2A)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "upcoming_quarter_label": "Q3 2026E",
+  "latest_reported_quarter_label": "Q2 2026",
+  "headline_and_company_kpis": [
+    {
+      "metric": "Total GAAP Revenue ($M)",
+      "tooltip_title": "Consolidated quarterly GAAP revenue across AI-driven Marketplace and Supplier Services.",
+      "tooltip_def": "Total GAAP Revenue ($M): Grew +41.05% YoY (+11.77% QoQ) to $229.28M in Q2 2026 driven by enterprise manufacturing demand; Wall Street consensus models $235.58M in Q3 2026E (+30.36% YoY vs $180.72M in Q3 2025), with buy-side whisper bogeys sitting at $241.0M+.",
+      "q_minus_1_actual": "$229.28M",
+      "q_minus_4_yoy_baseline": "$180.72M",
+      "street_consensus_q0e": "$235.58M",
+      "whisper_bogey_q0e": "$241.00M",
+      "whisper_spread_display": "+$5.42M (+2.30% Whisper Hurdle)",
+      "bar_width_pct": 90,
+      "hurdle_badge": "AI ON-DEMAND SCALE"
+    },
+    {
+      "metric": "Adjusted Diluted EPS ($)",
+      "tooltip_title": "Normalized diluted earnings per share excluding stock-based compensation and intangible amortization.",
+      "tooltip_def": "Adjusted Diluted EPS ($): Delivered $0.16 in Q2 2026 (matching consensus); Street consensus models $0.19 in Q3 2026E with buy-side whisper targeting $0.22+ per share.",
+      "q_minus_1_actual": "$0.16",
+      "q_minus_4_yoy_baseline": "$0.11",
+      "street_consensus_q0e": "$0.19",
+      "whisper_bogey_q0e": "$0.22",
+      "whisper_spread_display": "+$0.03 (+15.79% Beat Bogey)",
+      "bar_width_pct": 92,
+      "hurdle_badge": "EARNINGS EXPANSION"
+    },
+    {
+      "metric": "Marketplace Revenue ($M)",
+      "tooltip_title": "AI instant-quoting marketplace connecting corporate engineering buyers with global machine shops.",
+      "tooltip_def": "Marketplace Revenue ($M): Reached $203.0M in Q2 2026 (+44% YoY); Street consensus models $210.0M in Q3 2026E with whisper bogeys at $215.0M+ on aerospace and medical robotics prototyping.",
+      "q_minus_1_actual": "$203.0M",
+      "q_minus_4_yoy_baseline": "$156.0M",
+      "street_consensus_q0e": "$210.0M",
+      "whisper_bogey_q0e": "$215.0M",
+      "whisper_spread_display": "+$5.0M (+2.38% Marketplace Spread)",
+      "bar_width_pct": 94,
+      "hurdle_badge": "MARKETPLACE ENGINE"
+    },
+    {
+      "metric": "Supplier Services Revenue ($M)",
+      "tooltip_title": "ThomasNet industrial advertising, marketing SaaS, and supplier financing solutions.",
+      "tooltip_def": "Supplier Services Revenue ($M): Generated $26.28M in Q2 2026 (+15% YoY); Street models $25.58M in Q3 2026E with whisper bogeys at $26.0M+.",
+      "q_minus_1_actual": "$26.28M",
+      "q_minus_4_yoy_baseline": "$24.72M",
+      "street_consensus_q0e": "$25.58M",
+      "whisper_bogey_q0e": "$26.00M",
+      "whisper_spread_display": "+$0.42M (+1.64% Services Spread)",
+      "bar_width_pct": 84,
+      "hurdle_badge": "INDUSTRIAL DIRECTORY"
+    },
+    {
+      "metric": "Marketplace Gross Margin (%)",
+      "tooltip_title": "Gross profit from instant quoting marketplace divided by marketplace revenue.",
+      "tooltip_def": "Marketplace Gross Margin (%): Expanded to 38.01% in Q2 2026 ($87.15M Gross Profit on $229.28M Revenue); Street models 38.50% in Q3 2026E with whisper bogeys demanding 39.20%+ driven by machine learning pricing algorithms.",
+      "q_minus_1_actual": "38.01%",
+      "q_minus_4_yoy_baseline": "39.86%",
+      "street_consensus_q0e": "38.50%",
+      "whisper_bogey_q0e": "39.20%",
+      "whisper_spread_display": "+70 bps (Algorithmic Margin)",
+      "bar_width_pct": 88,
+      "hurdle_badge": "ALGORITHMIC PRICING"
+    }
+  ]
+}

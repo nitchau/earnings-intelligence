@@ -1,0 +1,70 @@
+{
+  "ticker": "TEM",
+  "earnings_date": "2026-11-02",
+  "agent": "Pre_KPI_Consensus_Agent (Agent 2A)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "upcoming_quarter_label": "Q3 2026E",
+  "latest_reported_quarter_label": "Q2 2026",
+  "headline_and_company_kpis": [
+    {
+      "metric": "Total GAAP Revenue ($M)",
+      "tooltip_title": "Consolidated quarterly GAAP net sales across Genomics diagnostics and Data/AI licensing segments.",
+      "tooltip_def": "Total GAAP Revenue ($M): Reached $382.49M in Q2 2026 (+21.57% YoY vs $314.63M in Q2 2025); Wall Street consensus models $409.30M in Q3 2026E (+22.47% YoY vs $334.21M in Q3 2025), with buy-side whisper bogeys sitting at $418.0M+.",
+      "q_minus_1_actual": "$382.49M",
+      "q_minus_4_yoy_baseline": "$334.21M",
+      "street_consensus_q0e": "$409.30M",
+      "whisper_bogey_q0e": "$418.0M",
+      "whisper_spread_display": "+$8.70M (+2.13% Whisper Hurdle)",
+      "bar_width_pct": 89,
+      "hurdle_badge": "AI HEALTHCARE ACCELERATION"
+    },
+    {
+      "metric": "Adjusted Diluted EPS ($)",
+      "tooltip_title": "Normalized diluted earnings per share excluding stock-based compensation and warrant revaluation.",
+      "tooltip_def": "Adjusted Diluted EPS ($): Delivered -$0.04 in Q2 2026 (beating -$0.15 estimate by +73.63%); Street consensus models -$0.08 in Q3 2026E with buy-side whisper looking for break-even (-$0.02 to $0.00).",
+      "q_minus_1_actual": "-$0.04",
+      "q_minus_4_yoy_baseline": "-$0.11",
+      "street_consensus_q0e": "-$0.08",
+      "whisper_bogey_q0e": "-$0.02",
+      "whisper_spread_display": "+$0.06 (Path to Profitability)",
+      "bar_width_pct": 91,
+      "hurdle_badge": "PROFITABILITY INFLECTION"
+    },
+    {
+      "metric": "Genomics Testing Revenue ($M)",
+      "tooltip_title": "Next-generation clinical sequencing tests (xT, xF, xR, xG) delivered to oncology clinics and academic medical centers.",
+      "tooltip_def": "Genomics Testing Revenue ($M): Generated $255.0M in Q2 2026 (66.7% of total sales); Street consensus models $272.0M in Q3 2026E with whisper bogeys at $278.0M+ driven by rising clinical test volumes.",
+      "q_minus_1_actual": "$255.0M",
+      "q_minus_4_yoy_baseline": "$220.0M",
+      "street_consensus_q0e": "$272.0M",
+      "whisper_bogey_q0e": "$278.0M",
+      "whisper_spread_display": "+$6.0M (+2.21% Genomics Spread)",
+      "bar_width_pct": 87,
+      "hurdle_badge": "CLINICAL SEQUENCING"
+    },
+    {
+      "metric": "Data & AI Insights Licensing ($M)",
+      "tooltip_title": "High-margin licensing of multimodal de-identified clinical and molecular data to global pharmaceutical sponsors.",
+      "tooltip_def": "Data & AI Insights Revenue ($M): Reached $127.49M in Q2 2026 (33.3% mix); Street models $137.3M in Q3 2026E with buy-side whisper bogeys demanding $142.0M+ on expanded pharma library subscriptions.",
+      "q_minus_1_actual": "$127.49M",
+      "q_minus_4_yoy_baseline": "$114.21M",
+      "street_consensus_q0e": "$137.30M",
+      "whisper_bogey_q0e": "$142.00M",
+      "whisper_spread_display": "+$4.70M (+3.42% Data Spread)",
+      "bar_width_pct": 93,
+      "hurdle_badge": "HIGH-MARGIN AI MOAT"
+    },
+    {
+      "metric": "Gross Margin (%)",
+      "tooltip_title": "Gross Profit divided by Total GAAP Revenue.",
+      "tooltip_def": "GAAP Gross Margin (%): Expanded to 64.45% in Q2 2026 ($246.50M Gross Profit on $382.49M Revenue); Street models 65.20% in Q3 2026E with whisper targeting 66.00%+ as high-margin data licensing scales.",
+      "q_minus_1_actual": "64.45%",
+      "q_minus_4_yoy_baseline": "62.82%",
+      "street_consensus_q0e": "65.20%",
+      "whisper_bogey_q0e": "66.00%",
+      "whisper_spread_display": "+80 bps (Mix Expansion)",
+      "bar_width_pct": 88,
+      "hurdle_badge": "MARGIN ACCRETION"
+    }
+  ]
+}
