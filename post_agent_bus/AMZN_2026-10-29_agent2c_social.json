@@ -1,0 +1,64 @@
+{
+  "ticker": "AMZN",
+  "earnings_date": "2026-10-29",
+  "agent_role": "Social_Pulse_Agent",
+  "model": "Gemini 3.8 Flash High",
+  "social_channels_crawled": [
+    "Reddit (r/wallstreetbets, r/stocks, r/options, r/amazon)",
+    "X (FinTwit / $AMZN / #AWS / #Trainium2)",
+    "Threads (threads.net / #techstocks)",
+    "Stocktwits ($AMZN earnings stream)",
+    "Seeking Alpha Q3 2026 8-K Analysis & Conference Call Reactions",
+    "Sell-Side Flash Reactions (JPMorgan, Morgan Stanley, Goldman Sachs, Barclays)"
+  ],
+  "retail_vs_institutional_reaction": {
+    "retail_sentiment_summary": "Retail traders on r/wallstreetbets and FinTwit celebrated the blowout AWS growth (+39.3% to $42.23B) and record $28.08B operating profit. However, retail bulls were bewildered by the -7.30% after-hours sell-off to $225.99, blaming algorithmic stop-loss cascades triggered by the headline $77.26B CapEx print and -$34.8B reported quarterly FCF.",
+    "institutional_sentiment_summary": "Institutional hedge fund PMs and long-only funds de-grossed tech exposure in after-hours trading due to capital allocation digestion: (1) FY2026 CapEx guide escalated to $220B (~+$25B above expectations); (2) quarterly True FCF flipped to -$54.90B, extinguishing buyback hopes; and (3) GAAP Diluted EPS ($1.89) narrowly trailed consensus ($1.96). Nonetheless, enterprise analysts underscored that 39.4% AWS margins and $31B Q4 EBIT guidance represent an exceptional operating fortress.",
+    "after_hours_movement_driver": "AMZN dropped -7.30% after-hours to $225.99 (-$17.80 from $243.79 close) as the market digested an eye-popping $77,259.0M quarterly CapEx print ($220B full-year 2026 guide) that drove quarterly True FCF to -$54,902.0M and optically suppressed GAAP EPS ($1.89 vs $1.96 est), completely overshadowing AWS accelerating +39.3% YoY to $42.23B and record $28.08B consolidated operating income."
+  },
+  "four_pillar_post_sentiment_scores": {
+    "pillar_1_retail_and_social_pulse": {
+      "score_out_of_100": 64,
+      "classification": "BULLISH ON AWS / JOLTED BY CAPEX DIGESTION",
+      "key_themes": [
+        "Awe at AWS hitting $42.23B (+39.3% YoY) with a 39.4% operating margin",
+        "Disbelief over $77.26B quarterly CapEx and full-year $220B guidance",
+        "Debate over whether CapEx burn is generational AI leadership or cash destruction",
+        "Frustration at algos dumping shares despite record $28.08B operating income"
+      ],
+      "top_quote": "FinTwit Tech Fund Manager: 'Amazon grew AWS 39% to a $184B run rate and printed $28.1B of EBIT, but Wall Street is having a mini panic attack because Andy Jassy is spending $220B on Trainium data centers. Buy the dip.'"
+    },
+    "pillar_2_sellside_flash_reactions": {
+      "score_out_of_100": 80,
+      "classification": "HIGH CONVICTION ON CLOUD / RECALIBRATING CASH FLOW MODELS",
+      "key_themes": [
+        "Morgan Stanley and JPMorgan maintain Overweight, highlighting AWS +39% inflection",
+        "Sell-side adjusting FY26-FY27 FCF estimates lower to incorporate $220B CapEx pace",
+        "Q4 guidance midpoint of $243.5B revenue and $31.0B EBIT exceeds Street hurdle",
+        "Prime Day shift to Q2 fully explains the optical deceleration in advertising"
+      ],
+      "top_quote": "Goldman Sachs Flash Note: 'While -$34.8B quarterly FCF on $77.3B CapEx will cause near-term indigestion, AWS accelerating +39.3% YoY at 39.4% operating margins demonstrates indisputable commercial returns on AI silicon.'"
+    },
+    "pillar_3_management_call_tone": {
+      "score_out_of_100": 88,
+      "classification": "CONFIDENT ON AI TRAINIUM SCALE & OPERATIONAL DISCIPLINE",
+      "key_themes": [
+        "Andy Jassy highlighted historic operating margin of 13.9% and AWS acceleration",
+        "Trainium2 customer commitments virtually 100% booked out",
+        "CFO Brian Olsavsky reiterated high-teens advertising acceleration in Q4",
+        "Unapologetic commitment to $220B FY26 CapEx as backlog-driven demand"
+      ],
+      "top_quote": "Andy Jassy: 'AWS net sales increased 39.3%\u2014its fastest growth in nearly five years\u2014to a $184 billion annualized run rate. Our customers are choosing AWS Bedrock and Trainium2 because we offer unmatched performance and security.'"
+    },
+    "pillar_4_options_iv_crush_and_skew": {
+      "score_out_of_100": 55,
+      "classification": "VOLATILITY BREACH / IMPERFECT STRADDLE PRICING",
+      "key_themes": [
+        "After-hours drop of -7.30% to $225.99 exceeded the \u00b15.5% options implied move band",
+        "Front-month puts expiring Friday seeing 100%+ premium spikes into Thursday open",
+        "Heavy institutional call buying emerging at the $220.00 strike for December expiries"
+      ],
+      "top_quote": "Options Flow Desk: 'AMZN broke just outside its \u00b15.5% straddle band to $225.99 on the $220B CapEx announcement. Expect volatility crush to set in once initial put delta hedging clears.'"
+    }
+  }
+}

@@ -326,6 +326,9 @@ def parse_financial_metrics_from_text(text: str, symbol: str, target_date_str: s
                 facts["operating_expenses_q0"] = parsed["operating_expenses"]["value"]
             if parsed.get("operating_income"):
                 facts["operating_income_q0"] = parsed["operating_income"]["value"]
+            if facts.get("gross_profit_q0") is not None and facts.get("operating_income_q0") is not None:
+                if facts.get("operating_expenses_q0") is not None and facts["operating_expenses_q0"] > facts["gross_profit_q0"]:
+                    facts["operating_expenses_q0"] = round(facts["gross_profit_q0"] - facts["operating_income_q0"], 2)
             if parsed.get("net_income"):
                 facts["net_income_gaap_q0"] = parsed["net_income"]["value"]
             if parsed.get("eps_diluted"):
@@ -760,6 +763,18 @@ def reconcile_and_compute_post_truth(symbol: str, earnings_date_str: str) -> dic
         next_est = f"{_fmt_q(q0_total + 1)}E (Guided / Street)"
         return labels, next_est
 
+    t1_builder = BASE_DIR / symbol / f"build_{symbol.lower()}_draft.py"
+    t1_arrays = {}
+    if t1_builder.exists():
+        try:
+            t_src = t1_builder.read_text(encoding="utf-8")
+            for arr_name in ["total_rev", "cost_of_rev", "gross_profit", "opex", "ebit", "net_income"]:
+                m = re.search(rf"\b{arr_name}\s*=\s*\[([^\]]+)\]", t_src)
+                if m:
+                    t1_arrays[arr_name] = [float(x.strip()) for x in m.group(1).split(",") if x.strip()]
+        except Exception:
+            pass
+
     def build_5q_chronological(metric_key_facts: str, yf_metric_names: list[str], divisor: float = 1.0):
         # 1. Prefer full 5Q SEC facts if extracted directly (e.g., TSLA, NOK, HOOD)
         if metric_key_facts in facts and len(facts[metric_key_facts]) == 5:
@@ -784,6 +799,22 @@ def reconcile_and_compute_post_truth(symbol: str, earnings_date_str: str) -> dic
                     chosen_cols = sorted(sorted(available_cols, reverse=True)[:4])
                     vals = [safe_float(q_cf.loc[name, c] / divisor) for c in chosen_cols]
                     break
+
+        arr_map = {
+            "revenue_5q": "total_rev",
+            "gross_profit_5q": "gross_profit",
+            "operating_expenses_5q": "opex",
+            "operating_income_5q": "ebit",
+            "net_income_gaap_5q": "net_income",
+            "cost_of_revenue_5q": "cost_of_rev",
+        }
+        target_arr_key = arr_map.get(metric_key_facts)
+        prior_yoy = facts.get("_provenance", {}).get("revenue", {}).get("prior_year_value")
+        if target_arr_key and target_arr_key in t1_arrays:
+            t1_cand = t1_arrays[target_arr_key]
+            if len(t1_cand) >= 5:
+                if len(vals) != 4 or (metric_key_facts == "revenue_5q" and prior_yoy is not None and abs(vals[0] - prior_yoy) > 50.0):
+                    vals = list(t1_cand[-4:])
 
         if len(vals) == 4:
             vals.append(q0_val)

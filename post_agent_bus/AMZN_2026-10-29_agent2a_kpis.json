@@ -1,0 +1,93 @@
+{
+  "ticker": "AMZN",
+  "earnings_date": "2026-10-29",
+  "agent_role": "KPI_Discovery_Agent",
+  "model": "Gemini 3.8 Flash High",
+  "company_operational_kpis": [
+    {
+      "kpi_name": "Amazon Web Services (AWS) Net Sales ($M)",
+      "definition": "Cloud infrastructure, foundational model hosting (Bedrock), and custom Trainium2/Inferentia silicon deployments reaching a $184B annualized run rate.",
+      "street_consensus": 41800.0,
+      "t1_whisper": 42500.0,
+      "reported_q0_actual": 42232.0,
+      "qoq_change_pct": 23.4,
+      "yoy_change_pct": 39.3,
+      "vs_consensus_delta": "+$432.0M (+1.03%)",
+      "verdict": "BEAT"
+    },
+    {
+      "kpi_name": "Worldwide Consolidated Operating Income ($M)",
+      "definition": "Total consolidated operating profit across North America, International, and AWS, achieving an all-time record 13.9% operating margin.",
+      "street_consensus": 18500.0,
+      "t1_whisper": 19500.0,
+      "reported_q0_actual": 28076.0,
+      "qoq_change_pct": 2.2,
+      "yoy_change_pct": 61.1,
+      "vs_consensus_delta": "+$9,576.0M (+51.76%)",
+      "verdict": "MASSIVE BEAT"
+    },
+    {
+      "kpi_name": "Advertising Services Revenue ($M)",
+      "definition": "High-margin digital retail media advertising across Sponsored Products, Sponsored Brands, and default Prime Video ad placements.",
+      "street_consensus": 19200.0,
+      "t1_whisper": 19600.0,
+      "reported_q0_actual": 19809.0,
+      "qoq_change_pct": 0.0,
+      "yoy_change_pct": 19.5,
+      "vs_consensus_delta": "+$609.0M (+3.17%)",
+      "verdict": "BEAT"
+    },
+    {
+      "kpi_name": "Third-Party (3P) Seller Services ($M)",
+      "definition": "Commissions, fulfillment (FBA), and shipping fees generated from marketplace merchants representing >61% of total paid unit volume.",
+      "street_consensus": 45500.0,
+      "t1_whisper": 46200.0,
+      "reported_q0_actual": 46780.0,
+      "qoq_change_pct": 0.0,
+      "yoy_change_pct": 12.0,
+      "vs_consensus_delta": "+$1,280.0M (+2.81%)",
+      "verdict": "BEAT"
+    },
+    {
+      "kpi_name": "Full-Year 2026 Cash Capital Expenditures ($B)",
+      "definition": "Cash investments in generative AI data center infrastructure, custom Trainium2 server clusters, and robotics fulfillment automation.",
+      "street_consensus": 195.0,
+      "t1_whisper": 205.0,
+      "reported_q0_actual": 220.0,
+      "qoq_change_pct": 10.0,
+      "yoy_change_pct": 65.0,
+      "vs_consensus_delta": "+$25.0B (+12.82% CapEx Surge)",
+      "verdict": "CAPEX SURGE"
+    }
+  ],
+  "reporting_segments_5q_mapping": [
+    {
+      "segment_name": "North America",
+      "q0_revenue_millions": 118500.0,
+      "share_of_revenue_pct": 58.68,
+      "sub_rows": [
+        "Online stores ($70,432.0M, +9.2% YoY)",
+        "Third-party seller services ($46,780.0M, +12.0% YoY)",
+        "North America Operating Income ($9,123.0M, 7.7% margin)"
+      ]
+    },
+    {
+      "segment_name": "Amazon Web Services (AWS)",
+      "q0_revenue_millions": 42232.0,
+      "share_of_revenue_pct": 20.91,
+      "sub_rows": [
+        "Cloud Enterprise Compute, Bedrock AI & Storage ($42,232.0M, +39.3% YoY)",
+        "AWS Segment Operating Profit ($16,621.0M, 39.4% operating margin)"
+      ]
+    },
+    {
+      "segment_name": "International",
+      "q0_revenue_millions": 41212.0,
+      "share_of_revenue_pct": 20.41,
+      "sub_rows": [
+        "International Consumer & Marketplace ($41,212.0M, +7.1% YoY)",
+        "International Operating Profit ($1,717.0M, 4.2% margin vs -$35M in Q3 2025)"
+      ]
+    }
+  ]
+}

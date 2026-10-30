@@ -60,11 +60,21 @@ LABELS = {
     "net_income": [
         "Net income available to common stockholders",
         "Net income attributable to common stockholders",
+        "Net income attributable to common shareholders",
+        "Net income attributable to Intel",
         "Net loss attributable to common stockholders",
         "Net income \\(loss\\)", "Net loss", "Net income", "Net earnings",
     ],
     "eps_diluted": [
         "Diluted net income per share of Class A, Class B, and Class C stock",
+        "Net loss per share attributable to Class A and Class B common stockholders, basic and diluted",
+        "Net loss per share attributable to common stockholders, basic and diluted",
+        "Net loss per share attributable to common shareholders, basic and diluted",
+        "Net income per share attributable to common shareholders, basic and diluted",
+        "Net income per share attributable to common stockholders, basic and diluted",
+        "Earnings \\(loss\\) per share attributable to Intel[-—]diluted",
+        "Earnings per share attributable to Intel[-—]diluted",
+        "Earnings per share - diluted", "Earnings per share-diluted",
         "Diluted net income per common share", "Diluted net income per share",
         "Basic and diluted net loss per share", "Basic and diluted net income \\(loss\\) per share",
         "Basic and diluted earnings \\(loss\\) per share",
@@ -74,9 +84,16 @@ LABELS = {
         "Diluted earnings \\(loss\\) per share",
         "Net income per share - diluted", "Net income per share-diluted",
         "Net income per share attributable to common stockholders, diluted",
+        "Net income \\(loss\\) per share",
+        "Net loss per share", "Net income per share",
         "Diluted",
     ],
     "eps_nongaap": [
+        "Non-GAAP earnings \\(loss\\) per share attributable to Intel[-—]diluted",
+        "Non-GAAP earnings per share attributable to Intel[-—]diluted",
+        "Adjusted net loss per share attributable to common stockholders, basic and diluted \\(non-GAAP\\)",
+        "Adjusted net loss per share attributable to common stockholders, basic and diluted",
+        "Adjusted net loss per share", "Adjusted net income per share",
         "Non-GAAP net income per share, diluted",
         "Non-GAAP net income per share - diluted",
         "Non-GAAP net income per diluted share",
@@ -100,6 +117,8 @@ LABELS = {
         "Purchases of property and equipment",
         "Purchases of property, plant and equipment",
         "Payments for property, plant and equipment",
+        "Additions to property, plant, and equipment",
+        "Additions to property, plant and equipment",
         "Capital expenditures and intangible assets",
         "Capital expenditures",
         "Purchases of property, equipment and software",
@@ -152,6 +171,10 @@ def find_sections(flat: str) -> dict[str, tuple[int, int]]:
     hits = []
     for name, pat in SECTION_PATTERNS.items():
         for m in re.finditer(pat, flat, re.IGNORECASE):
+            pre = flat[max(0, m.start() - 40):m.start()].lower()
+            post = flat[m.end():m.end() + 40].lower()
+            if post.strip().startswith("details") or "note" in pre or "see note" in pre or "refer to" in pre:
+                continue
             window = flat[m.end():m.end() + 600]
             if re.search(r"\b20\d\d\b", window):
                 hits.append((m.start(), name))
@@ -215,15 +238,26 @@ def parse_column_header(section_text: str) -> dict:
         period_types = ["YTD"] * n
     else:
         period_types = ["UNKNOWN"] * n
-    return {"years": years, "period_types": period_types, "header_text": header[-300:]}
+    months = None
+    if re.search(r"Nine\s+Months", header, re.IGNORECASE):
+        months = 9
+    elif re.search(r"Six\s+Months", header, re.IGNORECASE):
+        months = 6
+    elif re.search(r"Twelve\s+Months|Year\s+Ended|Fiscal\s+Year", header, re.IGNORECASE):
+        months = 12
+    elif re.search(r"Three\s+Months|Quarter\s+Ended|Three-Month", header, re.IGNORECASE):
+        months = 3
+
+    return {"years": years, "period_types": period_types, "months": months, "header_text": header[-300:]}
 
 
 def _label_regex(label: str) -> str:
     # Exact capitalisation on the first character (rejects "Cost of revenues",
-    # "Subscription revenues"), case-insensitive for the rest, allowing 0+ footnotes like (1) or (2)(3) or (a).
+    # "Subscription revenues"), case-insensitive for the rest, allowing 0+ footnotes like (1) or (2)(3) or (a) or isolated 1,
+    # spaces, colons, or dot leaders (....).
     first, rest = label[0], label[1:]
     first_cls = f"[{first}{first.upper()}]" if first.isalpha() else re.escape(first)
-    return rf"(?<![A-Za-z]){first_cls}(?i:{rest})(?:\s*\([0-9a-zA-Z,\s]+\))*\s*:?\s*"
+    return rf"(?<![A-Za-z]){first_cls}(?i:{rest})(?:\s*(?:\([0-9a-zA-Z,\s]+\)|\b[1-9]\b(?!\s*[,.]))|\.{{2,}}|:|\s)*"
 
 
 def extract_row(flat: str, span: tuple[int, int], label: str, n_cols: int, pick_max_col: int | None = None) -> tuple[list[float], int] | None:
@@ -233,11 +267,17 @@ def extract_row(flat: str, span: tuple[int, int], label: str, n_cols: int, pick_
     for m in re.finditer(pat, sec):
         # Ensure we didn't match a percentage row immediately followed by '%'
         after = sec[m.end():m.end() + 5].lstrip()
-        if after.startswith("%") or "%" in m.group(1):
+        if after.startswith("%") or (m.group(1) is not None and "%" in m.group(1)):
+            continue
+        if m.group(1) is None:
             continue
         toks = re.findall(NUM_TOKEN, m.group(1))
         vals = [_to_float(t) for t in toks[:n_cols]]
         if len(vals) == n_cols and all(v is not None for v in vals):
+            # Guard against matching share counts or dollar figures for per-share EPS rows
+            if label in LABELS.get("eps_diluted", []) + LABELS.get("eps_nongaap", []) + ["Diluted"]:
+                if any(abs(v) > 500.0 for v in vals):
+                    continue
             if pick_max_col is None:
                 return vals, span[0] + m.start()
             if best is None or abs(vals[pick_max_col]) > abs(best[0][pick_max_col]):
@@ -337,6 +377,7 @@ def _extract_special_nongaap_eps(flat: str, earnings_date: str, gaap_eps: float 
     head = flat[:6000]
     bullet_patterns = [
         r"(?:Non-GAAP|Adjusted)\s+(?:diluted\s+)?(?:earnings\s+per\s+share|EPS)(?:\s*\(\d+\))?\s+(?:of|was|grew\s+\d+%\s+to|increased\s+\d+%\s+to)\s+\$(\d+\.\d+)",
+        r"non-GAAP\s+EPS(?:\s+attributable\s+to\s+[A-Za-z]+)?\s+was\s+\$(\d+\.\d+)",
         r"Diluted\s+EPS\s+of\s+\$\d+\.\d+\s+would\s+have\s+increased\s+by\s+\$\d+\.\d+\s+to\s+\$(\d+\.\d+)",
     ]
     for bp in bullet_patterns:
@@ -362,6 +403,20 @@ def _extract_special_nongaap_eps(flat: str, earnings_date: str, gaap_eps: float 
 
 def detect_scale(flat: str) -> float:
     """Divisor to convert primary financial statement units into millions."""
+    # Prefer inspecting the income statement span/header first
+    m_inc = re.search(
+        r"STATEMENTS?\s+OF\s+(?:CONSOLIDATED\s+)?(?:COMPREHENSIVE\s+)?(?:INCOME|OPERATIONS|EARNINGS)",
+        flat,
+        re.IGNORECASE,
+    )
+    if m_inc:
+        inc_header = flat[m_inc.start():m_inc.start() + 1500]
+        if re.search(r"\bin\s+millions\b", inc_header, re.IGNORECASE):
+            return 1.0
+        if re.search(r"\bin\s+thousands\b", inc_header, re.IGNORECASE):
+            return 1000.0
+        if re.search(r"\bin\s+billions\b", inc_header, re.IGNORECASE):
+            return 0.001
     if re.search(r"\(\s*(?:unaudited,?\s*)?(?:dollars\s+)?in\s+thousands", flat, re.IGNORECASE) or \
        re.search(r"in\s+thousands,\s+except", flat, re.IGNORECASE):
         return 1000.0
@@ -449,7 +504,7 @@ def extract_prose_revenue_claims(text: str, max_chars: int = 5000) -> dict:
            r"(?:\s+year[\s-]+over[\s-]+year)?(?:\s+to\s+\$([\d.,]+)\s+(billion|million))?")
     for m in re.finditer(pat, head, re.IGNORECASE):
         pre = head[max(0, m.start() - 25):m.start()]
-        if re.search(r"(Subscription|Product|Service|Services|Cloud|Segment|Advertising|Organic)\s*$", pre, re.IGNORECASE):
+        if re.search(r"(Subscription|Product|Service|Services|Cloud|Segment|Advertising|Organic|AWS|Azure|Google\s+Cloud|Hardware|Software|Retail)\s*$", pre, re.IGNORECASE):
             continue
         amt = None
         if m.group(2):

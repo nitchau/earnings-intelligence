@@ -1,0 +1,88 @@
+{
+  "ticker": "INTC",
+  "earnings_date": "2026-10-29",
+  "matrix_a_execution_accountability": [
+    {
+      "metric": "Q3 2026 Total Net Revenue",
+      "prior_guidance": "$13.5B - $14.5B ($14.0B midpoint)",
+      "actual_delivered": "$16,513.0M delivered (+17.95% above midpoint)",
+      "variance_commentary": "Massive top-line beat powered by surging hyperscaler enterprise demand for Xeon 6 and custom packaging.",
+      "credibility_grade": "EXCEEDED"
+    },
+    {
+      "metric": "Non-GAAP Gross Margin",
+      "prior_guidance": "38.0% at midpoint",
+      "actual_delivered": "43.0% delivered (+500 bps beat)",
+      "variance_commentary": "Stronger factory utilization and higher server mix drove superior gross margin conversion.",
+      "credibility_grade": "EXCEEDED"
+    },
+    {
+      "metric": "Non-GAAP Diluted EPS",
+      "prior_guidance": "$0.38 - $0.42 ($0.40 midpoint)",
+      "actual_delivered": "$0.52 delivered (+$0.12 beat)",
+      "variance_commentary": "Operating leverage on blowout top-line and restructuring cost savings delivered a 30% EPS beat.",
+      "credibility_grade": "EXCEEDED"
+    },
+    {
+      "metric": "Operating Income (EBIT)",
+      "prior_guidance": "~$1,200M",
+      "actual_delivered": "$2,522.0M delivered (+110% beat)",
+      "variance_commentary": "Operating profit more than doubled prior guidance as fab utilization penalties decreased.",
+      "credibility_grade": "EXCEEDED"
+    }
+  ],
+  "matrix_b_forward_guidance_reset": [
+    {
+      "metric": "Q4 2026 Total Net Revenue",
+      "pre_print_consensus": "$16.8B ($16,800M)",
+      "management_guidance": "$15.0B - $16.0B ($15.5B midpoint)",
+      "delta_vs_street": "-$1.30B (-7.7%) sequential drop below Street",
+      "action_badge": "GUIDANCE RESET",
+      "pm_rationale": "Management warned of inventory digestion in client PCs and seasonal enterprise server budget pauses."
+    },
+    {
+      "metric": "Q4 2026 Non-GAAP Gross Margin",
+      "pre_print_consensus": "42.5%",
+      "management_guidance": "38.0% (down -500 bps sequentially)",
+      "delta_vs_street": "-450 bps sequential gross margin compression",
+      "action_badge": "SEVERE WARNING",
+      "pm_rationale": "Initial ramp costs for external Lunar Lake tiles and early 18A fab pre-production depreciation weigh on Q4 margins."
+    },
+    {
+      "metric": "Q4 2026 Non-GAAP Diluted EPS",
+      "pre_print_consensus": "$0.48",
+      "management_guidance": "$0.25 (collapsing from $0.52 in Q3)",
+      "delta_vs_street": "-$0.23 (-47.9%) EPS cut vs Street expectations",
+      "action_badge": "EARNINGS CUT",
+      "pm_rationale": "The severe guidance reset triggered an institutional liquidation, driving the stock down -23.00% to $70.89."
+    },
+    {
+      "metric": "Q4 2026 GAAP Diluted EPS",
+      "pre_print_consensus": "$0.35",
+      "management_guidance": "$0.10",
+      "delta_vs_street": "-$0.25 (-71.4%) vs Street baseline",
+      "action_badge": "DOWNWARD RESET",
+      "pm_rationale": "Reflects ongoing fab restructuring charges and elevated cleanroom transition expenses."
+    }
+  ],
+  "call_qa_forensic_highlights": [
+    {
+      "analyst": "C.J. Muse (Cantor Fitzgerald)",
+      "topic": "Q4 Gross Margin Compression & Lunar Lake Tile Cost Structure",
+      "question": "Why is Q4 gross margin stepping down 500 bps from 43% to 38% despite higher full-year revenue volumes, and how much of that is driven by external TSMC packaging costs on Lunar Lake?",
+      "executive_answer": "David Zinsner (CFO) admitted that Lunar Lake\u2019s architecture relies on external foundry packaging which carries lower initial gross margins until Panther Lake brings high-volume compute tiles back to internal 18A fabs in 2027. Q4 also bears elevated start-up costs for Fab 34 and Fab 52."
+    },
+    {
+      "analyst": "Timothy Arcuri (UBS)",
+      "topic": "Client PC Inventory Digestion & AI PC Momentum",
+      "question": "Can you unpack the Client Computing guidance drop to $15B-$16B? Are enterprise customers delaying corporate desktop refreshes until Windows 10 end-of-life in late 2027?",
+      "executive_answer": "Pat Gelsinger (CEO) explained that after aggressive pre-ordering in Q3, OEM customers in North America and EMEA are maintaining lean inventory. While AI PC adoption is expanding rapidly with over 100M Core Ultra units targeted by year-end, component supply chains remain disciplined."
+    },
+    {
+      "analyst": "Stacy Rasgon (Bernstein Research)",
+      "topic": "Intel Foundry External Commitments & 18A Milestones",
+      "question": "Where do customer tape-outs stand on 18A, and how much external cash burn should we expect from Intel Foundry before breakeven in 2028?",
+      "executive_answer": "Pat Gelsinger reiterated that 18A is on track for full manufacturing readiness, with Panther Lake and Clearwater Forest leading internal production. Commercial foundry pipeline stands at over $15B in lifetime deal value, with major hyperscaler tape-outs scheduled for H1 2027."
+    }
+  ]
+}

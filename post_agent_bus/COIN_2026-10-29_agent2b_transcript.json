@@ -1,0 +1,88 @@
+{
+  "ticker": "COIN",
+  "earnings_date": "2026-10-29",
+  "matrix_a_execution_accountability": [
+    {
+      "metric": "Subscription & Services Revenue",
+      "prior_guidance": "$500M - $580M ($540M midpoint)",
+      "actual_delivered": "$570.2M delivered (+5.6% vs midpoint)",
+      "variance_commentary": "Upper-bound execution driven by record average USDC held on-platform ($307M) and stable interest rate yields.",
+      "credibility_grade": "EXCEEDED"
+    },
+    {
+      "metric": "Transaction Expenses (% of Net Rev)",
+      "prior_guidance": "Mid-teens as % of net revenue (~15%)",
+      "actual_delivered": "16.8% of net revenue",
+      "variance_commentary": "Slightly above mid-teens target due to higher network miner fees on Layer-1 rollups and payment rail costs.",
+      "credibility_grade": "MET"
+    },
+    {
+      "metric": "Adjusted Expenses (OpEx)",
+      "prior_guidance": "$980M - $1,080M ($1,030M midpoint)",
+      "actual_delivered": "$975.0M delivered (below low-end)",
+      "variance_commentary": "Rigorous operating cost controls beat the lower bound of guidance by $5M, reflecting headcount discipline.",
+      "credibility_grade": "EXCEEDED"
+    },
+    {
+      "metric": "Stock-Based Compensation",
+      "prior_guidance": "~$245M",
+      "actual_delivered": "$233.0M delivered (-$12M favorable)",
+      "variance_commentary": "SBC came in 5% below target as equity grant vesting was managed tightly.",
+      "credibility_grade": "EXCEEDED"
+    }
+  ],
+  "matrix_b_forward_guidance_reset": [
+    {
+      "metric": "Q4 2026 Subscription & Services",
+      "pre_print_consensus": "$565.0M",
+      "management_guidance": "$550M - $630M ($590M midpoint)",
+      "delta_vs_street": "+$25.0M (+4.4%) above Street midpoint",
+      "action_badge": "RAISED",
+      "pm_rationale": "Bullish recurring revenue anchor as higher interest rates and expanding USDC balances buffer crypto market volatility."
+    },
+    {
+      "metric": "Q4 2026 Transaction Revenue",
+      "pre_print_consensus": "$650.0M",
+      "management_guidance": "~$165M QTD through Oct 25; caution extrapolating",
+      "delta_vs_street": "Run-rate suggests $550M - $620M (~$585M midpoint)",
+      "action_badge": "CAUTIONARY RESET",
+      "pm_rationale": "Management warned against linear extrapolation given muted crypto spot volatility and post-election uncertainty."
+    },
+    {
+      "metric": "FY2026 Adjusted Expenses Corridor",
+      "pre_print_consensus": "$4,250M - $4,350M",
+      "management_guidance": "$4,150M - $4,300M (lowered -$100M at midpoint)",
+      "delta_vs_street": "-$75.0M favorable cost reduction",
+      "action_badge": "LOWERED EXPENSES",
+      "pm_rationale": "Second consecutive quarterly reduction in full-year expense envelope proves high operating leverage."
+    },
+    {
+      "metric": "Q4 2026 Adjusted Expenses",
+      "pre_print_consensus": "$1,090M",
+      "management_guidance": "$1,007M - $1,157M ($1,082M midpoint)",
+      "delta_vs_street": "-$8.0M below Street expectations",
+      "action_badge": "IN-LINE",
+      "pm_rationale": "Reflects seasonal Q4 performance marketing spend offset by continued general and administrative austerity."
+    }
+  ],
+  "call_qa_forensic_highlights": [
+    {
+      "analyst": "Kenneth Worthington (JPMorgan)",
+      "topic": "USDC Yield Sharing Dynamics & Regulatory Scrutiny",
+      "question": "Can you elaborate on how potential Fed rate cuts will impact the stablecoin revenue sharing economics with Circle, and what percentage of USDC is migrating off-platform?",
+      "executive_answer": "Alesia Haas (CFO) emphasized that while rate cuts compress gross yield, the total supply of USDC in Coinbase products reached a new all-time high in Q3. Platform stickiness and international adoption via Base and institutional custody are offsetting rate headwinds."
+    },
+    {
+      "analyst": "Dan Dolev (Mizuho)",
+      "topic": "Derivatives Market Share & Deribit Unified Exchange",
+      "question": "How quickly can Coinbase convert international derivatives volume into revenue, and what is the cannibalization risk to existing spot trading fees?",
+      "executive_answer": "Brian Armstrong (CEO) stated that derivatives trading volume grew 179% CAGR over the last two years and reached an all-time high market share of 10.7%. Relaunching Coinbase Pro with unified cross-collateralization allows traders to use spot balances as margin, increasing net platform activity."
+    },
+    {
+      "analyst": "Devin Ryan (Citizens JMP)",
+      "topic": "Prediction Markets & Base Layer-2 Monetization",
+      "question": "What contributed to the surge in prediction market trading volume this quarter, and how does sequencer revenue on Base fit into medium-term revenue?",
+      "executive_answer": "Emilie Choi (COO) noted that election and macro prediction contracts provided an important non-correlated volume cushion during low crypto volatility. Base sequencer fees are currently optimized for developer low-cost transactions, but app ecosystem traction is creating long-term subscription value."
+    }
+  ]
+}

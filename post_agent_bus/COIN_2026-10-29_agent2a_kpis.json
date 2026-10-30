@@ -1,0 +1,168 @@
+{
+  "ticker": "COIN",
+  "earnings_date": "2026-10-29",
+  "operational_kpis": [
+    {
+      "name": "Transaction Revenue ($M)",
+      "q_minus_1_actual": 599.2,
+      "q_minus_4_yoy": 1046.3,
+      "street_consensus_q0": 630.0,
+      "reported_actual_q0": 590.2,
+      "spread_vs_street": "-6.3%",
+      "verdict": "MISS",
+      "bar_width_pct": 52
+    },
+    {
+      "name": "Subscription & Services Revenue ($M)",
+      "q_minus_1_actual": 555.1,
+      "q_minus_4_yoy": 716.6,
+      "street_consensus_q0": 550.0,
+      "reported_actual_q0": 570.2,
+      "spread_vs_street": "+3.7%",
+      "verdict": "BEAT",
+      "bar_width_pct": 82
+    },
+    {
+      "name": "Stablecoin Revenue ($M)",
+      "q_minus_1_actual": 292.0,
+      "q_minus_4_yoy": 325.0,
+      "street_consensus_q0": 298.0,
+      "reported_actual_q0": 307.0,
+      "spread_vs_street": "+3.0%",
+      "verdict": "BEAT",
+      "bar_width_pct": 78
+    },
+    {
+      "name": "Adjusted EBITDA ($M)",
+      "q_minus_1_actual": 207.8,
+      "q_minus_4_yoy": 800.7,
+      "street_consensus_q0": 260.0,
+      "reported_actual_q0": 332.9,
+      "spread_vs_street": "+28.0%",
+      "verdict": "BEAT",
+      "bar_width_pct": 92
+    },
+    {
+      "name": "Crypto Trading Volume Market Share (%)",
+      "q_minus_1_actual": 10.3,
+      "q_minus_4_yoy": 5.6,
+      "street_consensus_q0": 10.5,
+      "reported_actual_q0": 10.7,
+      "spread_vs_street": "+0.2%",
+      "verdict": "BEAT",
+      "bar_width_pct": 88
+    }
+  ],
+  "segment_reporting": {
+    "periods": [
+      "Q3 2025",
+      "Q4 2025",
+      "Q1 2026",
+      "Q2 2026",
+      "Q3 2026 (Actual)",
+      "Q4 2026E"
+    ],
+    "segments": [
+      {
+        "name": "Transaction Revenue",
+        "values": [
+          1046.3,
+          982.7,
+          755.8,
+          599.2,
+          590.2,
+          610.0
+        ],
+        "qoq": "-1.5%",
+        "yoy": "-43.6%"
+      },
+      {
+        "name": "Consumer Transaction Revenue",
+        "values": [
+          844.0,
+          734.0,
+          567.0,
+          452.0,
+          450.0,
+          470.0
+        ],
+        "qoq": "-0.4%",
+        "yoy": "-46.7%"
+      },
+      {
+        "name": "Institutional Transaction Revenue",
+        "values": [
+          135.0,
+          185.0,
+          136.0,
+          100.0,
+          92.0,
+          95.0
+        ],
+        "qoq": "-8.0%",
+        "yoy": "-31.9%"
+      },
+      {
+        "name": "Subscription and Services Revenue",
+        "values": [
+          716.6,
+          694.5,
+          583.5,
+          555.1,
+          570.2,
+          590.0
+        ],
+        "qoq": "+2.7%",
+        "yoy": "-20.4%"
+      },
+      {
+        "name": "Stablecoin Revenue (USDC)",
+        "values": [
+          325.0,
+          331.0,
+          305.0,
+          292.0,
+          307.0,
+          320.0
+        ],
+        "qoq": "+5.1%",
+        "yoy": "-5.5%"
+      },
+      {
+        "name": "Blockchain Rewards (Staking)",
+        "values": [
+          185.0,
+          152.0,
+          101.0,
+          83.0,
+          86.0,
+          88.0
+        ],
+        "qoq": "+3.6%",
+        "yoy": "-53.5%"
+      }
+    ]
+  },
+  "tooltip_definitions": {
+    "Transaction Revenue": "Fees earned from retail consumer and institutional trades across spot and crypto derivatives.",
+    "Subscription & Services": "Recurring and utility-based revenues including stablecoin interest sharing, blockchain staking rewards, and Coinbase One subscriptions.",
+    "Stablecoin Revenue": "Revenue earned via the Centre/Circle partnership from interest on reserves backing USDC held on and off platform.",
+    "Adjusted EBITDA": "Operating income adjusted for stock-based compensation, depreciation, amortization, and crypto asset impairment gains/losses.",
+    "Trading Volume Market Share": "Coinbase's share of global fiat-to-crypto and crypto-to-crypto trading volume across spot and derivatives.",
+    "Total Operating Expenses": "Consolidated expenses including transaction expenses, technology & development, sales & marketing, and general & administrative.",
+    "Consumer Crypto Spot Volume": "Direct trading volume executed by retail customers on the Coinbase consumer app and website.",
+    "Institutional Volume": "Prime brokerage, OTC, and high-frequency exchange execution volume for hedge funds, asset managers, and corporate treasuries.",
+    "Derivatives Trading Volume": "Regulated futures and perpetual contracts executed via Coinbase Financial Markets and INTX.",
+    "Coinbase One": "Paid consumer subscription tier offering zero trading fee allowances, boosted staking rewards, and priority support.",
+    "True FCF": "Operating cash flow minus capital expenditures, stock-based compensation, and finance lease obligations.",
+    "Crypto Asset Volatility": "Measure of price fluctuations across Bitcoin, Ethereum, and large-cap altcoins driving retail trading fee velocity.",
+    "Base L2": "Coinbase's Ethereum Layer-2 rollup network generating sequencer revenue and ecosystem developer activity.",
+    "Deribit / INTX Integration": "Integration of offshore derivatives venue Deribit with Coinbase International Exchange to expand global options OI.",
+    "Stock-Based Compensation": "Non-cash equity incentives granted to engineering, product, and leadership teams.",
+    "Operating Cash Flow": "Cash generated by core brokerage operations, customer balance sweeps, and staking distributions.",
+    "GAAP Diluted EPS": "Net profit divided by diluted common shares, reflecting crypto mark-to-market accounting adjustments under ASU 2023-08.",
+    "Net Income": "Consolidated GAAP earnings attributable to common stockholders after tax and fair value crypto asset adjustments.",
+    "Transaction Expenses": "Miner fees, bank payment processing charges, and liquidity provider rebates incurred to settle trades.",
+    "Cash & Cash Equivalents": "Available cash, USDC balances, and short-term Treasuries held directly by Coinbase corporate treasury."
+  }
+}
