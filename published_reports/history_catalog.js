@@ -34,10 +34,10 @@ window.EARNINGS_HISTORY_CATALOG = {
       "quarter": "Q3 2026",
       "date_display": "Oct 29, 2026",
       "t1": "AMZN_T1_2026-10-29.html",
-      "t0": null,
-      "verdict": null,
-      "post_move_pct": null,
-      "rev_actual_m": null,
+      "t0": "AMZN_T0_POST_2026-10-29.html",
+      "verdict": "CLEAN MISS",
+      "post_move_pct": -7.3,
+      "rev_actual_m": 201944.0,
       "rev_consensus_m": 202264.87,
       "currency": "$"
     }
@@ -76,10 +76,10 @@ window.EARNINGS_HISTORY_CATALOG = {
       "quarter": "Q3 2026",
       "date_display": "Oct 29, 2026",
       "t1": "COIN_T1_2026-10-29.html",
-      "t0": null,
-      "verdict": null,
-      "post_move_pct": null,
-      "rev_actual_m": null,
+      "t0": "COIN_T0_POST_2026-10-29.html",
+      "verdict": "EPS BEAT / REVENUE MISS",
+      "post_move_pct": -4.74,
+      "rev_actual_m": 1215.58,
       "rev_consensus_m": 1280.0,
       "currency": "$"
     }
@@ -160,10 +160,10 @@ window.EARNINGS_HISTORY_CATALOG = {
       "quarter": "Q3 2026",
       "date_display": "Oct 29, 2026",
       "t1": "ILMN_T1_2026-10-29.html",
-      "t0": null,
-      "verdict": null,
-      "post_move_pct": null,
-      "rev_actual_m": null,
+      "t0": "ILMN_T0_POST_2026-10-29.html",
+      "verdict": "HEADLINE BEAT / GUIDANCE RESET",
+      "post_move_pct": -11.74,
+      "rev_actual_m": 1129.0,
       "rev_consensus_m": 1120.0,
       "currency": "$"
     }
@@ -174,10 +174,10 @@ window.EARNINGS_HISTORY_CATALOG = {
       "quarter": "Q3 2026",
       "date_display": "Oct 29, 2026",
       "t1": "INTC_T1_2026-10-29.html",
-      "t0": null,
-      "verdict": null,
-      "post_move_pct": null,
-      "rev_actual_m": null,
+      "t0": "INTC_T0_POST_2026-10-29.html",
+      "verdict": "HEADLINE BEAT / GUIDANCE RESET",
+      "post_move_pct": -23.0,
+      "rev_actual_m": 16513.0,
       "rev_consensus_m": 14000.0,
       "currency": "$"
     }
@@ -286,10 +286,10 @@ window.EARNINGS_HISTORY_CATALOG = {
       "quarter": "Q3 2026",
       "date_display": "Oct 29, 2026",
       "t1": "RIVN_T1_2026-10-29.html",
-      "t0": null,
-      "verdict": null,
-      "post_move_pct": null,
-      "rev_actual_m": null,
+      "t0": "RIVN_T0_POST_2026-10-29.html",
+      "verdict": "BEAT & RAISE (CAPEX SURGE)",
+      "post_move_pct": 5.59,
+      "rev_actual_m": 2155.0,
       "rev_consensus_m": 1450.0,
       "currency": "$"
     }
