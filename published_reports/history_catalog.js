@@ -286,10 +286,10 @@ window.EARNINGS_HISTORY_CATALOG = {
       "quarter": "Q3 2026",
       "date_display": "Oct 30, 2026",
       "t1": "NVT_T1_2026-10-30.html",
-      "t0": null,
+      "t0": "NVT_T0_POST_2026-10-30.html",
       "verdict": "EPS BEAT / REVENUE MISS",
-      "post_move_pct": 0.0,
-      "rev_actual_m": null,
+      "post_move_pct": 1.05,
+      "rev_actual_m": 1514.9,
       "rev_consensus_m": 1540.0,
       "currency": "$"
     }
