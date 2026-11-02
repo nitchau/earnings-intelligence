@@ -1,0 +1,70 @@
+{
+  "ticker": "PACB",
+  "earnings_date": "2026-11-04",
+  "agent": "Pre_KPI_Consensus_Agent (Agent 2A)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "upcoming_quarter_label": "Q3 2026E",
+  "latest_reported_quarter_label": "Q2 2026",
+  "headline_and_company_kpis": [
+    {
+      "metric": "Total GAAP Revenue ($M)",
+      "tooltip_title": "Consolidated quarterly GAAP revenue across Instrument, Consumable, and Service lines.",
+      "tooltip_def": "Total GAAP Revenue ($M): Delivered $39.01M in Q2 2026 (-1.91% YoY vs $39.77M in Q2 2025); Wall Street consensus models $39.46M in Q3 2026E (+2.65% YoY vs $38.44M in Q3 2025), with buy-side whisper bogeys looking for $41.0M+.",
+      "q_minus_1_actual": "$39.01M",
+      "q_minus_4_yoy_baseline": "$38.44M",
+      "street_consensus_q0e": "$39.46M",
+      "whisper_bogey_q0e": "$41.00M",
+      "whisper_spread_display": "+$1.54M (+3.90% Whisper Hurdle)",
+      "bar_width_pct": 78,
+      "hurdle_badge": "REVENUE STABILIZATION"
+    },
+    {
+      "metric": "Non-GAAP Diluted EPS ($)",
+      "tooltip_title": "Adjusted diluted net loss per share excluding restructuring, goodwill impairment, and acquisition amortization.",
+      "tooltip_def": "Non-GAAP Diluted EPS ($): Reported -$0.14 in Q2 2026 (-10.41% miss vs -$0.13 estimate); Wall Street consensus models -$0.13 in Q3 2026E with buy-side whisper targeting -$0.11 or better.",
+      "q_minus_1_actual": "-$0.14",
+      "q_minus_4_yoy_baseline": "-$0.12",
+      "street_consensus_q0e": "-$0.13",
+      "whisper_bogey_q0e": "-$0.11",
+      "whisper_spread_display": "+$0.02 (+15.38% Beat Bogey)",
+      "bar_width_pct": 82,
+      "hurdle_badge": "COST REDUCTION TRAJECTORY"
+    },
+    {
+      "metric": "Consumables Revenue ($M)",
+      "tooltip_title": "High-margin sequencing chemistry, SMRT Cells, and reagent packs used on installed Revio instruments.",
+      "tooltip_def": "Consumables Revenue ($M): Generated $17.55M in Q2 2026 (+4.2% YoY); Street models $18.20M in Q3 2026E with whisper bogeys at $19.00M+ reflecting higher Revio pull-through utilization per system.",
+      "q_minus_1_actual": "$17.55M",
+      "q_minus_4_yoy_baseline": "$16.84M",
+      "street_consensus_q0e": "$18.20M",
+      "whisper_bogey_q0e": "$19.00M",
+      "whisper_spread_display": "+$0.80M (+4.40% Utilization Spread)",
+      "bar_width_pct": 85,
+      "hurdle_badge": "PULL-THROUGH EXPANSION"
+    },
+    {
+      "metric": "Revio System Placements (Units)",
+      "tooltip_title": "Number of flagship Revio long-read sequencing systems shipped and installed during the quarter.",
+      "tooltip_def": "Revio Placements (Units): Shipped 24 Revio units in Q2 2026 (installed base ~230+ systems); Street consensus models 26 units in Q3 2026E with whisper bogeys at 28+ units.",
+      "q_minus_1_actual": "24 Units",
+      "q_minus_4_yoy_baseline": "26 Units",
+      "street_consensus_q0e": "26 Units",
+      "whisper_bogey_q0e": "28 Units",
+      "whisper_spread_display": "+2 Systems (+7.69% Placement Spread)",
+      "bar_width_pct": 80,
+      "hurdle_badge": "LONG-READ INSTRUMENTATION"
+    },
+    {
+      "metric": "Operating Cash Burn ($M)",
+      "tooltip_title": "Quarterly cash used in operating activities reflecting ongoing cost restructuring actions.",
+      "tooltip_def": "Operating Cash Burn ($M): Burned -$35.58M in Q2 2026 (-$36M rounded, with Reported FCF of -$39.19M and True FCF of -$48.45M after $9.26M SBC); Street models -$32.0M operating burn in Q3 2026E with whisper targeting -$28.0M.",
+      "q_minus_1_actual": "-$35.58M",
+      "q_minus_4_yoy_baseline": "-$46.20M",
+      "street_consensus_q0e": "-$32.00M",
+      "whisper_bogey_q0e": "-$28.00M",
+      "whisper_spread_display": "+$4.00M (+12.50% Cash Burn Reduction)",
+      "bar_width_pct": 84,
+      "hurdle_badge": "RUNWAY PRESERVATION"
+    }
+  ]
+}

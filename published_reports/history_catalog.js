@@ -84,6 +84,20 @@ window.EARNINGS_HISTORY_CATALOG = {
       "currency": "$"
     }
   ],
+  "DDOG": [
+    {
+      "date": "2026-11-04",
+      "quarter": "Q3 2026",
+      "date_display": "Nov 4, 2026",
+      "t1": "DDOG_T1_2026-11-04.html",
+      "t0": null,
+      "verdict": null,
+      "post_move_pct": null,
+      "rev_actual_m": null,
+      "rev_consensus_m": 1146.97,
+      "currency": "$"
+    }
+  ],
   "FISV": [
     {
       "date": "2026-11-03",
@@ -294,6 +308,20 @@ window.EARNINGS_HISTORY_CATALOG = {
       "currency": "$"
     }
   ],
+  "PACB": [
+    {
+      "date": "2026-11-04",
+      "quarter": "Q3 2026",
+      "date_display": "Nov 4, 2026",
+      "t1": "PACB_T1_2026-11-04.html",
+      "t0": null,
+      "verdict": null,
+      "post_move_pct": null,
+      "rev_actual_m": null,
+      "rev_consensus_m": 39.46,
+      "currency": "$"
+    }
+  ],
   "PLTR": [
     {
       "date": "2026-11-02",
@@ -305,6 +333,20 @@ window.EARNINGS_HISTORY_CATALOG = {
       "post_move_pct": null,
       "rev_actual_m": null,
       "rev_consensus_m": 2180.44,
+      "currency": "$"
+    }
+  ],
+  "QCOM": [
+    {
+      "date": "2026-11-04",
+      "quarter": "Q4 FY2026",
+      "date_display": "Nov 4, 2026",
+      "t1": "QCOM_T1_2026-11-04.html",
+      "t0": null,
+      "verdict": null,
+      "post_move_pct": null,
+      "rev_actual_m": null,
+      "rev_consensus_m": 10145.91,
       "currency": "$"
     }
   ],
@@ -361,6 +403,20 @@ window.EARNINGS_HISTORY_CATALOG = {
       "post_move_pct": null,
       "rev_actual_m": null,
       "rev_consensus_m": null,
+      "currency": "$"
+    }
+  ],
+  "UBER": [
+    {
+      "date": "2026-11-04",
+      "quarter": "Q3 2026",
+      "date_display": "Nov 4, 2026",
+      "t1": "UBER_T1_2026-11-04.html",
+      "t0": null,
+      "verdict": null,
+      "post_move_pct": null,
+      "rev_actual_m": null,
+      "rev_consensus_m": 14673.58,
       "currency": "$"
     }
   ],

@@ -1,0 +1,116 @@
+{
+  "ticker": "NVT",
+  "earnings_date": "2026-10-30",
+  "operational_kpis": [
+    {
+      "name": "Systems Protection Segment Net Sales ($M)",
+      "q_minus_1_actual": 1072.1,
+      "q_minus_4_yoy": 715.6,
+      "street_consensus_q0": 1050.0,
+      "reported_actual_q0": 1098.0,
+      "spread_vs_street": "+4.57%",
+      "verdict": "BEAT",
+      "bar_width_pct": 95
+    },
+    {
+      "name": "Electrical Connections Segment Net Sales ($M)",
+      "q_minus_1_actual": 399.2,
+      "q_minus_4_yoy": 338.4,
+      "street_consensus_q0": 440.0,
+      "reported_actual_q0": 416.9,
+      "spread_vs_street": "-5.25%",
+      "verdict": "MISS",
+      "bar_width_pct": 58
+    },
+    {
+      "name": "Data Solutions & Liquid Cooling Revenue ($M)",
+      "q_minus_1_actual": 385.0,
+      "q_minus_4_yoy": 210.0,
+      "street_consensus_q0": 415.0,
+      "reported_actual_q0": 450.0,
+      "spread_vs_street": "+8.43%",
+      "verdict": "BEAT",
+      "bar_width_pct": 98
+    },
+    {
+      "name": "Adjusted Return on Sales (Operating ROS %)",
+      "q_minus_1_actual": 21.9,
+      "q_minus_4_yoy": 20.2,
+      "street_consensus_q0": 21.5,
+      "reported_actual_q0": 22.1,
+      "spread_vs_street": "+60 bps",
+      "verdict": "BEAT",
+      "bar_width_pct": 91
+    },
+    {
+      "name": "Free Cash Flow Conversion ($M)",
+      "q_minus_1_actual": 162.0,
+      "q_minus_4_yoy": 253.2,
+      "street_consensus_q0": 240.0,
+      "reported_actual_q0": 267.9,
+      "spread_vs_street": "+11.6%",
+      "verdict": "BEAT",
+      "bar_width_pct": 94
+    }
+  ],
+  "segment_reporting": {
+    "periods": [
+      "Q3 2025",
+      "Q4 2025",
+      "Q1 2026",
+      "Q2 2026",
+      "Q3 2026 (Actual)",
+      "Q4 2026E (Guided / Street)"
+    ],
+    "segments": [
+      {
+        "name": "Systems Protection (Enclosures & Liquid Cooling)",
+        "values": [
+          715.6,
+          730.0,
+          894.8,
+          1072.1,
+          1098.0,
+          1135.0
+        ],
+        "qoq": "+2.4%",
+        "yoy": "+53.4%"
+      },
+      {
+        "name": "Electrical Connections (Fasteners & Grounding)",
+        "values": [
+          338.4,
+          336.7,
+          347.2,
+          399.2,
+          416.9,
+          427.7
+        ],
+        "qoq": "+4.4%",
+        "yoy": "+23.2%"
+      }
+    ]
+  },
+  "tooltip_definitions": {
+    "Systems Protection Segment": "Enclosures, data center liquid cooling (CDUs, manifolds, high-density server racks), and utility switchgear systems ($1,098.0M in Q3 2026, up +53.4% YoY).",
+    "Electrical Connections Segment": "Critical electrical fastening, grounding, bonding, and connectivity solutions across commercial and industrial infrastructure ($416.9M in Q3 2026, up +23.2% YoY).",
+    "Data Solutions & Liquid Cooling": "Proprietary direct-to-chip liquid cooling loops, coolant distribution units (CDUs), and intelligent server cabinets delivering >100% YoY growth.",
+    "Coolant Distribution Units (CDUs)": "High-efficiency thermal management pumps circulating liquid coolant across dense GPU compute clusters to prevent thermal throttling.",
+    "Maverick Power Acquisition": "Strategic acquisition closed on October 1, 2026, adding pre-fabricated modular power skids, busway, and switchgear to broaden data center power reach.",
+    "Trachte Integration": "Engineered control building manufacturer acquired to provide customized utility-grade enclosures and modular substation protection.",
+    "Adjusted Return on Sales": "Adjusted operating income as a percentage of net sales (22.1% in Q3 2026, up +190 bps YoY vs 20.2% in Q3 2025).",
+    "Organic Sales Growth": "Net sales growth excluding the impact of foreign currency fluctuations and acquisitions completed within the preceding 12 months (+44% organic in Q3).",
+    "GAAP Diluted EPS": "Net profit from continuing operations divided by diluted ordinary shares ($1.23 per share in Q3 2026, up +68% YoY).",
+    "Adjusted Diluted EPS": "Non-GAAP diluted earnings per share excluding acquisition amortization, integration fees, and tariff items ($1.52 vs $1.40 consensus hurdle).",
+    "Operating Cash Flow": "Cash flow generated from operating activities of continuing operations ($303.2M in Q3 2026; $571.5M 9M YTD).",
+    "Capital Expenditures": "Cash reinvestment in manufacturing plant expansion, cleanrooms, and testing facilities ($37.0M in Q3 2026; $94.6M 9M YTD).",
+    "True Free Cash Flow": "Operating cash flow minus CapEx, stock-based compensation, and finance leases ($446.0M 9M YTD forensic balance).",
+    "Thermal Management Divestiture": "Reclassification of legacy heat tracing business as discontinued operations following its strategic sale, crystallizing pure-play electrical focus.",
+    "Consolidated Gross Profit": "Net sales minus cost of goods sold ($542.9M in Q3 2026, delivering 35.84% gross margin).",
+    "Selling, General & Administrative": "Corporate overhead, sales force compensation, and field marketing expenses ($236.3M in Q3 2026, 15.60% of sales).",
+    "Research & Development": "Targeted engineering spending on next-generation modular liquid cooling architectures and power interconnects ($24.3M in Q3 2026).",
+    "Full-Year Guidance Raise": "Upward revision of FY2026 net sales growth to 48%-49% and Adjusted EPS to $5.36-$5.39 (up from prior $5.00-$5.10).",
+    "Options Volatility Regime": "Weekly ATM straddle implied a \u00b114.04% move; realized move was +1.05% after-hours, triggering severe volatility crush.",
+    "Enterprise Value to EBITDA": "Valuation multiple comparing enterprise value ($21.77B) against operating earnings before interest, taxes, and depreciation (~18.5x)."
+  }
+}

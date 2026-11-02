@@ -1,0 +1,70 @@
+{
+  "ticker": "DDOG",
+  "earnings_date": "2026-11-04",
+  "agent": "Pre_KPI_Consensus_Agent (Agent 2A)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "upcoming_quarter_label": "Q3 2026E",
+  "latest_reported_quarter_label": "Q2 2026",
+  "headline_and_company_kpis": [
+    {
+      "metric": "Total GAAP Revenue ($M)",
+      "tooltip_title": "Consolidated quarterly GAAP cloud monitoring and observability subscription net sales.",
+      "tooltip_def": "Total GAAP Revenue ($M): Surged +35.64% YoY (+11.43% QoQ) to $1,121.45M in Q2 2026 powered by multi-cloud infrastructure and LLM Observability adoption; Wall Street consensus models $1,146.97M in Q3 2026E (+29.51% YoY vs $885.65M in Q3 2025), with buy-side whisper bogeys demanding $1,175.0M+.",
+      "q_minus_1_actual": "$1,121.45M",
+      "q_minus_4_yoy_baseline": "$885.65M",
+      "street_consensus_q0e": "$1,146.97M",
+      "whisper_bogey_q0e": "$1,175.0M",
+      "whisper_spread_display": "+$28.03M (+2.44% Whisper Hurdle)",
+      "bar_width_pct": 92,
+      "hurdle_badge": "CLOUD OBSERVABILITY SCALE"
+    },
+    {
+      "metric": "Adjusted Diluted EPS ($)",
+      "tooltip_title": "Non-GAAP diluted net earnings per share excluding stock-based compensation and amortization of acquired intangibles.",
+      "tooltip_def": "Adjusted Diluted EPS ($): Delivered $0.65 in Q2 2026 (beating $0.58 consensus by +12.07%); Wall Street consensus models $0.64 in Q3 2026E with buy-side whisper targeting $0.69+ per share.",
+      "q_minus_1_actual": "$0.65",
+      "q_minus_4_yoy_baseline": "$0.55",
+      "street_consensus_q0e": "$0.64",
+      "whisper_bogey_q0e": "$0.69",
+      "whisper_spread_display": "+$0.05 (+7.81% Beat Bogey)",
+      "bar_width_pct": 94,
+      "hurdle_badge": "OPERATING LEVERAGE"
+    },
+    {
+      "metric": "Customers with ARR >= $100K",
+      "tooltip_title": "Number of enterprise and mid-market organizations generating $100,000 or greater in Annual Recurring Revenue.",
+      "tooltip_def": "Customers with ARR >= $100K: Reached 3,850 enterprise customers in Q2 2026 (+18.8% YoY from 3,240 in Q3 2025); Street models 3,980 in Q3 2026E with buy-side whisper bogeys targeting 4,050+ customers.",
+      "q_minus_1_actual": "3,850",
+      "q_minus_4_yoy_baseline": "3,240",
+      "street_consensus_q0e": "3,980",
+      "whisper_bogey_q0e": "4,050",
+      "whisper_spread_display": "+70 Accounts (+1.76% Enterprise Spread)",
+      "bar_width_pct": 90,
+      "hurdle_badge": "ENTERPRISE EXPANSION"
+    },
+    {
+      "metric": "Dollar-Based Net Retention Rate (DBNRR %)",
+      "tooltip_title": "Trailing 12-month net revenue retention rate across existing customers including upsell and product cross-adoption.",
+      "tooltip_def": "Dollar-Based Net Retention Rate (%): Maintained a resilient 117% in Q2 2026 as cloud cost optimization headwind fully dissipated and multi-product adoption surged; Street consensus models 116% in Q3 2026E with whisper bogeys looking for 118%+.",
+      "q_minus_1_actual": "117%",
+      "q_minus_4_yoy_baseline": "114%",
+      "street_consensus_q0e": "116%",
+      "whisper_bogey_q0e": "118%",
+      "whisper_spread_display": "+200 bps (+1.72% Expansion)",
+      "bar_width_pct": 88,
+      "hurdle_badge": "NET RETENTION INFLECTION"
+    },
+    {
+      "metric": "Reported Free Cash Flow ($M)",
+      "tooltip_title": "Net cash provided by operating activities minus capital expenditures and development software additions.",
+      "tooltip_def": "Reported Free Cash Flow ($M): Generated $278.70M in Q2 2026 ($315.87M OCF minus $37.17M CapEx, representing a 24.85% FCF margin; True FCF stands at $58.45M after deducting $220.25M SBC); Street consensus models $285.0M in Q3 2026E with whisper bogeys at $310.0M+.",
+      "q_minus_1_actual": "$278.70M",
+      "q_minus_4_yoy_baseline": "$210.0M",
+      "street_consensus_q0e": "$285.0M",
+      "whisper_bogey_q0e": "$310.0M",
+      "whisper_spread_display": "+$25.0M (+8.77% Cash Spread)",
+      "bar_width_pct": 91,
+      "hurdle_badge": "CASH FLOW CONVERSION"
+    }
+  ]
+}

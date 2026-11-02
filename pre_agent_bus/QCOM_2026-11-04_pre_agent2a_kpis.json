@@ -1,0 +1,70 @@
+{
+  "ticker": "QCOM",
+  "earnings_date": "2026-11-04",
+  "agent": "Pre_KPI_Consensus_Agent (Agent 2A)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "upcoming_quarter_label": "Q4 FY26E",
+  "latest_reported_quarter_label": "Q3 FY26 (Ended Jun 30, 2026)",
+  "headline_and_company_kpis": [
+    {
+      "metric": "Total GAAP Revenue ($M)",
+      "tooltip_title": "Consolidated quarterly GAAP net revenue across QCT semiconductor and QTL licensing divisions.",
+      "tooltip_def": "Total GAAP Revenue ($M): Delivered $9,947.0M in Q2 2026 (-4.03% YoY vs $10,365.0M in Q2 2025); Wall Street consensus models $10,145.91M in Q4 FY26E (-9.97% YoY vs $11,271.0M in Q3 2025), with buy-side whisper bogeys demanding $10,350.0M+ on Snapdragon 8 Elite launches.",
+      "q_minus_1_actual": "$9,947.0M",
+      "q_minus_4_yoy_baseline": "$11,271.0M",
+      "street_consensus_q0e": "$10,145.91M",
+      "whisper_bogey_q0e": "$10,350.0M",
+      "whisper_spread_display": "+$204.09M (+2.01% Whisper Hurdle)",
+      "bar_width_pct": 86,
+      "hurdle_badge": "SNAPDRAGON ELITE VOLUME"
+    },
+    {
+      "metric": "Non-GAAP Diluted EPS ($)",
+      "tooltip_title": "Normalized diluted net earnings per share excluding acquisition-related amortization and tax adjustments.",
+      "tooltip_def": "Non-GAAP Diluted EPS ($): Delivered $2.21 in Q2 2026 (-0.74% miss vs $2.23 estimate); Wall Street consensus models $2.16 in Q4 FY26E with buy-side whisper targeting $2.25+ per share.",
+      "q_minus_1_actual": "$2.21",
+      "q_minus_4_yoy_baseline": "$3.00",
+      "street_consensus_q0e": "$2.16",
+      "whisper_bogey_q0e": "$2.25",
+      "whisper_spread_display": "+$0.09 (+4.17% Beat Bogey)",
+      "bar_width_pct": 88,
+      "hurdle_badge": "OPERATING MARGIN EXPANSION"
+    },
+    {
+      "metric": "QCT Handset Chipset Revenue ($M)",
+      "tooltip_title": "Revenue generated from premium, high, and mid-tier smartphone modem and SoC chipsets.",
+      "tooltip_def": "QCT Handsets ($M): Generated $5,850.0M in Q2 2026; Street consensus models $6,150.0M in Q4 FY26E with whisper bogeys looking for $6,300.0M+ powered by flagship Android design wins (Samsung, Xiaomi, Vivo) featuring the 3nm Oryon CPU.",
+      "q_minus_1_actual": "$5,850.0M",
+      "q_minus_4_yoy_baseline": "$6,980.0M",
+      "street_consensus_q0e": "$6,150.0M",
+      "whisper_bogey_q0e": "$6,300.0M",
+      "whisper_spread_display": "+$150.0M (+2.44% Handset Spread)",
+      "bar_width_pct": 89,
+      "hurdle_badge": "AI SMARTPHONE CYCLE"
+    },
+    {
+      "metric": "QCT Automotive Revenue ($M)",
+      "tooltip_title": "Snapdragon Digital Chassis, cockpit processors, ADAS compute, and connected vehicle connectivity platforms.",
+      "tooltip_def": "QCT Automotive ($M): Reached $850.0M in Q2 2026 (+42% YoY); Street models $920.0M in Q4 FY26E with whisper bogeys at $960.0M+ supported by an automotive pipeline backlog exceeding $45B.",
+      "q_minus_1_actual": "$850.0M",
+      "q_minus_4_yoy_baseline": "$600.0M",
+      "street_consensus_q0e": "$920.0M",
+      "whisper_bogey_q0e": "$960.0M",
+      "whisper_spread_display": "+$40.0M (+4.35% Auto Spread)",
+      "bar_width_pct": 92,
+      "hurdle_badge": "DIGITAL CHASSIS HYPERGROWTH"
+    },
+    {
+      "metric": "QCT IoT & Snapdragon X PC Revenue ($M)",
+      "tooltip_title": "Snapdragon X Elite/Plus Copilot+ PC silicon, industrial automation, edge computing, and consumer connectivity.",
+      "tooltip_def": "QCT IoT & PC ($M): Generated $1,450.0M in Q2 2026; Street consensus models $1,550.0M in Q4 FY26E with whisper bogeys at $1,620.0M+ tracking enterprise retail sell-through of Windows Copilot+ AI PCs.",
+      "q_minus_1_actual": "$1,450.0M",
+      "q_minus_4_yoy_baseline": "$1,380.0M",
+      "street_consensus_q0e": "$1,550.0M",
+      "whisper_bogey_q0e": "$1,620.0M",
+      "whisper_spread_display": "+$70.0M (+4.52% PC Spread)",
+      "bar_width_pct": 90,
+      "hurdle_badge": "COPILOT+ PC DISRUPTION"
+    }
+  ]
+}

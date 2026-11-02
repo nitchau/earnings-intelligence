@@ -1,7 +1,7 @@
 {
   "ticker": "NVT",
   "earnings_date": "2026-10-30",
-  "timestamp_generated": "2026-10-30T06:00:32.074573",
+  "timestamp_generated": "2026-10-30T18:11:02.998272",
   "t1_baseline": {
     "source_found": true,
     "t1_file": "NVT_2026-10-30_truth.json",
@@ -22,23 +22,23 @@
     "edgar_status": "FILING_RETRIEVED"
   },
   "market_portal": {
-    "regular_close_price": 138.15,
-    "after_hours_price": 138.15,
+    "regular_close_price": 125.98,
+    "after_hours_price": 127.3,
     "after_hours_volume": null,
     "previous_close_price": 135.48,
-    "google_finance_regular": 138.15,
-    "google_finance_after_hours": 138.15,
+    "google_finance_regular": 125.98,
+    "google_finance_after_hours": 127.3,
     "price_divergence_pct": 0.0,
     "price_divergence_warning": false,
-    "market_cap_millions": 22360.67,
-    "enterprise_value_millions": 23737.57,
-    "trailing_pe": 38.27,
-    "forward_pe": 20.37
+    "market_cap_millions": 20390.86,
+    "enterprise_value_millions": 21767.76,
+    "trailing_pe": 34.9,
+    "forward_pe": 18.58
   },
   "post_print_reaction": {
-    "regular_close_price": 138.15,
-    "after_hours_price": 138.15,
-    "post_print_move_pct": 0.0,
+    "regular_close_price": 125.98,
+    "after_hours_price": 127.3,
+    "post_print_move_pct": 1.05,
     "t1_options_implied_move_pct": 14.04,
     "move_vs_implied_status": "WITHIN_IMPLIED_BAND",
     "overall_print_verdict": "EPS BEAT / REVENUE MISS"
@@ -63,7 +63,7 @@
       "verdict": "BEAT"
     },
     "eps_gaap": {
-      "reported_actual": 164.0,
+      "reported_actual": 1.23,
       "street_consensus": null,
       "vs_consensus_delta_dollars": null,
       "vs_consensus_delta_pct": null,
@@ -123,7 +123,7 @@
       0.73,
       0.87,
       1.32,
-      164.0
+      1.23
     ],
     "nongaap_diluted_eps": [
       null,
@@ -196,7 +196,7 @@
     "operating_expenses_q0": 260.9,
     "operating_income_q0": 282.0,
     "net_income_gaap_q0": 202.4,
-    "eps_gaap_q0": 164.0,
+    "eps_gaap_q0": 1.23,
     "eps_nongaap_q0": 1.52,
     "ocf_q0": 571.5,
     "capex_q0": 94.6,

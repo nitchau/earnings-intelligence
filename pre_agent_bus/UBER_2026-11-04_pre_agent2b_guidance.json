@@ -1,0 +1,118 @@
+{
+  "ticker": "UBER",
+  "earnings_date": "2026-11-04",
+  "agent": "Pre_Guidance_Debate_Agent (Agent 2B)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "credibility_score": 86,
+  "credibility_label": "86 / 100 (Strong Guidance Execution, Disciplined Adjusted EBITDA Raised Targets & High FCF Conversion)",
+  "matrix_a_prior_guidance_and_track_record": [
+    {
+      "metric": "Q3 2026E Gross Bookings Guidance Corridor",
+      "tooltip_title": "Management prior quarter Gross Bookings guidance range for Q3 2026.",
+      "tooltip_def": "Q3 2026 Gross Bookings Guidance: Guided to $45,750M–$47,250M ($46,500M midpoint); Street consensus models $46,200.0M with buy-side whisper bogeys at $47,100.0M+.",
+      "prior_q_guidance_for_q0": "$45,750M – $47,250M ($46,500M Midpoint)",
+      "current_street_consensus": "$46,200.0M Consensus ($47,100.0M Whisper)",
+      "historical_4q_beat_rate": "4 Beats / 0 Misses on Gross Bookings",
+      "variance_and_sandbag_commentary": "Management sets realistic bookings ranges accounting for foreign exchange volatility, consistently delivering at or above the midpoint.",
+      "credibility_grade": "HIGH CREDIBILITY"
+    },
+    {
+      "metric": "Q3 2026E Adjusted EBITDA Guidance Corridor",
+      "tooltip_title": "Official Q3 2026 Adjusted EBITDA guidance range.",
+      "tooltip_def": "Q3 2026 Adjusted EBITDA Guidance: Guided to $2,180M–$2,280M ($2,230M midpoint); Street consensus models $2,250.0M with whisper targeting $2,320.0M+.",
+      "prior_q_guidance_for_q0": "$2,180M – $2,280M ($2,230M Midpoint)",
+      "current_street_consensus": "$2,250.0M Consensus ($2,320.0M Whisper)",
+      "historical_4q_beat_rate": "100% Adjusted EBITDA Beat Record",
+      "variance_and_sandbag_commentary": "Uber has systematically expanded Adjusted EBITDA margin as fixed engineering and administrative costs scale over rising booking volumes.",
+      "credibility_grade": "OPERATING LEVERAGE"
+    },
+    {
+      "metric": "Full-Year 2026 Free Cash Flow Conversion & Capital Returns",
+      "tooltip_title": "Management full-year cash generation commitments and share repurchase pacing.",
+      "tooltip_def": "Cash Generation & Capital Return: Management committed to 90%+ FCF conversion from Adjusted EBITDA; Q2 2026 delivered $2,862.0M OCF ($2,862M rounded) and $2,792.0M Reported FCF ($2,242.0M True FCF after $550.0M SBC), funding ongoing share repurchases under the $7B authorization.",
+      "prior_q_guidance_for_q0": "90%+ FCF Conversion from Adj EBITDA",
+      "current_street_consensus": "$8.5B+ Full-Year Free Cash Flow Target",
+      "historical_4q_beat_rate": "Elite Cash Conversion (>95%)",
+      "variance_and_sandbag_commentary": "Cash generation remains an extraordinary fortress with True FCF of $2,242.0M in Q2 2026, demonstrating elite platform economics and low capex intensity.",
+      "credibility_grade": "CASH ENGINE ANCHOR"
+    },
+    {
+      "metric": "4-Quarter Historical EPS Surprise & 1-Day Stock Reaction Track Record",
+      "tooltip_title": "Deterministic 4-quarter historical EPS surprise and 1-day post-earnings stock move from Stage 1.",
+      "tooltip_def": "4Q Historical Track Record: Over the last 4 quarters, UBER delivered a 50.0% beat rate with an average EPS surprise of +57.43%. Average 1-day post-earnings move was ±6.01% (-5.29%, +8.53%, -5.15%, -5.06%), compared to the current ATM straddle implied move of ±7.70% (±$5.18/sh).",
+      "prior_q_guidance_for_q0": "Last 4Q Moves: -5.29%, +8.53%, -5.15%, -5.06%",
+      "current_street_consensus": "Current ATM Straddle: ±7.70% (±$5.18/sh)",
+      "historical_4q_beat_rate": "50.0% Beat Rate (+57.43% Avg Surprise)",
+      "variance_and_sandbag_commentary": "Options pricing reflects a ±7.70% implied move (81.74% IV), which is +1.69% wider than the 4-quarter historical average realized 1-day move of ±6.01%, placing UBER in an OVERPRICED_VS_HISTORY (SHORT VOLATILITY / THETA HARVEST EDGE) regime.",
+      "credibility_grade": "SHORT VOLATILITY EDGE"
+    }
+  ],
+  "matrix_b_forward_guidance_bogeys": [
+    {
+      "forward_metric": "Q4 2026E Gross Bookings Guidance",
+      "tooltip_title": "Upcoming holiday quarter Gross Bookings guidance threshold.",
+      "tooltip_def": "Q4 2026E Bookings Hurdle: Street models $48,500M; Bull case requires guidance of $50,000M+ (+16% YoY); below $47,500M triggers concerns over consumer discretionary mobility spending.",
+      "street_consensus_hurdle": "$48,000M – $49,000M",
+      "bull_case_bogey": "$50,000.0M+ Holiday Milestone",
+      "bear_case_breakdown": "<$47,500.0M (Deceleration Warning)",
+      "sensitivity_badge": "HOLIDAY BOOKINGS SENSITIVITY",
+      "strategic_rationale": "Fourth quarter captures holiday travel, corporate entertainment, and peak food delivery seasons."
+    },
+    {
+      "forward_metric": "Full-Year 2026 Adjusted EBITDA Target",
+      "tooltip_title": "Full-year fiscal 2026 Adjusted EBITDA expectation update.",
+      "tooltip_def": "FY26 Adjusted EBITDA: Prior corridor of $8,200M–$8,400M; Street models $8,450M; Bulls require a raise above $8,600M reflecting operational leverage and advertising growth.",
+      "street_consensus_hurdle": "$8,400M – $8,500M",
+      "bull_case_bogey": "$8,650.0M+ Raised Guidance",
+      "bear_case_breakdown": "<$8,300.0M (Guidance Trim)",
+      "sensitivity_badge": "ANNUAL BENCHMARK",
+      "strategic_rationale": "Reinforces Uber's status as a premier multi-billion dollar cash flow compounder."
+    },
+    {
+      "forward_metric": "Autonomous Vehicle (AV) Network Commercialization Strategy",
+      "tooltip_title": "Partnership integration updates with Waymo, Cruise, and other autonomous fleet developers.",
+      "tooltip_def": "AV Fleet Integration: Street seeks validation that Uber's marketplace dispatch layer will dominate robotaxi commercialization, neutralizing disruption threats from proprietary networks.",
+      "street_consensus_hurdle": "Expanded Waymo / Cruise Fleet Rollouts",
+      "bull_case_bogey": "Exclusive AV Multi-City Dispatch Deals",
+      "bear_case_breakdown": "Robotaxi Disintermediation Threat",
+      "sensitivity_badge": "STRATEGIC MULTIPLE EXPANDER",
+      "strategic_rationale": "Positions Uber as the indispensable consumer routing and demand generation network for autonomous vehicle fleets."
+    },
+    {
+      "forward_metric": "Advertising ARR Run-Rate Milestone",
+      "tooltip_title": "Annualized high-margin advertising revenue generated from merchant sponsored listings.",
+      "tooltip_def": "Advertising Run-Rate: Reached $1.0B+ run-rate; Bulls expect management to guide toward $1.5B+ run-rate in 2027 with >70% incremental margins.",
+      "street_consensus_hurdle": "$1.2B+ Annualized Ad Run-Rate",
+      "bull_case_bogey": "$1.5B+ Targeted 2027 Run-Rate",
+      "bear_case_breakdown": "<$1.1B (Ad Saturation)",
+      "sensitivity_badge": "HIGH MARGIN CATALYST",
+      "strategic_rationale": "High-margin digital ad impressions flow almost directly into Adjusted EBITDA and True Free Cash Flow."
+    }
+  ],
+  "section_4b_pre_print_debates": [
+    {
+      "title": "Debate 1: Autonomous Robotaxis (Waymo/Tesla) — Disruption Threat vs. Uber Marketplace Partner",
+      "border_color": "var(--bull-color)",
+      "title_color": "#34d399",
+      "badge": "ROBOTAXI POSITIONING",
+      "badge_class": "badge-bull",
+      "content": "The foremost strategic debate among institutional portfolio managers is how autonomous driving will reshape Uber's terminal value. While bears argue that dedicated OEM robotaxi fleets or Google Waymo could attempt to bypass rideshare aggregators, bulls emphasize that Uber's existing partnerships with Waymo (Austin, Atlanta, Phoenix) and Cruise prove that AV developers require Uber's massive demand aggregation, dynamic routing, and fleet balancing infrastructure. CEO Dara Khosrowshahi's commentary on AV network economics will be the conference call's focal point."
+    },
+    {
+      "title": "Debate 2: S&P 500 Inclusion & Massive True Free Cash Flow ($2.2B/qtr) Capital Return",
+      "border_color": "#3b82f6",
+      "title_color": "#60a5fa",
+      "badge": "FCF ENGINE",
+      "badge_class": "badge-blue",
+      "content": "Uber has completed an astonishing financial turnaround into one of Silicon Valley's largest free cash flow generators. In Q2 2026, Uber delivered $2,862.0M in Operating Cash Flow ($2,862M rounded integer) and $2,792.0M in Reported Free Cash Flow, retaining an incredible $2,242.0M in True Free Cash Flow after deducting $550.0M of stock compensation. Long-only institutions argue that at 15.24x forward earnings with an active $7B share repurchase authorization, Uber is significantly undervalued relative to mega-cap tech peers."
+    },
+    {
+      "title": "Debate 3: Overpriced Options Volatility & Implied vs. Realized Move Spread",
+      "border_color": "var(--bear-color)",
+      "title_color": "#f87171",
+      "badge": "VOLATILITY ARBITRAGE",
+      "badge_class": "badge-bear",
+      "content": "Options markets are pricing a ±7.70% swing (±$5.18/sh on a $67.25 stock) on 81.74% IV heading into the print. However, over the past 4 reported quarters, Uber's actual 1-day post-earnings moves averaged just ±6.01% (-5.29%, +8.53%, -5.15%, -5.06%). Systematic options and multi-strategy hedge fund desks view the current ATM weekly straddle as overpriced (+1.69% premium), setting up an attractive volatility selling or theta harvesting trade structure."
+    }
+  ]
+}

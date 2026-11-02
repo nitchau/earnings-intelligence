@@ -1,0 +1,118 @@
+{
+  "ticker": "DDOG",
+  "earnings_date": "2026-11-04",
+  "agent": "Pre_Guidance_Debate_Agent (Agent 2B)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "credibility_score": 88,
+  "credibility_label": "88 / 100 (High Guidance Credibility, 100% 4Q Historical Beat Rate & Conservative Guidance Sandbagging)",
+  "matrix_a_prior_guidance_and_track_record": [
+    {
+      "metric": "Q3 2026E GAAP Revenue Guidance Corridor",
+      "tooltip_title": "Management prior quarter sales guidance for Q3 2026.",
+      "tooltip_def": "Q3 2026 Revenue Guidance: Management guided Q3 2026 revenue toward $1,135M–$1,145M (+28.2% to +29.3% YoY); Street consensus sits at $1,146.97M with buy-side whisper bogeys at $1,175.0M+.",
+      "prior_q_guidance_for_q0": "$1,135M – $1,145M (+28.2% to +29.3% YoY)",
+      "current_street_consensus": "$1,146.97M Consensus ($1,175.0M Whisper)",
+      "historical_4q_beat_rate": "4 Beats / 0 Misses (100.0% Beat Rate)",
+      "variance_and_sandbag_commentary": "Management consistently guides 1.5% to 3.0% below final quarterly prints, sandbagging consumption usage trends to establish beat-and-raise quarterly momentum.",
+      "credibility_grade": "HIGH CREDIBILITY"
+    },
+    {
+      "metric": "Q3 2026E Non-GAAP Diluted EPS Guidance Corridor",
+      "tooltip_title": "Official Q3 2026 Non-GAAP diluted EPS guidance range issued in Q2 2026.",
+      "tooltip_def": "Q3 2026 EPS Guidance: Guided to $0.61–$0.63 ($0.62 midpoint); Street consensus models $0.64 with buy-side whisper targeting $0.69+.",
+      "prior_q_guidance_for_q0": "$0.61 – $0.63 ($0.62 Midpoint)",
+      "current_street_consensus": "$0.64 Consensus ($0.69 Whisper)",
+      "historical_4q_beat_rate": "4 Beats / 0 Misses (100.0% Beat Rate)",
+      "variance_and_sandbag_commentary": "Datadog delivered an average EPS surprise of +14.09% over the past 4 quarters (11.45% in Q2 2026, 18.25% in Q1 2026, 6.33% in Q4 2025, and 20.33% in Q3 2025).",
+      "credibility_grade": "SYSTEMATIC BEAT TRACK"
+    },
+    {
+      "metric": "Full-Year 2026 Free Cash Flow & Capital Discipline",
+      "tooltip_title": "Management full-year Free Cash Flow conversion and operating cash flow expectations.",
+      "tooltip_def": "FCF & Capital Discipline: Management guided full-year FCF margin toward 23%–25%; Q2 2026 generated $315.87M OCF ($316M rounded) and $278.70M Reported FCF ($58.45M True FCF after $220.25M SBC), demonstrating strong operating cash flow generation.",
+      "prior_q_guidance_for_q0": "23% – 25% Full-Year FCF Margin",
+      "current_street_consensus": "$1,150.0M FY26 Free Cash Flow",
+      "historical_4q_beat_rate": "100% Cash Flow Target Delivery",
+      "variance_and_sandbag_commentary": "Cash conversion has remained exceptionally reliable, though stock-based compensation ($220.25M in Q2 2026) remains the primary variance between Reported FCF and True economic FCF ($58.45M).",
+      "credibility_grade": "STRONG CASH FLOW"
+    },
+    {
+      "metric": "4-Quarter Historical EPS Surprise & 1-Day Stock Reaction Track Record",
+      "tooltip_title": "Deterministic 4-quarter historical EPS surprise and 1-day post-earnings stock move from Stage 1.",
+      "tooltip_def": "4Q Historical Track Record: Over the last 4 quarters, DDOG delivered a 100.0% beat rate with an average EPS surprise of +14.09%. Average 1-day post-earnings move was ±21.81% (-19.03%, +31.33%, +13.74%, +23.13%), compared to the current ATM straddle implied move of ±14.25% (±$31.85/sh).",
+      "prior_q_guidance_for_q0": "Last 4Q Moves: -19.03%, +31.33%, +13.74%, +23.13%",
+      "current_street_consensus": "Current ATM Straddle: ±14.25% (±$31.85/sh)",
+      "historical_4q_beat_rate": "100.0% Beat Rate (+14.09% Avg Surprise)",
+      "variance_and_sandbag_commentary": "Options pricing reflects a ±14.25% implied move (158.84% IV), which is -7.56% narrower than the 4-quarter historical average realized 1-day move of ±21.81%, placing DDOG in an UNDERPRICED_VS_HISTORY (LONG VOLATILITY EDGE) regime.",
+      "credibility_grade": "LONG VOLATILITY EDGE"
+    }
+  ],
+  "matrix_b_forward_guidance_bogeys": [
+    {
+      "forward_metric": "Q4 2026E Revenue Guidance",
+      "tooltip_title": "Upcoming fourth-quarter revenue outlook threshold required for multiple expansion.",
+      "tooltip_def": "Q4 2026E Guidance Hurdle: Street models $1,215.0M; Bull case requires guidance at $1,245.0M+ (+28% YoY), while below $1,195.0M triggers severe valuation contraction given a 74.87x forward P/E multiple.",
+      "street_consensus_hurdle": "$1,210M – $1,220M (+27% YoY)",
+      "bull_case_bogey": "$1,245.0M+ (+30% YoY Re-Acceleration)",
+      "bear_case_breakdown": "<$1,195.0M (Deceleration Threat)",
+      "sensitivity_badge": "HIGH MULTIPLE SENSITIVITY",
+      "strategic_rationale": "High-valuation SaaS multiples require clear sequential revenue acceleration signals to justify EV/Sales above 18x."
+    },
+    {
+      "forward_metric": "Full-Year 2026 Revenue Guidance Raise",
+      "tooltip_title": "Full-year fiscal 2026 revenue guidance update.",
+      "tooltip_def": "FY26 Revenue Raise: Prior FY26 guidance corridor of $4,510M–$4,550M; Street models $4,570M; Bulls demand a raise to $4,620M+ reflecting enterprise AI workload monetization.",
+      "street_consensus_hurdle": "$4,560M – $4,580M",
+      "bull_case_bogey": "$4,620.0M+ Raised Guidance",
+      "bear_case_breakdown": "<$4,540.0M (Guidance Trim)",
+      "sensitivity_badge": "ANNUAL BENCHMARK",
+      "strategic_rationale": "Institutions benchmark Datadog against hyper-scale cloud observability growth rates from AWS, Azure, and GCP."
+    },
+    {
+      "forward_metric": "LLM Observability & Generative AI ARR Contribution",
+      "tooltip_title": "Annual recurring revenue specifically derived from AI native applications and LLM monitoring stacks.",
+      "tooltip_def": "AI Workload Contribution: AI-native customers contributed over 4% of ARR in early 2026; Street expects this cohort to surpass 6.5% to 7.0% of ARR in Q3 2026, validating Datadog as the premier monitoring layer for AI agents.",
+      "street_consensus_hurdle": ">5.5% of Consolidated ARR",
+      "bull_case_bogey": ">7.5% ARR ($120M+ Run-Rate)",
+      "bear_case_breakdown": "<4.5% ARR (Adoption Plateau)",
+      "sensitivity_badge": "AI MULTIPLE EXPANDER",
+      "strategic_rationale": "Direct AI monetization provides defense against commoditization concerns and drives net new customer land."
+    },
+    {
+      "forward_metric": "Q4 2026E Non-GAAP Operating Margin Guidance",
+      "tooltip_title": "Fourth-quarter operating margin guidance reflecting R&D investments and cloud infrastructure leverage.",
+      "tooltip_def": "Operating Margin Hurdle: Street models 24.5% Non-GAAP operating margin; Bulls demand 26.0%+ demonstrating software operating leverage alongside revenue scaling.",
+      "street_consensus_hurdle": "24.0% – 25.0%",
+      "bull_case_bogey": "26.5%+ Guided Margin",
+      "bear_case_breakdown": "<22.5% (Erosion Warning)",
+      "sensitivity_badge": "MARGIN EXPANSION",
+      "strategic_rationale": "Demonstrates operating leverage as sales efficiency rises and compute unit costs decline across AWS and GCP."
+    }
+  ],
+  "section_4b_pre_print_debates": [
+    {
+      "title": "Debate 1: AI Agent Workloads & LLM Observability Monetization Ramp",
+      "border_color": "var(--bull-color)",
+      "title_color": "#34d399",
+      "badge": "AI INFLECTION",
+      "badge_class": "badge-bull",
+      "content": "The central debate for hedge fund PMs is whether Datadog's LLM Observability and Bits AI products are transforming into durable top-line accelerators or remain early-stage experimental pilots. While management noted AI-native customers represented >4% of ARR in Q1/Q2, institutional desks are scrutinizing whether traditional enterprise customers deploying retrieval-augmented generation (RAG) and multi-agent systems are driving measurable usage expansion. Analysts will focus on customer migration from single-agent experimentation to high-volume production deployments."
+    },
+    {
+      "title": "Debate 2: Cloud Optimization Sunset vs. Enterprise Consumption Re-Acceleration",
+      "border_color": "#3b82f6",
+      "title_color": "#60a5fa",
+      "badge": "CLOUD CONSUMPTION",
+      "badge_class": "badge-blue",
+      "content": "After 18 months of rigorous cloud spend rationalization across enterprise IT departments, sell-side desks debate whether hyperscaler cloud consumption (AWS +19%, Azure +29%, Google Cloud +35%) is translating directly into faster Datadog telemetry ingestion. Bullish desks argue that multi-cloud data volume growth has decoupled from cost cutting, driving DBNRR back toward 118%-120%. Conversely, cautious analysts warn that tiered log storage and sampling alternatives could cap long-term metric billing."
+    },
+    {
+      "title": "Debate 3: True FCF Economics & Heavy Stock-Based Compensation Dilution",
+      "border_color": "var(--bear-color)",
+      "title_color": "#f87171",
+      "badge": "FCF BRIDGE FORENSICS",
+      "badge_class": "badge-bear",
+      "content": "A crucial structural focus for long-short institutional investors is Datadog's True Free Cash Flow bridge. While Datadog reported headline FCF of $278.70M in Q2 2026 (24.85% margin), stock-based compensation (SBC) consumed $220.25M (79.0% of reported FCF), leaving True Economic FCF at $58.45M (a 5.21% True FCF margin). With trailing P/E at 446.9x and EV/EBITDA at 974.37x, bears argue that multiple compression risk remains acute if top-line revenue growth moderates below 25%."
+    }
+  ]
+}

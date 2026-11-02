@@ -1,0 +1,118 @@
+{
+  "ticker": "QCOM",
+  "earnings_date": "2026-11-04",
+  "agent": "Pre_Guidance_Debate_Agent (Agent 2B)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "credibility_score": 82,
+  "credibility_label": "82 / 100 (Solid Guidance Delivery, 75% 4Q Historical Beat Rate & Disciplined Licensing Corridor Management)",
+  "matrix_a_prior_guidance_and_track_record": [
+    {
+      "metric": "Q4 FY26E GAAP Revenue Guidance Corridor",
+      "tooltip_title": "Management prior quarter sales guidance for Q4 FY26.",
+      "tooltip_def": "Q4 FY26 Revenue Guidance: Management guided revenue to $9,500M–$10,300M ($9,900M midpoint); Street consensus sits at $10,145.91M with buy-side whisper bogeys at $10,350.0M+.",
+      "prior_q_guidance_for_q0": "$9,500M – $10,300M ($9,900M Midpoint)",
+      "current_street_consensus": "$10,145.91M Consensus ($10,350.0M Whisper)",
+      "historical_4q_beat_rate": "3 Beats / 1 Miss (75.0% Beat Rate)",
+      "variance_and_sandbag_commentary": "Management sets a wide ±$400M corridor to account for customer launch timing across Chinese smartphone OEMs and Apple modem shipments.",
+      "credibility_grade": "HIGH CREDIBILITY"
+    },
+    {
+      "metric": "Q4 FY26E Non-GAAP Diluted EPS Guidance Corridor",
+      "tooltip_title": "Official Q4 FY26 Non-GAAP diluted EPS guidance range.",
+      "tooltip_def": "Q4 FY26 EPS Guidance: Guided to $2.05–$2.25 ($2.15 midpoint); Street consensus models $2.16 with buy-side whisper targeting $2.25+.",
+      "prior_q_guidance_for_q0": "$2.05 – $2.25 ($2.15 Midpoint)",
+      "current_street_consensus": "$2.16 Consensus ($2.25 Whisper)",
+      "historical_4q_beat_rate": "3 Beats / 1 Miss (75.0% Beat Rate)",
+      "variance_and_sandbag_commentary": "Qualcomm delivered beats in 3 of the last 4 quarters (surprises: -0.74%, +3.34%, +2.87%, +4.32%), demonstrating steady gross margin discipline.",
+      "credibility_grade": "STEADY EXECUTION"
+    },
+    {
+      "metric": "Full-Year Operating Cash Flow & Capital Returns",
+      "tooltip_title": "Full-year cash generation and capital return commitments via dividends and buybacks.",
+      "tooltip_def": "Cash Return Execution: Management targets returning >80% of free cash flow via dividends ($0.85/sh quarterly) and share repurchases; Q2 2026 generated $991.0M OCF ($991M integer) and $495.0M Reported FCF, though heavy SBC ($830.0M) brought True FCF to -$335.0M.",
+      "prior_q_guidance_for_q0": ">80% FCF Capital Return Commitment",
+      "current_street_consensus": "$10.5B+ Full-Year Operating Cash Flow",
+      "historical_4q_beat_rate": "100% Capital Return Delivery",
+      "variance_and_sandbag_commentary": "Qualcomm repurchased over $1.5B in stock in the latest quarter while maintaining an investment-grade A/A2 balance sheet.",
+      "credibility_grade": "SHAREHOLDER YIELD ANCHOR"
+    },
+    {
+      "metric": "4-Quarter Historical EPS Surprise & 1-Day Stock Reaction Track Record",
+      "tooltip_title": "Deterministic 4-quarter historical EPS surprise and 1-day post-earnings stock move from Stage 1.",
+      "tooltip_def": "4Q Historical Track Record: Over the last 4 quarters, QCOM delivered a 75.0% beat rate with an average EPS surprise of +2.45%. Average 1-day post-earnings move was ±7.46% (-2.62%, +15.12%, -8.46%, -3.63%), compared to the current ATM straddle implied move of ±9.00% (±$15.10/sh).",
+      "prior_q_guidance_for_q0": "Last 4Q Moves: -2.62%, +15.12%, -8.46%, -3.63%",
+      "current_street_consensus": "Current ATM Straddle: ±9.00% (±$15.10/sh)",
+      "historical_4q_beat_rate": "75.0% Beat Rate (+2.45% Avg Surprise)",
+      "variance_and_sandbag_commentary": "Options pricing reflects a ±9.00% implied move (96.50% IV), which is +1.54% wider than the 4-quarter historical average realized 1-day move of ±7.46%, placing QCOM in an OVERPRICED_VS_HISTORY (SHORT VOLATILITY / THETA HARVEST EDGE) regime.",
+      "credibility_grade": "SHORT VOLATILITY EDGE"
+    }
+  ],
+  "matrix_b_forward_guidance_bogeys": [
+    {
+      "forward_metric": "Q1 FY27E (Dec Qtr) Holiday Revenue Guidance",
+      "tooltip_title": "Holiday quarter revenue hurdle reflecting flagship smartphone launches and Snapdragon 8 Elite ramp.",
+      "tooltip_def": "Q1 FY27E Revenue Hurdle: Street consensus models $11,800M; Bulls require guidance of $12,200M+ (+8% YoY) on premium GenAI smartphone replacement cycles; below $11,400M signals demand softening in China.",
+      "street_consensus_hurdle": "$11,600M – $12,000M",
+      "bull_case_bogey": "$12,200.0M+ (AI Handset Supercycle)",
+      "bear_case_breakdown": "<$11,400.0M (China Softness)",
+      "sensitivity_badge": "HOLIDAY CYCLE SENSITIVITY",
+      "strategic_rationale": "The December fiscal first quarter represents Qualcomm's seasonal revenue peak driven by global holiday smartphone launches."
+    },
+    {
+      "forward_metric": "Q1 FY27E Non-GAAP Diluted EPS Guidance",
+      "tooltip_title": "First-quarter EPS guidance corridor reflecting gross margin leverage on Oryon CPU architecture.",
+      "tooltip_def": "Q1 FY27E EPS Hurdle: Street models $3.10; Bulls target $3.25+ reflecting higher average selling prices (ASPs) for Snapdragon 8 Elite processors.",
+      "street_consensus_hurdle": "$3.05 – $3.15",
+      "bull_case_bogey": "$3.25+ EPS Hurdle",
+      "bear_case_breakdown": "<$2.95 (Margin Compression)",
+      "sensitivity_badge": "EARNINGS POWER",
+      "strategic_rationale": "Oryon CPU integration into mobile silicon commands premium pricing, expanding QCT operating margins above 30%."
+    },
+    {
+      "forward_metric": "Snapdragon X Series Copilot+ PC Revenue Ramp",
+      "tooltip_title": "PC processor revenue trajectory across Windows on ARM commercial and consumer laptops.",
+      "tooltip_def": "Snapdragon PC Ramp: Street expects management to outline a credible path toward $1.0B+ in annual PC processor revenue by FY27, tracking design wins with Dell, HP, Lenovo, and Microsoft Surface.",
+      "street_consensus_hurdle": "$600M – $750M FY27 PC Run-Rate",
+      "bull_case_bogey": "$1.0B+ Run-Rate by Mid-2027",
+      "bear_case_breakdown": "Sluggish PC Retail Sell-Through",
+      "sensitivity_badge": "TAM DIVERSIFICATION",
+      "strategic_rationale": "Validates Qualcomm's expansion beyond smartphones into Intel and AMD's core client computing stronghold."
+    },
+    {
+      "forward_metric": "Apple Modem Agreement & Royalty Transition Visibility",
+      "tooltip_title": "Management commentary regarding Apple modem licensing through 2026-2027.",
+      "tooltip_def": "Apple Transition Visibility: Existing modem agreement extends through March 2027; Street seeks confirmation that Apple's internal modem rollout in 2025-2026 will have minimal impact on QTL licensing royalties.",
+      "street_consensus_hurdle": "Reaffirm QTL Licensing Stability",
+      "bull_case_bogey": "Prolonged Modem Supply into iPhone 18",
+      "bear_case_breakdown": "Accelerated Apple Disintermediation",
+      "sensitivity_badge": "LONG-TERM CONTRACT RISK",
+      "strategic_rationale": "Removes terminal multiple discount related to potential loss of Apple modem chip revenue."
+    }
+  ],
+  "section_4b_pre_print_debates": [
+    {
+      "title": "Debate 1: On-Device GenAI Smartphone Supercycle vs. Extended Upgrade Cycles",
+      "border_color": "var(--bull-color)",
+      "title_color": "#34d399",
+      "badge": "GENAI REPLACEMENT",
+      "badge_class": "badge-bull",
+      "content": "The central macroeconomic debate is whether hardware-accelerated generative AI on smartphones will trigger a genuine global handset upgrade cycle. Qualcomm unveiled the Snapdragon 8 Elite built on TSMC's 3nm process with custom Oryon CPU cores and an upgraded NPU capable of running multimodal AI models locally. Bullish analysts contend that AI agent capabilities will drive higher average selling prices (ASPs) and accelerated upgrade rates across Android OEMs. Skeptics argue that consumer AI applications have yet to deliver a 'killer use case' compelling mass hardware upgrades."
+    },
+    {
+      "title": "Debate 2: Snapdragon X Series Copilot+ PC Disruption vs. Intel/AMD Counterattack",
+      "border_color": "#3b82f6",
+      "title_color": "#60a5fa",
+      "badge": "PC MARKET SHARE",
+      "badge_class": "badge-blue",
+      "content": "Sell-side desks debate the sustainability of Qualcomm's entry into the $40B client PC silicon market. Qualcomm's Snapdragon X Elite launched with widespread OEM support, boasting industry-leading battery efficiency and 45 TOPS NPU performance for Microsoft Copilot+. However, competitive responses from Intel (Lunar Lake) and AMD (Strix Point) feature advanced x86 architectures with improved power profiles. Investors will listen closely for commentary on enterprise pilot adoption and software emulation compatibility."
+    },
+    {
+      "title": "Debate 3: Cash Flow Quality & High Stock-Based Compensation Dilution",
+      "border_color": "var(--bear-color)",
+      "title_color": "#f87171",
+      "badge": "FCF FORENSICS",
+      "badge_class": "badge-bear",
+      "content": "Forensic cash flow analysis reveals significant divergence between reported and economic cash generation. In Q2 2026, Qualcomm reported $991.0M in Operating Cash Flow ($991M integer) and $495.0M in Reported Free Cash Flow. However, stock-based compensation consumed $830.0M, resulting in True Free Cash Flow of -$335.0M. Institutional desks are scrutinizing whether high equity compensation granted to retain silicon engineering talent in automotive and PC compute is diluting the benefit of Qualcomm's share buyback program."
+    }
+  ]
+}

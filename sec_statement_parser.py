@@ -81,6 +81,7 @@ LABELS = {
         "U\\.S\\. GAAP net income per diluted share",
         "GAAP net income per share, diluted", "GAAP net income per share - diluted",
         "Diluted earnings per share \\(EPS\\)", "Diluted earnings per share",
+        "Diluted earnings per ordinary share",
         "Diluted earnings \\(loss\\) per share",
         "Net income per share - diluted", "Net income per share-diluted",
         "Net income per share attributable to common stockholders, diluted",
@@ -276,7 +277,7 @@ def extract_row(flat: str, span: tuple[int, int], label: str, n_cols: int, pick_
         if len(vals) == n_cols and all(v is not None for v in vals):
             # Guard against matching share counts or dollar figures for per-share EPS rows
             if label in LABELS.get("eps_diluted", []) + LABELS.get("eps_nongaap", []) + ["Diluted"]:
-                if any(abs(v) > 500.0 for v in vals):
+                if any(abs(v) > 50.0 for v in vals):
                     continue
             if pick_max_col is None:
                 return vals, span[0] + m.start()
