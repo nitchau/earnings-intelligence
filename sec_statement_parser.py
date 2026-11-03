@@ -72,6 +72,14 @@ LABELS = {
         "Net loss per share attributable to common shareholders, basic and diluted",
         "Net income per share attributable to common shareholders, basic and diluted",
         "Net income per share attributable to common stockholders, basic and diluted",
+        "Net loss per share, basic and diluted",
+        "Net income \\(loss\\) per share, basic and diluted",
+        "Net income per share, basic and diluted",
+        "Net loss per common share [-—\ufffd]? diluted",
+        "Net loss per common share [-—\ufffd]? basic",
+        "Net loss per common share",
+        "Net income per common share [-—\ufffd]? diluted",
+        "Net income per common share",
         "Earnings \\(loss\\) per share attributable to Intel[-—]diluted",
         "Earnings per share attributable to Intel[-—]diluted",
         "Earnings per share - diluted", "Earnings per share-diluted",
@@ -95,6 +103,11 @@ LABELS = {
         "Adjusted net loss per share attributable to common stockholders, basic and diluted \\(non-GAAP\\)",
         "Adjusted net loss per share attributable to common stockholders, basic and diluted",
         "Adjusted net loss per share", "Adjusted net income per share",
+        "Non-GAAP net income \\(loss\\) per share, basic and diluted",
+        "Non-GAAP net income \\(loss\\) per share",
+        "Non-GAAP net income per share, basic and diluted",
+        "Non-GAAP net loss per share, basic and diluted",
+        "Non-GAAP net loss per share",
         "Non-GAAP net income per share, diluted",
         "Non-GAAP net income per share - diluted",
         "Non-GAAP net income per diluted share",
@@ -501,11 +514,11 @@ def extract_prose_revenue_claims(text: str, max_chars: int = 5000) -> dict:
     head = flatten(text)[:max_chars]
     pat = (r"(?<![A-Za-z])(?:Total\s+|Consolidated\s+(?:\w+\s+)?)?(?:revenues?|net\s+sales)\s+"
            r"(?:of\s+\$[\d.,]+\s+(?:billion|million)\s*,?\s*)?"
-           r"(?:increased|grew|rose|was\s+up|up|growth\s+of)\s+(\d+(?:\.\d+)?)%"
+           r"(?:increased|grew|rose|was\s+up|up|growth\s+of|(?:an\s+)?increase\s+of)\s+(\d+(?:\.\d+)?)%"
            r"(?:\s+year[\s-]+over[\s-]+year)?(?:\s+to\s+\$([\d.,]+)\s+(billion|million))?")
     for m in re.finditer(pat, head, re.IGNORECASE):
-        pre = head[max(0, m.start() - 25):m.start()]
-        if re.search(r"(Subscription|Product|Service|Services|Cloud|Segment|Advertising|Organic|AWS|Azure|Google\s+Cloud|Hardware|Software|Retail)\s*$", pre, re.IGNORECASE):
+        pre = head[max(0, m.start() - 35):m.start()]
+        if re.search(r"(Subscription|Product|Service|Services|Cloud|Segment|Advertising|Organic|AWS|Azure|Google\s+Cloud|Hardware|Software|Retail|Comm|Commercial|Government|Gov|US|U\.S\.|International|Domestic|Consumer|Enterprise|Data|Apps|Applications|Diagnostics|Oncology|Hereditary)\s*$", pre, re.IGNORECASE):
             continue
         amt = None
         if m.group(2):

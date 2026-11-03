@@ -1095,9 +1095,13 @@ if __name__ == "__main__":
                 t = yf.Ticker(sym)
                 cal = t.calendar or {}
                 e_dates = [str(d) for d in cal.get("Earnings Date", [])]
-                if today_str in e_dates:
+                has_t1 = (
+                    f"{sym}_{today_str}" in ledger.get("published", [])
+                    or (GROUND_TRUTH_DIR / f"{sym}_{today_str}_truth.json").exists()
+                )
+                if today_str in e_dates and has_t1:
                     t0_matches.append({"ticker": sym, "earnings_date": today_str})
-                elif (GROUND_TRUTH_DIR / f"{sym}_{today_str}_truth.json").exists():
+                elif has_t1 and (GROUND_TRUTH_DIR / f"{sym}_{today_str}_truth.json").exists():
                     t0_matches.append({"ticker": sym, "earnings_date": today_str, "has_t1_truth": True})
             except Exception:
                 pass

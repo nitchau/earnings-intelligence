@@ -1,0 +1,114 @@
+{
+  "ticker": "TEM",
+  "earnings_date": "2026-11-02",
+  "operational_kpis": [
+    {
+      "name": "Diagnostics Segment Net Revenue ($M)",
+      "q_minus_1_actual": 285.0,
+      "q_minus_4_yoy": 253.0,
+      "street_consensus_q0": 300.0,
+      "reported_actual_q0": 303.5,
+      "spread_vs_street": "+1.17%",
+      "verdict": "BEAT",
+      "bar_width_pct": 92
+    },
+    {
+      "name": "Data & Applications Net Revenue ($M)",
+      "q_minus_1_actual": 97.5,
+      "q_minus_4_yoy": 81.2,
+      "street_consensus_q0": 105.0,
+      "reported_actual_q0": 108.1,
+      "spread_vs_street": "+2.95%",
+      "verdict": "BEAT",
+      "bar_width_pct": 94
+    },
+    {
+      "name": "Adjusted EBITDA ($M)",
+      "q_minus_1_actual": 18.2,
+      "q_minus_4_yoy": 1.48,
+      "street_consensus_q0": 20.0,
+      "reported_actual_q0": 25.57,
+      "spread_vs_street": "+27.85%",
+      "verdict": "BLOWOUT BEAT",
+      "bar_width_pct": 98
+    },
+    {
+      "name": "Minimal Residual Disease (MRD) Tests Volume",
+      "q_minus_1_actual": 9000,
+      "q_minus_4_yoy": 3000,
+      "street_consensus_q0": 10500,
+      "reported_actual_q0": 12000,
+      "spread_vs_street": "+14.29%",
+      "verdict": "BEAT",
+      "bar_width_pct": 95
+    },
+    {
+      "name": "Cash, Equivalents & Marketable Securities ($M)",
+      "q_minus_1_actual": 780.0,
+      "q_minus_4_yoy": 450.0,
+      "street_consensus_q0": 820.0,
+      "reported_actual_q0": 854.4,
+      "spread_vs_street": "+4.20%",
+      "verdict": "BEAT",
+      "bar_width_pct": 90
+    }
+  ],
+  "segment_reporting": {
+    "periods": [
+      "Q3 2025",
+      "Q4 2025",
+      "Q1 2026",
+      "Q2 2026",
+      "Q3 2026 (Actual)",
+      "Q4 2026E (Guided / Street)"
+    ],
+    "segments": [
+      {
+        "name": "Diagnostics (Genomics & Clinical Testing)",
+        "values": [
+          253.0,
+          275.0,
+          260.0,
+          285.0,
+          303.5,
+          335.0
+        ],
+        "qoq": "+6.5%",
+        "yoy": "+20.0%"
+      },
+      {
+        "name": "Data and Applications (AI & Licensing)",
+        "values": [
+          81.21,
+          92.21,
+          88.12,
+          97.49,
+          108.04,
+          125.5
+        ],
+        "qoq": "+10.8%",
+        "yoy": "+33.0%"
+      }
+    ]
+  },
+  "tooltip_definitions": {
+    "Diagnostics Segment": "Clinical next-generation sequencing (NGS), somatic oncology profiling, hereditary germline testing, and liquid biopsy assays ($303.5M in Q3 2026, up +20.0% YoY).",
+    "Data and Applications": "High-margin pharmaceutical multimodal data licensing, algorithm co-development, and clinical trial matching software ($108.1M in Q3 2026, up +33.0% YoY).",
+    "Minimal Residual Disease (MRD)": "Ultra-sensitive personalized circulating tumor DNA (ctDNA) blood test monitoring post-treatment molecular recurrence (~12,000 tests in Q3, up +300% YoY).",
+    "Adjusted EBITDA": "Earnings before interest, taxes, depreciation, and amortization, excluding stock-based compensation and transaction costs ($25.57M in Q3 2026, surging +1,633% YoY).",
+    "Oncology Clinical Volume": "Volume of somatic tissue and liquid sequencing tests ordered by oncologists across Tempus' network of connected healthcare systems (+32% unit growth).",
+    "Merck & Moderna Collaboration": "Multi-year strategic alliance supporting commercialization and patient identification for individualized neoantigen therapy (INT) cancer vaccines.",
+    "BMS Strategic Agreement": "Major data licensing and translational research expansion announced in October 2026, bringing YTD cumulative data bookings above $550M.",
+    "Total Net Revenue": "Consolidated net sales across Diagnostics and Data & Applications ($411.54M in Q3 2026, beating $409.30M Street consensus by +$2.24M / +0.55%).",
+    "Non-GAAP Diluted EPS": "Adjusted net income per share excluding stock-based compensation and non-operating fair value adjustments ($0.07 vs -$0.08 Street consensus, +$0.15 beat).",
+    "GAAP Net Loss": "Net loss attributable to common stockholders under U.S. GAAP (-$14.85M in Q3 2026, improved by +81.4% YoY from -$79.98M).",
+    "Operating Cash Flow": "Cash used in operating activities (-$71.59M in Q3 2026, demonstrating improved working capital efficiency vs -$119.84M YoY).",
+    "Capital Expenditures": "Cash reinvested in high-throughput sequencing instrumentation, lab automation, and proprietary data infrastructure ($23.66M in Q3 2026).",
+    "Reported Free Cash Flow": "Operating cash flow minus capital expenditures (-$95.25M in Q3 2026).",
+    "True Free Cash Flow": "Forensic cash generation deducting $154.90M in non-cash stock compensation expense (-$250.15M institutional economic balance).",
+    "Full-Year Guidance Raise": "Upward revision of FY2026 revenue guidance to $1.60B-$1.605B (~25% annual growth) and reaffirmation of full-year ~$65M Adjusted EBITDA.",
+    "Options Volatility Regime": "Weekly ATM straddle priced a \u00b112.40% move ($9.05); stock moved -0.74% after-hours ($77.90), producing sharp volatility crush.",
+    "Enterprise Value to Sales": "Valuation multiple comparing enterprise value ($14.79B) against forward annualized sales run-rate (~9.2x EV/Sales).",
+    "Liquid Biopsy ctDNA": "Non-invasive genomic sequencing of cell-free circulating tumor DNA from peripheral blood samples, accelerating targeted therapy selection."
+  }
+}
