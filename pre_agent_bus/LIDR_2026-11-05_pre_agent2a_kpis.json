@@ -1,0 +1,58 @@
+{
+  "ticker": "LIDR",
+  "earnings_date": "2026-11-05",
+  "agent": "Pre_KPI_Consensus_Agent (Agent 2A)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "upcoming_quarter_label": "Q3 2026E",
+  "latest_reported_quarter_label": "Q2 2026 (Ended Jun 30, 2026)",
+  "headline_and_company_kpis": [
+    {
+      "metric": "Total GAAP Revenue ($M)",
+      "tooltip_title": "Consolidated quarterly GAAP revenue across Defense, Automotive ADAS, and Industrial/Sports licensing.",
+      "tooltip_def": "Total GAAP Revenue ($M): AEye reported $0.20M in Q2 2026 (+900% YoY vs $0.02M in Q2 2025 and +100% QoQ vs $0.10M in Q1 2026). Wall Street consensus models $0.57M in Q3 2026E (+1050% YoY vs $0.05M in Q3 2025), with buy-side whisper looking for $0.62M on accelerating defense purchase orders.",
+      "q_minus_1_actual": "$0.20M",
+      "q_minus_4_yoy_baseline": "$0.05M",
+      "street_consensus_q0e": "$0.57M",
+      "whisper_bogey_q0e": "$0.62M",
+      "whisper_spread_display": "+8.77% Spread",
+      "bar_width_pct": 82,
+      "hurdle_badge": "Consensus Hurdle"
+    },
+    {
+      "metric": "GAAP Diluted EPS ($/sh)",
+      "tooltip_title": "Quarterly GAAP net loss per share reflecting operating burn and commercialization investments.",
+      "tooltip_def": "GAAP Diluted EPS ($/sh): Q2 2026 actual EPS came in at -$0.22 (normalized net income -$10.02M across 45.92M shares). Wall Street consensus models -$0.17 for Q3 2026E with buy-side whisper bogey at -$0.16.",
+      "q_minus_1_actual": "-$0.22",
+      "q_minus_4_yoy_baseline": "-$0.30",
+      "street_consensus_q0e": "-$0.17",
+      "whisper_bogey_q0e": "-$0.16",
+      "whisper_spread_display": "+$0.01 Better",
+      "bar_width_pct": 74,
+      "hurdle_badge": "Bottom-Line Hurdle"
+    },
+    {
+      "metric": "Defense & Aerospace Contract Orders ($M)",
+      "tooltip_title": "Total contract value and purchase orders for UAV and counter-UAS sensor integration.",
+      "tooltip_def": "Defense & Aerospace Orders: AEye's fastest growing vertical with engagements doubling QoQ in Q2 2026; Q3 2026E whisper models $1.20M in cumulative defense procurement bookings.",
+      "q_minus_1_actual": "$0.65M",
+      "q_minus_4_yoy_baseline": "$0.10M",
+      "street_consensus_q0e": "$0.95M",
+      "whisper_bogey_q0e": "$1.20M",
+      "whisper_spread_display": "+26.3% Spread",
+      "bar_width_pct": 88,
+      "hurdle_badge": "Strategic Bogey"
+    },
+    {
+      "metric": "Operating Cash Burn / Run-Rate ($M)",
+      "tooltip_title": "Cash utilized in operations reflecting strict runway management and capital discipline.",
+      "tooltip_def": "Operating Cash Burn ($M): Q2 2026 OCF was -$7.29M with total cash and marketable securities sustaining runway into late 2027; consensus expects Q3 cash burn of -$6.80M.",
+      "q_minus_1_actual": "-$7.29M",
+      "q_minus_4_yoy_baseline": "-$8.50M",
+      "street_consensus_q0e": "-$6.80M",
+      "whisper_bogey_q0e": "-$6.50M",
+      "whisper_spread_display": "+$0.30M Preserved",
+      "bar_width_pct": 78,
+      "hurdle_badge": "Fortress Runway"
+    }
+  ]
+}

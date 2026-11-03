@@ -105,8 +105,8 @@ window.EARNINGS_HISTORY_CATALOG = {
       "date_display": "Nov 3, 2026",
       "t1": "FISV_T1_2026-11-03.html",
       "t0": null,
-      "verdict": null,
-      "post_move_pct": null,
+      "verdict": "CLEAN BEAT & RAISE",
+      "post_move_pct": 0.0,
       "rev_actual_m": null,
       "rev_consensus_m": 4844.24,
       "currency": "$"
@@ -224,6 +224,20 @@ window.EARNINGS_HISTORY_CATALOG = {
       "currency": "$"
     }
   ],
+  "LIDR": [
+    {
+      "date": "2026-11-05",
+      "quarter": "Q3 2026",
+      "date_display": "Nov 5, 2026",
+      "t1": "LIDR_T1_2026-11-05.html",
+      "t0": null,
+      "verdict": null,
+      "post_move_pct": null,
+      "rev_actual_m": null,
+      "rev_consensus_m": 0.57,
+      "currency": "$"
+    }
+  ],
   "LRCX": [
     {
       "date": "2026-10-21",
@@ -249,6 +263,20 @@ window.EARNINGS_HISTORY_CATALOG = {
       "post_move_pct": 2.12,
       "rev_actual_m": 64601.0,
       "rev_consensus_m": 62500.0,
+      "currency": "$"
+    }
+  ],
+  "NET": [
+    {
+      "date": "2026-11-05",
+      "quarter": "Q3 2026",
+      "date_display": "Nov 5, 2026",
+      "t1": "NET_T1_2026-11-05.html",
+      "t0": null,
+      "verdict": null,
+      "post_move_pct": null,
+      "rev_actual_m": null,
+      "rev_consensus_m": 739.39,
       "currency": "$"
     }
   ],
@@ -364,6 +392,20 @@ window.EARNINGS_HISTORY_CATALOG = {
       "currency": "$"
     }
   ],
+  "SOUN": [
+    {
+      "date": "2026-11-05",
+      "quarter": "Q3 2026",
+      "date_display": "Nov 5, 2026",
+      "t1": "SOUN_T1_2026-11-05.html",
+      "t0": null,
+      "verdict": null,
+      "post_move_pct": null,
+      "rev_actual_m": null,
+      "rev_consensus_m": 62.18,
+      "currency": "$"
+    }
+  ],
   "TEM": [
     {
       "date": "2026-11-02",
@@ -406,6 +448,34 @@ window.EARNINGS_HISTORY_CATALOG = {
       "currency": "$"
     }
   ],
+  "TXG": [
+    {
+      "date": "2026-11-05",
+      "quarter": "Q3 2026",
+      "date_display": "Nov 5, 2026",
+      "t1": "TXG_T1_2026-11-05.html",
+      "t0": null,
+      "verdict": null,
+      "post_move_pct": null,
+      "rev_actual_m": null,
+      "rev_consensus_m": 147.85,
+      "currency": "$"
+    }
+  ],
+  "U": [
+    {
+      "date": "2026-11-05",
+      "quarter": "Q3 2026",
+      "date_display": "Nov 5, 2026",
+      "t1": "U_T1_2026-11-05.html",
+      "t0": null,
+      "verdict": null,
+      "post_move_pct": null,
+      "rev_actual_m": null,
+      "rev_consensus_m": 567.45,
+      "currency": "$"
+    }
+  ],
   "UBER": [
     {
       "date": "2026-11-04",
@@ -441,8 +511,8 @@ window.EARNINGS_HISTORY_CATALOG = {
       "date_display": "Nov 3, 2026",
       "t1": "XMTR_T1_2026-11-03.html",
       "t0": null,
-      "verdict": null,
-      "post_move_pct": null,
+      "verdict": "REVENUE BEAT / EPS MISS",
+      "post_move_pct": 0.0,
       "rev_actual_m": null,
       "rev_consensus_m": 235.58,
       "currency": "$"

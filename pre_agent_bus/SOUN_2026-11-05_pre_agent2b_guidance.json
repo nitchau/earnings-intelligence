@@ -1,0 +1,78 @@
+{
+  "ticker": "SOUN",
+  "earnings_date": "2026-11-05",
+  "agent": "Pre_Guidance_Debate_Agent (Agent 2B)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "credibility_score": 78,
+  "credibility_label": "78 / 100 (Strong Commercial Pipeline & Acquisition Integration Offsetting High Operating Cash Burn)",
+  "matrix_a_prior_guidance_and_track_record": [
+    {
+      "metric": "Q3 2026E Net Revenue Guidance Corridor",
+      "tooltip_title": "Management prior quarter revenue guidance range provided during Q2 2026 earnings.",
+      "tooltip_def": "Q3 2026 Revenue Guidance: Guided to $60.0M - $64.0M ($62.0M midpoint); current consensus sits at $62.18M.",
+      "prior_q_guidance_for_q0": "$60.0M \u2013 $64.0M ($62.0M Midpoint)",
+      "current_street_consensus": "$62.18M",
+      "historical_4q_beat_rate": "25.0% (1 Beat, 2 Meets, 1 Miss)",
+      "variance_and_sandbag_commentary": "Management has delivered tight execution against guided midpoints, though revenue beat margins have historically been narrow due to restaurant rollout timelines.",
+      "credibility_grade": "Grade B+ (Reliable)"
+    },
+    {
+      "metric": "FY2026 Full-Year Top-Line Revenue Guidance",
+      "tooltip_title": "Full-year 2026 revenue target raised during prior earnings call.",
+      "tooltip_def": "FY2026 Guidance: Prior guidance corridor set at $235M - $250M ($242.5M midpoint); consensus models $245.0M.",
+      "prior_q_guidance_for_q0": "$235.0M \u2013 $250.0M ($242.5M Midpoint)",
+      "current_street_consensus": "$245.00M",
+      "historical_4q_beat_rate": "75.0% Guidance Execution",
+      "variance_and_sandbag_commentary": "Inorganic contribution from Amelia acquisition is accelerating full-year run-rate toward $250M+.",
+      "credibility_grade": "Grade A- (Accretive)"
+    }
+  ],
+  "matrix_b_forward_guidance_bogeys": [
+    {
+      "forward_metric": "Q4 2026E Revenue Guidance Hurdle",
+      "tooltip_title": "Expected top-line fourth quarter guidance required to satisfy institutional growth expectations.",
+      "tooltip_def": "Q4 2026E Guidance Hurdle: Street models $78.0M; buy-side bull bogey requires guidance >= $83.0M on holiday drive-thru volume and automotive royalty inflection.",
+      "street_consensus_hurdle": "$78.00M (+41.7% YoY)",
+      "bull_case_bogey": "$83.00M+ (Amelia Enterprise Synergies)",
+      "bear_case_breakdown": "< $73.00M (Deployment Delays)",
+      "sensitivity_badge": "High Multiple Sensitivity",
+      "strategic_rationale": "High short interest (41.35% of float) means a raised Q4 revenue guide triggers massive short-covering across hedge fund accounts."
+    },
+    {
+      "forward_metric": "Path to Adjusted EBITDA Breakeven (2027)",
+      "tooltip_title": "Target timeline for crossing into sustained positive adjusted EBITDA.",
+      "tooltip_def": "EBITDA Breakeven Horizon: Management confirmation of crossing into positive adjusted EBITDA by early FY2027.",
+      "street_consensus_hurdle": "Targeted by Q2 2027",
+      "bull_case_bogey": "Pulled Forward to Q4 2026 / Q1 2027",
+      "bear_case_breakdown": "Pushed Out Beyond Late 2027",
+      "sensitivity_badge": "Profitability Inflection",
+      "strategic_rationale": "Given Q2 operating cash flow of -$33.71M, institutional investors strictly scrutinize cash runway and time-to-breakeven."
+    }
+  ],
+  "section_4b_pre_print_debates": [
+    {
+      "title": "1. Amelia Enterprise Acquisition Integration & Synergies",
+      "title_color": "#60a5fa",
+      "border_color": "#3b82f6",
+      "badge": "ENTERPRISE EXPANSION",
+      "badge_class": "badge-blue",
+      "content": "SoundHound's acquisition of conversational AI leader Amelia significantly expands its TAM into enterprise customer service, financial services, and healthcare. Investors are probing whether Amelia's enterprise sales cycles are integrating smoothly or experiencing post-merger integration friction."
+    },
+    {
+      "title": "2. High Short Interest Dynamics & Squeeze Risk (41.35% Float)",
+      "title_color": "#34d399",
+      "border_color": "#10b981",
+      "badge": "EXTREME SQUEEZE ASYMMETRY",
+      "badge_class": "badge-bull",
+      "content": "With 41.35% of floating shares sold short, SoundHound is one of the most heavily shorted artificial intelligence equities on Wall Street. Any upside surprise in restaurant ordering ARR or automotive voice wins could trigger a violent squeeze toward consensus mean price targets ($12.57, +205% upside)."
+    },
+    {
+      "title": "3. Cash Burn Trajectory & True FCF Conversion (-$57.50M)",
+      "title_color": "#f59e0b",
+      "border_color": "#f59e0b",
+      "badge": "RUNWAY SCRUTINY",
+      "badge_class": "badge-warn",
+      "content": "Operating cash flow was -$33.71M in Q2 2026, and True Free Cash Flow was -$57.50M after accounting for $20.62M in stock-based compensation. While SoundHound holds over $200M in cash and equivalents, analysts on the conference call will press CFO Nitesh Sharan on the burn trajectory and capital requirements."
+    }
+  ]
+}

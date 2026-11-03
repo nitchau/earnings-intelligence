@@ -1,0 +1,58 @@
+{
+  "ticker": "SOUN",
+  "earnings_date": "2026-11-05",
+  "agent": "Pre_KPI_Consensus_Agent (Agent 2A)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "upcoming_quarter_label": "Q3 2026E",
+  "latest_reported_quarter_label": "Q2 2026 (Ended Jun 30, 2026)",
+  "headline_and_company_kpis": [
+    {
+      "metric": "Total GAAP Revenue ($M)",
+      "tooltip_title": "Consolidated quarterly GAAP revenue across Automotive Voice AI, Restaurant Drive-Thru ordering, and Enterprise customer service.",
+      "tooltip_def": "Total GAAP Revenue ($M): SoundHound delivered $61.90M in Q2 2026 (+45.03% YoY vs $42.68M in Q2 2025). Wall Street consensus models $62.18M in Q3 2026E (+47.87% YoY vs $42.05M in Q3 2025), with buy-side whisper bogeys looking for $64.00M+ on Amelia acquisition synergies.",
+      "q_minus_1_actual": "$61.90M",
+      "q_minus_4_yoy_baseline": "$42.05M",
+      "street_consensus_q0e": "$62.18M",
+      "whisper_bogey_q0e": "$64.00M",
+      "whisper_spread_display": "+2.93% Spread",
+      "bar_width_pct": 85,
+      "hurdle_badge": "Top-Line Hurdle"
+    },
+    {
+      "metric": "Adjusted Diluted EPS ($/sh)",
+      "tooltip_title": "Quarterly adjusted net profit per share excluding acquisition-related amortization and non-cash equity compensation.",
+      "tooltip_def": "Adjusted Diluted EPS ($/sh): Q2 2026 actual EPS came in at -$0.02 (beating consensus of -$0.05). Street models -$0.05 for Q3 2026E with buy-side whisper looking for -$0.03.",
+      "q_minus_1_actual": "-$0.02",
+      "q_minus_4_yoy_baseline": "-$0.03",
+      "street_consensus_q0e": "-$0.05",
+      "whisper_bogey_q0e": "-$0.03",
+      "whisper_spread_display": "+$0.02 Better",
+      "bar_width_pct": 80,
+      "hurdle_badge": "Profitability Path"
+    },
+    {
+      "metric": "Cumulative Backlog & Contract Bookings ($M)",
+      "tooltip_title": "Contracted future revenue under multi-year automotive, restaurant, and enterprise software agreements.",
+      "tooltip_def": "Cumulative Bookings Backlog: Long-term committed contract value exceeded $725M in Q2 2026; Street looks for expansion past $775M in Q3 2026E.",
+      "q_minus_1_actual": "$725.0M",
+      "q_minus_4_yoy_baseline": "$450.0M",
+      "street_consensus_q0e": "$775.0M",
+      "whisper_bogey_q0e": "$810.0M",
+      "whisper_spread_display": "+$35.0M",
+      "bar_width_pct": 90,
+      "hurdle_badge": "Contract Visibility"
+    },
+    {
+      "metric": "Restaurant Smart Ordering Locations",
+      "tooltip_title": "Total active commercial restaurant drive-thru and phone ordering installations deployed.",
+      "tooltip_def": "Restaurant AI Locations: Commercial drive-thru and automated phone ordering installations deployed across national fast-food chains; whisper models 12,500+ live doors.",
+      "q_minus_1_actual": "10,800 Locations",
+      "q_minus_4_yoy_baseline": "5,200 Locations",
+      "street_consensus_q0e": "12,000 Locations",
+      "whisper_bogey_q0e": "12,500 Locations",
+      "whisper_spread_display": "+500 Locations",
+      "bar_width_pct": 88,
+      "hurdle_badge": "QSR Commercial Scale"
+    }
+  ]
+}

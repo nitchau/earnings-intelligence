@@ -1,0 +1,58 @@
+{
+  "ticker": "NET",
+  "earnings_date": "2026-11-05",
+  "agent": "Pre_KPI_Consensus_Agent (Agent 2A)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "upcoming_quarter_label": "Q3 2026E",
+  "latest_reported_quarter_label": "Q2 2026 (Ended Jun 30, 2026)",
+  "headline_and_company_kpis": [
+    {
+      "metric": "Total GAAP Revenue ($M)",
+      "tooltip_title": "Consolidated quarterly GAAP revenue across Cloudflare network connectivity, security, and developer platforms.",
+      "tooltip_def": "Total GAAP Revenue ($M): Cloudflare delivered $696.06M in Q2 2026 (+35.86% YoY vs $512.32M in Q2 2025). Wall Street consensus models $739.39M in Q3 2026E (+31.56% YoY vs $562.03M in Q3 2025), with buy-side whisper looking for $748.50M+ on accelerating Workers AI inference demand.",
+      "q_minus_1_actual": "$696.06M",
+      "q_minus_4_yoy_baseline": "$562.03M",
+      "street_consensus_q0e": "$739.39M",
+      "whisper_bogey_q0e": "$748.50M",
+      "whisper_spread_display": "+1.23% Spread",
+      "bar_width_pct": 86,
+      "hurdle_badge": "Top-Line Hurdle"
+    },
+    {
+      "metric": "Non-GAAP Diluted EPS ($/sh)",
+      "tooltip_title": "Quarterly adjusted diluted earnings per share excluding stock compensation and intangible amortization.",
+      "tooltip_def": "Non-GAAP Diluted EPS ($/sh): Q2 2026 actual EPS delivered $0.29 (+7.5% beat vs $0.27 consensus). Street models $0.34 for Q3 2026E with buy-side whisper bogeys looking for $0.36.",
+      "q_minus_1_actual": "$0.29",
+      "q_minus_4_yoy_baseline": "$0.27",
+      "street_consensus_q0e": "$0.34",
+      "whisper_bogey_q0e": "$0.36",
+      "whisper_spread_display": "+$0.02 Better",
+      "bar_width_pct": 82,
+      "hurdle_badge": "EPS Bogey"
+    },
+    {
+      "metric": "Large Enterprise Customers (> $100K ARR)",
+      "tooltip_title": "Count of commercial enterprise customers contributing annualized recurring revenue exceeding $100,000.",
+      "tooltip_def": "Large Enterprise Customers (> $100K ARR): Scaled past 3,250 accounts in Q2 2026; Street expects net customer adds of +185 accounts in Q3 2026E to reach 3,440+ enterprises.",
+      "q_minus_1_actual": "3,255 Accounts",
+      "q_minus_4_yoy_baseline": "2,784 Accounts",
+      "street_consensus_q0e": "3,440 Accounts",
+      "whisper_bogey_q0e": "3,490 Accounts",
+      "whisper_spread_display": "+50 Accounts",
+      "bar_width_pct": 88,
+      "hurdle_badge": "Enterprise Expansion"
+    },
+    {
+      "metric": "Workers AI Inference & Serverless Compute ($M)",
+      "tooltip_title": "Revenue and developer consumption run-rate across Cloudflare Workers AI edge GPUs, Vectorize, and R2 object storage.",
+      "tooltip_def": "Workers AI & Edge GPU Inference: Cloudflare's fastest-growing developer engine deployed across global edge points of presence; whisper models $85M+ run-rate in Q3 2026E.",
+      "q_minus_1_actual": "$68.50M",
+      "q_minus_4_yoy_baseline": "$28.00M",
+      "street_consensus_q0e": "$78.00M",
+      "whisper_bogey_q0e": "$85.00M",
+      "whisper_spread_display": "+8.97% Spread",
+      "bar_width_pct": 92,
+      "hurdle_badge": "AI Edge Driver"
+    }
+  ]
+}

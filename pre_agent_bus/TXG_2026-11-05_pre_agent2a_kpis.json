@@ -1,0 +1,58 @@
+{
+  "ticker": "TXG",
+  "earnings_date": "2026-11-05",
+  "agent": "Pre_KPI_Consensus_Agent (Agent 2A)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "upcoming_quarter_label": "Q3 2026E",
+  "latest_reported_quarter_label": "Q2 2026 (Ended Jun 30, 2026)",
+  "headline_and_company_kpis": [
+    {
+      "metric": "Total GAAP Revenue ($M)",
+      "tooltip_title": "Consolidated quarterly GAAP revenue across Chromium Single Cell, Visium Spatial Biology, and Xenium In Situ platforms.",
+      "tooltip_def": "Total GAAP Revenue ($M): 10x Genomics reported $151.04M in Q2 2026 (-12.65% YoY vs $172.91M in Q2 2025). Wall Street consensus models $147.85M in Q3 2026E (-0.78% YoY vs $149.00M in Q3 2025), with buy-side whisper looking for $150.50M on Visium HD and GEM-X adoption.",
+      "q_minus_1_actual": "$151.04M",
+      "q_minus_4_yoy_baseline": "$149.00M",
+      "street_consensus_q0e": "$147.85M",
+      "whisper_bogey_q0e": "$150.50M",
+      "whisper_spread_display": "+1.79% Spread",
+      "bar_width_pct": 84,
+      "hurdle_badge": "Consensus Hurdle"
+    },
+    {
+      "metric": "Diluted EPS ($/sh)",
+      "tooltip_title": "Quarterly GAAP diluted earnings per share reflecting research investments and manufacturing efficiency.",
+      "tooltip_def": "Diluted EPS ($/sh): Q2 2026 actual EPS delivered $0.03 (beating consensus of -$0.02). Street models -$0.02 for Q3 2026E with buy-side whisper looking for $0.01.",
+      "q_minus_1_actual": "$0.03",
+      "q_minus_4_yoy_baseline": "-$0.02",
+      "street_consensus_q0e": "-$0.02",
+      "whisper_bogey_q0e": "$0.01",
+      "whisper_spread_display": "+$0.03 Better",
+      "bar_width_pct": 86,
+      "hurdle_badge": "Bottom-Line Hurdle"
+    },
+    {
+      "metric": "Consumables Revenue & Pull-Through ($M)",
+      "tooltip_title": "Recurring high-margin reagent kits and consumable assays utilized per installed instrument.",
+      "tooltip_def": "Consumables Revenue: Recurring high-margin reagent sales delivered $125.0M in Q2 2026 (82.8% of sales); Street models $123.0M for Q3 2026E with whisper at $126.5M.",
+      "q_minus_1_actual": "$125.00M",
+      "q_minus_4_yoy_baseline": "$120.50M",
+      "street_consensus_q0e": "$123.00M",
+      "whisper_bogey_q0e": "$126.50M",
+      "whisper_spread_display": "+2.85% Spread",
+      "bar_width_pct": 88,
+      "hurdle_badge": "Recurring Moat"
+    },
+    {
+      "metric": "Xenium & Visium HD Spatial Placements",
+      "tooltip_title": "Net new clinical and academic laboratory placements of Xenium In Situ and Visium HD systems.",
+      "tooltip_def": "Spatial Instrument Placements: Commercial placements of Xenium analyzers and Visium HD upgrades; whisper looks for 85+ net new spatial system installations in Q3.",
+      "q_minus_1_actual": "78 Units",
+      "q_minus_4_yoy_baseline": "55 Units",
+      "street_consensus_q0e": "80 Units",
+      "whisper_bogey_q0e": "88 Units",
+      "whisper_spread_display": "+8 Units",
+      "bar_width_pct": 82,
+      "hurdle_badge": "Spatial Adoption"
+    }
+  ]
+}

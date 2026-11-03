@@ -1,0 +1,78 @@
+{
+  "ticker": "LIDR",
+  "earnings_date": "2026-11-05",
+  "agent": "Pre_Guidance_Debate_Agent (Agent 2B)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "credibility_score": 72,
+  "credibility_label": "72 / 100 (Prudent Runway Management & Strict Cost Containment Against Early-Stage Commercial Scaling)",
+  "matrix_a_prior_guidance_and_track_record": [
+    {
+      "metric": "Q3 2026E Revenue Guidance Corridor",
+      "tooltip_title": "Prior revenue guidance provided during Q2 earnings call.",
+      "tooltip_def": "Q3 2026 Revenue Guidance: Guided toward $0.45M - $0.65M ($0.55M midpoint) on accelerating Apollo software deployments and defense prototype shipments.",
+      "prior_q_guidance_for_q0": "$0.45M \u2013 $0.65M ($0.55M Midpoint)",
+      "current_street_consensus": "$0.57M",
+      "historical_4q_beat_rate": "50.0% (2 of 4 Quarters)",
+      "variance_and_sandbag_commentary": "Consensus sits right near the guided midpoint ($0.57M vs $0.55M), reflecting conservative defense milestone recognition.",
+      "credibility_grade": "Grade B (Moderate)"
+    },
+    {
+      "metric": "Quarterly Cash Burn Corridor",
+      "tooltip_title": "Targeted quarterly net operating cash outflow.",
+      "tooltip_def": "Operating Cash Outflow Target: Management targeted $6.5M - $7.5M quarterly burn to preserve liquidity into commercial volume inflection.",
+      "prior_q_guidance_for_q0": "-$7.00M Midpoint",
+      "current_street_consensus": "-$6.80M",
+      "historical_4q_beat_rate": "75.0% Beat Rate",
+      "variance_and_sandbag_commentary": "Management consistently keeps OpEx below $11M/quarter through lean engineering headcount and outsourced manufacturing.",
+      "credibility_grade": "Grade A- (Disciplined)"
+    }
+  ],
+  "matrix_b_forward_guidance_bogeys": [
+    {
+      "forward_metric": "Q4 2026E Top-Line Net Sales Hurdle",
+      "tooltip_title": "Required sequential revenue ramp for year-end 2026.",
+      "tooltip_def": "Q4 2026E Guidance Hurdle: Street models $0.90M; buy-side bull bogey requires >= $1.25M with commercial production milestone commitments.",
+      "street_consensus_hurdle": "$0.90M (+800% YoY)",
+      "bull_case_bogey": "$1.25M+ (Defense & NVIDIA Pipeline)",
+      "bear_case_breakdown": "< $0.60M (Commercial Pushouts)",
+      "sensitivity_badge": "High Multiple Sensitivity",
+      "strategic_rationale": "Microcap valuation multiple re-rating hinges entirely on validating scalable OEM licensing rather than one-off NRE prototypes."
+    },
+    {
+      "forward_metric": "Full-Year 2027 Cash Runway Horizon",
+      "tooltip_title": "Management confirmation of capital adequacy and zero dilutive near-term equity offering.",
+      "tooltip_def": "Cash Runway Horizon: Confirmation that existing cash position and debt facilities provide funding runway through FY2027 without immediate microcap dilution.",
+      "street_consensus_hurdle": "Funded Through Mid-2027",
+      "bull_case_bogey": "Funded Through Q4 2027+ via Milestone Receipts",
+      "bear_case_breakdown": "Capital Raise / S-3 ATM Dilution Warning",
+      "sensitivity_badge": "Existential Runway Hurdle",
+      "strategic_rationale": "Given $47.6M market cap, institutional microcap buyers strictly monitor dilution risk and share count preservation."
+    }
+  ],
+  "section_4b_pre_print_debates": [
+    {
+      "title": "1. NVIDIA DRIVE AGX Thor\u2122 & Hyperion Commercial Conversion",
+      "title_color": "#60a5fa",
+      "border_color": "#3b82f6",
+      "badge": "TIER-1 ADAS CATALYST",
+      "badge_class": "badge-blue",
+      "content": "Institutional investors are intensely focused on how quickly AEye's validation of Apollo\u2122 on NVIDIA DRIVE Thor translates into binding Tier-1 automotive sensor design wins. With automotive OEMs selecting autonomous platforms for 2027\u20132028 model years, will CEO Matt Fisch announce production agreements on the call?"
+    },
+    {
+      "title": "2. Defense & Counter-UAS Vertical Acceleration vs Lidar Peers",
+      "title_color": "#34d399",
+      "border_color": "#10b981",
+      "badge": "IMMEDIATE CASH FLOW",
+      "badge_class": "badge-bull",
+      "content": "Unlike automotive lidar deployments that face long 3-to-5 year lead times, defense and aerospace counter-drone applications are generating immediate repeat purchase orders. Analysts want to see what percentage of 2027 revenue is derisked by defense contracts compared to automotive ADAS."
+    },
+    {
+      "title": "3. Cash Burn Trajectory & Path to Gross Margin Inflection",
+      "title_color": "#f59e0b",
+      "border_color": "#f59e0b",
+      "badge": "CAPITAL DISCIPLINE",
+      "badge_class": "badge-warn",
+      "content": "AEye's enterprise value is currently -$25.75M, reflecting cash holdings that exceed total equity valuation. If management can demonstrate that quarterly burn stays under $7.0M while revenue scales past $1M/quarter, the stock could undergo rapid multiple expansion toward Street mean price targets ($4.75)."
+    }
+  ]
+}
