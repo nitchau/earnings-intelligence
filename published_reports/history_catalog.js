@@ -20,10 +20,10 @@ window.EARNINGS_HISTORY_CATALOG = {
       "quarter": "Q3 2026",
       "date_display": "Nov 3, 2026",
       "t1": "AMD_T1_2026-11-03.html",
-      "t0": null,
-      "verdict": null,
-      "post_move_pct": null,
-      "rev_actual_m": null,
+      "t0": "AMD_T0_POST_2026-11-03.html",
+      "verdict": "CLEAN BEAT & RAISE",
+      "post_move_pct": 5.02,
+      "rev_actual_m": 13377.0,
       "rev_consensus_m": 12350.0,
       "currency": "$"
     }
@@ -49,8 +49,8 @@ window.EARNINGS_HISTORY_CATALOG = {
       "date_display": "Nov 3, 2026",
       "t1": "ANET_T1_2026-11-03.html",
       "t0": null,
-      "verdict": null,
-      "post_move_pct": null,
+      "verdict": "CLEAN BEAT & RAISE",
+      "post_move_pct": 9.48,
       "rev_actual_m": null,
       "rev_consensus_m": 3180.0,
       "currency": "$"
@@ -106,7 +106,7 @@ window.EARNINGS_HISTORY_CATALOG = {
       "t1": "FISV_T1_2026-11-03.html",
       "t0": null,
       "verdict": "CLEAN BEAT & RAISE",
-      "post_move_pct": 0.0,
+      "post_move_pct": -1.04,
       "rev_actual_m": null,
       "rev_consensus_m": 4844.24,
       "currency": "$"
@@ -512,7 +512,7 @@ window.EARNINGS_HISTORY_CATALOG = {
       "t1": "XMTR_T1_2026-11-03.html",
       "t0": null,
       "verdict": "REVENUE BEAT / EPS MISS",
-      "post_move_pct": 0.0,
+      "post_move_pct": -1.34,
       "rev_actual_m": null,
       "rev_consensus_m": 235.58,
       "currency": "$"
