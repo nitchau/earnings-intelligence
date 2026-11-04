@@ -48,10 +48,10 @@ window.EARNINGS_HISTORY_CATALOG = {
       "quarter": "Q3 2026",
       "date_display": "Nov 3, 2026",
       "t1": "ANET_T1_2026-11-03.html",
-      "t0": null,
+      "t0": "ANET_T0_POST_2026-11-03.html",
       "verdict": "CLEAN BEAT & RAISE",
       "post_move_pct": 9.48,
-      "rev_actual_m": null,
+      "rev_actual_m": 3657.6,
       "rev_consensus_m": 3180.0,
       "currency": "$"
     }
