@@ -510,10 +510,10 @@ window.EARNINGS_HISTORY_CATALOG = {
       "quarter": "Q3 2026",
       "date_display": "Nov 3, 2026",
       "t1": "XMTR_T1_2026-11-03.html",
-      "t0": null,
+      "t0": "XMTR_T0_POST_2026-11-03.html",
       "verdict": "REVENUE BEAT / EPS MISS",
       "post_move_pct": -1.34,
-      "rev_actual_m": null,
+      "rev_actual_m": 252.44,
       "rev_consensus_m": 235.58,
       "currency": "$"
     }
