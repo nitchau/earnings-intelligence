@@ -1,0 +1,142 @@
+{
+  "ticker": "AMD",
+  "earnings_date": "2026-11-03",
+  "operational_kpis": [
+    {
+      "name": "Data Center Segment Revenue ($M)",
+      "q_minus_1_actual": 6718.0,
+      "q_minus_4_yoy": 4341.0,
+      "street_consensus_q0": 7550.0,
+      "reported_actual_q0": 8546.0,
+      "spread_vs_street": "+13.19%",
+      "verdict": "BLOWOUT BEAT",
+      "bar_width_pct": 98
+    },
+    {
+      "name": "Non-GAAP Gross Margin (%)",
+      "q_minus_1_actual": 56.0,
+      "q_minus_4_yoy": 54.0,
+      "street_consensus_q0": 55.0,
+      "reported_actual_q0": 56.0,
+      "spread_vs_street": "+100 bps",
+      "verdict": "BEAT",
+      "bar_width_pct": 94
+    },
+    {
+      "name": "Client Segment Revenue (Ryzen CPUs) ($M)",
+      "q_minus_1_actual": 3062.0,
+      "q_minus_4_yoy": 2750.0,
+      "street_consensus_q0": 3150.0,
+      "reported_actual_q0": 2949.0,
+      "spread_vs_street": "-6.38%",
+      "verdict": "SLIGHT MISS",
+      "bar_width_pct": 76
+    },
+    {
+      "name": "Embedded Segment Revenue ($M)",
+      "q_minus_1_actual": 977.0,
+      "q_minus_4_yoy": 857.0,
+      "street_consensus_q0": 950.0,
+      "reported_actual_q0": 1109.0,
+      "spread_vs_street": "+16.74%",
+      "verdict": "BEAT",
+      "bar_width_pct": 95
+    },
+    {
+      "name": "Gaming Segment Revenue ($M)",
+      "q_minus_1_actual": 779.0,
+      "q_minus_4_yoy": 1298.0,
+      "street_consensus_q0": 750.0,
+      "reported_actual_q0": 773.0,
+      "spread_vs_street": "+3.07%",
+      "verdict": "BEAT",
+      "bar_width_pct": 88
+    }
+  ],
+  "segment_reporting": {
+    "periods": [
+      "Q3 2025",
+      "Q4 2025",
+      "Q1 2026",
+      "Q2 2026",
+      "Q3 2026 (Actual)",
+      "Q4 2026E (Guided / Street)"
+    ],
+    "segments": [
+      {
+        "name": "Data Center Revenue",
+        "values": [
+          4341.0,
+          5400.0,
+          5850.0,
+          6718.0,
+          8546.0,
+          12000.0
+        ],
+        "qoq": "+27.2%",
+        "yoy": "+96.9%"
+      },
+      {
+        "name": "Client Business (Ryzen)",
+        "values": [
+          2750.0,
+          2800.0,
+          2650.0,
+          3062.0,
+          2949.0,
+          3100.0
+        ],
+        "qoq": "-3.7%",
+        "yoy": "+7.2%"
+      },
+      {
+        "name": "Gaming Business (Radeon & Semi-Custom)",
+        "values": [
+          1298.0,
+          1150.0,
+          850.0,
+          779.0,
+          773.0,
+          750.0
+        ],
+        "qoq": "-0.8%",
+        "yoy": "-40.4%"
+      },
+      {
+        "name": "Embedded Segment (Versal & FPGA)",
+        "values": [
+          857.0,
+          920.0,
+          903.0,
+          977.0,
+          1109.0,
+          1150.0
+        ],
+        "qoq": "+13.5%",
+        "yoy": "+29.4%"
+      }
+    ]
+  },
+  "tooltip_definitions": {
+    "Data Center Revenue": "Accelerated computing GPU platforms (Instinct MI300X, MI325X, MI350, Helios rackscale) and enterprise server CPUs (EPYC Turin and 6th Gen Venice). Grew +96.9% YoY to $8,546M in Q3 2026.",
+    "Client Business": "Personal computing microprocessors powering commercial notebooks and consumer desktop systems (Ryzen AI processors with integrated NPU). Generated $2,949M in Q3 2026.",
+    "Gaming Business": "Radeon discrete graphics cards and custom semi-custom SoC silicon for gaming consoles including Sony PlayStation 5 and Microsoft Xbox Series X/S ($773M in Q3 2026).",
+    "Embedded Segment": "Adaptive SoCs, FPGAs, System-on-Modules (SOMs), and embedded x86 processors serving aerospace, defense, industrial automation, and automotive markets ($1,109M in Q3 2026).",
+    "Helios Rackscale Architecture": "AMD's flagship AI supercomputing rack architecture integrating Instinct MI450 GPUs and 6th Gen EPYC Venice CPUs, adopted by Anthropic, OpenAI, Meta, and Microsoft.",
+    "Instinct MI450 Series": "Next-generation 2nm/3nm accelerated GPU silicon delivering industry-leading FP8/FP4 AI inference and training throughput with advanced high-bandwidth memory (HBM4).",
+    "EPYC Server Microprocessors": "Fifth-generation Turin (Zen 5) and sixth-generation Venice high-core-count enterprise server CPUs driving steady cloud and on-premise market share gains vs. Intel Xeon.",
+    "Non-GAAP Gross Margin": "Adjusted gross margin excluding stock-based compensation, intangible amortization, and acquisition adjustments (reached 56.0% in Q3 2026, beating 55.0% consensus).",
+    "GAAP Operating Income": "Income from operations under U.S. GAAP ($2,832M in Q3 2026, surging +123% YoY with operating margin expanding 700 bps to 21.17%).",
+    "Non-GAAP Operating Income": "Operating earnings excluding non-cash stock compensation and acquisition amortizations ($3,923M in Q3 2026, up +75.3% YoY with a 29.33% margin).",
+    "Non-GAAP Diluted EPS": "Adjusted earnings per share excluding acquisition-related amortization and stock compensation ($2.09 in Q3 2026 vs $1.93 Street consensus, a +8.29% beat).",
+    "GAAP Diluted EPS": "Net income per diluted share under U.S. GAAP ($1.46 in Q3 2026 vs $1.38 Street consensus, +5.80% beat).",
+    "ROCm Open Software Ecosystem": "AMD's open-source accelerated computing software stack (ROCm 10 with ROCm.AI) providing day-zero support for PyTorch, vLLM, Triton, and major frontier foundation models.",
+    "True Free Cash Flow": "Forensic cash generation deducting capital expenditures ($648M) and stock-based compensation ($1,152M) from operating cash flow ($1,202M), leaving -$598M economic cash.",
+    "World Labs Acquisition": "Strategic acquisition of Fei-Fei Li's World Labs Technologies for $8.2B in common stock to lead research in large world models (LWMs) and spatial AI computing.",
+    "Taalas Acquisition": "Strategic transaction acquiring proprietary direct-to-silicon inference ASIC technology to optimize high-volume, low-latency enterprise AI inference systems.",
+    "Operating Cash Flow": "Cash generated by core semiconductor design and licensing operations ($1,202M in Q3 2026, absorbing seasonal inventory build and foundry prepayment obligations).",
+    "Capital Expenditures": "Cash reinvested in high-density engineering compute clusters, test equipment, and mask set tooling ($648M in Q3 2026).",
+    "Reported Free Cash Flow": "Operating cash flow minus capital expenditures ($554M delivered in Q3 2026).",
+    "Full-Year Guidance Surge": "Upward revision of Q4 2026 revenue guidance to approximately $17.0B \u00b1 3% (representing ~66% YoY growth), catapulting full-year top line above $48.5B."
+  }
+}

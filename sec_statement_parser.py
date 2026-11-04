@@ -523,7 +523,10 @@ def extract_prose_revenue_claims(text: str, max_chars: int = 5000) -> dict:
         amt = None
         if m.group(2):
             amt = float(m.group(2).replace(",", "")) * (1000.0 if m.group(3).lower() == "billion" else 1.0)
-        return {"stated_yoy_pct": float(m.group(1)), "stated_amount_millions": amt, "snippet": m.group(0)}
+        post = head[m.end():m.end() + 250]
+        yoy_match = re.search(r"compared to the [^,.]*quarter[^,.]*,\s*(?:and\s+)?(?:an\s+)?(?:increase|growth)\s+of\s+(\d+(?:\.\d+)?)%\s+(?:from|compared to|year-over-year)", post, re.IGNORECASE)
+        pct = float(yoy_match.group(1)) if yoy_match else float(m.group(1))
+        return {"stated_yoy_pct": pct, "stated_amount_millions": amt, "snippet": m.group(0)}
     return {}
 
 

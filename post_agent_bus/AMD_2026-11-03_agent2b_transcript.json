@@ -1,0 +1,88 @@
+{
+  "ticker": "AMD",
+  "earnings_date": "2026-11-03",
+  "matrix_a_execution_accountability": [
+    {
+      "metric": "Q3 2026 Total Revenue",
+      "prior_guidance": "$12,300.0M - $12,900.0M ($12,600.0M midpoint)",
+      "actual_delivered": "$13,377.0M delivered (+6.17% above high-end)",
+      "variance_commentary": "Revenue exceeded the maximum guided range by +$477M, propelled by near-doubling (+96.9% YoY) of Data Center revenues to $8.55B.",
+      "credibility_grade": "CRUSHED OWN GUIDE"
+    },
+    {
+      "metric": "Q3 2026 Non-GAAP Gross Margin",
+      "prior_guidance": "Approximately 55.0%",
+      "actual_delivered": "56.0% delivered (+100 bps expansion)",
+      "variance_commentary": "Gross margin expanded 100 bps beyond internal guide due to favorable Instinct GPU accelerator mix and server EPYC CPU margin accretion.",
+      "credibility_grade": "BEAT OWN GUIDE"
+    },
+    {
+      "metric": "Q3 2026 Non-GAAP Diluted EPS",
+      "prior_guidance": "$1.80 - $1.95 ($1.88 midpoint)",
+      "actual_delivered": "$2.09 delivered (+$0.21 / +11.2% beat)",
+      "variance_commentary": "Non-GAAP EPS beat the guided midpoint by 21 cents on strong operating leverage with non-GAAP operating margin climbing to 29.3%.",
+      "credibility_grade": "CRUSHED OWN GUIDE"
+    },
+    {
+      "metric": "Data Center Revenue Growth",
+      "prior_guidance": "Substantial sequential expansion (>80% YoY)",
+      "actual_delivered": "+96.9% YoY / +27.2% QoQ ($8,546.0M delivered)",
+      "variance_commentary": "Data Center segment surged to 63.9% of total revenue as hyperscalers accelerated deployments of Instinct MI300X/MI325X and early Helios clusters.",
+      "credibility_grade": "CRUSHED OWN GUIDE"
+    }
+  ],
+  "matrix_b_forward_guidance_reset": [
+    {
+      "metric": "Q4 2026 Revenue Guidance",
+      "pre_print_consensus": "$13,500.0M",
+      "management_guidance": "Approximately $17,000.0M, plus or minus 3% ($16.49B - $17.51B)",
+      "delta_vs_street": "+$3,500.0M (+25.9%) blockbuster upward revision",
+      "action_badge": "RAISED AGGRESSIVELY",
+      "pm_rationale": "Represents 66% YoY and 27% QoQ growth, reflecting massive scaling of Helios rackscale systems and volume ramp of Venice 6th Gen EPYC CPUs."
+    },
+    {
+      "metric": "Q4 2026 Non-GAAP Gross Margin",
+      "pre_print_consensus": "54.8%",
+      "management_guidance": "Approximately 55.0%",
+      "delta_vs_street": "+20 bps above Street consensus",
+      "action_badge": "MAINTAINED / EXPANDED",
+      "pm_rationale": "Sustains mid-50s gross margin profile despite initial manufacturing ramp costs of advanced Helios rack solutions."
+    },
+    {
+      "metric": "FY 2026 Total Revenue",
+      "pre_print_consensus": "$45,200.0M",
+      "management_guidance": "Surpassing $48,500.0M (>45% YoY growth)",
+      "delta_vs_street": "+$3,300.0M (+7.3%) full-year top-line raise",
+      "action_badge": "RAISED",
+      "pm_rationale": "Confirms AMD's role as the premier second-source accelerated compute titan with an expanding multi-billion-dollar backlog."
+    },
+    {
+      "metric": "Data Center Revenue Run-Rate",
+      "pre_print_consensus": "~$30.0B annualized run-rate",
+      "management_guidance": "Approaching ~$48.0B annualized run-rate entering 2027",
+      "delta_vs_street": "+$18.0B run-rate acceleration",
+      "action_badge": "RAISED AGGRESSIVELY",
+      "pm_rationale": "Validates hyperscaler multi-vendor GPU procurement strategies across Microsoft, Meta, Anthropic, and Oracle."
+    }
+  ],
+  "call_qa_forensic_highlights": [
+    {
+      "analyst": "Toshiya Hari (Goldman Sachs)",
+      "topic": "Helios Rackscale Architecture Deployment & MI450 Hyperscaler Velocity",
+      "question": "Lisa, your Q4 guide of $17 billion represents an extraordinary $3.6B sequential jump. Can you detail how much of that acceleration is driven by Helios rackscale deployments, and what is the pipeline visibility across OpenAI, Anthropic, Meta, and Microsoft?",
+      "executive_answer": "Dr. Lisa Su (CEO) emphasized that Helios is transitioning from pilot validations into volume production across every Tier 1 hyperscaler: 'We have Anthropic, Meta, Microsoft, OpenAI, and Oracle Cloud all running frontier workloads on Helios rackscale today. The transition to rack-level architectures with MI450 and 6th Gen EPYC provides customers 4x higher performance density. Our CoWoS packaging allocations and supply chain are secured to meet this demand.'"
+    },
+    {
+      "analyst": "Vivek Arya (Bank of America)",
+      "topic": "Operating Leverage, CapEx Escalation & Long-Term Gross Margin Target",
+      "question": "Jean, operating income grew 123% GAAP and operating margin reached 29% non-GAAP. As Helios scales in Q4 and into 2027, how should we think about gross margin progression and CapEx needs given the negative true free cash flow this quarter?",
+      "executive_answer": "Jean Hu (CFO) explained that the negative true FCF reflects working capital timing: 'Operating cash flow was impacted by inventory builds for the massive Q4 shipment surge. CapEx remained disciplined at $648M. As top-line volume ramps to $17B in Q4, operating margin will expand further, and cash conversion will normalize with significant positive cash flow in Q4 and FY27.'"
+    },
+    {
+      "analyst": "Stacy Rasgon (Bernstein)",
+      "topic": "Server CPU Turin / Venice Share vs Intel & Client NPU Momentum",
+      "question": "Lisa, server CPU revenue grew nicely alongside GPUs, while Client was down slightly QoQ. Are you seeing enterprise server refresh cycles pick up with Turin, and when does the PC client market see a broader enterprise refresh?",
+      "executive_answer": "Dr. Lisa Su noted that EPYC enterprise adoption is at record levels: 'Turin is taking share across general-purpose cloud instances and enterprise infrastructure. For Client, Ryzen mobile grew 7% YoY, and while desktop was seasonally soft, we expect enterprise AI PC adoption to accelerate in early 2027 as Copilot+ capabilities expand.'"
+    }
+  ]
+}

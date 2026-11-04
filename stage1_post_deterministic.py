@@ -371,29 +371,30 @@ def parse_financial_metrics_from_text(text: str, symbol: str, target_date_str: s
     except Exception:
         facts["_prose_claims"] = {}
 
-    # 2. 5-value horizontal row patterns (e.g., TSLA Shareholder Deck)
-    patterns = {
-        "revenue_5q": r"Total revenues\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)",
-        "gross_profit_5q": r"Total gross profit\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)",
-        "operating_expenses_5q": r"Operating expenses\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)",
-        "operating_income_5q": r"Income from operations\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)",
-        "net_income_gaap_5q": r"Net income attributable to common stockholders \(GAAP\)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)",
-        "net_income_nongaap_5q": r"Net income attributable to common stockholders \(non-GAAP\)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)",
-        "eps_gaap_5q": r"EPS attributable to common stockholders, diluted \(GAAP\)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)",
-        "eps_nongaap_5q": r"EPS attributable to common stockholders, diluted \(non-GAAP\)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)",
-        "ocf_5q": r"Net cash provided by operating activities\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)",
-        "capex_5q": r"Capital expenditures\s+\(?([\d,]+)\)?\s+\(?([\d,]+)\)?\s+\(?([\d,]+)\)?\s+\(?([\d,]+)\)?\s+\(?([\d,]+)\)?",
-        "fcf_5q": r"Free cash flow\s+\(?([\d,]+)\)?\s+\(?([\d,]+)\)?\s+\(?([\d,]+)\)?\s+\(?([\d,]+)\)?\s+\(?([\d,]+)\)?",
-        "sbc_5q": r"Stock-based compensation\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)",
-        "leases_5q": r"Principal payments on finance leases\s+\(?([\d,]+)\)?\s+\(?([\d,]+)\)?\s+\(?([\d,]+)\)?\s+\(?([\d,]+)\)?\s+\(?([\d,]+)\)?"
-    }
+    # 2. 5-value horizontal row patterns (strictly for TSLA Shareholder Deck)
+    if symbol == "TSLA":
+        patterns = {
+            "revenue_5q": r"Total revenues\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)",
+            "gross_profit_5q": r"Total gross profit\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)",
+            "operating_expenses_5q": r"Operating expenses\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)",
+            "operating_income_5q": r"Income from operations\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)",
+            "net_income_gaap_5q": r"Net income attributable to common stockholders \(GAAP\)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)",
+            "net_income_nongaap_5q": r"Net income attributable to common stockholders \(non-GAAP\)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)",
+            "eps_gaap_5q": r"EPS attributable to common stockholders, diluted \(GAAP\)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)",
+            "eps_nongaap_5q": r"EPS attributable to common stockholders, diluted \(non-GAAP\)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)\s+([\d.]+)",
+            "ocf_5q": r"Net cash provided by operating activities\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)",
+            "capex_5q": r"Capital expenditures\s+\(?([\d,]+)\)?\s+\(?([\d,]+)\)?\s+\(?([\d,]+)\)?\s+\(?([\d,]+)\)?\s+\(?([\d,]+)\)?",
+            "fcf_5q": r"Free cash flow\s+\(?([\d,]+)\)?\s+\(?([\d,]+)\)?\s+\(?([\d,]+)\)?\s+\(?([\d,]+)\)?\s+\(?([\d,]+)\)?",
+            "sbc_5q": r"Stock-based compensation\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)\s+([\d,]+)",
+            "leases_5q": r"Principal payments on finance leases\s+\(?([\d,]+)\)?\s+\(?([\d,]+)\)?\s+\(?([\d,]+)\)?\s+\(?([\d,]+)\)?\s+\(?([\d,]+)\)?"
+        }
 
-    for key, pat in patterns.items():
-        m = re.search(pat, flat_text, re.IGNORECASE)
-        if m:
-            vals = [safe_float(v.replace(",", "")) for v in m.groups()]
-            facts[key] = vals
-            facts[f"{key.replace('_5q', '')}_q0"] = vals[-1] if vals else None
+        for key, pat in patterns.items():
+            m = re.search(pat, flat_text, re.IGNORECASE)
+            if m:
+                vals = [safe_float(v.replace(",", "")) for v in m.groups()]
+                facts[key] = vals
+                facts[f"{key.replace('_5q', '')}_q0"] = vals[-1] if vals else None
 
     # 2. Multi-column condensed financial statement & ticker-specific 8-K extraction
     if symbol == "TSLA":
@@ -809,7 +810,7 @@ def reconcile_and_compute_post_truth(symbol: str, earnings_date_str: str) -> dic
             "cost_of_revenue_5q": "cost_of_rev",
         }
         target_arr_key = arr_map.get(metric_key_facts)
-        prior_yoy = facts.get("_provenance", {}).get("revenue", {}).get("prior_year_value")
+        prior_yoy = ((facts.get("_provenance") or {}).get("revenue") or {}).get("prior_year_value")
         if target_arr_key and target_arr_key in t1_arrays:
             t1_cand = t1_arrays[target_arr_key]
             if len(t1_cand) >= 5:
