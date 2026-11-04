@@ -1,0 +1,175 @@
+import json
+from pathlib import Path
+
+BASE_DIR = Path("c:/Users/nitin/.earningreport")
+BUS_DIR = BASE_DIR / "pre_agent_bus"
+BUS_DIR.mkdir(exist_ok=True)
+
+TICKER = "AEVA"
+EARNINGS_DATE = "2026-11-04"
+
+# Agent 2A: KPIs
+bus_2a = {
+    "ticker": TICKER,
+    "earnings_date": EARNINGS_DATE,
+    "agent": "Pre_KPI_Consensus_Agent (Agent 2A)",
+    "model": "Gemini 3.8 Flash High Standard",
+    "upcoming_quarter_label": "Q3 2026E",
+    "latest_reported_quarter_label": "Q2 2026 (Ended Jun 30, 2026)",
+    "headline_and_company_kpis": [
+        {
+            "metric": "Total GAAP Revenue ($M)",
+            "tooltip_title": "Consolidated quarterly GAAP revenue across commercial LiDAR sensing hardware and NRE development services.",
+            "tooltip_def": "Total GAAP Revenue ($M): Aeva reported $6.14M in Q2 2026 (+11.43% YoY vs $5.51M in Q2 2025). Wall Street consensus models $6.43M in Q3 2026E (+79.65% YoY vs $3.58M in Q3 2025), with buy-side whisper looking for $6.70M on accelerating Tier-1 automotive and industrial shipments.",
+            "q_minus_1_actual": "$6.14M",
+            "q_minus_4_yoy_baseline": "$3.58M",
+            "street_consensus_q0e": "$6.43M",
+            "whisper_bogey_q0e": "$6.70M",
+            "whisper_spread_display": "+4.20% Spread",
+            "bar_width_pct": 84,
+            "hurdle_badge": "Consensus Hurdle"
+        },
+        {
+            "metric": "Diluted EPS ($/sh)",
+            "tooltip_title": "Quarterly GAAP net loss per diluted share reflecting R&D investments and non-cash equity compensation.",
+            "tooltip_def": "Diluted EPS ($/sh): Q2 2026 actual EPS came in at -$0.41 (beating consensus of -$0.43). Wall Street consensus models -$0.43 for Q3 2026E with buy-side whisper bogey looking for -$0.40.",
+            "q_minus_1_actual": "-$0.41",
+            "q_minus_4_yoy_baseline": "-$0.46",
+            "street_consensus_q0e": "-$0.43",
+            "whisper_bogey_q0e": "-$0.40",
+            "whisper_spread_display": "+$0.03 Better",
+            "bar_width_pct": 78,
+            "hurdle_badge": "Bottom-Line Hurdle"
+        },
+        {
+            "metric": "Commercial Product Revenue ($M)",
+            "tooltip_title": "Revenue recognized from volume shipments of Aeries II and Atlas 4D LiDAR sensors.",
+            "tooltip_def": "Product Revenue ($M): Product sales reached $2.50M in Q2 2026 (+68.9% YoY vs $1.48M in Q3 2025 baseline). Consensus models $2.85M in Q3 2026E, with whisper bogeys requiring $3.10M to signal commercial inflection.",
+            "q_minus_1_actual": "$2.50M",
+            "q_minus_4_yoy_baseline": "$1.48M",
+            "street_consensus_q0e": "$2.85M",
+            "whisper_bogey_q0e": "$3.10M",
+            "whisper_spread_display": "+8.77% Spread",
+            "bar_width_pct": 82,
+            "hurdle_badge": "Production Inflection"
+        },
+        {
+            "metric": "NRE & Services Revenue ($M)",
+            "tooltip_title": "Non-recurring engineering and software integration contracts with automotive primes.",
+            "tooltip_def": "NRE & Services Revenue ($M): Contract engineering and integration revenue was $3.64M in Q2 2026 (+73.3% YoY vs $2.10M in Q3 2025 baseline). Consensus models $3.58M in Q3 2026E with whisper at $3.60M.",
+            "q_minus_1_actual": "$3.64M",
+            "q_minus_4_yoy_baseline": "$2.10M",
+            "street_consensus_q0e": "$3.58M",
+            "whisper_bogey_q0e": "$3.60M",
+            "whisper_spread_display": "+0.56% Spread",
+            "bar_width_pct": 75,
+            "hurdle_badge": "Engineering Funding"
+        }
+    ]
+}
+
+# Agent 2B: Guidance & Debates
+bus_2b = {
+    "ticker": TICKER,
+    "earnings_date": EARNINGS_DATE,
+    "agent": "Pre_Guidance_Debate_Agent (Agent 2B)",
+    "model": "Gemini 3.8 Flash High Standard",
+    "credibility_score": 75,
+    "credibility_label": "75 / 100 (Strong 75% Historical Beat Rate Counterbalanced by Microcap Cash Burn & Dilution Risks)",
+    "matrix_a_prior_guidance_and_track_record": [
+        {
+            "metric": "Q3 2026E Revenue Guidance Corridor",
+            "tooltip_title": "Prior revenue guidance range issued during Q2 2026 earnings conference call.",
+            "tooltip_def": "Q3 2026 Revenue Guidance: Guided toward $6.0M - $7.0M ($6.50M midpoint); current consensus sits at $6.43M.",
+            "prior_q_guidance_for_q0": "$6.0M – $7.0M ($6.50M Midpoint)",
+            "current_street_consensus": "$6.43M",
+            "historical_4q_beat_rate": "75.0% (3 Beats, 0 Meets, 1 Miss)",
+            "variance_and_sandbag_commentary": "Management has beaten EPS consensus in 3 consecutive quarters by an average of 6.5%, though top-line beat margins have narrowed as NRE milestones are lumpy.",
+            "credibility_grade": "Grade A- (Dependable)"
+        },
+        {
+            "metric": "Gross Profit Progression Corridor",
+            "tooltip_title": "GAAP gross margin and gross profit improvement driven by silicon photonics integration.",
+            "tooltip_def": "Gross Margin Corridor: Q2 2026 gross profit improved to $2.19M (positive margin of 35.7%); management guided positive gross profit sustaining through H2 2026.",
+            "prior_q_guidance_for_q0": "Sustained Positive Gross Profit",
+            "current_street_consensus": "$2.35M Gross Profit",
+            "historical_4q_beat_rate": "75.0% Beat Rate",
+            "variance_and_sandbag_commentary": "Core silicon photonics transceiver chip integration is yielding manufacturing efficiencies compared to discrete optical assemblies.",
+            "credibility_grade": "Grade B+ (Improving)"
+        }
+    ],
+    "matrix_b_forward_guidance_bogeys": [
+        {
+            "forward_metric": "Q4 2026E Top-Line Net Sales Hurdle",
+            "tooltip_title": "Sequential revenue expansion required for full-year execution.",
+            "tooltip_def": "Q4 2026E Guidance Hurdle: Street consensus models $7.50M; buy-side bull bogey requires >= $8.50M on Daimler Truck milestone releases.",
+            "street_consensus_hurdle": "$7.50M (+33.5% YoY)",
+            "bull_case_bogey": "$8.50M+ (Daimler Truck Milestone Inflection)",
+            "bear_case_breakdown": "< $6.50M (Program Delay / Lumpy NRE)",
+            "sensitivity_badge": "High Multiple Sensitivity",
+            "strategic_rationale": "Microcap valuation multiple expansion depends entirely on converting automotive development programs into commercial series production revenue."
+        },
+        {
+            "forward_metric": "Cash Runway Horizon & Minimum Cash Balance",
+            "tooltip_title": "Management guidance on quarterly cash burn and runway into FY2027.",
+            "tooltip_def": "Cash Runway: Confirmation that $177.88M cash & short-term investments provides runway through 2027 without near-term equity offering.",
+            "street_consensus_hurdle": "Funded Through Mid-2027",
+            "bull_case_bogey": "Funded Beyond FY2027 with Reduced Burn < $25M/Q",
+            "bear_case_breakdown": "Cash Burn Accelerating Past $35M/Q",
+            "sensitivity_badge": "Solvency & Dilution Hurdle",
+            "strategic_rationale": "High short interest (20.37% of float) is anchored on cash burn thesis; guidance confirming runway stability triggers immediate short covering."
+        }
+    ],
+    "section_4b_pre_print_debates": [
+        {
+            "title": "1. Daimler Truck & Torc Robotics Commercial Series Production",
+            "title_color": "#60a5fa",
+            "border_color": "#3b82f6",
+            "badge": "TIER-1 OEM CATALYST",
+            "badge_class": "badge-blue",
+            "content": "Aeva's multi-year production win with Daimler Truck for autonomous commercial Class 8 freight trucks represents the largest announced FMCW LiDAR production program globally. Institutional analysts demand granular timelines on when Atlas sensor hardware transitions from pre-production testing to bill-of-materials volume procurement."
+        },
+        {
+            "title": "2. FMCW 4D Velocity Advantage vs Traditional Time-of-Flight (ToF)",
+            "title_color": "#34d399",
+            "border_color": "#10b981",
+            "badge": "TECHNOLOGY MOAT",
+            "badge_class": "badge-bull",
+            "content": "Unlike legacy pulsed ToF sensors (Hesai, Luminar, Ouster), Aeva's FMCW architecture measures instantaneous velocity (Doppler) at every point in addition to 3D distance. With high-speed highway autonomous trucking requiring detection at >500 meters, analysts will grill management on whether passenger auto OEMs are adopting FMCW specifications."
+        },
+        {
+            "title": "3. Cash Burn Trajectory vs 20.37% Short Float Squeeze Edge",
+            "title_color": "#f59e0b",
+            "border_color": "#f59e0b",
+            "badge": "SHORT SQUEEZE SKEW",
+            "badge_class": "badge-warn",
+            "content": "Operating cash outflow was -$31.17M in Q2 2026, offset by $177.88M in cash and marketable securities. With short interest at 20.37% of float ($125M+ short exposure) and options pricing a massive 22.82% move, any upside surprise in full-year guidance or commercial milestones could trigger violent forced short covering."
+        }
+    ]
+}
+
+# Agent 2C: Sentiment & Whisper
+bus_2c = {
+    "ticker": TICKER,
+    "earnings_date": EARNINGS_DATE,
+    "agent": "Pre_Whisper_Sentiment_Agent (Agent 2C)",
+    "model": "Gemini 3.8 Flash High Standard",
+    "verified_live_product_context": {
+        "flagship_products": "Aeva Atlas™ (Next-Generation Automotive 4D LiDAR for L3/L4 Highway Autonomous Driving), Aeva Aeries II™ (Industrial & Commercial Automation Sensor), Aeva CoreVision™ (Silicon Photonics Integration Engine)",
+        "commercialization_channels": "Direct commercial agreements with Daimler Truck AG and Torc Robotics, Tier-1 automotive partnerships, industrial security, and aerospace robotics"
+    },
+    "composite_pre_print_sentiment_score": 62,
+    "composite_sentiment_label": "Cautiously Bullish / Emerging Commercial Inflection (62/100)",
+    "retail_vs_institutional_positioning": {
+        "retail_sentiment_score": 68,
+        "retail_summary": "Retail traders on Reddit r/wallstreetbets, Stocktwits, and FinTwit highlight AEVA's heavy 20.37% short float and 224% upside to Wall Street analyst mean price target ($29.00), viewing the print as a prime asymmetric short squeeze candidate.",
+        "institutional_sentiment_score": 58,
+        "institutional_summary": "Institutional growth desks acknowledge FMCW technology leadership and Daimler partnership credibility, but maintain risk-managed exposure pending sustained commercial hardware revenue acceleration.",
+        "short_interest_summary": "Short interest sits at 20.37% of float, presenting acute short squeeze vulnerability if Q3 revenue exceeds whisper bogeys ($6.70M) and cash burn moderates."
+    }
+}
+
+(BUS_DIR / f"{TICKER}_{EARNINGS_DATE}_pre_agent2a_kpis.json").write_text(json.dumps(bus_2a, indent=2), encoding="utf-8")
+(BUS_DIR / f"{TICKER}_{EARNINGS_DATE}_pre_agent2b_guidance.json").write_text(json.dumps(bus_2b, indent=2), encoding="utf-8")
+(BUS_DIR / f"{TICKER}_{EARNINGS_DATE}_pre_agent2c_sentiment.json").write_text(json.dumps(bus_2c, indent=2), encoding="utf-8")
+print("AEVA pre_agent_bus files created successfully!")

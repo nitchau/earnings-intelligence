@@ -1,0 +1,78 @@
+{
+  "ticker": "AEVA",
+  "earnings_date": "2026-11-04",
+  "agent": "Pre_Guidance_Debate_Agent (Agent 2B)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "credibility_score": 75,
+  "credibility_label": "75 / 100 (Strong 75% Historical Beat Rate Counterbalanced by Microcap Cash Burn & Dilution Risks)",
+  "matrix_a_prior_guidance_and_track_record": [
+    {
+      "metric": "Q3 2026E Revenue Guidance Corridor",
+      "tooltip_title": "Prior revenue guidance range issued during Q2 2026 earnings conference call.",
+      "tooltip_def": "Q3 2026 Revenue Guidance: Guided toward $6.0M - $7.0M ($6.50M midpoint); current consensus sits at $6.43M.",
+      "prior_q_guidance_for_q0": "$6.0M \u2013 $7.0M ($6.50M Midpoint)",
+      "current_street_consensus": "$6.43M",
+      "historical_4q_beat_rate": "75.0% (3 Beats, 0 Meets, 1 Miss)",
+      "variance_and_sandbag_commentary": "Management has beaten EPS consensus in 3 consecutive quarters by an average of 6.5%, though top-line beat margins have narrowed as NRE milestones are lumpy.",
+      "credibility_grade": "Grade A- (Dependable)"
+    },
+    {
+      "metric": "Gross Profit Progression Corridor",
+      "tooltip_title": "GAAP gross margin and gross profit improvement driven by silicon photonics integration.",
+      "tooltip_def": "Gross Margin Corridor: Q2 2026 gross profit improved to $2.19M (positive margin of 35.7%); management guided positive gross profit sustaining through H2 2026.",
+      "prior_q_guidance_for_q0": "Sustained Positive Gross Profit",
+      "current_street_consensus": "$2.35M Gross Profit",
+      "historical_4q_beat_rate": "75.0% Beat Rate",
+      "variance_and_sandbag_commentary": "Core silicon photonics transceiver chip integration is yielding manufacturing efficiencies compared to discrete optical assemblies.",
+      "credibility_grade": "Grade B+ (Improving)"
+    }
+  ],
+  "matrix_b_forward_guidance_bogeys": [
+    {
+      "forward_metric": "Q4 2026E Top-Line Net Sales Hurdle",
+      "tooltip_title": "Sequential revenue expansion required for full-year execution.",
+      "tooltip_def": "Q4 2026E Guidance Hurdle: Street consensus models $7.50M; buy-side bull bogey requires >= $8.50M on Daimler Truck milestone releases.",
+      "street_consensus_hurdle": "$7.50M (+33.5% YoY)",
+      "bull_case_bogey": "$8.50M+ (Daimler Truck Milestone Inflection)",
+      "bear_case_breakdown": "< $6.50M (Program Delay / Lumpy NRE)",
+      "sensitivity_badge": "High Multiple Sensitivity",
+      "strategic_rationale": "Microcap valuation multiple expansion depends entirely on converting automotive development programs into commercial series production revenue."
+    },
+    {
+      "forward_metric": "Cash Runway Horizon & Minimum Cash Balance",
+      "tooltip_title": "Management guidance on quarterly cash burn and runway into FY2027.",
+      "tooltip_def": "Cash Runway: Confirmation that $177.88M cash & short-term investments provides runway through 2027 without near-term equity offering.",
+      "street_consensus_hurdle": "Funded Through Mid-2027",
+      "bull_case_bogey": "Funded Beyond FY2027 with Reduced Burn < $25M/Q",
+      "bear_case_breakdown": "Cash Burn Accelerating Past $35M/Q",
+      "sensitivity_badge": "Solvency & Dilution Hurdle",
+      "strategic_rationale": "High short interest (20.37% of float) is anchored on cash burn thesis; guidance confirming runway stability triggers immediate short covering."
+    }
+  ],
+  "section_4b_pre_print_debates": [
+    {
+      "title": "1. Daimler Truck & Torc Robotics Commercial Series Production",
+      "title_color": "#60a5fa",
+      "border_color": "#3b82f6",
+      "badge": "TIER-1 OEM CATALYST",
+      "badge_class": "badge-blue",
+      "content": "Aeva's multi-year production win with Daimler Truck for autonomous commercial Class 8 freight trucks represents the largest announced FMCW LiDAR production program globally. Institutional analysts demand granular timelines on when Atlas sensor hardware transitions from pre-production testing to bill-of-materials volume procurement."
+    },
+    {
+      "title": "2. FMCW 4D Velocity Advantage vs Traditional Time-of-Flight (ToF)",
+      "title_color": "#34d399",
+      "border_color": "#10b981",
+      "badge": "TECHNOLOGY MOAT",
+      "badge_class": "badge-bull",
+      "content": "Unlike legacy pulsed ToF sensors (Hesai, Luminar, Ouster), Aeva's FMCW architecture measures instantaneous velocity (Doppler) at every point in addition to 3D distance. With high-speed highway autonomous trucking requiring detection at >500 meters, analysts will grill management on whether passenger auto OEMs are adopting FMCW specifications."
+    },
+    {
+      "title": "3. Cash Burn Trajectory vs 20.37% Short Float Squeeze Edge",
+      "title_color": "#f59e0b",
+      "border_color": "#f59e0b",
+      "badge": "SHORT SQUEEZE SKEW",
+      "badge_class": "badge-warn",
+      "content": "Operating cash outflow was -$31.17M in Q2 2026, offset by $177.88M in cash and marketable securities. With short interest at 20.37% of float ($125M+ short exposure) and options pricing a massive 22.82% move, any upside surprise in full-year guidance or commercial milestones could trigger violent forced short covering."
+    }
+  ]
+}

@@ -7,8 +7,8 @@ window.EARNINGS_HISTORY_CATALOG = {
       "date_display": "Nov 4, 2026",
       "t1": "AEVA_T1_2026-11-04.html",
       "t0": null,
-      "verdict": null,
-      "post_move_pct": null,
+      "verdict": "EPS BEAT / REVENUE MISS",
+      "post_move_pct": 0.0,
       "rev_actual_m": null,
       "rev_consensus_m": 6.8,
       "currency": "$"
@@ -91,8 +91,8 @@ window.EARNINGS_HISTORY_CATALOG = {
       "date_display": "Nov 4, 2026",
       "t1": "DDOG_T1_2026-11-04.html",
       "t0": null,
-      "verdict": null,
-      "post_move_pct": null,
+      "verdict": "REVENUE BEAT / EPS MISS",
+      "post_move_pct": 0.0,
       "rev_actual_m": null,
       "rev_consensus_m": 1146.97,
       "currency": "$"
@@ -483,8 +483,8 @@ window.EARNINGS_HISTORY_CATALOG = {
       "date_display": "Nov 4, 2026",
       "t1": "UBER_T1_2026-11-04.html",
       "t0": null,
-      "verdict": null,
-      "post_move_pct": null,
+      "verdict": "REVENUE BEAT / EPS MISS",
+      "post_move_pct": 0.0,
       "rev_actual_m": null,
       "rev_consensus_m": 14673.58,
       "currency": "$"

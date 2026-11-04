@@ -1,0 +1,58 @@
+{
+  "ticker": "AEVA",
+  "earnings_date": "2026-11-04",
+  "agent": "Pre_KPI_Consensus_Agent (Agent 2A)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "upcoming_quarter_label": "Q3 2026E",
+  "latest_reported_quarter_label": "Q2 2026 (Ended Jun 30, 2026)",
+  "headline_and_company_kpis": [
+    {
+      "metric": "Total GAAP Revenue ($M)",
+      "tooltip_title": "Consolidated quarterly GAAP revenue across commercial LiDAR sensing hardware and NRE development services.",
+      "tooltip_def": "Total GAAP Revenue ($M): Aeva reported $6.14M in Q2 2026 (+11.43% YoY vs $5.51M in Q2 2025). Wall Street consensus models $6.43M in Q3 2026E (+79.65% YoY vs $3.58M in Q3 2025), with buy-side whisper looking for $6.70M on accelerating Tier-1 automotive and industrial shipments.",
+      "q_minus_1_actual": "$6.14M",
+      "q_minus_4_yoy_baseline": "$3.58M",
+      "street_consensus_q0e": "$6.43M",
+      "whisper_bogey_q0e": "$6.70M",
+      "whisper_spread_display": "+4.20% Spread",
+      "bar_width_pct": 84,
+      "hurdle_badge": "Consensus Hurdle"
+    },
+    {
+      "metric": "Diluted EPS ($/sh)",
+      "tooltip_title": "Quarterly GAAP net loss per diluted share reflecting R&D investments and non-cash equity compensation.",
+      "tooltip_def": "Diluted EPS ($/sh): Q2 2026 actual EPS came in at -$0.41 (beating consensus of -$0.43). Wall Street consensus models -$0.43 for Q3 2026E with buy-side whisper bogey looking for -$0.40.",
+      "q_minus_1_actual": "-$0.41",
+      "q_minus_4_yoy_baseline": "-$0.46",
+      "street_consensus_q0e": "-$0.43",
+      "whisper_bogey_q0e": "-$0.40",
+      "whisper_spread_display": "+$0.03 Better",
+      "bar_width_pct": 78,
+      "hurdle_badge": "Bottom-Line Hurdle"
+    },
+    {
+      "metric": "Commercial Product Revenue ($M)",
+      "tooltip_title": "Revenue recognized from volume shipments of Aeries II and Atlas 4D LiDAR sensors.",
+      "tooltip_def": "Product Revenue ($M): Product sales reached $2.50M in Q2 2026 (+68.9% YoY vs $1.48M in Q3 2025 baseline). Consensus models $2.85M in Q3 2026E, with whisper bogeys requiring $3.10M to signal commercial inflection.",
+      "q_minus_1_actual": "$2.50M",
+      "q_minus_4_yoy_baseline": "$1.48M",
+      "street_consensus_q0e": "$2.85M",
+      "whisper_bogey_q0e": "$3.10M",
+      "whisper_spread_display": "+8.77% Spread",
+      "bar_width_pct": 82,
+      "hurdle_badge": "Production Inflection"
+    },
+    {
+      "metric": "NRE & Services Revenue ($M)",
+      "tooltip_title": "Non-recurring engineering and software integration contracts with automotive primes.",
+      "tooltip_def": "NRE & Services Revenue ($M): Contract engineering and integration revenue was $3.64M in Q2 2026 (+73.3% YoY vs $2.10M in Q3 2025 baseline). Consensus models $3.58M in Q3 2026E with whisper at $3.60M.",
+      "q_minus_1_actual": "$3.64M",
+      "q_minus_4_yoy_baseline": "$2.10M",
+      "street_consensus_q0e": "$3.58M",
+      "whisper_bogey_q0e": "$3.60M",
+      "whisper_spread_display": "+0.56% Spread",
+      "bar_width_pct": 75,
+      "hurdle_badge": "Engineering Funding"
+    }
+  ]
+}
