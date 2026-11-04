@@ -104,10 +104,10 @@ window.EARNINGS_HISTORY_CATALOG = {
       "quarter": "Q3 2026",
       "date_display": "Nov 3, 2026",
       "t1": "FISV_T1_2026-11-03.html",
-      "t0": null,
+      "t0": "FISV_T0_POST_2026-11-03.html",
       "verdict": "CLEAN BEAT & RAISE",
       "post_move_pct": -1.04,
-      "rev_actual_m": null,
+      "rev_actual_m": 5196.0,
       "rev_consensus_m": 4844.24,
       "currency": "$"
     }
