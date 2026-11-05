@@ -342,10 +342,10 @@ window.EARNINGS_HISTORY_CATALOG = {
       "quarter": "Q3 2026",
       "date_display": "Nov 4, 2026",
       "t1": "PACB_T1_2026-11-04.html",
-      "t0": null,
+      "t0": "PACB_T0_POST_2026-11-04.html",
       "verdict": "BEAT & RAISE (CAPEX SURGE)",
       "post_move_pct": -0.39,
-      "rev_actual_m": null,
+      "rev_actual_m": 40.56,
       "rev_consensus_m": 39.46,
       "currency": "$"
     }
