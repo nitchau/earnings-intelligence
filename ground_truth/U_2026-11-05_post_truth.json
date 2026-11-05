@@ -1,0 +1,206 @@
+{
+  "ticker": "U",
+  "earnings_date": "2026-11-05",
+  "timestamp_generated": "2026-11-05T06:05:18.218011",
+  "t1_baseline": {
+    "source_found": true,
+    "t1_file": "U_2026-11-05_truth.json",
+    "consensus_revenue_millions": 567.45,
+    "whisper_revenue_millions": null,
+    "consensus_eps_nongaap": 0.35,
+    "consensus_eps_gaap": null,
+    "whisper_eps_nongaap": 0.38,
+    "options_implied_move_pct": 12.38,
+    "atm_straddle_usd": 4.87,
+    "prior_quarter_label": "Q2 2026 (Ended Jun 30, 2026)",
+    "prior_quarter_guidance": {}
+  },
+  "sec_filing_metadata": {
+    "form": "8-K",
+    "filing_date": "2026-11-05",
+    "exhibit_99_1_found": true,
+    "edgar_status": "FILING_RETRIEVED"
+  },
+  "market_portal": {
+    "regular_close_price": 42.46,
+    "after_hours_price": 42.46,
+    "after_hours_volume": null,
+    "previous_close_price": 42.08,
+    "google_finance_regular": 42.46,
+    "google_finance_after_hours": 42.46,
+    "price_divergence_pct": 0.0,
+    "price_divergence_warning": false,
+    "market_cap_millions": 18686.18,
+    "enterprise_value_millions": 18928.08,
+    "trailing_pe": null,
+    "forward_pe": 24.37
+  },
+  "post_print_reaction": {
+    "regular_close_price": 42.46,
+    "after_hours_price": 42.46,
+    "post_print_move_pct": 0.0,
+    "t1_options_implied_move_pct": 12.38,
+    "move_vs_implied_status": "WITHIN_IMPLIED_BAND",
+    "overall_print_verdict": "CLEAN BEAT & RAISE"
+  },
+  "beat_miss_scorecard": {
+    "revenue": {
+      "reported_actual_millions": 622.09,
+      "street_consensus_millions": 567.45,
+      "whisper_millions": null,
+      "vs_consensus_delta_millions": 54.64,
+      "vs_consensus_delta_pct": 9.63,
+      "vs_whisper_delta_millions": null,
+      "verdict": "BEAT"
+    },
+    "eps_nongaap": {
+      "reported_actual": 0.44,
+      "street_consensus": 0.35,
+      "whisper": 0.38,
+      "vs_consensus_delta_dollars": 0.09,
+      "vs_consensus_delta_pct": 25.71,
+      "vs_whisper_delta_dollars": 0.06,
+      "verdict": "BEAT"
+    },
+    "eps_gaap": {
+      "reported_actual": null,
+      "street_consensus": null,
+      "vs_consensus_delta_dollars": null,
+      "vs_consensus_delta_pct": null,
+      "verdict": "REPORTED"
+    },
+    "margins": {
+      "reported_gross_margin_pct": 81.92,
+      "reported_operating_margin_pct": 16.18
+    }
+  },
+  "stitched_5q_chronological": {
+    "period_labels": [
+      "Q3 2025",
+      "Q4 2025",
+      "Q1 2026",
+      "Q2 2026",
+      "Q3 2026 (Actual)"
+    ],
+    "next_quarter_estimate_label": "Q4 2026E (Guided / Street)",
+    "total_revenue": [
+      470.62,
+      503.09,
+      508.24,
+      546.47,
+      622.09
+    ],
+    "gross_profit": [
+      350.28,
+      373.85,
+      156.6,
+      434.76,
+      509.59
+    ],
+    "operating_expenses": [
+      476.14,
+      480.36,
+      508.01,
+      466.98,
+      408.94
+    ],
+    "operating_income": [
+      -125.86,
+      -106.51,
+      -351.41,
+      -32.22,
+      100.65
+    ],
+    "gaap_net_income": [
+      -126.36,
+      -89.96,
+      -347.61,
+      -23.61,
+      121.59
+    ],
+    "gaap_diluted_eps": [
+      -0.3,
+      -0.21,
+      -0.8,
+      -0.05,
+      null
+    ],
+    "nongaap_diluted_eps": [
+      null,
+      null,
+      null,
+      null,
+      0.44
+    ],
+    "operating_cash_flow": [
+      155.4,
+      121.44,
+      71.29,
+      205.62,
+      223.96
+    ],
+    "capital_expenditures": [
+      4.11,
+      5.75,
+      4.83,
+      3.66,
+      4.25
+    ],
+    "reported_fcf": [
+      151.29,
+      115.69,
+      66.46,
+      201.96,
+      219.71
+    ],
+    "stock_based_compensation": [
+      91.97,
+      92.85,
+      77.17,
+      79.95,
+      62.77
+    ],
+    "finance_leases": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "true_fcf": [
+      59.32,
+      22.84,
+      -10.71,
+      122.01,
+      156.94
+    ]
+  },
+  "forensic_fcf_bridge_q0": {
+    "ocf": 223.96,
+    "capex": 4.25,
+    "reported_fcf": 219.71,
+    "sbc": 62.77,
+    "finance_leases": 0.0,
+    "true_fcf": 156.94,
+    "formula_check": {
+      "ocf_minus_capex_equals_reported": true,
+      "reported_minus_sbc_leases_equals_true": true
+    }
+  },
+  "company_specific_facts": {
+    "revenue_q0": 622.09,
+    "revenue_prior_year": 470.62,
+    "cost_of_revenue_q0": 112.5,
+    "gross_profit_q0": 509.59,
+    "rd_q0": 251.15,
+    "sm_q0": 103.47,
+    "ga_q0": 54.32,
+    "operating_expenses_q0": 408.94,
+    "operating_income_q0": 100.65,
+    "net_income_gaap_q0": 121.59,
+    "eps_nongaap_q0": 0.44,
+    "ocf_q0": 223.96,
+    "capex_q0": 4.25,
+    "sbc_q0": 62.77
+  }
+}

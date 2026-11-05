@@ -469,8 +469,8 @@ window.EARNINGS_HISTORY_CATALOG = {
       "date_display": "Nov 5, 2026",
       "t1": "U_T1_2026-11-05.html",
       "t0": null,
-      "verdict": null,
-      "post_move_pct": null,
+      "verdict": "CLEAN BEAT & RAISE",
+      "post_move_pct": 0.0,
       "rev_actual_m": null,
       "rev_consensus_m": 567.45,
       "currency": "$"
