@@ -103,6 +103,8 @@ LABELS = {
         "Adjusted net loss per share attributable to common stockholders, basic and diluted \\(non-GAAP\\)",
         "Adjusted net loss per share attributable to common stockholders, basic and diluted",
         "Adjusted net loss per share", "Adjusted net income per share",
+        "Non-GAAP basic net loss per share",
+        "Non-GAAP basic net income per share",
         "Non-GAAP net income \\(loss\\) per share, basic and diluted",
         "Non-GAAP net income \\(loss\\) per share",
         "Non-GAAP net income per share, basic and diluted",

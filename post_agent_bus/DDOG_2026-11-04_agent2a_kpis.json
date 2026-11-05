@@ -1,0 +1,140 @@
+{
+  "ticker": "DDOG",
+  "earnings_date": "2026-11-04",
+  "operational_kpis": [
+    {
+      "name": "Total GAAP Revenue ($M)",
+      "q_minus_1_actual": 1121.45,
+      "q_minus_4_yoy": 885.65,
+      "street_consensus_q0": 1146.97,
+      "reported_actual_q0": 1197.09,
+      "spread_vs_street": "+4.37%",
+      "verdict": "BEAT",
+      "bar_width_pct": 94
+    },
+    {
+      "name": "Customers with ARR >= $100K",
+      "q_minus_1_actual": 4620.0,
+      "q_minus_4_yoy": 4050.0,
+      "street_consensus_q0": 4750.0,
+      "reported_actual_q0": 4860.0,
+      "spread_vs_street": "+2.32%",
+      "verdict": "BEAT",
+      "bar_width_pct": 91
+    },
+    {
+      "name": "GAAP Gross Margin (%)",
+      "q_minus_1_actual": 78.59,
+      "q_minus_4_yoy": 80.08,
+      "street_consensus_q0": 79.5,
+      "reported_actual_q0": 80.19,
+      "spread_vs_street": "+69 bps",
+      "verdict": "EXPANSION",
+      "bar_width_pct": 92
+    },
+    {
+      "name": "Operating Cash Flow ($M)",
+      "q_minus_1_actual": 315.87,
+      "q_minus_4_yoy": 251.47,
+      "street_consensus_q0": 290.0,
+      "reported_actual_q0": 289.95,
+      "spread_vs_street": "-0.02%",
+      "verdict": "IN LINE",
+      "bar_width_pct": 86
+    },
+    {
+      "name": "Reported Free Cash Flow ($M)",
+      "q_minus_1_actual": 278.7,
+      "q_minus_4_yoy": 213.95,
+      "street_consensus_q0": 260.0,
+      "reported_actual_q0": 279.08,
+      "spread_vs_street": "+7.34%",
+      "verdict": "BEAT",
+      "bar_width_pct": 95
+    }
+  ],
+  "segment_reporting": {
+    "periods": [
+      "Q3 2025",
+      "Q4 2025",
+      "Q1 2026",
+      "Q2 2026",
+      "Q3 2026 (Actual)",
+      "Q4 2026E (Guided / Street)"
+    ],
+    "segments": [
+      {
+        "name": "Infrastructure Monitoring & Cloud Observability",
+        "values": [
+          510.0,
+          545.0,
+          570.0,
+          625.0,
+          660.0,
+          655.0
+        ],
+        "qoq": "+5.6%",
+        "yoy": "+29.4%"
+      },
+      {
+        "name": "APM, Log Management & Distributed Tracing",
+        "values": [
+          275.0,
+          298.0,
+          316.0,
+          355.0,
+          382.0,
+          385.0
+        ],
+        "qoq": "+7.6%",
+        "yoy": "+38.9%"
+      },
+      {
+        "name": "AI Observability, LLM Monitoring & Security",
+        "values": [
+          100.65,
+          110.19,
+          120.43,
+          141.45,
+          155.09,
+          155.0
+        ],
+        "qoq": "+9.6%",
+        "yoy": "+54.1%"
+      },
+      {
+        "name": "Total Consolidated Revenue",
+        "values": [
+          885.65,
+          953.19,
+          1006.43,
+          1121.45,
+          1197.09,
+          1195.0
+        ],
+        "qoq": "+6.7%",
+        "yoy": "+35.2%"
+      }
+    ]
+  },
+  "tooltip_definitions": {
+    "Total GAAP Revenue": "Consolidated subscription revenue across Datadog's unified observability and security SaaS platform ($1,197.09M in Q3 2026, +35.2% YoY).",
+    "Infrastructure Monitoring & Cloud Observability": "Core host and container metrics collection across AWS, Azure, GCP, and on-premises environments ($660.0M in Q3 2026).",
+    "APM, Log Management & Distributed Tracing": "Application performance monitoring, synthetic tests, network monitoring, and real-time structured log indexing ($382.0M in Q3 2026).",
+    "AI Observability, LLM Monitoring & Security": "LLM observability, cloud security management (CSM), application security (ASM), and generative AI workload tracing ($155.09M in Q3 2026).",
+    "GAAP Gross Margin": "GAAP gross margin of 80.19% in Q3 2026 ($959.92M gross profit), up from 78.59% in Q2 2026 reflecting cloud infrastructure optimization.",
+    "GAAP Operating Income": "GAAP operating income of $74.71M in Q3 2026, surging sequentially from $7.46M in Q2 2026 as operating leverage expanded.",
+    "GAAP Diluted EPS": "GAAP diluted earnings per share of $0.32 in Q3 2026 based on weighted-average diluted shares.",
+    "Customers with ARR >= $100K": "Large enterprise customers generating over $100,000 in Annual Recurring Revenue (4,860 accounts, up +20% YoY).",
+    "Operating Cash Flow": "GAAP cash flows from operating activities of $289.95M in Q3 2026 ($1,167.5M generated over the trailing twelve months).",
+    "Capital Expenditures": "Purchases of property, equipment and capitalized software of $10.87M in Q3 2026.",
+    "Reported Free Cash Flow": "Operating cash flow minus capital expenditures ($279.08M in Q3 2026, representing a 23.3% FCF margin).",
+    "True Free Cash Flow": "Core economic cash generation deducting CapEx ($10.87M) and SBC ($9.51M) from OCF ($289.95M), yielding $269.57M in Q3 2026.",
+    "AI Observability Attach Rate": "Percentage of Datadog enterprise customers utilizing specialized LLM monitoring, vector database tracing, and AI token cost analytics.",
+    "Multi-Product Adoption": "Over 83% of customers using 2+ products, and over 49% of customers using 4+ products across Datadog's 20+ software modules.",
+    "Dollar-Based Net Retention Rate (DBNRR)": "Trailing net expansion metric reflecting customer usage growth, seat expansions, and additional module cross-selling.",
+    "Bits AI Copilot": "Datadog's generative AI assistant integrated into incident response workflows to automatically synthesize root causes and suggest remediations.",
+    "Cloud Cost Management": "Specialized FinOps monitoring tooling enabling organizations to track, allocate, and optimize multi-cloud computing and GPU spend.",
+    "Stock-Based Compensation": "Non-cash stock-based compensation of $9.51M in Q3 2026, maintaining prudent dilution control."
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "ticker": "AEVA",
+  "earnings_date": "2026-11-04",
+  "operational_kpis": [
+    {
+      "name": "Total GAAP Revenue ($M)",
+      "q_minus_1_actual": 6.14,
+      "q_minus_4_yoy": 3.58,
+      "street_consensus_q0": 6.8,
+      "reported_actual_q0": 6.67,
+      "spread_vs_street": "-1.91%",
+      "verdict": "SLIGHT MISS",
+      "bar_width_pct": 82
+    },
+    {
+      "name": "Gross Margin (%)",
+      "q_minus_1_actual": 35.67,
+      "q_minus_4_yoy": 12.01,
+      "street_consensus_q0": 34.0,
+      "reported_actual_q0": 33.58,
+      "spread_vs_street": "-42 bps",
+      "verdict": "IN LINE",
+      "bar_width_pct": 85
+    },
+    {
+      "name": "GAAP Diluted EPS ($)",
+      "q_minus_1_actual": -0.41,
+      "q_minus_4_yoy": -0.52,
+      "street_consensus_q0": -0.43,
+      "reported_actual_q0": -0.54,
+      "spread_vs_street": "-25.58%",
+      "verdict": "MISS",
+      "bar_width_pct": 74
+    },
+    {
+      "name": "Operating Cash Burn ($M)",
+      "q_minus_1_actual": -31.17,
+      "q_minus_4_yoy": -32.31,
+      "street_consensus_q0": -28.0,
+      "reported_actual_q0": -30.37,
+      "spread_vs_street": "-8.46%",
+      "verdict": "CONTROLLED BURN",
+      "bar_width_pct": 80
+    },
+    {
+      "name": "Total Available Liquidity ($M)",
+      "q_minus_1_actual": 302.9,
+      "q_minus_4_yoy": 285.0,
+      "street_consensus_q0": 260.0,
+      "reported_actual_q0": 272.5,
+      "spread_vs_street": "+4.81%",
+      "verdict": "BEAT",
+      "bar_width_pct": 92
+    }
+  ],
+  "segment_reporting": {
+    "periods": [
+      "Q3 2025",
+      "Q4 2025",
+      "Q1 2026",
+      "Q2 2026",
+      "Q3 2026 (Actual)",
+      "Q4 2026E (Guided / Street)"
+    ],
+    "segments": [
+      {
+        "name": "Automotive & Trucking Sensing Revenue",
+        "values": [
+          2.4,
+          3.8,
+          4.3,
+          4.2,
+          4.55,
+          5.2
+        ],
+        "qoq": "+8.3%",
+        "yoy": "+89.6%"
+      },
+      {
+        "name": "Industrial & Optical Connectivity Revenue",
+        "values": [
+          1.18,
+          1.82,
+          1.96,
+          1.94,
+          2.12,
+          2.6
+        ],
+        "qoq": "+9.3%",
+        "yoy": "+79.7%"
+      },
+      {
+        "name": "Total Consolidated Revenue",
+        "values": [
+          3.58,
+          5.62,
+          6.26,
+          6.14,
+          6.67,
+          7.8
+        ],
+        "qoq": "+8.6%",
+        "yoy": "+86.3%"
+      }
+    ]
+  },
+  "tooltip_definitions": {
+    "Total GAAP Revenue": "Consolidated GAAP net revenue from automotive 4D LiDAR and industrial FMCW sensing solutions ($6.67M in Q3 2026, up +86.3% YoY from $3.58M in Q3 2025).",
+    "Automotive & Trucking Sensing Revenue": "Revenue derived from commercial vehicle programs including Daimler Truck production series and Bendix market-leading ADAS integration ($4.55M in Q3 2026).",
+    "Industrial & Optical Connectivity Revenue": "Revenue from high-power optical source modules for AI data centers and Micro-Epsilon / SICK factory automation sensors ($2.12M in Q3 2026).",
+    "Gross Margin": "GAAP gross margin of 33.58% in Q3 2026 ($2.24M gross profit on $6.67M revenue), significantly higher than 12.01% in Q3 2025.",
+    "Operating Loss": "GAAP operating loss of -$39.11M in Q3 2026, reflecting continued R&D investment ($28.87M) and G&A scaling ($10.85M) for OEM series production.",
+    "GAAP Diluted EPS": "GAAP diluted net loss per share of -$0.54 in Q3 2026 based on weighted-average shares outstanding.",
+    "Operating Cash Flow": "Cash used in operating activities of -$30.37M in Q3 2026, an improvement from -$31.17M in Q2 2026.",
+    "True Free Cash Flow": "Economic cash generation deducting CapEx ($0.0M) and non-cash SBC ($11.41M) from OCF (-$30.37M), yielding -$41.78M in Q3 2026.",
+    "Total Available Liquidity": "Cash, cash equivalents, marketable securities and available credit totaling $272.5M as of September 30, 2026, providing over two years of runway.",
+    "Frequency Modulated Continuous Wave (FMCW)": "Aeva's core technology utilizing continuous laser beams to instantaneously measure radial velocity and range per pixel with zero optical crosstalk.",
+    "Aeva Atlas 4D LiDAR": "Automotive-grade 4D LiDAR sensing engine featuring silicon photonics integration designed for passenger car and commercial truck automated driving.",
+    "Daimler Truck Series Production": "Milestone production development contract for heavy-duty autonomous Class 8 trucks with series production scheduled for 2027.",
+    "Micro-Epsilon Supply Agreement": "Multi-year commercial supply contract for precision factory automation sensors with initial multi-thousand unit order received in Q3 2026.",
+    "US Defense Autonomy Contract": "Selection by the US Air Force and US Navy to develop airborne autonomy capabilities utilizing Aeva's FMCW velocity sensing.",
+    "AI Optical Connectivity": "Proprietary ultra-high-power optical laser engines addressing high-density optical interconnects for next-generation AI data centers.",
+    "Silicon Photonics Engine": "Chip-scale optical processing hardware consolidating laser transmitters, optical receivers, and processing on a single semiconductor chip.",
+    "Stock-Based Compensation": "Non-cash equity incentives totaling $11.41M in Q3 2026, up from $8.51M in Q2 2026.",
+    "Bendix ADAS Collaboration": "Joint commercial development with Bendix to integrate Aeva's 4D LiDAR into market-leading commercial vehicle ADAS suites."
+  }
+}

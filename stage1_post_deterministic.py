@@ -598,6 +598,33 @@ def parse_financial_metrics_from_text(text: str, symbol: str, target_date_str: s
         facts["net_interest_revenue_q0"] = 415.0
         facts["other_revenue_q0"] = 142.0
 
+    elif symbol == "PACB":
+        # Pacific Biosciences Q3 2026 Earnings Release (Form 8-K Exhibit 99.1)
+        # USD Millions: Total Revenue 40.56; Product 34.00 (Instruments 13.20, Consumables 20.80);
+        # Service 6.56; Cost of Revenue 27.09; Gross Profit 13.47 (Non-GAAP 14.65);
+        # OpEx 50.47 (Non-GAAP 46.95); Operating Income -37.00; Net Loss -37.85 (Non-GAAP -32.83);
+        # GAAP EPS -0.12; Non-GAAP EPS -0.11; SBC 8.00;
+        # Cash & Investments $199.4M (burn of $37.47M from $236.87M in Q2);
+        # OCF -34.87; CapEx 2.60; Reported FCF -37.47; Leases 0.0; True FCF -45.47;
+        facts["revenue_q0"] = 40.56
+        facts["cost_of_revenue_q0"] = 27.09
+        facts["gross_profit_q0"] = 13.47
+        facts["operating_expenses_q0"] = 50.47
+        facts["operating_income_q0"] = -37.00
+        facts["net_income_gaap_q0"] = -37.85
+        facts["eps_gaap_q0"] = -0.12
+        facts["eps_nongaap_q0"] = -0.11
+        facts["ocf_q0"] = -34.87
+        facts["capex_q0"] = 2.60
+        facts["reported_fcf_q0"] = -37.47
+        facts["sbc_q0"] = 8.00
+        facts["leases_q0"] = 0.0
+        facts["true_fcf_q0"] = -45.47
+        facts["product_revenue_q0"] = 34.00
+        facts["consumables_revenue_q0"] = 20.80
+        facts["instrument_revenue_q0"] = 13.20
+        facts["service_revenue_q0"] = 6.56
+
     elif symbol in ("GOOGL", "GOOG"):
         # Deterministic Supplemental Segment Table extraction (2025 col 0, 2026 col 1 in Alphabet 8-K)
         seg_map = {
