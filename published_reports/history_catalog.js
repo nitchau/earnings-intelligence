@@ -6,10 +6,10 @@ window.EARNINGS_HISTORY_CATALOG = {
       "quarter": "Q3 2026",
       "date_display": "Nov 4, 2026",
       "t1": "AEVA_T1_2026-11-04.html",
-      "t0": null,
-      "verdict": "EPS BEAT / REVENUE MISS",
-      "post_move_pct": 0.0,
-      "rev_actual_m": null,
+      "t0": "AEVA_T0_POST_2026-11-04.html",
+      "verdict": "OPERATING BEAT / OI&E NOISE",
+      "post_move_pct": 4.53,
+      "rev_actual_m": 6.67,
       "rev_consensus_m": 6.8,
       "currency": "$"
     }
@@ -92,7 +92,7 @@ window.EARNINGS_HISTORY_CATALOG = {
       "t1": "DDOG_T1_2026-11-04.html",
       "t0": null,
       "verdict": "REVENUE BEAT / EPS MISS",
-      "post_move_pct": 0.0,
+      "post_move_pct": -0.38,
       "rev_actual_m": null,
       "rev_consensus_m": 1146.97,
       "currency": "$"
@@ -343,8 +343,8 @@ window.EARNINGS_HISTORY_CATALOG = {
       "date_display": "Nov 4, 2026",
       "t1": "PACB_T1_2026-11-04.html",
       "t0": null,
-      "verdict": null,
-      "post_move_pct": null,
+      "verdict": "BEAT & RAISE (CAPEX SURGE)",
+      "post_move_pct": -0.39,
       "rev_actual_m": null,
       "rev_consensus_m": 39.46,
       "currency": "$"
@@ -367,12 +367,12 @@ window.EARNINGS_HISTORY_CATALOG = {
   "QCOM": [
     {
       "date": "2026-11-04",
-      "quarter": "Q4 FY2026",
+      "quarter": "Q3 2026",
       "date_display": "Nov 4, 2026",
       "t1": "QCOM_T1_2026-11-04.html",
       "t0": null,
-      "verdict": null,
-      "post_move_pct": null,
+      "verdict": "REVENUE BEAT / EPS MISS",
+      "post_move_pct": -7.4,
       "rev_actual_m": null,
       "rev_consensus_m": 10145.91,
       "currency": "$"
@@ -484,7 +484,7 @@ window.EARNINGS_HISTORY_CATALOG = {
       "t1": "UBER_T1_2026-11-04.html",
       "t0": null,
       "verdict": "REVENUE BEAT / EPS MISS",
-      "post_move_pct": 0.0,
+      "post_move_pct": -0.04,
       "rev_actual_m": null,
       "rev_consensus_m": 14673.58,
       "currency": "$"
