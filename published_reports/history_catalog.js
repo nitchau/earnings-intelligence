@@ -370,10 +370,10 @@ window.EARNINGS_HISTORY_CATALOG = {
       "quarter": "Q3 2026",
       "date_display": "Nov 4, 2026",
       "t1": "QCOM_T1_2026-11-04.html",
-      "t0": null,
+      "t0": "QCOM_T0_POST_2026-11-04.html",
       "verdict": "REVENUE BEAT / EPS MISS",
       "post_move_pct": -7.4,
-      "rev_actual_m": null,
+      "rev_actual_m": 10322.0,
       "rev_consensus_m": 10145.91,
       "currency": "$"
     }
