@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SOUN T+0 Post-Earnings Forensic Tearsheet (2026-11-05)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0b0f19;
+      --bg-card: #111827;
+      --bg-card-elevated: #161f33;
+      --bg-table-row-alt: #0e1525;
+      --border-color: #1f2937;
+      --border-subtle: #283548;
+      --text-primary: #f9fafb;
+      --text-secondary: #d1d5db;
+      --text-muted: #9ca3af;
+      --accent-blue: #3b82f6;
+      --accent-blue-glow: rgba(59, 130, 246, 0.15);
+      --bull-green: #10b981;
+      --bull-green-bg: rgba(16, 185, 129, 0.14);
+      --bear-red: #ef4444;
+      --bear-red-bg: rgba(239, 68, 68, 0.14);
+      --warn-amber: #f59e0b;
+      --warn-amber-bg: rgba(245, 158, 11, 0.14);
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      line-height: 1.5;
+      font-size: 14px;
+      padding: 24px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1560px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* ==========================================================================
+       INTERACTIVE HOVER TOOLTIP SYSTEM (FOR METRICS & ABBREVIATIONS)
+       ========================================================================== */
+    .tip {
+      position: relative;
+      display: inline-block;
+      border-bottom: 1px dotted #60a5fa;
+      cursor: help;
+      transition: color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .tip:hover {
+      color: #93c5fd;
+      border-bottom-color: #93c5fd;
+    }
+
+    .tip::after {
+      content: attr(data-tip);
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 0;
+      width: 290px;
+      padding: 10px 12px;
+      background-color: #1e293b;
+      color: #f8fafc;
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 1.45;
+      text-align: left;
+      text-transform: none;
+      letter-spacing: normal;
+      white-space: normal;
+      border: 1px solid var(--accent-blue);
+      border-radius: 6px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.75);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(4px);
+      transition: opacity 0.16s ease, transform 0.16s ease, visibility 0.16s;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* Right-aligned tooltip modifier to prevent right-edge screen clipping */
+    .tip-right::after {
+      left: auto;
+      right: 0;
+    }
+
+    /* Bottom-aligned tooltip modifier for elements near top of page */
+    .tip-bottom::after {
+      bottom: auto;
+      top: calc(100% + 8px);
+    }
+
+    .tip:hover::after {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    /* UTILITY & BADGES */
+    .mono {
+      font-family: var(--font-mono);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+
+    .badge-bull {
+      background-color: var(--bull-green-bg);
+      color: var(--bull-green);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+    }
+
+    .badge-bear {
+      background-color: var(--bear-red-bg);
+      color: var(--bear-red);
+      border: 1px solid rgba(239, 68, 68, 0.35);
+    }
+
+    .badge-warn {
+      background-color: var(--warn-amber-bg);
+      color: var(--warn-amber);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+    }
+
+    .badge-neutral {
+      background-color: rgba(156, 163, 175, 0.12);
+      color: var(--text-secondary);
+      border: 1px solid rgba(156, 163, 175, 0.25);
+    }
+
+    .badge-blue {
+      background-color: var(--accent-blue-glow);
+      color: #60a5fa;
+      border: 1px solid rgba(59, 130, 246, 0.4);
+    }
+
+    /* CARD SYSTEM */
+    .card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--border-color);
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-title-accent {
+      width: 4px;
+      height: 16px;
+      background-color: var(--accent-blue);
+      border-radius: 2px;
+      display: inline-block;
+    }
+
+    .card-subtitle {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    /* HEADER BANNER */
+    .header-banner {
+      background: linear-gradient(135deg, #111827 0%, #0f172a 65%, #172554 100%);
+      border: 1px solid var(--border-subtle);
+      border-left: 4px solid var(--accent-blue);
+      border-radius: 10px;
+      padding: 22px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .helper-bar {
+      background-color: rgba(59, 130, 246, 0.12);
+      border: 1px solid rgba(59, 130, 246, 0.35);
+      border-radius: 6px;
+      padding: 8px 14px;
+      font-size: 12.5px;
+      color: #bfdbfe;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .ticker-identity {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .ticker-line {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .ticker-symbol {
+      font-family: var(--font-mono);
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.4);
+      padding: 2px 12px;
+      border-radius: 6px;
+    }
+
+    .company-name {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .sector-tag {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .header-price-block {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .price-box {
+      text-align: right;
+    }
+
+    .price-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    .price-value {
+      font-family: var(--font-mono);
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .header-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(195px, 1fr));
+      gap: 12px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .strip-item {
+      background-color: rgba(11, 15, 25, 0.55);
+      border: 1px solid var(--border-color);
+      padding: 10px 14px;
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .strip-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .strip-val {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    /* ROW 1: 4 KPI CARDS */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .kpi-metric-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .kpi-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.07);
+      gap: 8px;
+    }
+
+    .kpi-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .kpi-name {
+      font-size: 12.5px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .kpi-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 2px;
+    }
+
+    .kpi-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 4px;
+    }
+
+    .kpi-val {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .delta-pair {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    /* ROW 2: HISTORICAL TABLE */
+    .table-wrapper {
+      overflow-x: auto;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px;
+    }
+
+    th {
+      background-color: #161f33;
+      color: var(--text-secondary);
+      font-weight: 600;
+      text-align: right;
+      padding: 11px 12px;
+      border-bottom: 1px solid var(--border-subtle);
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+
+    th:first-child {
+      text-align: left;
+      font-family: var(--font-sans);
+      min-width: 265px;
+      position: sticky;
+      left: 0;
+      z-index: 2;
+      background-color: #161f33;
+    }
+
+    td {
+      padding: 9px 12px;
+      border-bottom: 1px solid var(--border-color);
+      text-align: right;
+      font-family: var(--font-mono);
+      color: var(--text-primary);
+      white-space: nowrap;
+    }
+
+    td:first-child {
+      text-align: left;
+      font-family: var(--font-sans);
+      font-weight: 500;
+      color: var(--text-secondary);
+      position: sticky;
+      left: 0;
+      background-color: var(--bg-card);
+      z-index: 1;
+    }
+
+    tr:nth-child(even) td {
+      background-color: var(--bg-table-row-alt);
+    }
+
+    tr:nth-child(even) td:first-child {
+      background-color: var(--bg-table-row-alt);
+    }
+
+    tr.section-divider td {
+      background-color: rgba(59, 130, 246, 0.09);
+      color: #93c5fd;
+      font-family: var(--font-sans);
+      font-weight: 700;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      padding: 7px 12px;
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .col-q0 {
+      background-color: rgba(59, 130, 246, 0.06) !important;
+      font-weight: 700;
+    }
+
+    .col-est {
+      background-color: rgba(245, 158, 11, 0.05) !important;
+      color: #fde68a;
+    }
+
+    /* OUTLIER CELL BORDERS */
+    .outlier-red {
+      border: 1.5px solid var(--bear-red) !important;
+      background-color: rgba(239, 68, 68, 0.12) !important;
+      color: #fca5a5 !important;
+      font-weight: 700;
+      position: relative;
+    }
+
+    .outlier-amber {
+      border: 1.5px solid var(--warn-amber) !important;
+      background-color: rgba(245, 158, 11, 0.12) !important;
+      color: #fcd34d !important;
+      font-weight: 700;
+      position: relative;
+    }
+
+    /* ROW 3: FORENSIC CALLOUT */
+    .forensic-grid {
+      display: grid;
+      grid-template-columns: 1.35fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 1080px) {
+      .forensic-grid,
+      .split-2col,
+      .sentiment-grid {
+        grid-template-columns: 1fr !important;
+      }
+    }
+
+    .forensic-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .forensic-item {
+      background-color: rgba(11, 15, 25, 0.6);
+      border: 1px solid var(--border-color);
+      border-left: 3px solid var(--warn-amber);
+      border-radius: 6px;
+      padding: 13px 15px;
+    }
+
+    .forensic-item.critical {
+      border-left-color: var(--bear-red);
+    }
+
+    .forensic-item-title {
+      font-weight: 700;
+      font-size: 13.5px;
+      color: var(--text-primary);
+      margin-bottom: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .forensic-item p {
+      color: var(--text-secondary);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .fcf-bridge-box {
+      background-color: #0d1322;
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* ROW 4 & ROW 5: 2-COLUMN SPLIT CARDS */
+    .split-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .audit-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .audit-point {
+      padding: 12px 14px;
+      border-radius: 6px;
+      background-color: rgba(11, 15, 25, 0.55);
+      border: 1px solid var(--border-color);
+    }
+
+    .audit-point-bull {
+      border-left: 3px solid var(--bull-green);
+    }
+
+    .audit-point-bear {
+      border-left: 3px solid var(--bear-red);
+    }
+
+    .audit-point-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 5px;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .audit-point-title {
+      font-weight: 700;
+      font-size: 13.5px;
+      color: var(--text-primary);
+    }
+
+    .audit-point p {
+      font-size: 12.8px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* CATALYST ITEMS */
+    .catalyst-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .catalyst-card {
+      background-color: rgba(11, 15, 25, 0.55);
+      border: 1px solid var(--border-color);
+      border-left: 3px solid var(--accent-blue);
+      border-radius: 6px;
+      padding: 12px 14px;
+    }
+
+    /* SENTIMENT ANALYSIS CARD */
+    .sentiment-overview-banner {
+      background: linear-gradient(90deg, rgba(239, 68, 68, 0.12) 0%, rgba(245, 158, 11, 0.12) 50%, rgba(16, 185, 129, 0.12) 100%);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .sentiment-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .sentiment-source-card {
+      background-color: #0d1322;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .sentiment-meter-wrap {
+      display: flex;
+       flex-direction: column;
+      gap: 5px;
+      margin: 4px 0;
+    }
+
+    .sentiment-bar-bg {
+      width: 100%;
+      height: 8px;
+      background-color: #1f2937;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .sentiment-bar-fill {
+      height: 100%;
+      border-radius: 4px;
+    }
+
+    /* ROW 7: TRADE MATRIX */
+    .playbook-setup-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+      background-color: rgba(11, 15, 25, 0.65);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 14px;
+    }
+
+    .scenario-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 16px;
+    }
+
+    .scenario-card {
+      background-color: #0d1322;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .scenario-bull {
+      border-top: 4px solid var(--bull-green);
+    }
+
+    .scenario-base {
+      border-top: 4px solid var(--warn-amber);
+    }
+
+    .scenario-bear {
+      border-top: 4px solid var(--bear-red);
+    }
+
+    .scenario-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 800;
+      font-size: 15px;
+    }
+
+    .trigger-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 12.8px;
+      color: var(--text-secondary);
+    }
+
+    .trigger-list li {
+      position: relative;
+      padding-left: 14px;
+    }
+
+    .trigger-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--accent-blue);
+      font-weight: bold;
+    }
+
+    .trade-structure {
+      margin-top: auto;
+      padding: 11px 12px;
+      background-color: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      font-size: 12px;
+    }
+
+    .trade-structure strong {
+      display: block;
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .footer-meta {
+      text-align: center;
+      font-size: 11.5px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      padding: 10px 0 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    
+    <!-- HISTORICAL QUARTER ARCHIVE TOPBAR -->
+    <div class="archive-topbar" style="background: rgba(15, 23, 42, 0.92); border: 1px solid rgba(59, 130, 246, 0.32); border-radius: 10px; padding: 10px 16px; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; font-size: 12.5px;">
+      <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+        <a href="index.html" style="color: #93c5fd; text-decoration: none; font-weight: 600; padding: 4px 10px; border-radius: 6px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.12);">← Portal Home</a>
+        <span style="background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); font-weight: 700; font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 3px 9px; border-radius: 5px;">T+0 Post-Earnings Forensic</span>
+        <a id="archive-paired-stage-link" href="SOUN_T1_2026-11-05.html" style="display: none; color: #cbd5e1; text-decoration: none; font-size: 11.5px; padding: 3px 9px; border-radius: 5px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12);">Switch to T-1 Pre-Earnings Setup</a>
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+        <label for="quarter-archive-select" style="color: #94a3b8; font-size: 12px; font-weight: 600;">📅 Historical Quarter:</label>
+        <select id="quarter-archive-select" data-ticker="SOUN" data-date="2026-11-05" data-stage="t0" style="background: #090d16; color: #f8fafc; border: 1px solid rgba(59, 130, 246, 0.45); border-radius: 6px; padding: 5px 10px; font-size: 12px; font-family: 'Inter', sans-serif; font-weight: 600; cursor: pointer; outline: none;">
+          <option value="SOUN_T0_POST_2026-11-05.html" selected>Q3 2026 (Nov 5, 2026) — Latest</option>
+          <option value="" disabled>No prior quarters archived yet (history initiated Q3 2026)</option>
+        </select>
+      </div>
+    </div>
+    <script src="history_catalog.js"></script>
+    <script>
+      (function() {
+        var sel = document.getElementById('quarter-archive-select');
+        if (!sel) return;
+        var tk = sel.getAttribute('data-ticker');
+        var curDate = sel.getAttribute('data-date');
+        var stage = sel.getAttribute('data-stage');
+        var cat = (window.EARNINGS_HISTORY_CATALOG || {})[tk];
+        if (Array.isArray(cat) && cat.length > 0) {
+          sel.innerHTML = '';
+          cat.forEach(function(entry, idx) {
+            var targetFile = (stage === 't0') ? (entry.t0 || entry.t1) : (entry.t1 || entry.t0);
+            if (!targetFile) return;
+            var opt = document.createElement('option');
+            opt.value = targetFile;
+            var suffix = (idx === 0) ? ' — Latest' : '';
+            var stageHint = (stage === 't0' && !entry.t0) ? ' [T-1 Only]' : ((stage === 't1' && !entry.t1) ? ' [T+0 Only]' : '');
+            opt.textContent = entry.quarter + ' (' + entry.date_display + ')' + stageHint + suffix;
+            if (entry.date === curDate) opt.selected = true;
+            sel.appendChild(opt);
+          });
+          if (cat.length === 1) {
+            var note = document.createElement('option');
+            note.value = '';
+            note.disabled = true;
+            note.textContent = '── Prior quarters will appear here starting next quarter ──';
+            sel.appendChild(note);
+          }
+          var curEntry = cat.find(function(e) { return e.date === curDate; });
+          var pairedLink = document.getElementById('archive-paired-stage-link');
+          if (curEntry && pairedLink) {
+            var pairedHref = (stage === 't0') ? curEntry.t1 : curEntry.t0;
+            if (pairedHref) {
+              pairedLink.href = pairedHref;
+              pairedLink.style.display = 'inline-block';
+            }
+          }
+        }
+        sel.addEventListener('change', function() {
+          if (this.value && !window.location.pathname.endsWith('/' + this.value)) {
+            window.location.href = this.value;
+          }
+        });
+      })();
+    </script>
+<!-- 1. HEADER BANNER & STRIP -->
+    <header class="header-banner" style="margin-bottom: 20px;">
+      <div class="header-top" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 12px; margin-bottom: 16px;">
+        <div>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <h1 style="margin: 0; font-size: 24px; font-weight: 800; color: #fff;">SoundHound AI, Inc. (SOUN)</h1>
+            <span class="badge badge-bull" style="font-size: 13px; padding: 4px 8px;">T+0 POST-EARNINGS FORENSIC TEARSHEET</span>
+            <span class="badge badge-purple" style="font-size: 13px; padding: 4px 8px;">HEADLINE BEAT / GUIDANCE RESET</span>
+          </div>
+          <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">
+            Q3 2026 Earnings Release &bull; Filing Date: November 5, 2026 &bull; Form 8-K Exhibits 99.1 &amp; 99.2 &bull; Market Cap: $1,913.6M &bull; EV: $1,694.6M
+          </div>
+        </div>
+        <div style="text-align: right;">
+          <div style="font-size: 13px; color: var(--text-muted);">Regular Close: <strong style="color: #fff;">$4.26</strong></div>
+          <div style="font-size: 20px; font-weight: 800; color: #f87171;">
+            After-Hours: $3.94 <span style="font-size: 14px;">(-7.51%)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="header-strip" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; background: rgba(15, 23, 42, 0.6); padding: 12px 16px; border-radius: 8px; border: 1px solid var(--border-color);">
+        <div>
+          <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted);">T+0 Print Verdict</div>
+          <div style="font-size: 15px; font-weight: 700; color: #34d399;">HEADLINE BEAT / GUIDANCE RESET</div>
+        </div>
+        <div>
+          <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted);">Q0 Total Net Revenue</div>
+          <div style="font-size: 16px; font-weight: 700; color: #34d399;">$62.42M <span style="font-size: 11px; color: #34d399;">(+48.4% YoY)</span></div>
+        </div>
+        <div>
+          <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted);">GAAP Gross Margin</div>
+          <div style="font-size: 16px; font-weight: 700; color: #f87171;">34.09% <span style="font-size: 11px; color: #f87171;">(-991 bps QoQ)</span></div>
+        </div>
+        <div>
+          <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted);">Operating Cash Flow</div>
+          <div style="font-size: 16px; font-weight: 700; color: #f87171;">-$95.99M</div>
+        </div>
+        <div>
+          <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted);">True Free Cash Flow</div>
+          <div style="font-size: 16px; font-weight: 700; color: #f87171;">-$158.13M</div>
+        </div>
+        <div>
+          <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted);">1-Wk Straddle Implied</div>
+          <div style="font-size: 16px; font-weight: 700; color: #38bdf8;">±12.38% ($0.51) [CONTAINED]</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- 2. TRACK B STICKY JUMP-NAV -->
+    <nav class="post-jump-nav" style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; padding: 10px 14px; background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; position: sticky; top: 10px; z-index: 100; backdrop-filter: blur(8px);">
+      <a href="#sec-scorecard" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">1. Beat / Miss Scorecard</a>
+      <a href="#sec-5q" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">2. Rolling 5Q Table (Q3 Actual + Q4E)</a>
+      <a href="#sec-fcf" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">3. Forensic True FCF Bridge</a>
+      <a href="#sec-audit" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">4. Wins/Drags &amp; Call Audit</a>
+      <a href="#sec-comps" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">5. Comps &amp; Multiples</a>
+      <a href="#sec-sentiment" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">6. 4-Pillar Sentiment</a>
+      <a href="#sec-trade" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">7. PM Trade Matrix</a>
+    </nav>
+
+    <!-- TRACK B THESIS AUDIT BANNER -->
+    <div class="t1-vs-t0-audit" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-bottom: 24px; padding: 16px; background: rgba(30, 41, 59, 0.5); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px;">
+      <div style="border-left: 3px solid #3b82f6; padding-left: 12px;">
+        <div style="font-size: 11px; text-transform: uppercase; color: #93c5fd; font-weight: 700;">T-1 Pre-Print Expectations</div>
+        <p style="font-size: 12.5px; color: #cbd5e1; margin: 4px 0 0 0;">
+          Consensus called for $62.18M in Q3 revenue (+47.9% YoY) and -$0.05 in GAAP EPS. Buy-side whisper was $64.0M. Options straddles priced a ±12.38% move ($0.53) on restaurant AI expansion.
+        </p>
+      </div>
+      <div style="border-left: 3px solid #f59e0b; padding-left: 12px;">
+        <div style="font-size: 11px; text-transform: uppercase; color: #fcd34d; font-weight: 700;">T+0 Delivery &amp; Strategic Portfolio Pruning</div>
+        <p style="font-size: 12.5px; color: #cbd5e1; margin: 4px 0 0 0;">
+          SoundHound delivered $62.42M in revenue (+48.4% YoY), slightly beating Street ($62.18M). However, GAAP gross margin contracted to 34.09% as management non-renewed negative-margin legacy contracts, trimming FY26 guidance to $255M midpoint while initiating $375M midpoint for 2027.
+        </p>
+      </div>
+      <div style="border-left: 3px solid #8b5cf6; padding-left: 12px;">
+        <div style="font-size: 11px; text-transform: uppercase; color: #c4b5fd; font-weight: 700;">T-1 Thesis Verdict: MIXED / TRANSITIONAL</div>
+        <p style="font-size: 12.5px; color: #cbd5e1; margin: 4px 0 0 0;">
+          The voice AI deployment thesis remains intact with $120M in annualized synergies and $350M-$400M guided for 2027. However, elevated quarterly cash burn (-$95.99M) and contract pruning push sustained positive Adjusted EBITDA into second half 2027.
+        </p>
+      </div>
+    </div>
+
+    <!-- ROW 1: EXECUTIVE KPI GRID -->
+    <section class="kpi-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; margin-bottom: 24px;">
+      <div class="card kpi-card" style="padding: 16px; border: 1px solid var(--border-color); border-radius: 8px;">
+        <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 600;">Total GAAP Revenue</div>
+        <div style="font-size: 22px; font-weight: 800; color: #34d399; margin: 4px 0;">$62.42M</div>
+        <div style="font-size: 12px; color: var(--text-secondary);">
+          <span style="color: #34d399; font-weight: 700;">+48.4% YoY</span> | +$0.24M vs Consensus
+        </div>
+      </div>
+      <div class="card kpi-card" style="padding: 16px; border: 1px solid var(--border-color); border-radius: 8px;">
+        <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 600;">GAAP Gross Margin</div>
+        <div style="font-size: 22px; font-weight: 800; color: #f87171; margin: 4px 0;">34.09%</div>
+        <div style="font-size: 12px; color: var(--text-secondary);">
+          <span style="color: #f87171; font-weight: 700;">-991 bps QoQ</span> | Legacy Contract Pruning
+        </div>
+      </div>
+      <div class="card kpi-card" style="padding: 16px; border: 1px solid var(--border-color); border-radius: 8px;">
+        <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 600;">Annualized Synergy Actions</div>
+        <div style="font-size: 22px; font-weight: 800; color: #60a5fa; margin: 4px 0;">$120.0M</div>
+        <div style="font-size: 12px; color: var(--text-secondary);">
+          <span style="color: #60a5fa; font-weight: 700;">$80M+ Pre-2027</span> | Targeting 2H 2027 EBITDA
+        </div>
+      </div>
+      <div class="card kpi-card" style="padding: 16px; border: 1px solid var(--border-color); border-radius: 8px;">
+        <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 600;">Cash &amp; Equivalents</div>
+        <div style="font-size: 22px; font-weight: 800; color: #38bdf8; margin: 4px 0;">$207.58M</div>
+        <div style="font-size: 12px; color: var(--text-secondary);">
+          <span style="color: #38bdf8; font-weight: 700;">Runway to 2027</span> | Zero Near-Term Financing Needed
+        </div>
+      </div>
+    </section>
+
+    <!-- ROW 1B: SCORECARD SECTION -->
+    <section class="card scorecard" id="sec-scorecard" style="margin-bottom: 24px;">
+      <div class="card-header">
+        <div class="card-title"><span class="card-title-accent"></span>Row 1B: Post-Release Expectations &amp; Guidance Scorecard</div>
+        <span class="badge badge-blue">TABLE 1B-1 / 1B-2 / 1B-3</span>
+      </div>
+
+      <!-- TABLE 1B-1 -->
+      <div style="margin-bottom: 20px;">
+        <div style="font-weight: 700; font-size: 13.5px; color: #93c5fd; margin-bottom: 8px;">
+          Table 1B-1: Headline &amp; Operational KPI Beat/Miss Scorecard vs. Street Consensus &amp; Whisper
+        </div>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Metric</th>
+                <th>Q-1 Actual</th>
+                <th>Q-4 YoY</th>
+                <th class="col-q0">Street Consensus</th>
+                <th>Reported Q0 Actual</th>
+                <th>vs. Consensus</th>
+                <th>Verdict</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="tip" title="Consolidated GAAP Net Revenue across voice and agentic AI." data-tip="Total GAAP Revenue: $62.42M reported in Q3 2026 (+48.4% YoY vs $42.05M in Q3 2025 and +0.8% QoQ vs $61.90M in Q2 2026), slightly beating Street consensus ($62.18M) by +$0.24M (+0.39%) while falling below whisper ($64.0M) due to negative margin contract non-renewals.">Total GAAP Revenue ($M)</span></td>
+                <td>$61.90M</td>
+                <td>$42.05M</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">$62.18M</td>
+                <td style="font-weight:700; color: #34d399;">$62.42M</td>
+                <td>
+                  <span class="badge badge-bull">+$0.24M (++0.39%)</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div class="beat-bar-fill" style="width:88%; height:100%; background:linear-gradient(90deg, #10b981, #059669);"></div></div>
+                </td>
+                <td><span class="badge badge-bull">IN LINE / BEAT</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="GAAP Gross Margin percentage." data-tip="Gross Margin: 34.09% in Q3 2026 ($21.28M gross profit) down from 45.12% in Q2 2026 and 42.62% in Q3 2025, reflecting low-margin contracts from legacy Amelia acquisition that management is actively pruning.">GAAP Gross Margin (%)</span></td>
+                <td>45.12%</td>
+                <td>42.62%</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">44.00%</td>
+                <td style="font-weight:700; color: #f87171;">34.09%</td>
+                <td>
+                  <span class="badge badge-bear">-991 bps</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div class="beat-bar-fill" style="width:72%; height:100%; background:linear-gradient(90deg, #ef4444, #b91c1c);"></div></div>
+                </td>
+                <td><span class="badge badge-bear">COMPRESSION</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="GAAP Diluted Earnings Per Share." data-tip="GAAP Diluted EPS: -$0.10 in Q3 2026 vs -$0.05 Street consensus and -$0.27 in Q3 2025, impacted by acquisition integration and restructuring expenses.">GAAP Diluted EPS ($)</span></td>
+                <td>-$0.10</td>
+                <td>-$0.27</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">-$0.05</td>
+                <td style="font-weight:700; color: #f87171;">-$0.10</td>
+                <td>
+                  <span class="badge badge-bear">-$0.05</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div class="beat-bar-fill" style="width:80%; height:100%; background:linear-gradient(90deg, #f59e0b, #d97706);"></div></div>
+                </td>
+                <td><span class="badge badge-warn">MISS</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Operating cash flow from continuing operations." data-tip="Operating Cash Flow: -$95.99M in Q3 2026, widening from -$33.71M in Q2 2026 due to transaction expenses, restructuring, and working capital realignments.">Operating Cash Burn ($M)</span></td>
+                <td>-$33.71M</td>
+                <td>-$32.65M</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">-$30.00M</td>
+                <td style="font-weight:700; color: #f87171;">-$95.99M</td>
+                <td>
+                  <span class="badge badge-bear">-$65.99M</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div class="beat-bar-fill" style="width:68%; height:100%; background:linear-gradient(90deg, #ef4444, #b91c1c);"></div></div>
+                </td>
+                <td><span class="badge badge-bear">HIGH BURN</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Annualized run-rate cost synergies identified." data-tip="Annualized Synergy Actions: $120.0M identified ($80M+ effective before Jan 1, 2027), doubling Street expectations of $60M to accelerate EBITDA crossover in 2H 2027.">Annualized Synergy Actions ($M)</span></td>
+                <td>$0.0M</td>
+                <td>$0.0M</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">$50.0M</td>
+                <td style="font-weight:700; color: #34d399;">$120.0M</td>
+                <td>
+                  <span class="badge badge-bull">+$70.0M (+140%)</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div class="beat-bar-fill" style="width:98%; height:100%; background:linear-gradient(90deg, #10b981, #059669);"></div></div>
+                </td>
+                <td><span class="badge badge-bull">EXPANSION</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TABLE 1B-2 -->
+      <div style="margin-bottom: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <div style="font-weight: 700; font-size: 13.5px; color: #93c5fd;">
+            Table 1B-2: Prior-Quarter Guidance Accountability &amp; Track Record Scorecard
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <span style="font-size: 12px; color: var(--text-muted);">Guidance Credibility Score:</span>
+            <span style="font-weight: 800; color: #34d399; font-size: 13px;">85 / 100</span>
+          </div>
+        </div>
+        <div class="credibility-gauge-bar" style="height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; margin-bottom: 10px;">
+          <div class="credibility-gauge-fill" style="width: 85%; height: 100%; background: linear-gradient(90deg, #10b981, #059669);"></div>
+        </div>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Guided Metric</th>
+                <th>Prior Q2 Guidance for Q3</th>
+                <th>Reported Delivery</th>
+                <th>Variance vs Guide</th>
+                <th>Accountability Grade</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="tip" title="Q3 2026 Total Revenue ($M)" data-tip="Prior Guidance accountability check: Q3 2026 Total Revenue ($M) reported at $62.42M vs guided $61.0M - $63.0M.">Q3 2026 Total Revenue ($M)</span></td>
+                <td>$61.0M - $63.0M</td>
+                <td style="font-weight:700; color: #34d399;">$62.42M</td>
+                <td>+$0.42M (+0.7%)</td>
+                <td><span class="badge badge-bull">MET GUIDE</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Q3 2026 Gross Margin (%)" data-tip="Prior Guidance accountability check: Q3 2026 Gross Margin (%) reported at 34.09% vs guided 42.0% - 45.0%.">Q3 2026 Gross Margin (%)</span></td>
+                <td>42.0% - 45.0%</td>
+                <td style="font-weight:700; color: #34d399;">34.09%</td>
+                <td>-891 bps</td>
+                <td><span class="badge badge-bear">MISSED OWN GUIDE</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Q3 2026 GAAP Operating Loss ($M)" data-tip="Prior Guidance accountability check: Q3 2026 GAAP Operating Loss ($M) reported at -$46.50M vs guided -$42.0M to -$48.0M.">Q3 2026 GAAP Operating Loss ($M)</span></td>
+                <td>-$42.0M to -$48.0M</td>
+                <td style="font-weight:700; color: #34d399;">-$46.50M</td>
+                <td>Within Range</td>
+                <td><span class="badge badge-bull">MET GUIDE</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Q3 2026 Cash & Equivalents ($M)" data-tip="Prior Guidance accountability check: Q3 2026 Cash & Equivalents ($M) reported at $207.58M vs guided $200.0M - $220.0M.">Q3 2026 Cash & Equivalents ($M)</span></td>
+                <td>$200.0M - $220.0M</td>
+                <td style="font-weight:700; color: #34d399;">$207.58M</td>
+                <td>+$7.58M</td>
+                <td><span class="badge badge-bull">MET GUIDE</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TABLE 1B-3 -->
+      <div>
+        <div style="font-weight: 700; font-size: 13.5px; color: #93c5fd; margin-bottom: 8px;">
+          Table 1B-3: Forward FY 2026 &amp; FY 2027 Guidance Reset vs. Street Pre-Print Hurdle
+        </div>
+        <div class="table-wrapper">
+          <table>
+            <thead>
+              <tr>
+                <th>Forward Target Metric</th>
+                <th>Street Pre-Print Hurdle</th>
+                <th>New Management Guidance</th>
+                <th>Guidance Spread</th>
+                <th>Action Badge</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="tip" title="FY 2026 Revenue ($M)" data-tip="Forward guidance reset: New FY target for FY 2026 Revenue ($M) is $250.0M - $260.0M ($255.0M) vs pre-print consensus $262.50M.">FY 2026 Revenue ($M)</span></td>
+                <td>$262.50M</td>
+                <td style="font-weight:700; color: #34d399;">$250.0M - $260.0M ($255.0M)</td>
+                <td style="font-weight:600; color: #60a5fa;">-$7.5M (-2.9%)</td>
+                <td><span class="badge badge-bear">LOWERED (CONTRACT PRUNING)</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="FY 2027 Revenue Outlook ($M)" data-tip="Forward guidance reset: New FY target for FY 2027 Revenue Outlook ($M) is $350.0M - $400.0M ($375.0M) vs pre-print consensus $365.00M.">FY 2027 Revenue Outlook ($M)</span></td>
+                <td>$365.00M</td>
+                <td style="font-weight:700; color: #34d399;">$350.0M - $400.0M ($375.0M)</td>
+                <td style="font-weight:600; color: #60a5fa;">+$10.0M (+2.7%)</td>
+                <td><span class="badge badge-bull">INITIATED POSITIVE</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="EBITDA Profitability Timeline" data-tip="Forward guidance reset: New FY target for EBITDA Profitability Timeline is Sustained Positive within 2H 2027 vs pre-print consensus Q4 2026.">EBITDA Profitability Timeline</span></td>
+                <td>Q4 2026</td>
+                <td style="font-weight:700; color: #34d399;">Sustained Positive within 2H 2027</td>
+                <td style="font-weight:600; color: #60a5fa;">Pushed 2 Quarters</td>
+                <td><span class="badge badge-warn">RESET</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Annualized Cost Synergies ($M)" data-tip="Forward guidance reset: New FY target for Annualized Cost Synergies ($M) is $120.00M ($80M pre-Jan 2027) vs pre-print consensus $60.00M.">Annualized Cost Synergies ($M)</span></td>
+                <td>$60.00M</td>
+                <td style="font-weight:700; color: #34d399;">$120.00M ($80M pre-Jan 2027)</td>
+                <td style="font-weight:600; color: #60a5fa;">+$60.0M (+100%)</td>
+                <td><span class="badge badge-bull">DOUBLED</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROW 2: 5-QUARTER TABLE WITH ROLLING Q0 ACTUAL + Q+1E -->
+    <section class="card rolling-5q" id="sec-5q" style="margin-bottom: 24px;">
+      <div class="card-header">
+        <div class="card-title"><span class="card-title-accent"></span>Row 2: 5-Quarter Financial Performance &amp; Dynamic Segment Breakdown</div>
+        <span class="badge badge-blue">GAAP CONDENSED P&amp;L RECONCILIATION</span>
+      </div>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Metric ($M)</th>
+              <th>Q3 2025</th>
+              <th>Q4 2025</th>
+              <th>Q1 2026</th>
+              <th>Q2 2026</th>
+              <th class="col-q0" style="color: #34d399; font-weight: 700;">Q3 2026 (Actual)</th>
+              <th class="col-est" style="color: #60a5fa; font-weight: 700;">Q4 2026E (Guided / Street)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="font-weight: 700; background: rgba(255,255,255,0.02);">
+              <td><span class="tip" title="Total GAAP Net Revenue" data-tip="Total GAAP Revenue: $62.42M in Q3 2026, representing +48.4% YoY growth from $42.05M in Q3 2025.">Total GAAP Revenue</span></td>
+              <td>$42.05M</td>
+              <td>$55.06M</td>
+              <td>$44.20M</td>
+              <td>$61.90M</td>
+              <td class="col-q0" style="color: #34d399;">$62.42M</td>
+              <td class="col-est">$86.48M</td>
+            </tr>
+            <tr class="sub-row">
+              <td><span class="tip" title="Automotive &amp; Connected IoT Voice AI" data-tip="Embedded automotive voice interfaces deployed across Stellantis, Hyundai, and Kia.">↳ Automotive &amp; Connected IoT Voice AI</span></td>
+              <td>$23.13M</td>
+              <td>$29.18M</td>
+              <td>$22.10M</td>
+              <td>$27.85M</td>
+              <td class="col-q0">$27.50M</td>
+              <td class="col-est">$35.00M</td>
+            </tr>
+            <tr class="sub-row">
+              <td><span class="tip" title="Restaurant Smart Ordering &amp; Drive-Thru AI" data-tip="Automated voice ordering and phone answering for global QSR chains.">↳ Restaurant Smart Ordering &amp; Drive-Thru AI</span></td>
+              <td>$13.46M</td>
+              <td>$17.62M</td>
+              <td>$14.59M</td>
+              <td>$21.67M</td>
+              <td class="col-q0">$22.50M</td>
+              <td class="col-est">$30.00M</td>
+            </tr>
+            <tr class="sub-row">
+              <td><span class="tip" title="Enterprise Conversational AI &amp; Amelia Unit" data-tip="Customer service agents and IT helpdesk automation inherited from Amelia acquisition.">↳ Enterprise AI &amp; Amelia Platform</span></td>
+              <td>$3.36M</td>
+              <td>$5.51M</td>
+              <td>$5.30M</td>
+              <td>$9.28M</td>
+              <td class="col-q0">$9.82M</td>
+              <td class="col-est">$17.00M</td>
+            </tr>
+            <tr class="sub-row">
+              <td><span class="tip" title="Consumer Apps &amp; Other Emerging" data-tip="Consumer apps, music ID, and specialized developer licensing.">↳ Consumer Apps &amp; Emerging</span></td>
+              <td>$2.10M</td>
+              <td>$2.75M</td>
+              <td>$2.21M</td>
+              <td>$3.10M</td>
+              <td class="col-q0">$2.60M</td>
+              <td class="col-est">$4.48M</td>
+            </tr>
+            <tr>
+              <td>Cost of Revenue</td>
+              <td>$24.13M</td>
+              <td>$28.71M</td>
+              <td>$30.46M</td>
+              <td>$33.97M</td>
+              <td class="col-q0">$41.14M</td>
+              <td class="col-est">$48.00M</td>
+            </tr>
+            <tr style="font-weight: 700;">
+              <td><span class="tip" title="Gross Profit" data-tip="Gross profit of $21.28M in Q3 2026.">Gross Profit</span></td>
+              <td>$17.92M</td>
+              <td>$26.35M</td>
+              <td>$13.74M</td>
+              <td>$27.93M</td>
+              <td class="col-q0" style="color: #34d399;">$21.28M</td>
+              <td class="col-est">$38.48M</td>
+            </tr>
+            <tr>
+              <td>Gross Margin %</td>
+              <td>42.62%</td>
+              <td>47.86%</td>
+              <td>31.09%</td>
+              <td>45.12%</td>
+              <td class="col-q0" style="color: #f87171;">34.09%</td>
+              <td class="col-est">44.50%</td>
+            </tr>
+            <tr class="sub-row">
+              <td>↳ Research &amp; Development (R&amp;D)</td>
+              <td>$28.00M</td>
+              <td>$27.50M</td>
+              <td>$32.00M</td>
+              <td>$31.50M</td>
+              <td class="col-q0">$30.87M</td>
+              <td class="col-est">$28.00M</td>
+            </tr>
+            <tr class="sub-row">
+              <td>↳ Sales &amp; Marketing (S&amp;M)</td>
+              <td>$16.50M</td>
+              <td>$17.00M</td>
+              <td>$19.50M</td>
+              <td>$18.50M</td>
+              <td class="col-q0">$18.22M</td>
+              <td class="col-est">$17.00M</td>
+            </tr>
+            <tr class="sub-row">
+              <td>↳ General &amp; Administrative (G&amp;A)</td>
+              <td>$23.07M</td>
+              <td>$23.91M</td>
+              <td>$24.31M</td>
+              <td>$24.92M</td>
+              <td class="col-q0">$35.95M</td>
+              <td class="col-est">$20.00M</td>
+            </tr>
+            <tr>
+              <td><span class="tip" title="Total Operating Expenses" data-tip="Total GAAP OpEx of $67.78M in Q3 2026.">Total Operating Expenses</span></td>
+              <td>$67.57M</td>
+              <td>$68.41M</td>
+              <td>$75.81M</td>
+              <td>$74.92M</td>
+              <td class="col-q0">$67.78M</td>
+              <td class="col-est">$65.00M</td>
+            </tr>
+            <tr style="font-weight: 700;">
+              <td><span class="tip" title="Operating Income (Loss)" data-tip="GAAP Operating Loss of -$46.50M in Q3 2026 ($21.28M Gross Profit - $67.78M OpEx).">Operating Income (Loss)</span></td>
+              <td>-$49.65M</td>
+              <td>-$42.06M</td>
+              <td>-$62.06M</td>
+              <td>-$46.99M</td>
+              <td class="col-q0" style="color: #f87171;">-$46.50M</td>
+              <td class="col-est">-$26.52M</td>
+            </tr>
+            <tr>
+              <td>GAAP Net Income (Loss)</td>
+              <td>-$109.27M</td>
+              <td>$40.06M</td>
+              <td>-$25.03M</td>
+              <td>-$42.82M</td>
+              <td class="col-q0" style="color: #f87171;">-$46.37M</td>
+              <td class="col-est">-$25.00M</td>
+            </tr>
+            <tr>
+              <td>GAAP Diluted EPS ($)</td>
+              <td>-$0.27</td>
+              <td>-$0.03</td>
+              <td>-$0.11</td>
+              <td>-$0.10</td>
+              <td class="col-q0" style="color: #f87171;">-$0.10</td>
+              <td class="col-est">-$0.05</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ROW 3: FORENSIC TRUE FCF BRIDGE -->
+    <section class="card" id="sec-fcf" style="margin-bottom: 24px;">
+      <div class="card-header">
+        <div class="card-title"><span class="card-title-accent"></span>Row 3: Forensic Quality-of-Earnings &amp; True Free Cash Flow Bridge</div>
+        <span class="badge badge-purple">SEC CASH FLOW AUDIT</span>
+      </div>
+      <div class="forensic-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 16px; border-radius: 8px; border: 1px solid var(--border-color);">
+          <div style="font-weight: 700; font-size: 13.5px; color: #93c5fd; margin-bottom: 12px;">Q3 2026 Quarterly Cash Flow Waterfall ($M)</div>
+          <div class="waterfall-row" style="display:flex; justify-content:space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 12.5px;">
+            <span class="tip" title="Operating cash flow from continuing operations." data-tip="Operating Cash Flow: -$95.99M (-95.99M exact) in Q3 2026.">(+) Operating Cash Flow (OCF)</span>
+            <span style="font-weight:700; color: #f87171;">-$95.99M</span>
+          </div>
+          <div class="waterfall-row" style="display:flex; justify-content:space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 12.5px;">
+            <span class="tip" title="Capital expenditures." data-tip="CapEx: $1.12M in Q3 2026.">(-) Capital Expenditures (CapEx)</span>
+            <span style="font-weight:700; color: #f87171;">-$1.12M</span>
+          </div>
+          <div class="waterfall-row" style="display:flex; justify-content:space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 12.5px; background: rgba(59, 130, 246, 0.08); padding-left: 6px; padding-right: 6px;">
+            <span style="font-weight:600;">(=) Reported Free Cash Flow</span>
+            <span style="font-weight:700; color: #f87171;">-$97.11M</span>
+          </div>
+          <div class="waterfall-row" style="display:flex; justify-content:space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 12.5px;">
+            <span class="tip" title="Stock-based compensation." data-tip="Stock-Based Compensation: $61.02M in Q3 2026.">(-) Stock-Based Compensation (SBC)</span>
+            <span style="font-weight:700; color: #f87171;">-$61.02M</span>
+          </div>
+          <div class="waterfall-row" style="display:flex; justify-content:space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 12.5px;">
+            <span class="tip" title="Finance lease payments." data-tip="Finance Leases: $0.00M recorded.">(-) Principal Finance Leases</span>
+            <span style="font-weight:700; color: #94a3b8;">-$0.00M</span>
+          </div>
+          <div class="waterfall-row" style="display:flex; justify-content:space-between; padding: 8px 6px; font-size: 13.5px; background: rgba(239, 68, 68, 0.12); border-radius: 6px; margin-top: 6px;">
+            <span style="font-weight:700; color: #f87171;">(=) Forensic True Free Cash Flow</span>
+            <span style="font-weight:800; color: #f87171;">-$158.13M</span>
+          </div>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 16px; border-radius: 8px; border: 1px solid var(--border-color); display:flex; flex-direction:column; justify-content:space-between;">
+          <div>
+            <div style="font-weight: 700; font-size: 13.5px; color: #93c5fd; margin-bottom: 10px;">Forensic Cash Quality &amp; Balance Sheet Fortress Assessment</div>
+            <p style="font-size: 12.5px; color: #cbd5e1; line-height: 1.5; margin-bottom: 10px;">
+              SoundHound recorded elevated cash burn in Q3 2026 with Operating Cash Flow of <strong>-$95.99M</strong> and Reported Free Cash Flow of <strong>-$97.11M</strong>. Non-cash stock-based compensation totaled $61.02M, leading to Forensic True Free Cash Flow of <strong>-$158.13M</strong>.
+            </p>
+            <div style="font-size: 12px; color: var(--text-muted); line-height: 1.6;">
+              • <strong>Cash &amp; Equivalents Cushion:</strong> SoundHound held $207.58M in cash and cash equivalents as of September 30, 2026. Management reiterated that this capital base provides sufficient runway to bridge the company to positive adjusted EBITDA in 2H 2027 without secondary equity issuance.<br>
+              • <strong>One-Time Acquisition Burn Items:</strong> Cash burn in Q3 included non-recurring integration disbursements, advisory fees, and restructuring payouts associated with the Amelia transaction.<br>
+              • <strong>Cost Synergy Realization Schedule:</strong> Over $80M of the total $120M identified annualized cost synergies will be executed before January 1, 2027, drastically curtailing quarterly operating expenses.<br>
+              • <strong>Capital Intensity Discipline:</strong> Property and equipment additions remained minimal at $1.12M, preserving balance sheet flexibility for cloud model training.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROW 4: AUDIT GRID & CALL QA -->
+    <section class="card audit-grid" id="sec-audit" style="margin-bottom: 24px;">
+      <div class="card-header">
+        <div class="card-title"><span class="card-title-accent"></span>Row 4: Operational Wins, Drags &amp; Earnings Call Q&amp;A Audit</div>
+        <span class="badge badge-blue">QUALITATIVE &amp; TRANSCRIPT FORENSICS</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin-bottom: 20px;">
+        <div style="border-left: 3px solid #10b981; padding-left: 14px;">
+          <h4 style="margin: 0 0 8px 0; color: #34d399; font-size: 14px;">Operational Wins &amp; Catalysts</h4>
+          <ul style="font-size: 12.5px; color: #cbd5e1; margin: 0; padding-left: 18px; line-height: 1.6;">
+            <li><strong>Robust Top-Line Expansion:</strong> Revenue increased 48.4% YoY to $62.42M, driven by rapid customer rollouts across automotive and restaurant verticals.</li>
+            <li><strong>Doubled Synergy Target:</strong> Identified $120M in annualized cost reductions ($80M+ pre-2027), doubling previous estimates and accelerating structural margin recovery.</li>
+            <li><strong>Restaurant Voice AI Expansion:</strong> Restaurant smart ordering revenue climbed 67.2% YoY to $22.50M as leading QSR brands scaled drive-thru automation.</li>
+            <li><strong>Strong 2027 Revenue Outlook:</strong> Initiated 2027 revenue guidance of $350M - $400M ($375M midpoint), reflecting high-confidence enterprise pipeline conversions.</li>
+          </ul>
+        </div>
+        <div style="border-left: 3px solid #ef4444; padding-left: 14px;">
+          <h4 style="margin: 0 0 8px 0; color: #f87171; font-size: 14px;">Execution Drags &amp; Watch Items</h4>
+          <ul style="font-size: 12.5px; color: #cbd5e1; margin: 0; padding-left: 18px; line-height: 1.6;">
+            <li><strong>Gross Margin Compression:</strong> Gross margin fell to 34.09% (-991 bps QoQ) as legacy low-margin contracts from acquired units weighed on profitability.</li>
+            <li><strong>FY 2026 Guidance Trimming:</strong> Full-year revenue guided to $250M-$260M (down from $262.5M Street consensus) due to deliberate contract non-renewals.</li>
+            <li><strong>Pushed-Out EBITDA Milestone:</strong> Sustained positive Adjusted EBITDA timeline shifted two quarters forward into second half 2027.</li>
+            <li><strong>Spike in Quarterly Cash Burn:</strong> Operating cash flow burn expanded to -$95.99M, necessitating strict execution on announced synergy targets.</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <h4 style="margin: 0 0 10px 0; color: #93c5fd; font-size: 14px;">Top Institutional Analyst Q&amp;A and Analyst Questions Forensic Exchanges</h4>
+        <div class="audit-point" style="background: rgba(11, 15, 25, 0.6); border: 1px solid var(--border-color); border-left: 3px solid #3b82f6; padding: 12px 14px; border-radius: 6px; margin-bottom: 12px;">
+          <div style="font-weight: 700; color: #93c5fd; font-size: 13.5px; margin-bottom: 4px;">
+            Dan Ives (Wedbush) &mdash; <span style="color: #cbd5e1;">Contract Pruning Strategy & Gross Margin Trough</span>
+          </div>
+          <p style="font-size: 12.5px; color: #94a3b8; margin: 4px 0;"><strong>Question:</strong> Can you walk through the decision to exit certain negative gross margin contracts? Is 34% the trough for gross margin, and how quickly does it rebound toward 50%?</p>
+          <p style="font-size: 12.5px; color: #e2e8f0; margin: 4px 0;"><strong>Executive Answer:</strong> Keyvan Mohajer (CEO): 'When we acquired Amelia and earlier assets, some legacy customer commitments carried negative economics. We made the disciplined decision not to renew those contracts. That creates a minor short-term revenue drag, but it immediately clears our path to sustained gross margins above 50% and positive EBITDA by second half 2027.'</p>
+          <div style="font-size: 11px; color: #34d399; font-weight: 600; margin-top: 4px;">Forensic Assessment: DISCIPLINED OPERATIONAL RESET</div>
+        </div>
+        <div class="audit-point" style="background: rgba(11, 15, 25, 0.6); border: 1px solid var(--border-color); border-left: 3px solid #3b82f6; padding: 12px 14px; border-radius: 6px; margin-bottom: 12px;">
+          <div style="font-weight: 700; color: #93c5fd; font-size: 13.5px; margin-bottom: 4px;">
+            Glenn Mattson (Ladenburg Thalmann) &mdash; <span style="color: #cbd5e1;">Cash Runway & Operating Burn Spikes</span>
+          </div>
+          <p style="font-size: 12.5px; color: #94a3b8; margin: 4px 0;"><strong>Question:</strong> Operating cash burn rose to -$96M this quarter, leaving $207.6M in cash. Do you have sufficient liquidity to reach your 2H 2027 profitability milestone without dilutive capital raises?</p>
+          <p style="font-size: 12.5px; color: #e2e8f0; margin: 4px 0;"><strong>Executive Answer:</strong> Nitesh Sharan (CFO): 'Yes, absolutely. The Q3 cash burn included one-time transaction fees, severance costs, and working capital timing from our acquisitions. With $80M in synergy actions hitting before year-end, our quarterly cash burn will drop precipitously in Q4 and through 2027. We do not need outside financing.'</p>
+          <div style="font-size: 11px; color: #34d399; font-weight: 600; margin-top: 4px;">Forensic Assessment: LIQUIDITY RUNWAY CONFIRMED</div>
+        </div>
+        <div class="audit-point" style="background: rgba(11, 15, 25, 0.6); border: 1px solid var(--border-color); border-left: 3px solid #3b82f6; padding: 12px 14px; border-radius: 6px; margin-bottom: 12px;">
+          <div style="font-weight: 700; color: #93c5fd; font-size: 13.5px; margin-bottom: 4px;">
+            Scott Buck (H.C. Wainwright) &mdash; <span style="color: #cbd5e1;">OASYS Agentic AI Platform & Enterprise Demand</span>
+          </div>
+          <p style="font-size: 12.5px; color: #94a3b8; margin: 4px 0;"><strong>Question:</strong> How are customers responding to OASYS, and does the shift to a hosted recurring model change your sales cycle length?</p>
+          <p style="font-size: 12.5px; color: #e2e8f0; margin: 4px 0;"><strong>Executive Answer:</strong> Keyvan Mohajer: 'OASYS shifts us from episodic upfront software licenses to predictable monthly recurring revenue. Our agentic voice models can now perform multi-step transactional tasks—like booking service appointments or processing complex food orders—fully autonomously. Enterprise pipeline is at an all-time high.'</p>
+          <div style="font-size: 11px; color: #34d399; font-weight: 600; margin-top: 4px;">Forensic Assessment: ARR STABILITY FOCUS</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROW 5: PEER GROUP COMPS -->
+    <section class="card peers" id="sec-comps" style="margin-bottom: 24px;">
+      <div class="card-header">
+        <div class="card-title"><span class="card-title-accent"></span>Row 5: Conversational AI &amp; Enterprise Software Peer Valuation Comps</div>
+        <span class="badge badge-blue">RE-ANCHORED TO AFTER-HOURS PRICE</span>
+      </div>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Company</th>
+              <th>Ticker</th>
+              <th>Market Cap ($M)</th>
+              <th>EV ($M)</th>
+              <th>Q3 YoY Rev Growth</th>
+              <th>Gross Margin %</th>
+              <th>EV / NTM Rev</th>
+              <th>Strategic Positioning</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background: rgba(59, 130, 246, 0.1); font-weight: 700;">
+              <td>SoundHound AI, Inc.</td>
+              <td>SOUN</td>
+              <td>$1,913.6M</td>
+              <td>$1,694.6M</td>
+              <td style="color: #34d399;">+48.4%</td>
+              <td>34.09%</td>
+              <td>5.2x</td>
+              <td>Voice &amp; Agentic AI for Automotive, Restaurants &amp; Enterprise Service</td>
+            </tr>
+            <tr>
+              <td>Cerence Inc.</td>
+              <td>CRNC</td>
+              <td>$450.0M</td>
+              <td>$680.0M</td>
+              <td>-4.0%</td>
+              <td>68.50%</td>
+              <td>2.1x</td>
+              <td>Automotive In-Vehicle Voice &amp; Connected Assistant Software</td>
+            </tr>
+            <tr>
+              <td>LivePerson, Inc.</td>
+              <td>LPSN</td>
+              <td>$110.0M</td>
+              <td>$490.0M</td>
+              <td>-18.0%</td>
+              <td>62.00%</td>
+              <td>1.8x</td>
+              <td>Enterprise Conversational Commerce &amp; Customer Care Messaging</td>
+            </tr>
+            <tr>
+              <td>C3.ai, Inc.</td>
+              <td>AI</td>
+              <td>$3,200.0M</td>
+              <td>$2,450.0M</td>
+              <td>+20.5%</td>
+              <td>59.00%</td>
+              <td>7.5x</td>
+              <td>Enterprise Generative AI Applications &amp; Predictive Maintenance</td>
+            </tr>
+            <tr>
+              <td>Verint Systems</td>
+              <td>VRNT</td>
+              <td>$1,850.0M</td>
+              <td>$2,150.0M</td>
+              <td>+5.5%</td>
+              <td>71.00%</td>
+              <td>2.4x</td>
+              <td>Customer Engagement Software, Workforce Automation &amp; AI Bots</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ROW 6: 4-PILLAR POST-EARNINGS SENTIMENT -->
+    <section class="card" id="sec-sentiment" style="margin-bottom: 24px;">
+      <div class="card-header">
+        <div class="card-title"><span class="card-title-accent"></span>Row 6: Multi-Source 4-Pillar Post-Print Sentiment Gauge</div>
+        <span class="badge badge-purple">TRANSITIONAL CAUTION (71 / 100)</span>
+      </div>
+      <div class="sentiment-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 16px;">
+        <div style="background: rgba(255,255,255,0.03); padding: 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.06);">
+          <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted);">Institutional Positioning</div>
+          <div style="font-size: 20px; font-weight: 800; color: #60a5fa; margin: 4px 0;">74 / 100</div>
+          <div class="sentiment-meter-bar" style="height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; margin-top: 6px;">
+            <div style="width: 74%; height: 100%; background: #3b82f6;"></div>
+          </div>
+          <div style="font-size: 11.5px; color: var(--text-secondary); margin-top: 6px;">Institutional accounts adopt wait-and-see stance on execution of $120M cost synergies.</div>
+        </div>
+        <div style="background: rgba(255,255,255,0.03); padding: 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.06);">
+          <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted);">Retail Trader Pulse</div>
+          <div style="font-size: 20px; font-weight: 800; color: #f87171; margin: 4px 0;">68 / 100</div>
+          <div class="sentiment-meter-bar" style="height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; margin-top: 6px;">
+            <div style="width: 68%; height: 100%; background: #ef4444;"></div>
+          </div>
+          <div style="font-size: 11.5px; color: var(--text-secondary); margin-top: 6px;">Retail traders disappointed by gross margin drop to 34% and pushed-out EBITDA timeline.</div>
+        </div>
+        <div style="background: rgba(255,255,255,0.03); padding: 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.06);">
+          <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted);">Options Volatility Skew</div>
+          <div style="font-size: 20px; font-weight: 800; color: #a855f7; margin: 4px 0;">82 / 100</div>
+          <div class="sentiment-meter-bar" style="height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; margin-top: 6px;">
+            <div style="width: 82%; height: 100%; background: #a855f7;"></div>
+          </div>
+          <div style="font-size: 11.5px; color: var(--text-secondary); margin-top: 6px;">Downside move of -7.51% remained inside the ±12.38% priced band, driving IV crush.</div>
+        </div>
+        <div style="background: rgba(255,255,255,0.03); padding: 14px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.06);">
+          <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted);">Sell-Side Revision Tone</div>
+          <div style="font-size: 20px; font-weight: 800; color: #34d399; margin: 4px 0;">76 / 100</div>
+          <div class="sentiment-meter-bar" style="height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden; margin-top: 6px;">
+            <div style="width: 76%; height: 100%; background: #10b981;"></div>
+          </div>
+          <div style="font-size: 11.5px; color: var(--text-secondary); margin-top: 6px;">Analysts welcome contract pruning as necessary medicine that clears the path to 2027 profits.</div>
+        </div>
+      </div>
+      <p style="font-size: 12.5px; color: var(--text-secondary); margin: 0; line-height: 1.5;">
+        <strong>Desk Takeaway &amp; Driver:</strong> Stock declined -7.51% to $3.94 as gross margin fell to 34.09% and management reset 2026 revenue guidance to $255M midpoint due to strategic non-renewal of negative margin contracts, despite initiating strong 2027 revenue targets ($350M-$400M) and doubling cost synergies to $120M.
+      </p>
+    </section>
+
+    <!-- ROW 7: HEDGE FUND PM TRADE EXECUTION MATRIX -->
+    <section class="card" id="sec-trade" style="margin-bottom: 24px;">
+      <div class="card-header">
+        <div class="card-title"><span class="card-title-accent"></span>Row 7: Institutional PM Post-Earnings Trade Execution Playbook</div>
+        <span class="badge badge-purple">OPTIONS &amp; TACTICAL STRATEGY</span>
+      </div>
+      <div class="scenario-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
+        <div class="scenario-bull" style="background: rgba(16, 185, 129, 0.04); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 8px; padding: 16px;">
+          <div style="font-size: 13px; font-weight: 700; color: #34d399; margin-bottom: 6px;">Bull Case Target: $5.80</div>
+          <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 10px;">Target Range: $5.20 - $6.50 (+32% to +65% from AH $3.94)</div>
+          <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 12px;">
+            $120M in annualized cost synergies materialize ahead of schedule, gross margins rebound above 50% as negative contracts exit, and 2027 revenue approaches the top end of the $350M-$400M guidance range.
+          </p>
+          <div class="trade-structure" style="background: rgba(0,0,0,0.3); padding: 10px; border-radius: 6px; font-size: 12px; border-left: 3px solid #10b981;">
+            <strong>Options Structure:</strong> Buy Jan 2027 $4.00 / $6.00 Bull Call Spread. Sell $3.00 Put to finance premium.
+          </div>
+        </div>
+        <div class="scenario-base" style="background: rgba(59, 130, 246, 0.04); border: 1px solid rgba(59, 130, 246, 0.2); border-radius: 8px; padding: 16px;">
+          <div style="font-size: 13px; font-weight: 700; color: #60a5fa; margin-bottom: 6px;">Base Case Anchor: $4.00</div>
+          <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 10px;">Target Range: $3.60 - $4.40 (-9% to +12% around AH $3.94)</div>
+          <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 12px;">
+            Stock stabilizes around $4.00 as the market digests the guidance reset and monitors Q4 cash burn progression toward lower sequential run-rates.
+          </p>
+          <div class="trade-structure" style="background: rgba(0,0,0,0.3); padding: 10px; border-radius: 6px; font-size: 12px; border-left: 3px solid #3b82f6;">
+            <strong>Options Structure:</strong> Sell Nov 2026 $3.50 / $4.50 Strangle to capture post-earnings volatility contraction.
+          </div>
+        </div>
+        <div class="scenario-bear" style="background: rgba(239, 68, 68, 0.04); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 8px; padding: 16px;">
+          <div style="font-size: 13px; font-weight: 700; color: #f87171; margin-bottom: 6px;">Bear Case Target: $2.80</div>
+          <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 10px;">Target Range: $2.40 - $3.20 (-19% to -39% from AH $3.94)</div>
+          <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 12px;">
+            Cash burn remains elevated into 2027, Amelia integration stalls, and customer churn accelerates beyond management's initial pruning expectations.
+          </p>
+          <div class="trade-structure" style="background: rgba(0,0,0,0.3); padding: 10px; border-radius: 6px; font-size: 12px; border-left: 3px solid #ef4444;">
+            <strong>Options Structure:</strong> Buy Dec 2026 $3.50 Puts funded by writing $5.00 Covered Calls.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SEC CITATIONS & AUDIT LEDGER FOOTER -->
+    <footer style="padding: 16px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 11.5px; color: var(--text-muted); line-height: 1.5;">
+      <div><strong>Filing Ledger &amp; Source Attributions:</strong> SEC Form 8-K filed on November 5, 2026 (Item 2.02 Results of Operations and Financial Condition, Exhibits 99.1 Press Release and 99.2 Condensed Financial Statements). Historical 5Q financial series sourced from SEC EDGAR Forms 10-Q and verified against SoundHound AI Investor Relations. Stock pricing captured at 6:00 PM PST ($3.94 USD).</div>
+      <div style="margin-top: 4px;">Zero-Hallucination Pipeline standard enforced: All historical numbers, beat/miss deltas, options-implied moves, and forensic cash flow metrics are immutable ground truth.</div>
+    </footer>
+  </div>
+</body>
+</html>

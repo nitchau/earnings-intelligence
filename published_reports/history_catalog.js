@@ -398,10 +398,10 @@ window.EARNINGS_HISTORY_CATALOG = {
       "quarter": "Q3 2026",
       "date_display": "Nov 5, 2026",
       "t1": "SOUN_T1_2026-11-05.html",
-      "t0": null,
+      "t0": "SOUN_T0_POST_2026-11-05.html",
       "verdict": "HEADLINE BEAT / GUIDANCE RESET",
       "post_move_pct": -7.51,
-      "rev_actual_m": null,
+      "rev_actual_m": 62.42,
       "rev_consensus_m": 62.18,
       "currency": "$"
     }
