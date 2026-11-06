@@ -230,10 +230,10 @@ window.EARNINGS_HISTORY_CATALOG = {
       "quarter": "Q3 2026",
       "date_display": "Nov 5, 2026",
       "t1": "LIDR_T1_2026-11-05.html",
-      "t0": null,
+      "t0": "LIDR_T0_POST_2026-11-05.html",
       "verdict": "CLEAN MISS",
       "post_move_pct": -2.25,
-      "rev_actual_m": null,
+      "rev_actual_m": 0.51,
       "rev_consensus_m": 0.57,
       "currency": "$"
     }
