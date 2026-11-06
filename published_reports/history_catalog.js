@@ -454,10 +454,10 @@ window.EARNINGS_HISTORY_CATALOG = {
       "quarter": "Q3 2026",
       "date_display": "Nov 5, 2026",
       "t1": "TXG_T1_2026-11-05.html",
-      "t0": null,
+      "t0": "TXG_T0_POST_2026-11-05.html",
       "verdict": "REVENUE BEAT / EPS MISS",
       "post_move_pct": -9.73,
-      "rev_actual_m": null,
+      "rev_actual_m": 150.67,
       "rev_consensus_m": 147.85,
       "currency": "$"
     }
