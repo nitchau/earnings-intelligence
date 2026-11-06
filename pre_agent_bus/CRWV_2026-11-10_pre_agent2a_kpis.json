@@ -1,0 +1,58 @@
+{
+  "ticker": "CRWV",
+  "earnings_date": "2026-11-10",
+  "agent": "Pre_KPI_Consensus_Agent (Agent 2A)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "upcoming_quarter_label": "Q3 2026E",
+  "latest_reported_quarter_label": "Q2 2026 (Ended Jun 30, 2026)",
+  "headline_and_company_kpis": [
+    {
+      "metric": "Total GAAP Revenue ($M)",
+      "tooltip_title": "Consolidated quarterly GAAP revenue across Dedicated GPU Compute, On-Demand Cloud, and High-Speed AI Interconnect.",
+      "tooltip_def": "Total GAAP Revenue ($M): CoreWeave delivered $2,575.0M in Q2 2026 (+112.46% YoY vs $1,212.0M in Q2 2025). Wall Street consensus models $3,540.79M in Q3 2026E (+159.46% YoY vs $1,364.68M in Q3 2025), with buy-side whisper bogeys looking for $3,650.0M+ on aggressive Nvidia Blackwell B200 and H200 cluster turn-ups.",
+      "q_minus_1_actual": "$2,575.0M",
+      "q_minus_4_yoy_baseline": "$1,364.7M",
+      "street_consensus_q0e": "$3,540.8M",
+      "whisper_bogey_q0e": "$3,650.0M",
+      "whisper_spread_display": "+3.08% Spread",
+      "bar_width_pct": 88,
+      "hurdle_badge": "Consensus Hurdle"
+    },
+    {
+      "metric": "GAAP Diluted EPS ($/sh)",
+      "tooltip_title": "Quarterly GAAP net loss per share reflecting massive data center buildout depreciation and debt service.",
+      "tooltip_def": "GAAP Diluted EPS ($/sh): Q2 2026 actual EPS came in at -$1.14 (beating consensus of -$1.47). Street models -$1.55 for Q3 2026E with buy-side whisper looking for -$1.45 on superior power utilization.",
+      "q_minus_1_actual": "-$1.14",
+      "q_minus_4_yoy_baseline": "-$0.22",
+      "street_consensus_q0e": "-$1.55",
+      "whisper_bogey_q0e": "-$1.45",
+      "whisper_spread_display": "+$0.10 Better",
+      "bar_width_pct": 78,
+      "hurdle_badge": "Bottom-Line Hurdle"
+    },
+    {
+      "metric": "Contracted Revenue Backlog ($B)",
+      "tooltip_title": "Total multi-year contractual commitments for dedicated GPU AI clusters from foundation model developers and hyperscalers.",
+      "tooltip_def": "Contracted Revenue Backlog ($B): CoreWeave reported $28.5B in contracted backlog in Q2 2026; Street consensus models expansion to $33.0B, with whisper bogeys stretching to $35.0B+ driven by Tier-1 frontier lab multi-year reservation extensions.",
+      "q_minus_1_actual": "$28.50B",
+      "q_minus_4_yoy_baseline": "$14.20B",
+      "street_consensus_q0e": "$33.00B",
+      "whisper_bogey_q0e": "$35.00B",
+      "whisper_spread_display": "+$2.00B Expansion",
+      "bar_width_pct": 92,
+      "hurdle_badge": "Visibility Driver"
+    },
+    {
+      "metric": "Active Deployed Megawatts (MW)",
+      "tooltip_title": "Total energised and operational data center power capacity hosting production GPU workloads.",
+      "tooltip_def": "Active Deployed Megawatts (MW): Total energised data center power reached 470 MW in Q2 2026 (+135% YoY); consensus expects 620 MW operational by Q3 2026E as gigawatt-scale campus phases come online.",
+      "q_minus_1_actual": "470 MW",
+      "q_minus_4_yoy_baseline": "200 MW",
+      "street_consensus_q0e": "620 MW",
+      "whisper_bogey_q0e": "650 MW",
+      "whisper_spread_display": "+30 MW Capacity",
+      "bar_width_pct": 85,
+      "hurdle_badge": "Infrastructure Scale"
+    }
+  ]
+}

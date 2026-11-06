@@ -1,0 +1,78 @@
+{
+  "ticker": "CRWV",
+  "earnings_date": "2026-11-10",
+  "agent": "Pre_Guidance_Debate_Agent (Agent 2B)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "credibility_score": 76,
+  "credibility_label": "76 / 100 (Unprecedented AI Compute Demand & Multi-Year Backlog Balanced Against Gigawatt CapEx Execution Risks)",
+  "matrix_a_prior_guidance_and_track_record": [
+    {
+      "metric": "Q3 2026E Revenue Guidance Corridor",
+      "tooltip_title": "Prior revenue guidance provided during Q2 earnings call.",
+      "tooltip_def": "Q3 2026 Revenue Guidance: Guided toward $3,450M - $3,650M ($3,550M midpoint); current Street consensus sits at $3,540.79M.",
+      "prior_q_guidance_for_q0": "$3,450M \u2013 $3,650M ($3,550M Midpoint)",
+      "current_street_consensus": "$3,540.79M",
+      "historical_4q_beat_rate": "50.0% (2 Beats, 2 Misses)",
+      "variance_and_sandbag_commentary": "Management guidance tracks tightly to power interconnect energization schedules. Two prior misses were directly attributable to utility grid delays rather than demand softness.",
+      "credibility_grade": "Grade B+ (Reliable)"
+    },
+    {
+      "metric": "FY2026 CapEx & Capital Deployment Target",
+      "tooltip_title": "Full-year infrastructure capital expenditure target for GPU clusters and data center leases.",
+      "tooltip_def": "FY2026 CapEx Corridor: Guided to $22.0B - $25.0B to fund rapid Blackwell B200 buildout and long-haul dark fiber infrastructure.",
+      "prior_q_guidance_for_q0": "$22.0B \u2013 $25.0B Target Range",
+      "current_street_consensus": "$23.80B",
+      "historical_4q_beat_rate": "100.0% Deployment Execution",
+      "variance_and_sandbag_commentary": "CoreWeave consistently fulfills its equipment procurement obligations backed by its debt financing consortium and Nvidia allocation priority.",
+      "credibility_grade": "Grade A (Premier Execution)"
+    }
+  ],
+  "matrix_b_forward_guidance_bogeys": [
+    {
+      "forward_metric": "Q4 2026E Revenue Guidance Hurdle",
+      "tooltip_title": "Expected fourth quarter revenue corridor required to sustain institutional multiple expansion.",
+      "tooltip_def": "Q4 2026E Guidance Hurdle: Street models $4,250.0M; buy-side bull bogey demands guidance >= $4,500.0M on full commercial ramp of Blackwell GB200 NVL72 racks.",
+      "street_consensus_hurdle": "$4,250.0M (+170.4% YoY)",
+      "bull_case_bogey": "$4,500.0M+ (Accelerated Blackwell Delivery)",
+      "bear_case_breakdown": "< $3,950.0M (Utility Substation Delays)",
+      "sensitivity_badge": "High Multiple Sensitivity",
+      "strategic_rationale": "Given CoreWeave's enterprise value of $70.15B and 22.4% short interest, any guide above $4.5B triggers aggressive short covering."
+    },
+    {
+      "forward_metric": "FY2027 Initial Power Capacity & Revenue Outlook",
+      "tooltip_title": "Preliminary qualitative commentary on FY2027 contracted power pipeline and GPU cluster deliveries.",
+      "tooltip_def": "FY2027 Outlook: Street seeks confirmation of >1.5 GW total capacity under contract and initial FY2027 top-line guidance exceeding $18.0B.",
+      "street_consensus_hurdle": "> 1.4 GW & $17.5B+ Top-Line",
+      "bull_case_bogey": "> 1.8 GW Contracted & $20.0B+ Outlook",
+      "bear_case_breakdown": "< 1.2 GW or Grid Interconnect Bottlenecks",
+      "sensitivity_badge": "Structural Re-Rating",
+      "strategic_rationale": "Long-term institutional valuation anchors to power interconnect rights and multi-year sovereign and hyperscale contracts."
+    }
+  ],
+  "section_4b_pre_print_debates": [
+    {
+      "title": "1. Blackwell GB200 Architecture Deployment Pace & Liquid Cooling Scaling",
+      "title_color": "#60a5fa",
+      "border_color": "#3b82f6",
+      "badge": "COMPUTE ARCHITECTURE",
+      "badge_class": "badge-blue",
+      "content": "CoreWeave was the first cloud provider to receive production Nvidia Blackwell B200 and GB200 NVL72 clusters. Analysts will aggressively interrogate CEO Michael Intrator on liquid cooling manifold readiness, facility power density (120 kW/rack), and whether Nvidia allocations remain unconstrained amid global packaging capacity tightness."
+    },
+    {
+      "title": "2. High Debt Service, CapEx Intensity & Forensic True FCF Conversion (-$5,908M)",
+      "title_color": "#f59e0b",
+      "border_color": "#f59e0b",
+      "badge": "LIQUIDITY & DEBT LEVERAGE",
+      "badge_class": "badge-warn",
+      "content": "In Q2 2026, CoreWeave generated $679M in Operating Cash Flow but spent $6,422M in CapEx, resulting in True FCF of -$5,908M (including $165M SBC). With total enterprise value of $70.15B vs market cap of $25.55B, net debt exceeds $44B. Institutional desks demand clarity on debt refinancing schedules, equipment financing interest rates, and payback horizons per GPU cluster."
+    },
+    {
+      "title": "3. Short Interest Crowding (22.4% Float) & Hyperscaler Customer Concentration",
+      "title_color": "#34d399",
+      "border_color": "#10b981",
+      "badge": "SQUEEZE ASYMMETRY",
+      "badge_class": "badge-bull",
+      "content": "With short float at 22.4% and an options-implied earnings move of \u00b122.88%, CoreWeave presents massive pre-print asymmetry. Bears highlight that over 65% of revenue originates from two frontier AI foundation labs. A diversified Q3 customer backlog addition or sovereign AI deal announcement would spark an immediate short squeeze toward mean PT ($132.18, +185% upside)."
+    }
+  ]
+}

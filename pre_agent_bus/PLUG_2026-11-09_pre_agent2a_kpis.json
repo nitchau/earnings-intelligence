@@ -1,0 +1,58 @@
+{
+  "ticker": "PLUG",
+  "earnings_date": "2026-11-09",
+  "agent": "Pre_KPI_Consensus_Agent (Agent 2A)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "upcoming_quarter_label": "Q3 2026E",
+  "latest_reported_quarter_label": "Q2 2026 (Ended Jun 30, 2026)",
+  "headline_and_company_kpis": [
+    {
+      "metric": "Total Net GAAP Revenue ($M)",
+      "tooltip_title": "Consolidated quarterly GAAP revenue across Fuel Cell Systems, Electrolyzers, Hydrogen Fuel, and Services.",
+      "tooltip_def": "Total GAAP Revenue ($M): Plug Power delivered $178.30M in Q2 2026 (+2.49% YoY vs $173.97M in Q2 2025 and +9.05% QoQ vs $163.51M in Q1 2026). Wall Street consensus models $193.33M for Q3 2026E (+9.19% YoY vs $177.06M in Q3 2025), with buy-side whisper bogeys looking for $198.0M on accelerating material handling deployments.",
+      "q_minus_1_actual": "$178.30M",
+      "q_minus_4_yoy_baseline": "$177.06M",
+      "street_consensus_q0e": "$193.33M",
+      "whisper_bogey_q0e": "$198.00M",
+      "whisper_spread_display": "+2.42% Spread",
+      "bar_width_pct": 82,
+      "hurdle_badge": "Top-Line Hurdle"
+    },
+    {
+      "metric": "GAAP Diluted EPS ($/sh)",
+      "tooltip_title": "Quarterly GAAP net loss per share reflecting cost containment and manufacturing margin improvements.",
+      "tooltip_def": "GAAP Diluted EPS ($/sh): Q2 2026 actual EPS came in at -$0.07 (beating consensus of -$0.08). Street consensus models -$0.06 for Q3 2026E with buy-side whisper looking for -$0.05 on improved green hydrogen internal production margins.",
+      "q_minus_1_actual": "-$0.07",
+      "q_minus_4_yoy_baseline": "-$0.12",
+      "street_consensus_q0e": "-$0.06",
+      "whisper_bogey_q0e": "-$0.05",
+      "whisper_spread_display": "+$0.01 Better",
+      "bar_width_pct": 76,
+      "hurdle_badge": "Loss Reduction"
+    },
+    {
+      "metric": "Liquid Hydrogen Plant Production (TPD)",
+      "tooltip_title": "Daily tons per day (TPD) of internal green hydrogen fuel produced across Georgia, Tennessee, and Louisiana generation facilities.",
+      "tooltip_def": "Internal Green Hydrogen Production: Internal production reached 40 TPD across Georgia and Tennessee in Q2 2026, lowering third-party molecule procurement costs; Street looks for expansion past 55 TPD in Q3 2026E.",
+      "q_minus_1_actual": "40 TPD",
+      "q_minus_4_yoy_baseline": "15 TPD",
+      "street_consensus_q0e": "55 TPD",
+      "whisper_bogey_q0e": "60 TPD",
+      "whisper_spread_display": "+5 TPD Margin Driver",
+      "bar_width_pct": 88,
+      "hurdle_badge": "Margin Driver"
+    },
+    {
+      "metric": "DOE $1.66B Loan Facility Finalization",
+      "tooltip_title": "Status of the U.S. Department of Energy (DOE) Title 17 conditional clean energy loan guarantee facility.",
+      "tooltip_def": "DOE Loan Guarantee: Finalization and definitive documentation of the $1.66B DOE loan guarantee to construct up to six green hydrogen generation facilities; key institutional milestone to eliminate dilution fears.",
+      "q_minus_1_actual": "Conditional",
+      "q_minus_4_yoy_baseline": "Application",
+      "street_consensus_q0e": "Closing Steps",
+      "whisper_bogey_q0e": "Definitive Close",
+      "whisper_spread_display": "Liquidity Inflection",
+      "bar_width_pct": 94,
+      "hurdle_badge": "Balance Sheet Catalyst"
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "ticker": "RGTI",
+  "earnings_date": "2026-11-10",
+  "agent": "Pre_KPI_Consensus_Agent (Agent 2A)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "upcoming_quarter_label": "Q3 2026E",
+  "latest_reported_quarter_label": "Q2 2026 (Ended Jun 30, 2026)",
+  "headline_and_company_kpis": [
+    {
+      "metric": "Total GAAP Net Revenue ($M)",
+      "tooltip_title": "Consolidated quarterly GAAP revenue across Novera On-Premises Systems, Quantum Cloud Services, and Government R&D.",
+      "tooltip_def": "Total GAAP Revenue ($M): Rigetti generated $5.14M in Q2 2026 (+185.56% YoY vs $1.80M in Q2 2025 and +16.82% QoQ vs $4.40M in Q1 2026). Wall Street consensus models $3.68M for Q3 2026E (+88.8% YoY vs $1.95M in Q3 2025), with buy-side whisper bogeys looking for $4.20M driven by international research lab Novera deliveries.",
+      "q_minus_1_actual": "$5.14M",
+      "q_minus_4_yoy_baseline": "$1.95M",
+      "street_consensus_q0e": "$3.68M",
+      "whisper_bogey_q0e": "$4.20M",
+      "whisper_spread_display": "+14.13% Spread",
+      "bar_width_pct": 84,
+      "hurdle_badge": "Top-Line Hurdle"
+    },
+    {
+      "metric": "GAAP Diluted EPS ($/sh)",
+      "tooltip_title": "Quarterly GAAP net loss per share reflecting quantum fabrication facility burn and scaling of superconducting qubit arrays.",
+      "tooltip_def": "GAAP Diluted EPS ($/sh): Q2 2026 actual EPS came in at -$0.05 (meeting consensus of -$0.05). Street consensus models -$0.05 for Q3 2026E with buy-side whisper looking for -$0.04 on disciplined development cost allocation.",
+      "q_minus_1_actual": "-$0.05",
+      "q_minus_4_yoy_baseline": "-$0.03",
+      "street_consensus_q0e": "-$0.05",
+      "whisper_bogey_q0e": "-$0.04",
+      "whisper_spread_display": "+$0.01 Better",
+      "bar_width_pct": 78,
+      "hurdle_badge": "Bottom-Line Hurdle"
+    },
+    {
+      "metric": "Novera On-Premises Quantum System Orders",
+      "tooltip_title": "Cumulative commercial and defense purchase orders for Rigetti's 9-qubit and 24-qubit Novera Quantum Processing Units (QPUs).",
+      "tooltip_def": "Novera System Deployments: Rigetti has booked multiple Novera on-premises quantum computers ($900k\u2013$1.5M ASP) across federal and academic defense labs; Street models 2 additional purchase orders in Q3 2026E.",
+      "q_minus_1_actual": "3 Systems Booked",
+      "q_minus_4_yoy_baseline": "1 System Booked",
+      "street_consensus_q0e": "2 Systems Booked",
+      "whisper_bogey_q0e": "3+ Systems Booked",
+      "whisper_spread_display": "Commercial Traction",
+      "bar_width_pct": 88,
+      "hurdle_badge": "Commercial Scale"
+    },
+    {
+      "metric": "2-Qubit Gate Fidelity & Ankaa-3 Roadmap",
+      "tooltip_title": "Median 2-qubit gate fidelity benchmark across square-lattice multi-chip modular quantum architectures.",
+      "tooltip_def": "Gate Fidelity & Multi-Chip Scaling: Rigetti achieved >99.3% median 2-qubit gate fidelity on its Ankaa-2 system, progressing toward 99.5%+ on the 84-qubit Ankaa-3 and 336-qubit Lyra architecture.",
+      "q_minus_1_actual": "99.3% Fidelity",
+      "q_minus_4_yoy_baseline": "98.0% Fidelity",
+      "street_consensus_q0e": "99.5% Roadmap",
+      "whisper_bogey_q0e": "99.7% Landmark",
+      "whisper_spread_display": "Technical Moat",
+      "bar_width_pct": 92,
+      "hurdle_badge": "Quantum Advantage"
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "ticker": "RGTI",
+  "earnings_date": "2026-11-10",
+  "agent": "Pre_Guidance_Debate_Agent (Agent 2B)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "credibility_score": 78,
+  "credibility_label": "78 / 100 (Consistent Execution on Technical Milestones & Strict Fab Run-Rate Management)",
+  "matrix_a_prior_guidance_and_track_record": [
+    {
+      "metric": "Q3 2026E Net Revenue Guidance Corridor",
+      "tooltip_title": "Prior quarterly revenue expectations provided during Q2 2026 earnings conference call.",
+      "tooltip_def": "Q3 2026 Revenue Guidance: Guided toward $3.2M - $4.0M ($3.6M midpoint); current Street consensus sits at $3.68M.",
+      "prior_q_guidance_for_q0": "$3.2M \u2013 $4.0M ($3.6M Midpoint)",
+      "current_street_consensus": "$3.68M",
+      "historical_4q_beat_rate": "100.0% Met or Exceeded (1 Beat, 3 Meets)",
+      "variance_and_sandbag_commentary": "Rigetti has hit or beaten consensus EPS estimates in 4 consecutive quarters with zero misses, showing precise financial forecasting across government contracts.",
+      "credibility_grade": "Grade A- (Highly Consistent)"
+    },
+    {
+      "metric": "Annual Fab 1 Cleanroom CapEx Budget",
+      "tooltip_title": "Full-year capital expenditure allocation for the Fab-1 dedicated quantum device fabrication facility.",
+      "tooltip_def": "Fab-1 CapEx Budget: Management targeted $25M - $30M full-year CapEx for automated wafer probing and dilution refrigerator scaling.",
+      "prior_q_guidance_for_q0": "$25.0M \u2013 $30.0M Annual Target",
+      "current_street_consensus": "$28.0M",
+      "historical_4q_beat_rate": "100.0% Execution",
+      "variance_and_sandbag_commentary": "Rigetti remains one of the few pure-play quantum companies with captive semiconductor cleanroom manufacturing, avoiding foundry markups.",
+      "credibility_grade": "Grade A (Integrated Moat)"
+    }
+  ],
+  "matrix_b_forward_guidance_bogeys": [
+    {
+      "forward_metric": "Q4 2026E Revenue Guidance Hurdle",
+      "tooltip_title": "Expected fourth quarter revenue target required to sustain commercial quantum hardware re-rating.",
+      "tooltip_def": "Q4 2026E Guidance Hurdle: Street models $5.50M; buy-side bull bogey requires guidance >= $6.50M on clustered Novera deliveries.",
+      "street_consensus_hurdle": "$5.50M (+194.1% YoY)",
+      "bull_case_bogey": "$6.50M+ (Accelerated Novera Backlog)",
+      "bear_case_breakdown": "< $4.50M (Government Contract Delays)",
+      "sensitivity_badge": "High Multiple Sensitivity",
+      "strategic_rationale": "High short interest (21.37% of float) means a raised Q4 revenue guide triggers immediate short covering across hedge fund accounts."
+    },
+    {
+      "forward_metric": "336-Qubit Lyra Multi-Chip Architecture Timeline",
+      "tooltip_title": "Target timeline for commercial deployment of tiled multi-chip quantum processors.",
+      "tooltip_def": "Lyra Scaling Horizon: Management confirmation of initial customer testing for the 336-qubit Lyra system by early FY2027.",
+      "street_consensus_hurdle": "Customer Access in Q2 2027",
+      "bull_case_bogey": "Pre-Release Access in Q4 2026 / Q1 2027",
+      "bear_case_breakdown": "Pushed Out to Late 2027+",
+      "sensitivity_badge": "Quantum Advantage Inflection",
+      "strategic_rationale": "Multi-chip tiling is Rigetti's proprietary architecture to solve quantum interconnect scaling without massive single-chip yield losses."
+    }
+  ],
+  "section_4b_pre_print_debates": [
+    {
+      "title": "1. Novera On-Premises System Commercialization Velocity",
+      "title_color": "#60a5fa",
+      "border_color": "#3b82f6",
+      "badge": "COMMERCIAL REVENUE MOAT",
+      "badge_class": "badge-blue",
+      "content": "Rigetti's strategy to sell complete 9-qubit and 24-qubit Novera quantum processing units directly to national laboratories, defense research facilities, and university cleanrooms has created a tangible near-term revenue stream ($1M+ ASP). Analysts will aggressively press CEO Subodh Kulkarni on customer delivery backlogs, international export licenses, and repeat purchase pipelines."
+    },
+    {
+      "title": "2. High Short Float (21.37%) & Speculative Quantum Squeeze Dynamics",
+      "title_color": "#34d399",
+      "border_color": "#10b981",
+      "badge": "SQUEEZE ASYMMETRY",
+      "badge_class": "badge-bull",
+      "content": "Short sellers have accumulated 21.37% of floating shares, betting that quantum computing commercial viability remains a decade away and will require recurring dilutive capital raises. With options pricing a \u00b115.96% earnings move ($1.69 straddle) and Put/Call OI ratio at 0.64x, any upside surprise in revenue or a major defense contract award could trigger a violent squeeze toward consensus mean PT ($27.69, +161% upside)."
+    },
+    {
+      "title": "3. Cash Runway, Fab-1 CapEx & Forensic True FCF (-$34.79M)",
+      "title_color": "#f59e0b",
+      "border_color": "#f59e0b",
+      "badge": "CAPITAL ALLOCATION",
+      "badge_class": "badge-warn",
+      "content": "Operating cash flow was -$15.78M in Q2 2026, while CapEx of $11.99M and SBC of $7.02M resulted in True Free Cash Flow of -$34.79M. With over $100M in cash and equivalents, institutional investors want assurances that Rigetti can reach technical milestone inflection points on its Ankaa-3 and Lyra architectures before needing additional external financing."
+    }
+  ]
+}

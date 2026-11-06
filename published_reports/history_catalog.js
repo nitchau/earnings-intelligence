@@ -84,6 +84,20 @@ window.EARNINGS_HISTORY_CATALOG = {
       "currency": "$"
     }
   ],
+  "CRWV": [
+    {
+      "date": "2026-11-10",
+      "quarter": "Q3 2026",
+      "date_display": "Nov 10, 2026",
+      "t1": "CRWV_T1_2026-11-10.html",
+      "t0": null,
+      "verdict": null,
+      "post_move_pct": null,
+      "rev_actual_m": null,
+      "rev_consensus_m": 3540.79,
+      "currency": "$"
+    }
+  ],
   "DDOG": [
     {
       "date": "2026-11-04",
@@ -95,6 +109,20 @@ window.EARNINGS_HISTORY_CATALOG = {
       "post_move_pct": -0.38,
       "rev_actual_m": 1197.09,
       "rev_consensus_m": 1146.97,
+      "currency": "$"
+    }
+  ],
+  "EDIT": [
+    {
+      "date": "2026-11-09",
+      "quarter": "Q3 2026",
+      "date_display": "Nov 9, 2026",
+      "t1": "EDIT_T1_2026-11-09.html",
+      "t0": null,
+      "verdict": null,
+      "post_move_pct": null,
+      "rev_actual_m": null,
+      "rev_consensus_m": 4.53,
       "currency": "$"
     }
   ],
@@ -364,6 +392,20 @@ window.EARNINGS_HISTORY_CATALOG = {
       "currency": "$"
     }
   ],
+  "PLUG": [
+    {
+      "date": "2026-11-09",
+      "quarter": "Q3 2026",
+      "date_display": "Nov 9, 2026",
+      "t1": "PLUG_T1_2026-11-09.html",
+      "t0": null,
+      "verdict": null,
+      "post_move_pct": null,
+      "rev_actual_m": null,
+      "rev_consensus_m": 193.33,
+      "currency": "$"
+    }
+  ],
   "QCOM": [
     {
       "date": "2026-11-04",
@@ -375,6 +417,20 @@ window.EARNINGS_HISTORY_CATALOG = {
       "post_move_pct": -7.4,
       "rev_actual_m": 10322.0,
       "rev_consensus_m": 10145.91,
+      "currency": "$"
+    }
+  ],
+  "RGTI": [
+    {
+      "date": "2026-11-10",
+      "quarter": "Q3 2026",
+      "date_display": "Nov 10, 2026",
+      "t1": "RGTI_T1_2026-11-10.html",
+      "t0": null,
+      "verdict": null,
+      "post_move_pct": null,
+      "rev_actual_m": null,
+      "rev_consensus_m": 3.68,
       "currency": "$"
     }
   ],

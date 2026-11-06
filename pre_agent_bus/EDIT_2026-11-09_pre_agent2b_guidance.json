@@ -1,0 +1,78 @@
+{
+  "ticker": "EDIT",
+  "earnings_date": "2026-11-09",
+  "agent": "Pre_Guidance_Debate_Agent (Agent 2B)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "credibility_score": 80,
+  "credibility_label": "80 / 100 (Strong Track Record of 75% EPS Beats & Conservative Burn Management)",
+  "matrix_a_prior_guidance_and_track_record": [
+    {
+      "metric": "Q3 2026E Net Collaboration Revenue",
+      "tooltip_title": "Prior revenue expectations discussed during Q2 2026 earnings conference call.",
+      "tooltip_def": "Q3 Revenue Baseline: Management indicated quarterly license revenue would normalize between $3.0M and $6.0M following Q2's milestone timing.",
+      "prior_q_guidance_for_q0": "$3.0M \u2013 $6.0M ($4.5M Midpoint)",
+      "current_street_consensus": "$4.53M",
+      "historical_4q_beat_rate": "75.0% (3 of 4 Quarters)",
+      "variance_and_sandbag_commentary": "Editas has beaten consensus EPS in 3 of the last 4 quarters (avg surprise +34.5%), consistently underspending on SG&A while hitting patent license collection milestones.",
+      "credibility_grade": "Grade A- (Disciplined)"
+    },
+    {
+      "metric": "Annual Operating Expense Burn Target",
+      "tooltip_title": "Full-year guidance for operating expenses and cash burn trajectory.",
+      "tooltip_def": "OpEx Burn Corridor: Management targeted full-year operating expense reduction of 15-20% YoY through strategic reprioritization toward in vivo programs.",
+      "prior_q_guidance_for_q0": "15\u201320% YoY Reduction",
+      "current_street_consensus": "-18.5% YoY",
+      "historical_4q_beat_rate": "100.0% Execution",
+      "variance_and_sandbag_commentary": "Management has successfully rationalized laboratory operations and clinical site costs in line with guidance.",
+      "credibility_grade": "Grade A (Prudent Stewardship)"
+    }
+  ],
+  "matrix_b_forward_guidance_bogeys": [
+    {
+      "forward_metric": "Reni-cel Commercial Partnership Deal Announcement",
+      "tooltip_title": "Target timeline for securing an external pharma partner to assume clinical trial funding.",
+      "tooltip_def": "Reni-cel Partnership Hurdle: Street models non-dilutive upfront cash payment >$50M plus downstream development milestones; buy-side requires signed agreement by Q4 2026.",
+      "street_consensus_hurdle": "Agreement by Year-End 2026",
+      "bull_case_bogey": "Upfront Cash >$75M + Global Rights",
+      "bear_case_breakdown": "Partnership Delayed into 2027",
+      "sensitivity_badge": "High Multiple Sensitivity",
+      "strategic_rationale": "Editas' high short interest (24.91% of float) means a cash-rich partnership announcement would trigger immediate short covering toward the $6.10 mean price target (+132.8% upside)."
+    },
+    {
+      "forward_metric": "Cas12a IP Licensing Revenue Acceleration (2027)",
+      "tooltip_title": "Projected royalty streams from Vertex Cas9 licensing and emerging Cas12a gene editing licenses.",
+      "tooltip_def": "Cas12a IP Royalties: Confirmation of expanding third-party licensing revenue pipeline exceeding $25M annually by FY2027.",
+      "street_consensus_hurdle": "$15.0M \u2013 $20.0M Annual Run-Rate",
+      "bull_case_bogey": "> $30.0M / Multiple New Licensees",
+      "bear_case_breakdown": "< $10.0M or Patent Litigation Drag",
+      "sensitivity_badge": "Valuation Floor",
+      "strategic_rationale": "High-margin IP licensing provides a recurring non-dilutive valuation floor that decouples Editas from clinical trial binary risk."
+    }
+  ],
+  "section_4b_pre_print_debates": [
+    {
+      "title": "1. Reni-cel Partnering Deal Structure & Upfront Cash Inflow",
+      "title_color": "#60a5fa",
+      "border_color": "#3b82f6",
+      "badge": "CLINICAL PARTNERSHIP",
+      "badge_class": "badge-blue",
+      "content": "Editas has demonstrated compelling clinical proof-of-concept for reni-cel (EDIT-301) in severe sickle cell disease and transfusion-dependent beta-thalassemia, achieving complete resolution of vaso-occlusive events. However, CEO Gilmore O'Neill has committed to not self-funding expensive Phase 3 commercial trials. Analysts will press management on whether a deal with upfront non-dilutive cash is imminent."
+    },
+    {
+      "title": "2. High Short Float (24.91%) & Asymmetric Squeeze Potential",
+      "title_color": "#34d399",
+      "border_color": "#10b981",
+      "badge": "EXTREME SQUEEZE POTENTIAL",
+      "badge_class": "badge-bull",
+      "content": "Short sellers hold 24.91% of Editas' float, betting that gene editing commercialization hurdles and competition from Vertex/CRISPR Therapeutics (Casgevy) will force dilutive equity raises. With options pricing a \u00b126.72% move ($0.70 straddle) and Put/Call OI ratio at an ultra-low 0.15x, any positive licensing deal or partnership announcement creates massive upward squeeze convexity."
+    },
+    {
+      "title": "3. In Vivo Pipeline Translation & Cas12a Patent Defense",
+      "title_color": "#f59e0b",
+      "border_color": "#f59e0b",
+      "badge": "IP MOAT & IN VIVO PIPELINE",
+      "badge_class": "badge-warn",
+      "content": "Editas' long-term proprietary value proposition centers on targeted in vivo gene editing using engineered Cas12a (AsCas12a) and targeted lipid nanoparticles (LNPs) for genetic diseases of the liver and eye. Institutional investors seek pipeline milestones for IND-enabling studies and clarity on patent licensing disputes."
+    }
+  ]
+}
