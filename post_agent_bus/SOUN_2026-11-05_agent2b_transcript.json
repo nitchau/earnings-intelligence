@@ -1,0 +1,96 @@
+{
+  "ticker": "SOUN",
+  "earnings_date": "2026-11-05",
+  "matrix_a_guidance_accountability": [
+    {
+      "metric": "Q3 2026 Total Revenue ($M)",
+      "prior_guidance": "$61.0M - $63.0M",
+      "reported_actual": "$62.42M",
+      "variance": "+$0.42M (+0.7%)",
+      "grade": "MET GUIDE",
+      "badge_class": "badge-bull"
+    },
+    {
+      "metric": "Q3 2026 Gross Margin (%)",
+      "prior_guidance": "42.0% - 45.0%",
+      "reported_actual": "34.09%",
+      "variance": "-891 bps",
+      "grade": "MISSED OWN GUIDE",
+      "badge_class": "badge-bear"
+    },
+    {
+      "metric": "Q3 2026 GAAP Operating Loss ($M)",
+      "prior_guidance": "-$42.0M to -$48.0M",
+      "reported_actual": "-$46.50M",
+      "variance": "Within Range",
+      "grade": "MET GUIDE",
+      "badge_class": "badge-bull"
+    },
+    {
+      "metric": "Q3 2026 Cash & Equivalents ($M)",
+      "prior_guidance": "$200.0M - $220.0M",
+      "reported_actual": "$207.58M",
+      "variance": "+$7.58M",
+      "grade": "MET GUIDE",
+      "badge_class": "badge-bull"
+    }
+  ],
+  "matrix_b_forward_guidance_reset": [
+    {
+      "metric": "FY 2026 Revenue ($M)",
+      "street_pre_print": "$262.50M",
+      "new_guidance": "$250.0M - $260.0M ($255.0M)",
+      "delta": "-$7.5M (-2.9%)",
+      "action": "LOWERED (CONTRACT PRUNING)",
+      "badge_class": "badge-bear"
+    },
+    {
+      "metric": "FY 2027 Revenue Outlook ($M)",
+      "street_pre_print": "$365.00M",
+      "new_guidance": "$350.0M - $400.0M ($375.0M)",
+      "delta": "+$10.0M (+2.7%)",
+      "action": "INITIATED POSITIVE",
+      "badge_class": "badge-bull"
+    },
+    {
+      "metric": "EBITDA Profitability Timeline",
+      "street_pre_print": "Q4 2026",
+      "new_guidance": "Sustained Positive within 2H 2027",
+      "delta": "Pushed 2 Quarters",
+      "action": "RESET",
+      "badge_class": "badge-warn"
+    },
+    {
+      "metric": "Annualized Cost Synergies ($M)",
+      "street_pre_print": "$60.00M",
+      "new_guidance": "$120.00M ($80M pre-Jan 2027)",
+      "delta": "+$60.0M (+100%)",
+      "action": "DOUBLED",
+      "badge_class": "badge-bull"
+    }
+  ],
+  "credibility_score": 85,
+  "top_call_exchanges": [
+    {
+      "analyst": "Dan Ives (Wedbush)",
+      "topic": "Contract Pruning Strategy & Gross Margin Trough",
+      "question": "Can you walk through the decision to exit certain negative gross margin contracts? Is 34% the trough for gross margin, and how quickly does it rebound toward 50%?",
+      "management_answer": "Keyvan Mohajer (CEO): 'When we acquired Amelia and earlier assets, some legacy customer commitments carried negative economics. We made the disciplined decision not to renew those contracts. That creates a minor short-term revenue drag, but it immediately clears our path to sustained gross margins above 50% and positive EBITDA by second half 2027.'",
+      "verdict": "DISCIPLINED OPERATIONAL RESET"
+    },
+    {
+      "analyst": "Glenn Mattson (Ladenburg Thalmann)",
+      "topic": "Cash Runway & Operating Burn Spikes",
+      "question": "Operating cash burn rose to -$96M this quarter, leaving $207.6M in cash. Do you have sufficient liquidity to reach your 2H 2027 profitability milestone without dilutive capital raises?",
+      "management_answer": "Nitesh Sharan (CFO): 'Yes, absolutely. The Q3 cash burn included one-time transaction fees, severance costs, and working capital timing from our acquisitions. With $80M in synergy actions hitting before year-end, our quarterly cash burn will drop precipitously in Q4 and through 2027. We do not need outside financing.'",
+      "verdict": "LIQUIDITY RUNWAY CONFIRMED"
+    },
+    {
+      "analyst": "Scott Buck (H.C. Wainwright)",
+      "topic": "OASYS Agentic AI Platform & Enterprise Demand",
+      "question": "How are customers responding to OASYS, and does the shift to a hosted recurring model change your sales cycle length?",
+      "management_answer": "Keyvan Mohajer: 'OASYS shifts us from episodic upfront software licenses to predictable monthly recurring revenue. Our agentic voice models can now perform multi-step transactional tasks\u2014like booking service appointments or processing complex food orders\u2014fully autonomously. Enterprise pipeline is at an all-time high.'",
+      "verdict": "ARR STABILITY FOCUS"
+    }
+  ]
+}

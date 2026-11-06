@@ -1,0 +1,142 @@
+{
+  "ticker": "TXG",
+  "earnings_date": "2026-11-05",
+  "operational_kpis": [
+    {
+      "name": "Total GAAP Revenue ($M)",
+      "q_minus_1_actual": 151.04,
+      "q_minus_4_yoy": 149.0,
+      "street_consensus_q0": 147.85,
+      "reported_actual_q0": 150.67,
+      "spread_vs_street": "+1.91%",
+      "verdict": "BEAT",
+      "bar_width_pct": 88
+    },
+    {
+      "name": "Consumables Revenue ($M)",
+      "q_minus_1_actual": 132.35,
+      "q_minus_4_yoy": 127.89,
+      "street_consensus_q0": 131.5,
+      "reported_actual_q0": 134.33,
+      "spread_vs_street": "+2.15%",
+      "verdict": "BEAT",
+      "bar_width_pct": 92
+    },
+    {
+      "name": "Instruments Revenue ($M)",
+      "q_minus_1_actual": 9.42,
+      "q_minus_4_yoy": 12.0,
+      "street_consensus_q0": 10.5,
+      "reported_actual_q0": 6.86,
+      "spread_vs_street": "-34.67%",
+      "verdict": "DRAG",
+      "bar_width_pct": 65
+    },
+    {
+      "name": "GAAP Gross Margin (%)",
+      "q_minus_1_actual": 74.48,
+      "q_minus_4_yoy": 67.32,
+      "street_consensus_q0": 71.5,
+      "reported_actual_q0": 74.95,
+      "spread_vs_street": "+345 bps",
+      "verdict": "EXPANSION",
+      "bar_width_pct": 95
+    },
+    {
+      "name": "Non-GAAP Diluted EPS ($)",
+      "q_minus_1_actual": -0.14,
+      "q_minus_4_yoy": -0.22,
+      "street_consensus_q0": -0.02,
+      "reported_actual_q0": -0.15,
+      "spread_vs_street": "-$0.13",
+      "verdict": "MISS",
+      "bar_width_pct": 68
+    }
+  ],
+  "segment_reporting": {
+    "periods": [
+      "Q3 2025",
+      "Q4 2025",
+      "Q1 2026",
+      "Q2 2026",
+      "Q3 2026 (Actual)",
+      "Q4 2026E (Guided / Street)"
+    ],
+    "segments": [
+      {
+        "name": "Consumables Revenue",
+        "values": [
+          127.89,
+          138.5,
+          128.2,
+          132.35,
+          134.33,
+          150.0
+        ],
+        "qoq": "+1.5%",
+        "yoy": "+5.0%"
+      },
+      {
+        "name": "Instruments Revenue",
+        "values": [
+          12.0,
+          18.2,
+          13.5,
+          9.42,
+          6.86,
+          15.0
+        ],
+        "qoq": "-27.2%",
+        "yoy": "-42.8%"
+      },
+      {
+        "name": "Services & Other Revenue",
+        "values": [
+          9.11,
+          9.33,
+          9.14,
+          9.27,
+          9.48,
+          10.0
+        ],
+        "qoq": "+2.3%",
+        "yoy": "+4.1%"
+      },
+      {
+        "name": "Total Consolidated Revenue",
+        "values": [
+          149.0,
+          166.03,
+          150.84,
+          151.04,
+          150.67,
+          175.0
+        ],
+        "qoq": "-0.2%",
+        "yoy": "+1.1%"
+      }
+    ]
+  },
+  "tooltip_definitions": {
+    "Total GAAP Revenue": "Consolidated GAAP net revenue from 10x Genomics instruments, consumables, and biological cloud software ($150.67M in Q3 2026, beating Street consensus $147.85M by +1.91%).",
+    "Consumables Revenue": "Recurring high-margin reagent kits and microfluidic chips across Chromium Single Cell and Visium/Xenium spatial biology ($134.33M in Q3 2026, up +5.0% YoY).",
+    "Instruments Revenue": "Capital hardware placements of Chromium, Visium, Xenium, and newly launched Atera platforms ($6.86M in Q3 2026, down -42.8% YoY due to budget freezes).",
+    "Services & Other Revenue": "Contract sequencing services, biopharma validation pilots, software subscriptions, and non-recurring patent litigation licensing royalties ($9.48M in Q3 2026).",
+    "GAAP Gross Profit": "Gross profit of $112.93M in Q3 2026 delivering a 74.95% gross margin, expanding 763 bps YoY from 67.32% due to lower inventory write-downs and favorable mix.",
+    "GAAP Operating Income": "Operating loss of -$16.06M in Q3 2026 ($112.93M Gross Profit - $128.98M OpEx), improving by over 50% from -$32.24M in Q3 2025 on overhead discipline.",
+    "GAAP Diluted EPS": "GAAP diluted net loss per share of -$0.15 in Q3 2026 based on 130.8M weighted average common shares outstanding.",
+    "Operating Cash Flow": "Operating cash flow of $25.25M generated in Q3 2026, rising +48.8% sequentially from $16.97M in Q2 2026.",
+    "Capital Expenditures": "Property, plant, and laboratory equipment additions of $1.60M in Q3 2026, reflecting lean facility investments.",
+    "Reported Free Cash Flow": "Operating cash flow ($25.25M) minus CapEx ($1.60M), generating positive reported free cash flow of $23.65M in Q3 2026.",
+    "Stock-Based Compensation": "Non-cash equity incentives and stock compensation of $23.10M in Q3 2026 ($8.94M R&D, $12.00M SG&A, $2.16M COGS).",
+    "True Free Cash Flow": "Economic cash generation deducting CapEx ($1.60M) and non-cash SBC ($23.10M) from OCF ($25.25M), yielding positive True FCF of $0.55M in Q3 2026.",
+    "Atera Commercial Shipments": "10x Genomics' revolutionary next-generation spatial biology platform, combining in situ transcriptomics and protein detection, with global shipments commenced in Q3.",
+    "Sentira Cloud Platform": "Newly introduced cloud analysis platform powered by NVIDIA accelerated computing for spatial imaging and Anthropic's Claude for agentic AI analysis of single-cell datasets.",
+    "FY 2026 Revenue Guidance Raise": "Full-year 2026 revenue guidance raised to $625M - $635M ($630.0M midpoint), up from prior guidance of $610M - $630M ($620.0M midpoint).",
+    "Implied Q4 2026 Revenue": "Raised FY guidance implies Q4 2026 revenue of approximately $172.5M - $182.5M (~$175.0M midpoint), representing sequential acceleration.",
+    "Liquid Treasury Reserves": "Cash, cash equivalents, and marketable securities totaling $575.68M as of September 30, 2026, with zero long-term funded debt.",
+    "After-Hours Reaction": "TXG shares declined -9.73% to $52.41 after hours as an EPS miss (-$0.15 vs -$0.02 Street) and instrument revenue weakness (-42.8% YoY) triggered short-term multiple compression.",
+    "Academic Budgetary Headwinds": "Constrained NIH funding and institutional grant delays in the U.S. and Europe lengthening instrument procurement decision cycles.",
+    "China Biomedical Demand": "Asia-Pacific revenues stabilized at $25.97M ($15.22M China), showing resilient consumables demand despite macroeconomic cross-currents."
+  }
+}

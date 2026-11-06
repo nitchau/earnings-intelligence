@@ -1,0 +1,96 @@
+{
+  "ticker": "NET",
+  "earnings_date": "2026-11-05",
+  "matrix_a_guidance_accountability": [
+    {
+      "metric": "Q3 2026 Total Revenue ($M)",
+      "prior_guidance": "$735.0M - $740.0M",
+      "reported_actual": "$782.51M",
+      "variance": "+$45.01M (+6.1%)",
+      "grade": "BEAT OWN GUIDE",
+      "badge_class": "badge-bull"
+    },
+    {
+      "metric": "Q3 2026 Non-GAAP Operating Income ($M)",
+      "prior_guidance": "$125.0M - $127.0M",
+      "reported_actual": "$137.10M",
+      "variance": "+$11.10M (+8.8%)",
+      "grade": "BEAT OWN GUIDE",
+      "badge_class": "badge-bull"
+    },
+    {
+      "metric": "Q3 2026 Non-GAAP EPS ($)",
+      "prior_guidance": "$0.32 - $0.33",
+      "reported_actual": "$0.38",
+      "variance": "+$0.05 (+15.2%)",
+      "grade": "BEAT OWN GUIDE",
+      "badge_class": "badge-bull"
+    },
+    {
+      "metric": "Q3 2026 Operating Cash Flow ($M)",
+      "prior_guidance": "$160.0M - $180.0M",
+      "reported_actual": "$215.37M",
+      "variance": "+$45.37M (+26.7%)",
+      "grade": "BLOWOUT BEAT",
+      "badge_class": "badge-bull"
+    }
+  ],
+  "matrix_b_forward_guidance_reset": [
+    {
+      "metric": "Q4 2026 Revenue ($M)",
+      "street_pre_print": "$801.50M",
+      "new_guidance": "$845.0M - $846.0M ($845.5M)",
+      "delta": "+$44.0M (+5.5%)",
+      "action": "RAISED",
+      "badge_class": "badge-bull"
+    },
+    {
+      "metric": "Q4 2026 Non-GAAP Op Income ($M)",
+      "street_pre_print": "$142.00M",
+      "new_guidance": "$156.0M - $157.0M ($156.5M)",
+      "delta": "+$14.5M (+10.2%)",
+      "action": "RAISED",
+      "badge_class": "badge-bull"
+    },
+    {
+      "metric": "Q4 2026 Non-GAAP Diluted EPS ($)",
+      "street_pre_print": "$0.37",
+      "new_guidance": "$0.43",
+      "delta": "+$0.06 (+16.2%)",
+      "action": "RAISED",
+      "badge_class": "badge-bull"
+    },
+    {
+      "metric": "FY 2026 Full-Year Revenue ($M)",
+      "street_pre_print": "$2,895.0M",
+      "new_guidance": "$2,963.0M - $2,964.0M",
+      "delta": "+$68.5M (+2.4%)",
+      "action": "RAISED",
+      "badge_class": "badge-bull"
+    }
+  ],
+  "credibility_score": 96,
+  "top_call_exchanges": [
+    {
+      "analyst": "Keith Weiss (Morgan Stanley)",
+      "topic": "Workers AI Monetization & Inference Cluster Utilization",
+      "question": "Can you unpack the inflection in revenue growth to 39% YoY? How much of that is direct Workers AI inference spend versus legacy web security and CDN re-acceleration?",
+      "management_answer": "Matthew Prince (CEO): 'Workers AI is the fastest-growing developer service in Cloudflare history. We now have over 3 million developers on Workers. Customers aren't just caching; they are executing real-time serverless AI inferences in 330 cities. Over 30% of Fortune 500 accounts are actively utilizing Cloudflare AI gateway services.'",
+      "verdict": "BULLISH CONFIRMATION"
+    },
+    {
+      "analyst": "Brent Thill (Jefferies)",
+      "topic": "CapEx Surge & GPU Deployments",
+      "question": "CapEx jumped to $121.8M this quarter compared to ~$61M in Q2. How should we think about capital intensity in Q4 and into 2027 as you build out GPU capacity?",
+      "management_answer": "Thomas Seifert (CFO): 'We accelerated GPU cluster installations into our server racks to meet surging demand. Because we co-locate inference silicon directly into existing connectivity nodes, our capital efficiency remains 3x higher than hyperscalers. CapEx as a percentage of revenue will normalize around 12-14% over time.'",
+      "verdict": "PRAGMATIC MANAGEMENT CONTROL"
+    },
+    {
+      "analyst": "Mark Murphy (JPMorgan)",
+      "topic": "Enterprise SASE & Cisco/Palo Alto Displacement",
+      "question": "Zero Trust and SASE growth accelerated over 60% YoY. Are you seeing larger displacements of incumbent hardware firewalls and traditional VPN vendors?",
+      "management_answer": "Matthew Prince: 'Yes. In Q3 we closed our largest single SASE deal ever, replacing three legacy firewall vendors at a global financial institution. CIOs want a single pane of glass for security, connectivity, and developer edge.'",
+      "verdict": "STRONG COMPETITIVE MOAT"
+    }
+  ]
+}

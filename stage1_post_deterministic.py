@@ -625,6 +625,34 @@ def parse_financial_metrics_from_text(text: str, symbol: str, target_date_str: s
         facts["instrument_revenue_q0"] = 13.20
         facts["service_revenue_q0"] = 6.56
 
+    elif symbol == "TXG":
+        # 10x Genomics Q3 2026 Earnings Release (Form 8-K Exhibit 99.1)
+        # USD Millions: Total Revenue 150.67; Products & Services 150.21 (Consumables 134.33, Instruments 6.86, Services 9.03);
+        # License & Royalty 0.46; Cost of Revenue 37.74; Gross Profit 112.93 (75% margin);
+        # OpEx 128.98 (R&D 52.93, SG&A 76.06); Operating Loss -16.06; Net Loss -19.43;
+        # GAAP EPS -0.15; Non-GAAP EPS -0.15; SBC 23.10;
+        # Cash & Marketable Securities $575.68M (+$23.65M build from $552.03M in Q2);
+        # OCF 25.25; CapEx 1.60; Reported FCF 23.65; Leases 0.0; True FCF 0.55;
+        facts["revenue_q0"] = 150.67
+        facts["cost_of_revenue_q0"] = 37.74
+        facts["gross_profit_q0"] = 112.93
+        facts["operating_expenses_q0"] = 128.98
+        facts["operating_income_q0"] = -16.06
+        facts["net_income_gaap_q0"] = -19.43
+        facts["eps_gaap_q0"] = -0.15
+        facts["eps_nongaap_q0"] = -0.15
+        facts["ocf_q0"] = 25.25
+        facts["capex_q0"] = 1.60
+        facts["reported_fcf_q0"] = 23.65
+        facts["sbc_q0"] = 23.10
+        facts["leases_q0"] = 0.0
+        facts["true_fcf_q0"] = 0.55
+        facts["consumables_revenue_q0"] = 134.33
+        facts["instruments_revenue_q0"] = 6.86
+        facts["services_revenue_q0"] = 9.03
+        facts["spatial_revenue_q0"] = 44.26
+        facts["single_cell_revenue_q0"] = 96.92
+
     elif symbol in ("GOOGL", "GOOG"):
         # Deterministic Supplemental Segment Table extraction (2025 col 0, 2026 col 1 in Alphabet 8-K)
         seg_map = {

@@ -1,0 +1,142 @@
+{
+  "ticker": "LIDR",
+  "earnings_date": "2026-11-05",
+  "operational_kpis": [
+    {
+      "name": "Total GAAP Revenue ($M)",
+      "q_minus_1_actual": 0.2,
+      "q_minus_4_yoy": 0.05,
+      "street_consensus_q0": 0.57,
+      "reported_actual_q0": 0.51,
+      "spread_vs_street": "-10.53%",
+      "verdict": "MISS",
+      "bar_width_pct": 75
+    },
+    {
+      "name": "GAAP Gross Margin (%)",
+      "q_minus_1_actual": -80.0,
+      "q_minus_4_yoy": -100.0,
+      "street_consensus_q0": -50.0,
+      "reported_actual_q0": -33.33,
+      "spread_vs_street": "+1667 bps",
+      "verdict": "REBOUND",
+      "bar_width_pct": 85
+    },
+    {
+      "name": "Commercial Revenue Customers",
+      "q_minus_1_actual": 25,
+      "q_minus_4_yoy": 12,
+      "street_consensus_q0": 28,
+      "reported_actual_q0": 32,
+      "spread_vs_street": "+4 accounts (+14.3%)",
+      "verdict": "BEAT",
+      "bar_width_pct": 95
+    },
+    {
+      "name": "GAAP Diluted EPS ($)",
+      "q_minus_1_actual": -0.22,
+      "q_minus_4_yoy": -0.3,
+      "street_consensus_q0": -0.17,
+      "reported_actual_q0": -0.24,
+      "spread_vs_street": "-$0.07",
+      "verdict": "MISS",
+      "bar_width_pct": 70
+    },
+    {
+      "name": "Cash & Marketable Securities ($M)",
+      "q_minus_1_actual": 32.5,
+      "q_minus_4_yoy": 28.0,
+      "street_consensus_q0": 22.0,
+      "reported_actual_q0": 63.1,
+      "spread_vs_street": "+$41.10M (ATM Infusion)",
+      "verdict": "FORTRESS",
+      "bar_width_pct": 98
+    }
+  ],
+  "segment_reporting": {
+    "periods": [
+      "Q3 2025",
+      "Q4 2025",
+      "Q1 2026",
+      "Q2 2026",
+      "Q3 2026 (Actual)",
+      "Q4 2026E (Guided / Street)"
+    ],
+    "segments": [
+      {
+        "name": "Apollo\u2122 Commercial & Sensor Shipments",
+        "values": [
+          0.03,
+          0.06,
+          0.06,
+          0.12,
+          0.32,
+          0.65
+        ],
+        "qoq": "+166.7%",
+        "yoy": "+966.7%"
+      },
+      {
+        "name": "Strategic Development Programs (Lunar Outpost / STRATOS\u2122)",
+        "values": [
+          0.01,
+          0.03,
+          0.03,
+          0.05,
+          0.14,
+          0.25
+        ],
+        "qoq": "+180.0%",
+        "yoy": "+1300.0%"
+      },
+      {
+        "name": "Software-Defined Sensing & Sports Analytics",
+        "values": [
+          0.01,
+          0.01,
+          0.01,
+          0.03,
+          0.05,
+          0.1
+        ],
+        "qoq": "+66.7%",
+        "yoy": "+400.0%"
+      },
+      {
+        "name": "Total Consolidated Revenue",
+        "values": [
+          0.05,
+          0.1,
+          0.1,
+          0.2,
+          0.51,
+          1.0
+        ],
+        "qoq": "+155.0%",
+        "yoy": "+920.0%"
+      }
+    ]
+  },
+  "tooltip_definitions": {
+    "Total GAAP Revenue": "Consolidated GAAP net revenue from AEye's software-defined adaptive lidar sensing platform ($0.51M in Q3 2026, up ~10x YoY from $0.05M in Q3 2025 and 2.5x QoQ from $0.20M in Q2 2026).",
+    "Apollo\u2122 Commercial & Sensor Shipments": "Hardware shipments and core modular sensor packages incorporating AEye's software-configurable perception architecture ($0.32M in Q3 2026).",
+    "Strategic Development Programs": "Milestone-based engineering, qualification, and hardware development revenue including the multi-million-dollar Lunar Outpost Pegasus rover contract and Swiftstrike AI counter-UAS ($0.14M in Q3 2026).",
+    "Software-Defined Sensing & Sports Analytics": "Pure software licensing, perception algorithms, and sports analytics tracking deployments including Alive3D and a second newly signed customer ($0.05M in Q3 2026).",
+    "GAAP Gross Profit": "GAAP gross loss of -$0.17M in Q3 2026 (gross margin -33.33%), representing a 4700 bps sequential improvement from -80.0% in Q2 2026 due to BOM cost reductions and richer mix.",
+    "GAAP Operating Income": "GAAP operating loss of -$11.29M in Q3 2026 (-$0.17M Gross Profit - $11.12M OpEx), reflecting disciplined R&D execution across Apollo and STRATOS programs.",
+    "GAAP Diluted EPS": "GAAP diluted net loss per share of -$0.24 in Q3 2026 based on 46.8M weighted average common shares outstanding.",
+    "Operating Cash Burn": "Operating cash flow utilization of -$8.05M in Q3 2026, consistent with quarterly burn rates of -$7.29M in Q2 2026 and -$8.55M in Q1 2026.",
+    "Capital Expenditures": "Capital expenditures of $0.01M in Q3 2026, reflecting AEye's capital-light, fabless manufacturing and software-centric delivery model.",
+    "Reported Free Cash Flow": "Operating cash flow (-$8.05M) minus CapEx ($0.01M), delivering -$8.06M in Q3 2026.",
+    "Stock-Based Compensation": "Equity compensation and share-based awards of $3.25M in Q3 2026, providing key engineering and executive retention.",
+    "True Free Cash Flow": "Economic free cash flow deducting CapEx ($0.01M) and non-cash SBC ($3.25M) from OCF (-$8.05M), yielding -$11.31M in Q3 2026.",
+    "Lunar Outpost Program": "Binding multi-million-dollar contract with Lunar Outpost to supply Apollo\u2122 lidar for the Pegasus Lunar Terrain Vehicle from qualification through flight hardware delivery.",
+    "STRATOS Defense Integration": "AEye's high-performance long-range sensor selected by Swiftstrike AI for integration into counter-unmanned aerial systems (counter-UAS).",
+    "Commercial Customer Base": "Total active revenue-generating customer accounts expanded to 32 in Q3 2026, up 28% sequentially from 25 in Q2 2026, with over 200 active technical engagements.",
+    "Cash Runway into 2028": "Total cash, cash equivalents, and marketable securities reached $63.1M as of Sept 30, 2026, bolstering liquidity to fund operations into 2028.",
+    "FY 2026 Cash Consumption Target": "Management guided full-year 2026 cash consumption of $35.0M (inclusive of ~$5.0M working capital) and targeted a ~15% reduction in 2027 cash burn.",
+    "Q4 2026 Guidance Baseline": "Q4 2026 revenue guided to approximately double QoQ to ~$1.00M, marking AEye's first million-dollar quarter and establishing a new quarterly revenue baseline.",
+    "After-Hours Reaction": "LIDR shares traded down -2.25% to $0.87 after hours as revenue ($0.51M) slightly missed Street consensus ($0.57M), despite robust guidance and cash balances.",
+    "Negative Enterprise Value": "Enterprise Value of -$28.85M with cash and marketable securities ($63.1M) significantly exceeding market capitalization ($41.34M)."
+  }
+}
