@@ -231,8 +231,8 @@ window.EARNINGS_HISTORY_CATALOG = {
       "date_display": "Nov 5, 2026",
       "t1": "LIDR_T1_2026-11-05.html",
       "t0": null,
-      "verdict": null,
-      "post_move_pct": null,
+      "verdict": "CLEAN MISS",
+      "post_move_pct": -2.25,
       "rev_actual_m": null,
       "rev_consensus_m": 0.57,
       "currency": "$"
@@ -272,10 +272,10 @@ window.EARNINGS_HISTORY_CATALOG = {
       "quarter": "Q3 2026",
       "date_display": "Nov 5, 2026",
       "t1": "NET_T1_2026-11-05.html",
-      "t0": null,
-      "verdict": null,
-      "post_move_pct": null,
-      "rev_actual_m": null,
+      "t0": "NET_T0_POST_2026-11-05.html",
+      "verdict": "BEAT & RAISE (CAPEX SURGE)",
+      "post_move_pct": 14.57,
+      "rev_actual_m": 782.51,
       "rev_consensus_m": 739.39,
       "currency": "$"
     }
@@ -399,8 +399,8 @@ window.EARNINGS_HISTORY_CATALOG = {
       "date_display": "Nov 5, 2026",
       "t1": "SOUN_T1_2026-11-05.html",
       "t0": null,
-      "verdict": null,
-      "post_move_pct": null,
+      "verdict": "HEADLINE BEAT / GUIDANCE RESET",
+      "post_move_pct": -7.51,
       "rev_actual_m": null,
       "rev_consensus_m": 62.18,
       "currency": "$"
@@ -455,8 +455,8 @@ window.EARNINGS_HISTORY_CATALOG = {
       "date_display": "Nov 5, 2026",
       "t1": "TXG_T1_2026-11-05.html",
       "t0": null,
-      "verdict": null,
-      "post_move_pct": null,
+      "verdict": "REVENUE BEAT / EPS MISS",
+      "post_move_pct": -9.73,
       "rev_actual_m": null,
       "rev_consensus_m": 147.85,
       "currency": "$"
@@ -470,7 +470,7 @@ window.EARNINGS_HISTORY_CATALOG = {
       "t1": "U_T1_2026-11-05.html",
       "t0": null,
       "verdict": "CLEAN BEAT & RAISE",
-      "post_move_pct": 0.0,
+      "post_move_pct": 6.97,
       "rev_actual_m": null,
       "rev_consensus_m": 567.45,
       "currency": "$"
