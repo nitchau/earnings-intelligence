@@ -1,0 +1,1608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PLUG Q3 2026E Pre-Earnings Briefing | Plug Power Institutional Tearsheet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0b0f19;
+      --bg-card: #111827;
+      --bg-card-elevated: #161f33;
+      --bg-table-row-alt: #0e1525;
+      --border-color: #1f2937;
+      --border-subtle: #283548;
+      --text-primary: #f9fafb;
+      --text-secondary: #d1d5db;
+      --text-muted: #9ca3af;
+      --accent-blue: #3b82f6;
+      --accent-blue-glow: rgba(59, 130, 246, 0.15);
+      --bull-green: #10b981;
+      --bull-green-bg: rgba(16, 185, 129, 0.14);
+      --bear-red: #ef4444;
+      --bear-red-bg: rgba(239, 68, 68, 0.14);
+      --warn-amber: #f59e0b;
+      --warn-amber-bg: rgba(245, 158, 11, 0.14);
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      line-height: 1.5;
+      font-size: 14px;
+      padding: 24px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1560px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* ==========================================================================
+       INTERACTIVE HOVER TOOLTIP SYSTEM (FOR METRICS & ABBREVIATIONS)
+       ========================================================================== */
+    .tip {
+      position: relative;
+      display: inline-block;
+      border-bottom: 1px dotted #60a5fa;
+      cursor: help;
+      transition: color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .tip:hover {
+      color: #93c5fd;
+      border-bottom-color: #93c5fd;
+    }
+
+    .tip::after {
+      content: attr(data-tip);
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 0;
+      width: 290px;
+      padding: 10px 12px;
+      background-color: #1e293b;
+      color: #f8fafc;
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 1.45;
+      text-align: left;
+      text-transform: none;
+      letter-spacing: normal;
+      white-space: normal;
+      border: 1px solid var(--accent-blue);
+      border-radius: 6px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.75);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(4px);
+      transition: opacity 0.16s ease, transform 0.16s ease, visibility 0.16s;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* Right-aligned tooltip modifier to prevent right-edge screen clipping */
+    .tip-right::after {
+      left: auto;
+      right: 0;
+    }
+
+    /* Bottom-aligned tooltip modifier for elements near top of page */
+    .tip-bottom::after {
+      bottom: auto;
+      top: calc(100% + 8px);
+    }
+
+    .tip:hover::after {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    /* UTILITY & BADGES */
+    .mono {
+      font-family: var(--font-mono);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+
+    .badge-bull {
+      background-color: var(--bull-green-bg);
+      color: var(--bull-green);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+    }
+
+    .badge-bear {
+      background-color: var(--bear-red-bg);
+      color: var(--bear-red);
+      border: 1px solid rgba(239, 68, 68, 0.35);
+    }
+
+    .badge-warn {
+      background-color: var(--warn-amber-bg);
+      color: var(--warn-amber);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+    }
+
+    .badge-neutral {
+      background-color: rgba(156, 163, 175, 0.12);
+      color: var(--text-secondary);
+      border: 1px solid rgba(156, 163, 175, 0.25);
+    }
+
+    .badge-blue {
+      background-color: var(--accent-blue-glow);
+      color: #60a5fa;
+      border: 1px solid rgba(59, 130, 246, 0.4);
+    }
+
+    /* CARD SYSTEM */
+    .card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--border-color);
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-title-accent {
+      width: 4px;
+      height: 16px;
+      background-color: var(--accent-blue);
+      border-radius: 2px;
+      display: inline-block;
+    }
+
+    .card-subtitle {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    /* HEADER BANNER */
+    .header-banner {
+      background: linear-gradient(135deg, #111827 0%, #0f172a 65%, #172554 100%);
+      border: 1px solid var(--border-subtle);
+      border-left: 4px solid var(--accent-blue);
+      border-radius: 10px;
+      padding: 22px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .helper-bar {
+      background-color: rgba(59, 130, 246, 0.12);
+      border: 1px solid rgba(59, 130, 246, 0.35);
+      border-radius: 6px;
+      padding: 8px 14px;
+      font-size: 12.5px;
+      color: #bfdbfe;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .ticker-identity {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .ticker-line {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .ticker-symbol {
+      font-family: var(--font-mono);
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.4);
+      padding: 2px 12px;
+      border-radius: 6px;
+    }
+
+    .company-name {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .sector-tag {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .header-price-block {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .price-box {
+      text-align: right;
+    }
+
+    .price-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    .price-value {
+      font-family: var(--font-mono);
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .header-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(195px, 1fr));
+      gap: 12px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .strip-item {
+      background-color: rgba(11, 15, 25, 0.55);
+      border: 1px solid var(--border-color);
+      padding: 10px 14px;
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .strip-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .strip-val {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    /* ROW 1: 4 KPI CARDS */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .kpi-metric-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .kpi-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.07);
+      gap: 8px;
+    }
+
+    .kpi-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .kpi-name {
+      font-size: 12.5px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .kpi-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 2px;
+    }
+
+    .kpi-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 4px;
+    }
+
+    .kpi-val {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .delta-pair {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    /* ROW 2: HISTORICAL TABLE */
+    .table-wrapper {
+      overflow-x: auto;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px;
+    }
+
+    th {
+      background-color: #161f33;
+      color: var(--text-secondary);
+      font-weight: 600;
+      text-align: right;
+      padding: 11px 12px;
+      border-bottom: 1px solid var(--border-subtle);
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+
+    th:first-child {
+      text-align: left;
+      font-family: var(--font-sans);
+      min-width: 265px;
+      position: sticky;
+      left: 0;
+      z-index: 2;
+      background-color: #161f33;
+    }
+
+    td {
+      padding: 9px 12px;
+      border-bottom: 1px solid var(--border-color);
+      text-align: right;
+      font-family: var(--font-mono);
+      color: var(--text-primary);
+      white-space: nowrap;
+    }
+
+    td:first-child {
+      text-align: left;
+      font-family: var(--font-sans);
+      font-weight: 500;
+      color: var(--text-secondary);
+      position: sticky;
+      left: 0;
+      background-color: var(--bg-card);
+      z-index: 1;
+    }
+
+    tr:nth-child(even) td {
+      background-color: var(--bg-table-row-alt);
+    }
+
+    tr:nth-child(even) td:first-child {
+      background-color: var(--bg-table-row-alt);
+    }
+
+    tr.section-divider td {
+      background-color: rgba(59, 130, 246, 0.09);
+      color: #93c5fd;
+      font-family: var(--font-sans);
+      font-weight: 700;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      padding: 7px 12px;
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .col-q0 {
+      background-color: rgba(59, 130, 246, 0.06) !important;
+      font-weight: 700;
+    }
+
+    .col-est {
+      background-color: rgba(245, 158, 11, 0.05) !important;
+      color: #fde68a;
+    }
+
+    /* OUTLIER CELL BORDERS */
+    .outlier-red {
+      border: 1.5px solid var(--bear-red) !important;
+      background-color: rgba(239, 68, 68, 0.12) !important;
+      color: #fca5a5 !important;
+      font-weight: 700;
+      position: relative;
+    }
+
+    .outlier-amber {
+      border: 1.5px solid var(--warn-amber) !important;
+      background-color: rgba(245, 158, 11, 0.12) !important;
+      color: #fcd34d !important;
+      font-weight: 700;
+      position: relative;
+    }
+
+    /* ROW 3: FORENSIC CALLOUT */
+    .forensic-grid {
+      display: grid;
+      grid-template-columns: 1.35fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 1080px) {
+      .forensic-grid,
+      .split-2col,
+      .sentiment-grid {
+        grid-template-columns: 1fr !important;
+      }
+    }
+
+    .forensic-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .forensic-item {
+      background-color: rgba(11, 15, 25, 0.6);
+      border: 1px solid var(--border-color);
+      border-left: 3px solid var(--warn-amber);
+      border-radius: 6px;
+      padding: 13px 15px;
+    }
+
+    .forensic-item.critical {
+      border-left-color: var(--bear-red);
+    }
+
+    .forensic-item-title {
+      font-weight: 700;
+      font-size: 13.5px;
+      color: var(--text-primary);
+      margin-bottom: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .forensic-item p {
+      color: var(--text-secondary);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .fcf-bridge-box {
+      background-color: #0d1322;
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* ROW 4 & ROW 5: 2-COLUMN SPLIT CARDS */
+    .split-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .audit-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .audit-point {
+      padding: 12px 14px;
+      border-radius: 6px;
+      background-color: rgba(11, 15, 25, 0.55);
+      border: 1px solid var(--border-color);
+    }
+
+    .audit-point-bull {
+      border-left: 3px solid var(--bull-green);
+    }
+
+    .audit-point-bear {
+      border-left: 3px solid var(--bear-red);
+    }
+
+    .audit-point-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 5px;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .audit-point-title {
+      font-weight: 700;
+      font-size: 13.5px;
+      color: var(--text-primary);
+    }
+
+    .audit-point p {
+      font-size: 12.8px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* CATALYST ITEMS */
+    .catalyst-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .catalyst-card {
+      background-color: rgba(11, 15, 25, 0.55);
+      border: 1px solid var(--border-color);
+      border-left: 3px solid var(--accent-blue);
+      border-radius: 6px;
+      padding: 12px 14px;
+    }
+
+    /* SENTIMENT ANALYSIS CARD */
+    .sentiment-overview-banner {
+      background: linear-gradient(90deg, rgba(239, 68, 68, 0.12) 0%, rgba(245, 158, 11, 0.12) 50%, rgba(16, 185, 129, 0.12) 100%);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .sentiment-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .sentiment-source-card {
+      background-color: #0d1322;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .sentiment-meter-wrap {
+      display: flex;
+       flex-direction: column;
+      gap: 5px;
+      margin: 4px 0;
+    }
+
+    .sentiment-bar-bg {
+      width: 100%;
+      height: 8px;
+      background-color: #1f2937;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .sentiment-bar-fill {
+      height: 100%;
+      border-radius: 4px;
+    }
+
+    /* ROW 7: TRADE MATRIX */
+    .playbook-setup-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+      background-color: rgba(11, 15, 25, 0.65);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 14px;
+    }
+
+    .scenario-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 16px;
+    }
+
+    .scenario-card {
+      background-color: #0d1322;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .scenario-bull {
+      border-top: 4px solid var(--bull-green);
+    }
+
+    .scenario-base {
+      border-top: 4px solid var(--warn-amber);
+    }
+
+    .scenario-bear {
+      border-top: 4px solid var(--bear-red);
+    }
+
+    .scenario-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 800;
+      font-size: 15px;
+    }
+
+    .trigger-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 12.8px;
+      color: var(--text-secondary);
+    }
+
+    .trigger-list li {
+      position: relative;
+      padding-left: 14px;
+    }
+
+    .trigger-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--accent-blue);
+      font-weight: bold;
+    }
+
+    .trade-structure {
+      margin-top: auto;
+      padding: 11px 12px;
+      background-color: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      font-size: 12px;
+    }
+
+    .trade-structure strong {
+      display: block;
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .footer-meta {
+      text-align: center;
+      font-size: 11.5px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      padding: 10px 0 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    
+    <!-- HISTORICAL QUARTER ARCHIVE TOPBAR -->
+    <div class="archive-topbar" style="background: rgba(15, 23, 42, 0.92); border: 1px solid rgba(59, 130, 246, 0.32); border-radius: 10px; padding: 10px 16px; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; font-size: 12.5px;">
+      <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+        <a href="index.html" style="color: #93c5fd; text-decoration: none; font-weight: 600; padding: 4px 10px; border-radius: 6px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.12);">← Portal Home</a>
+        <span style="background: rgba(59, 130, 246, 0.18); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); font-weight: 700; font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 3px 9px; border-radius: 5px;">T-1 Pre-Earnings Briefing</span>
+        <a id="archive-paired-stage-link" href="PLUG_T0_POST_2026-11-09.html" style="display: none; color: #cbd5e1; text-decoration: none; font-size: 11.5px; padding: 3px 9px; border-radius: 5px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12);">Switch to T+0 Post-Earnings Report →</a>
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+        <label for="quarter-archive-select" style="color: #94a3b8; font-size: 12px; font-weight: 600;">📅 Historical Quarter:</label>
+        <select id="quarter-archive-select" data-ticker="PLUG" data-date="2026-11-09" data-stage="t1" style="background: #090d16; color: #f8fafc; border: 1px solid rgba(59, 130, 246, 0.45); border-radius: 6px; padding: 5px 10px; font-size: 12px; font-family: 'Inter', sans-serif; font-weight: 600; cursor: pointer; outline: none;">
+          <option value="PLUG_T1_2026-11-09.html" selected>Q3 2026 (Nov 9, 2026) — Latest</option>
+          <option value="" disabled>No prior quarters archived yet (history initiated Q3 2026)</option>
+        </select>
+      </div>
+    </div>
+    <script src="history_catalog.js"></script>
+    <script>
+      (function() {
+        var sel = document.getElementById('quarter-archive-select');
+        if (!sel) return;
+        var tk = sel.getAttribute('data-ticker');
+        var curDate = sel.getAttribute('data-date');
+        var stage = sel.getAttribute('data-stage');
+        var cat = (window.EARNINGS_HISTORY_CATALOG || {})[tk];
+        if (Array.isArray(cat) && cat.length > 0) {
+          sel.innerHTML = '';
+          cat.forEach(function(entry, idx) {
+            var targetFile = (stage === 't0') ? (entry.t0 || entry.t1) : (entry.t1 || entry.t0);
+            if (!targetFile) return;
+            var opt = document.createElement('option');
+            opt.value = targetFile;
+            var suffix = (idx === 0) ? ' — Latest' : '';
+            var stageHint = (stage === 't0' && !entry.t0) ? ' [T-1 Only]' : ((stage === 't1' && !entry.t1) ? ' [T+0 Only]' : '');
+            opt.textContent = entry.quarter + ' (' + entry.date_display + ')' + stageHint + suffix;
+            if (entry.date === curDate) opt.selected = true;
+            sel.appendChild(opt);
+          });
+          if (cat.length === 1) {
+            var note = document.createElement('option');
+            note.value = '';
+            note.disabled = true;
+            note.textContent = '── Prior quarters will appear here starting next quarter ──';
+            sel.appendChild(note);
+          }
+          var curEntry = cat.find(function(e) { return e.date === curDate; });
+          var pairedLink = document.getElementById('archive-paired-stage-link');
+          if (curEntry && pairedLink) {
+            var pairedHref = (stage === 't0') ? curEntry.t1 : curEntry.t0;
+            if (pairedHref) {
+              pairedLink.href = pairedHref;
+              pairedLink.style.display = 'inline-block';
+            }
+          }
+        }
+        sel.addEventListener('change', function() {
+          if (this.value && !window.location.pathname.endsWith('/' + this.value)) {
+            window.location.href = this.value;
+          }
+        });
+      })();
+    </script>
+
+    <!-- 1. HEADER BANNER -->
+    <header class="header-banner">
+      <div class="helper-bar">
+        <span>💡 <strong>Interactive Definitions Enabled:</strong> Hover your mouse over any <span class="tip tip-bottom" title="Plain-English definitions pop up automatically whenever you hover over any dotted-underlined term." data-tip="Plain-English definitions pop up automatically whenever you hover over any dotted-underlined financial metric or abbreviation.">dotted-underlined metric or abbreviation</span> for an instant plain-English explanation.</span>
+        <span class="mono" style="font-size:11.5px;color:#93c5fd;">Last Reported Quarter: <strong>Q2 2026 (Ended June 30, 2026)</strong> • Upcoming Release: <strong>Q3 2026 (Ended Sep 30, 2026)</strong></span>
+      </div>
+
+      <div class="header-top">
+        <div class="ticker-identity">
+          <div class="ticker-line">
+            <span class="ticker-symbol">PLUG</span>
+            <h1 class="company-name">Plug Power Inc.</h1>
+            <span class="badge badge-bull">TURNKEY HYDROGEN ECOSYSTEM &amp; PEM ELECTROLYZER INFRASTRUCTURE</span>
+            <span class="badge badge-blue"><span class="tip tip-bottom" title="One trading window before official quarterly earnings release." data-tip="T-1 (Pre-Earnings Window): Institutional pre-earnings briefing prepared ahead of the upcoming Q3 2026 earnings release scheduled for Monday, Nov 09, 2026.">T-1</span> PRE-EARNINGS BRIEFING</span>
+          </div>
+          <div class="sector-tag">NASDAQ • Industrials, Electrical Equipment &amp; Clean Hydrogen Energy • <span class="tip tip-bottom" title="Central Index Key: Unique 10-digit identifier assigned by the U.S. SEC." data-tip="Central Index Key (CIK): The unique 10-digit identifier (0001093691) assigned by the SEC to track Plug Power Inc.'s regulatory filings.">CIK</span>: 0001093691</div>
+        </div>
+        <div class="header-price-block">
+          <div class="price-box">
+            <div class="price-label">Spot Price (Nov 2026)</div>
+            <div class="price-value">$1.40 <span class="badge badge-bull">+142.14% <span class="tip tip-right tip-bottom" title="Implied Upside to Wall Street Consensus Mean Target Price ($3.39)." data-tip="Implied Upside to Street Target: Percentage upside from current spot price ($1.40) to the 15-analyst consensus mean price target of $3.39 (median PT $4.00, high $7.00).">Upside to Mean PT</span></span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="header-strip">
+        <div class="strip-item">
+          <span class="strip-label">Market Cap</span>
+          <span class="strip-val">$1.96B</span>
+          <span class="strip-sub">EV: $2.76B</span>
+        </div>
+        <div class="strip-item">
+          <span class="strip-label">Consensus Revenue</span>
+          <span class="strip-val">$193.33M</span>
+          <span class="strip-sub">+9.2% YoY Growth</span>
+        </div>
+        <div class="strip-item">
+          <span class="strip-label">Consensus Diluted EPS</span>
+          <span class="strip-val">$-0.06</span>
+          <span class="strip-sub">Whisper: -$0.05</span>
+        </div>
+        <div class="strip-item">
+          <span class="strip-label">ATM Straddle Implied Move</span>
+          <span class="strip-val">±18.57%</span>
+          <span class="strip-sub">Straddle: ±$0.26 | IV: 160.9%</span>
+        </div>
+        <div class="strip-item">
+          <span class="strip-label">Short Interest</span>
+          <span class="strip-val">23.54%</span>
+          <span class="strip-sub">Put/Call OI: 0.10x</span>
+        </div>
+        <div class="strip-item">
+          <span class="strip-label">Reporting Date &amp; Timing</span>
+          <span class="strip-val">Nov 09, 2026</span>
+          <span class="strip-sub">AMC (After Market Close)</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- 2. TRACK B STICKY JUMP-NAV -->
+    <nav class="pre-jump-nav" style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; padding: 10px 14px; background: rgba(15, 23, 42, 0.7); border: 1px solid var(--border-color); border-radius: 8px; backdrop-filter: blur(8px);">
+      <a href="#row-1-kpis" style="color: #93c5fd; font-size: 12px; text-decoration: none; padding: 4px 10px; background: rgba(59, 130, 246, 0.15); border-radius: 4px; font-weight: 600;">#1 Top KPIs</a>
+      <a href="#row-1b-scorecard" style="color: #6ee7b7; font-size: 12px; text-decoration: none; padding: 4px 10px; background: rgba(16, 185, 129, 0.15); border-radius: 4px; font-weight: 600;">#2 Pre-Print Scorecard</a>
+      <a href="#row-2-financials" style="color: #c084fc; font-size: 12px; text-decoration: none; padding: 4px 10px; background: rgba(168, 85, 247, 0.15); border-radius: 4px; font-weight: 600;">#3 5-Quarter Financials</a>
+      <a href="#row-3-fcf" style="color: #fcd34d; font-size: 12px; text-decoration: none; padding: 4px 10px; background: rgba(245, 158, 11, 0.15); border-radius: 4px; font-weight: 600;">#4 True FCF Bridge</a>
+      <a href="#row-4-segments" style="color: #fca5a5; font-size: 12px; text-decoration: none; padding: 4px 10px; background: rgba(239, 68, 68, 0.15); border-radius: 4px; font-weight: 600;">#5 Segment Tailwinds &amp; Headwinds</a>
+      <a href="#row-4b-debates" style="color: #93c5fd; font-size: 12px; text-decoration: none; padding: 4px 10px; background: rgba(59, 130, 246, 0.15); border-radius: 4px; font-weight: 600;">#6 Call Debates</a>
+      <a href="#row-5-peers" style="color: #e2e8f0; font-size: 12px; text-decoration: none; padding: 4px 10px; background: rgba(255, 255, 255, 0.08); border-radius: 4px; font-weight: 600;">#7 Peer Comps</a>
+      <a href="#row-6-sentiment" style="color: #6ee7b7; font-size: 12px; text-decoration: none; padding: 4px 10px; background: rgba(16, 185, 129, 0.15); border-radius: 4px; font-weight: 600;">#8 Sentiment &amp; Skew</a>
+      <a href="#row-7-pm-matrix" style="color: #fcd34d; font-size: 12px; text-decoration: none; padding: 4px 10px; background: rgba(245, 158, 11, 0.15); border-radius: 4px; font-weight: 600;">#9 PM Trade Playbook</a>
+    </nav>
+
+    <!-- 3. ROW 1: TOP EXECUTIVE KPI CARDS -->
+    <section class="kpi-grid" id="row-1-kpis" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 24px;">
+      <div class="card kpi-card">
+        <div class="card-header">
+          <span class="card-title"><span class="card-title-accent"></span>Quarterly Revenue Stabilisation</span>
+          <span class="badge badge-bull">+9.1% QoQ</span>
+        </div>
+        <div class="kpi-value">$178.30M</div>
+        <div class="kpi-sub">Q2 2026 Actual • Consensus Models $193.33M for Q3 (+9.2% YoY)</div>
+        <p style="font-size: 12.3px; color: var(--text-secondary); margin-top: 8px;">
+          Stabilizing warehouse forklift equipment shipments and expanding hydrogen deliveries are positioning Plug Power for improved revenue density across North America.
+        </p>
+      </div>
+
+      <div class="card kpi-card">
+        <div class="card-header">
+          <span class="card-title"><span class="card-title-accent"></span>Internal Hydrogen Production</span>
+          <span class="badge badge-bull">40 TPD Operational</span>
+        </div>
+        <div class="kpi-value">40 TPD</div>
+        <div class="kpi-sub">Georgia &amp; Tennessee Plants • Targeting 55 TPD in Q3 2026E</div>
+        <p style="font-size: 12.3px; color: var(--text-secondary); margin-top: 8px;">
+          Expanding low-cost internal liquid green hydrogen output directly replaces costly third-party merchant supply, narrowing catastrophic historical fuel margin losses.
+        </p>
+      </div>
+
+      <div class="card kpi-card">
+        <div class="card-header">
+          <span class="card-title"><span class="card-title-accent"></span>DOE $1.66B Loan Facility</span>
+          <span class="badge badge-blue">Conditional Guarantee</span>
+        </div>
+        <div class="kpi-value">$1.66B</div>
+        <div class="kpi-sub">Title 17 Clean Energy Debt Facility • Non-Dilutive Capital</div>
+        <p style="font-size: 12.3px; color: var(--text-secondary); margin-top: 8px;">
+          Closing definitive documentation on the DOE loan guarantee will provide dedicated capital to construct up to six regional hydrogen generation hubs without shareholder dilution.
+        </p>
+      </div>
+
+      <div class="card kpi-card">
+        <div class="card-header">
+          <span class="card-title"><span class="card-title-accent"></span>Forensic True Free Cash Burn</span>
+          <span class="badge badge-warn">-$137.67M True FCF</span>
+        </div>
+        <div class="kpi-value">-$124.72M</div>
+        <div class="kpi-sub">Reported FCF (OCF -$94.06M less CapEx $30.66M) • SBC $12.95M</div>
+        <p style="font-size: 12.3px; color: var(--text-secondary); margin-top: 8px;">
+          Strict working capital reductions and reduced plant CapEx lowered cash burn significantly from 2024 peak levels (-$300M+/quarter), extending liquid runway.
+        </p>
+      </div>
+    </section>
+
+    <!-- 4. ROW 1B: PRE-RELEASE EXPECTATIONS, WHISPER SPREAD & HISTORICAL SCORECARD -->
+    <section id="row-1b-scorecard" style="margin-bottom: 24px;">
+      <!-- Track B Setup Audit Banner -->
+      <div class="t1-setup-audit" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-bottom: 16px;">
+        <div class="card" style="padding: 14px; border-left: 3px solid #3b82f6;">
+          <div style="font-size: 11px; font-weight: 700; color: #93c5fd; text-transform: uppercase;">Pre-Print Options Setup</div>
+          <div style="font-size: 16px; font-weight: 800; color: #fff; margin-top: 4px;">Implied Move: ±18.57% (±$0.26)</div>
+          <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Weekly ATM Straddle prices a volatile ±$0.26 move vs historical average 1-day move of 7.68%, indicating an <span style="color:#f59e0b;font-weight:700;">Overpriced Volatility Regime</span>.</div>
+        </div>
+        <div class="card" style="padding: 14px; border-left: 3px solid #10b981;">
+          <div style="font-size: 11px; font-weight: 700; color: #6ee7b7; text-transform: uppercase;">Consensus vs. Whisper Spread</div>
+          <div style="font-size: 16px; font-weight: 800; color: #fff; margin-top: 4px;">Top-Line Whisper: $198.0M (+2.42% Bogey)</div>
+          <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Buy-side whisper models a modest beat above the $193.33M consensus, with key focus on electrolyzer deliveries and fuel margin inflection.</div>
+        </div>
+        <div class="card" style="padding: 14px; border-left: 3px solid #f59e0b;">
+          <div style="font-size: 11px; font-weight: 700; color: #fcd34d; text-transform: uppercase;">Historical Beat Track Record</div>
+          <div style="font-size: 16px; font-weight: 800; color: #fff; margin-top: 4px;">75.0% Beat Rate (3 Beats, 1 Miss)</div>
+          <div style="font-size: 12px; color: var(--text-secondary); margin-top: 4px;">Plug Power beat bottom-line consensus EPS in 3 of the prior 4 quarters, benefiting from restructuring actions and lower OpEx.</div>
+        </div>
+      </div>
+
+      <!-- Table 1B-1: Headline & Company KPI Consensus vs Whisper Scorecard -->
+      <div class="section-title">
+        <span class="section-title-accent"></span>Table 1B-1: Headline &amp; Company KPI Consensus vs. Buy-Side Whisper Scorecard
+      </div>
+      <div class="table-wrapper" style="margin-bottom: 16px;">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Operational Metric / Benchmark</th>
+              <th>Q-1 Actual</th>
+              <th>Q-4 YoY Baseline</th>
+              <th class="col-q0">Street Consensus (Q0E)</th>
+              <th>Buy-Side Whisper Bogey</th>
+              <th>Whisper Spread &amp; Beat Bar</th>
+              <th>Expectation Hurdle</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr>
+                <td><span class="tip" title="Consolidated quarterly GAAP revenue across Fuel Cell Systems, Electrolyzers, Hydrogen Fuel, and Services." data-tip="Total GAAP Revenue ($M): Plug Power delivered $178.30M in Q2 2026 (+2.49% YoY vs $173.97M in Q2 2025 and +9.05% QoQ vs $163.51M in Q1 2026). Wall Street consensus models $193.33M for Q3 2026E (+9.19% YoY vs $177.06M in Q3 2025), with buy-side whisper bogeys looking for $198.0M on accelerating material handling deployments.">Total Net GAAP Revenue ($M)</span></td>
+                <td>$178.30M</td>
+                <td>$177.06M</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">$193.33M</td>
+                <td style="font-weight:700; color: #34d399;">$198.00M</td>
+                <td>
+                  <span class="badge badge-bull">+2.42% Spread</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div style="width:82%; height:100%; background:linear-gradient(90deg, #3b82f6, #10b981);"></div></div>
+                </td>
+                <td><span class="badge badge-blue">Top-Line Hurdle</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Quarterly GAAP net loss per share reflecting cost containment and manufacturing margin improvements." data-tip="GAAP Diluted EPS ($/sh): Q2 2026 actual EPS came in at -$0.07 (beating consensus of -$0.08). Street consensus models -$0.06 for Q3 2026E with buy-side whisper looking for -$0.05 on improved green hydrogen internal production margins.">GAAP Diluted EPS ($/sh)</span></td>
+                <td>-$0.07</td>
+                <td>-$0.12</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">-$0.06</td>
+                <td style="font-weight:700; color: #34d399;">-$0.05</td>
+                <td>
+                  <span class="badge badge-bull">+$0.01 Better</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div style="width:76%; height:100%; background:linear-gradient(90deg, #3b82f6, #10b981);"></div></div>
+                </td>
+                <td><span class="badge badge-blue">Loss Reduction</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Daily tons per day (TPD) of internal green hydrogen fuel produced across Georgia, Tennessee, and Louisiana generation facilities." data-tip="Internal Green Hydrogen Production: Internal production reached 40 TPD across Georgia and Tennessee in Q2 2026, lowering third-party molecule procurement costs; Street looks for expansion past 55 TPD in Q3 2026E.">Liquid Hydrogen Plant Production (TPD)</span></td>
+                <td>40 TPD</td>
+                <td>15 TPD</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">55 TPD</td>
+                <td style="font-weight:700; color: #34d399;">60 TPD</td>
+                <td>
+                  <span class="badge badge-bull">+5 TPD Margin Driver</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div style="width:88%; height:100%; background:linear-gradient(90deg, #3b82f6, #10b981);"></div></div>
+                </td>
+                <td><span class="badge badge-blue">Margin Driver</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Status of the U.S. Department of Energy (DOE) Title 17 conditional clean energy loan guarantee facility." data-tip="DOE Loan Guarantee: Finalization and definitive documentation of the $1.66B DOE loan guarantee to construct up to six green hydrogen generation facilities; key institutional milestone to eliminate dilution fears.">DOE $1.66B Loan Facility Finalization</span></td>
+                <td>Conditional</td>
+                <td>Application</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">Closing Steps</td>
+                <td style="font-weight:700; color: #34d399;">Definitive Close</td>
+                <td>
+                  <span class="badge badge-bull">Liquidity Inflection</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div style="width:94%; height:100%; background:linear-gradient(90deg, #3b82f6, #10b981);"></div></div>
+                </td>
+                <td><span class="badge badge-blue">Balance Sheet Catalyst</span></td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Table 1B-2: Management Guidance Credibility & Track Record -->
+      <div class="section-title">
+        <span class="section-title-accent"></span>Table 1B-2: Management Guidance Credibility &amp; 4Q Historical Track Record
+      </div>
+      <div style="margin-bottom: 12px; padding: 10px 14px; background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border-color); border-radius: 6px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+          <span style="font-size: 12.5px; font-weight: 700; color: #e2e8f0;">Executive Sandbagging &amp; Credibility Score: <span style="color:#60a5fa;">74 / 100</span></span>
+          <span class="badge badge-bull">74 / 100</span>
+        </div>
+        <div class="credibility-gauge-bar" style="height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; overflow: hidden;">
+          <div style="width: 74%; height: 100%; background: linear-gradient(90deg, #3b82f6, #10b981);"></div>
+        </div>
+      </div>
+      <div class="table-wrapper" style="margin-bottom: 16px;">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Guidance Metric / Corridor</th>
+              <th>Prior Q Management Guidance for Q0</th>
+              <th>Current Street Consensus</th>
+              <th>4Q Beat Rate</th>
+              <th>Execution Variance &amp; Sandbagging Analysis</th>
+              <th>Credibility Grade</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr>
+                <td><span class="tip" title="Prior revenue guidance provided during Q2 2026 earnings conference call." data-tip="Q3 2026 Revenue Guidance: Guided toward $185.0M - $205.0M ($195.0M midpoint); current Street consensus sits at $193.33M.">Q3 2026E Revenue Guidance Corridor</span></td>
+                <td>$185.0M – $205.0M ($195.0M Midpoint)</td>
+                <td style="font-weight:600; color: #93c5fd;">$193.33M</td>
+                <td style="font-weight:600; color: #34d399;">75.0% (3 of 4 Quarters)</td>
+                <td>Management has met or beaten bottom-line EPS targets in 3 of the last 4 quarters as restructuring actions and internal hydrogen generation narrowed gross losses.</td>
+                <td><span class="badge badge-bull">Grade B+ (Improving Execution)</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Target timeline for returning equipment manufacturing and fuel margins to positive territory." data-tip="Gross Margin Trajectory: Management guided to near-breakeven equipment margins by Q3/Q4 2026 as legacy fixed-price fuel contracts roll off.">Equipment Gross Margin Breakeven Trajectory</span></td>
+                <td>Inflection toward 0% Gross Margin</td>
+                <td style="font-weight:600; color: #93c5fd;">-0.87% Gross Margin</td>
+                <td style="font-weight:600; color: #34d399;">50.0% Execution</td>
+                <td>Internal hydrogen production from the Georgia plant has begun replacing high-cost third-party merchant hydrogen, reducing fuel margin drag.</td>
+                <td><span class="badge badge-bull">Grade B (Moderate)</span></td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Table 1B-3: Forward Guidance Bogeys & Re-Rating Hurdles -->
+      <div class="section-title">
+        <span class="section-title-accent"></span>Table 1B-3: Forward Guidance Bogeys &amp; Re-Rating Hurdles (Q4 2026E &amp; FY2027)
+      </div>
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Forward Guidance Target Metric</th>
+              <th>Street Consensus Hurdle</th>
+              <th>Buy-Side Bull Bogey</th>
+              <th>Bear Breakdown Threshold</th>
+              <th>Multiple Sensitivity</th>
+              <th>Strategic Institutional Rationale</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr>
+                <td><span class="tip" title="Expected top-line fourth quarter revenue guidance required to satisfy institutional turnaround models." data-tip="Q4 2026E Guidance Hurdle: Street models $245.0M; buy-side bull bogey requires guidance >= $260.0M on seasonal equipment delivery surges.">Q4 2026E Revenue Guidance Hurdle</span></td>
+                <td>$245.0M (+8.8% YoY)</td>
+                <td style="font-weight:600; color: #34d399;">$260.0M+ (Electrolyzer Delivery Acceleration)</td>
+                <td style="font-weight:600; color: #f87171;">< $225.0M (Customer CapEx Delays)</td>
+                <td><span class="badge badge-warn">High Multiple Sensitivity</span></td>
+                <td>High short interest (23.54% of float) means a raised Q4 revenue guide triggers immediate short covering across hedge fund accounts.</td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Target operating cash burn reduction and timeline for crossing into cash flow neutrality." data-tip="Cash Flow Neutrality: Management commitment to reducing quarterly OCF burn below -$40M by early 2027.">Path to Positive Operating Cash Flow (2027)</span></td>
+                <td>Burn < -$50M/Quarter by Q2 2027</td>
+                <td style="font-weight:600; color: #34d399;">Cash Flow Breakeven by Q4 2026 / Q1 2027</td>
+                <td style="font-weight:600; color: #f87171;">Burn Persisting > -$80M/Quarter</td>
+                <td><span class="badge badge-warn">Solvency & Valuation Floor</span></td>
+                <td>With Q2 OCF at -$94.06M and True FCF at -$137.67M, institutional investors strictly scrutinize cash runway and time-to-breakeven.</td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 5. ROW 2: 5-QUARTER STITCHED FINANCIAL TABLE + Q0E CONSENSUS -->
+    <section class="financials-section" id="row-2-financials" style="margin-bottom: 24px;">
+      <div class="section-title">
+        <span class="section-title-accent"></span>Rolling 5-Quarter Stitched Financial Table &amp; Upcoming Consensus Estimate
+      </div>
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Metric ($ Millions, GAAP)</th>
+              <th>Q2 2025</th>
+              <th>Q3 2025</th>
+              <th>Q4 2025</th>
+              <th>Q1 2026</th>
+              <th class="col-q0">Q2 2026 (Latest Actual)</th>
+              <th class="col-est">Q3 2026E (Consensus)</th>
+              <th>QoQ Growth</th>
+              <th>YoY Growth</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="font-weight: 700; color: #60a5fa;">
+              <td><span class="tip" title="Total GAAP Net Revenue across fuel cells, hydrogen delivery, electrolyzers, and services." data-tip="Total GAAP Revenue: Fully consolidated GAAP revenue generated from material handling fuel cell systems, bulk green hydrogen fuel, cryogenic trailers, and megawatt-scale PEM electrolyzer systems.">Total Net Revenue</span></td>
+              <td>$173.97M</td>
+              <td>$177.06M</td>
+              <td>$225.22M</td>
+              <td>$163.51M</td>
+              <td class="col-q0">$178.30M</td>
+              <td class="col-est">$193.33M</td>
+              <td style="color:#34d399;">+9.0%</td>
+              <td style="color:#34d399;">+2.5%</td>
+            </tr>
+            <tr style="font-size: 12.3px; color: var(--text-secondary);">
+              <td style="padding-left: 20px;">• Fuel Cell Systems &amp; Infrastructure</td>
+              <td>$105.20M</td>
+              <td>$108.50M</td>
+              <td>$142.30M</td>
+              <td>$98.10M</td>
+              <td class="col-q0">$112.40M</td>
+              <td class="col-est">$123.00M</td>
+              <td style="color:#34d399;">+14.6%</td>
+              <td style="color:#34d399;">+6.8%</td>
+            </tr>
+            <tr style="font-size: 12.3px; color: var(--text-secondary);">
+              <td style="padding-left: 20px;">• Hydrogen Delivery &amp; Power Purchased</td>
+              <td>$34.50M</td>
+              <td>$36.20M</td>
+              <td>$41.80M</td>
+              <td>$33.60M</td>
+              <td class="col-q0">$35.10M</td>
+              <td class="col-est">$38.50M</td>
+              <td style="color:#34d399;">+4.5%</td>
+              <td style="color:#34d399;">+1.7%</td>
+            </tr>
+            <tr style="font-size: 12.3px; color: var(--text-secondary);">
+              <td style="padding-left: 20px;">• Electrolyzer Generation Equipment</td>
+              <td>$20.10M</td>
+              <td>$18.40M</td>
+              <td>$24.50M</td>
+              <td>$17.80M</td>
+              <td class="col-q0">$16.20M</td>
+              <td class="col-est">$16.83M</td>
+              <td style="color:#f87171;">-9.0%</td>
+              <td style="color:#f87171;">-19.4%</td>
+            </tr>
+            <tr style="font-size: 12.3px; color: var(--text-secondary);">
+              <td style="padding-left: 20px;">• Power Purchase Agreements &amp; Services</td>
+              <td>$14.17M</td>
+              <td>$13.96M</td>
+              <td>$16.62M</td>
+              <td>$14.01M</td>
+              <td class="col-q0">$14.60M</td>
+              <td class="col-est">$15.00M</td>
+              <td style="color:#34d399;">+4.2%</td>
+              <td style="color:#34d399;">+3.0%</td>
+            </tr>
+            <tr>
+              <td><span class="tip" title="Cost of Revenue: Direct equipment manufacturing, merchant hydrogen sourcing, and electricity." data-tip="Cost of Revenue: Direct material costs, factory labor, expensive third-party merchant hydrogen purchases, and power tariff expenses.">Cost of Revenue</span></td>
+              <td>$227.44M</td>
+              <td>$297.23M</td>
+              <td>$219.77M</td>
+              <td>$185.12M</td>
+              <td class="col-q0">$179.98M</td>
+              <td class="col-est">$195.00M</td>
+              <td style="color:#34d399;">-2.7%</td>
+              <td style="color:#34d399;">-20.9%</td>
+            </tr>
+            <tr style="font-weight: 600;">
+              <td><span class="tip" title="Gross Profit: Total revenue minus cost of revenue." data-tip="Gross Profit: Consolidated gross profit/loss reflecting negative fuel delivery margins offset by equipment shipments.">Gross Profit</span></td>
+              <td style="color:#f87171;">$-53.47M</td>
+              <td style="color:#f87171;">$-120.17M</td>
+              <td style="color:#34d399;">+$5.45M</td>
+              <td style="color:#f87171;">$-21.61M</td>
+              <td class="col-q0" style="color:#f87171;">$-1.68M</td>
+              <td class="col-est" style="color:#f87171;">-$1.67M</td>
+              <td style="color:#34d399;">+92.2%</td>
+              <td style="color:#34d399;">+96.9%</td>
+            </tr>
+            <tr>
+              <td><span class="tip" title="Operating Expenses: R&D, sales, general & administrative expenses." data-tip="Operating Expenses: Includes engineering R&D, corporate overhead, restructuring costs, and site development expenses.">Operating Expenses</span></td>
+              <td>$100.09M</td>
+              <td>$126.71M</td>
+              <td>$112.54M</td>
+              <td>$82.32M</td>
+              <td class="col-q0">$42.69M</td>
+              <td class="col-est">$52.00M</td>
+              <td style="color:#34d399;">-48.1%</td>
+              <td style="color:#34d399;">-57.3%</td>
+            </tr>
+            <tr style="font-weight: 700;">
+              <td><span class="tip" title="Operating Income (EBIT): Gross profit minus operating expenses." data-tip="Operating Income (EBIT): Operating loss from core green hydrogen manufacturing and delivery before interest and taxes.">Operating Income (EBIT)</span></td>
+              <td style="color:#f87171;">$-153.55M</td>
+              <td style="color:#f87171;">$-246.88M</td>
+              <td style="color:#f87171;">$-107.09M</td>
+              <td style="color:#f87171;">$-103.93M</td>
+              <td class="col-q0" style="color:#f87171;">$-44.36M</td>
+              <td class="col-est" style="color:#f87171;">-$53.67M</td>
+              <td style="color:#34d399;">+57.3%</td>
+              <td style="color:#34d399;">+71.1%</td>
+            </tr>
+            <tr style="font-weight: 700;">
+              <td><span class="tip" title="GAAP Net Income / (Loss) attributable to common stockholders." data-tip="GAAP Net Income: Consolidated net loss after accounting for equipment financing interest and non-cash asset adjustments.">GAAP Net Income</span></td>
+              <td style="color:#f87171;">$-227.10M</td>
+              <td style="color:#f87171;">$-361.87M</td>
+              <td style="color:#f87171;">$-845.97M</td>
+              <td style="color:#f87171;">$-245.30M</td>
+              <td class="col-q0" style="color:#f87171;">$-188.21M</td>
+              <td class="col-est" style="color:#f87171;">-$85.00M</td>
+              <td style="color:#34d399;">+23.3%</td>
+              <td style="color:#34d399;">+17.1%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 6. ROW 3: FORENSIC HIGHLIGHTS & TRUE FCF WATERFALL BRIDGE -->
+    <section class="forensic-section" id="row-3-fcf" style="margin-bottom: 24px;">
+      <div class="section-title">
+        <span class="section-title-accent"></span>Forensic Cash Flow Quality &amp; True Free Cash Flow Waterfall Bridge
+      </div>
+      <div class="forensic-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px;">
+        <div class="card" style="padding: 16px;">
+          <div class="card-header">
+            <span class="card-title"><span class="card-title-accent"></span>Latest Reported Quarter (Q2 2026) FCF Bridge</span>
+            <span class="badge badge-warn">Burn Reduction</span>
+          </div>
+          <p style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 12px;">
+            The forensic waterfall below bridges reported GAAP Operating Cash Flow ($-94.06M) to institutional True Free Cash Flow (-$137.67M), isolating green hydrogen plant CapEx and non-cash equity compensation.
+          </p>
+          <div style="background: rgba(11, 15, 25, 0.6); padding: 12px; border-radius: 6px; border: 1px solid var(--border-color);">
+            <div class="waterfall-row" style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 13px;">
+              <span><span class="tip" title="Operating Cash Flow: Cash used in operating activities." data-tip="Operating Cash Flow (OCF): Net cash used in operational hydrogen delivery and manufacturing (-$94.06M in Q2 2026), significantly narrowed from prior year levels.">Operating Cash Flow (OCF)</span></span>
+              <span style="font-weight: 700; color: #f87171;">-$94.06M</span>
+            </div>
+            <div class="waterfall-row" style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 13px;">
+              <span><span class="tip" title="Capital Expenditures: Purchases of property, plant, equipment, and electrolyzer stacks." data-tip="Capital Expenditures (CapEx): Cash deployed for liquid hydrogen plant construction and cryogenic equipment ($30.66M).">Less: Capital Expenditures (CapEx)</span></span>
+              <span style="font-weight: 700; color: #f87171;">-$30.66M</span>
+            </div>
+            <div class="waterfall-row" style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 13px; font-weight: 600; color: #93c5fd;">
+              <span>Reported Free Cash Flow (OCF - CapEx)</span>
+              <span>-$124.72M</span>
+            </div>
+            <div class="waterfall-row" style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 13px;">
+              <span><span class="tip" title="Stock-Based Compensation: Non-cash compensation expense." data-tip="Stock-Based Compensation (SBC): Non-cash equity compensation grants of $12.95M deducted by institutional analysts.">Less: Stock-Based Compensation (SBC)</span></span>
+              <span style="font-weight: 700; color: #f87171;">-$12.95M</span>
+            </div>
+            <div class="waterfall-row" style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 13px;">
+              <span><span class="tip" title="Finance Lease Principal Repayments." data-tip="Finance Leases: Contractual debt repayments on equipment leases ($0.0M in Q2 2026).">Less: Finance Lease Repayments</span></span>
+              <span style="font-weight: 700; color: #94a3b8;">-$0.00M</span>
+            </div>
+            <div class="waterfall-row" style="display: flex; justify-content: space-between; padding: 8px 0; font-size: 14px; font-weight: 800; color: #fca5a5; border-top: 1px dashed rgba(255,255,255,0.2);">
+              <span>Forensic True Free Cash Flow</span>
+              <span>-$137.67M</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="padding: 16px;">
+          <div class="card-header">
+            <span class="card-title"><span class="card-title-accent"></span>Institutional Quality of Earnings Takeaways</span>
+            <span class="badge badge-blue">Burn Trajectory</span>
+          </div>
+          <div style="font-size: 12.8px; color: var(--text-secondary); line-height: 1.6;">
+            <p style="margin-bottom: 8px;">
+              <strong>1. Cash Burn Moderation:</strong> Operating cash burn of -$94.06M represents a massive improvement from peak quarterly cash drains of -$300M+ in 2023–2024, proving restructuring efficacy.
+            </p>
+            <p style="margin-bottom: 8px;">
+              <strong>2. Disciplined Capital Intensity:</strong> CapEx was disciplined at $30.66M, focusing purely on completing the Georgia and Tennessee liquid hydrogen plants while pausing speculative expansions.
+            </p>
+            <p>
+              <strong>3. Working Capital Realignment:</strong> Inventory optimization and raw material supplier renegotiations have released working capital back into cash balances.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. ROW 4: SEGMENT EXECUTION AUDIT GRID (4 TAILWINDS VS 4 HEADWINDS) -->
+    <section class="audit-section" id="row-4-segments" style="margin-bottom: 24px;">
+      <div class="section-title">
+        <span class="section-title-accent"></span>Segment Execution Audit: 4 Operational Tailwinds vs. 4 Execution Headwinds
+      </div>
+      <div class="audit-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px;">
+        <!-- Tailwinds -->
+        <div class="card" style="border-left: 3px solid #10b981;">
+          <div class="card-header">
+            <span class="card-title" style="color: #34d399;"><span class="card-title-accent" style="background: #10b981;"></span>4 Key Operational Tailwinds</span>
+            <span class="badge badge-bull">Turnaround Catalysts</span>
+          </div>
+          <div style="margin-top: 10px;">
+            <div style="margin-bottom: 10px;">
+              <strong style="color: #6ee7b7; font-size: 13px;">1. Georgia &amp; Tennessee Green Hydrogen Plant Ramp:</strong>
+              <p style="font-size: 12.5px; color: var(--text-secondary); margin-top: 3px;">Internal production scaling to 40+ TPD replaces high-cost merchant hydrogen, driving structural gross margin improvement toward breakeven.</p>
+            </div>
+            <div style="margin-bottom: 10px;">
+              <strong style="color: #6ee7b7; font-size: 13px;">2. DOE $1.66 Billion Loan Facility Closing:</strong>
+              <p style="font-size: 12.5px; color: var(--text-secondary); margin-top: 3px;">Securing definitive documentation for the clean energy loan guarantee removes balance sheet insolvency risk and provides dedicated construction capital.</p>
+            </div>
+            <div style="margin-bottom: 10px;">
+              <strong style="color: #6ee7b7; font-size: 13px;">3. Anchor Material Handling Customer Base:</strong>
+              <p style="font-size: 12.5px; color: var(--text-secondary); margin-top: 3px;">Over 60,000 active fuel cell systems operating at mission-critical distribution centers for Amazon, Walmart, and Home Depot provide durable long-term service revenue.</p>
+            </div>
+            <div>
+              <strong style="color: #6ee7b7; font-size: 13px;">4. Global Electrolyzer Pipeline Growth:</strong>
+              <p style="font-size: 12.5px; color: var(--text-secondary); margin-top: 3px;">Modular 5MW GenSys PEM electrolyzers gain traction in European green ammonia and refining projects, expanding international backlog.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Headwinds -->
+        <div class="card" style="border-left: 3px solid #ef4444;">
+          <div class="card-header">
+            <span class="card-title" style="color: #f87171;"><span class="card-title-accent" style="background: #ef4444;"></span>4 Key Execution Headwinds</span>
+            <span class="badge badge-warn">Turnaround Risks</span>
+          </div>
+          <div style="margin-top: 10px;">
+            <div style="margin-bottom: 10px;">
+              <strong style="color: #fca5a5; font-size: 13px;">1. Lingering Cash Burn (-$94.06M OCF):</strong>
+              <p style="font-size: 12.5px; color: var(--text-secondary); margin-top: 3px;">Ongoing negative operating cash flow requires continued external capital access and careful liquidity management until production reaches full utilization.</p>
+            </div>
+            <div style="margin-bottom: 10px;">
+              <strong style="color: #fca5a5; font-size: 13px;">2. Hydrogen Fuel Margin Losses:</strong>
+              <p style="font-size: 12.5px; color: var(--text-secondary); margin-top: 3px;">Until Louisiana and Texas plants reach commercial operation, Plug remains partially dependent on external merchant molecules, exposing margins to power spikes.</p>
+            </div>
+            <div style="margin-bottom: 10px;">
+              <strong style="color: #fca5a5; font-size: 13px;">3. Customer Concentration Risk:</strong>
+              <p style="font-size: 12.5px; color: var(--text-secondary); margin-top: 3px;">A large percentage of equipment revenue remains tied to two primary retail warehouse customers, exposing quarters to timing delays in customer site buildouts.</p>
+            </div>
+            <div>
+              <strong style="color: #fca5a5; font-size: 13px;">4. Elevated Short Interest (23.54% Float):</strong>
+              <p style="font-size: 12.5px; color: var(--text-secondary); margin-top: 3px;">Short sellers remain heavily crowded, arguing that capital requirements will exceed internal generation and necessitate future dilutive offerings.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. SECTION 4B: TOP 3 INSTITUTIONAL PRE-PRINT DEBATES -->
+    <div id="row-4b-debates" style="margin-bottom: 24px;">
+      <div class="section-title">
+        <span class="section-title-accent"></span>Section 4B: Top 3 Institutional Pre-Print Debates &amp; Conference Call Focus Questions
+      </div>
+      <div class="card" style="padding: 16px;">
+        <div class="audit-point" style="background: rgba(11, 15, 25, 0.6); border: 1px solid var(--border-color); border-left: 3px solid #3b82f6; padding: 12px 14px; border-radius: 6px; margin-bottom: 12px;">
+          <div style="font-weight: 700; color: #60a5fa; font-size: 13.5px; margin-bottom: 4px;">
+            1. Internal Green Hydrogen Plant Ramp & Fuel Margin Turnaround <span class="badge badge-blue">MARGIN INFLECTION</span>
+          </div>
+          <p style="font-size: 12.8px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 6px;">
+            Plug Power has historically suffered massive negative gross margins on its hydrogen delivery business due to soaring third-party merchant liquid hydrogen purchase costs. With its 15 TPD Georgia plant operational and Tennessee online, analysts will probe CEO Andy Marsh on whether the internal cost per kilogram is falling below $4/kg and when fuel gross margin turns permanently positive.
+          </p>
+        </div>
+        <div class="audit-point" style="background: rgba(11, 15, 25, 0.6); border: 1px solid var(--border-color); border-left: 3px solid #10b981; padding: 12px 14px; border-radius: 6px; margin-bottom: 12px;">
+          <div style="font-weight: 700; color: #34d399; font-size: 13.5px; margin-bottom: 4px;">
+            2. DOE $1.66 Billion Loan Facility Closing & Dilution Protection <span class="badge badge-bull">CAPITAL STRUCTURE MOAT</span>
+          </div>
+          <p style="font-size: 12.8px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 6px;">
+            The U.S. Department of Energy's conditional commitment for up to $1.66 billion in debt financing is the single largest liquidity catalyst in Plug's history. Institutional investors demand concrete timing on definitive documentation closing, conditions precedent, and initial draw schedules to definitively remove the threat of ATM equity offerings.
+          </p>
+        </div>
+        <div class="audit-point" style="background: rgba(11, 15, 25, 0.6); border: 1px solid var(--border-color); border-left: 3px solid #f59e0b; padding: 12px 14px; border-radius: 6px; margin-bottom: 12px;">
+          <div style="font-weight: 700; color: #f59e0b; font-size: 13.5px; margin-bottom: 4px;">
+            3. High Short Float (23.54%) & Commercial Forklift Customer Concentration <span class="badge badge-warn">SQUEEZE ASYMMETRY</span>
+          </div>
+          <p style="font-size: 12.8px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 6px;">
+            With 23.54% of float sold short, Plug Power represents a classic high-beta short squeeze candidate. Bears point to customer concentration in warehouse material handling (Amazon, Walmart, Home Depot) and slow electrolyzer project final investment decisions (FIDs). Any major European or Asian green ammonia electrolyzer contract win could spark a rapid squeeze toward mean PT ($3.39, +142% upside).
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. ROW 5: PEER VALUATION COMPS -->
+    <section class="peer-section" id="row-5-peers" style="margin-bottom: 24px;">
+      <div class="section-title">
+        <span class="section-title-accent"></span>Peer Valuation Benchmarks &amp; Multiple Comparison
+      </div>
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Company / Peer Ticker</th>
+              <th>Market Cap</th>
+              <th>Forward P/E</th>
+              <th>Trailing P/S</th>
+              <th>EV/EBITDA</th>
+              <th>Revenue Growth (YoY)</th>
+              <th>Short % Float</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background: rgba(59, 130, 246, 0.1); font-weight: 700;">
+              <td><span class="tip" title="Plug Power Inc. (Target Company)" data-tip="Plug Power: Turnkey hydrogen solutions and fuel cell equipment developer.">Plug Power (PLUG)</span></td>
+              <td>$1.96B</td>
+              <td>-9.46x</td>
+              <td>2.63x</td>
+              <td>-5.38x</td>
+              <td style="color: #34d399;">+9.2%</td>
+              <td style="color: #f59e0b;">23.54%</td>
+            </tr>
+            <tr>
+              <td><span class="tip" title="Bloom Energy Corporation" data-tip="BE: Solid oxide fuel cell and electrolyzer manufacturer for commercial power.">Bloom Energy (BE)</span></td>
+              <td>$2,850.0M</td>
+              <td>24.5x</td>
+              <td>2.1x</td>
+              <td>18.2x</td>
+              <td>+14.0%</td>
+              <td>18.5%</td>
+            </tr>
+            <tr>
+              <td><span class="tip" title="Ballard Power Systems Inc." data-tip="BLDP: Proton exchange membrane (PEM) fuel cell developer for heavy duty transit.">Ballard Power (BLDP)</span></td>
+              <td>$620.0M</td>
+              <td>-4.8x</td>
+              <td>6.5x</td>
+              <td>-3.8x</td>
+              <td>-8.0%</td>
+              <td>12.8%</td>
+            </tr>
+            <tr>
+              <td><span class="tip" title="FuelCell Energy, Inc." data-tip="FCEL: Carbonate fuel cell power platform and carbon capture developer.">FuelCell Energy (FCEL)</span></td>
+              <td>$280.0M</td>
+              <td>-2.5x</td>
+              <td>2.8x</td>
+              <td>-2.1x</td>
+              <td>-15.0%</td>
+              <td>19.2%</td>
+            </tr>
+            <tr>
+              <td><span class="tip" title="Nel ASA" data-tip="NEL: Global dedicated electrolyzer company manufacturing alkaline and PEM equipment.">Nel ASA (NEL)</span></td>
+              <td>$850.0M</td>
+              <td>-8.0x</td>
+              <td>4.5x</td>
+              <td>-6.2x</td>
+              <td>+12.0%</td>
+              <td>8.5%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 10. ROW 6: MULTI-SOURCE 4-PILLAR SENTIMENT GRID -->
+    <section class="sentiment-section" id="row-6-sentiment" style="margin-bottom: 24px;">
+      <div class="section-title">
+        <span class="section-title-accent"></span>Multi-Source 4-Pillar Pre-Earnings Sentiment Gauge
+      </div>
+      <div class="sentiment-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-bottom: 16px;">
+        <div class="card" style="padding: 14px;">
+          <div style="font-size: 11px; font-weight: 700; color: #93c5fd; text-transform: uppercase;">Pillar 1: Sell-Side Consensus</div>
+          <div style="font-size: 18px; font-weight: 800; color: #fff; margin-top: 4px;">70 / 100 (Hold / Turnaround Watch)</div>
+          <div class="sentiment-meter-bar" style="height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin: 8px 0; overflow: hidden;"><div style="width: 70%; height: 100%; background: #60a5fa;"></div></div>
+          <div style="font-size: 12px; color: var(--text-secondary);">15 covering analysts maintain Hold rating (2.79 score) with $3.39 mean price target (+142.14% upside).</div>
+        </div>
+        <div class="card" style="padding: 14px;">
+          <div style="font-size: 11px; font-weight: 700; color: #6ee7b7; text-transform: uppercase;">Pillar 2: Buy-Side Whisper</div>
+          <div style="font-size: 18px; font-weight: 800; color: #fff; margin-top: 4px;">75 / 100 ($198M Revenue Bogey)</div>
+          <div class="sentiment-meter-bar" style="height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin: 8px 0; overflow: hidden;"><div style="width: 75%; height: 100%; background: #10b981;"></div></div>
+          <div style="font-size: 12px; color: var(--text-secondary);">Hedge fund desks look for $198M top-line whisper and proof of internal liquid hydrogen production ramp.</div>
+        </div>
+        <div class="card" style="padding: 14px;">
+          <div style="font-size: 11px; font-weight: 700; color: #fcd34d; text-transform: uppercase;">Pillar 3: Retail &amp; FinTwit Sentiment</div>
+          <div style="font-size: 18px; font-weight: 800; color: #fff; margin-top: 4px;">85 / 100 (Short Squeeze Speculation)</div>
+          <div class="sentiment-meter-bar" style="height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin: 8px 0; overflow: hidden;"><div style="width: 85%; height: 100%; background: #f59e0b;"></div></div>
+          <div style="font-size: 12px; color: var(--text-secondary);">Retail discussions across Reddit r/wallstreetbets, r/plugpower, and FinTwit are heavily call-biased citing 23.54% short float and 0.10x Put/Call ratio.</div>
+        </div>
+        <div class="card" style="padding: 14px;">
+          <div style="font-size: 11px; font-weight: 700; color: #c084fc; text-transform: uppercase;">Pillar 4: Short Squeeze &amp; Options Skew</div>
+          <div style="font-size: 18px; font-weight: 800; color: #fff; margin-top: 4px;">88 / 100 (High Upward Convexity)</div>
+          <div class="sentiment-meter-bar" style="height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin: 8px 0; overflow: hidden;"><div style="width: 88%; height: 100%; background: #a855f7;"></div></div>
+          <div style="font-size: 12px; color: var(--text-secondary);">Weekly straddle prices a violent ±18.57% move ($0.26 straddle). Any DOE loan closing confirmation triggers massive short covering.</div>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px;">
+        <div class="card" style="padding: 14px; border-left: 3px solid #3b82f6;">
+          <div style="font-weight: 700; color: #93c5fd; font-size: 13px; margin-bottom: 4px;">Retail Positioning Pulse (Reddit &amp; FinTwit)</div>
+          <p style="font-size: 12.3px; color: var(--text-secondary); line-height: 1.5;">
+            Retail clean energy investors across Reddit r/wallstreetbets, r/plugpower, FinTwit, and Threads are intensely vocal, focusing on the 23.54% short interest, $3.39 mean price target (+142.1% upside), and 0.10x Put/Call ratio as prime indicators of an impending short-squeeze rally.
+          </p>
+        </div>
+        <div class="card" style="padding: 14px; border-left: 3px solid #10b981;">
+          <div style="font-weight: 700; color: #6ee7b7; font-size: 13px; margin-bottom: 4px;">Institutional Desk Intelligence</div>
+          <p style="font-size: 12.3px; color: var(--text-secondary); line-height: 1.5;">
+            Institutional funds remain split between long-term ESG and infrastructure transition managers who see Plug as the only vertically integrated commercial hydrogen platform, and credit/hedge funds monitoring cash burn (-$94M OCF in Q2) and DOE loan closing timing.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. ROW 7: HEDGE FUND PM TRADE EXECUTION MATRIX -->
+    <section class="scenario-section" id="row-7-pm-matrix" style="margin-bottom: 30px;">
+      <div class="section-title">
+        <span class="section-title-accent"></span>Hedge Fund PM Post-Earnings Trade Execution Playbook
+      </div>
+      <div class="scenario-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px;">
+        <!-- Bull Case -->
+        <div class="card scenario-bull" style="border-top: 3px solid #10b981;">
+          <div class="card-header">
+            <div class="card-title" style="color: #34d399;"><span class="card-title-accent" style="background: #10b981;"></span>Bull Case Scenario (35% Probability)</div>
+            <span class="badge badge-bull">TARGET: $1.80 – $2.40</span>
+          </div>
+          <p style="font-size: 12.8px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 10px;">
+            <strong>Catalysts:</strong> Q3 Revenue prints above $198M, fuel gross margin inflects closer to breakeven, and management confirms closing steps for the $1.66B DOE loan guarantee, triggering short squeeze across 23.54% float.
+          </p>
+          <div class="trade-structure" style="background: rgba(16, 185, 129, 0.08); padding: 10px; border-radius: 6px; font-size: 12px; color: #6ee7b7;">
+            <strong>Options Structure:</strong> Nov 13 $1.50 / $2.00 Bull Call Spread to leverage asymmetric upside while capping high options implied volatility outlay (160.94%).
+          </div>
+        </div>
+
+        <!-- Base Case -->
+        <div class="card scenario-base" style="border-top: 3px solid #3b82f6;">
+          <div class="card-header">
+            <div class="card-title" style="color: #60a5fa;"><span class="card-title-accent" style="background: #3b82f6;"></span>Base Case Scenario (45% Probability)</div>
+            <span class="badge badge-blue">TARGET: $1.25 – $1.55</span>
+          </div>
+          <p style="font-size: 12.8px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 10px;">
+            <strong>Catalysts:</strong> Q3 revenue meets consensus at $190M–$195M, cash burn remains controlled around -$90M, and management provides steady progress on internal plant operations without closing loan documents.
+          </p>
+          <div class="trade-structure" style="background: rgba(59, 130, 246, 0.08); padding: 10px; border-radius: 6px; font-size: 12px; color: #93c5fd;">
+            <strong>Options Structure:</strong> Nov 13 $1.00 / $2.00 Short Iron Condor to capture post-announcement implied volatility crush from 160% down toward 75%.
+          </div>
+        </div>
+
+        <!-- Bear Case -->
+        <div class="card scenario-bear" style="border-top: 3px solid #ef4444;">
+          <div class="card-header">
+            <div class="card-title" style="color: #f87171;"><span class="card-title-accent" style="background: #ef4444;"></span>Bear Case Scenario (20% Probability)</div>
+            <span class="badge badge-warn">TARGET: $0.90 – $1.15</span>
+          </div>
+          <p style="font-size: 12.8px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 10px;">
+            <strong>Catalysts:</strong> Q3 revenue falls short (&lt; $180M) or operating cash burn re-accelerates past -$110M, reigniting concerns regarding future equity dilution.
+          </p>
+          <div class="trade-structure" style="background: rgba(239, 68, 68, 0.08); padding: 10px; border-radius: 6px; font-size: 12px; color: #fca5a5;">
+            <strong>Options Structure:</strong> Nov 13 $1.50 / $1.00 Bear Put Spread to hedge downside valuation compression.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER VERIFICATION LEDGER -->
+    <footer style="margin-top: 30px; padding: 16px; border-top: 1px solid var(--border-color); font-size: 11.5px; color: var(--text-muted); text-align: center;">
+      <p>Deterministic Ground-Truth Ledger: Spot Price: $1.40 | Consensus Revenue: $193.33M | Consensus EPS: $-0.06 | Latest OCF: $-94.06M (-94) | True FCF: $-137.67M | Options-Implied Move: ±18.57% (±$0.26) | 4Q Historical Beat Rate: 75.0% | Wall Street Consensus Mean PT: $3.39</p>
+      <p style="margin-top: 4px;">Antigravity 2.0 Institutional Tearsheet • Strict Zero-Hallucination Multi-Agent Orchestration Mesh</p>
+    </footer>
+
+  </div>
+</body>
+</html>
