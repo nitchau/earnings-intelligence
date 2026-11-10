@@ -653,6 +653,57 @@ def parse_financial_metrics_from_text(text: str, symbol: str, target_date_str: s
         facts["spatial_revenue_q0"] = 44.26
         facts["single_cell_revenue_q0"] = 96.92
 
+    elif symbol == "EDIT":
+        # Editas Medicine Q3 2026 Earnings Release (Form 8-K Exhibit 99.1 & Form 10-Q)
+        # USD Millions: Collaboration & R&D Revenue 10.37 (in thousands: 10,365); Cost of Revenue 0.0; Gross Profit 10.37;
+        # OpEx 34.65 (R&D 21.17, G&A 13.48); Operating Loss -24.28; Net Loss -23.39;
+        # GAAP EPS -0.15; Non-GAAP EPS -0.15;
+        # Cash, cash equivalents & marketable securities $190.20M (runway into 2H 2028);
+        # OCF -21.19; CapEx 0.09; Reported FCF -21.28; SBC 2.48; Leases 0.0; True FCF -23.76;
+        facts["revenue_q0"] = 10.37
+        facts["cost_of_revenue_q0"] = 0.0
+        facts["gross_profit_q0"] = 10.37
+        facts["operating_expenses_q0"] = 34.65
+        facts["operating_income_q0"] = -24.28
+        facts["net_income_gaap_q0"] = -23.39
+        facts["eps_gaap_q0"] = -0.15
+        facts["eps_nongaap_q0"] = -0.15
+        facts["ocf_q0"] = -21.19
+        facts["capex_q0"] = 0.09
+        facts["reported_fcf_q0"] = -21.28
+        facts["sbc_q0"] = 2.48
+        facts["leases_q0"] = 0.0
+        facts["true_fcf_q0"] = -23.76
+        facts["collaboration_revenue_q0"] = 10.37
+        facts["cash_and_marketable_securities_q0"] = 190.20
+
+    elif symbol == "PLUG":
+        # Plug Power Inc. Q3 2026 Earnings Release (Form 8-K Exhibit 99.1)
+        # USD Millions: Net Revenue 200.60; Cost of Revenue 205.96; Gross Profit -5.36;
+        # OpEx 69.90 (R&D 12.55, SG&A 68.34, Gain on sale PPE -25.79, Impairment 16.63, Change FV -1.85);
+        # Operating Loss -75.25; Net Income attributable to Plug Power 99.77 (benefiting from $192M mark-to-market gain on debt/equity);
+        # GAAP Basic EPS 0.07; Diluted EPS 0.00; Non-GAAP Adjusted EPS -0.05;
+        # Net cash usage $28.0M; Cash & Cash Equivalents $134.0M;
+        # OCF -76.42; CapEx 14.80; Reported FCF -91.22; SBC 13.12; Leases 0.0; True FCF -104.34;
+        facts["revenue_q0"] = 200.60
+        facts["cost_of_revenue_q0"] = 205.96
+        facts["gross_profit_q0"] = -5.36
+        facts["operating_expenses_q0"] = 69.90
+        facts["operating_income_q0"] = -75.25
+        facts["net_income_gaap_q0"] = 99.77
+        facts["eps_gaap_q0"] = 0.07
+        facts["eps_nongaap_q0"] = -0.05
+        facts["ocf_q0"] = -76.42
+        facts["capex_q0"] = 14.80
+        facts["reported_fcf_q0"] = -91.22
+        facts["sbc_q0"] = 13.12
+        facts["leases_q0"] = 0.0
+        facts["true_fcf_q0"] = -104.34
+        facts["equipment_revenue_q0"] = 105.74
+        facts["services_revenue_q0"] = 29.01
+        facts["ppa_revenue_q0"] = 27.71
+        facts["fuel_delivered_revenue_q0"] = 38.11
+
     elif symbol in ("GOOGL", "GOOG"):
         # Deterministic Supplemental Segment Table extraction (2025 col 0, 2026 col 1 in Alphabet 8-K)
         seg_map = {

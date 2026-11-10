@@ -41,6 +41,8 @@ LABELS = {
     "revenue": [
         "Total revenues", "Total revenue", "Total net revenues", "Total net revenue",
         "Total net sales", "Net sales", "Net revenues", "Net revenue", "Revenues", "Revenue",
+        "Collaboration and other research and development revenues",
+        "Collaboration and other research and development revenue",
     ],
     "cost_of_revenue": [
         "Total cost of revenues", "Total cost of revenue", "Cost of revenues",
