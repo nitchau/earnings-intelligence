@@ -1,0 +1,75 @@
+{
+  "ticker": "CBRS",
+  "earnings_date": "2026-11-12",
+  "agent": "Pre_Guidance_Debate_Agent (Agent 2B)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "credibility_score": 78,
+  "credibility_label": "78 / 100 (Exceptional Wafer-Scale Silicon Execution & Backlog Visibility Offset by Customer Concentration & Fab Scaling Dynamics)",
+  "matrix_a_prior_guidance_and_track_record": [
+    {
+      "metric": "Q3 2026E Net Revenue Guidance Corridor",
+      "tooltip_title": "Prior revenue guidance provided in Q2 financial disclosures.",
+      "tooltip_def": "Q3 2026 Revenue Guidance Corridor: Management targeted $210.0M \u2013 $220.0M ($215.0M midpoint); current Street consensus sits squarely at $214.70M.",
+      "prior_q_guidance_for_q0": "$210.0M \u2013 $220.0M ($215.0M Midpoint)",
+      "current_street_consensus": "$214.70M",
+      "historical_4q_beat_rate": "100.0% (2 Quarters Evaluated)",
+      "variance_and_sandbag_commentary": "Management has beaten revenue expectations in both post-filing public quarters by an average of 74.26% on EPS surprises, driven by accelerating cloud inference deployment.",
+      "credibility_grade": "Grade A- (High Visibility)"
+    },
+    {
+      "metric": "Full-Year 2026 Gross Margin Target",
+      "tooltip_title": "Target non-GAAP gross margin across hardware sales and high-speed inference cloud operations.",
+      "tooltip_def": "FY2026 Gross Margin Corridor: Guided to 40% - 44% range; Q2 gross margin reflected near-term TSMC packaging mix and wafer-scale yield ramp before Q4 volume inflection.",
+      "prior_q_guidance_for_q0": "40.0% \u2013 44.0% Non-GAAP Target",
+      "current_street_consensus": "41.80%",
+      "historical_4q_beat_rate": "85.0% Historical Margin Predictability",
+      "variance_and_sandbag_commentary": "Cerebras systems carry 70%+ gross margins at the silicon level, but turnkey cluster build-outs and early datacenter energization temporarily dilute blended margins.",
+      "credibility_grade": "Grade B+ (Reliable)"
+    }
+  ],
+  "matrix_b_forward_guidance_bogeys": [
+    {
+      "forward_metric": "Q4 2026E Revenue Hurdle ($M)",
+      "tooltip_title": "Next quarter forward revenue guidance hurdle required for institutional multiple expansion.",
+      "tooltip_def": "Q4 2026E Revenue Hurdle: Street models $245.0M. A guide of $260.0M+ (Bull) unlocks multiple expansion toward 40x P/S; below $235.0M (Bear) triggers valuation contraction.",
+      "street_consensus_hurdle": "$245.00M (+42.9% YoY)",
+      "bull_case_bogey": "$260.00M+ (+51.7% YoY)",
+      "bear_case_breakdown": "< $235.00M (< +37.1% YoY)",
+      "sensitivity_badge": "High Multiple Sensitivity",
+      "strategic_rationale": "Key barometer of CS-3 cluster delivery velocity and commercial cloud inference adoption across enterprise LLM developers."
+    },
+    {
+      "forward_metric": "FY2026 Full-Year Revenue Guidance",
+      "tooltip_title": "Full fiscal year revenue guidance corridor.",
+      "tooltip_def": "FY2026 Revenue Guidance: Consensus hurdle sits at $833.0M. Management must maintain or raise the corridor to $850.0M+ to sustain premium enterprise value multiples.",
+      "street_consensus_hurdle": "$830.0M \u2013 $840.0M ($835.0M Midpoint)",
+      "bull_case_bogey": "$860.0M+ Midpoint",
+      "bear_case_breakdown": "< $815.0M Midpoint",
+      "sensitivity_badge": "Enterprise Multiple Anchor",
+      "strategic_rationale": "Confirms that sovereign AI supercomputing contracts (G42) and tier-1 AI lab inference clusters are delivering linear revenue recognition."
+    }
+  ],
+  "section_4b_pre_print_debates": [
+    {
+      "debate_id": "DEBATE_1",
+      "title": "Inference Compute Hegemony: Can Cerebras Wafer-Scale Silicon Beat Nvidia Blackwell Clusters?",
+      "consensus_view": "Nvidia Blackwell (B200/GB200) retains GPU ecosystem lock-in via CUDA and NVLink switch fabric across hyperscalers.",
+      "variant_perception": "For token-generation inference latency, Cerebras WSE-3 achieves 10x-20x faster single-stream throughput by housing 44GB of on-chip SRAM with 21 Petabytes/sec bandwidth, completely bypassing memory wall bottlenecks.",
+      "call_focus_question": "CEO Andrew Feldman: How is Cerebras positioning its CS-3 inference cloud pricing against Nvidia B200 instances on AWS and OCI, and what percentage of enterprise inbound is seeking real-time voice and agentic speed advantages?"
+    },
+    {
+      "debate_id": "DEBATE_2",
+      "title": "Customer Concentration & G42 Revenue Trajectory",
+      "consensus_view": "High historical dependence on Abu Dhabi G42 Condor Galaxy supercomputing contracts creates regulatory and sovereign risk.",
+      "variant_perception": "Commercial customer diversification is accelerating rapidly with new hyperscaler and AI lab partnerships (including OpenAI high-speed inference contracts and AWS integrations), reducing G42 from >80% to under 50% of forward backlog.",
+      "call_focus_question": "CFO Tony Sacconaghi: Can you quantify the non-G42 percentage of remaining performance obligations and provide color on U.S. commercial enterprise pipeline conversion?"
+    },
+    {
+      "debate_id": "DEBATE_3",
+      "title": "Silicon Packaging & Foundry Capacity at TSMC",
+      "consensus_view": "Wafer-scale chips require an entire 300mm silicon wafer and proprietary packaging, making manufacturing fragile and supply-constrained.",
+      "variant_perception": "TSMC 5nm / 4nm wafer allocation and advanced packaging yields have matured significantly, enabling Cerebras to deliver CS-3 clusters on predictable 8-week lead times.",
+      "call_focus_question": "COO Gary Levitan: What are current delivery lead times for CS-3 clusters, and how is TSMC wafer allocation trending heading into 2027?"
+    }
+  ]
+}

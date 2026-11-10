@@ -1,0 +1,58 @@
+{
+  "ticker": "GUTS",
+  "earnings_date": "2026-11-12",
+  "agent": "Pre_KPI_Consensus_Agent (Agent 2A)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "upcoming_quarter_label": "Q3 2026E",
+  "latest_reported_quarter_label": "Q2 2026 (Ended Jun 30, 2026)",
+  "headline_and_company_kpis": [
+    {
+      "metric": "Consolidated Commercial Revenue ($M)",
+      "tooltip_title": "Commercial product revenue from Revita procedural therapy or collaborative licensing milestone payments.",
+      "tooltip_def": "Consolidated Commercial Revenue ($M): Fractyl Health is a clinical-stage metabolic therapeutic company with no commercial product sales prior to FDA regulatory authorization. Consensus models $0.00M in Q3 2026E, with whisper expectations centered on potential non-dilutive licensing milestone income from Rejuva partnering.",
+      "q_minus_1_actual": "$0.00M",
+      "q_minus_4_yoy_baseline": "$0.00M",
+      "street_consensus_q0e": "$0.00M",
+      "whisper_bogey_q0e": "$0.00M",
+      "whisper_spread_display": "Pre-Commercial",
+      "bar_width_pct": 50,
+      "hurdle_badge": "Clinical Stage"
+    },
+    {
+      "metric": "GAAP Diluted EPS ($/sh)",
+      "tooltip_title": "Diluted net loss per share reflecting clinical trial site activation, regulatory filing preparations, and corporate overhead.",
+      "tooltip_def": "GAAP Diluted EPS ($/sh): Q2 2026 actual EPS came in at -$1.41 (beating consensus of -$1.64). Street consensus models -$1.59 for Q3 2026E, with buy-side whisper bogeys looking for -$1.40 as initial workforce restructuring efficiencies take hold.",
+      "q_minus_1_actual": "-$1.41",
+      "q_minus_4_yoy_baseline": "-$8.52",
+      "street_consensus_q0e": "-$1.59",
+      "whisper_bogey_q0e": "-$1.40",
+      "whisper_spread_display": "+$0.19 Better",
+      "bar_width_pct": 82,
+      "hurdle_badge": "Burn Hurdle"
+    },
+    {
+      "metric": "Quarterly Operating Cash Burn ($M)",
+      "tooltip_title": "Net operating cash consumption per quarter dedicated to the REMAIN-1 pivotal study and regulatory submissions.",
+      "tooltip_def": "Quarterly Operating Cash Burn ($M): Q2 2026 OCF was -$15.90M. Consensus anticipates Q3 operating cash outflow of -$14.50M, with management targeting a steady-state burn reduction to ~$8.0M per quarter by mid-2027 following the October corporate restructuring.",
+      "q_minus_1_actual": "-$15.90M",
+      "q_minus_4_yoy_baseline": "-$18.20M",
+      "street_consensus_q0e": "-$14.50M",
+      "whisper_bogey_q0e": "-$13.00M",
+      "whisper_spread_display": "+$1.50M Savings",
+      "bar_width_pct": 85,
+      "hurdle_badge": "Capital Discipline"
+    },
+    {
+      "metric": "Cash Runway Horizon (Quarter)",
+      "tooltip_title": "Projected cash runway duration under current streamlined operating budget.",
+      "tooltip_def": "Cash Runway Horizon: Following the 45% workforce reduction in October 2026, management guided that existing cash reserves provide operational runway into Q2 2027, fully funding operations past the 12-month REMAIN-1 readout and FDA De Novo submission.",
+      "q_minus_1_actual": "Q4 2026",
+      "q_minus_4_yoy_baseline": "Q3 2026",
+      "street_consensus_q0e": "Q2 2027",
+      "whisper_bogey_q0e": "Q3 2027",
+      "whisper_spread_display": "Funded to Readout",
+      "bar_width_pct": 88,
+      "hurdle_badge": "Runway Buffer"
+    }
+  ]
+}

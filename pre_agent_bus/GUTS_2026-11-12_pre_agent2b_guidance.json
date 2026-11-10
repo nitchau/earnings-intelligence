@@ -1,0 +1,75 @@
+{
+  "ticker": "GUTS",
+  "earnings_date": "2026-11-12",
+  "agent": "Pre_Guidance_Debate_Agent (Agent 2B)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "credibility_score": 75,
+  "credibility_label": "75 / 100 (Solid Clinical Pivotal Trial Execution & Positive 6-Month Data Balanced Against Microcap Balance Sheet Runway)",
+  "matrix_a_prior_guidance_and_track_record": [
+    {
+      "metric": "REMAIN-1 Pivotal 6-Month Topline Readout",
+      "tooltip_title": "Prior clinical milestone guidance for 6-month REMAIN-1 cohort data.",
+      "tooltip_def": "REMAIN-1 6-Month Readout: Guided to Q4 2026; delivered successfully in late October 2026 meeting co-primary endpoint (p=0.0023).",
+      "prior_q_guidance_for_q0": "Topline 6-Month Data in Q4 2026",
+      "current_street_consensus": "Met Primary Endpoint (p=0.0023)",
+      "historical_4q_beat_rate": "75.0% (3 Beats, 1 Miss on EPS)",
+      "variance_and_sandbag_commentary": "Management delivered ahead of timeline on the REMAIN-1 pivotal study, demonstrating statistically significant weight loss retention post-GLP-1 cessation.",
+      "credibility_grade": "Grade A- (Pivotal Success)"
+    },
+    {
+      "metric": "Operating Cash Burn Reduction Target",
+      "tooltip_title": "Quarterly operating cash burn target post-restructuring.",
+      "tooltip_def": "Cash Burn Reduction: Guided to reduce quarterly burn by ~50% to ~$8M by Q2 2027.",
+      "prior_q_guidance_for_q0": "~50% Reduction to ~$8.0M/Qtr",
+      "current_street_consensus": "$8.0M \u2013 $9.0M Target by Q2 2027",
+      "historical_4q_beat_rate": "80.0% R&D Budget Adherence",
+      "variance_and_sandbag_commentary": "The 45% workforce reduction and discontinuation of internal Rejuva clinical development directly preserve capital for the Revita commercial pathway.",
+      "credibility_grade": "Grade B+ (Disciplined Focus)"
+    }
+  ],
+  "matrix_b_forward_guidance_bogeys": [
+    {
+      "forward_metric": "FDA De Novo Submission Filing Timing",
+      "tooltip_title": "Target timeline for formal submission of the Revita De Novo regulatory packet.",
+      "tooltip_def": "FDA De Novo Submission: Street consensus hurdle requires formal submission by late Q4 2026 / early Q1 2027; any slippage beyond Q1 2027 risks valuation degradation.",
+      "street_consensus_hurdle": "Late Q4 2026 \u2013 Early Q1 2027 Submission",
+      "bull_case_bogey": "Filed by Dec 31, 2026 with Priority Review",
+      "bear_case_breakdown": "Delayed to Mid-2027 or Additional Trial Mandated",
+      "sensitivity_badge": "High Regulatory Sensitivity",
+      "strategic_rationale": "Key gating item to unlock U.S. commercial clearance and establish first-mover advantage in procedural post-GLP-1 maintenance."
+    },
+    {
+      "forward_metric": "REMAIN-1 12-Month Durability Readout",
+      "tooltip_title": "Anticipated readout timing for full 12-month pivotal cohort data.",
+      "tooltip_def": "REMAIN-1 12-Month Readout: Consensus expects topline 1-year data in Q1 2027. Bull case bogey looks for >75% weight loss retention at 12 months.",
+      "street_consensus_hurdle": "Q1 2027 Topline Data (Second Co-Primary)",
+      "bull_case_bogey": ">75% GLP-1 Weight Retention at 12 Months",
+      "bear_case_breakdown": "Waning Efficacy (<60% Retention vs Sham)",
+      "sensitivity_badge": "Clinical Efficacy Anchor",
+      "strategic_rationale": "Confirms long-term metabolic signaling durability and underpins commercial reimbursement adoption."
+    }
+  ],
+  "section_4b_pre_print_debates": [
+    {
+      "debate_id": "DEBATE_1",
+      "title": "Post-GLP-1 Weight Maintenance: Procedural Revita vs. Maintenance Oral GLP-1s",
+      "consensus_view": "Patients completing intensive GLP-1 therapy will transition to low-dose oral GLP-1 pills or second-generation peptides rather than an endoscopic ablation procedure.",
+      "variant_perception": "Over 50% of patients discontinue GLP-1s within one year due to gastrointestinal side effects, cost, or fatigue; a single 30-minute outpatient Revita procedure offers a permanent, drug-free maintenance alternative.",
+      "call_focus_question": "CEO Harith Rajagopalan: What commercial physician feedback have you received from obesity medicine specialists regarding patient willingness to undergo duodenal mucosal resurfacing vs. lifelong GLP-1 adherence?"
+    },
+    {
+      "debate_id": "DEBATE_2",
+      "title": "Cash Runway Sufficiency & Financing Strategy",
+      "consensus_view": "With market cap under $15M and enterprise value at $25.5M, Fractyl faces severe equity dilution risk before commercial revenue inflects in 2028.",
+      "variant_perception": "The 45% workforce reduction extends runway past the 12-month REMAIN-1 readout into Q2 2027, allowing Fractyl to partner Rejuva out-of-license and secure non-dilutive milestone financing.",
+      "call_focus_question": "CFO Bradley Campbell: What is the current status of the strategic alternatives process for the Rejuva platform, and can non-dilutive upfront proceeds bridge the company through FDA clearance?"
+    },
+    {
+      "debate_id": "DEBATE_3",
+      "title": "Reimbursement & CPT Coding Roadmap",
+      "consensus_view": "Securing broad commercial and Medicare payer coverage for a novel endoscopic metabolic device will take 3-5 years post-approval.",
+      "variant_perception": "The AMA has already issued dedicated Category III CPT code 1122T effective January 1, 2027, substantially accelerating hospital outpatient department (HOPD) billing and private payer coverage determinations.",
+      "call_focus_question": "Chief Commercial Officer: How will the implementation of CPT code 1122T in January 2027 streamline early commercial center activation ahead of the formal 2028 U.S. launch?"
+    }
+  ]
+}

@@ -70,6 +70,20 @@ window.EARNINGS_HISTORY_CATALOG = {
       "currency": "$"
     }
   ],
+  "CBRS": [
+    {
+      "date": "2026-11-12",
+      "quarter": "Q3 2026",
+      "date_display": "Nov 12, 2026",
+      "t1": "CBRS_T1_2026-11-12.html",
+      "t0": null,
+      "verdict": null,
+      "post_move_pct": null,
+      "rev_actual_m": null,
+      "rev_consensus_m": 214.7,
+      "currency": "$"
+    }
+  ],
   "COIN": [
     {
       "date": "2026-10-29",
@@ -179,6 +193,20 @@ window.EARNINGS_HISTORY_CATALOG = {
       "post_move_pct": -9.97,
       "rev_actual_m": 127577.0,
       "rev_consensus_m": 128220.0,
+      "currency": "$"
+    }
+  ],
+  "GUTS": [
+    {
+      "date": "2026-11-12",
+      "quarter": "Q3 2026",
+      "date_display": "Nov 12, 2026",
+      "t1": "GUTS_T1_2026-11-12.html",
+      "t0": null,
+      "verdict": null,
+      "post_move_pct": null,
+      "rev_actual_m": null,
+      "rev_consensus_m": 0.0,
       "currency": "$"
     }
   ],

@@ -1,0 +1,58 @@
+{
+  "ticker": "CBRS",
+  "earnings_date": "2026-11-12",
+  "agent": "Pre_KPI_Consensus_Agent (Agent 2A)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "upcoming_quarter_label": "Q3 2026E",
+  "latest_reported_quarter_label": "Q2 2026 (Ended Jun 30, 2026)",
+  "headline_and_company_kpis": [
+    {
+      "metric": "Consolidated GAAP Revenue ($M)",
+      "tooltip_title": "Consolidated GAAP Revenue recognized across CS-3 hardware systems, cloud inference services, and customer engineering support.",
+      "tooltip_def": "Consolidated GAAP Revenue ($M): Cerebras generated $180.11M in Q2 2026 (+74.32% YoY vs $103.32M in Q2 2025). Wall Street consensus models $214.70M in Q3 2026E (+58.13% YoY vs Q3 2025 baseline of $135.77M), with institutional whisper bogeys looking for $225.00M+ propelled by high-throughput CS-3 delivery to frontier enterprise labs.",
+      "q_minus_1_actual": "$180.11M",
+      "q_minus_4_yoy_baseline": "$135.77M",
+      "street_consensus_q0e": "$214.70M",
+      "whisper_bogey_q0e": "$225.00M",
+      "whisper_spread_display": "+4.80% Spread",
+      "bar_width_pct": 89,
+      "hurdle_badge": "Consensus Hurdle"
+    },
+    {
+      "metric": "GAAP Diluted EPS ($/sh)",
+      "tooltip_title": "Diluted earnings per share reflecting wafer fabrication costs, advanced packaging depreciation, and post-IPO stock-based compensation.",
+      "tooltip_def": "GAAP Diluted EPS ($/sh): Q2 2026 GAAP diluted EPS reflected a large post-IPO stock compensation catch-up ($377.01M SBC expense). Street consensus expects GAAP EPS of -$0.14 for Q3 2026E with buy-side whisper bogeys anticipating -$0.10 per share as non-cash stock compensation normalizes.",
+      "q_minus_1_actual": "-$0.00",
+      "q_minus_4_yoy_baseline": "-$0.19",
+      "street_consensus_q0e": "-$0.14",
+      "whisper_bogey_q0e": "-$0.10",
+      "whisper_spread_display": "+$0.04 Spread",
+      "bar_width_pct": 78,
+      "hurdle_badge": "Bottom-Line Hurdle"
+    },
+    {
+      "metric": "Contracted Backlog & RPO ($B)",
+      "tooltip_title": "Remaining Performance Obligations and multi-year contracted backlog for CS-3 wafer-scale clusters and dedicated cloud compute capacity.",
+      "tooltip_def": "Contracted Backlog & RPO ($B): Cerebras ended 2025 with $24.6B in contracted backlog and commitments, led by multi-gigawatt G42 Condor Galaxy expansion and tier-1 frontier AI labs. Institutional consensus models RPO reaching $26.50B in Q3 2026E, with whisper bogeys stretching toward $28.00B.",
+      "q_minus_1_actual": "$25.20B",
+      "q_minus_4_yoy_baseline": "$12.80B",
+      "street_consensus_q0e": "$26.50B",
+      "whisper_bogey_q0e": "$28.00B",
+      "whisper_spread_display": "+$1.50B Expansion",
+      "bar_width_pct": 92,
+      "hurdle_badge": "Visibility Driver"
+    },
+    {
+      "metric": "Cerebras Cloud Inference Output (Tokens/Sec)",
+      "tooltip_title": "Peak sustained inference speed for Llama 3.1 70B/405B models measured in tokens per second per user stream.",
+      "tooltip_def": "Cerebras Cloud Inference Output (Tokens/Sec): Wafer-Scale Engine 3 delivers unmatched memory bandwidth, generating over 1,800 tokens/sec on Llama 3.1 8B and 450 tokens/sec on Llama 3.1 70B\u2014orders of magnitude faster than conventional GPU server clusters. Consensus expects cloud API volume to surge >200% QoQ.",
+      "q_minus_1_actual": "450 T/s (70B)",
+      "q_minus_4_yoy_baseline": "150 T/s",
+      "street_consensus_q0e": "520 T/s",
+      "whisper_bogey_q0e": "600 T/s",
+      "whisper_spread_display": "+80 T/s Speed",
+      "bar_width_pct": 86,
+      "hurdle_badge": "Compute Edge"
+    }
+  ]
+}
