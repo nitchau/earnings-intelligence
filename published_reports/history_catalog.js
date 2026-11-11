@@ -104,10 +104,10 @@ window.EARNINGS_HISTORY_CATALOG = {
       "quarter": "Q3 2026",
       "date_display": "Nov 10, 2026",
       "t1": "CRWV_T1_2026-11-10.html",
-      "t0": null,
-      "verdict": null,
-      "post_move_pct": null,
-      "rev_actual_m": null,
+      "t0": "CRWV_T0_POST_2026-11-10.html",
+      "verdict": "BEAT & RAISE (CAPEX SURGE)",
+      "post_move_pct": 7.9,
+      "rev_actual_m": 3661.0,
       "rev_consensus_m": 3540.79,
       "currency": "$"
     }
@@ -455,8 +455,8 @@ window.EARNINGS_HISTORY_CATALOG = {
       "date_display": "Nov 10, 2026",
       "t1": "RGTI_T1_2026-11-10.html",
       "t0": null,
-      "verdict": null,
-      "post_move_pct": null,
+      "verdict": "CLEAN MISS",
+      "post_move_pct": -6.83,
       "rev_actual_m": null,
       "rev_consensus_m": 3.68,
       "currency": "$"
