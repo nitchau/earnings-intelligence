@@ -454,10 +454,10 @@ window.EARNINGS_HISTORY_CATALOG = {
       "quarter": "Q3 2026",
       "date_display": "Nov 10, 2026",
       "t1": "RGTI_T1_2026-11-10.html",
-      "t0": null,
+      "t0": "RGTI_T0_POST_2026-11-10.html",
       "verdict": "CLEAN MISS",
       "post_move_pct": -6.83,
-      "rev_actual_m": null,
+      "rev_actual_m": 1.41,
       "rev_consensus_m": 3.68,
       "currency": "$"
     }

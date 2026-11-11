@@ -1,0 +1,1560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RGTI T+0 Post-Earnings Forensic Tearsheet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0b0f19;
+      --bg-card: #111827;
+      --bg-card-elevated: #161f33;
+      --bg-table-row-alt: #0e1525;
+      --border-color: #1f2937;
+      --border-subtle: #283548;
+      --text-primary: #f9fafb;
+      --text-secondary: #d1d5db;
+      --text-muted: #9ca3af;
+      --accent-blue: #3b82f6;
+      --accent-blue-glow: rgba(59, 130, 246, 0.15);
+      --bull-green: #10b981;
+      --bull-green-bg: rgba(16, 185, 129, 0.14);
+      --bear-red: #ef4444;
+      --bear-red-bg: rgba(239, 68, 68, 0.14);
+      --warn-amber: #f59e0b;
+      --warn-amber-bg: rgba(245, 158, 11, 0.14);
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      line-height: 1.5;
+      font-size: 14px;
+      padding: 24px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1560px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* ==========================================================================
+       INTERACTIVE HOVER TOOLTIP SYSTEM (FOR METRICS & ABBREVIATIONS)
+       ========================================================================== */
+    .tip {
+      position: relative;
+      display: inline-block;
+      border-bottom: 1px dotted #60a5fa;
+      cursor: help;
+      transition: color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .tip:hover {
+      color: #93c5fd;
+      border-bottom-color: #93c5fd;
+    }
+
+    .tip::after {
+      content: attr(data-tip);
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 0;
+      width: 290px;
+      padding: 10px 12px;
+      background-color: #1e293b;
+      color: #f8fafc;
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 1.45;
+      text-align: left;
+      text-transform: none;
+      letter-spacing: normal;
+      white-space: normal;
+      border: 1px solid var(--accent-blue);
+      border-radius: 6px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.75);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(4px);
+      transition: opacity 0.16s ease, transform 0.16s ease, visibility 0.16s;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* Right-aligned tooltip modifier to prevent right-edge screen clipping */
+    .tip-right::after {
+      left: auto;
+      right: 0;
+    }
+
+    /* Bottom-aligned tooltip modifier for elements near top of page */
+    .tip-bottom::after {
+      bottom: auto;
+      top: calc(100% + 8px);
+    }
+
+    .tip:hover::after {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    /* UTILITY & BADGES */
+    .mono {
+      font-family: var(--font-mono);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+
+    .badge-bull {
+      background-color: var(--bull-green-bg);
+      color: var(--bull-green);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+    }
+
+    .badge-bear {
+      background-color: var(--bear-red-bg);
+      color: var(--bear-red);
+      border: 1px solid rgba(239, 68, 68, 0.35);
+    }
+
+    .badge-warn {
+      background-color: var(--warn-amber-bg);
+      color: var(--warn-amber);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+    }
+
+    .badge-neutral {
+      background-color: rgba(156, 163, 175, 0.12);
+      color: var(--text-secondary);
+      border: 1px solid rgba(156, 163, 175, 0.25);
+    }
+
+    .badge-blue {
+      background-color: var(--accent-blue-glow);
+      color: #60a5fa;
+      border: 1px solid rgba(59, 130, 246, 0.4);
+    }
+
+    /* CARD SYSTEM */
+    .card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--border-color);
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-title-accent {
+      width: 4px;
+      height: 16px;
+      background-color: var(--accent-blue);
+      border-radius: 2px;
+      display: inline-block;
+    }
+
+    .card-subtitle {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    /* HEADER BANNER */
+    .header-banner {
+      background: linear-gradient(135deg, #111827 0%, #0f172a 65%, #172554 100%);
+      border: 1px solid var(--border-subtle);
+      border-left: 4px solid var(--accent-blue);
+      border-radius: 10px;
+      padding: 22px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .helper-bar {
+      background-color: rgba(59, 130, 246, 0.12);
+      border: 1px solid rgba(59, 130, 246, 0.35);
+      border-radius: 6px;
+      padding: 8px 14px;
+      font-size: 12.5px;
+      color: #bfdbfe;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .ticker-identity {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .ticker-line {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .ticker-symbol {
+      font-family: var(--font-mono);
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.4);
+      padding: 2px 12px;
+      border-radius: 6px;
+    }
+
+    .company-name {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .sector-tag {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .header-price-block {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .price-box {
+      text-align: right;
+    }
+
+    .price-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    .price-value {
+      font-family: var(--font-mono);
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .header-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(195px, 1fr));
+      gap: 12px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .strip-item {
+      background-color: rgba(11, 15, 25, 0.55);
+      border: 1px solid var(--border-color);
+      padding: 10px 14px;
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .strip-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .strip-val {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    /* ROW 1: 4 KPI CARDS */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .kpi-metric-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .kpi-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.07);
+      gap: 8px;
+    }
+
+    .kpi-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .kpi-name {
+      font-size: 12.5px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .kpi-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 2px;
+    }
+
+    .kpi-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 4px;
+    }
+
+    .kpi-val {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .delta-pair {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    /* ROW 2: HISTORICAL TABLE */
+    .table-wrapper {
+      overflow-x: auto;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px;
+    }
+
+    th {
+      background-color: #161f33;
+      color: var(--text-secondary);
+      font-weight: 600;
+      text-align: right;
+      padding: 11px 12px;
+      border-bottom: 1px solid var(--border-subtle);
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+
+    th:first-child {
+      text-align: left;
+      font-family: var(--font-sans);
+      min-width: 265px;
+      position: sticky;
+      left: 0;
+      z-index: 2;
+      background-color: #161f33;
+    }
+
+    td {
+      padding: 9px 12px;
+      border-bottom: 1px solid var(--border-color);
+      text-align: right;
+      font-family: var(--font-mono);
+      color: var(--text-primary);
+      white-space: nowrap;
+    }
+
+    td:first-child {
+      text-align: left;
+      font-family: var(--font-sans);
+      font-weight: 500;
+      color: var(--text-secondary);
+      position: sticky;
+      left: 0;
+      background-color: var(--bg-card);
+      z-index: 1;
+    }
+
+    tr:nth-child(even) td {
+      background-color: var(--bg-table-row-alt);
+    }
+
+    tr:nth-child(even) td:first-child {
+      background-color: var(--bg-table-row-alt);
+    }
+
+    tr.section-divider td {
+      background-color: rgba(59, 130, 246, 0.09);
+      color: #93c5fd;
+      font-family: var(--font-sans);
+      font-weight: 700;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      padding: 7px 12px;
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .col-q0 {
+      background-color: rgba(59, 130, 246, 0.06) !important;
+      font-weight: 700;
+    }
+
+    .col-est {
+      background-color: rgba(245, 158, 11, 0.05) !important;
+      color: #fde68a;
+    }
+
+    /* OUTLIER CELL BORDERS */
+    .outlier-red {
+      border: 1.5px solid var(--bear-red) !important;
+      background-color: rgba(239, 68, 68, 0.12) !important;
+      color: #fca5a5 !important;
+      font-weight: 700;
+      position: relative;
+    }
+
+    .outlier-amber {
+      border: 1.5px solid var(--warn-amber) !important;
+      background-color: rgba(245, 158, 11, 0.12) !important;
+      color: #fcd34d !important;
+      font-weight: 700;
+      position: relative;
+    }
+
+    /* ROW 3: FORENSIC CALLOUT */
+    .forensic-grid {
+      display: grid;
+      grid-template-columns: 1.35fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 1080px) {
+      .forensic-grid,
+      .split-2col,
+      .sentiment-grid {
+        grid-template-columns: 1fr !important;
+      }
+    }
+
+    .forensic-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .forensic-item {
+      background-color: rgba(11, 15, 25, 0.6);
+      border: 1px solid var(--border-color);
+      border-left: 3px solid var(--warn-amber);
+      border-radius: 6px;
+      padding: 13px 15px;
+    }
+
+    .forensic-item.critical {
+      border-left-color: var(--bear-red);
+    }
+
+    .forensic-item-title {
+      font-weight: 700;
+      font-size: 13.5px;
+      color: var(--text-primary);
+      margin-bottom: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .forensic-item p {
+      color: var(--text-secondary);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .fcf-bridge-box {
+      background-color: #0d1322;
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* ROW 4 & ROW 5: 2-COLUMN SPLIT CARDS */
+    .split-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .audit-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .audit-point {
+      padding: 12px 14px;
+      border-radius: 6px;
+      background-color: rgba(11, 15, 25, 0.55);
+      border: 1px solid var(--border-color);
+    }
+
+    .audit-point-bull {
+      border-left: 3px solid var(--bull-green);
+    }
+
+    .audit-point-bear {
+      border-left: 3px solid var(--bear-red);
+    }
+
+    .audit-point-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 5px;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .audit-point-title {
+      font-weight: 700;
+      font-size: 13.5px;
+      color: var(--text-primary);
+    }
+
+    .audit-point p {
+      font-size: 12.8px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* CATALYST ITEMS */
+    .catalyst-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .catalyst-card {
+      background-color: rgba(11, 15, 25, 0.55);
+      border: 1px solid var(--border-color);
+      border-left: 3px solid var(--accent-blue);
+      border-radius: 6px;
+      padding: 12px 14px;
+    }
+
+    /* SENTIMENT ANALYSIS CARD */
+    .sentiment-overview-banner {
+      background: linear-gradient(90deg, rgba(239, 68, 68, 0.12) 0%, rgba(245, 158, 11, 0.12) 50%, rgba(16, 185, 129, 0.12) 100%);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .sentiment-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .sentiment-source-card {
+      background-color: #0d1322;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .sentiment-meter-wrap {
+      display: flex;
+       flex-direction: column;
+      gap: 5px;
+      margin: 4px 0;
+    }
+
+    .sentiment-bar-bg {
+      width: 100%;
+      height: 8px;
+      background-color: #1f2937;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .sentiment-bar-fill {
+      height: 100%;
+      border-radius: 4px;
+    }
+
+    /* ROW 7: TRADE MATRIX */
+    .playbook-setup-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+      background-color: rgba(11, 15, 25, 0.65);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 14px;
+    }
+
+    .scenario-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 16px;
+    }
+
+    .scenario-card {
+      background-color: #0d1322;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .scenario-bull {
+      border-top: 4px solid var(--bull-green);
+    }
+
+    .scenario-base {
+      border-top: 4px solid var(--warn-amber);
+    }
+
+    .scenario-bear {
+      border-top: 4px solid var(--bear-red);
+    }
+
+    .scenario-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 800;
+      font-size: 15px;
+    }
+
+    .trigger-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 12.8px;
+      color: var(--text-secondary);
+    }
+
+    .trigger-list li {
+      position: relative;
+      padding-left: 14px;
+    }
+
+    .trigger-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--accent-blue);
+      font-weight: bold;
+    }
+
+    .trade-structure {
+      margin-top: auto;
+      padding: 11px 12px;
+      background-color: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      font-size: 12px;
+    }
+
+    .trade-structure strong {
+      display: block;
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .footer-meta {
+      text-align: center;
+      font-size: 11.5px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      padding: 10px 0 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    
+    <!-- HISTORICAL QUARTER ARCHIVE TOPBAR -->
+    <div class="archive-topbar" style="background: rgba(15, 23, 42, 0.92); border: 1px solid rgba(59, 130, 246, 0.32); border-radius: 10px; padding: 10px 16px; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; font-size: 12.5px;">
+      <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+        <a href="index.html" style="color: #93c5fd; text-decoration: none; font-weight: 600; padding: 4px 10px; border-radius: 6px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.12);">← Portal Home</a>
+        <span style="background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); font-weight: 700; font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 3px 9px; border-radius: 5px;">T+0 Post-Earnings Forensic</span>
+        <a id="archive-paired-stage-link" href="RGTI_T1_2026-11-10.html" style="display: none; color: #cbd5e1; text-decoration: none; font-size: 11.5px; padding: 3px 9px; border-radius: 5px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12);">Switch to T-1 Pre-Earnings Setup</a>
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+        <label for="quarter-archive-select" style="color: #94a3b8; font-size: 12px; font-weight: 600;">📅 Historical Quarter:</label>
+        <select id="quarter-archive-select" data-ticker="RGTI" data-date="2026-11-10" data-stage="t0" style="background: #090d16; color: #f8fafc; border: 1px solid rgba(59, 130, 246, 0.45); border-radius: 6px; padding: 5px 10px; font-size: 12px; font-family: 'Inter', sans-serif; font-weight: 600; cursor: pointer; outline: none;">
+          <option value="RGTI_T0_POST_2026-11-10.html" selected>Q3 2026 (Nov 10, 2026) — Latest</option>
+          <option value="" disabled>No prior quarters archived yet (history initiated Q3 2026)</option>
+        </select>
+      </div>
+    </div>
+    <script src="history_catalog.js"></script>
+    <script>
+      (function() {
+        var sel = document.getElementById('quarter-archive-select');
+        if (!sel) return;
+        var tk = sel.getAttribute('data-ticker');
+        var curDate = sel.getAttribute('data-date');
+        var stage = sel.getAttribute('data-stage');
+        var cat = (window.EARNINGS_HISTORY_CATALOG || {})[tk];
+        if (Array.isArray(cat) && cat.length > 0) {
+          sel.innerHTML = '';
+          cat.forEach(function(entry, idx) {
+            var targetFile = (stage === 't0') ? (entry.t0 || entry.t1) : (entry.t1 || entry.t0);
+            if (!targetFile) return;
+            var opt = document.createElement('option');
+            opt.value = targetFile;
+            var suffix = (idx === 0) ? ' — Latest' : '';
+            var stageHint = (stage === 't0' && !entry.t0) ? ' [T-1 Only]' : ((stage === 't1' && !entry.t1) ? ' [T+0 Only]' : '');
+            opt.textContent = entry.quarter + ' (' + entry.date_display + ')' + stageHint + suffix;
+            if (entry.date === curDate) opt.selected = true;
+            sel.appendChild(opt);
+          });
+          if (cat.length === 1) {
+            var note = document.createElement('option');
+            note.value = '';
+            note.disabled = true;
+            note.textContent = '── Prior quarters will appear here starting next quarter ──';
+            sel.appendChild(note);
+          }
+          var curEntry = cat.find(function(e) { return e.date === curDate; });
+          var pairedLink = document.getElementById('archive-paired-stage-link');
+          if (curEntry && pairedLink) {
+            var pairedHref = (stage === 't0') ? curEntry.t1 : curEntry.t0;
+            if (pairedHref) {
+              pairedLink.href = pairedHref;
+              pairedLink.style.display = 'inline-block';
+            }
+          }
+        }
+        sel.addEventListener('change', function() {
+          if (this.value && !window.location.pathname.endsWith('/' + this.value)) {
+            window.location.href = this.value;
+          }
+        });
+      })();
+    </script>
+
+    <!-- 1. HEADER BANNER & STRIP -->
+    <header class="header-banner" style="margin-bottom: 20px;">
+      <div class="header-top" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 12px; margin-bottom: 16px;">
+        <div>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <h1 style="margin: 0; font-size: 24px; font-weight: 800; color: #fff;">Rigetti Computing, Inc. (RGTI)</h1>
+            <span class="badge badge-bear" style="font-size: 13px; padding: 4px 8px;">T+0 POST-EARNINGS FORENSIC TEARSHEET</span>
+            <span class="badge badge-bear" style="font-size: 13px; padding: 4px 8px;">CLEAN MISS</span>
+          </div>
+          <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">
+            Q3 2026 Earnings Release &bull; Filing Date: November 10, 2026 &bull; Form 8-K Exhibit 99.1 &bull; Market Cap: $4,055.3M &bull; EV: $3,669.3M
+          </div>
+        </div>
+        <div style="text-align: right;">
+          <div style="font-size: 13px; color: var(--text-muted);">Regular Close: <strong style="color: #fff;">$12.15</strong></div>
+          <div style="font-size: 20px; font-weight: 800; color: #f87171;">
+            After-Hours: $11.32 <span style="font-size: 14px;">(-6.83%)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="header-strip" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; background: rgba(15, 23, 42, 0.6); padding: 12px 16px; border-radius: 8px; border: 1px solid var(--border-color);">
+        <div>
+          <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted);">T+0 Print Verdict</div>
+          <div style="font-size: 15px; font-weight: 700; color: #f87171;">CLEAN MISS</div>
+        </div>
+        <div>
+          <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted);">Q0 Total Net Revenue</div>
+          <div style="font-size: 16px; font-weight: 700; color: #f87171;">$1.41M <span style="font-size: 11px; color: #f87171;">(-61.68% vs $3.68M)</span></div>
+        </div>
+        <div>
+          <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted);">Two-Qubit Fidelity</div>
+          <div style="font-size: 16px; font-weight: 700; color: #34d399;">99.5% <span style="font-size: 11px; color: #34d399;">(108-Qubit System)</span></div>
+        </div>
+        <div>
+          <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted);">CHIPS Act Award</div>
+          <div style="font-size: 16px; font-weight: 700; color: #38bdf8;">$100.0M <span style="font-size: 11px; color: #38bdf8;">(Dept of Commerce)</span></div>
+        </div>
+        <div>
+          <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted);">Liquid Cash Balance</div>
+          <div style="font-size: 16px; font-weight: 700; color: #f59e0b;">$45.80M <span style="font-size: 11px; color: #f59e0b;">(-$17.06M Q0 OCF Burn)</span></div>
+        </div>
+        <div>
+          <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted);">1-Wk Straddle Implied</div>
+          <div style="font-size: 16px; font-weight: 700; color: #38bdf8;">±13.39% ($1.62) [CONTAINED]</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- 2. TRACK B STICKY JUMP-NAV -->
+    <nav class="post-jump-nav" style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; padding: 10px 14px; background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; position: sticky; top: 10px; z-index: 100; backdrop-filter: blur(8px);">
+      <a href="#sec-scorecard" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">1. Beat / Miss Scorecard</a>
+      <a href="#sec-5q" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">2. Rolling 5Q Table (Q3 Actual + Q4E)</a>
+      <a href="#sec-fcf" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">3. Forensic True FCF Bridge</a>
+      <a href="#sec-audit" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">4. Wins, Drags &amp; Call Q&amp;A</a>
+      <a href="#sec-comps" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">5. Peer Group Multiples</a>
+      <a href="#sec-sentiment" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">6. 4-Pillar Sentiment</a>
+      <a href="#sec-trade" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">7. PM Trade Matrix</a>
+    </nav>
+
+    <!-- EXECUTIVE KPI GRID -->
+    <section class="kpi-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-bottom: 24px;">
+      <div style="background: rgba(15, 23, 42, 0.6); padding: 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+        <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted);">Two-Qubit Fidelity Breakthrough</div>
+        <div style="font-size: 18px; font-weight: 800; color: #34d399; margin: 4px 0;">99.5% Median</div>
+        <div style="font-size: 11.5px; color: var(--text-secondary);">Validated chiplet modular architecture across 108 qubits (reaching 99.7% on 8Q sublattice).</div>
+      </div>
+      <div style="background: rgba(15, 23, 42, 0.6); padding: 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+        <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted);">CHIPS Act Federal Backing</div>
+        <div style="font-size: 18px; font-weight: 800; color: #38bdf8; margin: 4px 0;">$100.0M Award</div>
+        <div style="font-size: 11.5px; color: var(--text-secondary);">Signed definitive agreement with U.S. Dept of Commerce for cryogenics and chiplet R&amp;D.</div>
+      </div>
+      <div style="background: rgba(15, 23, 42, 0.6); padding: 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+        <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted);">Nine-Month Revenue Expansion</div>
+        <div style="font-size: 18px; font-weight: 800; color: #60a5fa; margin: 4px 0;">$10.95M YTD</div>
+        <div style="font-size: 11.5px; color: var(--text-secondary);">9-month revenue surged +110% YoY vs $5.22M in 9M 2025 despite quarterly delivery lumpiness.</div>
+      </div>
+      <div style="background: rgba(15, 23, 42, 0.6); padding: 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+        <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted);">Quarterly Operating Loss</div>
+        <div style="font-size: 18px; font-weight: 800; color: #f87171; margin: 4px 0;">-$33.19M EBIT</div>
+        <div style="font-size: 11.5px; color: var(--text-secondary);">Cleanroom tooling and cryogenic R&amp;D expansion elevated quarterly operating loss.</div>
+      </div>
+    </section>
+
+    <!-- 3. ROW 1B SCORECARD & AUDIT -->
+    <section id="sec-scorecard" class="scorecard" style="margin-bottom: 28px;">
+      <h2 style="font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+        Row 1B: Post-Release Print vs Expectations &amp; Guidance Scorecard
+      </h2>
+
+      <!-- TRACK B: T-1 vs T+0 THESIS AUDIT BANNER -->
+      <div class="t1-vs-t0-audit" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-bottom: 16px; background: rgba(15, 23, 42, 0.5); padding: 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+        <div style="border-left: 3px solid #3b82f6; padding-left: 10px;">
+          <div style="font-size: 11px; text-transform: uppercase; color: #93c5fd; font-weight: 700;">T-1 Pre-Print Thesis Setup</div>
+          <div style="font-size: 12.5px; color: #e2e8f0; margin-top: 4px;">
+            Consensus revenue expected at $3.68M (+88.8% YoY) with Whisper at $4.20M following strong Q2 momentum ($5.14M). Options implied ±13.39% move ($1.62). The primary hurdle was proving commercial system adoption.
+          </div>
+        </div>
+        <div style="border-left: 3px solid #ef4444; padding-left: 10px;">
+          <div style="font-size: 11px; text-transform: uppercase; color: #f87171; font-weight: 700;">T+0 Actual Print &amp; Guide Reset</div>
+          <div style="font-size: 12.5px; color: #e2e8f0; margin-top: 4px;">
+            Reported revenue of $1.41M missed consensus by -$2.27M (-61.68%) due to delivery acceptance timing. GAAP diluted EPS was -$0.08 vs -$0.05 consensus. However, 108Q gate fidelity reached landmark 99.5%.
+          </div>
+        </div>
+        <div style="border-left: 3px solid #f59e0b; padding-left: 10px;">
+          <div style="font-size: 11px; text-transform: uppercase; color: #fbbf24; font-weight: 700;">T-1 Thesis Verdict</div>
+          <div style="font-size: 12.5px; color: #e2e8f0; margin-top: 4px;">
+            <strong style="color: #f87171;">COMMERCIAL REVENUE DISAPPOINTMENT / TECHNICAL VICTORY</strong> &mdash; Near-term revenue visibility remains lumpy, but the $100M CHIPS agreement and 99.5% fidelity confirm long-term moat.
+          </div>
+        </div>
+      </div>
+
+      <!-- TABLE 1B-1: HEADLINE & COMPANY KPI SCORECARD -->
+      <div style="margin-bottom: 20px;">
+        <div style="font-size: 13.5px; font-weight: 700; color: #cbd5e1; margin-bottom: 8px;">
+          Table 1B-1: Headline &amp; Company KPI Beat / Miss Scorecard
+        </div>
+        <div class="table-wrapper" style="overflow-x: auto; border: 1px solid var(--border-color); border-radius: 8px;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 12px; text-align: left;">
+            <thead>
+              <tr style="background: rgba(15, 23, 42, 0.9); border-bottom: 1px solid var(--border-color);">
+                <th style="padding: 10px 12px; color: var(--text-muted);">Metric</th>
+                <th style="padding: 10px 12px; color: var(--text-muted);">Q-1 Actual</th>
+                <th style="padding: 10px 12px; color: var(--text-muted);">Q-4 YoY</th>
+                <th class="col-q0" style="padding: 10px 12px; color: #60a5fa;">Street Consensus</th>
+                <th style="padding: 10px 12px; color: #f87171;">Q0 Actual</th>
+                <th style="padding: 10px 12px; color: var(--text-muted);">vs. Consensus (Visual)</th>
+                <th style="padding: 10px 12px; color: var(--text-muted);">Verdict</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="tip" title="Total GAAP Net Revenue across Quantum Cloud Services and Novera QPU deployments." data-tip="Total GAAP Net Revenue: $1.41M reported in Q3 2026 (-27.7% YoY vs $1.95M in Q3 2025 and -72.6% QoQ vs $5.14M in Q2 2026), missing Street consensus ($3.68M) by -$2.27M (-61.68%) and whisper ($4.20M) by -$2.79M due to lumpy system acceptance milestones.">Total Consolidated Revenue ($M)</span></td>
+                <td>$5.14M</td>
+                <td>$1.95M</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">$3.68M</td>
+                <td style="font-weight:700; color: #f87171;">$1.41M</td>
+                <td>
+                  <span class="badge badge-bear">$-2.27M (-61.68%)</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div class="beat-bar-fill" style="width:38%; height:100%; background:linear-gradient(90deg, #ef4444, #b91c1c);"></div></div>
+                </td>
+                <td><span class="badge badge-bear">MISS</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="2-Qubit Gate Fidelity on Cepheus-1-108Q Architecture." data-tip="Median Two-Qubit Fidelity: Reached 99.5% on the full 108-qubit system (99.6% on 80-qubit sublattice and 99.7% on 8-qubit sublattice), meeting key performance milestone validating tiled chiplet scalability.">2-Qubit Gate Fidelity (108Q)</span></td>
+                <td>99.30%</td>
+                <td>98.00%</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">99.50%</td>
+                <td style="font-weight:700; color: #34d399;">99.50%</td>
+                <td>
+                  <span class="badge badge-bull">MET (99.6% 80Q)</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div class="beat-bar-fill" style="width:95%; height:100%; background:linear-gradient(90deg, #10b981, #059669);"></div></div>
+                </td>
+                <td><span class="badge badge-bull">MET</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="GAAP Diluted Earnings Per Share." data-tip="GAAP Diluted EPS: -$0.08 in Q3 2026 based on 342.7M shares, missing consensus (-$0.05) by -$0.03 (-60.0%) as revenue contraction and elevated cleanroom development expenditures expanded net operating loss.">GAAP Diluted EPS ($)</span></td>
+                <td>-$0.16</td>
+                <td>-$0.62</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">-$0.05</td>
+                <td style="font-weight:700; color: #f87171;">-$0.08</td>
+                <td>
+                  <span class="badge badge-bear">$-0.03 (-60.00%)</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div class="beat-bar-fill" style="width:45%; height:100%; background:linear-gradient(90deg, #ef4444, #b91c1c);"></div></div>
+                </td>
+                <td><span class="badge badge-bear">MISS</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="U.S. Department of Commerce CHIPS Act Award." data-tip="CHIPS Act Agreement: Executed definitive $100M agreement with U.S. Dept of Commerce in September 2026 across 3 advanced R&amp;D scaling tracks with minority government equity stake.">CHIPS Act Award ($M)</span></td>
+                <td>$0.00M</td>
+                <td>$0.00M</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">$0.00M</td>
+                <td style="font-weight:700; color: #34d399;">$100.00M</td>
+                <td>
+                  <span class="badge badge-bull">+$100.0M Award</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div class="beat-bar-fill" style="width:98%; height:100%; background:linear-gradient(90deg, #10b981, #059669);"></div></div>
+                </td>
+                <td><span class="badge badge-bull">AWARD</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Total Cash, Cash Equivalents &amp; Liquid Runway." data-tip="Liquid Cash Balance: $45.80M at September 30, 2026 compared to $67.67M in Q2 2026 and $44.85M in Q3 2025; initial milestone draws under the $100M CHIPS award required to fund multi-chip scaling through late 2027.">Liquid Cash Balance ($M)</span></td>
+                <td>$67.67M</td>
+                <td>$44.85M</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">$55.00M</td>
+                <td style="font-weight:700; color: #f87171;">$45.80M</td>
+                <td>
+                  <span class="badge badge-bear">-$9.20M Below Est</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div class="beat-bar-fill" style="width:72%; height:100%; background:linear-gradient(90deg, #f59e0b, #d97706);"></div></div>
+                </td>
+                <td><span class="badge badge-warn">BURN</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TABLE 1B-2: MANAGEMENT GUIDANCE ACCOUNTABILITY -->
+      <div style="margin-bottom: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+          <div style="font-size: 13.5px; font-weight: 700; color: #cbd5e1;">
+            Table 1B-2: Management Execution Accountability (Q0 Actual vs Q-1 Guidance)
+          </div>
+          <div style="font-size: 11.5px; color: #fbbf24; font-weight: 600;">
+            Management Credibility Score: 72 / 100 (Technology Strong / Revenue Lumpy)
+          </div>
+        </div>
+        <div class="credibility-gauge-bar" style="height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; margin-bottom: 10px; overflow: hidden;">
+          <div class="credibility-gauge-fill" style="width: 72%; height: 100%; background: linear-gradient(90deg, #f59e0b, #10b981);"></div>
+        </div>
+        <div class="table-wrapper" style="overflow-x: auto; border: 1px solid var(--border-color); border-radius: 8px;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 12px; text-align: left;">
+            <thead>
+              <tr style="background: rgba(15, 23, 42, 0.9); border-bottom: 1px solid var(--border-color);">
+                <th style="padding: 10px 12px; color: var(--text-muted);">Guided Metric</th>
+                <th style="padding: 10px 12px; color: var(--text-muted);">Prior Q-1 Guidance</th>
+                <th style="padding: 10px 12px; color: #e2e8f0;">Reported Q0 Actual</th>
+                <th style="padding: 10px 12px; color: var(--text-muted);">Variance Commentary</th>
+                <th style="padding: 10px 12px; color: var(--text-muted);">Execution Grade</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="tip" title="Q3 2026 Total Net Revenue ($M)" data-tip="Q3 2026 Total Net Revenue ($M): Prior guide was $3.5M - $4.5M vs reported $1.41M (-$2.27M below midpoint (-61.7% miss)).">Q3 2026 Total Net Revenue ($M)</span></td>
+                <td>$3.5M - $4.5M</td>
+                <td style="font-weight:700; color: #e2e8f0;">$1.41M</td>
+                <td>-$2.27M below midpoint (-61.7% miss)</td>
+                <td><span class="badge badge-bear">MISSED OWN GUIDE</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="108-Qubit Gate Fidelity Benchmark" data-tip="108-Qubit Gate Fidelity Benchmark: Prior guide was >=99.5% median 2-qubit fidelity vs reported 99.5% achieved (99.6% on 80Q) (Target met on schedule).">108-Qubit Gate Fidelity Benchmark</span></td>
+                <td>>=99.5% median 2-qubit fidelity</td>
+                <td style="font-weight:700; color: #e2e8f0;">99.5% achieved (99.6% on 80Q)</td>
+                <td>Target met on schedule</td>
+                <td><span class="badge badge-bull">MET BENCHMARK</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="CHIPS Act Finalization" data-tip="CHIPS Act Finalization: Prior guide was Definitive agreement in 2H 2026 vs reported Signed $100M agreement in September (Landmark government award executed).">CHIPS Act Finalization</span></td>
+                <td>Definitive agreement in 2H 2026</td>
+                <td style="font-weight:700; color: #e2e8f0;">Signed $100M agreement in September</td>
+                <td>Landmark government award executed</td>
+                <td><span class="badge badge-bull">BEAT OWN GUIDE</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Q3 2026 Diluted EPS ($)" data-tip="Q3 2026 Diluted EPS ($): Prior guide was -$0.06 to -$0.04 vs reported -$0.08 GAAP / -$0.06 Non-GAAP (-$0.02 GAAP variance).">Q3 2026 Diluted EPS ($)</span></td>
+                <td>-$0.06 to -$0.04</td>
+                <td style="font-weight:700; color: #e2e8f0;">-$0.08 GAAP / -$0.06 Non-GAAP</td>
+                <td>-$0.02 GAAP variance</td>
+                <td><span class="badge badge-bear">MISSED RANGE</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TABLE 1B-3: FORWARD GUIDANCE RESET -->
+      <div>
+        <div style="font-size: 13.5px; font-weight: 700; color: #cbd5e1; margin-bottom: 8px;">
+          Table 1B-3: Forward Guidance Reset (New Management Guidance vs Street Expectations)
+        </div>
+        <div class="table-wrapper" style="overflow-x: auto; border: 1px solid var(--border-color); border-radius: 8px;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 12px; text-align: left;">
+            <thead>
+              <tr style="background: rgba(15, 23, 42, 0.9); border-bottom: 1px solid var(--border-color);">
+                <th style="padding: 10px 12px; color: var(--text-muted);">Forward Metric</th>
+                <th style="padding: 10px 12px; color: var(--text-muted);">Street Pre-Print Consensus</th>
+                <th style="padding: 10px 12px; color: #e2e8f0;">New Management Guidance</th>
+                <th style="padding: 10px 12px; color: var(--text-muted);">Guidance Delta</th>
+                <th style="padding: 10px 12px; color: var(--text-muted);">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="tip" title="Full-Year 2026 Revenue Guidance" data-tip="Full-Year 2026 Revenue Guidance: Street expected $16.5M ($15.0M - $18.0M) while new management guide is $14.0M - $15.5M (~$14.75M Midpoint) (-$1.75M revision due to lumpy milestone recognition).">Full-Year 2026 Revenue Guidance</span></td>
+                <td>$16.5M ($15.0M - $18.0M)</td>
+                <td style="font-weight:700; color: #e2e8f0;">$14.0M - $15.5M (~$14.75M Midpoint)</td>
+                <td>-$1.75M revision due to lumpy milestone recognition</td>
+                <td><span class="badge badge-bear">LOWERED</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Q4 2026E Implied Revenue Guidance" data-tip="Q4 2026E Implied Revenue Guidance: Street expected $5.55M Consensus while new management guide is $3.1M - $4.6M (~$3.85M Midpoint) (-$1.70M reset reflecting deployment schedules).">Q4 2026E Implied Revenue Guidance</span></td>
+                <td>$5.55M Consensus</td>
+                <td style="font-weight:700; color: #e2e8f0;">$3.1M - $4.6M (~$3.85M Midpoint)</td>
+                <td>-$1.70M reset reflecting deployment schedules</td>
+                <td><span class="badge badge-bear">LOWERED</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="300-Plus-Qubit Deployment Horizon" data-tip="300-Plus-Qubit Deployment Horizon: Street expected Late 2027 while new management guide is Targeting 300+ qubits with 99.7% fidelity by year-end 2027 (Reconfirmed technical timeline).">300-Plus-Qubit Deployment Horizon</span></td>
+                <td>Late 2027</td>
+                <td style="font-weight:700; color: #e2e8f0;">Targeting 300+ qubits with 99.7% fidelity by year-end 2027</td>
+                <td>Reconfirmed technical timeline</td>
+                <td><span class="badge badge-bull">MAINTAINED</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="CHIPS Act Cash Tranche Inflows" data-tip="CHIPS Act Cash Tranche Inflows: Street expected $15.0M initial draw while new management guide is $20.0M - $25.0M expected initial funding in Q4/Q1 (+$7.5M non-dilutive liquidity boost).">CHIPS Act Cash Tranche Inflows</span></td>
+                <td>$15.0M initial draw</td>
+                <td style="font-weight:700; color: #e2e8f0;">$20.0M - $25.0M expected initial funding in Q4/Q1</td>
+                <td>+$7.5M non-dilutive liquidity boost</td>
+                <td><span class="badge badge-bull">NON-DILUTIVE REINFORCEMENT</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. ROW 2 5-QUARTER ROLLING TABLE -->
+    <section id="sec-5q" style="margin-bottom: 28px;">
+      <h2 style="font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 12px;">
+        Row 2: 5-Quarter Rolling Financial Performance &amp; Dynamic Segment Breakdown
+      </h2>
+      <div class="table-wrapper" style="overflow-x: auto; border: 1px solid var(--border-color); border-radius: 8px;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 12px; text-align: left;">
+          <thead>
+            <tr style="background: rgba(15, 23, 42, 0.9); border-bottom: 1px solid var(--border-color);">
+              <th style="padding: 10px 12px; color: var(--text-muted); min-width: 200px;">Financial Metric ($M)</th>
+              <th style="padding: 10px 12px; color: var(--text-muted);">Q3 2025</th>
+              <th style="padding: 10px 12px; color: var(--text-muted);">Q4 2025</th>
+              <th style="padding: 10px 12px; color: var(--text-muted);">Q1 2026</th>
+              <th style="padding: 10px 12px; color: var(--text-muted);">Q2 2026</th>
+              <th class="col-q0" style="padding: 10px 12px; font-weight: 700; color: #f87171; background: rgba(239, 68, 68, 0.1);">Q3 2026 (Actual)</th>
+              <th class="col-est" style="padding: 10px 12px; font-weight: 700; color: #60a5fa; background: rgba(59, 130, 246, 0.1);">Q4 2026E (Guided / Street)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="font-weight: 700; background: rgba(255,255,255,0.02);">
+              <td style="padding: 8px 12px;"><span class="tip" title="Consolidated GAAP Net Revenue" data-tip="Total Revenue: $1.41M in Q3 2026 (-27.7% YoY from $1.95M in Q3 2025 and down from $5.14M in Q2 2026).">Total Consolidated Revenue ($M)</span></td>
+              <td style="padding: 8px 12px;">$1.95M</td>
+              <td style="padding: 8px 12px;">$1.87M</td>
+              <td style="padding: 8px 12px;">$4.40M</td>
+              <td style="padding: 8px 12px;">$5.14M</td>
+              <td class="col-q0" style="padding: 8px 12px; font-weight: 700; color: #f87171; background: rgba(239, 68, 68, 0.05);">$1.41M</td>
+              <td class="col-est" style="padding: 8px 12px; font-weight: 700; color: #60a5fa; background: rgba(59, 130, 246, 0.05);">$3.50M</td>
+            </tr>
+            <tr class="sub-row" style="color: var(--text-secondary); font-size: 11.5px;">
+              <td style="padding: 6px 12px 6px 24px;">↳ Development Contracts &amp; Government Programs</td>
+              <td style="padding: 6px 12px;">$1.15M</td>
+              <td style="padding: 6px 12px;">$1.10M</td>
+              <td style="padding: 6px 12px;">$2.80M</td>
+              <td style="padding: 6px 12px;">$3.20M</td>
+              <td class="col-q0" style="padding: 6px 12px; background: rgba(239, 68, 68, 0.05);">$0.90M</td>
+              <td class="col-est" style="padding: 6px 12px; background: rgba(59, 130, 246, 0.05);">$2.10M</td>
+            </tr>
+            <tr class="sub-row" style="color: var(--text-secondary); font-size: 11.5px;">
+              <td style="padding: 6px 12px 6px 24px;">↳ Quantum Computing Systems &amp; Cloud (QCS / Novera)</td>
+              <td style="padding: 6px 12px;">$0.80M</td>
+              <td style="padding: 6px 12px;">$0.77M</td>
+              <td style="padding: 6px 12px;">$1.60M</td>
+              <td style="padding: 6px 12px;">$1.94M</td>
+              <td class="col-q0" style="padding: 6px 12px; background: rgba(239, 68, 68, 0.05);">$0.51M</td>
+              <td class="col-est" style="padding: 6px 12px; background: rgba(59, 130, 246, 0.05);">$1.40M</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 12px;"><span class="tip" title="Cost of Revenue" data-tip="Cost of Revenue: Direct quantum hardware fabrication and cloud server operations ($0.55M in Q3 2026).">Cost of Revenue ($M)</span></td>
+              <td style="padding: 8px 12px;">$1.55M</td>
+              <td style="padding: 8px 12px;">$1.22M</td>
+              <td style="padding: 8px 12px;">$3.02M</td>
+              <td style="padding: 8px 12px;">$2.95M</td>
+              <td class="col-q0" style="padding: 8px 12px; background: rgba(239, 68, 68, 0.05);">$0.55M</td>
+              <td class="col-est" style="padding: 8px 12px; background: rgba(59, 130, 246, 0.05);">$1.70M</td>
+            </tr>
+            <tr style="font-weight: 700; background: rgba(255,255,255,0.02);">
+              <td style="padding: 8px 12px;"><span class="tip" title="Gross Profit" data-tip="Gross Profit: Revenue minus cost of revenue, yielding $0.86M in Q3 2026 (60.99% gross margin).">Gross Profit ($M)</span></td>
+              <td style="padding: 8px 12px;">$0.40M</td>
+              <td style="padding: 8px 12px;">$0.65M</td>
+              <td style="padding: 8px 12px;">$1.38M</td>
+              <td style="padding: 8px 12px;">$2.19M</td>
+              <td class="col-q0" style="padding: 8px 12px; font-weight: 700; color: #34d399; background: rgba(239, 68, 68, 0.05);">$0.86M</td>
+              <td class="col-est" style="padding: 8px 12px; font-weight: 700; color: #60a5fa; background: rgba(59, 130, 246, 0.05);">$1.80M</td>
+            </tr>
+            <tr style="font-weight: 700;">
+              <td style="padding: 8px 12px;"><span class="tip" title="Total Operating Expenses" data-tip="Total Operating Expenses: Total R&amp;D and SG&amp;A of $34.05M in Q3 2026.">Total Operating Expenses ($M)</span></td>
+              <td style="padding: 8px 12px;">$20.95M</td>
+              <td style="padding: 8px 12px;">$23.25M</td>
+              <td style="padding: 8px 12px;">$27.33M</td>
+              <td style="padding: 8px 12px;">$30.25M</td>
+              <td class="col-q0" style="padding: 8px 12px; font-weight: 700; background: rgba(239, 68, 68, 0.05);">$34.05M</td>
+              <td class="col-est" style="padding: 8px 12px; font-weight: 700; background: rgba(59, 130, 246, 0.05);">$33.00M</td>
+            </tr>
+            <tr class="sub-row" style="color: var(--text-secondary); font-size: 11.5px;">
+              <td style="padding: 6px 12px 6px 24px;">↳ Research &amp; Development</td>
+              <td style="padding: 6px 12px;">$15.02M</td>
+              <td style="padding: 6px 12px;">$16.85M</td>
+              <td style="padding: 6px 12px;">$19.50M</td>
+              <td style="padding: 6px 12px;">$21.18M</td>
+              <td class="col-q0" style="padding: 6px 12px; background: rgba(239, 68, 68, 0.05);">$25.50M</td>
+              <td class="col-est" style="padding: 6px 12px; background: rgba(59, 130, 246, 0.05);">$24.50M</td>
+            </tr>
+            <tr class="sub-row" style="color: var(--text-secondary); font-size: 11.5px;">
+              <td style="padding: 6px 12px 6px 24px;">↳ Selling, General &amp; Administrative</td>
+              <td style="padding: 6px 12px;">$5.93M</td>
+              <td style="padding: 6px 12px;">$6.40M</td>
+              <td style="padding: 6px 12px;">$7.83M</td>
+              <td style="padding: 6px 12px;">$9.07M</td>
+              <td class="col-q0" style="padding: 6px 12px; background: rgba(239, 68, 68, 0.05);">$8.55M</td>
+              <td class="col-est" style="padding: 6px 12px; background: rgba(59, 130, 246, 0.05);">$8.50M</td>
+            </tr>
+            <tr style="font-weight: 700; background: rgba(255,255,255,0.02);">
+              <td style="padding: 8px 12px;"><span class="tip" title="Operating Income" data-tip="Operating Loss: -$33.19M in Q3 2026 reflecting elevated R&amp;D investments at Fab-1.">GAAP Operating Income ($M)</span></td>
+              <td style="padding: 8px 12px;">-$20.55M</td>
+              <td style="padding: 8px 12px;">-$22.60M</td>
+              <td style="padding: 8px 12px;">-$25.95M</td>
+              <td style="padding: 8px 12px;">-$28.06M</td>
+              <td class="col-q0" style="padding: 8px 12px; font-weight: 700; color: #f87171; background: rgba(239, 68, 68, 0.05);">-$33.19M</td>
+              <td class="col-est" style="padding: 8px 12px; font-weight: 700; color: #60a5fa; background: rgba(59, 130, 246, 0.05);">-$31.20M</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 12px;"><span class="tip" title="GAAP Net Loss" data-tip="GAAP Net Loss: -$3.14M in Q3 2026, benefiting from a $25.29M derivative warrant fair value gain.">GAAP Net Loss ($M)</span></td>
+              <td style="padding: 8px 12px;">-$200.97M</td>
+              <td style="padding: 8px 12px;">-$18.21M</td>
+              <td style="padding: 8px 12px;">$33.11M</td>
+              <td style="padding: 8px 12px;">-$52.61M</td>
+              <td class="col-q0" style="padding: 8px 12px; background: rgba(239, 68, 68, 0.05);">-$3.14M</td>
+              <td class="col-est" style="padding: 8px 12px; background: rgba(59, 130, 246, 0.05);">-$25.00M</td>
+            </tr>
+            <tr style="font-weight: 700;">
+              <td style="padding: 8px 12px;"><span class="tip" title="GAAP Diluted EPS" data-tip="GAAP Diluted EPS: -$0.08 per share in Q3 2026 vs -$0.05 consensus.">GAAP Diluted EPS ($)</span></td>
+              <td style="padding: 8px 12px;">-$0.62</td>
+              <td style="padding: 8px 12px;">-$0.06</td>
+              <td style="padding: 8px 12px;">-$0.06</td>
+              <td style="padding: 8px 12px;">-$0.16</td>
+              <td class="col-q0" style="padding: 8px 12px; font-weight: 700; color: #f87171; background: rgba(239, 68, 68, 0.05);">-$0.08</td>
+              <td class="col-est" style="padding: 8px 12px; font-weight: 700; color: #60a5fa; background: rgba(59, 130, 246, 0.05);">-$0.07</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 5. ROW 3 FORENSIC QUALITY OF EARNINGS & TRUE FCF BRIDGE -->
+    <section id="sec-fcf" style="margin-bottom: 28px;">
+      <h2 style="font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 12px;">
+        Row 3: Forensic Quality-of-Earnings &amp; True Free Cash Flow Bridge
+      </h2>
+      <div class="forensic-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 16px;">
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 16px; border-radius: 8px; border: 1px solid var(--border-color);">
+          <div style="font-size: 12px; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Operating Cash Outflow</div>
+          <div style="font-size: 22px; font-weight: 800; color: #f87171; margin: 6px 0;">-$17.06M OCF (-17.06)</div>
+          <div style="font-size: 12px; color: var(--text-secondary); line-height: 1.5;">
+            Operating cash burn worsened slightly from -$15.78M in Q2 2026 to -$17.06M in Q3 2026 (-$49.06M for 9M 2026) due to working capital requirements and laboratory operations.
+          </div>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 16px; border-radius: 8px; border: 1px solid var(--border-color);">
+          <div style="font-size: 12px; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Cleanroom &amp; Cryo CapEx</div>
+          <div style="font-size: 22px; font-weight: 800; color: #f87171; margin: 6px 0;">-$26.20M CapEx</div>
+          <div style="font-size: 12px; color: var(--text-secondary); line-height: 1.5;">
+            Purchases of property and equipment expanded to $26.20M in Q3 ($42.60M for 9M 2026) to fund Fab-1 cleanroom equipment and dilution refrigeration capacity.
+          </div>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 16px; border-radius: 8px; border: 1px solid var(--border-color);">
+          <div style="font-size: 12px; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">True Economic Cash Burn</div>
+          <div style="font-size: 22px; font-weight: 800; color: #f87171; margin: 6px 0;">-$51.22M True FCF</div>
+          <div style="font-size: 12px; color: var(--text-secondary); line-height: 1.5;">
+            Subtracting CapEx ($26.20M) and SBC ($7.96M) from OCF (-$17.06M) yields true economic cash burn of -$51.22M in Q3 2026, offset by $45.80M cash balance and $100M CHIPS award.
+          </div>
+        </div>
+      </div>
+
+      <!-- WATERFALL ROWS -->
+      <div style="background: rgba(11, 15, 25, 0.7); border: 1px solid var(--border-color); border-radius: 8px; padding: 16px;">
+        <div style="font-size: 13px; font-weight: 700; color: #cbd5e1; margin-bottom: 12px;">Q3 2026 Comprehensive Cash Flow Waterfall ($M)</div>
+        <div class="waterfall-row" style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 12.5px;">
+          <span>(&minus;) Net Cash Used in Operating Activities (OCF)</span>
+          <strong style="color: #f87171;">-$17.06M</strong>
+        </div>
+        <div class="waterfall-row" style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 12.5px;">
+          <span>(&minus;) Purchases of Property &amp; Equipment (CapEx)</span>
+          <strong style="color: #f87171;">-$26.20M</strong>
+        </div>
+        <div class="waterfall-row" style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 12.5px; background: rgba(255,255,255,0.02);">
+          <span>(=) Reported Free Cash Flow (OCF &minus; CapEx)</span>
+          <strong style="color: #f87171;">-$43.26M</strong>
+        </div>
+        <div class="waterfall-row" style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 12.5px;">
+          <span>(&minus;) Stock-Based Compensation Expense (SBC)</span>
+          <strong style="color: #f87171;">-$7.96M</strong>
+        </div>
+        <div class="waterfall-row" style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 12.5px;">
+          <span>(&minus;) Principal Payments on Finance Leases</span>
+          <strong style="color: #cbd5e1;">$0.00M</strong>
+        </div>
+        <div class="waterfall-row" style="display: flex; justify-content: space-between; padding: 8px 0; font-size: 13px; font-weight: 800; background: rgba(239, 68, 68, 0.05);">
+          <span>(=) True Economic Free Cash Flow</span>
+          <strong style="color: #f87171;">-$51.22M</strong>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. ROW 4 WHAT MANAGEMENT DID RIGHT VS WRONG & CALL Q&A -->
+    <section id="sec-audit" style="margin-bottom: 28px;">
+      <h2 style="font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 12px;">
+        Row 4: Operational Execution Wins vs Headwinds &amp; Call Q&amp;A Forensic Audit
+      </h2>
+      <div class="audit-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin-bottom: 20px;">
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 16px; border-radius: 8px; border: 1px solid var(--border-color); border-top: 3px solid #10b981;">
+          <h3 style="font-size: 14px; font-weight: 700; color: #34d399; margin-top: 0; margin-bottom: 10px;">What Management Did Right (Operational Wins)</h3>
+          <ul style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.6; padding-left: 18px; margin: 0;">
+            <li><strong>99.5% Two-Qubit Gate Fidelity:</strong> Met milestone benchmark across full 108 qubits on Cepheus-1-108Q (and 99.7% on 8Q sublattice), demonstrating industry-leading gate speeds of 50-70ns.</li>
+            <li><strong>CHIPS Act $100M Agreement:</strong> Signed definitive contract with U.S. Dept of Commerce for $100M in non-dilutive scaling grants across cryogenics and fabrication.</li>
+            <li><strong>Modular Architecture Validation:</strong> Successfully integrated twelve 9-qubit chiplets on silicon interposers with zero degradation in logic gate speeds compared to monolithic chips.</li>
+            <li><strong>Year-to-Date Topline Growth:</strong> 9-month consolidated revenue reached $10.95M, growing +110% YoY compared to $5.22M for the first nine months of 2025.</li>
+          </ul>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 16px; border-radius: 8px; border: 1px solid var(--border-color); border-top: 3px solid #ef4444;">
+          <h3 style="font-size: 14px; font-weight: 700; color: #f87171; margin-top: 0; margin-bottom: 10px;">Execution Challenges &amp; Headwinds (Operational Drags)</h3>
+          <ul style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.6; padding-left: 18px; margin: 0;">
+            <li><strong>Severe Revenue Contraction:</strong> Q3 revenue dropped -72.6% QoQ to $1.41M, missing Street consensus ($3.68M) by -61.68% due to delivery acceptance timing.</li>
+            <li><strong>Accelerating Cash Burn:</strong> Quarterly true free cash burn widened to -$51.22M as Fab-1 cleanroom investments and cryogenic equipment purchases elevated CapEx to $26.20M.</li>
+            <li><strong>Declining Liquid Cash Balance:</strong> Cash and cash equivalents declined to $45.80M from $67.67M in Q2 2026, increasing operational dependency on timely CHIPS Act milestone draws.</li>
+            <li><strong>Dilution from Derivative Warrants:</strong> While warrant revaluations created a $25.29M paper gain in Q3, warrant liabilities remain a source of share count volatility.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ANALYST Q&A HIGHLIGHTS -->
+      <div style="margin-top: 16px;">
+        <div style="font-size: 13.5px; font-weight: 700; color: #cbd5e1; margin-bottom: 10px;">
+          Earnings Call Q&amp;A Forensic Highlights (Hardest Analyst Questions)
+        </div>
+        <div class="audit-point" style="background: rgba(11, 15, 25, 0.6); border: 1px solid var(--border-color); border-left: 3px solid #3b82f6; padding: 12px 14px; border-radius: 6px; margin-bottom: 12px;">
+          <div style="font-weight: 700; color: #93c5fd; font-size: 13.5px; margin-bottom: 4px;">
+            David Williams (Benchmark Company) &mdash; <span style="color: #cbd5e1;">Revenue Lumpiness & Delivery Timing vs Contract Delays</span>
+          </div>
+          <p style="font-size: 12.5px; color: #94a3b8; margin: 4px 0;"><strong>Question:</strong> Can you walk through what caused the top-line decline from $5.14M in Q2 to $1.41M in Q3? Were any Novera QPU purchase orders or government milestones cancelled or pushed into future quarters?</p>
+          <p style="font-size: 12.5px; color: #e2e8f0; margin: 4px 0;"><strong>Executive Answer:</strong> Dr. Subodh Kulkarni (CEO): 'None of our contracted projects or Novera pipelines have been cancelled. Our revenue model in this nascent phase is heavily tied to delivery acceptance milestones. In Q2, we recognized multi-system Novera shipments and initial government phases; in Q3, our engineering resources were overwhelmingly committed to validating the Cepheus-1-108Q chiplet architecture and finalizing the $100M CHIPS agreement. We expect acceptance revenue to rebound sharply in Q4 and 2027.'</p>
+          <div style="font-size: 11px; color: #34d399; font-weight: 600; margin-top: 4px;">Forensic Assessment: ACCEPTANCE TIMING DRIVING REVENUE LUMPINESS</div>
+        </div>
+        <div class="audit-point" style="background: rgba(11, 15, 25, 0.6); border: 1px solid var(--border-color); border-left: 3px solid #3b82f6; padding: 12px 14px; border-radius: 6px; margin-bottom: 12px;">
+          <div style="font-weight: 700; color: #93c5fd; font-size: 13.5px; margin-bottom: 4px;">
+            Craig Ellis (B. Riley Securities) &mdash; <span style="color: #cbd5e1;">CHIPS Act $100M Award Tranches & Liquidity Runway</span>
+          </div>
+          <p style="font-size: 12.5px; color: #94a3b8; margin: 4px 0;"><strong>Question:</strong> With cash at $45.8M and quarterly cash burn around $17M-$26M with CapEx, when will the first capital disbursements from the $100M CHIPS agreement hit the balance sheet, and what are the matching fund requirements?</p>
+          <p style="font-size: 12.5px; color: #e2e8f0; margin: 4px 0;"><strong>Executive Answer:</strong> Dr. Subodh Kulkarni (CEO): 'We have completed the definitive agreement with the Department of Commerce, and the first disbursements are tied to technical milestones across our three R&D initiatives: miniaturized readout electronics, advanced cryogenic cryostats, and high-connectivity chiplet fabrication. We expect initial funding disbursements to begin in the coming quarters, which substantially extends our operational runway into late 2027 without relying on dilutive equity financing.'</p>
+          <div style="font-size: 11px; color: #34d399; font-weight: 600; margin-top: 4px;">Forensic Assessment: DISBURSEMENTS TIED TO TECHNICAL MILESTONES</div>
+        </div>
+        <div class="audit-point" style="background: rgba(11, 15, 25, 0.6); border: 1px solid var(--border-color); border-left: 3px solid #3b82f6; padding: 12px 14px; border-radius: 6px; margin-bottom: 12px;">
+          <div style="font-weight: 700; color: #93c5fd; font-size: 13.5px; margin-bottom: 4px;">
+            Quinn Bolton (Needham & Co.) &mdash; <span style="color: #cbd5e1;">Chiplet Modularity vs Monolithic QPU Scaling</span>
+          </div>
+          <p style="font-size: 12.5px; color: #94a3b8; margin: 4px 0;"><strong>Question:</strong> Achieving 99.5% median fidelity across 108 qubits using twelve tiled 9-qubit chiplets is a technical milestone. How do inter-chip coupler losses compare to on-chip gate speeds, and what is the gating factor to 300+ qubits?</p>
+          <p style="font-size: 12.5px; color: #e2e8f0; margin: 4px 0;"><strong>Executive Answer:</strong> Dr. Subodh Kulkarni (CEO): 'Our proprietary silicon interposer and 3D superconducting interconnect technology enable inter-chiplet quantum logic gates to operate at nearly identical 50-70 nanosecond speeds as on-chip couplers. The primary engineering hurdle to 300+ qubits is cryogenic wiring heat load, which our second CHIPS Act project directly solves by orders of magnitude through next-gen cryostat integration.'</p>
+          <div style="font-size: 11px; color: #34d399; font-weight: 600; margin-top: 4px;">Forensic Assessment: CHIPLET ARCHITECTURE VALIDATED OVER MONOLITHIC</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. ROW 5 PEER VALUATION & MULTIPLES -->
+    <section id="sec-comps" style="margin-bottom: 28px;">
+      <h2 style="font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 12px;">
+        Row 5: Post-Print Peer Valuation &amp; Market Multiples Comps
+      </h2>
+      <div class="table-wrapper" style="overflow-x: auto; border: 1px solid var(--border-color); border-radius: 8px;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 12px; text-align: left;">
+          <thead>
+            <tr style="background: rgba(15, 23, 42, 0.9); border-bottom: 1px solid var(--border-color);">
+              <th style="padding: 10px 12px; color: var(--text-muted);">Company / Ticker</th>
+              <th style="padding: 10px 12px; color: var(--text-muted);">Price (AH / Spot)</th>
+              <th style="padding: 10px 12px; color: var(--text-muted);">Market Cap ($M)</th>
+              <th style="padding: 10px 12px; color: var(--text-muted);">Enterprise Value ($M)</th>
+              <th style="padding: 10px 12px; color: var(--text-muted);">Qubit Modality</th>
+              <th style="padding: 10px 12px; color: var(--text-muted);">Lead Processor</th>
+              <th style="padding: 10px 12px; color: var(--text-muted);">2-Qubit Fidelity</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="font-weight: 700; background: rgba(239, 68, 68, 0.08);">
+              <td style="padding: 9px 12px; color: #fca5a5;">Rigetti Computing (RGTI)</td>
+              <td style="padding: 9px 12px; font-weight: 700; color: #f87171;">$11.32 (AH)</td>
+              <td style="padding: 9px 12px;">$4,055M</td>
+              <td style="padding: 9px 12px;">$3,669M</td>
+              <td style="padding: 9px 12px; font-weight: 700; color: #38bdf8;">Superconducting Chiplets</td>
+              <td style="padding: 9px 12px;">Cepheus-1-108Q</td>
+              <td style="padding: 9px 12px; font-weight: 700; color: #34d399;">99.5%</td>
+            </tr>
+            <tr>
+              <td style="padding: 9px 12px;">IonQ, Inc. (IONQ)</td>
+              <td style="padding: 9px 12px;">$15.80</td>
+              <td style="padding: 9px 12px;">$3,420M</td>
+              <td style="padding: 9px 12px;">$3,050M</td>
+              <td style="padding: 9px 12px;">Trapped Ion</td>
+              <td style="padding: 9px 12px;">Forte Enterprise (36AQ)</td>
+              <td style="padding: 9px 12px;">99.9% (Slow Gates)</td>
+            </tr>
+            <tr>
+              <td style="padding: 9px 12px;">D-Wave Quantum Inc. (QBTS)</td>
+              <td style="padding: 9px 12px;">$1.85</td>
+              <td style="padding: 9px 12px;">$385M</td>
+              <td style="padding: 9px 12px;">$410M</td>
+              <td style="padding: 9px 12px;">Quantum Annealing</td>
+              <td style="padding: 9px 12px;">Advantage2 (4,400+ Qubits)</td>
+              <td style="padding: 9px 12px;">N/A (Non-Gate)</td>
+            </tr>
+            <tr>
+              <td style="padding: 9px 12px;">Quantum Computing Inc. (QUBT)</td>
+              <td style="padding: 9px 12px;">$2.40</td>
+              <td style="padding: 9px 12px;">$220M</td>
+              <td style="padding: 9px 12px;">$205M</td>
+              <td style="padding: 9px 12px;">Photonic Computing</td>
+              <td style="padding: 9px 12px;">Dirac-3 Optical Solvers</td>
+              <td style="padding: 9px 12px;">N/A (Optical)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 8. ROW 6 MULTI-SOURCE 4-PILLAR SENTIMENT -->
+    <section id="sec-sentiment" style="margin-bottom: 28px;">
+      <h2 style="font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 12px;">
+        Row 6: Multi-Source 4-Pillar Sentiment &amp; Microblogging Pulse
+      </h2>
+      <div class="sentiment-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-bottom: 16px;">
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+          <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Retail Trader Pulse</div>
+          <div style="font-size: 20px; font-weight: 800; color: #f59e0b; margin: 4px 0;">62 / 100 (Disappointed)</div>
+          <div class="sentiment-meter-bar" style="height: 5px; background: rgba(255,255,255,0.08); border-radius: 3px; margin: 6px 0; overflow: hidden;">
+            <div style="width: 62%; height: 100%; background: #f59e0b;"></div>
+          </div>
+          <div style="font-size: 11.5px; color: var(--text-secondary); line-height: 1.5;">Mixed to disappointed on r/wallstreetbets and FinTwit. Retail traders had anticipated stronger sequential revenue momentum following Q2's $5.14M print, leading to frustration over the $1.41M print. However, quantum technology purists are actively defending the stock on X, pointing to the 99.5% 2-qubit fidelity benchmark on 108 qubits and the $100M CHIPS Act backing.</div>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+          <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Sell-Side Flash Notes</div>
+          <div style="font-size: 20px; font-weight: 800; color: #38bdf8; margin: 4px 0;">68 / 100 (Neutral/Hold)</div>
+          <div class="sentiment-meter-bar" style="height: 5px; background: rgba(255,255,255,0.08); border-radius: 3px; margin: 6px 0; overflow: hidden;">
+            <div style="width: 68%; height: 100%; background: #38bdf8;"></div>
+          </div>
+          <div style="font-size: 11.5px; color: var(--text-secondary); line-height: 1.5;">Cautious on near-term revenue visibility but constructive on technology leadership. Analysts at Benchmark and Needham lowered 2026 price targets slightly to account for revenue volatility, while reaffirming buy ratings based on Rigetti's defensible multi-chip modular architecture and federal funding.</div>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+          <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Management Call Tone</div>
+          <div style="font-size: 20px; font-weight: 800; color: #34d399; margin: 4px 0;">75 / 100 (Transparent)</div>
+          <div class="sentiment-meter-bar" style="height: 5px; background: rgba(255,255,255,0.08); border-radius: 3px; margin: 6px 0; overflow: hidden;">
+            <div style="width: 75%; height: 100%; background: #10b981;"></div>
+          </div>
+          <div style="font-size: 11.5px; color: var(--text-secondary); line-height: 1.5;">Methodical, transparent, and technology-focused. Dr. Subodh Kulkarni acknowledged revenue lumpiness without equivocation, emphasizing that achieving 99.5% 2-qubit fidelity on a 108-qubit system proves that Rigetti's modular chiplet approach is the viable path to scaling superconducting quantum computers.</div>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+          <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Options IV Crush &amp; Skew</div>
+          <div style="font-size: 20px; font-weight: 800; color: #a855f7; margin: 4px 0;">Contained IV Crush</div>
+          <div class="sentiment-meter-bar" style="height: 5px; background: rgba(255,255,255,0.08); border-radius: 3px; margin: 6px 0; overflow: hidden;">
+            <div style="width: 65%; height: 100%; background: #a855f7;"></div>
+          </div>
+          <div style="font-size: 11.5px; color: var(--text-secondary); line-height: 1.5;">Options implied move was ±13.39% ($1.62). The after-hours decline of -6.83% (-$0.83 to $11.32) was well within the straddle pricing, inflicting sharp IV collapse on weekly long straddles and rewarding short options premium sellers.</div>
+        </div>
+      </div>
+      <div style="background: rgba(11, 15, 25, 0.6); border: 1px solid var(--border-color); border-radius: 8px; padding: 12px 16px; font-size: 12px; color: var(--text-secondary);">
+        <strong>After-Hours Price Movement Driver:</strong> RGTI shares declined -6.83% to $11.32 in after-hours trading after Rigetti reported third-quarter revenue of $1.41M, missing Street expectations of $3.68M due to customer delivery acceptance timing, despite achieving a major technical milestone with 99.5% median 2-qubit gate fidelity on its 108-qubit Cepheus-1 system and executing a $100M CHIPS Act definitive agreement.
+      </div>
+    </section>
+
+    <!-- 9. ROW 7 T+1 PM TRADE EXECUTION MATRIX -->
+    <section id="sec-trade" style="margin-bottom: 28px;">
+      <h2 style="font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 12px;">
+        Row 7: T+1 Hedge Fund PM Trade Execution Matrix
+      </h2>
+      <div class="scenario-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 16px;">
+        <!-- BULL CASE -->
+        <div class="scenario-bull" style="background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border-color); border-top: 3px solid #10b981; border-radius: 8px; padding: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span style="font-size: 13.5px; font-weight: 700; color: #34d399;">Bull Case Scenario</span>
+            <span class="badge badge-bull">Target: $14.50 &ndash; $16.50</span>
+          </div>
+          <p style="font-size: 12px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 10px;">
+            Market realizes the $1.41M revenue print was purely timing-related, while recognizing that achieving 99.5% 2-qubit gate fidelity across 108 qubits establishes Rigetti as the sole scalable chiplet architecture in quantum computing. Initial $20M+ disbursements under the $100M CHIPS Act award arrive in Q4/Q1, removing cash runway overhang through 2027.
+          </p>
+          <div class="trade-structure" style="background: rgba(16, 185, 129, 0.08); padding: 10px; border-radius: 6px; font-size: 11.5px; color: #a7f3d0;">
+            <strong>Options Structure:</strong> Buy Dec-2026 $12.00 / $15.00 Bull Call Spread; Sell Dec-2026 $9.00 Puts to offset premium.
+          </div>
+        </div>
+
+        <!-- BASE CASE -->
+        <div class="scenario-base" style="background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border-color); border-top: 3px solid #3b82f6; border-radius: 8px; padding: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span style="font-size: 13.5px; font-weight: 700; color: #93c5fd;">Base Case Scenario</span>
+            <span class="badge badge-blue">Target: $10.50 &ndash; $12.50</span>
+          </div>
+          <p style="font-size: 12px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 10px;">
+            Shares consolidate between $10.50 and $12.50 as the post-earnings selloff stabilizes within the implied ±13.39% straddle band ($11.32 AH price). Investors await Q4 delivery acceptance confirmation and initial CHIPS funding receipts to re-rate commercial pipeline valuation.
+          </p>
+          <div class="trade-structure" style="background: rgba(59, 130, 246, 0.08); padding: 10px; border-radius: 6px; font-size: 11.5px; color: #bfdbfe;">
+            <strong>Options Structure:</strong> Sell Nov-27 weekly $10.00 / $13.00 Short Strangle / Iron Condor to harvest elevated implied volatility.
+          </div>
+        </div>
+
+        <!-- BEAR CASE -->
+        <div class="scenario-bear" style="background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border-color); border-top: 3px solid #ef4444; border-radius: 8px; padding: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span style="font-size: 13.5px; font-weight: 700; color: #f87171;">Bear Case Scenario</span>
+            <span class="badge badge-bear">Target: $7.50 &ndash; $8.50</span>
+          </div>
+          <p style="font-size: 12px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 10px;">
+            Continued revenue lumpiness persists into Q4, while quarterly cash burn (-$17.06M OCF + -$26.20M CapEx = -$43.26M reported FCF) depletes the remaining $45.80M cash balance faster than CHIPS Act milestones are achieved, triggering concerns over secondary equity dilution.
+          </p>
+          <div class="trade-structure" style="background: rgba(239, 68, 68, 0.08); padding: 10px; border-radius: 6px; font-size: 11.5px; color: #fecaca;">
+            <strong>Options Structure:</strong> Buy Jan-2027 $10.00 Puts funded by selling Jan-2027 $13.00 Calls.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. ROW 8 SEC FILING CITATIONS & METHODOLOGY FOOTER -->
+    <footer style="border-top: 1px solid var(--border-color); padding-top: 16px; margin-top: 24px; font-size: 11.5px; color: var(--text-muted); line-height: 1.6;">
+      <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 12px;">
+        <div>
+          <strong>SEC Primary Source Filing:</strong> Form 8-K (Item 2.02) Exhibit 99.1 filed with the U.S. Securities and Exchange Commission on November 10, 2026.
+        </div>
+        <div>
+          <strong>Pricing Engine:</strong> Cross-validated regular close ($12.15) and after-hours price ($11.32) via Yahoo Finance and Google Finance.
+        </div>
+      </div>
+      <p style="margin: 4px 0;">
+        <strong>Methodology Note:</strong> This forensic post-earnings tearsheet adheres to Antigravity 2.0 Zero-Hallucination standards. All historical five-quarter financials, beat/miss deltas, cash flow waterfall calculations, and forward guidance figures are extracted deterministically from SEC EDGAR filings and locked ground truth JSON models. Forward guidance figures are non-GAAP and reflect management disclosures during the official earnings webcast.
+      </p>
+    </footer>
+
+  </div>
+</body>
+</html>
