@@ -1,0 +1,127 @@
+{
+  "ticker": "RGTI",
+  "earnings_date": "2026-11-10",
+  "operational_kpis": [
+    {
+      "name": "Total GAAP Net Revenue ($M)",
+      "q_minus_1_actual": 5.14,
+      "q_minus_4_yoy": 1.95,
+      "street_consensus_q0": 3.68,
+      "reported_actual_q0": 1.41,
+      "spread_vs_street": "-61.68%",
+      "verdict": "MISS",
+      "bar_width_pct": 38
+    },
+    {
+      "name": "2-Qubit Gate Fidelity on 108Q System",
+      "q_minus_1_actual": "99.30%",
+      "q_minus_4_yoy": "98.00%",
+      "street_consensus_q0": "99.50%",
+      "reported_actual_q0": "99.50% (99.7% on 8Q)",
+      "spread_vs_street": "MET MILESTONE",
+      "verdict": "MILESTONE MET",
+      "bar_width_pct": 95
+    },
+    {
+      "name": "GAAP Diluted EPS ($)",
+      "q_minus_1_actual": -0.16,
+      "q_minus_4_yoy": -0.62,
+      "street_consensus_q0": -0.05,
+      "reported_actual_q0": -0.08,
+      "spread_vs_street": "-$0.03 (-60.0%)",
+      "verdict": "MISS",
+      "bar_width_pct": 45
+    },
+    {
+      "name": "U.S. Dept of Commerce CHIPS Award ($M)",
+      "q_minus_1_actual": 0.0,
+      "q_minus_4_yoy": 0.0,
+      "street_consensus_q0": 0.0,
+      "reported_actual_q0": 100.0,
+      "spread_vs_street": "+$100.0M Award",
+      "verdict": "LANDMARK AWARD",
+      "bar_width_pct": 98
+    },
+    {
+      "name": "Total Liquid Cash & Equivalents ($M)",
+      "q_minus_1_actual": 67.67,
+      "q_minus_4_yoy": 44.85,
+      "street_consensus_q0": 55.0,
+      "reported_actual_q0": 45.8,
+      "spread_vs_street": "-$9.20M Below Est",
+      "verdict": "BURN CONCERN",
+      "bar_width_pct": 72
+    }
+  ],
+  "segment_reporting": {
+    "periods": [
+      "Q3 2025",
+      "Q4 2025",
+      "Q1 2026",
+      "Q2 2026",
+      "Q3 2026 (Actual)",
+      "Q4 2026E (Guided / Street)"
+    ],
+    "segments": [
+      {
+        "name": "Development Contracts & Government R&D",
+        "values": [
+          1.15,
+          1.1,
+          2.8,
+          3.2,
+          0.9,
+          2.1
+        ],
+        "qoq": "-71.9%",
+        "yoy": "-21.7%"
+      },
+      {
+        "name": "Quantum Computing Systems & Cloud (QCS / Novera)",
+        "values": [
+          0.8,
+          0.77,
+          1.6,
+          1.94,
+          0.51,
+          1.4
+        ],
+        "qoq": "-73.7%",
+        "yoy": "-36.2%"
+      },
+      {
+        "name": "Total Consolidated Revenue",
+        "values": [
+          1.95,
+          1.87,
+          4.4,
+          5.14,
+          1.41,
+          3.5
+        ],
+        "qoq": "-72.6%",
+        "yoy": "-27.7%"
+      }
+    ]
+  },
+  "tooltip_definitions": {
+    "Total GAAP Net Revenue": "Consolidated GAAP net revenue from Rigetti quantum computing systems (Novera QPU), Quantum Cloud Services (QCS), and government research development contracts ($1.41M in Q3 2026, missing consensus $3.68M by -61.68%).",
+    "Cepheus-1-108Q Architecture": "Rigetti's flagship 108-qubit quantum processor assembled from twelve 9-qubit chiplets tiled together, delivering the industry's largest multi-chip superconducting quantum computer.",
+    "Median Two-Qubit Fidelity": "Quantum gate benchmark measuring gate error rates; Cepheus-1-108Q achieved 99.5% median 2-qubit fidelity across the full 108 qubits, 99.6% on an 80-qubit sublattice, and 99.7% on an 8-qubit sublattice.",
+    "CHIPS Act $100M Award": "Definitive agreement signed with the U.S. Department of Commerce in September 2026 for up to $100M in non-dilutive R&D funding with a minority government equity stake.",
+    "Operating Loss": "GAAP operating loss of -$33.19M in Q3 2026 compared to -$28.06M in Q2 2026 and -$20.55M in Q3 2025 as R&D scaling in cryogenics and microelectronics elevated operational costs.",
+    "Research and Development": "Laboratory R&D and chip fabrication costs at Fab-1 totaling $25.50M in Q3 2026 ($66.18M for 9M 2026) compared to $15.02M in Q3 2025 (+69.8% YoY).",
+    "Selling, General and Administrative": "Corporate, marketing, and legal expenses of $8.55M in Q3 2026 compared to $5.93M in Q3 2025 (+44.2% YoY).",
+    "GAAP Net Loss": "GAAP net loss of -$3.14M in Q3 2026 (-$0.08 per share), benefiting from a $25.3M non-cash fair value gain on derivative warrant liabilities.",
+    "Non-GAAP Net Loss": "Non-GAAP net loss of -$20.5M (-$0.06 per share) in Q3 2026, excluding warrant revaluations and $7.96M in stock-based compensation expense.",
+    "Operating Cash Burn": "Operating cash outflow of -$17.06M in Q3 2026 (-$49.06M for 9M 2026), worsening sequentially from -$15.78M in Q2 2026.",
+    "Capital Expenditures": "Cash purchases of property and equipment of $26.20M in Q3 2026 ($42.60M for 9M 2026), primarily funding cleanroom expansion and cryogenic dilution refrigerator installations.",
+    "Reported Free Cash Flow": "Operating cash flow (-$17.06M) minus capital expenditures ($26.20M) equals reported negative free cash flow of -$43.26M in Q3 2026.",
+    "Stock-Based Compensation": "Non-cash equity compensation expense of $7.96M in Q3 2026 ($20.87M for 9M 2026) to retain key quantum physicists and fabrication engineers.",
+    "True Free Cash Flow": "Comprehensive economic cash burn subtracting CapEx ($26.20M) and SBC ($7.96M) from OCF (-$17.06M), totaling -$51.22M in Q3 2026.",
+    "Cash Runway Horizon": "Cash and cash equivalents of $45.80M at September 30, 2026, requiring initial tranches of the $100M CHIPS Act funding to support operations through late 2027.",
+    "After-Hours Reaction": "RGTI stock dropped -6.83% to $11.32 in after-hours trading as commercial revenue fell short ($1.41M vs $3.68M Street consensus), despite landmark 99.5% fidelity validation on Cepheus-1-108Q.",
+    "300-Plus-Qubit Target": "Next-generation quantum processor roadmap targeting >300 qubits with approximately 99.7% median 2-qubit gate fidelity and ultra-fast 50-70ns gate speeds.",
+    "1,000-Qubit Roadmap": "Long-term architecture roadmap advancing toward 1,000 qubits with 99.9% 2-qubit fidelity, laying the foundation for commercial fault-tolerant quantum advantage."
+  }
+}

@@ -71,6 +71,11 @@ LABELS = {
         "Diluted net income per share of Class A, Class B, and Class C stock",
         "Net loss per share attributable to Class A and Class B common stockholders, basic and diluted",
         "Net loss per share attributable to common stockholders, basic and diluted",
+        "Net loss per share attributable to common stockholders, diluted",
+        "Net loss per share attributable to common stockholders [-—\ufffd]? diluted",
+        "Net loss per share attributable to common stockholders - diluted",
+        "Net loss per share attributable to common stockholders – diluted",
+        "Net loss per share attributable to common stockholders",
         "Net loss per share attributable to common shareholders, basic and diluted",
         "Net income per share attributable to common shareholders, basic and diluted",
         "Net income per share attributable to common stockholders, basic and diluted",
@@ -86,6 +91,7 @@ LABELS = {
         "Earnings per share attributable to Intel[-—]diluted",
         "Earnings per share - diluted", "Earnings per share-diluted",
         "Diluted net income per common share", "Diluted net income per share",
+        "Diluted net loss per share",
         "Basic and diluted net loss per share", "Basic and diluted net income \\(loss\\) per share",
         "Basic and diluted earnings \\(loss\\) per share",
         "U\\.S\\. GAAP net income per diluted share",
@@ -107,6 +113,10 @@ LABELS = {
         "Adjusted net loss per share", "Adjusted net income per share",
         "Non-GAAP basic net loss per share",
         "Non-GAAP basic net income per share",
+        "Non-GAAP net loss per share attributable to common stockholders [-—\ufffd]? diluted",
+        "Non-GAAP net loss per share attributable to common stockholders - diluted",
+        "Non-GAAP net loss per share attributable to common stockholders – diluted",
+        "Non-GAAP net loss per share attributable to common stockholders",
         "Non-GAAP net income \\(loss\\) per share, basic and diluted",
         "Non-GAAP net income \\(loss\\) per share",
         "Non-GAAP net income per share, basic and diluted",
@@ -116,6 +126,7 @@ LABELS = {
         "Non-GAAP net income per share - diluted",
         "Non-GAAP net income per diluted share",
         "Non-GAAP diluted net income per share",
+        "Non-GAAP diluted net loss per share",
         "Non-GAAP diluted earnings per share",
         "Non-GAAP diluted EPS",
         "Adjusted diluted EPS",
@@ -132,6 +143,7 @@ LABELS = {
         "Cash provided by operating activities",
     ],
     "capex": [
+        "Purchases of property and equipment, including capitalized internal-use software",
         "Purchases of property and equipment",
         "Purchases of property, plant and equipment",
         "Payments for property, plant and equipment",
@@ -177,8 +189,9 @@ def _to_float(tok: str) -> float | None:
 
 
 def flatten(text: str) -> str:
-    # Normalize NBSP and Unicode hyphens inside words (e.g. "Non‐GAAP", "Stock‐based")
+    # Normalize NBSP, zero-width characters, and Unicode hyphens inside words (e.g. "Non‐GAAP", "Stock‐based")
     norm = text.replace("\u00a0", " ")
+    norm = re.sub(r"[\u200b\u200c\u200d\u200e\u200f\ufeff]", " ", norm)
     norm = re.sub(r"[\u2010\u2011\u2012]", "-", norm)
     norm = re.sub(r"(?<=[A-Za-z])[\u2013\u2014](?=[A-Za-z])", "-", norm)
     return re.sub(r"\s+", " ", norm)

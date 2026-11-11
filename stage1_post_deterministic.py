@@ -228,15 +228,16 @@ def fetch_sec_filings_facts(symbol: str, target_date_str: str) -> dict:
         exhibit_text = cached_ex.read_text(encoding="utf-8", errors="ignore")
         # Validate exhibit freshness: Check that it covers a plausible reporting date (10-95 days before target_date_str)
         q_ends = extract_reported_quarter_end_dates(exhibit_text, target_date_str)
-        if q_ends or not EDGAR_AVAILABLE:
+        cached_facts = parse_financial_metrics_from_text(exhibit_text, symbol, target_date_str)
+        if (q_ends and cached_facts.get("revenue_q0") is not None and (cached_facts.get("ocf_q0") is not None or cached_facts.get("operating_income_q0") is not None)) or not EDGAR_AVAILABLE:
             sec_data["filing_form"] = "8-K"
             sec_data["filing_date"] = target_date_str
             sec_data["exhibit_99_1_found"] = True
             sec_data["edgar_status"] = "FILING_RETRIEVED"
-            sec_data["facts"] = parse_financial_metrics_from_text(exhibit_text, symbol, target_date_str)
+            sec_data["facts"] = cached_facts
             return sec_data
         else:
-            print(f"[{symbol}] Cached exhibit failed freshness check (no quarter end matching {target_date_str}). Refetching from EDGAR...")
+            print(f"[{symbol}] Cached exhibit failed freshness/validity check (no revenue or incomplete facts). Refetching from EDGAR...")
 
     if not EDGAR_AVAILABLE:
         sec_data["edgar_status"] = "EDGARTOOLS_LIBRARY_NOT_INSTALLED"
@@ -246,12 +247,20 @@ def fetch_sec_filings_facts(symbol: str, target_date_str: str) -> dict:
         comp = Company(symbol)
         sec_data["cik"] = str(comp.cik).zfill(10)
 
-        filings = comp.get_filings(form=["8-K", "10-Q", "10-K"]).latest(5)
+        filings = comp.get_filings(form=["8-K", "10-Q", "10-K"]).latest(10)
         target_filing = None
         for f in filings:
-            if str(f.filing_date) == target_date_str and f.form == "8-K":
+            items_str = str(getattr(f, "items", ""))
+            if str(f.filing_date) == target_date_str and f.form == "8-K" and ("2.02" in items_str or not target_filing):
                 target_filing = f
-                break
+                if "2.02" in items_str:
+                    break
+        if not target_filing:
+            for f in filings:
+                items_str = str(getattr(f, "items", ""))
+                if f.form == "8-K" and "2.02" in items_str:
+                    target_filing = f
+                    break
         if not target_filing:
             for f in filings:
                 if f.form == "8-K":
@@ -270,7 +279,7 @@ def fetch_sec_filings_facts(symbol: str, target_date_str: str) -> dict:
             for att in getattr(target_filing, "attachments", []):
                 desc = getattr(att, "description", "").lower()
                 doc_name = att.document.lower()
-                if "99.1" in desc or "exhibit99" in doc_name or "ex-99" in doc_name or "991" in doc_name or "press" in desc:
+                if "99.1" in desc or "exhibit99" in doc_name or "ex-99" in doc_name or "ex99" in doc_name or "991" in doc_name or "press" in desc or "earnings" in doc_name or "ex-99.1" in desc:
                     try:
                         raw = att.download()
                         soup = BeautifulSoup(raw, "html.parser")

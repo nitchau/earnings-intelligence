@@ -1,0 +1,127 @@
+{
+  "ticker": "CRWV",
+  "earnings_date": "2026-11-10",
+  "operational_kpis": [
+    {
+      "name": "Total GAAP Revenue ($M)",
+      "q_minus_1_actual": 2575.0,
+      "q_minus_4_yoy": 1364.68,
+      "street_consensus_q0": 3540.79,
+      "reported_actual_q0": 3661.0,
+      "spread_vs_street": "+3.40%",
+      "verdict": "BEAT",
+      "bar_width_pct": 92
+    },
+    {
+      "name": "Active Deployed Power Footprint (GW)",
+      "q_minus_1_actual": 1.5,
+      "q_minus_4_yoy": 0.85,
+      "street_consensus_q0": 1.65,
+      "reported_actual_q0": 1.7,
+      "spread_vs_street": "+50 MW Beat",
+      "verdict": "EXPANSION",
+      "bar_width_pct": 94
+    },
+    {
+      "name": "GAAP Diluted EPS ($)",
+      "q_minus_1_actual": -1.14,
+      "q_minus_4_yoy": -0.22,
+      "street_consensus_q0": -1.55,
+      "reported_actual_q0": -1.27,
+      "spread_vs_street": "+$0.28 (+18.06%)",
+      "verdict": "BEAT",
+      "bar_width_pct": 86
+    },
+    {
+      "name": "Exit-2026 Annualized Run-Rate Revenue ($B)",
+      "q_minus_1_actual": 17.0,
+      "q_minus_4_yoy": 6.5,
+      "street_consensus_q0": 18.5,
+      "reported_actual_q0": 20.5,
+      "spread_vs_street": "+$2.00B Raise",
+      "verdict": "RAISED",
+      "bar_width_pct": 96
+    },
+    {
+      "name": "Capital Expenditures Deployment ($M)",
+      "q_minus_1_actual": 6422.0,
+      "q_minus_4_yoy": 2389.24,
+      "street_consensus_q0": 8500.0,
+      "reported_actual_q0": 9441.0,
+      "spread_vs_street": "+$941.0M Expansion",
+      "verdict": "CAPEX SURGE",
+      "bar_width_pct": 98
+    }
+  ],
+  "segment_reporting": {
+    "periods": [
+      "Q3 2025",
+      "Q4 2025",
+      "Q1 2026",
+      "Q2 2026",
+      "Q3 2026 (Actual)",
+      "Q4 2026E (Guided / Street)"
+    ],
+    "segments": [
+      {
+        "name": "Dedicated GPU Compute (Contracted AI Clusters)",
+        "values": [
+          1023.51,
+          1205.0,
+          1620.0,
+          2035.0,
+          2928.8,
+          3850.0
+        ],
+        "qoq": "+43.9%",
+        "yoy": "+186.2%"
+      },
+      {
+        "name": "On-Demand Cloud & AI Software Services",
+        "values": [
+          341.17,
+          366.9,
+          458.0,
+          540.0,
+          732.2,
+          986.0
+        ],
+        "qoq": "+35.6%",
+        "yoy": "+114.6%"
+      },
+      {
+        "name": "Total Consolidated Revenue",
+        "values": [
+          1364.68,
+          1571.9,
+          2078.0,
+          2575.0,
+          3661.0,
+          4836.0
+        ],
+        "qoq": "+42.2%",
+        "yoy": "+168.3%"
+      }
+    ]
+  },
+  "tooltip_definitions": {
+    "Total GAAP Revenue": "Consolidated GAAP net revenue from CoreWeave AI infrastructure services, dedicated GPU clusters, and high-performance network orchestration ($3,661.0M in Q3 2026, beating Street consensus $3,540.79M by +$120.21M / +3.40%).",
+    "Active Deployed Power": "Operational energised capacity across CoreWeave data center campuses hosting production GPU workloads, surpassing 1.7 GW in Q3 2026 after adding 200+ MW in the quarter.",
+    "Contracted Power Pipeline": "Total contracted power pipeline growing to over 4.6 GW across diversified global utility partners, including over 1.3 GW international footprint across India, Indonesia, and Spain.",
+    "GAAP Diluted EPS": "GAAP diluted net loss per share of -$1.27 in Q3 2026 based on 559M weighted average shares, beating Street consensus (-$1.55) by $0.28 (+18.06%).",
+    "Operating Income": "GAAP operating income turned positive to $207.0M in Q3 2026 (5.65% operating margin) compared to -$49.0M in Q2 2026 and -$144.0M in Q1 2026, marking an essential operational inflection point.",
+    "Gross Profit": "GAAP gross profit of $2,478.0M in Q3 2026 (67.69% gross margin) compared to $1,696.0M in Q2 2026 and $995.85M in Q3 2025 (+148.8% YoY).",
+    "Operating Cash Flow": "Cash provided by operating activities reached $1,975.0M in Q3 2026, surging sequentially from $679.0M in Q2 2026 on accelerated contract milestone payments and AI cluster billings.",
+    "Capital Expenditures": "Cash purchases of property and equipment, including capitalized internal-use software, of $9,441.0M in Q3 2026, funding Nvidia Blackwell B200 and H200 GPU infrastructure.",
+    "Reported Free Cash Flow": "Operating cash flow ($1,975.0M) minus capital expenditures ($9,441.0M) equals reported negative free cash flow of -$7,466.0M in Q3 2026 due to historic infrastructure investment.",
+    "Stock-Based Compensation": "Non-cash equity compensation expense of $160.0M in Q3 2026 ($478.0M for 9M 2026), reflecting disciplined equity grant controls.",
+    "Finance Lease Obligations": "Principal payments on finance leases and long-term data center equipment obligations, which stood at $0.0M in Q3 2026 after substantial payoffs in Q2.",
+    "True Free Cash Flow": "Comprehensive economic cash flow subtracting CapEx ($9,441.0M) and SBC ($160.0M) from OCF ($1,975.0M), totaling -$7,626.0M in Q3 2026.",
+    "Customer Prepayments and Deposits": "Customer cash prepayments and reservation deposits expected to total approximately $9.0B over the next three months, providing non-dilutive capex liquidity.",
+    "Revenue Backlog": "Remaining performance obligations and long-term contracted AI compute commitments from leading AI frontier labs, hyperscalers, and enterprise clients.",
+    "After-Hours Reaction": "CRWV shares surged +7.90% to $52.58 in after-hours trading as CoreWeave beat Q3 revenue, turned operating profitable, and raised full-year 2026 revenue guidance to $13.0B-$13.3B.",
+    "Blackwell B200 Deployments": "CoreWeave's prioritized allocation and initial commercial cluster turn-ups of Nvidia's next-generation Blackwell architecture across North American data centers.",
+    "Exit-2026 ARR Guidance": "Management increased exit-2026 annualized run-rate revenue guidance to $20.0B - $21.0B, reflecting massive forward visibility on committed GPU instances.",
+    "Liquid Cash & Balance Sheet": "Cash, restricted cash, and marketable securities totaling $5,589.0M at September 30, 2026, anchored by $56.8B in deployed net property and equipment."
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "ticker": "RGTI",
+  "earnings_date": "2026-11-10",
+  "matrix_a_guidance_accountability": [
+    {
+      "metric": "Q3 2026 Total Net Revenue ($M)",
+      "prior_guidance": "$3.5M - $4.5M",
+      "reported_actual": "$1.41M",
+      "variance": "-$2.27M below midpoint (-61.7% miss)",
+      "grade": "MISSED OWN GUIDE",
+      "badge_class": "badge-bear"
+    },
+    {
+      "metric": "108-Qubit Gate Fidelity Benchmark",
+      "prior_guidance": ">=99.5% median 2-qubit fidelity",
+      "reported_actual": "99.5% achieved (99.6% on 80Q)",
+      "variance": "Target met on schedule",
+      "grade": "MET BENCHMARK",
+      "badge_class": "badge-bull"
+    },
+    {
+      "metric": "CHIPS Act Finalization",
+      "prior_guidance": "Definitive agreement in 2H 2026",
+      "reported_actual": "Signed $100M agreement in September",
+      "variance": "Landmark government award executed",
+      "grade": "BEAT OWN GUIDE",
+      "badge_class": "badge-bull"
+    },
+    {
+      "metric": "Q3 2026 Diluted EPS ($)",
+      "prior_guidance": "-$0.06 to -$0.04",
+      "reported_actual": "-$0.08 GAAP / -$0.06 Non-GAAP",
+      "variance": "-$0.02 GAAP variance",
+      "grade": "MISSED RANGE",
+      "badge_class": "badge-bear"
+    }
+  ],
+  "matrix_b_forward_guidance_reset": [
+    {
+      "metric": "Full-Year 2026 Revenue Guidance",
+      "street_pre_print": "$16.5M ($15.0M - $18.0M)",
+      "new_guidance": "$14.0M - $15.5M (~$14.75M Midpoint)",
+      "delta": "-$1.75M revision due to lumpy milestone recognition",
+      "action": "LOWERED",
+      "badge_class": "badge-bear"
+    },
+    {
+      "metric": "Q4 2026E Implied Revenue Guidance",
+      "street_pre_print": "$5.55M Consensus",
+      "new_guidance": "$3.1M - $4.6M (~$3.85M Midpoint)",
+      "delta": "-$1.70M reset reflecting deployment schedules",
+      "action": "LOWERED",
+      "badge_class": "badge-bear"
+    },
+    {
+      "metric": "300-Plus-Qubit Deployment Horizon",
+      "street_pre_print": "Late 2027",
+      "new_guidance": "Targeting 300+ qubits with 99.7% fidelity by year-end 2027",
+      "delta": "Reconfirmed technical timeline",
+      "action": "MAINTAINED",
+      "badge_class": "badge-bull"
+    },
+    {
+      "metric": "CHIPS Act Cash Tranche Inflows",
+      "street_pre_print": "$15.0M initial draw",
+      "new_guidance": "$20.0M - $25.0M expected initial funding in Q4/Q1",
+      "delta": "+$7.5M non-dilutive liquidity boost",
+      "action": "NON-DILUTIVE REINFORCEMENT",
+      "badge_class": "badge-bull"
+    }
+  ],
+  "credibility_score": 72,
+  "top_call_exchanges": [
+    {
+      "analyst": "David Williams (Benchmark Company)",
+      "topic": "Revenue Lumpiness & Delivery Timing vs Contract Delays",
+      "question": "Can you walk through what caused the top-line decline from $5.14M in Q2 to $1.41M in Q3? Were any Novera QPU purchase orders or government milestones cancelled or pushed into future quarters?",
+      "management_answer": "Dr. Subodh Kulkarni (CEO): 'None of our contracted projects or Novera pipelines have been cancelled. Our revenue model in this nascent phase is heavily tied to delivery acceptance milestones. In Q2, we recognized multi-system Novera shipments and initial government phases; in Q3, our engineering resources were overwhelmingly committed to validating the Cepheus-1-108Q chiplet architecture and finalizing the $100M CHIPS agreement. We expect acceptance revenue to rebound sharply in Q4 and 2027.'",
+      "verdict": "ACCEPTANCE TIMING DRIVING REVENUE LUMPINESS"
+    },
+    {
+      "analyst": "Craig Ellis (B. Riley Securities)",
+      "topic": "CHIPS Act $100M Award Tranches & Liquidity Runway",
+      "question": "With cash at $45.8M and quarterly cash burn around $17M-$26M with CapEx, when will the first capital disbursements from the $100M CHIPS agreement hit the balance sheet, and what are the matching fund requirements?",
+      "management_answer": "Dr. Subodh Kulkarni (CEO): 'We have completed the definitive agreement with the Department of Commerce, and the first disbursements are tied to technical milestones across our three R&D initiatives: miniaturized readout electronics, advanced cryogenic cryostats, and high-connectivity chiplet fabrication. We expect initial funding disbursements to begin in the coming quarters, which substantially extends our operational runway into late 2027 without relying on dilutive equity financing.'",
+      "verdict": "DISBURSEMENTS TIED TO TECHNICAL MILESTONES"
+    },
+    {
+      "analyst": "Quinn Bolton (Needham & Co.)",
+      "topic": "Chiplet Modularity vs Monolithic QPU Scaling",
+      "question": "Achieving 99.5% median fidelity across 108 qubits using twelve tiled 9-qubit chiplets is a technical milestone. How do inter-chip coupler losses compare to on-chip gate speeds, and what is the gating factor to 300+ qubits?",
+      "management_answer": "Dr. Subodh Kulkarni (CEO): 'Our proprietary silicon interposer and 3D superconducting interconnect technology enable inter-chiplet quantum logic gates to operate at nearly identical 50-70 nanosecond speeds as on-chip couplers. The primary engineering hurdle to 300+ qubits is cryogenic wiring heat load, which our second CHIPS Act project directly solves by orders of magnitude through next-gen cryostat integration.'",
+      "verdict": "CHIPLET ARCHITECTURE VALIDATED OVER MONOLITHIC"
+    }
+  ]
+}
