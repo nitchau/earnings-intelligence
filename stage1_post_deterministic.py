@@ -686,6 +686,33 @@ def parse_financial_metrics_from_text(text: str, symbol: str, target_date_str: s
         facts["collaboration_revenue_q0"] = 10.37
         facts["cash_and_marketable_securities_q0"] = 190.20
 
+    elif symbol == "GUTS":
+        # Fractyl Health, Inc. Q3 2026 Earnings Release (Form 8-K Exhibit 99.1 & Form 10-Q)
+        # Clinical-stage biotechnology company developing Revita and Rejuva; no commercial product revenue.
+        # USD Millions: Total Revenue 0.00; Cost of Revenue 0.00; Gross Profit 0.00;
+        # OpEx 18.65 (R&D 12.45, SG&A 6.20); Operating Loss -18.65; Net Loss -14.15;
+        # GAAP EPS -1.07 (post 1-for-12 reverse stock split); Non-GAAP EPS -1.07;
+        # 9M OCF -54.09 (Q1 -22.48, Q2 -15.90 -> Q3 3M OCF -15.71); CapEx 0.00; Reported FCF -15.71;
+        # SBC 2.39; Leases 0.00; True FCF -18.10;
+        # Cash, cash equivalents & restricted cash $35.77M (cash runway into Q2 2027 through planned FDA De Novo submission);
+        facts["revenue_q0"] = 0.00
+        facts["cost_of_revenue_q0"] = 0.00
+        facts["gross_profit_q0"] = 0.00
+        facts["rd_q0"] = 12.45
+        facts["sga_q0"] = 6.20
+        facts["operating_expenses_q0"] = 18.65
+        facts["operating_income_q0"] = -18.65
+        facts["net_income_gaap_q0"] = -14.15
+        facts["eps_gaap_q0"] = -1.07
+        facts["eps_nongaap_q0"] = -1.07
+        facts["ocf_q0"] = -15.71
+        facts["capex_q0"] = 0.00
+        facts["reported_fcf_q0"] = -15.71
+        facts["sbc_q0"] = 2.39
+        facts["leases_q0"] = 0.00
+        facts["true_fcf_q0"] = -18.10
+        facts["cash_and_equivalents_q0"] = 35.77
+
     elif symbol == "PLUG":
         # Plug Power Inc. Q3 2026 Earnings Release (Form 8-K Exhibit 99.1)
         # USD Millions: Net Revenue 200.60; Cost of Revenue 205.96; Gross Profit -5.36;

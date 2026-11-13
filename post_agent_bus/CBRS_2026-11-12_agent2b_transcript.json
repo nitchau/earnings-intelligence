@@ -1,0 +1,97 @@
+{
+  "ticker": "CBRS",
+  "earnings_date": "2026-11-12",
+  "agent": "Transcript_Forensic_Agent (Agent 2B)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "credibility_score": 86,
+  "credibility_label": "86 / 100 (High Credibility: Three Consecutive Quarters of Guidance Beats & Massive Revenue Guidance Hike)",
+  "matrix_a_prior_guidance_accountability": [
+    {
+      "metric": "Q3 2026 Core Total Revenue ($M)",
+      "prior_guidance": "$210.0M \u2013 $220.0M ($215.0M Midpoint)",
+      "reported_delivery": "$230.90M",
+      "variance": "+$15.90M (+7.4% vs Midpoint)",
+      "credibility_grade": "BEAT OWN GUIDE"
+    },
+    {
+      "metric": "Q3 2026 Core Gross Margin (%)",
+      "prior_guidance": "40.0% \u2013 42.0% (41.0% Midpoint)",
+      "reported_delivery": "41.00%",
+      "variance": "Met Guidance Exactly",
+      "credibility_grade": "MET GUIDE"
+    },
+    {
+      "metric": "Q3 2026 Data Center Capacity",
+      "prior_guidance": "650 MW by Q3 end",
+      "reported_delivery": "700 MW under contract",
+      "variance": "+50 MW Ahead of Plan",
+      "credibility_grade": "BEAT OWN GUIDE"
+    }
+  ],
+  "matrix_b_forward_guidance_reset": [
+    {
+      "metric": "Q4 2026E Core Revenue ($M)",
+      "pre_print_consensus": "$260.0M \u2013 $275.0M ($267.5M Midpoint)",
+      "new_guidance": "$310.0M \u2013 $330.0M ($320.0M Midpoint)",
+      "delta_display": "+$52.50M (+19.6% vs Street)",
+      "action_badge": "RAISED"
+    },
+    {
+      "metric": "Q4 2026E Core Gross Margin (%)",
+      "pre_print_consensus": "43.0% \u2013 45.0%",
+      "new_guidance": "47.0% \u2013 49.0% (48.0% Midpoint)",
+      "delta_display": "+400 bps Expansion",
+      "action_badge": "RAISED"
+    },
+    {
+      "metric": "Q4 2026E Core Operating Margin (%)",
+      "pre_print_consensus": "-8.0% to -5.0%",
+      "new_guidance": "-1.0% to +1.0% (Breakeven Trajectory)",
+      "delta_display": "+700 bps Surge to Breakeven",
+      "action_badge": "RAISED"
+    },
+    {
+      "metric": "Full-Year 2026 Core Revenue ($M)",
+      "pre_print_consensus": "$875.0M \u2013 $900.0M",
+      "new_guidance": "$940.0M \u2013 $960.0M ($950.0M Midpoint)",
+      "delta_display": "+$65.0M (+7.3% Increase)",
+      "action_badge": "RAISED"
+    },
+    {
+      "metric": "FY2027 Long-Term Growth Target",
+      "pre_print_consensus": "+100% YoY Growth",
+      "new_guidance": "Triple Revenue in 2027 (>+200% YoY)",
+      "delta_display": "Reaffirmed >3x Growth Target",
+      "action_badge": "RAISED"
+    }
+  ],
+  "call_qa_forensic_highlights": [
+    {
+      "question_num": 1,
+      "analyst_name": "Toshiya Hari",
+      "firm": "Goldman Sachs",
+      "topic": "Wafer Supply Bottlenecks & TSMC Advanced Node Transitions",
+      "hard_question": "Andrew, with data center commitments jumping to 700 MW and Q4 revenue guided up to $320M, are you facing any allocation limits at TSMC for monolithic 5nm wafers, and when will Cerebras transition to 3nm/2nm for the next-generation CS-4/CS-5 accelerators?",
+      "management_answer": "Andrew Feldman (CEO): 'We have secured 100% of the TSMC wafer supply required to meet both our Q4 guide and our plan to triple revenue in 2027. Because we use monolithic wafer-scale silicon rather than advanced CoWoS packaging or HBM memory stacks, we completely bypass the industry's biggest supply chain choke points. CS-4 tape-out is on schedule, and we see zero silicon gating for our delivery roadmap.'",
+      "forensic_verdict": "STRONG REASSURANCE: Direct confirmation that bypassing CoWoS packaging gives Cerebras a structural lead times advantage over Nvidia and AMD."
+    },
+    {
+      "question_num": 2,
+      "analyst_name": "Stacy Rasgon",
+      "firm": "Bernstein Research",
+      "topic": "GAAP vs Core Revenue Divergence & Customer Warrant Amortization",
+      "hard_question": "Bob, GAAP revenue missed consensus at $210.8M while Core revenue beat at $230.9M. Can you walk through the $20M delta and specifically how customer warrant amortization will impact reported GAAP margins over the next four quarters?",
+      "management_answer": "Bob Komin (CFO): 'The $20.1M variance is entirely non-cash amortization associated with strategic customer equity warrants granted at the time of multi-gigawatt contracted capacity signings. As cloud inference volumes ramp and hardware deliveries accelerate in Q4, that non-cash discount diminishes as a percentage of top-line, which is why our Core gross margin expands directly to 47%-49% next quarter.'",
+      "forensic_verdict": "ACCOUNTING CLARITY: Demonstrates that the GAAP revenue optical 'miss' was purely non-cash warrant timing, while underlying cash collections and Core revenues surged."
+    },
+    {
+      "question_num": 3,
+      "analyst_name": "Vivek Arya",
+      "firm": "BofA Securities",
+      "topic": "CapEx Surge & Free Cash Flow Burn Runway",
+      "hard_question": "You spent $497M on CapEx in Q3 and burned $871M in True Free Cash Flow. At what point does data center build-out peak, and when do customer cash deposits turn operating cash flow sustainably positive?",
+      "management_answer": "Bob Komin (CFO): 'CapEx in Q2 and Q3 represented front-loaded capital deployment to secure 700 MW of high-density powered shell capacity across North America and Europe. We are sitting on $7.8 billion in cash and short-term liquid investments plus an undrawn $850 million credit facility. With Q4 operating margins reaching breakeven (-1% to +1%), operating cash flow inflects sharply in the first half of 2027 as customer deposits on our $25.4B backlog convert.'",
+      "forensic_verdict": "FORTRESS BALANCE SHEET: $7.8B liquid reserves eliminates dilutive financing risk despite near-term capital expenditure intensity."
+    }
+  ]
+}

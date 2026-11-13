@@ -1,0 +1,90 @@
+{
+  "ticker": "GUTS",
+  "earnings_date": "2026-11-12",
+  "agent": "Transcript_Forensic_Agent (Agent 2B)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "credibility_score": 82,
+  "credibility_label": "82 / 100 (High Credibility: REMAIN-1 Primary Endpoint Met with High Statistical Significance & Aggressive 45% Cost Cutting)",
+  "matrix_a_prior_guidance_accountability": [
+    {
+      "metric": "REMAIN-1 Pivotal Cohort 6-Month Data",
+      "prior_guidance": "Topline 6-Month Co-Primary Endpoint Readout in Q4 2026",
+      "reported_delivery": "Met Co-Primary Endpoint (80% Revita vs 67% Sham, p=0.0023)",
+      "variance": "Delivered on Schedule with Statistical Significance",
+      "credibility_grade": "BEAT OWN GUIDE"
+    },
+    {
+      "metric": "FDA Regulatory Filing Schedule",
+      "prior_guidance": "Late Q4 2026 FDA De Novo Submission",
+      "reported_delivery": "Confirmed Late Q4 2026 Submission Target",
+      "variance": "Reaffirmed Milestone Execution",
+      "credibility_grade": "MET GUIDE"
+    },
+    {
+      "metric": "Cash Runway Preservation",
+      "prior_guidance": "Fund Operations into Q1 2027",
+      "reported_delivery": "Extended Runway into Q2 2027 via 45% Headcount Reduction",
+      "variance": "+1 Quarter Extended Runway",
+      "credibility_grade": "BEAT OWN GUIDE"
+    }
+  ],
+  "matrix_b_forward_guidance_reset": [
+    {
+      "metric": "FDA De Novo Submission Timing",
+      "pre_print_consensus": "Late Q4 2026 / Early 2027",
+      "new_guidance": "Late Q4 2026 (Formal Filing Imminent)",
+      "delta_display": "Reaffirmed Imminent Submission",
+      "action_badge": "MAINTAINED"
+    },
+    {
+      "metric": "REMAIN-1 12-Month Topline Data",
+      "pre_print_consensus": "1H 2027",
+      "new_guidance": "Q1 2027 (Ahead of Consensus Expectation)",
+      "delta_display": "Accelerated Timing to Q1 2027",
+      "action_badge": "RAISED"
+    },
+    {
+      "metric": "Operating Cash Burn Rate",
+      "pre_print_consensus": "$18.0M \u2013 $20.0M Quarterly Burn",
+      "new_guidance": "Sub-$12.0M Quarterly Burn post-45% Reduction",
+      "delta_display": ">$6M Quarterly Cash Burn Reduction",
+      "action_badge": "RAISED"
+    },
+    {
+      "metric": "Cash Runway Horizon",
+      "pre_print_consensus": "Early Q1 2027",
+      "new_guidance": "Through Q2 2027 (Through Planned De Novo & 12M Data)",
+      "delta_display": "+3 Months Extended Runway",
+      "action_badge": "RAISED"
+    }
+  ],
+  "call_qa_forensic_highlights": [
+    {
+      "question_num": 1,
+      "analyst_name": "Matthew O'Brien",
+      "firm": "Piper Sandler",
+      "topic": "Clinical Significance of 80% Retention vs 67% Sham",
+      "hard_question": "Harith, can you unpack the clinical meaning of the 80% vs 67% retention delta at 6 months, and how you expect FDA reviewers to interpret the sham effect in the De Novo review process?",
+      "management_answer": "Dr. Harith Rajagopalan (CEO): 'Achieving p=0.0023 on our co-primary endpoint provides unequivocal, randomized proof that duodenal mucosal resurfacing exerts an active biologic metabolic benefit after GLP-1 withdrawal. In clinical practice, retaining 80% of GLP-1 weight loss without daily drug therapy is transformative for patients who discontinue medication due to nausea, cost, or gastrointestinal intolerance.'",
+      "forensic_verdict": "CLINICAL VALIDATION: p=0.0023 confirms statistical robustness, providing unambiguous evidence of efficacy for FDA De Novo review."
+    },
+    {
+      "question_num": 2,
+      "analyst_name": "Michael Sarcone",
+      "firm": "Jefferies",
+      "topic": "Strategic Reorganization & Rejuva Gene Therapy Halting",
+      "hard_question": "Cutting 45% of headcount and shelving Rejuva is a major strategic pivot. Does this reflect scientific challenges with the AAV gene therapy approach, or purely a capital preservation decision?",
+      "management_answer": "Dr. Harith Rajagopalan (CEO): 'This was an intentional capital discipline decision. Rejuva pre-clinical data remain intriguing, but entering the clinic with AAV gene therapy requires tens of millions of dollars in CMC and tox studies. With Revita crossing the finish line on a pivotal endpoint and an FDA submission weeks away, our fiduciary duty is to deploy every dollar into Revita regulatory clearance and commercial preparation.'",
+      "forensic_verdict": "CAPITAL DISCIPLINE: Prioritizes late-stage commercial asset over early-stage capital-intensive gene therapy, significantly lowering corporate burn."
+    },
+    {
+      "question_num": 3,
+      "analyst_name": "Josh Jennings",
+      "firm": "TD Cowen",
+      "topic": "Cash Runway into Q2 2027 & Post-De Novo Financing Strategy",
+      "hard_question": "Lisa, with $35.8M in liquid resources and runway into Q2 2027, what financing mechanisms are you evaluating once the De Novo submission is formally under review, and will you seek strategic partnerships in Europe?",
+      "management_answer": "Lisa Davidson (CFO): 'Our 45% restructuring lowers annualized operating costs by over $20 million, allowing us to reach both the De Novo submission and the 12-month REMAIN-1 readouts without requiring near-term dilutive equity financing. As we achieve regulatory milestones, we are actively evaluating non-dilutive commercial partnerships and regional licensing in Europe and Asia.'",
+      "forensic_verdict": "STRATEGIC RUNWAY: Restructuring buys time through key Q1 2027 clinical readouts, enabling partnership negotiations from a position of regulatory strength."
+    }
+  ]
+}

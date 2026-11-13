@@ -1,0 +1,141 @@
+{
+  "ticker": "CBRS",
+  "earnings_date": "2026-11-12",
+  "agent": "KPI_Discovery_Agent (Agent 2A)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "operational_kpis": [
+    {
+      "name": "Cloud and Other Services GAAP Revenue ($M)",
+      "q_minus_1_actual": 126.0,
+      "q_minus_4_yoy": 38.92,
+      "street_consensus_q0": 135.0,
+      "whisper_q0": 140.0,
+      "reported_actual_q0": 141.93,
+      "spread_vs_street": "+$6.93M (+5.13%)",
+      "spread_vs_whisper": "+$1.93M (+1.38%)",
+      "verdict": "BEAT",
+      "bar_width_pct": 92
+    },
+    {
+      "name": "Core Non-GAAP Total Revenue ($M)",
+      "q_minus_1_actual": 209.9,
+      "q_minus_4_yoy": 135.71,
+      "street_consensus_q0": 220.0,
+      "whisper_q0": 228.0,
+      "reported_actual_q0": 230.9,
+      "spread_vs_street": "+$10.90M (+4.95%)",
+      "spread_vs_whisper": "+$2.90M (+1.27%)",
+      "verdict": "BEAT",
+      "bar_width_pct": 94
+    },
+    {
+      "name": "Contracted Data Center Capacity (Megawatts)",
+      "q_minus_1_actual": 600.0,
+      "q_minus_4_yoy": 250.0,
+      "street_consensus_q0": 650.0,
+      "whisper_q0": 675.0,
+      "reported_actual_q0": 700.0,
+      "spread_vs_street": "+50 MW (+7.69%)",
+      "spread_vs_whisper": "+25 MW (+3.70%)",
+      "verdict": "BEAT",
+      "bar_width_pct": 96
+    },
+    {
+      "name": "Consolidated GAAP Revenue ($M)",
+      "q_minus_1_actual": 180.11,
+      "q_minus_4_yoy": 135.71,
+      "street_consensus_q0": 214.7,
+      "whisper_q0": 225.0,
+      "reported_actual_q0": 210.81,
+      "spread_vs_street": "-$3.89M (-1.81%)",
+      "spread_vs_whisper": "-$14.19M (-6.31%)",
+      "verdict": "MISS",
+      "bar_width_pct": 74
+    },
+    {
+      "name": "Core Gross Margin (%)",
+      "q_minus_1_actual": 41.0,
+      "q_minus_4_yoy": 31.6,
+      "street_consensus_q0": 40.5,
+      "whisper_q0": 41.5,
+      "reported_actual_q0": 41.0,
+      "spread_vs_street": "+50 bps",
+      "spread_vs_whisper": "-50 bps",
+      "verdict": "MET",
+      "bar_width_pct": 88
+    }
+  ],
+  "segment_reporting": {
+    "periods": [
+      "Q3 2025",
+      "Q4 2025",
+      "Q1 2026",
+      "Q2 2026",
+      "Q3 2026 (Actual)",
+      "Q4 2026E (Guided / Street)"
+    ],
+    "segments": [
+      {
+        "name": "Cloud and Other Services Revenue ($M)",
+        "values": [
+          38.92,
+          45.1,
+          115.3,
+          126.0,
+          141.93,
+          205.0
+        ],
+        "qoq": "+12.6%",
+        "yoy": "+264.7%"
+      },
+      {
+        "name": "Hardware System Revenue ($M)",
+        "values": [
+          96.79,
+          58.22,
+          78.11,
+          54.11,
+          68.88,
+          115.0
+        ],
+        "qoq": "+27.3%",
+        "yoy": "-28.8%"
+      },
+      {
+        "name": "Total GAAP Consolidated Revenue ($M)",
+        "values": [
+          135.71,
+          103.32,
+          193.41,
+          180.11,
+          210.81,
+          320.0
+        ],
+        "qoq": "+17.0%",
+        "yoy": "+55.3%"
+      }
+    ]
+  },
+  "tooltip_definitions": {
+    "Cloud and Other Services GAAP Revenue": "GAAP revenue derived from Cerebras Cloud inference tokens, dedicated cluster hosting, and customer engineering support ($141.93M in Q3 2026, up +264.7% YoY, beating Street consensus $135.0M).",
+    "Core Non-GAAP Total Revenue": "Core revenue excluding non-cash warrant amortization, stock-based compensation, and data center pass-through costs ($230.90M in Q3 2026, up +70.1% YoY, beating consensus $220.0M).",
+    "Contracted Data Center Capacity": "Total energized and contracted data center power under binding multi-year delivery agreements across North America and Europe, reaching 700 megawatts (up from 600 MW in Q2 2026).",
+    "Consolidated GAAP Revenue": "Total GAAP revenue recognizing both wafer-scale hardware deliveries and cloud inference services ($210.81M in Q3 2026, up +55.3% YoY, narrowly missing consensus $214.70M by -1.81% due to warrant timing).",
+    "Core Gross Margin": "Non-GAAP gross profit margin adjusting for IPO warrant charges, standing at 41.0% in Q3 2026 (+940 bps YoY vs Q3 2025).",
+    "Hardware System Revenue": "Direct sales of CS-3 wafer-scale server clusters and rack-scale AI supercomputers to enterprise AI labs and sovereign data centers ($68.88M in Q3 2026, up +27.3% QoQ).",
+    "Wafer-Scale Engine 3 (WSE-3)": "Cerebras's 4-trillion transistor monolithic silicon processor fabricated by TSMC on 5nm process, delivering 900,000 AI cores and 44GB on-chip SRAM with 21 petabytes/sec memory bandwidth.",
+    "CS-3 AI Supercomputer": "Liquid-cooled server unit packaging the WSE-3 processor, delivering 125 petaflops of AI compute in a 15U rack chassis without requiring external interconnect fabrics.",
+    "Remaining Performance Obligations (RPO)": "Contractually committed future revenue backlog for hardware deliveries and multi-year cloud capacity, totaling over $25.4 billion.",
+    "Disaggregated Inference": "Pioneering architectural framework developed with AMD and AWS splitting prefill and decode stages across disparate compute nodes to maximize token throughput and minimize latency.",
+    "OpenAI GPT-5.6 Sol Integration": "Tier-1 launch partnership serving OpenAI's frontier reasoning model at an unprecedented 750 tokens per second on Cerebras Cloud infrastructure.",
+    "Oracle Cloud Infrastructure (OCI) Deployment": "Definitive multi-year agreement to stand up Cerebras CS-3 superclusters inside OCI data centers worldwide beginning in 2027.",
+    "Operating Loss": "GAAP operating loss of -$224.15M in Q3 2026 as heavy R&D for next-generation CS-4/CS-5 silicon ($177.84M) and global data center expansion scaled ahead of revenue.",
+    "Research and Development": "Silicon architecture engineering, next-gen chiplet design, and software stack development totaling $177.84M in Q3 2026 ($573.49M for 9M 2026).",
+    "Capital Expenditure": "Purchases of data center infrastructure, liquid cooling systems, and specialized manufacturing equipment totaling $497.19M in Q3 2026 ($1,046.06M YTD).",
+    "Stock-Based Compensation": "Non-cash equity compensation to engineers and executives, normalizing to $32.85M in Q3 2026 following Q2's post-IPO catch-up vesting.",
+    "True Free Cash Flow": "Forensic cash generation metric deducting OCF (-$341.41M), CapEx ($497.19M), and SBC ($32.85M), yielding True FCF of -$871.45M.",
+    "Cash and Liquid Resources": "Cash, cash equivalents, restricted cash, and short-term investments totaling $7.80 billion with an additional $850 million undrawn revolving credit line.",
+    "TSMC Packaging Allocation": "Direct wafer allocation and advanced silicon packaging capacity secured with TSMC, bypassing CoWoS packaging bottlenecks by utilizing monolithic wafer-scale dies.",
+    "Breakeven Operating Margin Target": "Guidance corridor targeting Core non-GAAP operating margin of (1%) to +1% in Q4 2026, marking Cerebras's imminent transition to operational profitability."
+  }
+}
