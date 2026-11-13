@@ -202,10 +202,10 @@ window.EARNINGS_HISTORY_CATALOG = {
       "quarter": "Q3 2026",
       "date_display": "Nov 12, 2026",
       "t1": "GUTS_T1_2026-11-12.html",
-      "t0": null,
+      "t0": "GUTS_T0_POST_2026-11-12.html",
       "verdict": "BEAT & RAISE (CAPEX SURGE)",
       "post_move_pct": 4.94,
-      "rev_actual_m": null,
+      "rev_actual_m": 0.0,
       "rev_consensus_m": 0.0,
       "currency": "$"
     }
