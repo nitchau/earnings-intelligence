@@ -1,0 +1,70 @@
+{
+  "ticker": "NVDA",
+  "earnings_date": "2026-11-17",
+  "agent": "Pre_KPI_Consensus_Agent (Agent 2A)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "upcoming_quarter_label": "Q4 2026E",
+  "latest_reported_quarter_label": "Q3 2026 (Ended Jul 31, 2026)",
+  "headline_and_company_kpis": [
+    {
+      "metric": "Data Center Net Revenue ($M)",
+      "tooltip_title": "Core AI compute and networking revenue recognized across Hopper H100/H200 and Blackwell B200/GB200 systems.",
+      "tooltip_def": "Data Center Net Revenue ($M): NVIDIA generated $89,023M in Q3 2026 (+116.6% YoY vs $41,096M in Q3 2025), representing 92.5% of total company revenue. Wall Street consensus models $101,200M in Q4 2026E (+146.2% YoY vs Q4 2025 baseline of $41,096M), with institutional whisper bogeys stretching toward $104,500M+ propelled by initial volume deliveries of Blackwell GB200 NVL72 liquid-cooled supercomputing racks to hyperscalers.",
+      "q_minus_1_actual": "$89,023.0M",
+      "q_minus_4_yoy_baseline": "$41,096.0M",
+      "street_consensus_q0e": "$101,200.0M",
+      "whisper_bogey_q0e": "$104,500.0M",
+      "whisper_spread_display": "+3.26% Whisper Spread",
+      "bar_width_pct": 95,
+      "hurdle_badge": "Consensus Hurdle"
+    },
+    {
+      "metric": "Consolidated GAAP Revenue ($M)",
+      "tooltip_title": "Total consolidated GAAP net revenue recognized across Data Center, Gaming, Professional Visualization, and Automotive.",
+      "tooltip_def": "Consolidated GAAP Revenue ($M): Total revenue reached $96,221M in Q3 2026 (+105.85% YoY vs $46,743M in Q3 2025). Sell-side consensus expects $108,813.8M for Q4 2026E (company guidance midpoint $108,000M \u00b1 2%), with buy-side whisper bogeys targeting $112,500M+ to sustain premium trading multiples.",
+      "q_minus_1_actual": "$96,221.0M",
+      "q_minus_4_yoy_baseline": "$46,743.0M",
+      "street_consensus_q0e": "$108,813.8M",
+      "whisper_bogey_q0e": "$112,500.0M",
+      "whisper_spread_display": "+3.39% Spread",
+      "bar_width_pct": 94,
+      "hurdle_badge": "Top-Line Hurdle"
+    },
+    {
+      "metric": "Diluted GAAP EPS ($/sh)",
+      "tooltip_title": "Diluted earnings per share reflecting wafer fabrication costs, CoWoS advanced packaging, and operational scale.",
+      "tooltip_def": "Diluted GAAP EPS ($/sh): Q3 2026 GAAP diluted EPS was $2.46 (GAAP Net Income of $59,688M on 24,285M diluted shares). Street consensus expects GAAP EPS of $2.47 for Q4 2026E, while institutional whisper bogeys look for $2.58+ on higher operating margins.",
+      "q_minus_1_actual": "$2.46",
+      "q_minus_4_yoy_baseline": "$1.30",
+      "street_consensus_q0e": "$2.47",
+      "whisper_bogey_q0e": "$2.58",
+      "whisper_spread_display": "+$0.11 Spread",
+      "bar_width_pct": 90,
+      "hurdle_badge": "Bottom-Line Hurdle"
+    },
+    {
+      "metric": "Non-GAAP Gross Margin (%)",
+      "tooltip_title": "Gross profit percentage reflecting Blackwell yield ramp and high-density networking interconnect mix.",
+      "tooltip_def": "Non-GAAP Gross Margin (%): Stood at 75.1% in Q3 2026. Management guided Q4 2026E to 74.5%\u201375.5% (75.0% midpoint). Buy-side whisper expects 75.8%+ as initial high-cost Blackwell packaging yields mature and transition to high-volume manufacturing.",
+      "q_minus_1_actual": "75.1%",
+      "q_minus_4_yoy_baseline": "75.0%",
+      "street_consensus_q0e": "75.0%",
+      "whisper_bogey_q0e": "75.8%",
+      "whisper_spread_display": "+80 bps Spread",
+      "bar_width_pct": 88,
+      "hurdle_badge": "Margin Quality"
+    },
+    {
+      "metric": "Blackwell GB200 & Compute Backlog ($B)",
+      "tooltip_title": "Multi-quarter customer order commitments and delivery backlog for B100/B200 chips and GB200 NVL72 rack-scale systems.",
+      "tooltip_def": "Blackwell Compute Backlog ($B): CEO Jensen Huang noted that Blackwell demand is extraordinarily elevated, with supply fully booked out for 12 months across tier-1 hyperscalers (Microsoft, AWS, Google, Meta, OCI) and sovereign AI cloud builders.",
+      "q_minus_1_actual": "Booked 12M Out",
+      "q_minus_4_yoy_baseline": "Hopper Sold Out",
+      "street_consensus_q0e": "$15.0B Ramp",
+      "whisper_bogey_q0e": "$18.0B+ B200 Mix",
+      "whisper_spread_display": "+$3.0B Expansion",
+      "bar_width_pct": 96,
+      "hurdle_badge": "Growth Driver"
+    }
+  ]
+}

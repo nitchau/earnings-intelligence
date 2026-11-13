@@ -6,31 +6,100 @@
   "schedule_verification": {
     "earnings_date": "2026-11-17",
     "confirmation_flag": "SCHEDULED_IN_EARNINGS_CALENDAR_VERIFY_WEBCAST_TIME",
-    "release_timing_hint": "UNKNOWN_CHECK_BMO_OR_AMC",
-    "yahoo_consensus_eps": 2.47
+    "release_timing_hint": "AMC (After Market Close)",
+    "yahoo_consensus_eps": 2.47,
+    "yahoo_consensus_revenue": 108813.8
   },
   "price_validation": {
-    "yahoo_spot_price": 217.23,
+    "yahoo_spot_price": 162.09,
     "google_finance_spot_price": null,
     "cross_source_divergence_pct": 0.0,
     "status": "VERIFIED"
   },
   "valuation_and_market": {
-    "market_cap_millions": 5245452.68,
-    "enterprise_value_millions": 5309720.95,
-    "trailing_pe": 28.36,
-    "forward_pe": 13.65,
-    "price_to_sales_ttm": 17.31,
-    "ev_to_ebitda": 26.38,
-    "short_percent_of_float": 1.34
+    "market_cap_millions": 3914709.07,
+    "enterprise_value_millions": 3981569.95,
+    "trailing_pe": 20.5,
+    "forward_pe": 10.23,
+    "price_to_sales_ttm": 12.92,
+    "ev_to_ebitda": 19.78,
+    "short_percent_of_float": 1.21
   },
   "options_positioning": {
-    "expiry_strictly_after_earnings": "2026-11-20",
+    "expiry_strictly_after_earnings": "2026-11-18",
     "pricing_method_used": "BID_ASK_MIDPOINT / BID_ASK_MIDPOINT",
-    "atm_straddle_usd": 21.45,
-    "atm_implied_move_pct": 9.87,
-    "atm_implied_volatility_pct": 38.79,
-    "put_call_oi_ratio": 0.68
+    "atm_straddle_usd": 15.03,
+    "atm_implied_move_pct": 9.27,
+    "atm_implied_volatility_pct": 90.53,
+    "put_call_oi_ratio": 0.58
+  },
+  "historical_earnings_track_record": {
+    "quarters_evaluated": 4,
+    "beats_count": 4,
+    "beat_rate_pct": 100.0,
+    "avg_eps_surprise_pct": 5.12,
+    "avg_historical_1d_move_abs_pct": 4.78,
+    "current_implied_move_pct": 9.27,
+    "implied_vs_historical_move_delta_pct": 4.49,
+    "options_vol_regime": "OVERPRICED_VS_HISTORY (SHORT VOLATILITY / THETA HARVEST EDGE)",
+    "prior_4q_releases": [
+      {
+        "earnings_date": "2026-08-26",
+        "eps_estimate": 2.09,
+        "eps_actual": 2.22,
+        "surprise_pct": 6.16,
+        "verdict": "BEAT",
+        "actual_1d_move_pct": 8.74
+      },
+      {
+        "earnings_date": "2026-05-20",
+        "eps_estimate": 1.77,
+        "eps_actual": 1.87,
+        "surprise_pct": 5.54,
+        "verdict": "BEAT",
+        "actual_1d_move_pct": -1.77
+      },
+      {
+        "earnings_date": "2026-02-25",
+        "eps_estimate": 1.54,
+        "eps_actual": 1.62,
+        "surprise_pct": 5.32,
+        "verdict": "BEAT",
+        "actual_1d_move_pct": -5.46
+      },
+      {
+        "earnings_date": "2025-11-19",
+        "eps_estimate": 1.26,
+        "eps_actual": 1.3,
+        "surprise_pct": 3.46,
+        "verdict": "BEAT",
+        "actual_1d_move_pct": -3.15
+      }
+    ]
+  },
+  "street_consensus_and_targets": {
+    "target_mean_price": 285.35,
+    "target_median_price": 282.0,
+    "target_high_price": 515.0,
+    "target_low_price": 174.0,
+    "implied_upside_to_mean_pct": 76.04,
+    "analyst_count": 53,
+    "recommendation_key": "buy",
+    "recommendation_mean": 1.59,
+    "yahoo_consensus_eps_q0e": 2.47,
+    "yahoo_consensus_revenue_q0e": 108813.8,
+    "yahoo_revenue_low_q0e": 100481.0,
+    "yahoo_revenue_high_q0e": 116251.0,
+    "yahoo_revenue_growth_q0e_pct": 90.88
+  },
+  "forensic_fcf_bridge_latest": {
+    "period_label": "Q3 2026 (Ended Jul 31, 2026)",
+    "ocf": 24077.0,
+    "capex": 2677.0,
+    "reported_fcf": 21400.0,
+    "sbc": 2026.0,
+    "finance_leases": 0.0,
+    "true_fcf": 19374.0
   },
   "stitched_5q_financials": {
     "income_statement_5q": {
