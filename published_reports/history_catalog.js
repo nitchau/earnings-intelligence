@@ -406,6 +406,20 @@ window.EARNINGS_HISTORY_CATALOG = {
       "currency": "$"
     }
   ],
+  "PANW": [
+    {
+      "date": "2026-11-18",
+      "quarter": "Q4 2026",
+      "date_display": "Nov 18, 2026",
+      "t1": "PANW_T1_2026-11-18.html",
+      "t0": null,
+      "verdict": null,
+      "post_move_pct": null,
+      "rev_actual_m": null,
+      "rev_consensus_m": 3307.46,
+      "currency": "$"
+    }
+  ],
   "PLTR": [
     {
       "date": "2026-11-02",
