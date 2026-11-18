@@ -83,7 +83,9 @@
     "RGTI_POST_2026-11-10",
     "CBRS_POST_2026-11-12",
     "GUTS_POST_2026-11-12",
-    "PANW_2026-11-18"
+    "PANW_2026-11-18",
+    "ESTC_2026-11-19",
+    "NVDA_POST_2026-11-17"
   ],
   "links": {
     "NVDA_2026-11-17": {
@@ -505,6 +507,16 @@
       "local_browser_url": "http://localhost:8080/published_reports/PANW_T1_2026-11-18.html",
       "github_pages_url": "https://nitchau.github.io/earnings-intelligence/published_reports/PANW_T1_2026-11-18.html",
       "public_sharable_url": "https://acm-tires-fraser-quarters.trycloudflare.com/published_reports/PANW_T1_2026-11-18.html"
+    },
+    "ESTC_2026-11-19": {
+      "local_browser_url": "http://localhost:8080/published_reports/ESTC_T1_2026-11-19.html",
+      "github_pages_url": "https://nitchau.github.io/earnings-intelligence/published_reports/ESTC_T1_2026-11-19.html",
+      "public_sharable_url": "https://acm-tires-fraser-quarters.trycloudflare.com/published_reports/ESTC_T1_2026-11-19.html"
+    },
+    "NVDA_POST_2026-11-17": {
+      "local_browser_url": "http://localhost:8080/published_reports/NVDA_T0_POST_2026-11-17.html",
+      "github_pages_url": "https://nitchau.github.io/earnings-intelligence/published_reports/NVDA_T0_POST_2026-11-17.html",
+      "public_sharable_url": "https://nitchau.github.io/earnings-intelligence/published_reports/NVDA_T0_POST_2026-11-17.html"
     }
   },
   "reports": {
@@ -1561,7 +1573,7 @@
     "NVDA_2026-11-17": {
       "ticker": "NVDA",
       "earnings_date": "2026-11-17",
-      "latest_version": "v2",
+      "latest_version": "v3",
       "latest_file": "NVDA_T1_2026-11-17.html",
       "versions": [
         {
@@ -1571,13 +1583,21 @@
           "published_display": "Nov 13, 2026 at 07:11 AM",
           "local_browser_url": "http://localhost:8080/published_reports/NVDA_T1_2026-11-17_v2.html",
           "public_sharable_url": "https://acm-tires-fraser-quarters.trycloudflare.com/published_reports/NVDA_T1_2026-11-17_v2.html"
+        },
+        {
+          "version": "v3",
+          "filename": "NVDA_T1_2026-11-17_v3.html",
+          "published_at": "2026-11-17T07:10:27.056732",
+          "published_display": "Nov 17, 2026 at 07:10 AM",
+          "local_browser_url": "http://localhost:8080/published_reports/NVDA_T1_2026-11-17_v3.html",
+          "public_sharable_url": "https://acm-tires-fraser-quarters.trycloudflare.com/published_reports/NVDA_T1_2026-11-17_v3.html"
         }
       ]
     },
     "PANW_2026-11-18": {
       "ticker": "PANW",
       "earnings_date": "2026-11-18",
-      "latest_version": "v1",
+      "latest_version": "v2",
       "latest_file": "PANW_T1_2026-11-18.html",
       "versions": [
         {
@@ -1587,6 +1607,30 @@
           "published_display": "Nov 16, 2026 at 07:16 AM",
           "local_browser_url": "http://localhost:8080/published_reports/PANW_T1_2026-11-18_v1.html",
           "public_sharable_url": "https://acm-tires-fraser-quarters.trycloudflare.com/published_reports/PANW_T1_2026-11-18_v1.html"
+        },
+        {
+          "version": "v2",
+          "filename": "PANW_T1_2026-11-18_v2.html",
+          "published_at": "2026-11-17T07:09:51.230459",
+          "published_display": "Nov 17, 2026 at 07:09 AM",
+          "local_browser_url": "http://localhost:8080/published_reports/PANW_T1_2026-11-18_v2.html",
+          "public_sharable_url": "https://acm-tires-fraser-quarters.trycloudflare.com/published_reports/PANW_T1_2026-11-18_v2.html"
+        }
+      ]
+    },
+    "ESTC_2026-11-19": {
+      "ticker": "ESTC",
+      "earnings_date": "2026-11-19",
+      "latest_version": "v1",
+      "latest_file": "ESTC_T1_2026-11-19.html",
+      "versions": [
+        {
+          "version": "v1",
+          "filename": "ESTC_T1_2026-11-19_v1.html",
+          "published_at": "2026-11-17T07:08:44.868825",
+          "published_display": "Nov 17, 2026 at 07:08 AM",
+          "local_browser_url": "http://localhost:8080/published_reports/ESTC_T1_2026-11-19_v1.html",
+          "public_sharable_url": "https://acm-tires-fraser-quarters.trycloudflare.com/published_reports/ESTC_T1_2026-11-19_v1.html"
         }
       ]
     }

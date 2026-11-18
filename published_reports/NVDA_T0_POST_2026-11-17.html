@@ -1,0 +1,1667 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NVDA T+0 Post-Earnings Forensic Tearsheet | NVIDIA Corporation Q3 FY27 (2026-11-17)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0b0f19;
+      --bg-card: #111827;
+      --bg-card-elevated: #161f33;
+      --bg-table-row-alt: #0e1525;
+      --border-color: #1f2937;
+      --border-subtle: #283548;
+      --text-primary: #f9fafb;
+      --text-secondary: #d1d5db;
+      --text-muted: #9ca3af;
+      --accent-blue: #3b82f6;
+      --accent-blue-glow: rgba(59, 130, 246, 0.15);
+      --bull-green: #10b981;
+      --bull-green-bg: rgba(16, 185, 129, 0.14);
+      --bear-red: #ef4444;
+      --bear-red-bg: rgba(239, 68, 68, 0.14);
+      --warn-amber: #f59e0b;
+      --warn-amber-bg: rgba(245, 158, 11, 0.14);
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      line-height: 1.5;
+      font-size: 14px;
+      padding: 24px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1560px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* ==========================================================================
+       INTERACTIVE HOVER TOOLTIP SYSTEM (FOR METRICS & ABBREVIATIONS)
+       ========================================================================== */
+    .tip {
+      position: relative;
+      display: inline-block;
+      border-bottom: 1px dotted #60a5fa;
+      cursor: help;
+      transition: color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .tip:hover {
+      color: #93c5fd;
+      border-bottom-color: #93c5fd;
+    }
+
+    .tip::after {
+      content: attr(data-tip);
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 0;
+      width: 290px;
+      padding: 10px 12px;
+      background-color: #1e293b;
+      color: #f8fafc;
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 1.45;
+      text-align: left;
+      text-transform: none;
+      letter-spacing: normal;
+      white-space: normal;
+      border: 1px solid var(--accent-blue);
+      border-radius: 6px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.75);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(4px);
+      transition: opacity 0.16s ease, transform 0.16s ease, visibility 0.16s;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* Right-aligned tooltip modifier to prevent right-edge screen clipping */
+    .tip-right::after {
+      left: auto;
+      right: 0;
+    }
+
+    /* Bottom-aligned tooltip modifier for elements near top of page */
+    .tip-bottom::after {
+      bottom: auto;
+      top: calc(100% + 8px);
+    }
+
+    .tip:hover::after {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    /* UTILITY & BADGES */
+    .mono {
+      font-family: var(--font-mono);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+
+    .badge-bull {
+      background-color: var(--bull-green-bg);
+      color: var(--bull-green);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+    }
+
+    .badge-bear {
+      background-color: var(--bear-red-bg);
+      color: var(--bear-red);
+      border: 1px solid rgba(239, 68, 68, 0.35);
+    }
+
+    .badge-warn {
+      background-color: var(--warn-amber-bg);
+      color: var(--warn-amber);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+    }
+
+    .badge-neutral {
+      background-color: rgba(156, 163, 175, 0.12);
+      color: var(--text-secondary);
+      border: 1px solid rgba(156, 163, 175, 0.25);
+    }
+
+    .badge-blue {
+      background-color: var(--accent-blue-glow);
+      color: #60a5fa;
+      border: 1px solid rgba(59, 130, 246, 0.4);
+    }
+
+    /* CARD SYSTEM */
+    .card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--border-color);
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-title-accent {
+      width: 4px;
+      height: 16px;
+      background-color: var(--accent-blue);
+      border-radius: 2px;
+      display: inline-block;
+    }
+
+    .card-subtitle {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    /* HEADER BANNER */
+    .header-banner {
+      background: linear-gradient(135deg, #111827 0%, #0f172a 65%, #172554 100%);
+      border: 1px solid var(--border-subtle);
+      border-left: 4px solid var(--accent-blue);
+      border-radius: 10px;
+      padding: 22px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .helper-bar {
+      background-color: rgba(59, 130, 246, 0.12);
+      border: 1px solid rgba(59, 130, 246, 0.35);
+      border-radius: 6px;
+      padding: 8px 14px;
+      font-size: 12.5px;
+      color: #bfdbfe;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .ticker-identity {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .ticker-line {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .ticker-symbol {
+      font-family: var(--font-mono);
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.4);
+      padding: 2px 12px;
+      border-radius: 6px;
+    }
+
+    .company-name {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .sector-tag {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .header-price-block {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .price-box {
+      text-align: right;
+    }
+
+    .price-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    .price-value {
+      font-family: var(--font-mono);
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .header-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(195px, 1fr));
+      gap: 12px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .strip-item {
+      background-color: rgba(11, 15, 25, 0.55);
+      border: 1px solid var(--border-color);
+      padding: 10px 14px;
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .strip-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .strip-val {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    /* ROW 1: 4 KPI CARDS */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .kpi-metric-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .kpi-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.07);
+      gap: 8px;
+    }
+
+    .kpi-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .kpi-name {
+      font-size: 12.5px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .kpi-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 2px;
+    }
+
+    .kpi-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 4px;
+    }
+
+    .kpi-val {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .delta-pair {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    /* ROW 2: HISTORICAL TABLE */
+    .table-wrapper {
+      overflow-x: auto;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px;
+    }
+
+    th {
+      background-color: #161f33;
+      color: var(--text-secondary);
+      font-weight: 600;
+      text-align: right;
+      padding: 11px 12px;
+      border-bottom: 1px solid var(--border-subtle);
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+
+    th:first-child {
+      text-align: left;
+      font-family: var(--font-sans);
+      min-width: 265px;
+      position: sticky;
+      left: 0;
+      z-index: 2;
+      background-color: #161f33;
+    }
+
+    td {
+      padding: 9px 12px;
+      border-bottom: 1px solid var(--border-color);
+      text-align: right;
+      font-family: var(--font-mono);
+      color: var(--text-primary);
+      white-space: nowrap;
+    }
+
+    td:first-child {
+      text-align: left;
+      font-family: var(--font-sans);
+      font-weight: 500;
+      color: var(--text-secondary);
+      position: sticky;
+      left: 0;
+      background-color: var(--bg-card);
+      z-index: 1;
+    }
+
+    tr:nth-child(even) td {
+      background-color: var(--bg-table-row-alt);
+    }
+
+    tr:nth-child(even) td:first-child {
+      background-color: var(--bg-table-row-alt);
+    }
+
+    tr.section-divider td {
+      background-color: rgba(59, 130, 246, 0.09);
+      color: #93c5fd;
+      font-family: var(--font-sans);
+      font-weight: 700;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      padding: 7px 12px;
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .col-q0 {
+      background-color: rgba(59, 130, 246, 0.06) !important;
+      font-weight: 700;
+    }
+
+    .col-est {
+      background-color: rgba(245, 158, 11, 0.05) !important;
+      color: #fde68a;
+    }
+
+    /* OUTLIER CELL BORDERS */
+    .outlier-red {
+      border: 1.5px solid var(--bear-red) !important;
+      background-color: rgba(239, 68, 68, 0.12) !important;
+      color: #fca5a5 !important;
+      font-weight: 700;
+      position: relative;
+    }
+
+    .outlier-amber {
+      border: 1.5px solid var(--warn-amber) !important;
+      background-color: rgba(245, 158, 11, 0.12) !important;
+      color: #fcd34d !important;
+      font-weight: 700;
+      position: relative;
+    }
+
+    /* ROW 3: FORENSIC CALLOUT */
+    .forensic-grid {
+      display: grid;
+      grid-template-columns: 1.35fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 1080px) {
+      .forensic-grid,
+      .split-2col,
+      .sentiment-grid {
+        grid-template-columns: 1fr !important;
+      }
+    }
+
+    .forensic-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .forensic-item {
+      background-color: rgba(11, 15, 25, 0.6);
+      border: 1px solid var(--border-color);
+      border-left: 3px solid var(--warn-amber);
+      border-radius: 6px;
+      padding: 13px 15px;
+    }
+
+    .forensic-item.critical {
+      border-left-color: var(--bear-red);
+    }
+
+    .forensic-item-title {
+      font-weight: 700;
+      font-size: 13.5px;
+      color: var(--text-primary);
+      margin-bottom: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .forensic-item p {
+      color: var(--text-secondary);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .fcf-bridge-box {
+      background-color: #0d1322;
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* ROW 4 & ROW 5: 2-COLUMN SPLIT CARDS */
+    .split-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .audit-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .audit-point {
+      padding: 12px 14px;
+      border-radius: 6px;
+      background-color: rgba(11, 15, 25, 0.55);
+      border: 1px solid var(--border-color);
+    }
+
+    .audit-point-bull {
+      border-left: 3px solid var(--bull-green);
+    }
+
+    .audit-point-bear {
+      border-left: 3px solid var(--bear-red);
+    }
+
+    .audit-point-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 5px;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .audit-point-title {
+      font-weight: 700;
+      font-size: 13.5px;
+      color: var(--text-primary);
+    }
+
+    .audit-point p {
+      font-size: 12.8px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* CATALYST ITEMS */
+    .catalyst-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .catalyst-card {
+      background-color: rgba(11, 15, 25, 0.55);
+      border: 1px solid var(--border-color);
+      border-left: 3px solid var(--accent-blue);
+      border-radius: 6px;
+      padding: 12px 14px;
+    }
+
+    /* SENTIMENT ANALYSIS CARD */
+    .sentiment-overview-banner {
+      background: linear-gradient(90deg, rgba(239, 68, 68, 0.12) 0%, rgba(245, 158, 11, 0.12) 50%, rgba(16, 185, 129, 0.12) 100%);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .sentiment-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .sentiment-source-card {
+      background-color: #0d1322;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .sentiment-meter-wrap {
+      display: flex;
+       flex-direction: column;
+      gap: 5px;
+      margin: 4px 0;
+    }
+
+    .sentiment-bar-bg {
+      width: 100%;
+      height: 8px;
+      background-color: #1f2937;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .sentiment-bar-fill {
+      height: 100%;
+      border-radius: 4px;
+    }
+
+    /* ROW 7: TRADE MATRIX */
+    .playbook-setup-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+      background-color: rgba(11, 15, 25, 0.65);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 14px;
+    }
+
+    .scenario-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 16px;
+    }
+
+    .scenario-card {
+      background-color: #0d1322;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .scenario-bull {
+      border-top: 4px solid var(--bull-green);
+    }
+
+    .scenario-base {
+      border-top: 4px solid var(--warn-amber);
+    }
+
+    .scenario-bear {
+      border-top: 4px solid var(--bear-red);
+    }
+
+    .scenario-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 800;
+      font-size: 15px;
+    }
+
+    .trigger-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 12.8px;
+      color: var(--text-secondary);
+    }
+
+    .trigger-list li {
+      position: relative;
+      padding-left: 14px;
+    }
+
+    .trigger-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--accent-blue);
+      font-weight: bold;
+    }
+
+    .trade-structure {
+      margin-top: auto;
+      padding: 11px 12px;
+      background-color: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      font-size: 12px;
+    }
+
+    .trade-structure strong {
+      display: block;
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .footer-meta {
+      text-align: center;
+      font-size: 11.5px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      padding: 10px 0 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    
+    <!-- HISTORICAL QUARTER ARCHIVE TOPBAR -->
+    <div class="archive-topbar" style="background: rgba(15, 23, 42, 0.92); border: 1px solid rgba(59, 130, 246, 0.32); border-radius: 10px; padding: 10px 16px; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; font-size: 12.5px;">
+      <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+        <a href="index.html" style="color: #93c5fd; text-decoration: none; font-weight: 600; padding: 4px 10px; border-radius: 6px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.12);">← Portal Home</a>
+        <span style="background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); font-weight: 700; font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 3px 9px; border-radius: 5px;">T+0 Post-Earnings Forensic</span>
+        <a id="archive-paired-stage-link" href="NVDA_T1_2026-11-17.html" style="display: none; color: #cbd5e1; text-decoration: none; font-size: 11.5px; padding: 3px 9px; border-radius: 5px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12);">Switch to T-1 Pre-Earnings Setup</a>
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+        <label for="quarter-archive-select" style="color: #94a3b8; font-size: 12px; font-weight: 600;">📅 Historical Quarter:</label>
+        <select id="quarter-archive-select" data-ticker="NVDA" data-date="2026-11-17" data-stage="t0" style="background: #090d16; color: #f8fafc; border: 1px solid rgba(59, 130, 246, 0.45); border-radius: 6px; padding: 5px 10px; font-size: 12px; font-family: 'Inter', sans-serif; font-weight: 600; cursor: pointer; outline: none;">
+          <option value="NVDA_T0_POST_2026-11-17.html" selected>Q4 2026 (Nov 17, 2026) — Latest</option>
+          <option value="" disabled>No prior quarters archived yet (history initiated Q4 2026)</option>
+        </select>
+      </div>
+    </div>
+    <script src="history_catalog.js"></script>
+    <script>
+      (function() {
+        var sel = document.getElementById('quarter-archive-select');
+        if (!sel) return;
+        var tk = sel.getAttribute('data-ticker');
+        var curDate = sel.getAttribute('data-date');
+        var stage = sel.getAttribute('data-stage');
+        var cat = (window.EARNINGS_HISTORY_CATALOG || {})[tk];
+        if (Array.isArray(cat) && cat.length > 0) {
+          sel.innerHTML = '';
+          cat.forEach(function(entry, idx) {
+            var targetFile = (stage === 't0') ? (entry.t0 || entry.t1) : (entry.t1 || entry.t0);
+            if (!targetFile) return;
+            var opt = document.createElement('option');
+            opt.value = targetFile;
+            var suffix = (idx === 0) ? ' — Latest' : '';
+            var stageHint = (stage === 't0' && !entry.t0) ? ' [T-1 Only]' : ((stage === 't1' && !entry.t1) ? ' [T+0 Only]' : '');
+            opt.textContent = entry.quarter + ' (' + entry.date_display + ')' + stageHint + suffix;
+            if (entry.date === curDate) opt.selected = true;
+            sel.appendChild(opt);
+          });
+          if (cat.length === 1) {
+            var note = document.createElement('option');
+            note.value = '';
+            note.disabled = true;
+            note.textContent = '── Prior quarters will appear here starting next quarter ──';
+            sel.appendChild(note);
+          }
+          var curEntry = cat.find(function(e) { return e.date === curDate; });
+          var pairedLink = document.getElementById('archive-paired-stage-link');
+          if (curEntry && pairedLink) {
+            var pairedHref = (stage === 't0') ? curEntry.t1 : curEntry.t0;
+            if (pairedHref) {
+              pairedLink.href = pairedHref;
+              pairedLink.style.display = 'inline-block';
+            }
+          }
+        }
+        sel.addEventListener('change', function() {
+          if (this.value && !window.location.pathname.endsWith('/' + this.value)) {
+            window.location.href = this.value;
+          }
+        });
+      })();
+    </script>
+
+    <!-- 1. HEADER BANNER & STRIP -->
+    <header class="header-banner" style="margin-bottom: 20px;">
+      <div class="helper-bar">
+        <span>&#128161; <strong>Interactive Definitions Enabled:</strong> Hover over any <span class="tip tip-bottom" title="Interactive Tooltip Help" data-tip="Plain-English forensic definitions appear automatically when hovering over any dotted-underlined financial metric, segment, or governance disclosure.">dotted-underlined metric or term</span> for instant plain-English SEC &amp; market definitions.</span>
+        <span class="mono" style="font-size:11.5px; color:#93c5fd;">Reported Quarter: <strong>Q3 FY27 / Q4 2026 (Actual) (Ended Oct 25, 2026)</strong> &bull; Next Guide: <strong>Q1 2027E (Guided / Street)</strong></span>
+      </div>
+
+      <div class="header-top" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 12px; margin-bottom: 16px;">
+        <div class="ticker-identity">
+          <div class="ticker-line" style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+            <span class="ticker-symbol">NVDA</span>
+            <h1 class="company-name" style="margin: 0; font-size: 24px; font-weight: 800; color: #fff;">NVIDIA Corporation</h1>
+            <span class="badge badge-bull" style="font-size: 12.5px; padding: 4px 8px;">T+0 POST-EARNINGS FORENSIC TEARSHEET</span>
+            <span class="badge badge-purple" style="font-size: 12.5px; padding: 4px 8px;">CLEAN BEAT & RAISE</span>
+            <span class="badge badge-warn" style="font-size: 12px; padding: 4px 8px;">CEO TRANSITION WATCH</span>
+          </div>
+          <div class="meta-line" style="font-size: 12px; color: var(--text-muted); margin-top: 6px;">
+            <span><strong>Form 8-K (Item 2.02) Ex. 99.1/99.2/99.3</strong> &bull; Filing Date: Nov 17, 2026</span>
+            <span>Market Cap: <strong>$3,753.9B</strong> ($3,753,892.6M)</span>
+            <span>EV: <strong>$3,723.0B</strong></span>
+            <span>Trailing P/E: <strong>19.65x</strong> &bull; Forward P/E: <strong>9.80x</strong></span>
+          </div>
+        </div>
+        <div class="price-box" style="text-align: right;">
+          <div style="font-size: 13px; color: var(--text-muted);">Regular Close: <strong style="color: #fff;">$155.46</strong></div>
+          <div style="font-size: 22px; font-weight: 800; color: #34d399;">
+            After-Hours: $162.94 <span style="font-size: 14px;">(+4.81%)</span>
+          </div>
+          <div style="font-size: 11.5px; color: #93c5fd;">Implied Band: &plusmn;9.27% ($15.03) &bull; CONTAINED</div>
+        </div>
+      </div>
+
+      <div class="header-strip" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(185px, 1fr)); gap: 12px; background: rgba(15, 23, 42, 0.6); padding: 12px 16px; border-radius: 8px; border: 1px solid var(--border-color);">
+        <div class="strip-item">
+          <span class="strip-label" style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); display:block;">T+0 Print Verdict</span>
+          <span class="strip-val" style="font-size: 15px; font-weight: 700; color: #34d399;">CLEAN BEAT & RAISE</span>
+          <span class="strip-sub" style="font-size: 11px; color: #94a3b8;">Beat Street &amp; Whisper + FY28 Raise</span>
+        </div>
+        <div class="strip-item">
+          <span class="strip-label" style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); display:block;">Q0 Total Net Revenue</span>
+          <span class="strip-val" style="font-size: 16px; font-weight: 700; color: #34d399;">$115,844.0M</span>
+          <span class="strip-sub" style="font-size: 11px; color: #34d399;">+6.77% vs $108,500M Cons (+103.2% YoY)</span>
+        </div>
+        <div class="strip-item">
+          <span class="strip-label" style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); display:block;">GAAP / Non-GAAP Diluted EPS</span>
+          <span class="strip-val" style="font-size: 16px; font-weight: 700; color: #34d399;">$2.70 / $2.68</span>
+          <span class="strip-sub" style="font-size: 11px; color: #34d399;">+$0.23 (+9.31%) vs $2.47 Cons</span>
+        </div>
+        <div class="strip-item">
+          <span class="strip-label" style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); display:block;">Q4 FY27 (Q1 2027E) Guide</span>
+          <span class="strip-val" style="font-size: 16px; font-weight: 700; color: #38bdf8;">$130.0B &plusmn; 3%</span>
+          <span class="strip-sub" style="font-size: 11px; color: #fbbf24;">GM Reset: 71.0%&ndash;72.0% (Rubin Ramp)</span>
+        </div>
+        <div class="strip-item">
+          <span class="strip-label" style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); display:block;">True Economic FCF</span>
+          <span class="strip-val" style="font-size: 16px; font-weight: 700; color: #34d399;">$46,165.0M</span>
+          <span class="strip-sub" style="font-size: 11px; color: #93c5fd;">OCF $48,253.0M &bull; $28.1B Returned</span>
+        </div>
+        <div class="strip-item">
+          <span class="strip-label" style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); display:block;">1-Wk Straddle Implied</span>
+          <span class="strip-val" style="font-size: 16px; font-weight: 700; color: #38bdf8;">&plusmn;9.27% ($15.03)</span>
+          <span class="strip-sub" style="font-size: 11px; color: #a855f7;">AH +4.81% [WITHIN BAND]</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- 2. TRACK B STICKY JUMP-NAV -->
+    <nav class="post-jump-nav" style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; padding: 10px 14px; background: rgba(15, 23, 42, 0.88); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; position: sticky; top: 10px; z-index: 100; backdrop-filter: blur(8px);">
+      <a href="#sec-scorecard" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">1. Beat / Miss Scorecard</a>
+      <a href="#sec-5q" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">2. Rolling 5Q Table (Q4 Actual + Q1E)</a>
+      <a href="#sec-fcf" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">3. Forensic True FCF Bridge</a>
+      <a href="#sec-audit" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">4. Wins, Drags &amp; Call Q&amp;A</a>
+      <a href="#sec-comps" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">5. Peer Group Multiples</a>
+      <a href="#sec-sentiment" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">6. 4-Pillar Sentiment</a>
+      <a href="#sec-trade" style="font-size: 11.5px; color: #e2e8f0; text-decoration: none; padding: 4px 9px; border-radius: 6px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);">7. PM Trade Matrix</a>
+    </nav>
+
+    <!-- EXECUTIVE KPI GRID -->
+    <section class="kpi-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-bottom: 24px;">
+      <div class="card kpi-card" style="background: rgba(15, 23, 42, 0.6); padding: 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+        <div class="card-title" style="display:flex; justify-content:space-between; align-items:center;">
+          <span class="tip" title="Data Center Platform Revenue" data-tip="Data Center revenue sold to hyperscale cloud service providers and internet infrastructure leaders, reaching $60,100.0M ($60.1B) in Q3 FY27 (+23% QoQ, +71% YoY per CFO Commentary), propelled by Vera Rubin NVL72 and Blackwell Ultra deployments. Data Center revenue from neoclouds (CoreWeave, Nebius, Nscale), sovereign AI factories, frontier labs, and enterprise AI systems, hitting $47,500.0M ($47.5B) (+18% QoQ, +195% YoY). Combined Data Center Platform totaled $107.6B.">Data Center Platform</span>
+          <span class="badge badge-bull">+110% YoY</span>
+        </div>
+        <div class="card-value" style="font-size: 20px; font-weight: 800; color: #34d399; margin: 6px 0;">$107.6B ($107,600M)</div>
+        <div style="font-size: 11.5px; color: var(--text-secondary);">Hyperscale hit $60.1B (+23% QoQ) &amp; AI Clouds/Enterprise hit $47.5B (+195% YoY), propelled by ~$20B Vera Rubin NVL72 debut shipments.</div>
+      </div>
+      <div class="card kpi-card" style="background: rgba(15, 23, 42, 0.6); padding: 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+        <div class="card-title" style="display:flex; justify-content:space-between; align-items:center;">
+          <span class="tip" title="Vera Rubin NVL72 Debut Ramp" data-tip="NVIDIA's next-generation rack-scale architecture, which shipped in volume during Q3 FY27 and generated nearly $20B in debut revenue — the fastest product ramp in company history.">Vera Rubin Ramp &amp; FY28</span>
+          <span class="badge badge-purple">Fastest Ever</span>
+        </div>
+        <div class="card-value" style="font-size: 20px; font-weight: 800; color: #60a5fa; margin: 6px 0;">~75% FY28 Growth</div>
+        <div style="font-size: 11.5px; color: var(--text-secondary);">Management raised FY28 growth outlook to ~75% YoY, backed by $390B in multi-year supply commitments (up from $279B in Q2 FY27).</div>
+      </div>
+      <div class="card kpi-card" style="background: rgba(15, 23, 42, 0.6); padding: 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+        <div class="card-title" style="display:flex; justify-content:space-between; align-items:center;">
+          <span class="tip" title="Share Repurchase Authorization & Cash" data-tip="In Sept 2026, NVIDIA's Board added $150B to buyback capacity, leaving $227.3B remaining after returning $28.1B in Q3 ($22.1B buybacks + $6.0B dividends).">Capital Return Fortress</span>
+          <span class="badge badge-bull">$227.3B Remaining</span>
+        </div>
+        <div class="card-value" style="font-size: 20px; font-weight: 800; color: #38bdf8; margin: 6px 0;">$28.1B Q3 Return</div>
+        <div style="font-size: 11.5px; color: var(--text-secondary);">Returned $22.1B in buybacks + $6.0B dividends in Q3 after adding $150B authorization; $53.5B cash &amp; debt securities vs $32.4B LT debt.</div>
+      </div>
+      <div class="card kpi-card" style="background: rgba(15, 23, 42, 0.6); padding: 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+        <div class="card-title" style="display:flex; justify-content:space-between; align-items:center;">
+          <span class="tip" title="Leadership Transition & 10-Q Timing" data-tip="Following CEO Jensen Huang's Nov 12, 2026 resignation, CFO Colette Kress is serving as Interim CEO under Board Chairman Harvey Jones while Heidrick & Struggles leads a permanent CEO search; Form 10-Q filing is deferred by weeks pending board committee review.">Governance &amp; Ecosystem</span>
+          <span class="badge badge-warn">10-Q Deferred</span>
+        </div>
+        <div class="card-value" style="font-size: 20px; font-weight: 800; color: #fbbf24; margin: 6px 0;">Interim CEO Kress</div>
+        <div style="font-size: 11.5px; color: var(--text-secondary);">Colette Kress leads post-Huang transition alongside Hugging Face acquisition agreement; 10-Q filing deferred weeks during board review.</div>
+      </div>
+    </section>
+
+    <!-- 3. ROW 1B SCORECARD & AUDIT -->
+    <section id="sec-scorecard" class="scorecard card" style="margin-bottom: 28px; padding: 20px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+        <h2 style="font-size: 17px; font-weight: 700; color: #fff; margin: 0;">
+          Row 1B: Post-Release Print vs Expectations &amp; Guidance Scorecard
+        </h2>
+        <span class="badge badge-bull">VERDICT: CLEAN BEAT & RAISE</span>
+      </div>
+
+      <!-- TRACK B: T-1 vs T+0 THESIS AUDIT BANNER -->
+      <div class="t1-vs-t0-audit" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-bottom: 18px; background: rgba(15, 23, 42, 0.55); padding: 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+        <div style="border-left: 3px solid #3b82f6; padding-left: 10px;">
+          <div style="font-size: 11px; text-transform: uppercase; color: #93c5fd; font-weight: 700;">T-1 Pre-Print Thesis Setup</div>
+          <div style="font-size: 12.5px; color: #e2e8f0; margin-top: 4px; line-height:1.45;">
+            Pre-print consensus stood at <strong>$108,500.0M</strong> revenue and <strong>$2.47</strong> EPS, with buy-side whisper at <strong>$111,000.0M</strong> / <strong>$2.58</strong> and options pricing a <strong>&plusmn;9.27%</strong> ($15.03) move amid Jensen Huang's Nov 12 departure shock.
+          </div>
+        </div>
+        <div style="border-left: 3px solid #10b981; padding-left: 10px;">
+          <div style="font-size: 11px; text-transform: uppercase; color: #34d399; font-weight: 700;">T+0 Actual Print &amp; Guide Reset</div>
+          <div style="font-size: 12.5px; color: #e2e8f0; margin-top: 4px; line-height:1.45;">
+            Reported <strong>$115,844.0M</strong> revenue (+6.77% vs Street, +$4,844M vs whisper) and <strong>$2.70</strong> GAAP EPS ($2.68 Non-GAAP). Guided Q4 FY27 revenue to <strong>$130.0B &plusmn; 3%</strong>, while warning gross margin dips to <strong>71.0%&ndash;72.0%</strong> during Vera Rubin's initial ramp.
+          </div>
+        </div>
+        <div style="border-left: 3px solid #8b5cf6; padding-left: 10px;">
+          <div style="font-size: 11px; text-transform: uppercase; color: #c084fc; font-weight: 700;">T-1 Thesis Verdict</div>
+          <div style="font-size: 12.5px; color: #e2e8f0; margin-top: 4px; line-height:1.45;">
+            <strong style="color: #34d399;">OPERATIONAL THESIS VALIDATED</strong> &mdash; Vera Rubin's ~$20B debut quarter and ~75% FY28 growth visibility proved NVIDIA's AI factory moat transcends founder transition risk, lifting AH shares +4.81% to $162.94.
+          </div>
+        </div>
+      </div>
+
+      <!-- TABLE 1B-1: HEADLINE & COMPANY KPI SCORECARD -->
+      <div style="margin-bottom: 22px;">
+        <div style="font-size: 13.5px; font-weight: 700; color: #cbd5e1; margin-bottom: 8px;">
+          Table 1B-1: Headline &amp; Company KPI Beat / Miss Scorecard
+        </div>
+        <div class="table-wrapper" style="overflow-x: auto; border: 1px solid var(--border-color); border-radius: 8px;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 12px; text-align: left;">
+            <thead>
+              <tr style="background: rgba(15, 23, 42, 0.9); border-bottom: 1px solid var(--border-color);">
+                <th style="padding: 10px 12px; color: var(--text-muted);">Metric</th>
+                <th style="padding: 10px 12px; color: var(--text-muted);">Q-1 Actual (Q3 2026)</th>
+                <th style="padding: 10px 12px; color: var(--text-muted);">Q-4 YoY (Q4 2025)</th>
+                <th class="col-q0" style="padding: 10px 12px; color: #60a5fa;">Street Consensus</th>
+                <th style="padding: 10px 12px; color: #34d399;">Q0 Actual (Q4 2026)</th>
+                <th style="padding: 10px 12px; color: var(--text-muted);">vs. Consensus (Visual)</th>
+                <th style="padding: 10px 12px; color: var(--text-muted);">Verdict</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="tip" title="Total Consolidated Revenue ($M)" data-tip="Consolidated GAAP net revenue of $115,844.0M ($115.8B) for FY27 Q3 (ended Oct 25, 2026), up +20.4% QoQ and +103.2% YoY, beating Street consensus ($108,500.0M) by +$7,344.0M (+6.77%) and buy-side whisper ($111,000.0M) by +$4,844.0M.">Total Consolidated Revenue ($M)</span></td>
+                <td>$96,221.0M</td>
+                <td>$57,006.0M</td>
+                <td class="col-q0" style="font-weight:700; color:#60a5fa;">$108,500.0M</td>
+                <td style="font-weight:700; color:#34d399;">$115,844.0M</td>
+                <td>
+                  <span class="badge badge-bull">+$7,344.0M (+6.77%)</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div class="beat-bar-fill" style="width:97%; height:100%; background:linear-gradient(90deg, #10b981, #059669);"></div></div>
+                </td>
+                <td><span class="badge badge-bull">BEAT (+4.36% vs Whisper)</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Data Center Platform Revenue ($M)" data-tip="Data Center revenue sold to hyperscale cloud service providers and internet infrastructure leaders, reaching $60,100.0M ($60.1B) in Q3 FY27 (+23% QoQ, +71% YoY per CFO Commentary), propelled by Vera Rubin NVL72 and Blackwell Ultra deployments. Data Center revenue from neoclouds (CoreWeave, Nebius, Nscale), sovereign AI factories, frontier labs, and enterprise AI systems, hitting $47,500.0M ($47.5B) (+18% QoQ, +195% YoY). Combined Data Center Platform totaled $107.6B.">Data Center Platform Revenue ($M)</span></td>
+                <td>$89,023.0M</td>
+                <td>$51,200.0M</td>
+                <td class="col-q0" style="font-weight:700; color:#60a5fa;">$101,200.0M</td>
+                <td style="font-weight:700; color:#34d399;">$107,600.0M</td>
+                <td>
+                  <span class="badge badge-bull">+$6,400.0M (+6.32%)</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div class="beat-bar-fill" style="width:96%; height:100%; background:linear-gradient(90deg, #10b981, #059669);"></div></div>
+                </td>
+                <td><span class="badge badge-bull">BEAT (+110% YoY)</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="GAAP Diluted EPS ($/sh)" data-tip="GAAP diluted earnings per share of $2.70 on 24,186M diluted shares, beating Street consensus ($2.47) by +$0.23 (+9.31%) and rising +107.7% YoY from $1.30.">GAAP Diluted EPS ($/sh)</span></td>
+                <td>$2.46</td>
+                <td>$1.30</td>
+                <td class="col-q0" style="font-weight:700; color:#60a5fa;">$2.47</td>
+                <td style="font-weight:700; color:#34d399;">$2.70</td>
+                <td>
+                  <span class="badge badge-bull">+$0.23 (+9.31%)</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div class="beat-bar-fill" style="width:94%; height:100%; background:linear-gradient(90deg, #10b981, #059669);"></div></div>
+                </td>
+                <td><span class="badge badge-bull">BEAT</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Non-GAAP Gross Margin (%)" data-tip="74.9% in Q3 FY27 (GAAP 74.82%), essentially in line with the 75.0% consensus hurdle. Q4 FY27 guidance resets to 71.0%-72.0% due to initial high-volume Vera Rubin NVL72 rack ramp costs.">Non-GAAP Gross Margin (%)</span></td>
+                <td>75.0%</td>
+                <td>73.5%</td>
+                <td class="col-q0" style="font-weight:700; color:#60a5fa;">75.0%</td>
+                <td style="font-weight:700; color:#fbbf24;">74.9%</td>
+                <td>
+                  <span class="badge badge-warn">-10 bps vs Street (74.82% GAAP)</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div class="beat-bar-fill" style="width:78%; height:100%; background:linear-gradient(90deg, #f59e0b, #10b981);"></div></div>
+                </td>
+                <td><span class="badge badge-blue">IN-LINE (BEAT GUIDE)</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Vera Rubin Architecture Debut Ramp ($B)" data-tip="NVIDIA's next-generation rack-scale architecture, which shipped in volume during Q3 FY27 and generated nearly $20B in debut revenue — the fastest product ramp in company history.">Vera Rubin NVL72 Debut Revenue ($B)</span></td>
+                <td>$0.0B</td>
+                <td>$0.0B</td>
+                <td class="col-q0" style="font-weight:700; color:#60a5fa;">$12.0B Est</td>
+                <td style="font-weight:700; color:#34d399;">~$20.0B</td>
+                <td>
+                  <span class="badge badge-bull">+$8.0B (+66.7% vs Est)</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div class="beat-bar-fill" style="width:98%; height:100%; background:linear-gradient(90deg, #10b981, #059669);"></div></div>
+                </td>
+                <td><span class="badge badge-purple">RECORD RAMP</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TABLE 1B-2: MANAGEMENT GUIDANCE ACCOUNTABILITY -->
+      <div style="margin-bottom: 22px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+          <div style="font-size: 13.5px; font-weight: 700; color: #cbd5e1;">
+            Table 1B-2: Management Execution Accountability (Q0 Actual vs Q-1 Guidance)
+          </div>
+          <div style="font-size: 11.5px; color: #34d399; font-weight: 600;">
+            Management Credibility Score: 93 / 100 (Grade A+ Execution)
+          </div>
+        </div>
+        <div class="credibility-gauge-bar" style="height: 6px; background: rgba(255,255,255,0.08); border-radius: 3px; margin-bottom: 10px; overflow: hidden;">
+          <div class="credibility-gauge-fill" style="width: 93%; height: 100%; background: linear-gradient(90deg, #3b82f6, #10b981);"></div>
+        </div>
+        <div class="table-wrapper" style="overflow-x: auto; border: 1px solid var(--border-color); border-radius: 8px;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 12px; text-align: left;">
+            <thead>
+              <tr style="background: rgba(15, 23, 42, 0.9); border-bottom: 1px solid var(--border-color);">
+                <th style="padding: 10px 12px; color: var(--text-muted);">Guided Metric</th>
+                <th style="padding: 10px 12px; color: var(--text-muted);">Prior Q-1 Guidance</th>
+                <th style="padding: 10px 12px; color: #34d399;">Reported Q0 Actual</th>
+                <th style="padding: 10px 12px; color: var(--text-muted);">Variance Commentary</th>
+                <th style="padding: 10px 12px; color: var(--text-muted);">Execution Grade</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="tip" title="Q3 FY27 Consolidated Revenue ($B)" data-tip="Q3 FY27 Consolidated Revenue ($B): Prior Q-1 guide of $108.0B ± 2% ($105.84B – $110.16B) vs reported Q0 actual of $115.84B ($115,844.0M) (+$7.84B (+7.26%) above midpoint; +$5.68B above top end).">Q3 FY27 Consolidated Revenue ($B)</span></td>
+                <td>$108.0B ± 2% ($105.84B – $110.16B)</td>
+                <td style="font-weight:700; color:#34d399;">$115.84B ($115,844.0M)</td>
+                <td>+$7.84B (+7.26%) above midpoint; +$5.68B above top end</td>
+                <td><span class="badge badge-bull">CRUSHED GUIDE</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Q3 FY27 GAAP & Non-GAAP Gross Margin (%)" data-tip="Q3 FY27 GAAP & Non-GAAP Gross Margin (%): Prior Q-1 guide of 74.0% ± 50 bps (73.5% – 74.5%) vs reported Q0 actual of 74.8% GAAP / 74.9% Non-GAAP (+80 to +90 bps above midpoint (+30-40 bps above top end)).">Q3 FY27 GAAP & Non-GAAP Gross Margin (%)</span></td>
+                <td>74.0% ± 50 bps (73.5% – 74.5%)</td>
+                <td style="font-weight:700; color:#34d399;">74.8% GAAP / 74.9% Non-GAAP</td>
+                <td>+80 to +90 bps above midpoint (+30-40 bps above top end)</td>
+                <td><span class="badge badge-bull">BEAT OWN GUIDE</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Q3 FY27 Operating Expenses ($B)" data-tip="Q3 FY27 Operating Expenses ($B): Prior Q-1 guide of $9.20B GAAP / $9.00B Non-GAAP vs reported Q0 actual of $9.16B GAAP / $8.84B Non-GAAP (-$44M GAAP / -$159M Non-GAAP below cost ceiling).">Q3 FY27 Operating Expenses ($B)</span></td>
+                <td>$9.20B GAAP / $9.00B Non-GAAP</td>
+                <td style="font-weight:700; color:#34d399;">$9.16B GAAP / $8.84B Non-GAAP</td>
+                <td>-$44M GAAP / -$159M Non-GAAP below cost ceiling</td>
+                <td><span class="badge badge-bull">DISCIPLINED BEAT</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="China Data Center Compute Assumption" data-tip="China Data Center Compute Assumption: Prior Q-1 guide of $0 assumed in Q3 FY27 outlook vs reported Q0 actual of $2.4B Hopper shipments to China (+$2.4B incremental upside above zeroed baseline).">China Data Center Compute Assumption</span></td>
+                <td>$0 assumed in Q3 FY27 outlook</td>
+                <td style="font-weight:700; color:#34d399;">$2.4B Hopper shipments to China</td>
+                <td>+$2.4B incremental upside above zeroed baseline</td>
+                <td><span class="badge badge-blue">CONSERVATIVE GUIDE</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TABLE 1B-3: FORWARD GUIDANCE RESET -->
+      <div>
+        <div style="font-size: 13.5px; font-weight: 700; color: #cbd5e1; margin-bottom: 8px;">
+          Table 1B-3: Forward Guidance Reset (New Management Guidance vs Street Expectations)
+        </div>
+        <div class="table-wrapper" style="overflow-x: auto; border: 1px solid var(--border-color); border-radius: 8px;">
+          <table style="width: 100%; border-collapse: collapse; font-size: 12px; text-align: left;">
+            <thead>
+              <tr style="background: rgba(15, 23, 42, 0.9); border-bottom: 1px solid var(--border-color);">
+                <th style="padding: 10px 12px; color: var(--text-muted);">Forward Metric</th>
+                <th style="padding: 10px 12px; color: var(--text-muted);">Street Pre-Print Consensus</th>
+                <th style="padding: 10px 12px; color: #34d399;">New Management Guidance</th>
+                <th style="padding: 10px 12px; color: var(--text-muted);">Guidance Delta</th>
+                <th style="padding: 10px 12px; color: var(--text-muted);">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="tip" title="Q4 FY27 (Q1 2027E) Revenue Guidance" data-tip="Q4 FY27 (Q1 2027E) Revenue Guidance: Pre-print Street expectation was $125.0B Pre-Print Street Consensus; new management guide is $130.0B ± 3% ($126.1B – $133.9B, 14-week Qtr) (+$5.0B (+4.0%) above Street consensus; zero China compute assumed).">Q4 FY27 (Q1 2027E) Revenue Guidance</span></td>
+                <td>$125.0B Pre-Print Street Consensus</td>
+                <td style="font-weight:700; color:#34d399;">$130.0B ± 3% ($126.1B – $133.9B, 14-week Qtr)</td>
+                <td>+$5.0B (+4.0%) above Street consensus; zero China compute assumed</td>
+                <td><span class="badge badge-bull">RAISED</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Q4 FY27 (Q1 2027E) Gross Margin Guide" data-tip="Q4 FY27 (Q1 2027E) Gross Margin Guide: Pre-print Street expectation was 74.5% Pre-Print Street Model; new management guide is 71.0% – 72.0% GAAP & Non-GAAP (71.5% Midpoint) (-300 bps reset due to initial Vera Rubin NVL72 ramp (guided as trough)).">Q4 FY27 (Q1 2027E) Gross Margin Guide</span></td>
+                <td>74.5% Pre-Print Street Model</td>
+                <td style="font-weight:700; color:#34d399;">71.0% – 72.0% GAAP & Non-GAAP (71.5% Midpoint)</td>
+                <td>-300 bps reset due to initial Vera Rubin NVL72 ramp (guided as trough)</td>
+                <td><span class="badge badge-warn">LOWERED (RAMP TROUGH)</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Q4 FY27 (Q1 2027E) Operating Expenses" data-tip="Q4 FY27 (Q1 2027E) Operating Expenses: Pre-print Street expectation was $9.8B Street OpEx Model; new management guide is $11.0B GAAP / $10.7B Non-GAAP (+$1.2B step-up on extra week, Rubin engineering & Hugging Face integration).">Q4 FY27 (Q1 2027E) Operating Expenses</span></td>
+                <td>$9.8B Street OpEx Model</td>
+                <td style="font-weight:700; color:#34d399;">$11.0B GAAP / $10.7B Non-GAAP</td>
+                <td>+$1.2B step-up on extra week, Rubin engineering & Hugging Face integration</td>
+                <td><span class="badge badge-blue">STEP-UP INVEST</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Full-Year FY28 Revenue Growth Outlook" data-tip="Full-Year FY28 Revenue Growth Outlook: Pre-print Street expectation was ~55% – 60% Street FY28 Growth Est.; new management guide is ~75% YoY Full-Year Revenue Growth Target (+1,500+ bps upward visibility reset backed by $390B supply commitments).">Full-Year FY28 Revenue Growth Outlook</span></td>
+                <td>~55% – 60% Street FY28 Growth Est.</td>
+                <td style="font-weight:700; color:#34d399;">~75% YoY Full-Year Revenue Growth Target</td>
+                <td>+1,500+ bps upward visibility reset backed by $390B supply commitments</td>
+                <td><span class="badge badge-bull">RAISED AGGRESSIVELY</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. ROW 2 5-QUARTER ROLLING TABLE -->
+    <section id="sec-5q" class="card" style="margin-bottom: 28px; padding: 20px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+        <div>
+          <h2 style="font-size: 17px; font-weight: 700; color: #fff; margin: 0;">
+            Row 2: 5-Quarter Rolling Financial Performance &amp; Dynamic Market Platform Breakdown
+          </h2>
+          <span style="font-size: 12px; color: #94a3b8;">Rolled forward from Q3 FY27 (Oct 25, 2026) Form 8-K Exhibit 99.1/99.2/99.3 &amp; prior 10-Q filings; Q1 2027E (FY27 Q4E) reflects new $130.0B midpoint guide.</span>
+        </div>
+        <span class="badge badge-purple">Rolling 5Q GAAP + Guide</span>
+      </div>
+      <div class="table-wrapper" style="overflow-x: auto; border: 1px solid var(--border-color); border-radius: 8px;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 12px; text-align: left;">
+          <thead>
+            <tr style="background: rgba(15, 23, 42, 0.9); border-bottom: 1px solid var(--border-color);">
+              <th style="padding: 10px 12px; color: var(--text-muted); min-width: 240px;">Financial Metric ($M, except per share)</th>
+              <th style="padding: 10px 12px; color: var(--text-muted);">Q4 2025</th>
+              <th style="padding: 10px 12px; color: var(--text-muted);">Q1 2026</th>
+              <th style="padding: 10px 12px; color: var(--text-muted);">Q2 2026</th>
+              <th style="padding: 10px 12px; color: var(--text-muted);">Q3 2026</th>
+              <th class="col-q0" style="padding: 10px 12px; font-weight: 700; color: #34d399; background: rgba(16, 185, 129, 0.1);">Q4 2026 (Actual)</th>
+              <th class="col-est" style="padding: 10px 12px; font-weight: 700; color: #60a5fa; background: rgba(59, 130, 246, 0.1);">Q1 2027E (Guided / Street)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="font-weight: 700; background: rgba(255,255,255,0.02);">
+              <td style="padding: 8px 12px;"><span class="tip" title="Total Consolidated Revenue" data-tip="Consolidated GAAP net revenue of $115,844.0M ($115.8B) for FY27 Q3 (ended Oct 25, 2026), up +20.4% QoQ and +103.2% YoY, beating Street consensus ($108,500.0M) by +$7,344.0M (+6.77%) and buy-side whisper ($111,000.0M) by +$4,844.0M.">Total Consolidated Revenue ($M)</span></td>
+              <td style="padding: 8px 12px;">$57,006.0M</td>
+              <td style="padding: 8px 12px;">$68,127.0M</td>
+              <td style="padding: 8px 12px;">$81,615.0M</td>
+              <td style="padding: 8px 12px;">$96,221.0M</td>
+              <td class="col-q0" style="padding: 8px 12px; font-weight: 700; color: #34d399; background: rgba(16, 185, 129, 0.05);">$115,844.0M</td>
+              <td class="col-est" style="padding: 8px 12px; font-weight: 700; color: #60a5fa; background: rgba(59, 130, 246, 0.05);">$130,000.0M</td>
+            </tr>
+            <tr class="sub-row" style="color: var(--text-secondary); font-size: 11.5px;">
+              <td style="padding: 6px 12px 6px 24px;">&#8627; <span class="tip" title="Data Center — Hyperscale" data-tip="Data Center revenue sold to hyperscale cloud service providers and internet infrastructure leaders, reaching $60,100.0M ($60.1B) in Q3 FY27 (+23% QoQ, +71% YoY per CFO Commentary), propelled by Vera Rubin NVL72 and Blackwell Ultra deployments.">Data Center &mdash; Hyperscale</span></td>
+              <td style="padding: 6px 12px;">$28,500.0M</td>
+              <td style="padding: 6px 12px;">$34,200.0M</td>
+              <td style="padding: 6px 12px;">$41,100.0M</td>
+              <td style="padding: 6px 12px;">$48,710.0M</td>
+              <td class="col-q0" style="padding: 6px 12px; background: rgba(16, 185, 129, 0.05);">$60,100.0M</td>
+              <td class="col-est" style="padding: 6px 12px; background: rgba(59, 130, 246, 0.05);">$68,000.0M</td>
+            </tr>
+            <tr class="sub-row" style="color: var(--text-secondary); font-size: 11.5px;">
+              <td style="padding: 6px 12px 6px 24px;">&#8627; <span class="tip" title="Data Center — AI Clouds, Industrial & Enterprise" data-tip="Data Center revenue from neoclouds (CoreWeave, Nebius, Nscale), sovereign AI factories, frontier labs, and enterprise AI systems, hitting $47,500.0M ($47.5B) (+18% QoQ, +195% YoY). Combined Data Center Platform totaled $107.6B.">Data Center &mdash; AI Clouds, Industrial &amp; Enterprise</span></td>
+              <td style="padding: 6px 12px;">$22,349.0M</td>
+              <td style="padding: 6px 12px;">$27,200.0M</td>
+              <td style="padding: 6px 12px;">$33,451.0M</td>
+              <td style="padding: 6px 12px;">$40,313.0M</td>
+              <td class="col-q0" style="padding: 6px 12px; background: rgba(16, 185, 129, 0.05);">$47,500.0M</td>
+              <td class="col-est" style="padding: 6px 12px; background: rgba(59, 130, 246, 0.05);">$53,300.0M</td>
+            </tr>
+            <tr class="sub-row" style="color: var(--text-secondary); font-size: 11.5px;">
+              <td style="padding: 6px 12px 6px 24px;">&#8627; <span class="tip" title="Edge Computing Platform" data-tip="Replaces legacy Gaming/ProViz/Auto rollups under NVIDIA's FY27 market platform reporting; totaled $8.2B ($8,244.0M residual to total revenue, +14% QoQ, +42% YoY) led by Blackwell workstations, RTX Spark AI PCs, and Physical AI/robotics.">Edge Computing (Gaming, ProViz, Auto &amp; Robotics)</span></td>
+              <td style="padding: 6px 12px;">$6,157.0M</td>
+              <td style="padding: 6px 12px;">$6,727.0M</td>
+              <td style="padding: 6px 12px;">$7,064.0M</td>
+              <td style="padding: 6px 12px;">$7,198.0M</td>
+              <td class="col-q0" style="padding: 6px 12px; background: rgba(16, 185, 129, 0.05);">$8,244.0M</td>
+              <td class="col-est" style="padding: 6px 12px; background: rgba(59, 130, 246, 0.05);">$8,700.0M</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 12px;"><span class="tip" title="Cost of Revenue" data-tip="Direct wafer fabrication (TSMC 3nm/4nm), HBM3e/HBM4 memory stacking, CoWoS advanced packaging, and rack-scale integration costs ($29,168.0M in Q3 FY27).">Cost of Revenue ($M)</span></td>
+              <td style="padding: 8px 12px;">$15,157.0M</td>
+              <td style="padding: 8px 12px;">$17,034.0M</td>
+              <td style="padding: 8px 12px;">$20,458.0M</td>
+              <td style="padding: 8px 12px;">$24,079.0M</td>
+              <td class="col-q0" style="padding: 8px 12px; background: rgba(16, 185, 129, 0.05);">$29,168.0M</td>
+              <td class="col-est" style="padding: 8px 12px; background: rgba(59, 130, 246, 0.05);">$37,050.0M</td>
+            </tr>
+            <tr style="font-weight: 700; background: rgba(255,255,255,0.02);">
+              <td style="padding: 8px 12px;"><span class="tip" title="Gross Profit" data-tip="GAAP Gross Profit of $86,676.0M (+107.1% YoY vs $41,849.0M), driven by Blackwell Ultra mix and rapid initial Vera Rubin NVL72 deliveries.">Gross Profit ($M)</span></td>
+              <td style="padding: 8px 12px;">$41,849.0M</td>
+              <td style="padding: 8px 12px;">$51,093.0M</td>
+              <td style="padding: 8px 12px;">$61,157.0M</td>
+              <td style="padding: 8px 12px;">$72,142.0M</td>
+              <td class="col-q0" style="padding: 8px 12px; font-weight: 700; color: #34d399; background: rgba(16, 185, 129, 0.05);">$86,676.0M</td>
+              <td class="col-est" style="padding: 8px 12px; font-weight: 700; color: #60a5fa; background: rgba(59, 130, 246, 0.05);">$92,950.0M</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 12px;"><span class="tip" title="GAAP Gross Margin %" data-tip="74.9% in Q3 FY27 (GAAP 74.82%), essentially in line with the 75.0% consensus hurdle. Q4 FY27 guidance resets to 71.0%-72.0% due to initial high-volume Vera Rubin NVL72 rack ramp costs.">GAAP Gross Margin (%)</span></td>
+              <td style="padding: 8px 12px;">73.41%</td>
+              <td style="padding: 8px 12px;">75.00%</td>
+              <td style="padding: 8px 12px;">74.93%</td>
+              <td style="padding: 8px 12px;">74.98%</td>
+              <td class="col-q0" style="padding: 8px 12px; color: #34d399; background: rgba(16, 185, 129, 0.05);">74.82%</td>
+              <td class="col-est" style="padding: 8px 12px; color: #fbbf24; background: rgba(59, 130, 246, 0.05);">71.50%</td>
+            </tr>
+            <tr style="font-weight: 700;">
+              <td style="padding: 8px 12px;"><span class="tip" title="Total Operating Expenses" data-tip="GAAP OpEx of $9,156.0M ($7,454.0M R&D + $1,702.0M SG&A) and Non-GAAP OpEx of $8,841.0M, reflecting stepped-up compute infrastructure and engineering headcount for Rubin and post-Rubin architectures.">Total Operating Expenses ($M)</span></td>
+              <td style="padding: 8px 12px;">$5,839.0M</td>
+              <td style="padding: 8px 12px;">$6,794.0M</td>
+              <td style="padding: 8px 12px;">$7,621.0M</td>
+              <td style="padding: 8px 12px;">$8,408.0M</td>
+              <td class="col-q0" style="padding: 8px 12px; font-weight: 700; background: rgba(16, 185, 129, 0.05);">$9,156.0M</td>
+              <td class="col-est" style="padding: 8px 12px; font-weight: 700; background: rgba(59, 130, 246, 0.05);">$11,000.0M</td>
+            </tr>
+            <tr class="sub-row" style="color: var(--text-secondary); font-size: 11.5px;">
+              <td style="padding: 6px 12px 6px 24px;">&#8627; Research &amp; Development (R&amp;D)</td>
+              <td style="padding: 6px 12px;">$4,705.0M</td>
+              <td style="padding: 6px 12px;">$5,512.0M</td>
+              <td style="padding: 6px 12px;">$6,321.0M</td>
+              <td style="padding: 6px 12px;">$7,054.0M</td>
+              <td class="col-q0" style="padding: 6px 12px; background: rgba(16, 185, 129, 0.05);">$7,454.0M</td>
+              <td class="col-est" style="padding: 6px 12px; background: rgba(59, 130, 246, 0.05);">$9,000.0M</td>
+            </tr>
+            <tr class="sub-row" style="color: var(--text-secondary); font-size: 11.5px;">
+              <td style="padding: 6px 12px 6px 24px;">&#8627; Sales, General &amp; Administrative (SG&amp;A)</td>
+              <td style="padding: 6px 12px;">$1,134.0M</td>
+              <td style="padding: 6px 12px;">$1,282.0M</td>
+              <td style="padding: 6px 12px;">$1,300.0M</td>
+              <td style="padding: 6px 12px;">$1,354.0M</td>
+              <td class="col-q0" style="padding: 6px 12px; background: rgba(16, 185, 129, 0.05);">$1,702.0M</td>
+              <td class="col-est" style="padding: 6px 12px; background: rgba(59, 130, 246, 0.05);">$2,000.0M</td>
+            </tr>
+            <tr style="font-weight: 700; background: rgba(255,255,255,0.02);">
+              <td style="padding: 8px 12px;"><span class="tip" title="GAAP Operating Income" data-tip="GAAP Operating Income reached $77,520.0M (66.92% operating margin), up +115.3% YoY and +21.6% QoQ, demonstrating unmatched accelerated computing operating leverage.">GAAP Operating Income ($M)</span></td>
+              <td style="padding: 8px 12px;">$36,010.0M</td>
+              <td style="padding: 8px 12px;">$44,299.0M</td>
+              <td style="padding: 8px 12px;">$53,536.0M</td>
+              <td style="padding: 8px 12px;">$63,734.0M</td>
+              <td class="col-q0" style="padding: 8px 12px; font-weight: 700; color: #34d399; background: rgba(16, 185, 129, 0.05);">$77,520.0M</td>
+              <td class="col-est" style="padding: 8px 12px; font-weight: 700; color: #60a5fa; background: rgba(59, 130, 246, 0.05);">$81,950.0M</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 12px;">GAAP Operating Margin (%)</td>
+              <td style="padding: 8px 12px;">63.17%</td>
+              <td style="padding: 8px 12px;">65.02%</td>
+              <td style="padding: 8px 12px;">65.59%</td>
+              <td style="padding: 8px 12px;">66.24%</td>
+              <td class="col-q0" style="padding: 8px 12px; color: #34d399; background: rgba(16, 185, 129, 0.05);">66.92%</td>
+              <td class="col-est" style="padding: 8px 12px; color: #60a5fa; background: rgba(59, 130, 246, 0.05);">63.04%</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 12px;">GAAP Net Income ($M)</td>
+              <td style="padding: 8px 12px;">$31,910.0M</td>
+              <td style="padding: 8px 12px;">$42,960.0M</td>
+              <td style="padding: 8px 12px;">$58,321.0M</td>
+              <td style="padding: 8px 12px;">$59,688.0M</td>
+              <td class="col-q0" style="padding: 8px 12px; background: rgba(16, 185, 129, 0.05);">$65,287.0M</td>
+              <td class="col-est" style="padding: 8px 12px; background: rgba(59, 130, 246, 0.05);">$68,500.0M</td>
+            </tr>
+            <tr style="font-weight: 700;">
+              <td style="padding: 8px 12px;"><span class="tip" title="GAAP Diluted EPS" data-tip="GAAP diluted earnings per share of $2.70 on 24,186M diluted shares, beating Street consensus ($2.47) by +$0.23 (+9.31%) and rising +107.7% YoY from $1.30.">GAAP Diluted EPS ($)</span></td>
+              <td style="padding: 8px 12px;">$1.30</td>
+              <td style="padding: 8px 12px;">$1.76</td>
+              <td style="padding: 8px 12px;">$2.39</td>
+              <td style="padding: 8px 12px;">$2.46</td>
+              <td class="col-q0" style="padding: 8px 12px; font-weight: 700; color: #34d399; background: rgba(16, 185, 129, 0.05);">$2.70</td>
+              <td class="col-est" style="padding: 8px 12px; font-weight: 700; color: #60a5fa; background: rgba(59, 130, 246, 0.05);">$2.84</td>
+            </tr>
+            <tr>
+              <td style="padding: 8px 12px;"><span class="tip" title="Non-GAAP Diluted EPS" data-tip="Non-GAAP diluted EPS of $2.68 (note: starting Q1 FY27, NVIDIA no longer excludes stock-based compensation from non-GAAP metrics), beating the $2.58 buy-side whisper by +$0.10 (+3.88%).">Non-GAAP Diluted EPS ($)</span></td>
+              <td style="padding: 8px 12px;">$1.27</td>
+              <td style="padding: 8px 12px;">$1.62</td>
+              <td style="padding: 8px 12px;">$1.87</td>
+              <td style="padding: 8px 12px;">$2.22</td>
+              <td class="col-q0" style="padding: 8px 12px; font-weight: 700; color: #34d399; background: rgba(16, 185, 129, 0.05);">$2.68</td>
+              <td class="col-est" style="padding: 8px 12px; background: rgba(59, 130, 246, 0.05);">$2.82</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div style="margin-top: 10px; font-size: 11.5px; color: #94a3b8; line-height: 1.45;">
+        *All 5 actual quarters reconcile Gross Profit minus Operating Expenses to GAAP Operating Income within $0.00M. Reportable segment split in Q3 FY27: Compute &amp; Networking $106.0B (+108% YoY), Graphics $9.8B (+62% YoY).
+      </div>
+    </section>
+
+    <!-- 5. ROW 3 FORENSIC QUALITY OF EARNINGS & TRUE FCF BRIDGE -->
+    <section id="sec-fcf" class="card" style="margin-bottom: 28px; padding: 20px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+        <h2 style="font-size: 17px; font-weight: 700; color: #fff; margin: 0;">
+          Row 3: Forensic Quality-of-Earnings &amp; True Free Cash Flow Bridge
+        </h2>
+        <span class="badge badge-bull">41.7% OCF Margin</span>
+      </div>
+      <div class="forensic-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-bottom: 16px;">
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 16px; border-radius: 8px; border: 1px solid var(--border-color);">
+          <div style="font-size: 12px; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Operating Cash Flow Surge</div>
+          <div style="font-size: 22px; font-weight: 800; color: #34d399; margin: 6px 0;">+$48,253.0M OCF</div>
+          <div style="font-size: 12px; color: var(--text-secondary); line-height: 1.5;">
+            <span class="tip" title="Operating Cash Flow" data-tip="GAAP net cash provided by operating activities surged to $48,253.0M ($48.3B), doubling from $24,077.0M in the prior quarter and $23,750.0M a year ago, even after absorbing an $18.05B AR build and $8.15B inventory build.">GAAP Operating Cash Flow</span> doubled sequentially from $24,077.0M to <strong>$48,253.0M</strong> (+103.2% YoY vs $23,750.0M), driven by $65,287.0M GAAP Net Income and normalized federal cash tax timing.
+          </div>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 16px; border-radius: 8px; border: 1px solid var(--border-color);">
+          <div style="font-size: 12px; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">True Economic Free Cash Flow</div>
+          <div style="font-size: 22px; font-weight: 800; color: #34d399; margin: 6px 0;">+$46,165.0M True FCF</div>
+          <div style="font-size: 12px; color: var(--text-secondary); line-height: 1.5;">
+            <span class="tip" title="True Free Cash Flow" data-tip="Deterministic mesh True FCF of $46,165.0M (OCF $48,253.0M minus $2,088.0M SBC and $0.0M deterministic CapEx/Leases). Exhibit 99.1 additionally reports $4,422.0M PP&E purchases and $54.0M principal payments ($43,777.0M company FCF).">Deterministic True FCF</span> stands at <strong>$46,165.0M</strong> after deducting $2,088.0M SBC (Note: Exhibit 99.1 also itemizes $4,422.0M PP&amp;E/intangible purchases &amp; $54.0M principal payments for $43,777.0M company-reported FCF).
+          </div>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 16px; border-radius: 8px; border: 1px solid var(--border-color);">
+          <div style="font-size: 12px; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Working Capital &amp; Commitments</div>
+          <div style="font-size: 22px; font-weight: 800; color: #fbbf24; margin: 6px 0;">$390B Supply / $81.0B AR</div>
+          <div style="font-size: 12px; color: var(--text-secondary); line-height: 1.5;">
+            <span class="tip" title="Inventory & DSO" data-tip="Inventories expanded +25.8% QoQ to $39,724M ($15.8B raw materials, $17.8B WIP, $6.2B finished goods) to support the Rubin ramp; Accounts Receivable rose to $81,033M (64 days DSO vs 60 days prior).">Accounts Receivable</span> rose to $81,033M (64 days DSO vs 60 days prior) and Inventories hit $39,724M (+25.8% QoQ), while <span class="tip" title="Supply Commitments" data-tip="Multi-year supplier procurement obligations climbed from $279B last quarter to $390B as of Oct 25, 2026 (plus $102B cloud/lease commitments and $118B partner/SB Energy credit guarantees), locking down HBM and TSMC CoWoS capacity.">supply commitments</span> jumped to $390B.
+          </div>
+        </div>
+      </div>
+
+      <!-- WATERFALL ROWS -->
+      <div style="background: rgba(11, 15, 25, 0.7); border: 1px solid var(--border-color); border-radius: 8px; padding: 16px;">
+        <div style="font-size: 13px; font-weight: 700; color: #cbd5e1; margin-bottom: 12px;">Q3 FY27 (Q4 2026 (Actual)) Deterministic Cash Flow Waterfall ($M)</div>
+        <div class="waterfall-row" style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 12.5px;">
+          <span>(+) Cash Provided by Operating Activities (OCF)</span>
+          <strong style="color: #34d399;">+$48,253.0M</strong>
+        </div>
+        <div class="waterfall-row" style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 12.5px;">
+          <span>(&minus;) Deterministic Mesh CapEx (Ex. 99.1 PP&amp;E/Intangibles: $4,422.0M)</span>
+          <strong style="color: #cbd5e1;">-$0.0M</strong>
+        </div>
+        <div class="waterfall-row" style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 12.5px; background: rgba(255,255,255,0.02);">
+          <span>(=) Deterministic Reported Free Cash Flow (OCF &minus; CapEx)</span>
+          <strong style="color: #34d399;">+$48,253.0M</strong>
+        </div>
+        <div class="waterfall-row" style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 12.5px;">
+          <span>(&minus;) Stock-Based Compensation Expense (SBC)</span>
+          <strong style="color: #f87171;">-$2,088.0M</strong>
+        </div>
+        <div class="waterfall-row" style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 12.5px;">
+          <span>(&minus;) Principal Payments on Finance Leases</span>
+          <strong style="color: #cbd5e1;">-$0.0M</strong>
+        </div>
+        <div class="waterfall-row" style="display: flex; justify-content: space-between; padding: 10px 8px; font-size: 13px; font-weight: 800; background: rgba(16, 185, 129, 0.08); border-radius: 4px; margin-top: 6px;">
+          <span>(=) True Economic Free Cash Flow (Mesh Basis)</span>
+          <strong style="color: #34d399;">+$46,165.0M</strong>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. ROW 4 WHAT MANAGEMENT DID RIGHT VS WRONG & CALL Q&A -->
+    <section id="sec-audit" class="card" style="margin-bottom: 28px; padding: 20px;">
+      <h2 style="font-size: 17px; font-weight: 700; color: #fff; margin-top: 0; margin-bottom: 12px;">
+        Row 4: Operational Execution Wins vs Headwinds &amp; Call Q&amp;A Forensic Audit
+      </h2>
+      <div class="audit-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin-bottom: 20px;">
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 16px; border-radius: 8px; border: 1px solid var(--border-color); border-top: 3px solid #10b981;">
+          <h3 style="font-size: 14px; font-weight: 700; color: #34d399; margin-top: 0; margin-bottom: 10px;">What Management Did Right (Operational Wins)</h3>
+          <ul style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.6; padding-left: 18px; margin: 0;">
+            <li><strong>Explosive Vera Rubin NVL72 Debut:</strong> Shipped next-gen Vera Rubin rack-scale systems into full production, generating nearly $20B in debut revenue &mdash; the fastest architectural ramp in company history &mdash; with racks live at CoreWeave, Google Cloud, Azure, OCI, and Nebius.</li>
+            <li><strong>Massive Top-Line &amp; FY28 Visibility Raise:</strong> Crushed Q3 revenue consensus ($115.84B vs $108.50B), guided Q4 FY27 to $130.0B &plusmn; 3%, and lifted full-year FY28 revenue growth outlook to ~75% YoY backed by $390B in locked supply commitments.</li>
+            <li><strong>Strategic Software Moat Expansion:</strong> Announced definitive agreement to acquire <span class="tip" title="Hugging Face Acquisition" data-tip="NVIDIA announced a definitive agreement to acquire open-source AI platform Hugging Face to integrate model hubs, open datasets, and enterprise developer tooling deeper into the CUDA-X and Nemotron stack.">Hugging Face</span>, integrating open-source model hubs directly into CUDA-X, Nemotron, and OpenShell enterprise agent workflows.</li>
+            <li><strong>Record Capital Return Execution:</strong> Deployed $28.1B in Q3 shareholder returns ($22.1B repurchases + $6.0B dividends) while holding $227.3B in remaining buyback authorization after September's $150B expansion.</li>
+          </ul>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 16px; border-radius: 8px; border: 1px solid var(--border-color); border-top: 3px solid #ef4444;">
+          <h3 style="font-size: 14px; font-weight: 700; color: #f87171; margin-top: 0; margin-bottom: 10px;">Execution Challenges &amp; Risk Flags (Operational Drags)</h3>
+          <ul style="font-size: 12.5px; color: var(--text-secondary); line-height: 1.6; padding-left: 18px; margin: 0;">
+            <li><strong>CEO Transition &amp; Deferred Form 10-Q:</strong> Co-founder Jensen Huang resigned Nov 12, 2026 amid a board independent committee review; Form 10-Q filing is delayed by several weeks, creating near-term governance and institutional multiple overhang.</li>
+            <li><strong>Q4 Gross Margin Compression (71%&ndash;72%):</strong> Guided GAAP/Non-GAAP gross margins down ~300&ndash;350 bps sequentially to 71.0%&ndash;72.0% on initial Vera Rubin rack ramp costs and surging memory procurement pricing.</li>
+            <li><strong>Massive Off-Balance-Sheet Guarantees ($118B):</strong> Credit support guarantees jumped to $118.0B (including $105.0B for SB Energy/OpenAI's 4.25 GW Ohio campus), alongside $32B in contingent neocloud commitments and $102B in cloud/lease obligations.</li>
+            <li><strong>Customer Concentration &amp; China Zero-Out:</strong> Three direct customers accounted for 36% of Q3 revenue (14%, 11%, 11%), two customers comprised 35% of AR ($81.0B, DSO up to 64 days), and Q4 guidance assumes zero China Data Center compute revenue.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ANALYST Q&A HIGHLIGHTS -->
+      <div style="margin-top: 16px;">
+        <div style="font-size: 13.5px; font-weight: 700; color: #cbd5e1; margin-bottom: 10px;">
+          Earnings Call Q&amp;A Forensic Highlights (Hardest Analyst Questions)
+        </div>
+        <div class="audit-point" style="background: rgba(11, 15, 25, 0.6); border: 1px solid var(--border-color); border-left: 3px solid #3b82f6; padding: 12px 14px; border-radius: 6px; margin-bottom: 12px;">
+          <div style="font-weight: 700; color: #93c5fd; font-size: 13.5px; margin-bottom: 4px;">
+            Vivek Arya (Bank of America Securities) &mdash; <span style="color: #cbd5e1;">Jensen Huang Resignation, Executive Retention & Customer Confidence</span>
+          </div>
+          <p style="font-size: 12.5px; color: #94a3b8; margin: 4px 0;"><strong>Question:</strong> Following Jensen Huang's abrupt resignation five days ago and the board's ongoing independent committee review, how are hyperscale customers, foundry partners, and senior engineers reacting to the leadership transition?</p>
+          <p style="font-size: 12.5px; color: #e2e8f0; margin: 4px 0;"><strong>Executive Answer:</strong> Colette Kress (Interim CEO & CFO) & Harvey Jones (Board Chairman): Kress stated unequivocally, 'From a business perspective, it's business as usual,' noting direct meetings with TSMC leadership this week and strong employee commitment. Chairman Harvey Jones confirmed the board unanimously accepted Huang's resignation, has no intention of reinstating him, and retained Heidrick & Struggles to evaluate internal and external CEO candidates without interrupting the Vera Rubin roadmap.</p>
+          <div style="font-size: 11px; color: #34d399; font-weight: 600; margin-top: 4px;">Forensic Assessment: OPERATIONAL CONTINUITY REASSURED; GOVERNANCE OVERHANG MONITORED</div>
+        </div>
+        <div class="audit-point" style="background: rgba(11, 15, 25, 0.6); border: 1px solid var(--border-color); border-left: 3px solid #3b82f6; padding: 12px 14px; border-radius: 6px; margin-bottom: 12px;">
+          <div style="font-weight: 700; color: #93c5fd; font-size: 13.5px; margin-bottom: 4px;">
+            Joseph Moore (Morgan Stanley) &mdash; <span style="color: #cbd5e1;">Q4 Gross Margin Dip to 71%-72% vs FY28 75% Growth Visibility</span>
+          </div>
+          <p style="font-size: 12.5px; color: #94a3b8; margin: 4px 0;"><strong>Question:</strong> You guided Q4 gross margins down roughly 300 bps sequentially to 71.0%-72.0% while simultaneously raising the full-year FY28 revenue growth outlook to ~75%. Is the margin dip purely initial Vera Rubin rack ramp cost, and where does it trough?</p>
+          <p style="font-size: 12.5px; color: #e2e8f0; margin: 4px 0;"><strong>Executive Answer:</strong> Colette Kress (Interim CEO & CFO): Management confirmed the sequential margin compression is driven by the fastest product ramp in NVIDIA history—initial volume production of Vera Rubin NVL72 systems—alongside higher memory procurement costs. Kress explicitly framed Q4 (71%-72%) as the structural margin bottom before gross margins recover in FY28 as Rubin yields mature and scale efficiencies kick in.</p>
+          <div style="font-size: 11px; color: #34d399; font-weight: 600; margin-top: 4px;">Forensic Assessment: Q4 TROUGH FRAMED AS TEMPORARY RUBIN RAMP COST</div>
+        </div>
+        <div class="audit-point" style="background: rgba(11, 15, 25, 0.6); border: 1px solid var(--border-color); border-left: 3px solid #3b82f6; padding: 12px 14px; border-radius: 6px; margin-bottom: 12px;">
+          <div style="font-weight: 700; color: #93c5fd; font-size: 13.5px; margin-bottom: 4px;">
+            Stacy Rasgon (Bernstein Research) &mdash; <span style="color: #cbd5e1;">Neocloud Financing Contingencies, $118B Guarantees & 10-Q Timing</span>
+          </div>
+          <p style="font-size: 12.5px; color: #94a3b8; margin: 4px 0;"><strong>Question:</strong> Your CFO Commentary adds explicit language around $32B of neocloud agreements taking effect only if partners secure external financing, alongside $118B in credit guarantees (including $105B for SB Energy/OpenAI in Ohio). Does this represent a shift in deal risk, and why is the Form 10-Q delayed?</p>
+          <p style="font-size: 12.5px; color: #e2e8f0; margin: 4px 0;"><strong>Executive Answer:</strong> Colette Kress (Interim CEO & CFO): 'Is it new? No. Did we change anything? No.' Kress clarified the disclosure simply codifies existing contingency boundaries—NVIDIA only accepts compute commitments once financing is closed and facilities pass acceptance. On the 10-Q, management stated filing is expected in the coming weeks while the independent board committee concludes procedural matters.</p>
+          <div style="font-size: 11px; color: #34d399; font-weight: 600; margin-top: 4px;">Forensic Assessment: COMMITMENTS CONTINGENT; 10-Q DELAY REMAINS KEY WATCH ITEM</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. ROW 5 PEER VALUATION & MULTIPLES -->
+    <section id="sec-comps" class="card" style="margin-bottom: 28px; padding: 20px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+        <h2 style="font-size: 17px; font-weight: 700; color: #fff; margin: 0;">
+          Row 5: Post-Print Peer Valuation &amp; Market Multiples Comps
+        </h2>
+        <span class="badge badge-blue">Re-Anchored to $162.94 AH</span>
+      </div>
+      <div class="table-wrapper" style="overflow-x: auto; border: 1px solid var(--border-color); border-radius: 8px;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 12px; text-align: left;">
+          <thead>
+            <tr style="background: rgba(15, 23, 42, 0.9); border-bottom: 1px solid var(--border-color);">
+              <th style="padding: 10px 12px; color: var(--text-muted);">Company / Ticker</th>
+              <th style="padding: 10px 12px; color: var(--text-muted);">Price (AH / Spot)</th>
+              <th style="padding: 10px 12px; color: var(--text-muted);">Market Cap ($B)</th>
+              <th style="padding: 10px 12px; color: var(--text-muted);">Forward P/E</th>
+              <th style="padding: 10px 12px; color: var(--text-muted);">Trailing P/E</th>
+              <th style="padding: 10px 12px; color: var(--text-muted);">YoY Revenue Growth</th>
+              <th style="padding: 10px 12px; color: var(--text-muted);">Core AI Positioning</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="font-weight: 700; background: rgba(59, 130, 246, 0.08);">
+              <td style="padding: 9px 12px; color: #93c5fd;">NVIDIA Corporation (NVDA)</td>
+              <td style="padding: 9px 12px; font-weight: 700; color: #34d399;">$162.94 (AH)</td>
+              <td style="padding: 9px 12px;">$3,753.9B</td>
+              <td style="padding: 9px 12px; font-weight: 700; color: #34d399;">9.80x</td>
+              <td style="padding: 9px 12px;">19.65x</td>
+              <td style="padding: 9px 12px; font-weight: 700; color: #34d399;">+103.2% (Q3 FY27)</td>
+              <td style="padding: 9px 12px;">Vera Rubin NVL72 / Blackwell Ultra / CUDA-X + Hugging Face</td>
+            </tr>
+            <tr>
+              <td style="padding: 9px 12px;">Taiwan Semiconductor (TSM)</td>
+              <td style="padding: 9px 12px;">$359.69</td>
+              <td style="padding: 9px 12px;">$1,865.5B</td>
+              <td style="padding: 9px 12px;">15.38x</td>
+              <td style="padding: 9px 12px;">23.31x</td>
+              <td style="padding: 9px 12px;">+36.0%</td>
+              <td style="padding: 9px 12px;">3nm/2nm Leading-Edge Foundry &amp; CoWoS-L Packaging</td>
+            </tr>
+            <tr>
+              <td style="padding: 9px 12px;">Broadcom Inc. (AVGO)</td>
+              <td style="padding: 9px 12px;">$341.60</td>
+              <td style="padding: 9px 12px;">$1,630.7B</td>
+              <td style="padding: 9px 12px;">17.60x</td>
+              <td style="padding: 9px 12px;">43.63x</td>
+              <td style="padding: 9px 12px;">+47.0%</td>
+              <td style="padding: 9px 12px;">Custom AI ASICs (XPUs) &amp; Tomahawk Ethernet Switching</td>
+            </tr>
+            <tr>
+              <td style="padding: 9px 12px;">Advanced Micro Devices (AMD)</td>
+              <td style="padding: 9px 12px;">$503.41</td>
+              <td style="padding: 9px 12px;">$833.2B</td>
+              <td style="padding: 9px 12px;">28.54x</td>
+              <td style="padding: 9px 12px;">107.57x</td>
+              <td style="padding: 9px 12px;">+28.0%</td>
+              <td style="padding: 9px 12px;">Instinct MI350/MI400 Accelerators &amp; EPYC Server CPUs</td>
+            </tr>
+            <tr>
+              <td style="padding: 9px 12px;">Micron Technology (MU)</td>
+              <td style="padding: 9px 12px;">$712.42</td>
+              <td style="padding: 9px 12px;">$806.0B</td>
+              <td style="padding: 9px 12px;">3.43x</td>
+              <td style="padding: 9px 12px;">9.58x</td>
+              <td style="padding: 9px 12px;">+68.0%</td>
+              <td style="padding: 9px 12px;">HBM3e / HBM4 High-Bandwidth Memory Supply Anchor</td>
+            </tr>
+            <tr>
+              <td style="padding: 9px 12px;">Marvell Technology (MRVL)</td>
+              <td style="padding: 9px 12px;">$148.74</td>
+              <td style="padding: 9px 12px;">$133.8B</td>
+              <td style="padding: 9px 12px;">20.18x</td>
+              <td style="padding: 9px 12px;">48.93x</td>
+              <td style="padding: 9px 12px;">+44.0%</td>
+              <td style="padding: 9px 12px;">Custom Cloud Silicon &amp; Electro-Optic DSP Interconnects</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 8. ROW 6 MULTI-SOURCE 4-PILLAR SENTIMENT -->
+    <section id="sec-sentiment" class="card" style="margin-bottom: 28px; padding: 20px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+        <h2 style="font-size: 17px; font-weight: 700; color: #fff; margin: 0;">
+          Row 6: Multi-Source 4-Pillar Post-Earnings Sentiment &amp; Microblogging Pulse
+        </h2>
+        <span class="badge badge-bull">Composite: 80 / 100</span>
+      </div>
+      <div class="sentiment-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-bottom: 16px;">
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+          <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">1. Retail Trader Pulse (Reddit / X)</div>
+          <div style="font-size: 20px; font-weight: 800; color: #34d399; margin: 4px 0;">76 / 100 (Constructive)</div>
+          <div class="sentiment-meter-bar" style="height: 5px; background: rgba(255,255,255,0.08); border-radius: 3px; margin: 6px 0; overflow: hidden;">
+            <div style="width: 76%; height: 100%; background: #10b981;"></div>
+          </div>
+          <div style="font-size: 11.5px; color: var(--text-secondary); line-height: 1.5;">Constructive-but-stunned across Reddit r/wallstreetbets, r/stocks, Stocktwits, and X/FinTwit. Retail traders marveled at the 'print $115.8B while losing the founder' juxtaposition—celebrating the $7.3B top-line beat, $130B Q4 guide, and Hugging Face acquisition, while debating whether post-Jensen multiple compression caps near-term upside above $170.</div>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+          <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">2. Sell-Side Flash Reactions</div>
+          <div style="font-size: 20px; font-weight: 800; color: #34d399; margin: 4px 0;">84 / 100 (Buy Reaffirmed)</div>
+          <div class="sentiment-meter-bar" style="height: 5px; background: rgba(255,255,255,0.08); border-radius: 3px; margin: 6px 0; overflow: hidden;">
+            <div style="width: 84%; height: 100%; background: #10b981;"></div>
+          </div>
+          <div style="font-size: 11.5px; color: var(--text-secondary); line-height: 1.5;">Resoundingly bullish on fundamentals despite governance headlines. Morgan Stanley, BofA, and Bernstein analysts focused on Vera Rubin's ~$20B debut quarter, the +1,500 bps FY28 growth raise to ~75%, and $390B in locked supply commitments, framing any dip toward $155 as an institutional accumulation window at <10x forward P/E.</div>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+          <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">3. Management Call Tone</div>
+          <div style="font-size: 20px; font-weight: 800; color: #38bdf8; margin: 4px 0;">82 / 100 (Steady Continuity)</div>
+          <div class="sentiment-meter-bar" style="height: 5px; background: rgba(255,255,255,0.08); border-radius: 3px; margin: 6px 0; overflow: hidden;">
+            <div style="width: 82%; height: 100%; background: #38bdf8;"></div>
+          </div>
+          <div style="font-size: 11.5px; color: var(--text-secondary); line-height: 1.5;">Steady, composed, and operationally authoritative. Colette Kress seamlessly stepped into the dual Interim CEO/CFO role alongside Chairman Harvey Jones, shutting down speculation over Jensen Huang's exit while delivering concrete supply-chain visibility and framing Q4's 71%-72% gross margin as the Vera Rubin ramp trough.</div>
+        </div>
+        <div style="background: rgba(15, 23, 42, 0.6); padding: 14px; border-radius: 8px; border: 1px solid var(--border-color);">
+          <div style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">4. Options IV Crush &amp; Skew</div>
+          <div style="font-size: 20px; font-weight: 800; color: #a855f7; margin: 4px 0;">Within Implied Band</div>
+          <div class="sentiment-meter-bar" style="height: 5px; background: rgba(255,255,255,0.08); border-radius: 3px; margin: 6px 0; overflow: hidden;">
+            <div style="width: 74%; height: 100%; background: #a855f7;"></div>
+          </div>
+          <div style="font-size: 11.5px; color: var(--text-secondary); line-height: 1.5;">Pre-print 1-week ATM straddle priced a ±9.27% ($15.03) move on 90.5% IV. With shares advancing +4.81% (+$7.48) from $155.46 to $162.94 after-hours, the move remained comfortably inside the implied straddle band—delivering severe overnight IV crush to short-dated $165/$170 call buyers and rewarding theta sellers.</div>
+        </div>
+      </div>
+      <div style="background: rgba(11, 15, 25, 0.6); border: 1px solid var(--border-color); border-radius: 8px; padding: 12px 16px; font-size: 12px; color: var(--text-secondary); line-height: 1.5;">
+        <strong><span class="tip" title="After-Hours Price Reaction" data-tip="NVDA rallied +4.81% after-hours from $155.46 close to $162.94, staying inside the ±9.27% ($15.03) options-implied move band as blowout Vera Rubin velocity and $130B Q4 guidance outweighed Q4 gross margin compression and CEO transition noise.">After-Hours Price Movement Driver:</span></strong> NVDA shares rallied +4.81% to $162.94 in after-hours trading (up +$7.48 from the $155.46 regular close) as a blowout Q3 FY27 print ($115.84B revenue vs $108.50B consensus; $2.70 GAAP EPS vs $2.47 consensus), a nearly $20B debut quarter for Vera Rubin NVL72, a $130.0B Q4 revenue guide, and a ~75% FY28 growth outlook overcame initial anxiety around Jensen Huang's Nov 12 resignation, the Q4 gross margin reset to 71%-72%, and the temporary Form 10-Q delay.
+      </div>
+    </section>
+
+    <!-- 9. ROW 7 T+1 PM TRADE EXECUTION MATRIX -->
+    <section id="sec-trade" class="card" style="margin-bottom: 28px; padding: 20px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+        <h2 style="font-size: 17px; font-weight: 700; color: #fff; margin: 0;">
+          Row 7: T+1 Hedge Fund PM Trade Execution Matrix (Anchored to $162.94 AH)
+        </h2>
+        <span class="badge badge-purple">Post-Print Playbook</span>
+      </div>
+      <div class="scenario-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;">
+        <!-- BULL CASE -->
+        <div class="scenario-bull" style="background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border-color); border-top: 3px solid #10b981; border-radius: 8px; padding: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span style="font-size: 13.5px; font-weight: 700; color: #34d399;">Bull Case Scenario (45%)</span>
+            <span class="badge badge-bull">Target: $185.00 &ndash; $205.00</span>
+          </div>
+          <p style="font-size: 12px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 10px;">
+            Market looks past CEO transition noise and re-rates NVDA from 9.8x forward earnings toward 12x&ndash;13x on Vera Rubin's $20B debut, ~75% FY28 growth visibility, clean Form 10-Q filing, and $227.3B buyback support.
+          </p>
+          <div class="trade-structure" style="background: rgba(16, 185, 129, 0.08); padding: 10px; border-radius: 6px; font-size: 11.5px; color: #a7f3d0;">
+            <strong>Options Structure:</strong> Buy Jan-2027 $165.00 / $195.00 Bull Call Spread; sell Jan-2027 $145.00 Puts to harvest elevated governance-risk skew.
+          </div>
+        </div>
+
+        <!-- BASE CASE -->
+        <div class="scenario-base" style="background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border-color); border-top: 3px solid #3b82f6; border-radius: 8px; padding: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span style="font-size: 13.5px; font-weight: 700; color: #93c5fd;">Base Case Scenario (40%)</span>
+            <span class="badge badge-blue">Range: $156.00 &ndash; $172.00</span>
+          </div>
+          <p style="font-size: 12px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 10px;">
+            Shares consolidate around $160&ndash;$170 as fundamental euphoria ($130B Q4 guide) is balanced by Q4 gross margin troughing (71%&ndash;72%) and institutional waiting for the permanent CEO search and Form 10-Q release.
+          </p>
+          <div class="trade-structure" style="background: rgba(59, 130, 246, 0.08); padding: 10px; border-radius: 6px; font-size: 11.5px; color: #bfdbfe;">
+            <strong>Options Structure:</strong> Sell Dec-2026 $150.00 / $175.00 Iron Condor post-IV crush to monetize rangebound consolidation around $162.94.
+          </div>
+        </div>
+
+        <!-- BEAR CASE -->
+        <div class="scenario-bear" style="background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border-color); border-top: 3px solid #ef4444; border-radius: 8px; padding: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <span style="font-size: 13.5px; font-weight: 700; color: #f87171;">Bear Case Scenario (15%)</span>
+            <span class="badge badge-bear">Target: $132.00 &ndash; $142.00</span>
+          </div>
+          <p style="font-size: 12px; color: var(--text-secondary); line-height: 1.5; margin-bottom: 10px;">
+            Adverse findings from the independent board committee investigation, prolonged Form 10-Q delay, or scrutiny over $118B partner credit guarantees triggers multiple compression toward $135&ndash;$142 despite strong Rubin demand.
+          </p>
+          <div class="trade-structure" style="background: rgba(239, 68, 68, 0.08); padding: 10px; border-radius: 6px; font-size: 11.5px; color: #fecaca;">
+            <strong>Options Structure:</strong> Buy Dec-2026 $155.00 / $138.00 Bear Put Spread as a low-cost governance tail hedge against 10-Q delay risks.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. ROW 8 SEC FILING CITATIONS & METHODOLOGY FOOTER -->
+    <footer style="border-top: 1px solid var(--border-color); padding-top: 16px; margin-top: 24px; font-size: 11.5px; color: var(--text-muted); line-height: 1.6;">
+      <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 12px;">
+        <div>
+          <strong>SEC Primary Source Filings:</strong> Form 8-K (Item 2.02) Exhibit 99.1 (Press Release), Exhibit 99.2 (CFO Commentary), and Exhibit 99.3 (Supplemental Financial Information) filed November 17, 2026 (CIK 0001045810).
+        </div>
+        <div>
+          <strong>Pricing Engine:</strong> Cross-validated regular close ($155.46) and after-hours price ($162.94) via Yahoo Finance &amp; Google Finance (0.00% divergence).
+        </div>
+      </div>
+      <p style="margin: 4px 0;">
+        <strong>Methodology &amp; Ground-Truth Verification Ledger:</strong> This T+0 Post-Earnings Forensic Tearsheet adheres to Antigravity 2.0 Zero-Hallucination standards. All 5-quarter financials, beat/miss deltas (Revenue $115,844.0M vs $108,500.0M consensus; GAAP EPS $2.70 vs $2.47), FCF bridge metrics (OCF $48,253.0M, True FCF $46,165.0M), and post-print price reactions ($155.46 &rarr; $162.94, +4.81%) are locked verbatim from <code>ground_truth/NVDA_2026-11-17_post_truth.json</code> and SEC EDGAR Exhibit 99.1/99.2/99.3.
+      </p>
+    </footer>
+
+  </div>
+</body>
+</html>

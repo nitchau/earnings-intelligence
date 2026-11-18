@@ -140,6 +140,20 @@ window.EARNINGS_HISTORY_CATALOG = {
       "currency": "$"
     }
   ],
+  "ESTC": [
+    {
+      "date": "2026-11-19",
+      "quarter": "Q2 FY2027",
+      "date_display": "Nov 19, 2026",
+      "t1": "ESTC_T1_2026-11-19.html",
+      "t0": null,
+      "verdict": null,
+      "post_move_pct": null,
+      "rev_actual_m": null,
+      "rev_consensus_m": 486.77,
+      "currency": "$"
+    }
+  ],
   "FISV": [
     {
       "date": "2026-11-03",
@@ -370,10 +384,10 @@ window.EARNINGS_HISTORY_CATALOG = {
       "quarter": "Q4 2026",
       "date_display": "Nov 17, 2026",
       "t1": "NVDA_T1_2026-11-17.html",
-      "t0": null,
-      "verdict": null,
-      "post_move_pct": null,
-      "rev_actual_m": null,
+      "t0": "NVDA_T0_POST_2026-11-17.html",
+      "verdict": "CLEAN BEAT & RAISE",
+      "post_move_pct": 4.81,
+      "rev_actual_m": 115844.0,
       "rev_consensus_m": 108500.0,
       "currency": "$"
     }
