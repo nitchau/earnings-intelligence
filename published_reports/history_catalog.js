@@ -426,10 +426,10 @@ window.EARNINGS_HISTORY_CATALOG = {
       "quarter": "Q4 2026",
       "date_display": "Nov 18, 2026",
       "t1": "PANW_T1_2026-11-18.html",
-      "t0": null,
-      "verdict": null,
-      "post_move_pct": null,
-      "rev_actual_m": null,
+      "t0": "PANW_T0_POST_2026-11-18.html",
+      "verdict": "CLEAN BEAT & RAISE",
+      "post_move_pct": 9.08,
+      "rev_actual_m": 3445.0,
       "rev_consensus_m": 3307.46,
       "currency": "$"
     }
