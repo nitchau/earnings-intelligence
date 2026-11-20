@@ -143,13 +143,13 @@ window.EARNINGS_HISTORY_CATALOG = {
   "ESTC": [
     {
       "date": "2026-11-19",
-      "quarter": "Q2 FY2027",
+      "quarter": "Q4 2026",
       "date_display": "Nov 19, 2026",
       "t1": "ESTC_T1_2026-11-19.html",
-      "t0": null,
-      "verdict": null,
-      "post_move_pct": null,
-      "rev_actual_m": null,
+      "t0": "ESTC_T0_POST_2026-11-19.html",
+      "verdict": "BEAT & RAISE (CAPEX SURGE)",
+      "post_move_pct": -3.59,
+      "rev_actual_m": 495.95,
       "rev_consensus_m": 486.77,
       "currency": "$"
     }
