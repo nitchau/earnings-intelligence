@@ -84,6 +84,20 @@ window.EARNINGS_HISTORY_CATALOG = {
       "currency": "$"
     }
   ],
+  "CLSK": [
+    {
+      "date": "2026-11-24",
+      "quarter": "Q4 FY2026",
+      "date_display": "Nov 24, 2026",
+      "t1": "CLSK_T1_2026-11-24.html",
+      "t0": null,
+      "verdict": null,
+      "post_move_pct": null,
+      "rev_actual_m": null,
+      "rev_consensus_m": 127.75,
+      "currency": "$"
+    }
+  ],
   "COIN": [
     {
       "date": "2026-10-29",
@@ -95,6 +109,20 @@ window.EARNINGS_HISTORY_CATALOG = {
       "post_move_pct": -4.74,
       "rev_actual_m": 1215.58,
       "rev_consensus_m": 1280.0,
+      "currency": "$"
+    }
+  ],
+  "CRWD": [
+    {
+      "date": "2026-11-23",
+      "quarter": "Q4 2026",
+      "date_display": "Nov 23, 2026",
+      "t1": "CRWD_T1_2026-11-23.html",
+      "t0": "CRWD_T0_POST_2026-11-23.html",
+      "verdict": "EPS BEAT / REVENUE MISS",
+      "post_move_pct": 1.48,
+      "rev_actual_m": 1583.42,
+      "rev_consensus_m": 1621.65,
       "currency": "$"
     }
   ],
@@ -515,6 +543,20 @@ window.EARNINGS_HISTORY_CATALOG = {
       "post_move_pct": -7.51,
       "rev_actual_m": 62.42,
       "rev_consensus_m": 62.18,
+      "currency": "$"
+    }
+  ],
+  "SYM": [
+    {
+      "date": "2026-11-23",
+      "quarter": "Q3 2026",
+      "date_display": "Nov 23, 2026",
+      "t1": "SYM_T1_2026-11-23.html",
+      "t0": "SYM_T0_POST_2026-11-23.html",
+      "verdict": "CLEAN BEAT & RAISE",
+      "post_move_pct": -0.63,
+      "rev_actual_m": 777.61,
+      "rev_consensus_m": 774.38,
       "currency": "$"
     }
   ],
