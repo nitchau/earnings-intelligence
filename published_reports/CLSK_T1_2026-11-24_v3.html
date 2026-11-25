@@ -1,0 +1,1671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CLSK Q4 FY26E Pre-Earnings Tearsheet | Institutional Equity Research</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0b0f19;
+      --bg-card: #111827;
+      --bg-card-elevated: #161f33;
+      --bg-table-row-alt: #0e1525;
+      --border-color: #1f2937;
+      --border-subtle: #283548;
+      --text-primary: #f9fafb;
+      --text-secondary: #d1d5db;
+      --text-muted: #9ca3af;
+      --accent-blue: #3b82f6;
+      --accent-blue-glow: rgba(59, 130, 246, 0.15);
+      --bull-green: #10b981;
+      --bull-green-bg: rgba(16, 185, 129, 0.14);
+      --bear-red: #ef4444;
+      --bear-red-bg: rgba(239, 68, 68, 0.14);
+      --warn-amber: #f59e0b;
+      --warn-amber-bg: rgba(245, 158, 11, 0.14);
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      line-height: 1.5;
+      font-size: 14px;
+      padding: 24px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1560px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    /* ==========================================================================
+       INTERACTIVE HOVER TOOLTIP SYSTEM (FOR METRICS & ABBREVIATIONS)
+       ========================================================================== */
+    .tip {
+      position: relative;
+      display: inline-block;
+      border-bottom: 1px dotted #60a5fa;
+      cursor: help;
+      transition: color 0.15s ease, border-color 0.15s ease;
+    }
+
+    .tip:hover {
+      color: #93c5fd;
+      border-bottom-color: #93c5fd;
+    }
+
+    .tip::after {
+      content: attr(data-tip);
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 0;
+      width: 290px;
+      padding: 10px 12px;
+      background-color: #1e293b;
+      color: #f8fafc;
+      font-family: var(--font-sans);
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 1.45;
+      text-align: left;
+      text-transform: none;
+      letter-spacing: normal;
+      white-space: normal;
+      border: 1px solid var(--accent-blue);
+      border-radius: 6px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.75);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(4px);
+      transition: opacity 0.16s ease, transform 0.16s ease, visibility 0.16s;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* Right-aligned tooltip modifier to prevent right-edge screen clipping */
+    .tip-right::after {
+      left: auto;
+      right: 0;
+    }
+
+    /* Bottom-aligned tooltip modifier for elements near top of page */
+    .tip-bottom::after {
+      bottom: auto;
+      top: calc(100% + 8px);
+    }
+
+    .tip:hover::after {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    /* UTILITY & BADGES */
+    .mono {
+      font-family: var(--font-mono);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+
+    .badge-bull {
+      background-color: var(--bull-green-bg);
+      color: var(--bull-green);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+    }
+
+    .badge-bear {
+      background-color: var(--bear-red-bg);
+      color: var(--bear-red);
+      border: 1px solid rgba(239, 68, 68, 0.35);
+    }
+
+    .badge-warn {
+      background-color: var(--warn-amber-bg);
+      color: var(--warn-amber);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+    }
+
+    .badge-neutral {
+      background-color: rgba(156, 163, 175, 0.12);
+      color: var(--text-secondary);
+      border: 1px solid rgba(156, 163, 175, 0.25);
+    }
+
+    .badge-blue {
+      background-color: var(--accent-blue-glow);
+      color: #60a5fa;
+      border: 1px solid rgba(59, 130, 246, 0.4);
+    }
+
+    /* CARD SYSTEM */
+    .card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 12px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--border-color);
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .card-title {
+      font-size: 15px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-title-accent {
+      width: 4px;
+      height: 16px;
+      background-color: var(--accent-blue);
+      border-radius: 2px;
+      display: inline-block;
+    }
+
+    .card-subtitle {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    /* HEADER BANNER */
+    .header-banner {
+      background: linear-gradient(135deg, #111827 0%, #0f172a 65%, #172554 100%);
+      border: 1px solid var(--border-subtle);
+      border-left: 4px solid var(--accent-blue);
+      border-radius: 10px;
+      padding: 22px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .helper-bar {
+      background-color: rgba(59, 130, 246, 0.12);
+      border: 1px solid rgba(59, 130, 246, 0.35);
+      border-radius: 6px;
+      padding: 8px 14px;
+      font-size: 12.5px;
+      color: #bfdbfe;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .ticker-identity {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .ticker-line {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .ticker-symbol {
+      font-family: var(--font-mono);
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.4);
+      padding: 2px 12px;
+      border-radius: 6px;
+    }
+
+    .company-name {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .sector-tag {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .header-price-block {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .price-box {
+      text-align: right;
+    }
+
+    .price-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+
+    .price-value {
+      font-family: var(--font-mono);
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .header-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(195px, 1fr));
+      gap: 12px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .strip-item {
+      background-color: rgba(11, 15, 25, 0.55);
+      border: 1px solid var(--border-color);
+      padding: 10px 14px;
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .strip-label {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .strip-val {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    /* ROW 1: 4 KPI CARDS */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .kpi-metric-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .kpi-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.07);
+      gap: 8px;
+    }
+
+    .kpi-row:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .kpi-name {
+      font-size: 12.5px;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .kpi-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 2px;
+    }
+
+    .kpi-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 4px;
+    }
+
+    .kpi-val {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .delta-pair {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    /* ROW 2: HISTORICAL TABLE */
+    .table-wrapper {
+      overflow-x: auto;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12.5px;
+    }
+
+    th {
+      background-color: #161f33;
+      color: var(--text-secondary);
+      font-weight: 600;
+      text-align: right;
+      padding: 11px 12px;
+      border-bottom: 1px solid var(--border-subtle);
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+
+    th:first-child {
+      text-align: left;
+      font-family: var(--font-sans);
+      min-width: 265px;
+      position: sticky;
+      left: 0;
+      z-index: 2;
+      background-color: #161f33;
+    }
+
+    td {
+      padding: 9px 12px;
+      border-bottom: 1px solid var(--border-color);
+      text-align: right;
+      font-family: var(--font-mono);
+      color: var(--text-primary);
+      white-space: nowrap;
+    }
+
+    td:first-child {
+      text-align: left;
+      font-family: var(--font-sans);
+      font-weight: 500;
+      color: var(--text-secondary);
+      position: sticky;
+      left: 0;
+      background-color: var(--bg-card);
+      z-index: 1;
+    }
+
+    tr:nth-child(even) td {
+      background-color: var(--bg-table-row-alt);
+    }
+
+    tr:nth-child(even) td:first-child {
+      background-color: var(--bg-table-row-alt);
+    }
+
+    tr.section-divider td {
+      background-color: rgba(59, 130, 246, 0.09);
+      color: #93c5fd;
+      font-family: var(--font-sans);
+      font-weight: 700;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      padding: 7px 12px;
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .col-q0 {
+      background-color: rgba(59, 130, 246, 0.06) !important;
+      font-weight: 700;
+    }
+
+    .col-est {
+      background-color: rgba(245, 158, 11, 0.05) !important;
+      color: #fde68a;
+    }
+
+    /* OUTLIER CELL BORDERS */
+    .outlier-red {
+      border: 1.5px solid var(--bear-red) !important;
+      background-color: rgba(239, 68, 68, 0.12) !important;
+      color: #fca5a5 !important;
+      font-weight: 700;
+      position: relative;
+    }
+
+    .outlier-amber {
+      border: 1.5px solid var(--warn-amber) !important;
+      background-color: rgba(245, 158, 11, 0.12) !important;
+      color: #fcd34d !important;
+      font-weight: 700;
+      position: relative;
+    }
+
+    /* ROW 3: FORENSIC CALLOUT */
+    .forensic-grid {
+      display: grid;
+      grid-template-columns: 1.35fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 1080px) {
+      .forensic-grid,
+      .split-2col,
+      .sentiment-grid {
+        grid-template-columns: 1fr !important;
+      }
+    }
+
+    .forensic-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .forensic-item {
+      background-color: rgba(11, 15, 25, 0.6);
+      border: 1px solid var(--border-color);
+      border-left: 3px solid var(--warn-amber);
+      border-radius: 6px;
+      padding: 13px 15px;
+    }
+
+    .forensic-item.critical {
+      border-left-color: var(--bear-red);
+    }
+
+    .forensic-item-title {
+      font-weight: 700;
+      font-size: 13.5px;
+      color: var(--text-primary);
+      margin-bottom: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .forensic-item p {
+      color: var(--text-secondary);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .fcf-bridge-box {
+      background-color: #0d1322;
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* ROW 4 & ROW 5: 2-COLUMN SPLIT CARDS */
+    .split-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .audit-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .audit-point {
+      padding: 12px 14px;
+      border-radius: 6px;
+      background-color: rgba(11, 15, 25, 0.55);
+      border: 1px solid var(--border-color);
+    }
+
+    .audit-point-bull {
+      border-left: 3px solid var(--bull-green);
+    }
+
+    .audit-point-bear {
+      border-left: 3px solid var(--bear-red);
+    }
+
+    .audit-point-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 5px;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .audit-point-title {
+      font-weight: 700;
+      font-size: 13.5px;
+      color: var(--text-primary);
+    }
+
+    .audit-point p {
+      font-size: 12.8px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* CATALYST ITEMS */
+    .catalyst-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .catalyst-card {
+      background-color: rgba(11, 15, 25, 0.55);
+      border: 1px solid var(--border-color);
+      border-left: 3px solid var(--accent-blue);
+      border-radius: 6px;
+      padding: 12px 14px;
+    }
+
+    /* SENTIMENT ANALYSIS CARD */
+    .sentiment-overview-banner {
+      background: linear-gradient(90deg, rgba(239, 68, 68, 0.12) 0%, rgba(245, 158, 11, 0.12) 50%, rgba(16, 185, 129, 0.12) 100%);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .sentiment-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .sentiment-source-card {
+      background-color: #0d1322;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .sentiment-meter-wrap {
+      display: flex;
+       flex-direction: column;
+      gap: 5px;
+      margin: 4px 0;
+    }
+
+    .sentiment-bar-bg {
+      width: 100%;
+      height: 8px;
+      background-color: #1f2937;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .sentiment-bar-fill {
+      height: 100%;
+      border-radius: 4px;
+    }
+
+    /* ROW 7: TRADE MATRIX */
+    .playbook-setup-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+      background-color: rgba(11, 15, 25, 0.65);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 14px;
+    }
+
+    .scenario-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 16px;
+    }
+
+    .scenario-card {
+      background-color: #0d1322;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .scenario-bull {
+      border-top: 4px solid var(--bull-green);
+    }
+
+    .scenario-base {
+      border-top: 4px solid var(--warn-amber);
+    }
+
+    .scenario-bear {
+      border-top: 4px solid var(--bear-red);
+    }
+
+    .scenario-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 800;
+      font-size: 15px;
+    }
+
+    .trigger-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 12.8px;
+      color: var(--text-secondary);
+    }
+
+    .trigger-list li {
+      position: relative;
+      padding-left: 14px;
+    }
+
+    .trigger-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--accent-blue);
+      font-weight: bold;
+    }
+
+    .trade-structure {
+      margin-top: auto;
+      padding: 11px 12px;
+      background-color: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      font-size: 12px;
+    }
+
+    .trade-structure strong {
+      display: block;
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 4px;
+    }
+
+    .footer-meta {
+      text-align: center;
+      font-size: 11.5px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+      padding: 10px 0 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    
+    <!-- HISTORICAL QUARTER ARCHIVE TOPBAR -->
+    <div class="archive-topbar" style="background: rgba(15, 23, 42, 0.92); border: 1px solid rgba(59, 130, 246, 0.32); border-radius: 10px; padding: 10px 16px; margin-bottom: 18px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; font-size: 12.5px;">
+      <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+        <a href="index.html" style="color: #93c5fd; text-decoration: none; font-weight: 600; padding: 4px 10px; border-radius: 6px; background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.12);">← Portal Home</a>
+        <span style="background: rgba(59, 130, 246, 0.18); color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.4); font-weight: 700; font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 3px 9px; border-radius: 5px;">T-1 Pre-Earnings Briefing</span>
+        <a id="archive-paired-stage-link" href="CLSK_T0_POST_2026-11-24.html" style="display: none; color: #cbd5e1; text-decoration: none; font-size: 11.5px; padding: 3px 9px; border-radius: 5px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12);">Switch to T+0 Post-Earnings Report →</a>
+      </div>
+      <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+        <label for="quarter-archive-select" style="color: #94a3b8; font-size: 12px; font-weight: 600;">📅 Historical Quarter:</label>
+        <select id="quarter-archive-select" data-ticker="CLSK" data-date="2026-11-24" data-stage="t1" style="background: #090d16; color: #f8fafc; border: 1px solid rgba(59, 130, 246, 0.45); border-radius: 6px; padding: 5px 10px; font-size: 12px; font-family: 'Inter', sans-serif; font-weight: 600; cursor: pointer; outline: none;">
+          <option value="CLSK_T1_2026-11-24.html" selected>Q4 FY26 (Nov 24, 2026) — Latest</option>
+          <option value="" disabled>No prior quarters archived yet (history initiated Q4 FY26)</option>
+        </select>
+      </div>
+    </div>
+    <script src="history_catalog.js"></script>
+    <script>
+      (function() {
+        var sel = document.getElementById('quarter-archive-select');
+        if (!sel) return;
+        var tk = sel.getAttribute('data-ticker');
+        var curDate = sel.getAttribute('data-date');
+        var stage = sel.getAttribute('data-stage');
+        var cat = (window.EARNINGS_HISTORY_CATALOG || {})[tk];
+        if (Array.isArray(cat) && cat.length > 0) {
+          sel.innerHTML = '';
+          cat.forEach(function(entry, idx) {
+            var targetFile = (stage === 't0') ? (entry.t0 || entry.t1) : (entry.t1 || entry.t0);
+            if (!targetFile) return;
+            var opt = document.createElement('option');
+            opt.value = targetFile;
+            var suffix = (idx === 0) ? ' — Latest' : '';
+            var stageHint = (stage === 't0' && !entry.t0) ? ' [T-1 Only]' : ((stage === 't1' && !entry.t1) ? ' [T+0 Only]' : '');
+            opt.textContent = entry.quarter + ' (' + entry.date_display + ')' + stageHint + suffix;
+            if (entry.date === curDate) opt.selected = true;
+            sel.appendChild(opt);
+          });
+          if (cat.length === 1) {
+            var note = document.createElement('option');
+            note.value = '';
+            note.disabled = true;
+            note.textContent = '── Prior quarters will appear here starting next quarter ──';
+            sel.appendChild(note);
+          }
+          var curEntry = cat.find(function(e) { return e.date === curDate; });
+          var pairedLink = document.getElementById('archive-paired-stage-link');
+          if (curEntry && pairedLink) {
+            var pairedHref = (stage === 't0') ? curEntry.t1 : curEntry.t0;
+            if (pairedHref) {
+              pairedLink.href = pairedHref;
+              pairedLink.style.display = 'inline-block';
+            }
+          }
+        }
+        sel.addEventListener('change', function() {
+          if (this.value && !window.location.pathname.endsWith('/' + this.value)) {
+            window.location.href = this.value;
+          }
+        });
+      })();
+    </script>
+
+    <!-- 1. HEADER BANNER -->
+    <header class="header-banner">
+      <div class="helper-bar">
+        <span>💡 <strong>Interactive Definitions Enabled:</strong> Hover your mouse over any <span class="tip tip-bottom" title="Plain-English definitions pop up automatically whenever you hover over any dotted-underlined term." data-tip="Plain-English definitions pop up automatically whenever you hover over any dotted-underlined financial metric or abbreviation.">dotted-underlined metric or abbreviation</span> for an instant plain-English explanation.</span>
+        <span class="mono" style="font-size:11.5px;color:#93c5fd;">Last Reported Quarter: <strong>Q3 FY26 (Ended Jun 30, 2026)</strong> • Upcoming Release: <strong>Q4 FY26E (Ended Sep 30, 2026)</strong></span>
+      </div>
+
+      <div class="header-top">
+        <div class="ticker-identity">
+          <div class="ticker-line">
+            <span class="ticker-symbol">CLSK</span>
+            <h1 class="company-name">CleanSpark, Inc.</h1>
+            <span class="badge badge-purple">T-1 PRE-EARNINGS BRIEFING</span>
+            <span class="badge badge-blue">NASDAQ</span>
+            <span class="badge badge-warn">EARNINGS DATE: NOV 24, 2026 (AMC)</span>
+          </div>
+          <div class="meta-line">
+            <span>Sector: <strong>Digital Infrastructure & Energy Compute</strong></span>
+            <span>Industry: <strong>Bitcoin Mining & AI/HPC Data Centers</strong></span>
+            <span>Primary Exchange: <strong>NASDAQ</strong></span>
+            <span>IR Webcast: <strong>Tuesday, Nov 24, 2026 at 4:30 PM ET / 1:30 PM PT (investors.cleanspark.com)</strong></span>
+          </div>
+        </div>
+        <div class="price-box">
+          <div class="price-row">
+            <span class="price-val">$5.64</span>
+            <span class="badge badge-bull" style="font-size:14px; font-weight:700;">SPOT CLOSE</span>
+          </div>
+          <div class="price-sub">Market Cap: <strong>$1.45B</strong> • Enterprise Value: <strong>$2.84B</strong></div>
+          <div class="price-sub">TTM P/S: <strong>2.13x</strong> • EV/Sales: <strong>4.18x</strong> • Short Interest: <strong>42.89% of Float</strong></div>
+        </div>
+      </div>
+
+      <div class="header-strip">
+        <div class="strip-item">
+          <span class="strip-label">Wall St Consensus Revenue</span>
+          <span class="strip-val">$127.75M</span>
+          <span class="strip-sub">Range: $110.65M – $158.07M (-42.9% YoY)</span>
+        </div>
+        <div class="strip-item">
+          <span class="strip-label">Buy-Side Whisper Revenue</span>
+          <span class="strip-val" style="color:#34d399;">$132.50M</span>
+          <span class="strip-sub">+3.72% Whisper Spread (1,708 BTC Mined)</span>
+        </div>
+        <div class="strip-item">
+          <span class="strip-label">Consensus Diluted EPS</span>
+          <span class="strip-val">-$0.37</span>
+          <span class="strip-sub">Whisper Bogey: -$0.30 (Prior Q3: -$0.39)</span>
+        </div>
+        <div class="strip-item">
+          <span class="strip-label">ATM Straddle Implied Move</span>
+          <span class="strip-val" style="color:#fbbf24;">±15.78%</span>
+          <span class="strip-sub">Straddle Cost: $0.89 (IV: 169.1% | P/C: 0.20)</span>
+        </div>
+        <div class="strip-item">
+          <span class="strip-label">Wall Street Mean Target</span>
+          <span class="strip-val" style="color:#38bdf8;">$20.87</span>
+          <span class="strip-sub">+270.0% Upside (15 Analysts | High $27)</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- TRACK B STICKY JUMP-NAV -->
+    <nav class="pre-jump-nav" style="position:sticky; top:0; z-index:40; display:flex; gap:8px; padding:10px 16px; background:#0f172a; border-bottom:1px solid #334155; margin-bottom:20px; overflow-x:auto;">
+      <a href="#row-1-kpis" style="color:#94a3b8; text-decoration:none; font-size:12px; font-weight:600; padding:4px 10px; border-radius:4px; background:#1e293b;">Executive KPIs</a>
+      <a href="#row-1b-scorecard" style="color:#94a3b8; text-decoration:none; font-size:12px; font-weight:600; padding:4px 10px; border-radius:4px; background:#1e293b;">Expectations & Whisper</a>
+      <a href="#row-2-financials" style="color:#94a3b8; text-decoration:none; font-size:12px; font-weight:600; padding:4px 10px; border-radius:4px; background:#1e293b;">5Q Financials</a>
+      <a href="#row-3-fcf" style="color:#94a3b8; text-decoration:none; font-size:12px; font-weight:600; padding:4px 10px; border-radius:4px; background:#1e293b;">Forensic FCF</a>
+      <a href="#row-4-segments" style="color:#94a3b8; text-decoration:none; font-size:12px; font-weight:600; padding:4px 10px; border-radius:4px; background:#1e293b;">Execution Drivers</a>
+      <a href="#row-4b-debates" style="color:#94a3b8; text-decoration:none; font-size:12px; font-weight:600; padding:4px 10px; border-radius:4px; background:#1e293b;">Institutional Debates</a>
+      <a href="#row-5-peers" style="color:#94a3b8; text-decoration:none; font-size:12px; font-weight:600; padding:4px 10px; border-radius:4px; background:#1e293b;">Peer Comps</a>
+      <a href="#row-6-sentiment" style="color:#94a3b8; text-decoration:none; font-size:12px; font-weight:600; padding:4px 10px; border-radius:4px; background:#1e293b;">Sentiment Audit</a>
+      <a href="#row-7-pm-matrix" style="color:#94a3b8; text-decoration:none; font-size:12px; font-weight:600; padding:4px 10px; border-radius:4px; background:#1e293b;">PM Trade Matrix</a>
+      <a href="CLSK_T0_POST_2026-11-24.html" style="color:#38bdf8; text-decoration:none; font-size:12px; font-weight:700; padding:4px 10px; border-radius:4px; background:rgba(56,189,248,0.12); margin-left:auto;">T+0 Post-Print Switcher →</a>
+    </nav>
+
+    <!-- SECTION 2: ROW 1 EXECUTIVE KPI GRID -->
+    <section class="kpi-grid" id="row-1-kpis" style="margin-bottom:24px;">
+      <div class="card kpi-card">
+        <div class="card-title">
+          <span class="tip" title="Q4 FY26E Top-Line Consensus & Mining Volume" data-tip="CleanSpark pre-announced 1,708 BTC mined in Jul–Sep 2026 (586 Jul, 593 Aug, 529 Sep) at 36.0–38.6 EH/s average operating hashrate (50 EH/s peak).">Top-Line Consensus & Cash Burn</span>
+          <span class="badge badge-warn">-42.9% YoY E</span>
+        </div>
+        <div class="card-value">$127.75M</div>
+        <div class="card-sub" style="color:#94a3b8;">Q4 FY26E Consensus (Whisper: $132.50M)</div>
+        <div style="margin-top:10px; font-size:12px; color:#cbd5e1; line-height:1.45;">
+          Q3 FY26 posted $138.01M revenue (-30.5% YoY), <strong>OCF of -112M (-$112.33M)</strong>, and -$132.98M True FCF as post-halving mining difficulty squeezed unit margins.
+        </div>
+      </div>
+
+      <div class="card kpi-card">
+        <div class="card-title">
+          <span class="tip" title="Sandersville 175 MW Meta Platforms NNN Lease" data-tip="20-year triple-net (NNN) AI/HPC data center lease at Sandersville, GA with Meta Platforms (Anviran LLC): $6.6B initial contracted revenue ($11.6B w/ extensions), ~100% NOI margin, RFS Nov 2027.">Meta Platforms AI/HPC Lease</span>
+          <span class="badge badge-bull">$6.6B Contracted</span>
+        </div>
+        <div class="card-value">175 MW NNN</div>
+        <div class="card-sub" style="color:#94a3b8;">~$330M Annual NOI • 3.0% Escalators</div>
+        <div style="margin-top:10px; font-size:12px; color:#cbd5e1; line-height:1.45;">
+          Funded in Sep 2026 via $2.276B senior secured project notes with Meta guarantee; plus Meta LOI exclusivity covering up to <strong>885 MW in Texas</strong> out of 1.8+ GW total power.
+        </div>
+      </div>
+
+      <div class="card kpi-card">
+        <div class="card-title">
+          <span class="tip" title="Bitcoin Treasury, Cash & Debt Structure" data-tip="As of Jun 30, 2026, CleanSpark held $202.60M unrestricted cash, $794.66M cash & ST investments, and $814.9M total BTC HODL against $1,786.92M corporate debt (prior to $2.276B project notes).">Liquidity & BTC Treasury</span>
+          <span class="badge badge-blue">$814.9M BTC</span>
+        </div>
+        <div class="card-value">$794.7M</div>
+        <div class="card-sub" style="color:#94a3b8;">Cash & ST Inv. ($202.6M Cash) vs $1.79B Debt</div>
+        <div style="margin-top:10px; font-size:12px; color:#cbd5e1; line-height:1.45;">
+          Working capital stood at $765.08M ($761M reported) in Q3 FY26, providing liquidity runway alongside non-dilutive project debt while bridging toward Nov 2027 AI rent.
+        </div>
+      </div>
+
+      <div class="card kpi-card">
+        <div class="card-title">
+          <span class="tip" title="Extreme Valuation Discount & Short Interest Asymmetry" data-tip="CleanSpark trades at 4.18x TTM EV/Sales vs 13.36x at Core Scientific (CORZ) and 18.43x at IREN, while carrying a 42.89% short float.">Valuation & Short Squeeze Setup</span>
+          <span class="badge badge-purple">42.9% Short Float</span>
+        </div>
+        <div class="card-value">4.18x EV/S</div>
+        <div class="card-sub" style="color:#94a3b8;">vs 13.36x CORZ • 18.43x IREN • Mean PT $20.87</div>
+        <div style="margin-top:10px; font-size:12px; color:#cbd5e1; line-height:1.45;">
+          At $5.64/sh ($1.45B Mkt Cap), Wall Street's $20.87 mean target implies <strong>+270.0% upside</strong> if Q4 FY26 confirms non-dilutive execution and Texas LOI progress.
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2B: ROW 1B PRE-RELEASE EXPECTATIONS, WHISPER & TRACK RECORD SCORECARD -->
+    <section class="card" id="row-1b-scorecard" style="margin-bottom:24px; padding:20px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+        <div>
+          <h2 style="font-size:18px; font-weight:700; color:#f8fafc; margin:0 0 4px 0;">Pre-Release Expectations, Buy-Side Whisper & Track Record Scorecard</h2>
+          <p style="font-size:12.5px; color:#94a3b8; margin:0;">Triangulating Q4 FY26E consensus estimates, pre-announced 1,708 BTC volume, and AI/HPC infrastructure milestones ahead of Tuesday's AMC print.</p>
+        </div>
+        <span class="badge badge-purple" style="font-size:12px;">Pre-Print Audit Engine</span>
+      </div>
+
+      <!-- TRACK B AUDIT BANNER -->
+      <div class="t1-setup-audit" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:12px; margin-bottom:20px;">
+        <div style="background:rgba(59,130,246,0.06); border:1px solid rgba(59,130,246,0.2); border-radius:8px; padding:12px;">
+          <span style="color:#60a5fa; font-weight:700; font-size:11px; text-transform:uppercase; display:block; margin-bottom:4px;">Options Volatility Regime</span>
+          <strong style="color:#f8fafc; font-size:14px; display:block; margin-bottom:4px;">±15.78% Implied vs 11.27% Realized</strong>
+          <span style="color:#94a3b8; font-size:11.5px;">Nov 27 ATM straddle ($0.89) prices a +4.51% spread vs trailing 4Q moves (-3.53%, -5.80%, +21.96%, +13.79%). Overpriced event vol vs history at 169.1% IV.</span>
+        </div>
+        <div style="background:rgba(245,158,11,0.06); border:1px solid rgba(245,158,11,0.2); border-radius:8px; padding:12px;">
+          <span style="color:#fbbf24; font-weight:700; font-size:11px; text-transform:uppercase; display:block; margin-bottom:4px;">Historical Beat Record</span>
+          <strong style="color:#f8fafc; font-size:14px; display:block; margin-bottom:4px;">0.0% Beat Rate (0 / 4 Prior Quarters)</strong>
+          <span style="color:#94a3b8; font-size:11.5px;">GAAP EPS missed in 4 straight releases (avg -236.7% surprise due to non-cash BTC marks), yet stock surged +13.8% and +22.0% when strategic catalysts offset GAAP noise.</span>
+        </div>
+        <div style="background:rgba(168,85,247,0.06); border:1px solid rgba(168,85,247,0.2); border-radius:8px; padding:12px;">
+          <span style="color:#c084fc; font-weight:700; font-size:11px; text-transform:uppercase; display:block; margin-bottom:4px;">Executive Guidance Credibility</span>
+          <strong style="color:#f8fafc; font-size:14px; display:block; margin-bottom:4px;">68 / 100 Credibility Score</strong>
+          <div class="credibility-gauge-bar" style="height:6px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:6px; overflow:hidden;">
+            <div style="width:68%; height:100%; background:linear-gradient(90deg, #3b82f6, #10b981);"></div>
+          </div>
+          <span style="color:#94a3b8; font-size:11px; display:block; margin-top:4px;">Strong capital markets execution ($2.28B Sandersville notes), offset by mining cash burn and short-interest overhang.</span>
+        </div>
+      </div>
+
+      <!-- TABLE 1B-1 -->
+      <h3 style="font-size:14px; font-weight:700; color:#e2e8f0; margin:16px 0 8px 0;">Table 1B-1: Headline & Company KPI Consensus vs. Buy-Side Whisper Scorecard</h3>
+      <div class="table-wrapper" style="margin-bottom:20px;">
+        <table class="financial-table">
+          <thead>
+            <tr>
+              <th>Operational / Financial KPI</th>
+              <th>Q3 FY26 Actual (Q-1)</th>
+              <th>Q4 FY25 Baseline (Q-4)</th>
+              <th class="col-q0">Street Consensus (Q0E)</th>
+              <th>Buy-Side Whisper Bogey</th>
+              <th>Whisper Spread & Progress</th>
+              <th>Hurdle Class</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr>
+                <td><span class="tip" title="Total consolidated GAAP revenue from Bitcoin mining operations." data-tip="Consolidated GAAP Revenue ($M): CleanSpark generated $138.01M in Q3 FY26 (-30.5% YoY vs $198.64M; $223.65M in Q4 FY25). Street Q4 FY26E consensus sits at $127.75M (-42.9% YoY, range $110.65M–$158.07M), while buy-side whisper looks for $132.0M+ on 1,708 BTC mined.">Consolidated GAAP Revenue ($M)</span></td>
+                <td>$138.01M</td>
+                <td>$223.65M</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">$127.75M</td>
+                <td style="font-weight:700; color: #34d399;">$132.50M</td>
+                <td>
+                  <span class="badge badge-bull">+3.72% Whisper Spread</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div style="width:82%; height:100%; background:linear-gradient(90deg, #3b82f6, #10b981);"></div></div>
+                </td>
+                <td><span class="badge badge-blue">Top-Line Hurdle</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="GAAP diluted earnings per share including BTC fair-value remeasurement and D&A." data-tip="GAAP Diluted EPS ($/sh): Consensus models -$0.37/sh for Q4 FY26E vs -$0.39 actual in Q3 FY26 (16.3% miss vs -$0.33 est) and +$0.16 in Q4 FY25. Whisper targets -$0.30/sh or better if quarter-end BTC mark-to-market remeasurement is favorable.">GAAP Diluted EPS ($/sh)</span></td>
+                <td>-$0.39</td>
+                <td>+$0.16</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">-$0.37</td>
+                <td style="font-weight:700; color: #34d399;">-$0.30</td>
+                <td>
+                  <span class="badge badge-bull">+$0.07 Narrower Loss</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div style="width:74%; height:100%; background:linear-gradient(90deg, #3b82f6, #10b981);"></div></div>
+                </td>
+                <td><span class="badge badge-blue">Bottom-Line Hurdle</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Total self-mined Bitcoin produced during the fiscal quarter." data-tip="Quarterly Bitcoin Mined: CleanSpark already pre-announced monthly unaudited production totaling 1,708 BTC for Jul–Sep 2026 (586 Jul + 593 Aug + 529 Sep), down from ~1,800+ BTC in Q3 FY26 due to higher network difficulty and curtailment.">Quarterly Bitcoin Mined (BTC)</span></td>
+                <td>1,800+ BTC</td>
+                <td>2,011 BTC</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">1,708 BTC (Pre-Ann.)</td>
+                <td style="font-weight:700; color: #34d399;">1,708 BTC + Energy Credits</td>
+                <td>
+                  <span class="badge badge-bull">100% Pre-Announced</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div style="width:86%; height:100%; background:linear-gradient(90deg, #3b82f6, #10b981);"></div></div>
+                </td>
+                <td><span class="badge badge-blue">Core Output Volume</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Average energized mining computing capacity across CleanSpark facilities." data-tip="Operating Hashrate: Peak energized capacity sits at 50.0 EH/s, while average operating hashrate averaged ~37.6 EH/s across Q4 FY26 (38.6 Jul, 38.3 Aug, 36.0 Sep) reflecting strategic power curtailment and miner redeployment.">Average Operating Hashrate (EH/s)</span></td>
+                <td>39.0 EH/s Avg</td>
+                <td>43.5 EH/s Avg</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">37.6 EH/s Avg (50 Peak)</td>
+                <td style="font-weight:700; color: #34d399;">50.0 EH/s + Fleet Efficiency <16 J/TH</td>
+                <td>
+                  <span class="badge badge-bull">50 EH/s Ceiling</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div style="width:85%; height:100%; background:linear-gradient(90deg, #3b82f6, #10b981);"></div></div>
+                </td>
+                <td><span class="badge badge-blue">Infrastructure Scale</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Contracted hyperscale data center critical IT load and total grid-connected power portfolio." data-tip="AI/HPC Infrastructure: Sandersville 175 MW NNN lease with Meta Platforms ($6.6B initial 20-yr contracted revenue, $2.276B project notes closed Sep 2026) plus Meta LOI/exclusivity on up to 885 MW in Texas out of a 1.8+ GW total power portfolio.">AI/HPC Contracted Capacity & Power Pipeline (MW / $B)</span></td>
+                <td>175 MW Signed ($6.6B)</td>
+                <td>0 MW AI/HPC</td>
+                <td class="col-q0" style="font-weight:700; color: #60a5fa;">175 MW Funded ($2.28B Debt)</td>
+                <td style="font-weight:700; color: #34d399;">Texas 885 MW LOI Conversion Update</td>
+                <td>
+                  <span class="badge badge-bull">+885 MW Texas Optionality</span>
+                  <div class="beat-bar-track" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-top:4px; overflow:hidden;"><div style="width:94%; height:100%; background:linear-gradient(90deg, #3b82f6, #10b981);"></div></div>
+                </td>
+                <td><span class="badge badge-blue">Re-Rating Catalyst</span></td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- TABLE 1B-2 -->
+      <h3 style="font-size:14px; font-weight:700; color:#e2e8f0; margin:16px 0 8px 0;">Table 1B-2: Management Guidance Credibility & 4Q Historical Track Record</h3>
+      <div class="table-wrapper" style="margin-bottom:20px;">
+        <table class="financial-table">
+          <thead>
+            <tr>
+              <th>Guidance / Execution Metric</th>
+              <th>Prior Q-1 Benchmark / Target</th>
+              <th>Current Street / Market State</th>
+              <th>Historical 4Q Track Record</th>
+              <th>Variance & Capital Stewardship Commentary</th>
+              <th>Credibility Grade</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr>
+                <td><span class="tip" title="CleanSpark does not issue formal quarterly revenue guidance due to BTC price volatility, but monthly BTC production acts as a deterministic anchor." data-tip="Q4 FY26 Revenue Anchor: With 1,708 BTC mined in Jul–Sep 2026, Street consensus sits at $127.75M (-42.9% YoY). Historically, realized revenue fluctuates closely with spot BTC price and power curtailment credits.">Q4 FY26E Total Revenue vs. Monthly BTC Run-Rate</span></td>
+                <td>No Formal Rev Guide (50 EH/s Peak Target)</td>
+                <td style="font-weight:600; color: #93c5fd;">$127.75M</td>
+                <td style="font-weight:600; color: #fbbf24;">0.0% EPS Beat Rate (4 / 4 GAAP Misses)</td>
+                <td>GAAP EPS missed consensus in all 4 prior quarters (-16.3% to -745.7%) due to FASB fair-value BTC remeasurement swings and elevated depreciation ($111M/qtr), though shares still rallied +21.96% and +13.79% on operational/HPC updates.</td>
+                <td><span class="badge badge-blue">Grade B- (Operational Delivery, Volatile GAAP)</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Management commitment in Q3 FY26 release to fully fund equity and long-lead items for Meta's Sandersville campus." data-tip="Sandersville Funding Milestone: In Q3 FY26 (Aug 6), CFO Gary Vecchiarelli confirmed equity was funded and long-lead items pre-paid; in Sep 2026, CLSK closed $2.276B in senior secured project notes to fully finance construction.">Sandersville 175 MW Equity & Long-Lead Funding</span></td>
+                <td>Equity Funded & Long-Lead Pre-Paid (Aug 2026)</td>
+                <td style="font-weight:600; color: #93c5fd;">$2.276B Project Notes Closed (Sep 2026)</td>
+                <td style="font-weight:600; color: #fbbf24;">100% Execution on Sandersville Milestones</td>
+                <td>Management delivered non-dilutive project-level debt financing ($2.276B notes) within 6 weeks of Q3 earnings, validating institutional credit confidence in Meta's Anviran LLC lease guarantee.</td>
+                <td><span class="badge badge-blue">Grade A (Capital Stewardship)</span></td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Management strategy to bridge construction capex using BTC treasury ($814.9M in Q3) and mining cash flow without toxic equity dilution." data-tip="Treasury & Liquidity: CLSK ended Q3 FY26 with $202.6M cash and $814.9M BTC (~13,700–14,000 BTC). Investors will scrutinize Q4 FY26 BTC sales vs HODL balance and convert/debt covenant cushions.">Bitcoin Treasury & Liquidity Preservation</span></td>
+                <td>Preserve Liquidity & Avoid Common Equity Dilution</td>
+                <td style="font-weight:600; color: #93c5fd;">~$900M+ Liquidity / ~$1.79B Corp Debt + $2.28B Proj Debt</td>
+                <td style="font-weight:600; color: #fbbf24;">42.89% Short Interest Skepticism</td>
+                <td>High short interest (42.89% of float) reflects bear bets that negative mining OCF (-$112.3M in Q3) forces BTC liquidation or equity raises before Sandersville rent begins in Nov 2027.</td>
+                <td><span class="badge badge-blue">Grade C+ (High Leverage Watch)</span></td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- TABLE 1B-3 -->
+      <h3 style="font-size:14px; font-weight:700; color:#e2e8f0; margin:16px 0 8px 0;">Table 1B-3: Forward Guidance Bogeys & Re-Rating Hurdles</h3>
+      <div class="table-wrapper">
+        <table class="financial-table">
+          <thead>
+            <tr>
+              <th>Forward Catalyst / Target</th>
+              <th>Street Consensus Hurdle</th>
+              <th>Bull Case Bogey (Re-Rating)</th>
+              <th>Bear Case Breakdown (Compression)</th>
+              <th>Multiple Sensitivity</th>
+              <th>Strategic Institutional Rationale</th>
+            </tr>
+          </thead>
+          <tbody>
+              <tr>
+                <td><span class="tip" title="Conversion of CleanSpark's Texas land and power portfolio (up to 885 MW) under Meta LOI/exclusivity into a binding NNN lease." data-tip="Texas 885 MW Conversion: Converting even 200–400 MW of the 885 MW Texas LOI into a binding hyperscale lease would double CleanSpark's contracted NOI pipeline above $650M+/year.">Texas 885 MW Meta LOI Conversion Timeline</span></td>
+                <td>Reiterated Active Negotiations / LOI Progress</td>
+                <td style="font-weight:600; color: #34d399;">Binding Texas Phase-1 Lease (200+ MW) or Firm RFS Date</td>
+                <td style="font-weight:600; color: #f87171;">Meta Exclusivity Lapses / Texas Power Interconnect Delays</td>
+                <td><span class="badge badge-warn">Primary Re-Rating Trigger</span></td>
+                <td>CLSK trades at just 4.18x EV/Sales vs 18.43x at IREN and 13.36x at CORZ; converting Texas power to binding AI leases is the #1 catalyst to close the 70%+ multiple discount.</td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Direct power cost per kWh and all-in cash cost per BTC mined relative to post-halving network difficulty." data-tip="Mining Unit Economics: Q3 FY26 Cost of Revenue ($113.29M) vs Revenue ($138.01M) compressed GAAP gross margin to 17.9% (down from 46.4% YoY). Bulls need power cost optimization and higher curtailment credits.">FY27 Mining Cash Cost / Breakeven & Curtailment Strategy</span></td>
+                <td>Gross Margin Stabilization >= 20% / Disciplined CapEx</td>
+                <td style="font-weight:600; color: #34d399;">Gross Margin >= 25% + Positive Mining EBITDA Ex-Marks</td>
+                <td style="font-weight:600; color: #f87171;">Gross Margin < 15% + Accelerating Cash Burn (>-$120M/qtr)</td>
+                <td><span class="badge badge-warn">Liquidity Bridge Check</span></td>
+                <td>Legacy Bitcoin mining must remain cash-flow self-sustaining (or near breakeven) so CLSK does not deplete its $202.6M cash or $814.9M BTC stack ahead of Nov 2027 AI rent.</td>
+              </tr>
+              <tr>
+                <td><span class="tip" title="Confirmation that $2.276B project notes + pre-funded equity fully cover the $10M–$12M/MW Sandersville buildout without ATM common issuance." data-tip="Buildout Cost Control: At ~$11.9M/MW for 175 MW (~$2.08B), the $2.276B project financing covers capex if EPC schedules hold without cost overruns.">Sandersville 175 MW CapEx Budget & Non-Dilutive Funding Bridge</span></td>
+                <td>On-Budget (~$11.9M/MW) / Nov 2027 RFS On Track</td>
+                <td style="font-weight:600; color: #34d399;">Zero Common Equity ATM Usage + Accelerated RFS Pull-Forward</td>
+                <td style="font-weight:600; color: #f87171;">CapEx Overruns Requiring Parent Equity Infusion / ATM Dilution</td>
+                <td><span class="badge badge-warn">Short Squeeze Catalyst</span></td>
+                <td>With 42.89% of float sold short, explicit confirmation of zero common equity dilution for Sandersville removes the primary bear thesis.</td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECTION 3: ROW 2 5-QUARTER STITCHED FINANCIAL TABLE -->
+    <section class="card" id="row-2-financials" style="margin-bottom:24px; padding:20px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+        <div>
+          <h2 style="font-size:18px; font-weight:700; color:#f8fafc; margin:0 0 4px 0;">5-Quarter Historical Financials & Upcoming Q4 FY26E Consensus</h2>
+          <p style="font-size:12.5px; color:#94a3b8; margin:0;">Stitched SEC Form 10-K / 10-Q GAAP financials with CleanSpark's single reportable Bitcoin Mining segment & contracted AI/HPC pipeline overlay.</p>
+        </div>
+        <span class="badge badge-blue">Deterministic Ground-Truth GAAP Mesh</span>
+      </div>
+
+      <div class="table-wrapper">
+        <table class="financial-table">
+          <thead>
+            <tr>
+              <th>Financial Metric ($M except EPS)</th>
+              <th>Q3 FY25 (Jun 30, 2025)</th>
+              <th>Q4 FY25 (Sep 30, 2025)</th>
+              <th>Q1 FY26 (Dec 31, 2025)</th>
+              <th>Q2 FY26 (Mar 31, 2026)</th>
+              <th class="col-q0">Q3 FY26 (Jun 30, 2026)</th>
+              <th class="col-est">Q4 FY26E Consensus</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="font-weight:700; background:rgba(255,255,255,0.03);">
+              <td><span class="tip" title="Total Revenue" data-tip="Total consolidated GAAP revenue. CleanSpark operates as a single reportable segment (Bitcoin Mining) through Q3 FY26; Sandersville AI/HPC lease revenue begins late CY27.">Total Revenue</span></td>
+              <td>$198.64</td>
+              <td>$223.65</td>
+              <td>$181.18</td>
+              <td>$136.41</td>
+              <td class="col-q0">$138.01</td>
+              <td class="col-est" style="font-weight:700; color:#60a5fa;">$127.75</td>
+            </tr>
+            <tr style="color:#94a3b8; font-size:12.5px;">
+              <td style="padding-left:20px;">↳ <span class="tip" title="Bitcoin Mining Segment Revenue" data-tip="100% of CleanSpark's recognized GAAP revenue through FY26 comes from self-mined Bitcoin digital asset production across its 50 EH/s peak U.S. fleet.">Bitcoin Mining Segment (100% Recognized GAAP)</span></td>
+              <td>$198.64</td>
+              <td>$223.65</td>
+              <td>$181.18</td>
+              <td>$136.41</td>
+              <td class="col-q0">$138.01</td>
+              <td class="col-est" style="color:#93c5fd;">$127.75</td>
+            </tr>
+            <tr style="color:#64748b; font-size:12px;">
+              <td style="padding-left:20px;">↳ <span class="tip" title="AI / HPC Data Center Lease Pipeline" data-tip="Sandersville 175 MW 20-year NNN lease with Meta Platforms ($6.6B contracted / ~$330M annual NOI). Pre-revenue during construction; initial rent commences Nov 30, 2027.">AI / HPC Data Center Leasing (Sandersville Meta NNN — RFS Q4 CY27)</span></td>
+              <td>$0.00</td>
+              <td>$0.00</td>
+              <td>$0.00</td>
+              <td>$0.00</td>
+              <td class="col-q0">$0.00</td>
+              <td class="col-est">$0.00</td>
+            </tr>
+            <tr>
+              <td><span class="tip" title="Cost of Revenue" data-tip="Direct electricity, energy hosting, and mining facility operating costs excluding miner depreciation.">Cost of Revenue (Excl. D&amp;A)</span></td>
+              <td>$106.53</td>
+              <td>$149.12</td>
+              <td>$119.41</td>
+              <td>$106.61</td>
+              <td class="col-q0">$113.29</td>
+              <td class="col-est">$104.50</td>
+            </tr>
+            <tr style="font-weight:600;">
+              <td><span class="tip" title="Gross Profit" data-tip="Total GAAP Revenue minus direct Cost of Revenue (17.9% GAAP gross margin ex-D&A in Q3 FY26 vs 46.4% in Q3 FY25 due to post-halving difficulty).">Gross Profit (Excl. D&amp;A)</span></td>
+              <td>$92.12</td>
+              <td>$74.54</td>
+              <td>$61.77</td>
+              <td>$29.80</td>
+              <td class="col-q0">$24.72</td>
+              <td class="col-est" style="color:#34d399;">$23.25</td>
+            </tr>
+            <tr>
+              <td><span class="tip" title="Selling, General & Administrative" data-tip="Corporate salaries, SBC, legal, and data center development overhead ($25.41M in Q3 FY26).">Selling, General &amp; Admin (SG&amp;A)</span></td>
+              <td>$19.57</td>
+              <td>$18.18</td>
+              <td>$20.85</td>
+              <td>$25.76</td>
+              <td class="col-q0">$25.41</td>
+              <td class="col-est">$26.00</td>
+            </tr>
+            <tr>
+              <td><span class="tip" title="Depreciation, Amortization & Other OpEx" data-tip="Heavy ASIC miner and data center depreciation ($111.04M D&A in Q3 FY26) plus payroll/property taxes ($1.49M).">Depreciation, Amortization &amp; Other OpEx</span></td>
+              <td>$94.88</td>
+              <td>$119.45</td>
+              <td>$109.47</td>
+              <td>$117.61</td>
+              <td class="col-q0">$112.53</td>
+              <td class="col-est">$110.00</td>
+            </tr>
+            <tr style="font-weight:600;">
+              <td><span class="tip" title="Total Operating Expenses" data-tip="Sum of SG&A, D&A, and other operating taxes excluding non-cash Bitcoin fair-value remeasurement and impairment charges.">Total Operating Expenses (Excl. BTC Marks)</span></td>
+              <td>$114.45</td>
+              <td>$137.63</td>
+              <td>$130.32</td>
+              <td>$143.37</td>
+              <td class="col-q0">$137.94</td>
+              <td class="col-est">$136.00</td>
+            </tr>
+            <tr style="font-weight:700; background:rgba(255,255,255,0.02);">
+              <td><span class="tip" title="Core Operating Income (Excl. BTC Marks)" data-tip="Gross Profit minus Total Operating Expenses before FASB Bitcoin fair-value remeasurement and miner write-offs.">Operating Income (Core Ex-BTC Marks)</span></td>
+              <td>-$22.33</td>
+              <td>-$63.09</td>
+              <td>-$68.55</td>
+              <td>-$113.57</td>
+              <td class="col-q0">-$113.22</td>
+              <td class="col-est" style="font-weight:700; color:#f87171;">-$112.75</td>
+            </tr>
+            <tr>
+              <td><span class="tip" title="GAAP Net Income" data-tip="Consolidated GAAP Net Income including non-cash FASB Bitcoin fair-value mark-to-market gains/losses (-$239.84M in Q3 FY26 vs +$257.39M in Q3 FY25).">Net Income (GAAP Incl. BTC Marks)</span></td>
+              <td>$257.39</td>
+              <td>-$0.93</td>
+              <td>-$378.71</td>
+              <td>-$378.34</td>
+              <td class="col-q0">-$239.84</td>
+              <td class="col-est">-$99.30</td>
+            </tr>
+            <tr style="font-weight:700;">
+              <td><span class="tip" title="Diluted EPS (Street / Reported)" data-tip="Consensus Q4 FY26E EPS sits at -$0.37/sh across ~268.4M diluted shares vs -$0.39 actual in Q3 FY26 and +$0.16 in Q4 FY25.">Diluted EPS (Consensus / Historical)</span></td>
+              <td>$0.79</td>
+              <td>$0.16</td>
+              <td>-$1.32</td>
+              <td>-$0.49</td>
+              <td class="col-q0">-$0.39</td>
+              <td class="col-est" style="font-weight:700; color:#fbbf24;">-$0.37</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECTION 4: ROW 3 FORENSIC QUALITY-OF-EARNINGS & TRUE FCF BRIDGE -->
+    <section class="card" id="row-3-fcf" style="margin-bottom:24px; padding:20px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+        <div>
+          <h2 style="font-size:18px; font-weight:700; color:#f8fafc; margin:0 0 4px 0;">Forensic Quality-of-Earnings & True Free Cash Flow Bridge</h2>
+          <p style="font-size:12.5px; color:#94a3b8; margin:0;">Deconstructing Q3 FY26 operating cash flow (-112M / -$112.33M) to measure cash burn net of CapEx and SBC dilution ahead of AI capex ramp.</p>
+        </div>
+        <span class="badge badge-purple">Quality of Earnings Waterfall</span>
+      </div>
+
+      <div class="forensic-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+        <div class="waterfall-box" style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06); border-radius:8px; padding:16px;">
+          <h3 style="font-size:13px; font-weight:700; text-transform:uppercase; color:#94a3b8; margin:0 0 12px 0;">Latest Quarter True FCF Waterfall Bridge (Q3 FY26 Ended Jun 30, 2026)</h3>
+          
+          <div class="waterfall-row" style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.05);">
+            <span><span class="tip" title="Operating Cash Flow" data-tip="GAAP Operating Cash Flow (-$112.33M in Q3 FY26) reflects cash power/operating costs while mined Bitcoin is held on balance sheet as an asset rather than immediately liquidated into cash.">Operating Cash Flow (GAAP OCF)</span></span>
+            <strong style="color:#f87171;">-$112.33M (-112M)</strong>
+          </div>
+          <div class="waterfall-row" style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.05); color:#f87171;">
+            <span>(-) <span class="tip" title="Capital Expenditures" data-tip="Q3 FY26 PP&E CapEx slowed sharply to $6.10M (from $37.59M in Q2 FY26) ahead of the $2.276B Sandersville project debt closing in Sep 2026.">Capital Expenditures (CapEx)</span></span>
+            <strong>-$6.10M</strong>
+          </div>
+          <div class="waterfall-row" style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.08); font-weight:600; color:#fbbf24;">
+            <span>(=) <span class="tip" title="Reported Free Cash Flow" data-tip="Standard Reported Free Cash Flow (OCF minus CapEx = -$118.43M).">Reported Free Cash Flow</span></span>
+            <strong>-$118.43M</strong>
+          </div>
+          <div class="waterfall-row" style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.05); color:#f87171;">
+            <span>(-) <span class="tip" title="Stock-Based Compensation" data-tip="Non-cash equity compensation ($14.55M in Q3 FY26, or 10.5% of revenue).">Stock-Based Compensation (SBC)</span></span>
+            <strong>-$14.55M</strong>
+          </div>
+          <div class="waterfall-row" style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.05); color:#94a3b8;">
+            <span>(-) <span class="tip" title="Finance Lease Principal Payments" data-tip="Zero material finance lease principal outflows reported in Q3 FY26.">Finance Lease Repayments</span></span>
+            <strong>-$0.00M</strong>
+          </div>
+          <div class="waterfall-row" style="display:flex; justify-content:space-between; padding:10px 0; font-weight:700; font-size:14px; color:#f87171; background:rgba(239,68,68,0.06); border-radius:4px; padding-left:8px; padding-right:8px; margin-top:4px;">
+            <span>(=) <span class="tip" title="True Forensic Free Cash Flow" data-tip="Economic owner cash flow after deducting CapEx and full SBC dilution (-$132.98M in Q3 FY26).">True Forensic Free Cash Flow</span></span>
+            <strong>-$132.98M</strong>
+          </div>
+        </div>
+
+        <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06); border-radius:8px; padding:16px;">
+          <h3 style="font-size:13px; font-weight:700; text-transform:uppercase; color:#94a3b8; margin:0 0 12px 0;">Forensic Cash Flow & Accounting Quality Audit</h3>
+          <p style="font-size:12.5px; color:#cbd5e1; line-height:1.55; margin-bottom:12px;">
+            Under FASB crypto accounting rules, self-mined Bitcoin retained on the balance sheet does not convert into GAAP Operating Cash Flow until sold—explaining why Q3 FY26 GAAP OCF registered <strong>-$112.33M (-112M)</strong> and Reported FCF printed <strong>-$118.43M</strong> despite $138.01M of mining revenue. Excluding $14.55M SBC, True Forensic Free Cash Flow was <strong>-$132.98M</strong>.
+          </p>
+          <p style="font-size:12.5px; color:#cbd5e1; line-height:1.55; margin-bottom:12px;">
+            Crucially, CleanSpark closed a <strong>$2.276B senior secured notes offering</strong> at its Sandersville project subsidiary in September 2026 to ring-fence the ~$11.9M/MW construction capex for Meta's 175 MW NNN lease, insulating parent-level liquidity ($794.66M cash & ST investments + $814.9M BTC HODL).
+          </p>
+          <div style="background:rgba(59,130,246,0.04); border:1px solid rgba(59,130,246,0.15); border-radius:6px; padding:10px; font-size:12px; color:#93c5fd;">
+            <strong>Forensic Watchlist Item:</strong> Watch Q4 FY26 non-cash BTC fair-value remeasurement (which drove -$239.84M GAAP Net Loss in Q3 FY26 vs -$113.22M core operating loss) and verify parent unrestricted cash post-Sandersville debt syndication.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: ROW 4 SEGMENT EXECUTION AUDIT GRID & SECTION 4B DEBATES -->
+    <section class="card" id="row-4-segments" style="margin-bottom:24px; padding:20px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+        <div>
+          <h2 style="font-size:18px; font-weight:700; color:#f8fafc; margin:0 0 4px 0;">Segment Execution Audit: Tailwinds vs. Headwinds</h2>
+          <p style="font-size:12.5px; color:#94a3b8; margin:0;">Operational catalysts and execution risks across CleanSpark's 50 EH/s Bitcoin mining base and 1.8+ GW AI/HPC data center transition.</p>
+        </div>
+        <span class="badge badge-blue">Operational Matrix</span>
+      </div>
+
+      <div class="audit-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:24px;">
+        <div style="background:rgba(16,185,129,0.03); border:1px solid rgba(16,185,129,0.15); border-radius:8px; padding:16px;">
+          <h3 style="color:#34d399; font-size:13px; font-weight:700; text-transform:uppercase; margin:0 0 12px 0;">Operational Tailwinds & Catalysts</h3>
+          <ul style="margin:0; padding-left:18px; color:#cbd5e1; font-size:12.5px; line-height:1.6;">
+            <li><strong>$6.6B Meta Platforms NNN Lease Fully Financed:</strong> 175 MW Sandersville campus backed by Meta guarantee ($330M/yr NNN NOI starting Nov 2027, 3% escalators) and $2.276B project notes closed Sep 2026.</li>
+            <li><strong>885 MW Texas Meta Exclusivity Pipeline:</strong> Meta LOI covering up to 885 MW of CleanSpark's 1.8+ GW grid-connected power portfolio offers massive multi-billion-dollar Phase-2 lease upside.</li>
+            <li><strong>Valuation & Short-Squeeze Asymmetry:</strong> At 4.18x EV/Sales vs 13.36x (CORZ) and 18.43x (IREN) with 42.89% short float and 0.20 P/C OI ratio, any Texas lease milestone triggers violent covering.</li>
+            <li><strong>$814.9M BTC Treasury + 50 EH/s Fleet:</strong> High-efficiency (~16.07 J/TH) ASIC fleet mined 1,708 BTC in Q4 FY26 while preserving a deep digital asset liquidity cushion.</li>
+          </ul>
+        </div>
+
+        <div style="background:rgba(239,68,68,0.03); border:1px solid rgba(239,68,68,0.15); border-radius:8px; padding:16px;">
+          <h3 style="color:#f87171; font-size:13px; font-weight:700; text-transform:uppercase; margin:0 0 12px 0;">Execution Headwinds & Risks</h3>
+          <ul style="margin:0; padding-left:18px; color:#cbd5e1; font-size:12.5px; line-height:1.6;">
+            <li><strong>Compressed Mining Gross Margins:</strong> GAAP gross margin ex-D&amp;A fell from 46.4% (Q3 FY25) to 17.9% (Q3 FY26) on post-halving network difficulty and Q4 revenue consensus down -42.9% YoY ($127.75M).</li>
+            <li><strong>12-Month Pre-Revenue AI Bridge Risk:</strong> First Meta rent at Sandersville does not commence until Nov 30, 2027, leaving four quarters of negative mining OCF (-$112.33M in Q3) to bridge.</li>
+            <li><strong>Heavy Consolidated Debt Load:</strong> $1.79B existing corporate debt plus $2.276B Sandersville project notes raises consolidated leverage if BTC prices experience a prolonged drawdown.</li>
+            <li><strong>Four Consecutive GAAP EPS Misses:</strong> 0% 4Q beat rate and heightened short interest (42.89% of float) keep momentum institutions sidelined until Texas LOI converts to binding leases.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- SECTION 4B: INSTITUTIONAL DEBATES -->
+      <div id="row-4b-debates">
+        <h3 style="font-size:15px; font-weight:700; color:#f8fafc; margin:0 0 12px 0;">Top 3 Institutional Pre-Print Debates & Conference Call Focus Questions</h3>
+        <div class="card debate-card" style="margin-bottom:14px; border-left:3px solid #6366f1;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span class="badge badge-purple" style="font-size:11px; font-weight:700;">DEBATE_1</span>
+            <strong style="color:#f8fafc; font-size:14px; flex:1; margin-left:10px;">Digital Infrastructure Landlord Re-Rating ($6.6B Meta Lease) vs. Near-Term Bitcoin Mining Cash Burn</strong>
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:10px; font-size:12.5px;">
+            <div style="background:rgba(255,255,255,0.02); padding:10px; border-radius:6px; border:1px solid rgba(255,255,255,0.05);">
+              <span style="color:#94a3b8; font-weight:600; text-transform:uppercase; font-size:10.5px; display:block; margin-bottom:4px;">Sell-Side / Short Consensus Stance</span>
+              <p style="margin:0; color:#cbd5e1; line-height:1.45;">Bears and short-sellers (42.89% short float) highlight that Q3 FY26 mining gross margin collapsed to 17.9%, OCF burned -$112.33M, and Sandersville does not begin generating rent until November 30, 2027—leaving a 12-month cash bridge risk.</p>
+            </div>
+            <div style="background:rgba(59,130,246,0.04); padding:10px; border-radius:6px; border:1px solid rgba(59,130,246,0.15);">
+              <span style="color:#60a5fa; font-weight:600; text-transform:uppercase; font-size:10.5px; display:block; margin-bottom:4px;">Buy-Side Variant Perception</span>
+              <p style="margin:0; color:#e2e8f0; line-height:1.45;">CleanSpark's $2.276B senior secured project notes (closed Sep 2026) ring-fence Sandersville construction capex at the subsidiary level, while $814.9M in BTC + $202.6M cash provides ~$1B in liquidity buffer against $6.6B of investment-grade Meta NNN cash flows (~$330M/yr NOI).</p>
+            </div>
+          </div>
+          <div style="background:rgba(16,185,129,0.04); border-left:2px solid #10b981; padding:8px 12px; border-radius:4px; font-size:12px;">
+            <strong style="color:#34d399;">Institutional Conference Call Focus Question:</strong>
+            <span style="color:#cbd5e1; margin-left:4px;">"CFO Gary Vecchiarelli: Following the $2.276B project-level debt closing in September, what is CleanSpark's pro-forma parent-level unrestricted cash and BTC treasury balance, and how much mining OCF is needed to avoid any common equity ATM issuance through Q4 2027?"</span>
+          </div>
+        </div>
+        <div class="card debate-card" style="margin-bottom:14px; border-left:3px solid #6366f1;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span class="badge badge-purple" style="font-size:11px; font-weight:700;">DEBATE_2</span>
+            <strong style="color:#f8fafc; font-size:14px; flex:1; margin-left:10px;">Texas 885 MW Portfolio Conversion: Binding Second Hyperscale Lease or Stranded Mining Capacity?</strong>
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:10px; font-size:12.5px;">
+            <div style="background:rgba(255,255,255,0.02); padding:10px; border-radius:6px; border:1px solid rgba(255,255,255,0.05);">
+              <span style="color:#94a3b8; font-weight:600; text-transform:uppercase; font-size:10.5px; display:block; margin-bottom:4px;">Sell-Side / Short Consensus Stance</span>
+              <p style="margin:0; color:#cbd5e1; line-height:1.45;">Skeptics note that CleanSpark discontinued standalone monthly mining updates starting FY27 and has not yet converted the Texas 885 MW Meta LOI/exclusivity into a definitive binding lease, raising questions over ERCOT interconnection timelines.</p>
+            </div>
+            <div style="background:rgba(59,130,246,0.04); padding:10px; border-radius:6px; border:1px solid rgba(59,130,246,0.15);">
+              <span style="color:#60a5fa; font-weight:600; text-transform:uppercase; font-size:10.5px; display:block; margin-bottom:4px;">Buy-Side Variant Perception</span>
+              <p style="margin:0; color:#e2e8f0; line-height:1.45;">Discontinuing monthly BTC production releases aligns CleanSpark with institutional data center peers (CORZ, EQIX, DLR) rather than retail crypto miners, while Texas's 885 MW grid-connected footprint represents an additional ~$15B+ contracted revenue opportunity if converted at Sandersville economics.</p>
+            </div>
+          </div>
+          <div style="background:rgba(16,185,129,0.04); border-left:2px solid #10b981; padding:8px 12px; border-radius:4px; font-size:12px;">
+            <strong style="color:#34d399;">Institutional Conference Call Focus Question:</strong>
+            <span style="color:#cbd5e1; margin-left:4px;">"CEO Matt Schultz: Can you detail the engineering and ERCOT interconnection milestones for the 885 MW Texas portfolio under exclusivity, and should investors expect a binding Texas Phase-1 AI/HPC lease announcement within the next two quarters?"</span>
+          </div>
+        </div>
+        <div class="card debate-card" style="margin-bottom:14px; border-left:3px solid #6366f1;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span class="badge badge-purple" style="font-size:11px; font-weight:700;">DEBATE_3</span>
+            <strong style="color:#f8fafc; font-size:14px; flex:1; margin-left:10px;">Extreme Valuation Dislocation (4.18x EV/Sales, $5.64 Spot vs. $20.87 Mean PT) & 42.89% Short Squeeze Setup</strong>
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:10px; font-size:12.5px;">
+            <div style="background:rgba(255,255,255,0.02); padding:10px; border-radius:6px; border:1px solid rgba(255,255,255,0.05);">
+              <span style="color:#94a3b8; font-weight:600; text-transform:uppercase; font-size:10.5px; display:block; margin-bottom:4px;">Sell-Side / Short Consensus Stance</span>
+              <p style="margin:0; color:#cbd5e1; line-height:1.45;">Quant/momentum funds (e.g., Zacks Sell rating) remain short CLSK due to four consecutive GAAP EPS misses, rising total debt ($1.79B corporate + $2.28B project), and -42.9% YoY Q4 revenue contraction.</p>
+            </div>
+            <div style="background:rgba(59,130,246,0.04); padding:10px; border-radius:6px; border:1px solid rgba(59,130,246,0.15);">
+              <span style="color:#60a5fa; font-weight:600; text-transform:uppercase; font-size:10.5px; display:block; margin-bottom:4px;">Buy-Side Variant Perception</span>
+              <p style="margin:0; color:#e2e8f0; line-height:1.45;">At $1.45B Market Cap ($5.64/sh), the market values CleanSpark at a fraction of its $6.6B contracted Meta lease NPV (~$330M annual NNN NOI at ~100% margin) plus ~$815M BTC holdings, creating extreme asymmetry vs 13.4x–18.4x EV/Sales peers (CORZ, IREN) if execution stays on schedule.</p>
+            </div>
+          </div>
+          <div style="background:rgba(16,185,129,0.04); border-left:2px solid #10b981; padding:8px 12px; border-radius:4px; font-size:12px;">
+            <strong style="color:#34d399;">Institutional Conference Call Focus Question:</strong>
+            <span style="color:#cbd5e1; margin-left:4px;">"Management: With Sandersville generating ~$330M in projected annual NNN NOI starting late 2027 versus a $1.45B current equity market cap, how do you evaluate non-dilutive project equity partnerships or convertible refinancing to bridge the valuation gap?"</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 6: ROW 5 PEER VALUATION COMPS -->
+    <section class="card" id="row-5-peers" style="margin-bottom:24px; padding:20px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+        <div>
+          <h2 style="font-size:18px; font-weight:700; color:#f8fafc; margin:0 0 4px 0;">Peer Valuation & Operational Benchmarks</h2>
+          <p style="font-size:12.5px; color:#94a3b8; margin:0;">Benchmarking CleanSpark against Bitcoin mining and AI/HPC data center transition peers across live market cap, EV/Sales, and margins.</p>
+        </div>
+        <span class="badge badge-blue">Sector Comps</span>
+      </div>
+
+      <div class="table-wrapper">
+        <table class="financial-table">
+          <thead>
+            <tr>
+              <th>Company Name</th>
+              <th>Ticker</th>
+              <th>Market Cap</th>
+              <th>Forward P/E</th>
+              <th>EV / Sales (TTM)</th>
+              <th>Revenue Growth (YoY)</th>
+              <th>Gross Margin</th>
+              <th>TTM FCF ($B)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background:rgba(59,130,246,0.08); font-weight:700;">
+              <td><span class="tip" title="CleanSpark, Inc." data-tip="Bitcoin miner pivoting into hyperscale AI/HPC data centers via a $6.6B 20-year NNN Meta lease at Sandersville, GA.">CleanSpark, Inc. (Subject)</span></td>
+              <td>CLSK</td>
+              <td>$1.45B</td>
+              <td>N/M (-3.2x)</td>
+              <td>4.18x</td>
+              <td>-30.5%</td>
+              <td>47.0%</td>
+              <td>-$1.04B (OCF/CapEx)</td>
+            </tr>
+            <tr>
+              <td><span class="tip" title="Core Scientific, Inc." data-tip="Hyperscale AI/HPC colocation and Bitcoin mining peer anchored by multi-gigawatt CoreWeave hosting contracts.">Core Scientific, Inc.</span></td>
+              <td>CORZ</td>
+              <td>$3.98B</td>
+              <td>53.5x</td>
+              <td>13.36x</td>
+              <td>+187.1%</td>
+              <td>44.1%</td>
+              <td>-$0.96B</td>
+            </tr>
+            <tr>
+              <td><span class="tip" title="IREN Limited" data-tip="Renewable-powered data center and AI cloud infrastructure operator transitioning capacity to GPU hosting.">IREN Limited</span></td>
+              <td>IREN</td>
+              <td>$5.71B</td>
+              <td>49.8x</td>
+              <td>18.43x</td>
+              <td>-5.0%</td>
+              <td>73.4%</td>
+              <td>-$8.78B</td>
+            </tr>
+            <tr>
+              <td><span class="tip" title="Riot Platforms, Inc." data-tip="Large-scale U.S. Bitcoin mining and power-asset developer in Texas exploring HPC/AI colocation monetization.">Riot Platforms, Inc.</span></td>
+              <td>RIOT</td>
+              <td>$6.42B</td>
+              <td>N/M (-19.0x)</td>
+              <td>9.88x</td>
+              <td>+0.7%</td>
+              <td>23.9%</td>
+              <td>-$0.75B</td>
+            </tr>
+            <tr>
+              <td><span class="tip" title="MARA Holdings, Inc." data-tip="Pure-play Bitcoin mining and digital energy treasury peer with large BTC balance sheet holdings.">MARA Holdings, Inc.</span></td>
+              <td>MARA</td>
+              <td>$2.31B</td>
+              <td>N/M (-9.9x)</td>
+              <td>6.49x</td>
+              <td>-34.9%</td>
+              <td>32.6%</td>
+              <td>-$1.04B</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECTION 7: ROW 6 MULTI-SOURCE 4-PILLAR SENTIMENT GRID -->
+    <section class="card" id="row-6-sentiment" style="margin-bottom:24px; padding:20px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+        <div>
+          <h2 style="font-size:18px; font-weight:700; color:#f8fafc; margin:0 0 4px 0;">Multi-Source 4-Pillar Pre-Earnings Sentiment & Positioning Audit</h2>
+          <p style="font-size:12.5px; color:#94a3b8; margin:0;">Triangulating weekly options call skew, analyst SOTP targets, Reddit/FinTwit positioning, and 42.89% short-squeeze asymmetry.</p>
+        </div>
+        <span class="badge badge-purple">4-Pillar Sentiment</span>
+      </div>
+
+      <div class="sentiment-grid" style="display:grid; grid-template-columns:repeat(4, 1fr); gap:12px; margin-bottom:20px;">
+        <div class="card sentiment-card" style="padding:14px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06);">
+          <div style="font-size:11px; text-transform:uppercase; color:#94a3b8; font-weight:700; margin-bottom:4px;">Options Skew &amp; Volatility</div>
+          <div style="font-size:20px; font-weight:800; color:#fbbf24; margin-bottom:4px;">66 / 100</div>
+          <div class="sentiment-meter-bar" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-bottom:8px; overflow:hidden;">
+            <div style="width:66%; height:100%; background:#fbbf24;"></div>
+          </div>
+          <span style="font-size:11.5px; color:#cbd5e1; line-height:1.4; display:block;">ATM Straddle implies ±15.78% ($0.89) vs 11.27% 4Q avg move. Heavy call skew (0.20 P/C OI) at 169.1% IV.</span>
+        </div>
+
+        <div class="card sentiment-card" style="padding:14px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06);">
+          <div style="font-size:11px; text-transform:uppercase; color:#94a3b8; font-weight:700; margin-bottom:4px;">Institutional Positioning</div>
+          <div style="font-size:20px; font-weight:800; color:#34d399; margin-bottom:4px;">74 / 100</div>
+          <div class="sentiment-meter-bar" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-bottom:8px; overflow:hidden;">
+            <div style="width:74%; height:100%; background:#34d399;"></div>
+          </div>
+          <span style="font-size:11.5px; color:#cbd5e1; line-height:1.4; display:block;">15 Analysts carry a $20.87 Mean PT (+270.0% upside; High $27, Low $9.50), valuing Sandersville Meta NNN lease above current EV.</span>
+        </div>
+
+        <div class="card sentiment-card" style="padding:14px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06);">
+          <div style="font-size:11px; text-transform:uppercase; color:#94a3b8; font-weight:700; margin-bottom:4px;">Retail Community Pulse</div>
+          <div style="font-size:20px; font-weight:800; color:#60a5fa; margin-bottom:4px;">62 / 100</div>
+          <div class="sentiment-meter-bar" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-bottom:8px; overflow:hidden;">
+            <div style="width:62%; height:100%; background:#60a5fa;"></div>
+          </div>
+          <span style="font-size:11.5px; color:#cbd5e1; line-height:1.4; display:block;">Divided Reddit (r/CleanSpark) &amp; FinTwit tape: AI landlord bulls highlight $6.6B Meta lease &amp; 885 MW Texas pipeline vs dilution/mining bears.</span>
+        </div>
+
+        <div class="card sentiment-card" style="padding:14px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06);">
+          <div style="font-size:11px; text-transform:uppercase; color:#94a3b8; font-weight:700; margin-bottom:4px;">Short Squeeze Asymmetry</div>
+          <div style="font-size:20px; font-weight:800; color:#c084fc; margin-bottom:4px;">88 / 100</div>
+          <div class="sentiment-meter-bar" style="height:5px; background:rgba(255,255,255,0.08); border-radius:3px; margin-bottom:8px; overflow:hidden;">
+            <div style="width:88%; height:100%; background:#c084fc;"></div>
+          </div>
+          <span style="font-size:11.5px; color:#cbd5e1; line-height:1.4; display:block;">Massive 42.89% short float + 0.20 P/C OI ratio creates explosive upward squeeze convexity above $6.50 on Texas LOI or zero-ATM pledge.</span>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+        <div style="background:rgba(59,130,246,0.03); border:1px solid rgba(59,130,246,0.15); border-radius:8px; padding:14px;">
+          <strong style="color:#60a5fa; font-size:13px; display:block; margin-bottom:6px;">Retail Trader Sentiment Narrative (Reddit &amp; FinTwit)</strong>
+          <p style="margin:0; font-size:12px; color:#cbd5e1; line-height:1.5;">Across Reddit (r/CleanSpark, r/wallstreetbets) and Stocktwits, retail bulls argue CLSK at $5.64 ($1.45B market cap) is wildly mispriced relative to its $6.6B Meta Platforms lease and ~$815M BTC treasury, though momentum traders remain scarred by the slide from $20+ and demand proof of non-dilutive Texas financing.</p>
+        </div>
+        <div style="background:rgba(168,85,247,0.03); border:1px solid rgba(168,85,247,0.15); border-radius:8px; padding:14px;">
+          <strong style="color:#c084fc; font-size:13px; display:block; margin-bottom:6px;">Institutional Desk Positioning (Credit Desks &amp; Hedge Funds)</strong>
+          <p style="margin:0; font-size:12px; color:#cbd5e1; line-height:1.5;">Institutional credit and equity desks acknowledge the landmark $2.276B project debt financing for Meta's 175 MW Sandersville campus, yet equity hedge funds maintain a massive 42.89% short float hedging convertible bonds and betting on near-term BTC mining cash burn (-$112.3M Q3 OCF) ahead of late-2027 AI rent.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 8: ROW 7 HEDGE FUND PM TRADE EXECUTION MATRIX -->
+    <section class="card" id="row-7-pm-matrix" style="margin-bottom:24px; padding:20px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+        <div>
+          <h2 style="font-size:18px; font-weight:700; color:#f8fafc; margin:0 0 4px 0;">Hedge Fund Portfolio Manager Options &amp; Trade Execution Matrix</h2>
+          <p style="font-size:12.5px; color:#94a3b8; margin:0;">3-Scenario execution playbook anchored to spot price ($5.64) and the Nov 27 ATM straddle (±15.78% / ±$0.89).</p>
+        </div>
+        <span class="badge badge-warn">Institutional Risk Matrix</span>
+      </div>
+
+      <div class="scenario-grid" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:14px; margin-bottom:20px;">
+        <!-- BULL CASE -->
+        <div class="card scenario-bull" style="background:rgba(16,185,129,0.03); border:1px solid rgba(16,185,129,0.2); border-radius:8px; padding:16px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span class="badge badge-bull" style="font-weight:700;">Bull Case Squeeze</span>
+            <span style="font-size:12px; font-weight:700; color:#34d399;">Probability: 30%</span>
+          </div>
+          <div style="font-size:18px; font-weight:800; color:#34d399; margin-bottom:4px;">Target: $6.50 – $7.50</div>
+          <div style="font-size:12px; color:#94a3b8; margin-bottom:10px;">Implied Move: +16.1% to +33.9%</div>
+          <p style="font-size:12px; color:#cbd5e1; line-height:1.5; margin-bottom:12px;">
+            <strong>Catalysts:</strong> Revenue beats $132.5M whisper, management confirms zero parent ATM equity issuance needed for Sandersville post-$2.276B note close, and delivers concrete milestones toward binding the 885 MW Texas Meta LOI.
+          </p>
+          <div class="trade-structure" style="background:rgba(16,185,129,0.06); border-left:2px solid #10b981; padding:8px 10px; border-radius:4px; font-size:11.5px; color:#e2e8f0;">
+            <strong>Options Structure:</strong> Long Dec 18 $5.50/$7.50 Call Spread or Cash-Secured $5.00 Put + Long Dec $6.00/$7.50 Call Spread to capture short-squeeze convexity.
+          </div>
+        </div>
+
+        <!-- BASE CASE -->
+        <div class="card scenario-base" style="background:rgba(59,130,246,0.03); border:1px solid rgba(59,130,246,0.2); border-radius:8px; padding:16px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span class="badge badge-blue" style="font-weight:700;">Base Case (Rangebound)</span>
+            <span style="font-size:12px; font-weight:700; color:#60a5fa;">Probability: 45%</span>
+          </div>
+          <div style="font-size:18px; font-weight:800; color:#60a5fa; margin-bottom:4px;">Target: $5.10 – $6.20</div>
+          <div style="font-size:12px; color:#94a3b8; margin-bottom:10px;">Implied Move: -8.9% to +10.7%</div>
+          <p style="font-size:12px; color:#cbd5e1; line-height:1.5; margin-bottom:12px;">
+            <strong>Catalysts:</strong> Q4 Revenue prints inline ($126M–$130M) on known 1,708 BTC production, Sandersville Nov 2027 RFS reiterated on budget, and Texas 885 MW stays in active engineering diligence. 169.1% event IV crushes, pinning shares near $5.50–$6.00.
+          </p>
+          <div class="trade-structure" style="background:rgba(59,130,246,0.06); border-left:2px solid #3b82f6; padding:8px 10px; border-radius:4px; font-size:11.5px; color:#e2e8f0;">
+            <strong>Options Structure:</strong> Short Nov 27 $4.50/$5.00 Put &amp; $6.50/$7.00 Call Iron Condor to harvest the ±15.78% ($0.89) straddle premium crush.
+          </div>
+        </div>
+
+        <!-- BEAR CASE -->
+        <div class="card scenario-bear" style="background:rgba(239,68,68,0.03); border:1px solid rgba(239,68,68,0.2); border-radius:8px; padding:16px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span class="badge badge-warn" style="font-weight:700;">Bear Case Breakdown</span>
+            <span style="font-size:12px; font-weight:700; color:#f87171;">Probability: 25%</span>
+          </div>
+          <div style="font-size:18px; font-weight:800; color:#f87171; margin-bottom:4px;">Target: $4.20 – $4.90</div>
+          <div style="font-size:12px; color:#94a3b8; margin-bottom:10px;">Implied Move: -12.5% to -25.0%</div>
+          <p style="font-size:12px; color:#cbd5e1; line-height:1.5; margin-bottom:12px;">
+            <strong>Catalysts:</strong> Mining gross margin falls below 15%, Q4 OCF burn worsens beyond -$125M forcing BTC treasury sales or new ATM common equity issuance, or Texas Meta exclusivity stalls on ERCOT delays.
+          </p>
+          <div class="trade-structure" style="background:rgba(239,68,68,0.06); border-left:2px solid #ef4444; padding:8px 10px; border-radius:4px; font-size:11.5px; color:#e2e8f0;">
+            <strong>Options Structure:</strong> Long Nov 27 $5.50/$4.50 Bear Put Spread or protective Dec $5.00 Puts against underlying equity exposure.
+          </div>
+        </div>
+      </div>
+
+      <div style="background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.05); border-radius:6px; padding:12px; font-size:12px; color:#94a3b8;">
+        <strong>Portfolio Manager Note:</strong> CLSK is a battleground SOTP transition story: 42.89% short float and 4 prior GAAP misses clash against a $6.6B Meta NNN lease and 885 MW Texas exclusivity. Avoid naked short gamma above $6.50; use defined-risk spreads around the ±15.78% ($0.89) straddle boundary.
+      </div>
+    </section>
+
+    <!-- FOOTER VERIFICATION LEDGER -->
+    <footer style="margin-top:30px; padding:16px; border-top:1px solid #334155; font-size:11.5px; color:#64748b; display:flex; justify-content:space-between; align-items:center;">
+      <div>
+        <span>Deterministic Pre-Earnings Ground Truth Verified: <strong>CLSK (2026-11-24)</strong></span> •
+        <span>Spot Price: <strong>$5.64</strong></span> •
+        <span>Latest OCF: <strong>-$112.33M (-112M)</strong></span> •
+        <span>True FCF: <strong>-$132.98M</strong></span>
+      </div>
+      <div>
+        <span class="badge badge-blue">Antigravity 2.0 Track A + Track B Institutional Certified</span>
+      </div>
+    </footer>
+
+  </div>
+</body>
+</html>

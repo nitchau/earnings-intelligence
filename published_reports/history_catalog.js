@@ -87,13 +87,13 @@ window.EARNINGS_HISTORY_CATALOG = {
   "CLSK": [
     {
       "date": "2026-11-24",
-      "quarter": "Q4 FY2026",
+      "quarter": "Q3 2026",
       "date_display": "Nov 24, 2026",
       "t1": "CLSK_T1_2026-11-24.html",
-      "t0": null,
-      "verdict": null,
-      "post_move_pct": null,
-      "rev_actual_m": null,
+      "t0": "CLSK_T0_POST_2026-11-24.html",
+      "verdict": "EPS BEAT / REVENUE MISS",
+      "post_move_pct": -2.34,
+      "rev_actual_m": 120.94,
       "rev_consensus_m": 127.75,
       "currency": "$"
     }
