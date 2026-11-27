@@ -1,0 +1,70 @@
+{
+  "ticker": "ESTC",
+  "earnings_date": "2026-11-19",
+  "agent": "Pre_KPI_Consensus_Agent (Agent 2A)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "upcoming_quarter_label": "Q2 FY27E (Ended Oct 31, 2026)",
+  "latest_reported_quarter_label": "Q1 FY27 (Ended Jul 31, 2026)",
+  "headline_and_company_kpis": [
+    {
+      "metric": "Consolidated GAAP Revenue ($M)",
+      "tooltip_title": "Total consolidated GAAP revenue across Subscription and Professional Services.",
+      "tooltip_def": "Consolidated GAAP Revenue ($M): Elastic generated $478.1M in Q1 FY27 (+15.1% YoY vs $415.3M in Q1 FY26; $423.5M in Q2 FY26). Management guided Q2 FY27 to $486.0M\u2013$487.0M; Street consensus sits at $486.77M, while buy-side whisper targets $494.0M+ on Search AI and cRPO conversion.",
+      "q_minus_1_actual": "$478.1M",
+      "q_minus_4_yoy_baseline": "$423.5M",
+      "street_consensus_q0e": "$486.77M",
+      "whisper_bogey_q0e": "$494.00M",
+      "whisper_spread_display": "+1.49% Whisper Spread",
+      "bar_width_pct": 88,
+      "hurdle_badge": "Top-Line Hurdle"
+    },
+    {
+      "metric": "Sales-Led Subscription Revenue ($M)",
+      "tooltip_title": "Subscription revenue excluding Monthly Elastic Cloud self-serve consumption.",
+      "tooltip_def": "Sales-Led Subscription Revenue ($M): Management's core enterprise KPI reached $399.0M in Q1 FY27 (+18% YoY vs $339.0M in Q1 FY26; $349.0M in Q2 FY26). Q2 FY27 guidance midpoint is $408.0M ($407.5M\u2013$408.5M); whisper bogey requires $414.0M+ to confirm H2 acceleration.",
+      "q_minus_1_actual": "$399.0M",
+      "q_minus_4_yoy_baseline": "$349.0M",
+      "street_consensus_q0e": "$408.00M",
+      "whisper_bogey_q0e": "$414.00M",
+      "whisper_spread_display": "+1.47% Spread",
+      "bar_width_pct": 90,
+      "hurdle_badge": "Core Growth Engine"
+    },
+    {
+      "metric": "Non-GAAP Diluted EPS ($/sh)",
+      "tooltip_title": "Adjusted diluted EPS excluding stock-based compensation, amortization, and restructuring charges.",
+      "tooltip_def": "Non-GAAP Diluted EPS ($/sh): Q1 FY27 printed $0.70 (+19.85% beat vs $0.58 estimate). Management guided Q2 FY27 to $0.80\u2013$0.82 (consensus $0.81), while buy-side whisper models $0.88+ given 100% 4Q beat rate (+13.08% avg surprise) and 19.0% guided non-GAAP operating margin.",
+      "q_minus_1_actual": "$0.70",
+      "q_minus_4_yoy_baseline": "$0.64",
+      "street_consensus_q0e": "$0.81",
+      "whisper_bogey_q0e": "$0.88",
+      "whisper_spread_display": "+$0.07 Spread",
+      "bar_width_pct": 92,
+      "hurdle_badge": "Bottom-Line Hurdle"
+    },
+    {
+      "metric": "Current RPO (cRPO) ($B)",
+      "tooltip_title": "Contracted remaining performance obligations expected to be recognized over the next 12 months.",
+      "tooltip_def": "Current RPO ($B): cRPO hit $1.153B in Q1 FY27 (+21% YoY reported, +20% CC) vs $971M in Q2 FY26. Street looks for ~$1.19B (+22.5% YoY) in Q2 FY27, while bulls require $1.21B+ (+24% YoY) to validate enterprise multi-year Search AI commitments.",
+      "q_minus_1_actual": "$1.153B",
+      "q_minus_4_yoy_baseline": "$0.971B",
+      "street_consensus_q0e": "$1.190B",
+      "whisper_bogey_q0e": "$1.215B",
+      "whisper_spread_display": "+2.10% Expansion",
+      "bar_width_pct": 89,
+      "hurdle_badge": "Visibility Driver"
+    },
+    {
+      "metric": ">$100K ACV Enterprise Customers (#)",
+      "tooltip_title": "Total enterprise customer accounts generating more than $100,000 in Annual Contract Value.",
+      "tooltip_def": ">$100K ACV Customers: Reached 1,800+ in Q1 FY27 (record QoQ net additions of ~80+ from >1,720 in Q4 FY26; >1,600 in Q2 FY26). Consensus models 1,850+ in Q2 FY27; whisper targets 1,870+ fueled by >37% of high-ACV accounts adopting Elastic for GenAI/RAG workloads.",
+      "q_minus_1_actual": "1,800+",
+      "q_minus_4_yoy_baseline": "1,600+",
+      "street_consensus_q0e": "1,850",
+      "whisper_bogey_q0e": "1,875",
+      "whisper_spread_display": "+25 Net Adds Spread",
+      "bar_width_pct": 91,
+      "hurdle_badge": "Enterprise Adoption"
+    }
+  ]
+}

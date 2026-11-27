@@ -1,0 +1,28 @@
+{
+  "ticker": "ESTC",
+  "earnings_date": "2026-11-19",
+  "agent": "Pre_Whisper_Sentiment_Agent (Agent 2C)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "verified_products": [
+    "Elasticsearch VectorDB & DiskBBQ / Better Binary Quantization (BBQ): GA vector search engine with Auto Calibration reducing memory footprint up to 95% for enterprise RAG",
+    "Elastic Cloud Serverless & Cross-Project Search (CPS): Fully managed, auto-scaling search/observability/security lake across AWS, Azure, and GCP",
+    "ES|QL (Elasticsearch Query Language): Unified pipelined query engine with named subqueries bridging search, logs, metrics, and security telemetry",
+    "Elastic Inference Service (EIS) & Jina AI On-Prem: Native Jina embedding and reranking models (plus OpenAI & NVIDIA cuVS GPU acceleration) for hybrid AI search",
+    "Elastic Observability + Deductive AI: Automated reinforcement-learning root cause analysis (RCA) with native Prometheus/PromQL and OpenTelemetry support",
+    "Elastic Security (EASE & Alert Zero): AI-driven agentic SOC alert triage, SIEM displacement, and AWS AI Security Competency validated XDR"
+  ],
+  "four_pillar_sentiment": {
+    "options_volatility_score": 68,
+    "options_volatility_desc": "68/100 (ATM Implied Move \u00b116.41% / $13.35 Straddle vs 15.43% 4Q Historical Avg Move \u2014 Fairly Priced Binary Event Vol at 228.5% IV, P/C OI Skew 0.16 Call-Heavy)",
+    "institutional_positioning_score": 78,
+    "institutional_positioning_desc": "78/100 (26 Wall Street Analysts with 1.87 Buy Consensus; Mean PT $111.00 implies +36.48% Upside, High PT $132.00 Citi, though TD Cowen recently trimmed PT to $85 Hold)",
+    "retail_sentiment_score": 65,
+    "retail_sentiment_desc": "65/100 (Divided Pre-Print Tape: FinTwit cautious on SaaS insider selling & post-print volatility, while r/nasdaq & value bulls highlight 4.2x EV/Sales AI search dislocation)",
+    "short_interest_score": 72,
+    "short_interest_desc": "72/100 (5.30% Short Interest of Float with 0.16 Put/Call OI Ratio \u2014 heavy upside call positioning sets up sharp squeeze above $90 if FY27 guide is raised)"
+  },
+  "retail_vs_institutional_audit": {
+    "retail_narrative": "Retail traders across Reddit (r/nasdaq, r/wallstreetbets) and Stocktwits view ESTC near $81.33 as an oversold GenAI infrastructure laggard trading at barely 4.2x EV/Sales, pointing to last quarter's +19.3% post-earnings surge and call-heavy 0.16 Put/Call OI skew.",
+    "institutional_narrative": "Institutional software desks are polarized between valuation support (20.5x forward P/E, $1.46B cash, $500M buyback) and mixed observability checks (TD Cowen $85 Hold vs Citi $132 / RBC $125 / Monness Crespi $120 / Stifel $120 Buys), demanding >20% cRPO durability and a Q3 revenue guide above $520M."
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "ticker": "CRWD",
+  "earnings_date": "2026-11-23",
+  "agent": "Pre_Guidance_Debate_Agent (Agent 2B)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "credibility_score": 88,
+  "credibility_label": "88 / 100 (100% 4Q EPS Beat/Meet Rate, +3.24% Avg Surprise, Consistent Beat-and-Raise Execution on ARR & FCF)",
+  "matrix_a_prior_guidance_and_track_record": [
+    {
+      "metric": "Q3 FY27E Total Revenue vs. Prior Management Guide",
+      "tooltip_title": "Comparison of management's Q2 FY27 outlook for Q3 FY27 against Street consensus.",
+      "tooltip_def": "Revenue Guidance Calibration: In Q2 FY27 (Aug 2026), management guided Q3 FY27 revenue to $1,523M\u2013$1,529M. Yahoo Finance 0q consensus sits at $1,621.65M (+24.23% YoY), reflecting rolled forward estimates and aggressive Falcon Flex beat assumptions.",
+      "prior_q_guidance_for_q0": "$1,523.0M \u2013 $1,529.0M (Q2 Call)",
+      "current_street_consensus": "$1,621.65M (Yahoo 0q) / $1.53B (Q3)",
+      "historical_4q_beat_rate": "100% Beat/Meet (2 Beats, 2 Meets)",
+      "variance_and_sandbag_commentary": "CrowdStrike routinely sandbags quarterly top-line guidance by 200\u2013350 bps; Q2 FY27 revenue of $1,470.90M topped ~$1,440M consensus (+2.1%).",
+      "credibility_grade": "Grade A (Consistent Sandbagger)"
+    },
+    {
+      "metric": "Net New ARR & Ending ARR Trajectory",
+      "tooltip_title": "Management's historical beat rate on ending ARR and net new ARR growth.",
+      "tooltip_def": "ARR Execution: Management raised full-year FY27 net new ARR growth outlook by 630 bps in Q2 FY27 to ~34% YoY (~$1.355B), backed by record $333M Q2 net new ARR (+51% YoY).",
+      "prior_q_guidance_for_q0": "$6.18B \u2013 $6.19B Ending ARR",
+      "current_street_consensus": "$6.185B Midpoint / +34% FY27 NNARR",
+      "historical_4q_beat_rate": "4 / 4 Consecutive NNARR Accelerations",
+      "variance_and_sandbag_commentary": "Ending ARR growth re-accelerated from 23% (Q3 FY26) to 25% (Q2 FY27) as Falcon Flex contracts removed multi-module procurement friction.",
+      "credibility_grade": "Grade A+ (Best-in-Class Visibility)"
+    },
+    {
+      "metric": "Non-GAAP EPS & SBC Discipline",
+      "tooltip_title": "Split-adjusted Non-GAAP EPS execution versus GAAP SBC dilution.",
+      "tooltip_def": "EPS & SBC Audit: Trailing 4Q Non-GAAP EPS surprises averaged +3.24% (+6.38%, +3.05%, +1.56%, +1.98%), though Q2 FY27 SBC rose to $376.91M (25.6% of revenue), compressing True FCF to -$0.57M.",
+      "prior_q_guidance_for_q0": "$0.31/sh Consensus Benchmark",
+      "current_street_consensus": "$0.31/sh (High $0.34+ Whisper)",
+      "historical_4q_beat_rate": "100% Beat/Meet (+3.24% Avg Surp.)",
+      "variance_and_sandbag_commentary": "Non-GAAP operating leverage remains strong, but institutional forensic desks closely watch whether SBC growth (+34.8% YoY in Q2) moderates below 23% of revenue.",
+      "credibility_grade": "Grade B+ (High Non-GAAP Beat, Watch SBC)"
+    }
+  ],
+  "matrix_b_forward_guidance_bogeys": [
+    {
+      "forward_metric": "Q4 FY27E Revenue & FY27 Full-Year Outlook",
+      "tooltip_title": "Forward Q4 FY27 revenue and FY27 net new ARR growth guidance required to sustain CrowdStrike's 42.8x EV/Sales multiple.",
+      "tooltip_def": "Forward Revenue & NNARR Bogey: At 42.77x EV/Sales and 142.3x Forward P/E, CrowdStrike is priced for accelerating 25%+ top-line growth and >40% FY27 net new ARR expansion.",
+      "street_consensus_hurdle": "$1,621.65M Q4E / +35% FY27 NNARR",
+      "bull_case_bogey": ">= $1,635M Q4E + >40% FY27 NNARR Guide",
+      "bear_case_breakdown": "< $1,605M Q4E or Flat FY27 NNARR",
+      "sensitivity_badge": "Multiple Anchor",
+      "strategic_rationale": "At 39.25x TTM P/S (4x peer group median of 11.0x), any deceleration in forward Q4/FY27 net new ARR guidance risks sharp multiple compression."
+    },
+    {
+      "forward_metric": "Next-Gen SIEM, Cloud & Identity Scale + Agentic AI Monetization",
+      "tooltip_title": "Adoption metrics for Next-Gen SIEM, Cloud Security, Identity Protection, and Falcon Guardian AI security.",
+      "tooltip_def": "Platform Consolidation: Investors require proof that non-endpoint pillars (SIEM, Cloud, Identity, Falcon Guardian) sustain >35% YoY ARR growth and drive 6+ module adoption above 50%.",
+      "street_consensus_hurdle": "Steady Module Adoption & SIEM Wins",
+      "bull_case_bogey": "6+ Modules >50% & AI/SIEM Acceleration",
+      "bear_case_breakdown": "Falcon Flex Cannibalization / Slow SIEM",
+      "sensitivity_badge": "Platform TAM Driver",
+      "strategic_rationale": "Displacing legacy SIEM (Splunk/Cisco) and defending against Palo Alto Networks platformization is critical to justifying CRWD's category-leading premium."
+    },
+    {
+      "forward_metric": "Capital Allocation, M&A Discipline & True FCF Conversion",
+      "tooltip_title": "Deployment of CrowdStrike's $5.01B cash pile versus SBC dilution ($376.91M in Q2 FY27).",
+      "tooltip_def": "Capital Allocation & True FCF: With $5.01B cash vs $820M total debt, investors monitor M&A discipline (avoiding dilutive mega-deals) and GAAP True FCF recovery back above 10% of revenue.",
+      "street_consensus_hurdle": "26%+ Reported FCF Margin / Bolt-On M&A",
+      "bull_case_bogey": "28%+ Rep FCF Margin & SBC < 22% Rev",
+      "bear_case_breakdown": "Large Dilutive M&A or True FCF Negative",
+      "sensitivity_badge": "Quality of Earnings",
+      "strategic_rationale": "Q2 FY27 True FCF dipped to -$0.57M due to $376.91M SBC (+34.8% YoY); reversing SBC intensity or signaling disciplined M&A is vital for institutional quality buyers."
+    }
+  ],
+  "section_4b_pre_print_debates": [
+    {
+      "debate_id": "DEBATE_1",
+      "title": "Falcon Flex Acceleration vs. Premium Valuation Ceiling (42.8x EV/Sales & 142x Forward P/E)",
+      "consensus_view": "Valuation skeptics note CRWD trades at 42.77x EV/Sales and 142.28x Forward P/E\u2014nearly double PANW (22.61x EV/Sales) and 4x FTNT/ZS (9x\u201311x)\u2014leaving zero margin for error if macro IT budgets tighten.",
+      "variant_perception": "Bulls argue Falcon Flex has fundamentally altered enterprise software expansion velocity, driving net new ARR up +51% YoY in Q2 FY27 ($333M) and positioning Q3/Q4 for sustained >25% compounding with 75%+ gross margins.",
+      "call_focus_question": "CFO Burt Podbere: With Falcon Flex contracts now driving a growing share of multi-module expansions, how much visibility do you have into Q4 FY27 net new ARR conversion and consumption pacing without cannibalizing upfront cash collections?"
+    },
+    {
+      "debate_id": "DEBATE_2",
+      "title": "Next-Gen SIEM Displacement & Agentic AI Security vs. Palo Alto Networks Platformization",
+      "consensus_view": "Bears question whether enterprise SOC teams will rip-and-replace legacy Splunk SIEM deployments quickly enough, and highlight intensifying platform bundling pressure from Palo Alto Networks and Microsoft.",
+      "variant_perception": "CrowdStrike's single-agent data gravity eliminates ingestion friction for native endpoint/cloud/identity telemetry, while new agentic AI security modules (Falcon Guardian, Charlotte AI) open a net-new TAM securing enterprise AI agents.",
+      "call_focus_question": "CEO George Kurtz: What percentage of Q3 net new ARR came from Next-Gen SIEM displacements and emerging AI agent security workloads, and how are win rates trending against Palo Alto Networks in large enterprise consolidations?"
+    },
+    {
+      "debate_id": "DEBATE_3",
+      "title": "Forensic SBC Dilution ($376.91M Q2 SBC) & $5.01B Cash War Chest Deployment",
+      "consensus_view": "Quality-of-earnings analysts flag that while Q2 FY27 Reported FCF was $376.34M (25.6% margin), SBC surged +34.8% YoY to $376.91M, pushing True FCF to -$0.57M alongside rising CapEx ($153.93M, +222% YoY).",
+      "variant_perception": "Management attributes elevated Q2 SBC and CapEx to strategic AI infrastructure scaling and talent retention; with $5,013.85M in cash and only $820.18M in total debt, CrowdStrike holds a $4.19B net cash fortress to fund organic AI R&D and targeted bolt-on M&A.",
+      "call_focus_question": "CFO Burt Podbere: Following Q2's jump in stock-based compensation ($376.9M) and CapEx ($153.9M), what is your targeted trajectory for SBC as a percent of revenue and CapEx intensity over the next four quarters, and how are you prioritizing M&A vs. buybacks with $5.01B in cash?"
+    }
+  ]
+}

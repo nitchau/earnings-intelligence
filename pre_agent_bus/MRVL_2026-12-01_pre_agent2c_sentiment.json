@@ -1,0 +1,26 @@
+{
+  "ticker": "MRVL",
+  "earnings_date": "2026-12-01",
+  "agent": "Pre_Whisper_Sentiment_Agent (Agent 2C)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "verified_products": [
+    "Custom AI Accelerators / XPUs (5nm/3nm/2nm ASICs): Hyperscaler custom compute programs ramping sharply in H2 FY27 toward ~$12B FY27 and ~$18B FY28 revenue targets",
+    "Inphi Electro-Optics DSPs & Lumentum Optical Portfolio: 800G/1.6T PAM4 DSPs, coherent optics, and proposed all-stock Lumentum laser integration",
+    "Celestial AI Photonic Fabric & XConn PCIe/CXL Switching: Acquired scale-up optical and CXL interconnect silicon for multi-rack AI clusters",
+    "Teralynx Ethernet Switches & Bravera Controllers: High-radix cloud data center switching and enterprise storage/carrier silicon"
+  ],
+  "four_pillar_sentiment": {
+    "options_volatility_score": 50,
+    "options_volatility_desc": "50/100 (Dec 4 ATM Straddle implies \u00b114.31% / $19.18 vs 9.90% 4Q Avg Realized Move \u2014 Overpriced Event Vol by +4.41%, Bullish 0.53 P/C OI)",
+    "institutional_positioning_score": 84,
+    "institutional_positioning_desc": "84/100 (39 Analysts with Strong Buy 1.40 consensus & $298.99 Mean PT implying +123.01% upside; High PT $450, Low $175 at 17.76x Fwd P/E)",
+    "retail_sentiment_score": 44,
+    "retail_sentiment_desc": "44/100 (Cooled Reddit/WSB & FinTwit sentiment following drawdown from mid-year highs and Lumentum all-stock dilution backlash)",
+    "short_interest_score": 38,
+    "short_interest_desc": "38/100 (Moderate 4.36% Short Interest of Float \u2014 reflects M&A arbitrage / hedging rather than heavy directional short crowding)"
+  },
+  "retail_vs_institutional_audit": {
+    "retail_narrative": "Across Reddit (r/wallstreetbets) and FinTwit, sentiment on MRVL at $134.07 has turned wary after its sharp slide from mid-year peaks near $316 and backlash over the all-stock Lumentum acquisition. Traders debate whether 17.76x Forward P/E makes MRVL an oversold AI bounce play or if the \u00b114.31% ($19.18) straddle favors selling premium.",
+    "institutional_narrative": "Institutional semis desks (39 analysts, Strong Buy, $298.99 mean PT) acknowledge sector-wide multiple compression and Lumentum integration scrutiny, yet maintain strong conviction in AWS/hyperscaler custom ASIC scaling and Q3's +51.95% YoY revenue acceleration. With P/C OI skewed bullish at 0.53, funds want airtight Q4 guidance >= $3.75B to confirm the ~$18B FY28 trajectory."
+  }
+}

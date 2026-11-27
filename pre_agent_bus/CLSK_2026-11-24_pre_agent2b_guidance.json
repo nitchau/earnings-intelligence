@@ -1,0 +1,95 @@
+{
+  "ticker": "CLSK",
+  "earnings_date": "2026-11-24",
+  "agent": "Pre_Guidance_Debate_Agent (Agent 2B)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "credibility_score": 68,
+  "credibility_label": "68 / 100 (0% 4Q EPS Beat Rate Due to Volatile BTC Marks, Yet Strong AI/HPC Lease & $2.28B Project Debt Execution)",
+  "matrix_a_prior_guidance_and_track_record": [
+    {
+      "metric": "Q4 FY26E Total Revenue vs. Monthly BTC Run-Rate",
+      "tooltip_title": "CleanSpark does not issue formal quarterly revenue guidance due to BTC price volatility, but monthly BTC production acts as a deterministic anchor.",
+      "tooltip_def": "Q4 FY26 Revenue Anchor: With 1,708 BTC mined in Jul\u2013Sep 2026, Street consensus sits at $127.75M (-42.9% YoY). Historically, realized revenue fluctuates closely with spot BTC price and power curtailment credits.",
+      "prior_q_guidance_for_q0": "No Formal Rev Guide (50 EH/s Peak Target)",
+      "current_street_consensus": "$127.75M",
+      "historical_4q_beat_rate": "0.0% EPS Beat Rate (4 / 4 GAAP Misses)",
+      "variance_and_sandbag_commentary": "GAAP EPS missed consensus in all 4 prior quarters (-16.3% to -745.7%) due to FASB fair-value BTC remeasurement swings and elevated depreciation ($111M/qtr), though shares still rallied +21.96% and +13.79% on operational/HPC updates.",
+      "credibility_grade": "Grade B- (Operational Delivery, Volatile GAAP)"
+    },
+    {
+      "metric": "Sandersville 175 MW Equity & Long-Lead Funding",
+      "tooltip_title": "Management commitment in Q3 FY26 release to fully fund equity and long-lead items for Meta's Sandersville campus.",
+      "tooltip_def": "Sandersville Funding Milestone: In Q3 FY26 (Aug 6), CFO Gary Vecchiarelli confirmed equity was funded and long-lead items pre-paid; in Sep 2026, CLSK closed $2.276B in senior secured project notes to fully finance construction.",
+      "prior_q_guidance_for_q0": "Equity Funded & Long-Lead Pre-Paid (Aug 2026)",
+      "current_street_consensus": "$2.276B Project Notes Closed (Sep 2026)",
+      "historical_4q_beat_rate": "100% Execution on Sandersville Milestones",
+      "variance_and_sandbag_commentary": "Management delivered non-dilutive project-level debt financing ($2.276B notes) within 6 weeks of Q3 earnings, validating institutional credit confidence in Meta's Anviran LLC lease guarantee.",
+      "credibility_grade": "Grade A (Capital Stewardship)"
+    },
+    {
+      "metric": "Bitcoin Treasury & Liquidity Preservation",
+      "tooltip_title": "Management strategy to bridge construction capex using BTC treasury ($814.9M in Q3) and mining cash flow without toxic equity dilution.",
+      "tooltip_def": "Treasury & Liquidity: CLSK ended Q3 FY26 with $202.6M cash and $814.9M BTC (~13,700\u201314,000 BTC). Investors will scrutinize Q4 FY26 BTC sales vs HODL balance and convert/debt covenant cushions.",
+      "prior_q_guidance_for_q0": "Preserve Liquidity & Avoid Common Equity Dilution",
+      "current_street_consensus": "~$900M+ Liquidity / ~$1.79B Corp Debt + $2.28B Proj Debt",
+      "historical_4q_beat_rate": "42.89% Short Interest Skepticism",
+      "variance_and_sandbag_commentary": "High short interest (42.89% of float) reflects bear bets that negative mining OCF (-$112.3M in Q3) forces BTC liquidation or equity raises before Sandersville rent begins in Nov 2027.",
+      "credibility_grade": "Grade C+ (High Leverage Watch)"
+    }
+  ],
+  "matrix_b_forward_guidance_bogeys": [
+    {
+      "forward_metric": "Texas 885 MW Meta LOI Conversion Timeline",
+      "tooltip_title": "Conversion of CleanSpark's Texas land and power portfolio (up to 885 MW) under Meta LOI/exclusivity into a binding NNN lease.",
+      "tooltip_def": "Texas 885 MW Conversion: Converting even 200\u2013400 MW of the 885 MW Texas LOI into a binding hyperscale lease would double CleanSpark's contracted NOI pipeline above $650M+/year.",
+      "street_consensus_hurdle": "Reiterated Active Negotiations / LOI Progress",
+      "bull_case_bogey": "Binding Texas Phase-1 Lease (200+ MW) or Firm RFS Date",
+      "bear_case_breakdown": "Meta Exclusivity Lapses / Texas Power Interconnect Delays",
+      "sensitivity_badge": "Primary Re-Rating Trigger",
+      "strategic_rationale": "CLSK trades at just 4.18x EV/Sales vs 18.43x at IREN and 13.36x at CORZ; converting Texas power to binding AI leases is the #1 catalyst to close the 70%+ multiple discount."
+    },
+    {
+      "forward_metric": "FY27 Mining Cash Cost / Breakeven & Curtailment Strategy",
+      "tooltip_title": "Direct power cost per kWh and all-in cash cost per BTC mined relative to post-halving network difficulty.",
+      "tooltip_def": "Mining Unit Economics: Q3 FY26 Cost of Revenue ($113.29M) vs Revenue ($138.01M) compressed GAAP gross margin to 17.9% (down from 46.4% YoY). Bulls need power cost optimization and higher curtailment credits.",
+      "street_consensus_hurdle": "Gross Margin Stabilization >= 20% / Disciplined CapEx",
+      "bull_case_bogey": "Gross Margin >= 25% + Positive Mining EBITDA Ex-Marks",
+      "bear_case_breakdown": "Gross Margin < 15% + Accelerating Cash Burn (>-$120M/qtr)",
+      "sensitivity_badge": "Liquidity Bridge Check",
+      "strategic_rationale": "Legacy Bitcoin mining must remain cash-flow self-sustaining (or near breakeven) so CLSK does not deplete its $202.6M cash or $814.9M BTC stack ahead of Nov 2027 AI rent."
+    },
+    {
+      "forward_metric": "Sandersville 175 MW CapEx Budget & Non-Dilutive Funding Bridge",
+      "tooltip_title": "Confirmation that $2.276B project notes + pre-funded equity fully cover the $10M\u2013$12M/MW Sandersville buildout without ATM common issuance.",
+      "tooltip_def": "Buildout Cost Control: At ~$11.9M/MW for 175 MW (~$2.08B), the $2.276B project financing covers capex if EPC schedules hold without cost overruns.",
+      "street_consensus_hurdle": "On-Budget (~$11.9M/MW) / Nov 2027 RFS On Track",
+      "bull_case_bogey": "Zero Common Equity ATM Usage + Accelerated RFS Pull-Forward",
+      "bear_case_breakdown": "CapEx Overruns Requiring Parent Equity Infusion / ATM Dilution",
+      "sensitivity_badge": "Short Squeeze Catalyst",
+      "strategic_rationale": "With 42.89% of float sold short, explicit confirmation of zero common equity dilution for Sandersville removes the primary bear thesis."
+    }
+  ],
+  "section_4b_pre_print_debates": [
+    {
+      "debate_id": "DEBATE_1",
+      "title": "Digital Infrastructure Landlord Re-Rating ($6.6B Meta Lease) vs. Near-Term Bitcoin Mining Cash Burn",
+      "consensus_view": "Bears and short-sellers (42.89% short float) highlight that Q3 FY26 mining gross margin collapsed to 17.9%, OCF burned -$112.33M, and Sandersville does not begin generating rent until November 30, 2027\u2014leaving a 12-month cash bridge risk.",
+      "variant_perception": "CleanSpark's $2.276B senior secured project notes (closed Sep 2026) ring-fence Sandersville construction capex at the subsidiary level, while $814.9M in BTC + $202.6M cash provides ~$1B in liquidity buffer against $6.6B of investment-grade Meta NNN cash flows (~$330M/yr NOI).",
+      "call_focus_question": "CFO Gary Vecchiarelli: Following the $2.276B project-level debt closing in September, what is CleanSpark's pro-forma parent-level unrestricted cash and BTC treasury balance, and how much mining OCF is needed to avoid any common equity ATM issuance through Q4 2027?"
+    },
+    {
+      "debate_id": "DEBATE_2",
+      "title": "Texas 885 MW Portfolio Conversion: Binding Second Hyperscale Lease or Stranded Mining Capacity?",
+      "consensus_view": "Skeptics note that CleanSpark discontinued standalone monthly mining updates starting FY27 and has not yet converted the Texas 885 MW Meta LOI/exclusivity into a definitive binding lease, raising questions over ERCOT interconnection timelines.",
+      "variant_perception": "Discontinuing monthly BTC production releases aligns CleanSpark with institutional data center peers (CORZ, EQIX, DLR) rather than retail crypto miners, while Texas's 885 MW grid-connected footprint represents an additional ~$15B+ contracted revenue opportunity if converted at Sandersville economics.",
+      "call_focus_question": "CEO Matt Schultz: Can you detail the engineering and ERCOT interconnection milestones for the 885 MW Texas portfolio under exclusivity, and should investors expect a binding Texas Phase-1 AI/HPC lease announcement within the next two quarters?"
+    },
+    {
+      "debate_id": "DEBATE_3",
+      "title": "Extreme Valuation Dislocation (4.18x EV/Sales, $5.64 Spot vs. $20.87 Mean PT) & 42.89% Short Squeeze Setup",
+      "consensus_view": "Quant/momentum funds (e.g., Zacks Sell rating) remain short CLSK due to four consecutive GAAP EPS misses, rising total debt ($1.79B corporate + $2.28B project), and -42.9% YoY Q4 revenue contraction.",
+      "variant_perception": "At $1.45B Market Cap ($5.64/sh), the market values CleanSpark at a fraction of its $6.6B contracted Meta lease NPV (~$330M annual NNN NOI at ~100% margin) plus ~$815M BTC holdings, creating extreme asymmetry vs 13.4x\u201318.4x EV/Sales peers (CORZ, IREN) if execution stays on schedule.",
+      "call_focus_question": "Management: With Sandersville generating ~$330M in projected annual NNN NOI starting late 2027 versus a $1.45B current equity market cap, how do you evaluate non-dilutive project equity partnerships or convertible refinancing to bridge the valuation gap?"
+    }
+  ]
+}

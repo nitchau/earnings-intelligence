@@ -112,6 +112,20 @@ window.EARNINGS_HISTORY_CATALOG = {
       "currency": "$"
     }
   ],
+  "CRDO": [
+    {
+      "date": "2026-12-01",
+      "quarter": "Q2 FY2027",
+      "date_display": "Dec 1, 2026",
+      "t1": "CRDO_T1_2026-12-01.html",
+      "t0": null,
+      "verdict": null,
+      "post_move_pct": null,
+      "rev_actual_m": null,
+      "rev_consensus_m": 531.95,
+      "currency": "$"
+    }
+  ],
   "CRWD": [
     {
       "date": "2026-11-23",
@@ -238,6 +252,20 @@ window.EARNINGS_HISTORY_CATALOG = {
       "currency": "$"
     }
   ],
+  "GTLB": [
+    {
+      "date": "2026-12-01",
+      "quarter": "Q3 FY2027",
+      "date_display": "Dec 1, 2026",
+      "t1": "GTLB_T1_2026-12-01.html",
+      "t0": null,
+      "verdict": null,
+      "post_move_pct": null,
+      "rev_actual_m": null,
+      "rev_consensus_m": 282.81,
+      "currency": "$"
+    }
+  ],
   "GUTS": [
     {
       "date": "2026-11-12",
@@ -350,6 +378,20 @@ window.EARNINGS_HISTORY_CATALOG = {
       "currency": "$"
     }
   ],
+  "MDB": [
+    {
+      "date": "2026-12-01",
+      "quarter": "Q3 FY2027",
+      "date_display": "Dec 1, 2026",
+      "t1": "MDB_T1_2026-12-01.html",
+      "t0": null,
+      "verdict": null,
+      "post_move_pct": null,
+      "rev_actual_m": null,
+      "rev_consensus_m": 761.75,
+      "currency": "$"
+    }
+  ],
   "META": [
     {
       "date": "2026-10-21",
@@ -361,6 +403,20 @@ window.EARNINGS_HISTORY_CATALOG = {
       "post_move_pct": 2.12,
       "rev_actual_m": 64601.0,
       "rev_consensus_m": 62500.0,
+      "currency": "$"
+    }
+  ],
+  "MRVL": [
+    {
+      "date": "2026-12-01",
+      "quarter": "Q3 FY2027",
+      "date_display": "Dec 1, 2026",
+      "t1": "MRVL_T1_2026-12-01.html",
+      "t0": null,
+      "verdict": null,
+      "post_move_pct": null,
+      "rev_actual_m": null,
+      "rev_consensus_m": 3152.21,
       "currency": "$"
     }
   ],

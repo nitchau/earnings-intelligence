@@ -1,0 +1,70 @@
+{
+  "ticker": "GTLB",
+  "earnings_date": "2026-12-01",
+  "agent": "Pre_KPI_Consensus_Agent (Agent 2A)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "upcoming_quarter_label": "Q3 FY27E (Ended Oct 31, 2026)",
+  "latest_reported_quarter_label": "Q2 FY27 (Ended Jul 31, 2026)",
+  "headline_and_company_kpis": [
+    {
+      "metric": "Consolidated GAAP Revenue ($M)",
+      "tooltip_title": "Total consolidated GAAP revenue across Subscription (Self-Managed + SaaS) and License & Other.",
+      "tooltip_def": "Consolidated GAAP Revenue ($M): GitLab delivered $286.25M in Q2 FY27 (+21.3% YoY). Management guided Q3 FY27 revenue to $281M\u2013$283M (~15%\u201316% YoY), while Street Yahoo 0q consensus sits at $282.81M and buy-side whispers look for $290M\u2013$295M+.",
+      "q_minus_1_actual": "$286.25M",
+      "q_minus_4_yoy_baseline": "$244.35M",
+      "street_consensus_q0e": "$282.81M",
+      "whisper_bogey_q0e": "$290.0M\u2013$295.0M+",
+      "whisper_spread_display": "+3.4% vs Consensus",
+      "bar_width_pct": 89,
+      "hurdle_badge": "Top-Line Hurdle"
+    },
+    {
+      "metric": "Non-GAAP Diluted EPS ($/sh)",
+      "tooltip_title": "Non-GAAP diluted earnings per share excluding $75.01M stock-based compensation.",
+      "tooltip_def": "Non-GAAP Diluted EPS ($/sh): Consensus is $0.20/sh (matching Q3 guidance high end of $0.19\u2013$0.20 vs $0.24 in Q2 FY27 and $0.25 in Q3 FY26). GitLab has beaten consensus EPS 4 straight quarters by an average of +24.98%.",
+      "q_minus_1_actual": "$0.24",
+      "q_minus_4_yoy_baseline": "$0.25",
+      "street_consensus_q0e": "$0.20",
+      "whisper_bogey_q0e": "$0.25\u2013$0.27",
+      "whisper_spread_display": "+25% to +35% Whisper",
+      "bar_width_pct": 91,
+      "hurdle_badge": "Bottom-Line Hurdle"
+    },
+    {
+      "metric": "Paid Consumption Run Rate (Duo AI & Flex)",
+      "tooltip_title": "Annualized Paid Consumption Run Rate (CRR) across GitLab Duo Agent Platform and hybrid Flex usage.",
+      "tooltip_def": "Paid CRR ($M): Surged >$40M exiting Q2 FY27 (up sharply from $15M in Q1 FY27), propelled by ~50% QoQ Duo Agent Platform expansion and 130+ Flex customers committing >$20M in six weeks.",
+      "q_minus_1_actual": ">$40.0M CRR",
+      "q_minus_4_yoy_baseline": "Early Duo GA",
+      "street_consensus_q0e": ">$52M\u2013$55M Q3E",
+      "whisper_bogey_q0e": ">$60M+ CRR & Flex Uptake",
+      "whisper_spread_display": "Act 2 AI Monetization",
+      "bar_width_pct": 87,
+      "hurdle_badge": "Primary AI Catalyst"
+    },
+    {
+      "metric": "Dollar-Based Net Retention Rate (DBNRR) & Ultimate Mix",
+      "tooltip_title": "Trailing 12-month net expansion rate across existing cohorts and Ultimate tier share of ARR.",
+      "tooltip_def": "DBNRR & Ultimate Tier: DBNRR accelerated sequentially to 117% in Q2 FY27 while Ultimate grew ~35% YoY to reach 59% of total ARR. Sustaining DBNRR >= 117% proves seat expansion + AI upsells offset macro headwinds.",
+      "q_minus_1_actual": "117% / 59% Ultimate",
+      "q_minus_4_yoy_baseline": "120%+ / 50%+ Ultimate",
+      "street_consensus_q0e": "116%\u2013117% DBNRR",
+      "whisper_bogey_q0e": ">= 118% DBNRR / 60%+ Ult.",
+      "whisper_spread_display": "+100bps Expansion",
+      "bar_width_pct": 82,
+      "hurdle_badge": "Net Expansion Check"
+    },
+    {
+      "metric": "SaaS Revenue Mix & Net ARR Growth (%)",
+      "tooltip_title": "Cloud-hosted GitLab SaaS share of total revenue and Net New ARR growth rate.",
+      "tooltip_def": "SaaS & Net ARR: SaaS climbed +36% YoY to reach 34% of total revenue in Q2 FY27 while Net ARR grew >40% YoY (~42%). Investors track SaaS durability alongside Flex accounting timing ($13M potential FY27 rev-rec shift).",
+      "q_minus_1_actual": "34% SaaS (+36% YoY)",
+      "q_minus_4_yoy_baseline": "~30% SaaS",
+      "street_consensus_q0e": "35% SaaS / +20% Tot Rev",
+      "whisper_bogey_q0e": "36%+ SaaS / >35% NNARR",
+      "whisper_spread_display": "Cloud Mix Shift",
+      "bar_width_pct": 85,
+      "hurdle_badge": "Cloud Transition"
+    }
+  ]
+}

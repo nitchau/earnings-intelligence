@@ -1,0 +1,70 @@
+{
+  "ticker": "MRVL",
+  "earnings_date": "2026-12-01",
+  "agent": "Pre_KPI_Consensus_Agent (Agent 2A)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "upcoming_quarter_label": "Q3 FY27E (Ended Oct 31, 2026)",
+  "latest_reported_quarter_label": "Q2 FY27 (Ended Aug 1, 2026)",
+  "headline_and_company_kpis": [
+    {
+      "metric": "Consolidated Net Revenue ($M)",
+      "tooltip_title": "Total consolidated GAAP net revenue across Data Center and Communications & Other end markets.",
+      "tooltip_def": "Consolidated Net Revenue ($M): Marvell posted $2,739.30M in Q2 FY27 (+36.5% YoY). Management guided Q3 FY27 revenue to $3,150M (\u00b15%, +51.8% YoY); Yahoo consensus sits at $3,152.21M (+51.95% YoY) while buy-side whispers look for $3,210M\u2013$3,260M+.",
+      "q_minus_1_actual": "$2,739.30M",
+      "q_minus_4_yoy_baseline": "$2,074.50M",
+      "street_consensus_q0e": "$3,152.21M",
+      "whisper_bogey_q0e": "$3,210M\u2013$3,260M+",
+      "whisper_spread_display": "+2.5% vs Consensus",
+      "bar_width_pct": 91,
+      "hurdle_badge": "Top-Line Hurdle"
+    },
+    {
+      "metric": "Non-GAAP Diluted EPS ($/sh)",
+      "tooltip_title": "Non-GAAP diluted earnings per share excluding $326.2M SBC and acquisition intangible amortization.",
+      "tooltip_def": "Non-GAAP Diluted EPS ($/sh): Consensus is $1.10/sh (matching Q3 guide $1.10 \u00b1$0.05 vs $0.94 in Q2 FY27 and $0.76 in Q3 FY26). Marvell has beaten consensus EPS 4 consecutive quarters (+1.42% avg surprise).",
+      "q_minus_1_actual": "$0.94",
+      "q_minus_4_yoy_baseline": "$0.76",
+      "street_consensus_q0e": "$1.10",
+      "whisper_bogey_q0e": "$1.14\u2013$1.18",
+      "whisper_spread_display": "+3.6% to +7.3% Whisper",
+      "bar_width_pct": 87,
+      "hurdle_badge": "Bottom-Line Hurdle"
+    },
+    {
+      "metric": "Data Center Segment Revenue ($M & % Mix)",
+      "tooltip_title": "Hyperscaler custom AI ASICs/XPUs, electro-optics DSPs, Teralynx switches, and Celestial AI interconnects.",
+      "tooltip_def": "Data Center Revenue ($M): Surged +45.7% YoY to $2,171.50M in Q2 FY27 (79.3% of total revenue). Custom AI XPU ramps and 800G/1.6T optical interconnects are expected to push Q3 Data Center above $2.56B (>81% mix).",
+      "q_minus_1_actual": "$2,171.50M (79.3%)",
+      "q_minus_4_yoy_baseline": "$1,517.90M (73.2%)",
+      "street_consensus_q0e": "~$2,568M (+69% YoY)",
+      "whisper_bogey_q0e": "$2,620M+ (>81% Mix)",
+      "whisper_spread_display": "Custom ASIC Inflection",
+      "bar_width_pct": 94,
+      "hurdle_badge": "Core Valuation Engine"
+    },
+    {
+      "metric": "Non-GAAP Gross Margin (%)",
+      "tooltip_title": "Non-GAAP gross margin balancing high-margin optical DSPs against lower-margin custom AI ASIC ramps.",
+      "tooltip_def": "Non-GAAP Gross Margin (%): Printed 58.9% in Q2 FY27 (53.1% GAAP). Management guided Q3 Non-GAAP GM slightly lower to 57.5%\u201358.5% due to rapid H2 mix shift toward custom AI silicon.",
+      "q_minus_1_actual": "58.9% (53.1% GAAP)",
+      "q_minus_4_yoy_baseline": "51.6% (GAAP)",
+      "street_consensus_q0e": "58.0% (Guide 57.5\u201358.5%)",
+      "whisper_bogey_q0e": "58.2%\u201358.6%",
+      "whisper_spread_display": "Mix-Shift Discipline",
+      "bar_width_pct": 80,
+      "hurdle_badge": "Margin Mix Check"
+    },
+    {
+      "metric": "Multi-Year AI Revenue & Lumentum Deal Framing ($B)",
+      "tooltip_title": "Progress toward ~$12B FY27 / ~$18B FY28 revenue targets and Lumentum Holdings all-stock deal dilution clarity.",
+      "tooltip_def": "FY27/FY28 AI Trajectory & M&A: Management previously raised FY27 revenue outlook to ~$12B and FY28 to ~$18B on hyperscaler ASIC bookings, while the announced all-stock Lumentum acquisition faces investor scrutiny over ~1/3 share dilution.",
+      "q_minus_1_actual": "~$12B FY27 / ~$18B FY28",
+      "q_minus_4_yoy_baseline": "$8.19B FY26 Actual",
+      "street_consensus_q0e": "Reaffirm ~$12B / ~$18B",
+      "whisper_bogey_q0e": "Raise FY27 >$12.3B + Synergies",
+      "whisper_spread_display": "M&A Overhang Audit",
+      "bar_width_pct": 84,
+      "hurdle_badge": "Multiple Re-Rating Key"
+    }
+  ]
+}

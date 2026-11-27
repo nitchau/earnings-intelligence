@@ -1,0 +1,70 @@
+{
+  "ticker": "CRWD",
+  "earnings_date": "2026-11-23",
+  "agent": "Pre_KPI_Consensus_Agent (Agent 2A)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "upcoming_quarter_label": "Q3 FY27E (Ended Oct 31, 2026)",
+  "latest_reported_quarter_label": "Q2 FY27 (Ended Jul 31, 2026)",
+  "headline_and_company_kpis": [
+    {
+      "metric": "Consolidated GAAP Revenue ($M)",
+      "tooltip_title": "Total consolidated GAAP revenue across Subscription and Professional Services.",
+      "tooltip_def": "Consolidated GAAP Revenue ($M): CrowdStrike delivered $1,470.90M in Q2 FY27 (+25.8% YoY vs $1,168.95M in Q2 FY26). Management guided Q3 FY27 revenue to $1,523M\u2013$1,529M, while Street Yahoo 0q consensus sits at $1,621.65M (+24.23% YoY) and buy-side whisper looks for $1,545M+ on Falcon Flex acceleration.",
+      "q_minus_1_actual": "$1,470.90M",
+      "q_minus_4_yoy_baseline": "$1,234.24M",
+      "street_consensus_q0e": "$1,621.65M",
+      "whisper_bogey_q0e": "$1,545M\u2013$1,630M",
+      "whisper_spread_display": "+1.3% vs Guide Mid",
+      "bar_width_pct": 88,
+      "hurdle_badge": "Top-Line Hurdle"
+    },
+    {
+      "metric": "Non-GAAP Diluted EPS ($/sh)",
+      "tooltip_title": "Split-adjusted Non-GAAP diluted earnings per share excluding SBC and amortization.",
+      "tooltip_def": "Non-GAAP Diluted EPS ($/sh): Consensus sits at $0.31/sh (matching Q2 FY27 actual of $0.31/sh vs $0.24 in Q3 FY26). Buy-side whisper targets $0.33\u2013$0.34/sh given CrowdStrike's 100% beat-or-meet track record over the trailing 4 quarters.",
+      "q_minus_1_actual": "$0.31",
+      "q_minus_4_yoy_baseline": "$0.24",
+      "street_consensus_q0e": "$0.31",
+      "whisper_bogey_q0e": "$0.33\u2013$0.34",
+      "whisper_spread_display": "+6.5% to +9.7% Whisper",
+      "bar_width_pct": 84,
+      "hurdle_badge": "Bottom-Line Hurdle"
+    },
+    {
+      "metric": "Ending Annual Recurring Revenue (ARR)",
+      "tooltip_title": "Annualized value of active customer subscription contracts at quarter-end.",
+      "tooltip_def": "Ending ARR ($B): Reached $5.84B in Q2 FY27 (+25% YoY). Management guided Q3 FY27 ending ARR to $6.18B\u2013$6.19B; buy-side bulls look for >= $6.22B driven by Falcon Flex multi-module expansion.",
+      "q_minus_1_actual": "$5.84B",
+      "q_minus_4_yoy_baseline": "$4.92B",
+      "street_consensus_q0e": "$6.18B\u2013$6.19B (Guide)",
+      "whisper_bogey_q0e": "$6.22B+ (+26.4% YoY)",
+      "whisper_spread_display": "+$35M ARR Whisper",
+      "bar_width_pct": 92,
+      "hurdle_badge": "Core Valuation Anchor"
+    },
+    {
+      "metric": "Net New ARR Added ($M)",
+      "tooltip_title": "Incremental net new Annual Recurring Revenue added during the quarter.",
+      "tooltip_def": "Net New ARR ($M): Added $333M in Q2 FY27 (+51% YoY) and $265M in Q3 FY26. Prior full-year FY27 net new ARR growth guidance of ~34% YoY implies Q3 net new ARR >= $345M; buy-side whisper sits at $365M\u2013$390M+.",
+      "q_minus_1_actual": "$333.0M",
+      "q_minus_4_yoy_baseline": "$265.0M",
+      "street_consensus_q0e": "$345M\u2013$355M",
+      "whisper_bogey_q0e": "$375M+ (+41.5% YoY)",
+      "whisper_spread_display": "+7.1% Whisper Spread",
+      "bar_width_pct": 90,
+      "hurdle_badge": "Primary Print Catalyst"
+    },
+    {
+      "metric": "Subscription Gross Margin & FCF Margin (%)",
+      "tooltip_title": "GAAP/Non-GAAP subscription gross margin and reported free cash flow conversion.",
+      "tooltip_def": "Subscription Margin & FCF: Q2 FY27 posted $1,400.29M subscription revenue (95.2% of total), 74.6% consolidated GAAP gross margin, and $376.34M reported FCF (25.6% margin). Investors demand >= 26% FCF margin despite rising AI R&D.",
+      "q_minus_1_actual": "74.6% GM / 25.6% FCF",
+      "q_minus_4_yoy_baseline": "75.1% GM / 24.1% FCF",
+      "street_consensus_q0e": "75%+ GM / 26% FCF",
+      "whisper_bogey_q0e": "79%+ GAAP Sub GM / 28%+ FCF",
+      "whisper_spread_display": "+200bps FCF Expansion",
+      "bar_width_pct": 81,
+      "hurdle_badge": "Margin Quality Check"
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "ticker": "MDB",
+  "earnings_date": "2026-12-01",
+  "agent": "Pre_Guidance_Debate_Agent (Agent 2B)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "credibility_score": 82,
+  "credibility_label": "82 / 100 (100% 4Q EPS Beat Rate, +26.99% Avg Surprise, Yet Cautious Q3 Atlas Guide & CEO Transition Drove -13.5% Q2 Reaction)",
+  "matrix_a_prior_guidance_and_track_record": [
+    {
+      "metric": "Q3 FY27E Total Revenue vs. Prior Management Guide",
+      "tooltip_title": "Comparison of management's Q2 FY27 outlook for Q3 FY27 against Street consensus.",
+      "tooltip_def": "Revenue Guidance Calibration: Management guided Q3 FY27 revenue to $756M\u2013$761M (sequentially below Q2's $771.77M due to Q2's multi-year EA upfront license strength). Yahoo consensus sits at $761.75M.",
+      "prior_q_guidance_for_q0": "$756.0M \u2013 $761.0M (Q2 Call)",
+      "current_street_consensus": "$761.75M (Range $752.8M\u2013$785.4M)",
+      "historical_4q_beat_rate": "4 / 4 Top-Line Beats",
+      "variance_and_sandbag_commentary": "MongoDB consistently beats conservative quarterly guidance by 2.5%\u20134.5%, yet two of the last three beats (Q4 FY26 -22.2%, Q2 FY27 -13.5%) sold off on softer sequential/Atlas outlook commentary.",
+      "credibility_grade": "Grade A- (Consistent Beat, Tough Bar)"
+    },
+    {
+      "metric": "Atlas Cloud Growth (~26% Guide vs 29% Q2 Actual)",
+      "tooltip_title": "Management's Atlas cloud consumption deceleration guide vs historical consumption upside.",
+      "tooltip_def": "Atlas Consumption Audit: Atlas delivered ~29% YoY growth for 5 consecutive quarters through Q2 FY27 ($565.92M). Guiding Q3 to ~26% YoY (while raising FY27 Atlas to ~27%) reflects typical usage-model prudence.",
+      "prior_q_guidance_for_q0": "~26% YoY Atlas Growth (Q3) / ~27% FY27",
+      "current_street_consensus": "~$592.7M Atlas (~26% YoY)",
+      "historical_4q_beat_rate": "5 Straight Qtrs ~29% Atlas Growth",
+      "variance_and_sandbag_commentary": "Buy-side desks treat 26% as an artificial floor; anything below 27.5% actual Atlas growth in Q3 will be viewed as real consumption deceleration.",
+      "credibility_grade": "Grade A (Proven Atlas Conservatism)"
+    },
+    {
+      "metric": "Non-GAAP Operating Margin & GAAP SBC Discipline",
+      "tooltip_title": "4Q Non-GAAP EPS surprise rate vs $148.94M GAAP SBC dilution.",
+      "tooltip_def": "Profitability & SBC Audit: Trailing 4Q EPS beats averaged +26.99% (+66.24%, +12.08%, +11.54%, +18.09%). Q2 GAAP EBIT turned positive (+$28.40M), though $148.94M SBC pushed True FCF to -$9.53M.",
+      "prior_q_guidance_for_q0": "$152M\u2013$156M OpInc / $1.57\u2013$1.61 EPS",
+      "current_street_consensus": "$1.61/sh (FY27 $6.39\u2013$6.58)",
+      "historical_4q_beat_rate": "100% Beat Rate (+26.99% Avg Surp.)",
+      "variance_and_sandbag_commentary": "MongoDB achieved GAAP operating profitability (+3.7% GAAP EBIT margin) in Q2 while expanding Non-GAAP operating margin +900 bps YoY to 24.1%.",
+      "credibility_grade": "Grade A (Strong Operating Leverage)"
+    }
+  ],
+  "matrix_b_forward_guidance_bogeys": [
+    {
+      "forward_metric": "Q4 FY27E Revenue & Full-Year FY27 Raise (Above $3.03B)",
+      "tooltip_title": "Forward Q4 FY27 revenue guide and FY27 raise needed to reverse Q4's double-digit stock pullback.",
+      "tooltip_def": "Forward Revenue Bogey: Current FY27 guidance is $2.99B\u2013$3.03B (+21%\u201323% YoY). Clearing $3.05B+ FY27 and guiding Q4 Atlas >= 26%\u201327% YoY is essential to re-rate MDB from 8.23x EV/Sales.",
+      "street_consensus_hurdle": "$795M\u2013$805M Q4E / $3.03B FY27",
+      "bull_case_bogey": ">= $818M Q4E + FY27 Raised >= $3.06B",
+      "bear_case_breakdown": "< $785M Q4E or Atlas FY27 Cut < 27%",
+      "sensitivity_badge": "Primary Re-Rating Anchor",
+      "strategic_rationale": "With CJ Desai's departure to Meta weighing on sentiment, an explicit FY27 raise above $3.05B proves enterprise Atlas demand is unaffected by executive turnover."
+    },
+    {
+      "forward_metric": "Atlas AI-Native Workload Consumption & EA Vector Search",
+      "tooltip_title": "Evidence that AI-native production apps are driving durable Atlas consumption and EA upgrades.",
+      "tooltip_def": "AI Database Moat: Investors demand concrete proof that MongoDB's operational JSON + native Vector Search architecture is winning production AI agents rather than losing workloads to Postgres (pgvector) or Snowflake.",
+      "street_consensus_hurdle": "Atlas >= 27.5% YoY + EA Search Traction",
+      "bull_case_bogey": "Atlas >= 28.5% YoY + Record AI Net Adds",
+      "bear_case_breakdown": "Atlas < 26.5% YoY (Signals Consumption Slowdown)",
+      "sensitivity_badge": "Multiple Catalyst",
+      "strategic_rationale": "Directly refutes the FinTwit bear narrative that AI code-generation tools lower switching costs toward commoditized relational Postgres databases."
+    },
+    {
+      "forward_metric": "CEO Transition Clarity & True FCF Inflection",
+      "tooltip_title": "Permanent CEO succession update from Dev Ittycheria and narrowing the $148.94M SBC gap.",
+      "tooltip_def": "Governance & Cash Quality: Following CJ Desai's exit to Meta and Q2's -$9.53M True FCF ($139.41M Rep FCF minus $148.94M SBC), investors look for leadership stability and SBC moderating below 18% of sales.",
+      "street_consensus_hurdle": "Stable Exec Bench & 22%+ FY27 Non-GAAP OM",
+      "bull_case_bogey": "CEO Clarity + SBC < 18% Rev + Positive True FCF",
+      "bear_case_breakdown": "Prolonged Leadership Vacuum or Rising SBC",
+      "sensitivity_badge": "Governance & Quality",
+      "strategic_rationale": "Clearing executive uncertainty while holding $2.41B cash ($28.6M debt) removes the overhang keeping MDB 30% below its $449.13 Street mean target."
+    }
+  ],
+  "section_4b_pre_print_debates": [
+    {
+      "debate_id": "DEBATE_1",
+      "title": "Atlas ~28%\u201329% Durability vs. Postgres/AI Code-Gen Moat Disruption Fears",
+      "consensus_view": "Bears point to MongoDB's recent pullback and question whether AI code-generation tools make relational Postgres + pgvector 'good enough' for new applications, while noting Q3 Atlas guidance (~26% YoY) implies deceleration from Q2's 28.9%.",
+      "variant_perception": "Bulls emphasize that Atlas sustained ~29% YoY growth for 5 straight quarters, added a record $127M net-new ARR in Q2 and 2,900 net new customers (70,600+ total), while embedded Search & Vector Search propelled Enterprise Advanced +35.9% YoY.",
+      "call_focus_question": "Interim CEO Dev Ittycheria: After five consecutive quarters near 29% Atlas growth, what consumption trends did you see in Q3 across AI-native workloads, and how conservative was your 26% Q3 Atlas baseline?"
+    },
+    {
+      "debate_id": "DEBATE_2",
+      "title": "CEO Succession Overhang (Post-CJ Desai Exit to Meta) vs. 8.2x EV/Sales Valuation Floor",
+      "consensus_view": "Institutional desks remain cautious following former CEO CJ Desai's departure to Meta earlier in 2026, adding execution uncertainty ahead of Q4/FY28 planning and contributing to negative post-earnings stock drift in prior prints.",
+      "variant_perception": "Returning chief executive Dev Ittycheria brings deep operational credibility, and sell-side defenders (Rosenblatt, RBC) highlight that 8.23x EV/Sales (less than half Snowflake's 17.44x) with 24% Non-GAAP operating margins prices in an overly punitive transition discount vs the $449.13 Street mean PT (+43.3% upside).",
+      "call_focus_question": "Board / Dev Ittycheria: Can you update shareholders on the permanent CEO search timeline and how go-to-market leadership is retaining enterprise field productivity during the transition?"
+    },
+    {
+      "debate_id": "DEBATE_3",
+      "title": "GAAP EBIT Inflection (+$28.40M) vs. $148.94M SBC Dilution (-$9.53M True FCF)",
+      "consensus_view": "Quality-of-earnings analysts note that despite $139.41M in Q2 Reported FCF (18.1% margin), GAAP Stock-Based Compensation of $148.94M (19.3% of revenue) kept True Forensic FCF negative at -$9.53M.",
+      "variant_perception": "MongoDB crossed into positive GAAP Operating Income (+$28.40M) and GAAP Net Income (+$40.94M) in Q2 FY27 while holding $2,411.25M in cash against just $28.59M total debt ($2.38B net cash) and growing Total Deferred Revenue +44.8% YoY to $447.69M.",
+      "call_focus_question": "CFO Michael Gordon: With GAAP operating income turning positive at +$28.4M and TTM Reported FCF reaching $660M, when will SBC decelerate below 17% of revenue to turn True Forensic FCF sustainably positive?"
+    }
+  ]
+}

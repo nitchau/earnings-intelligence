@@ -4,72 +4,92 @@
   "agent": "Pre_Guidance_Debate_Agent (Agent 2B)",
   "model": "Gemini 3.8 Flash High Standard",
   "credibility_score": 92,
-  "credibility_label": "92 / 100 (Flawless 100% 4-Quarter Beat Rate, Consistent Guidance Sandbagging Buffer of 2\u20134%, High RPO Contract Visibility)",
+  "credibility_label": "92 / 100 (100% 4Q EPS Beat Rate with +6.30% Avg Surprise, Yet Stock Dropped After All 4 Prior Beats [-5.6% to -9.3%])",
   "matrix_a_prior_guidance_and_track_record": [
     {
-      "metric": "Q4 2026E Net Revenue Guidance Corridor",
-      "tooltip_title": "Prior revenue guidance issued by management in Q3 2026 earnings release.",
-      "tooltip_def": "Q4 2026 Revenue Guidance Corridor: Management guided to $3,280M \u2013 $3,330M ($3,305M midpoint); current Street consensus sits at $3,307.46M, with whisper bogeys stretching to $3,365.0M+.",
-      "prior_q_guidance_for_q0": "$3,280.0M \u2013 $3,330.0M ($3,305.0M Midpoint)",
+      "metric": "Q1 FY27E Net Revenue Guidance Corridor",
+      "tooltip_title": "Official Q1 FY27 revenue guidance issued in Q4 FY26 release (Sept 1, 2026).",
+      "tooltip_def": "Q1 FY27 Revenue Guidance Corridor: Management guided $3,300M\u2013$3,310M (+33%\u201334% YoY); Street consensus sits at $3,307.46M (range $3,292.43M\u2013$3,367.10M), whisper expects $3,365M+.",
+      "prior_q_guidance_for_q0": "$3,300.0M \u2013 $3,310.0M ($3,305.0M Midpoint)",
       "current_street_consensus": "$3,307.46M",
       "historical_4q_beat_rate": "100.0% (4 / 4 Beats, Avg EPS Surprise +6.30%)",
-      "variance_and_sandbag_commentary": "CEO Nikesh Arora routinely guides with a 2-3% conservative buffer to accommodate multi-platform contract timing and deferred revenue recognition rules.",
-      "credibility_grade": "Grade A+ (Systematic Sandbagger)"
+      "variance_and_sandbag_commentary": "CEO Nikesh Arora & CFO Dipak Golechha routinely embed a 1.5\u20132.5% top-line cushion, though elevated 21.8x P/S and 62.7x Fwd P/E caused 4 consecutive 'beat-and-drop' reactions.",
+      "credibility_grade": "Grade A+ (Consistent Operational Beat)"
     },
     {
-      "metric": "Q4 2026E Non-GAAP Diluted EPS Target",
-      "tooltip_title": "Prior quarterly EPS guidance range issued in Q3 report.",
-      "tooltip_def": "Q4 2026 Non-GAAP Diluted EPS Corridor: Management forecasted $0.95 \u2013 $0.99 ($0.97 midpoint); Street consensus models $0.97.",
-      "prior_q_guidance_for_q0": "$0.95 \u2013 $0.99 ($0.97 Midpoint)",
+      "metric": "Q1 FY27E Next-Gen Security (NGS) ARR Guide",
+      "tooltip_title": "Official Q1 FY27 NGS ARR guidance issued in Q4 FY26 release.",
+      "tooltip_def": "Q1 FY27 NGS ARR Guidance: Management guided $9.54B\u2013$9.56B (+63% YoY), incorporating CyberArk/Idira & Chronosphere momentum toward the $20B FY30 NGS ARR target.",
+      "prior_q_guidance_for_q0": "$9.54B \u2013 $9.56B ($9.55B Midpoint)",
+      "current_street_consensus": "$9.55B",
+      "historical_4q_beat_rate": "100.0% (4 / 4 Quarterly Beats)",
+      "variance_and_sandbag_commentary": "Q4 FY26 added nearly $1B of Net New NGS ARR to reach $9.10B. Separating organic NGS ARR acceleration from CyberArk/Chronosphere M&A contribution is the #1 institutional focus.",
+      "credibility_grade": "Grade A (Core Growth Bellwether)"
+    },
+    {
+      "metric": "Q1 FY27E Non-GAAP Diluted EPS Target",
+      "tooltip_title": "Official Q1 FY27 Non-GAAP EPS guidance range issued in Q4 FY26 release.",
+      "tooltip_def": "Q1 FY27 Non-GAAP Diluted EPS Corridor: Management forecasted $0.96\u2013$0.98 ($0.97 midpoint) on 837M\u2013844M diluted shares; Street sits squarely at $0.97.",
+      "prior_q_guidance_for_q0": "$0.96 \u2013 $0.98 ($0.97 Midpoint)",
       "current_street_consensus": "$0.97",
-      "historical_4q_beat_rate": "100.0% (Beats in 4 of 4 Quarters)",
-      "variance_and_sandbag_commentary": "PANW has exceeded EPS consensus for 12 consecutive quarters, driven by disciplined G&A scaling and high-margin software gross margins.",
-      "credibility_grade": "Grade A (Highly Predictable)"
+      "historical_4q_beat_rate": "100.0% (4 / 4 Beats: +4.35%, +6.62%, +9.88%, +4.36%)",
+      "variance_and_sandbag_commentary": "Consistent EPS beat streak driven by software mix shift and disciplined G&A scaling, even as GAAP operating income absorbs CyberArk/Chronosphere integration amortization ($281M in Q4 FY26).",
+      "credibility_grade": "Grade A (High Margin Predictability)"
     }
   ],
   "matrix_b_forward_guidance_bogeys": [
     {
-      "forward_metric": "Q1 2027E Net Revenue Hurdle ($M)",
-      "tooltip_title": "Forward quarter top-line hurdle required to sustain multiple expansion.",
-      "tooltip_def": "Q1 2027E Revenue Hurdle: Street consensus models $3,450.0M (+33.0% YoY). A forward guide above $3,520.0M (Bull) unlocks multiple expansion toward 25x EV/Sales; guide below $3,400.0M (Bear) triggers multiple contraction.",
-      "street_consensus_hurdle": "$3,440.0M \u2013 $3,460.0M ($3,450.0M Midpoint)",
+      "forward_metric": "Q2 FY27E Net Revenue Hurdle ($M)",
+      "tooltip_title": "Forward quarter top-line guidance required to break PANW's 4-quarter 'beat-and-drop' streak.",
+      "tooltip_def": "Q2 FY27E Revenue Hurdle: Street consensus models ~$3,460M (+33.4% YoY). A Q2 guide >= $3,520M (Bull) validates CyberArk/Chronosphere cross-sell; < $3,410M (Bear) triggers multiple compression.",
+      "street_consensus_hurdle": "$3,445.0M \u2013 $3,475.0M ($3,460.0M Midpoint)",
       "bull_case_bogey": "$3,520.0M+ Midpoint (+35.7% YoY)",
-      "bear_case_breakdown": "< $3,390.0M Midpoint (< +30.7% YoY)",
+      "bear_case_breakdown": "< $3,410.0M Midpoint (< +31.5% YoY)",
       "sensitivity_badge": "High Multiple Sensitivity",
-      "strategic_rationale": "Key barometer of platformization contract duration, hardware firewall refresh tailwinds, and Cortex XSIAM momentum."
+      "strategic_rationale": "PANW sold off -5.6% to -9.3% on all 4 prior prints; breaking the streak requires an unambiguous Q2 FY27 revenue guide above $3.52B."
     },
     {
-      "forward_metric": "FY2027 Full-Year NGS ARR Target ($B)",
-      "tooltip_title": "Full fiscal year Next-Gen Security ARR expectation.",
-      "tooltip_def": "FY2027 Full-Year NGS ARR Target: Street models $5.20B \u2013 $5.35B. Management maintaining or raising the milestone above $5.50B confirms sustainable 35%+ ARR compounding.",
-      "street_consensus_hurdle": "$5.25B \u2013 $5.35B ($5.30B Midpoint)",
-      "bull_case_bogey": "$5.50B+ Midpoint Target",
-      "bear_case_breakdown": "< $5.15B Midpoint Target",
+      "forward_metric": "FY2027 Full-Year Revenue & NGS ARR Raise ($B)",
+      "tooltip_title": "Full-year FY27 guidance issued in Sept 2026: $14.10B\u2013$14.20B Revenue and $11.075B\u2013$11.175B NGS ARR.",
+      "tooltip_def": "FY2027 Full-Year Guidance Raise: Current FY27 outlook calls for $14.10B\u2013$14.20B revenue (+23%\u201324% YoY), $11.075B\u2013$11.175B NGS ARR (+22%\u201323%), $4.16\u2013$4.19 EPS, 29.5% Non-GAAP operating margin, and 38.0% Adj FCF margin.",
+      "street_consensus_hurdle": "$14.15B Rev / $11.13B NGS ARR",
+      "bull_case_bogey": "$14.30B+ Rev / $11.30B+ NGS ARR",
+      "bear_case_breakdown": "Reiterated < $14.20B Rev Cap",
       "sensitivity_badge": "Core Valuation Anchor",
-      "strategic_rationale": "Directly drives the software recurring revenue multiple and affirms Prisma Cloud and SASE market share gains over standalone competitors."
+      "strategic_rationale": "At 21.8x TTM Sales and 62.7x Forward P/E, merely reiterating FY27 guidance invites profit-taking; bulls need a clean $100M+ FY27 raise."
+    },
+    {
+      "forward_metric": "FY2027 Non-GAAP Operating & Adj FCF Margins",
+      "tooltip_title": "Profitability framework targeting 29.5% Non-GAAP op margin and 38.0% Adj FCF margin in FY27 (en route to 40% in FY28).",
+      "tooltip_def": "FY2027 Margin & FCF Framework: FY26 delivered 38.4% Adj FCF margin; FY27 guides 29.5% Non-GAAP op margin and 38.0% Adj FCF margin despite M&A integration.",
+      "street_consensus_hurdle": "29.5% Op Margin / 38.0% Adj FCF",
+      "bull_case_bogey": "30.0%+ Op Margin / 38.5%+ Adj FCF",
+      "bear_case_breakdown": "< 29.0% Op Margin / < 37.0% Adj FCF",
+      "sensitivity_badge": "M&A Margin Check",
+      "strategic_rationale": "Confirms Console, CyberArk/Idira, and Chronosphere integrations are scaling accretively toward management's 40% FY28 Adj FCF margin target."
     }
   ],
   "section_4b_pre_print_debates": [
     {
       "debate_id": "DEBATE_1",
-      "title": "Platformization Monetization: Are Enterprise Free-Period Incentives Diluting Near-Term Cash Flow?",
-      "consensus_view": "Palo Alto Networks' aggressive 'platformization' strategy (offering 6-12 month transition periods for customers replacing legacy point solutions) expands long-term contract value but creates near-term billings headwinds and deferred revenue lag.",
-      "variant_perception": "Early platformization cohorts are converting to full billing at 95%+ retention rates with 125%+ net revenue retention, driving an explosive surge in high-margin NGS ARR ($4.22B+) and creating unassailable enterprise switching costs across Fortune 500 accounts.",
-      "call_focus_question": "CEO Nikesh Arora: Can you provide an update on the conversion velocity of the initial 1,150 platformized customer cohort into paid billing status, and how average annual contract value (ACV) is trending across multi-platform deals?"
+      "title": "Organic Platformization Velocity vs. M&A-Driven Growth (CyberArk/Idira, Chronosphere & Console)",
+      "consensus_view": "Skeptical desks note Q1 FY27's +63% YoY NGS ARR guide ($9.54B\u2013$9.56B) is heavily boosted by CyberArk (Idira) and Chronosphere consolidations, questioning underlying organic net-new ARR deceleration as FY27 full-year NGS ARR slows to +22%\u201323%.",
+      "variant_perception": "PANW delivered a record ~220 net new platformizations in Q4 FY26 (excluding M&A baselines), >65% of NGS ARR comes from platformized accounts (>120% NRR), and >$10M ARR customers surged +50% YoY to 78. Cross-selling CyberArk identity & Console agentic workflows creates unmatched AI-era consolidation.",
+      "call_focus_question": "CEO Nikesh Arora: What share of Q1 FY27 net-new NGS ARR was organic vs. CyberArk/Chronosphere, and how quickly is the newly acquired Console agentic platform monetizing within Cortex?"
     },
     {
       "debate_id": "DEBATE_2",
-      "title": "Cortex XSIAM & Autonomous SOC: Market Share Conquest vs CrowdStrike & Microsoft Sentinel",
-      "consensus_view": "CrowdStrike Falcon and Microsoft Sentinel hold dominant endpoint and SIEM/SOAR footholds, limiting PANW's ability to displace incumbent security operations centers.",
-      "variant_perception": "Cortex XSIAM has become the fastest-growing software product in cybersecurity history, booking over $500M in cumulative bookings by replacing legacy SIEMs with autonomous AI triage, reducing mean-time-to-remediate (MTTR) from days to minutes.",
-      "call_focus_question": "CFO Dipak Golechha: What percentage of Cortex XSIAM deals in the quarter represented direct legacy SIEM replacements (Splunk/QRadar), and how is XSIAM impacting gross margin mix relative to hardware firewalls?"
+      "title": "Breaking the 4-Quarter 'Beat-and-Drop' Curse at 62.7x Forward P/E",
+      "consensus_view": "Despite beating EPS in all 4 trailing quarters (+4.35% to +9.88%), PANW shares fell after every single print (-9.28%, -5.64%, -6.82%, -7.42%) because rich 21.8x P/S and 62.7x Forward P/E multiples leave zero tolerance for merely in-line forward guidance.",
+      "variant_perception": "After pulling back to $305.70 (+30.4% upside to Street's $398.63 mean target), expectations for seasonal Q1 RPO ($20.8B\u2013$20.9B) are well-calibrated; any FY27 revenue raise above $14.3B and Q2 guide >$3.52B can snap the post-print selloff streak.",
+      "call_focus_question": "CFO Dipak Golechha: With Q1 RPO guided for a normal seasonal sequential dip ($20.8B\u2013$20.9B vs $21.2B in Q4), how does pipeline visibility support re-acceleration toward $25.2B\u2013$25.4B FY27 RPO?"
     },
     {
       "debate_id": "DEBATE_3",
-      "title": "Hardware Firewall Refresh Cycle vs Pure Cloud-Native Architecture",
-      "consensus_view": "Traditional physical firewall appliance demand is cyclically sluggish, dragging on total gross margin and revenue growth relative to pure SaaS peers.",
-      "variant_perception": "AI datacenter infrastructure build-outs and sovereign enterprise private clouds require massive physical throughput (PA-5400 and PA-7000 series with quantum-resistant encryption), driving high-single-digit hardware stabilization that provides captive pull-through for software subscriptions.",
-      "call_focus_question": "President BJ Jenkins: How is demand for high-throughput AI datacenter perimeter protection and campus firewalls evolving as enterprises deploy on-premises private AI clusters?"
+      "title": "GAAP Margin Dilution ($281M Intangibles Amortization, $487M SBC) vs. 38% Adjusted FCF Engine",
+      "consensus_view": "GAAP operating income compressed to $172M in Q4 FY26 (down from $497M YoY) with -$282M GAAP net loss due to $487M SBC, $281M acquired intangibles amortization, and -$441M other expense.",
+      "variant_perception": "Q4 FY26 generated $1,357M OCF and $1,254M Reported FCF (36.8% margin; $794M True FCF even net of SBC), and management targets 38.0% FY27 and 40.0% FY28 Adjusted FCF margins ($5B+ annual FCF), easily self-funding M&A integration.",
+      "call_focus_question": "CFO Dipak Golechha: How should institutional models pace acquired intangible amortization and SBC dilution across FY27 as CyberArk and Console integrate, and when does GAAP operating margin inflect back above 10%?"
     }
   ]
 }

@@ -1,0 +1,70 @@
+{
+  "ticker": "CRDO",
+  "earnings_date": "2026-12-01",
+  "agent": "Pre_KPI_Consensus_Agent (Agent 2A)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "upcoming_quarter_label": "Q2 FY27E (Ended Oct 31, 2026)",
+  "latest_reported_quarter_label": "Q1 FY27 (Ended Aug 1, 2026)",
+  "headline_and_company_kpis": [
+    {
+      "metric": "Consolidated GAAP Revenue ($M)",
+      "tooltip_title": "Total consolidated GAAP revenue across Active Electrical Cables, Optical DSPs, SiPho PICs, and IP Licensing.",
+      "tooltip_def": "Consolidated GAAP Revenue ($M): Credo generated $479.00M in Q1 FY27 (+114.7% YoY, +9.6% QoQ). Management guided Q2 FY27 revenue to $525M\u2013$535M ($530M midpoint); Yahoo consensus sits at $531.95M (+98.5% YoY) while buy-side whispers target $542M\u2013$550M+.",
+      "q_minus_1_actual": "$479.00M",
+      "q_minus_4_yoy_baseline": "$268.03M",
+      "street_consensus_q0e": "$531.95M",
+      "whisper_bogey_q0e": "$542.0M\u2013$550.0M+",
+      "whisper_spread_display": "+2.3% vs Consensus",
+      "bar_width_pct": 92,
+      "hurdle_badge": "Top-Line Hurdle"
+    },
+    {
+      "metric": "Non-GAAP Diluted EPS ($/sh)",
+      "tooltip_title": "Non-GAAP diluted earnings per share excluding $87.98M stock-based compensation and acquisition intangibles.",
+      "tooltip_def": "Non-GAAP Diluted EPS ($/sh): Consensus is $1.28/sh (+91% YoY vs $0.67 in Q2 FY26, and +6.7% QoQ vs $1.20 in Q1 FY27) on ~200M guided diluted shares. Credo has beaten consensus EPS 4 consecutive quarters (+15.96% avg surprise).",
+      "q_minus_1_actual": "$1.20",
+      "q_minus_4_yoy_baseline": "$0.67",
+      "street_consensus_q0e": "$1.28",
+      "whisper_bogey_q0e": "$1.34\u2013$1.38",
+      "whisper_spread_display": "+4.7% to +7.8% Whisper",
+      "bar_width_pct": 88,
+      "hurdle_badge": "Bottom-Line Hurdle"
+    },
+    {
+      "metric": "Non-GAAP Gross Margin (%)",
+      "tooltip_title": "Non-GAAP product and IP gross margin excluding SBC and acquired intangible amortization.",
+      "tooltip_def": "Non-GAAP Gross Margin (%): Posted 68.0% in Q1 FY27 (64.5% GAAP). Management guided Q2 FY27 Non-GAAP GM to 67.0%\u201369.0% despite integrating DustPhotonics silicon photonics PICs and ramping new 1.6T optical/AEC SKUs.",
+      "q_minus_1_actual": "68.0% (64.5% GAAP)",
+      "q_minus_4_yoy_baseline": "67.6% (GAAP)",
+      "street_consensus_q0e": "68.0% (Guide 67\u201369%)",
+      "whisper_bogey_q0e": "68.5%\u201369.2%",
+      "whisper_spread_display": "+50bps to +120bps",
+      "bar_width_pct": 84,
+      "hurdle_badge": "Margin Mix Audit"
+    },
+    {
+      "metric": "Optical Portfolio Run-Rate (DSPs, ZeroFlap & SiPho PICs)",
+      "tooltip_title": "Combined revenue trajectory across Optical DSPs (50G/100G/1.6T), ZeroFlap optics, and DustPhotonics SiPho PICs.",
+      "tooltip_def": "Optical Portfolio Trajectory: Management targets >$600M in FY27 optical revenue (with ZeroFlap, SiPho PICs, and Optical DSPs each exceeding $100M) to diversify away from copper AEC concentration and drive fiscal H2 re-acceleration.",
+      "q_minus_1_actual": "Record DSP + 1st SiPho",
+      "q_minus_4_yoy_baseline": "Early 50G/100G Ramp",
+      "street_consensus_q0e": ">$140M Q2E Implied",
+      "whisper_bogey_q0e": ">$155M + FY27 Raise",
+      "whisper_spread_display": "H2 Optical Inflection",
+      "bar_width_pct": 86,
+      "hurdle_badge": "Secondary TAM Driver"
+    },
+    {
+      "metric": "Inventory Buffer & Hyperscaler Mix ($M)",
+      "tooltip_title": "Balance sheet inventory staging ($313.05M) and US/APAC hyperscaler shipment concentration.",
+      "tooltip_def": "Inventory & Hyperscaler Mix: Inventory climbed +24.8% QoQ to $313.05M (+168% YoY) to support unfulfilled AEC and 1.6T backlog, while US shipments hit $255.44M (53.3%) and Malaysia surged 11x YoY to $74.46M.",
+      "q_minus_1_actual": "$313.05M Inv / 53.3% US",
+      "q_minus_4_yoy_baseline": "$150.19M Inv / 38.7% US",
+      "street_consensus_q0e": "Stable Days Inv. / 3+ Hyperscalers",
+      "whisper_bogey_q0e": "New Neo-Cloud & 1.6T Wins",
+      "whisper_spread_display": "Diversification Check",
+      "bar_width_pct": 79,
+      "hurdle_badge": "Concentration Risk"
+    }
+  ]
+}

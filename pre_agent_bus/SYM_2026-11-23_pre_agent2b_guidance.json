@@ -1,0 +1,95 @@
+{
+  "ticker": "SYM",
+  "earnings_date": "2026-11-23",
+  "agent": "Pre_Guidance_Debate_Agent (Agent 2B)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "credibility_score": 84,
+  "credibility_label": "84 / 100 (100% 4Q EPS Beat Rate with +385.6% Avg Surprise, Yet 20% Stock Pullback on Margin Stabilization & OCF Timing)",
+  "matrix_a_prior_guidance_and_track_record": [
+    {
+      "metric": "Q4 FY26E Consolidated Revenue Guidance Corridor",
+      "tooltip_title": "Prior revenue guidance issued by management in Q3 FY26 earnings release (Aug 5, 2026).",
+      "tooltip_def": "Q4 FY26 Revenue Guidance: Management guided $760.0M\u2013$780.0M (+24.5% YoY at midpoint); Street sits in the upper half at $774.38M (range $763.34M\u2013$782.70M).",
+      "prior_q_guidance_for_q0": "$760.0M \u2013 $780.0M ($770.0M Midpoint)",
+      "current_street_consensus": "$774.38M",
+      "historical_4q_beat_rate": "100.0% (4 / 4 EPS Beats, Avg +385.6% Surprise)",
+      "variance_and_sandbag_commentary": "CEO Rick Cohen & CFO Izzy Martins consistently beat top-line guidance midpoints ($720.84M Q3 actual vs $660M\u2013$680M guide) as next-gen SymBot deployment velocity accelerates.",
+      "credibility_grade": "Grade A (Consistent Deployment Beats)"
+    },
+    {
+      "metric": "Q4 FY26E Adjusted EBITDA Guidance Corridor",
+      "tooltip_title": "Prior Adjusted EBITDA guidance issued in Q3 FY26 release.",
+      "tooltip_def": "Q4 FY26 Adjusted EBITDA Guidance: Management forecasted $100.0M\u2013$105.0M (13.3% margin at midpoint), crossing the $100M/quarter profitability threshold for the first time.",
+      "prior_q_guidance_for_q0": "$100.0M \u2013 $105.0M ($102.5M Midpoint)",
+      "current_street_consensus": "$103.0M",
+      "historical_4q_beat_rate": "100.0% (4 / 4 Profitability Beats)",
+      "variance_and_sandbag_commentary": "Adjusted EBITDA doubled YoY in Q3 ($95M vs $45M) and beat $85M\u2013$90M guidance, yet shares sold off -14.88% on gross margin stabilization commentary (~22%\u201325%) and negative Q3 OCF.",
+      "credibility_grade": "Grade A- (Strong EBITDA, Watch OCF)"
+    },
+    {
+      "metric": "Walmart Strategic Expansion & R&D Partnership",
+      "tooltip_title": "Execution on broadening scope with anchor customer Walmart across U.S. and Americas markets.",
+      "tooltip_def": "Walmart Expansion: On Oct 29, 2026, Symbotic signed a new Enterprise Master Automation Agreement with Walmart adding ~$6.0B initial spend ($125M R&D DPA) and up to $6.92B in future backlog.",
+      "prior_q_guidance_for_q0": "Broadening Scope With Existing & Prospective Customers",
+      "current_street_consensus": "+$6.92B Future Backlog Signed (Oct 29 8-K)",
+      "historical_4q_beat_rate": "Major Commercial Execution",
+      "variance_and_sandbag_commentary": "The Oct 29 Walmart Enterprise Master Agreement proves multi-decade demand durability and international Americas expansion, though bears still seek non-Walmart customer diversification.",
+      "credibility_grade": "Grade A (Anchor Lock-In)"
+    }
+  ],
+  "matrix_b_forward_guidance_bogeys": [
+    {
+      "forward_metric": "Q1 FY27E Total Revenue Guidance Hurdle ($M)",
+      "tooltip_title": "Forward quarter revenue guidance required to reverse SYM's ~20% autumn pullback.",
+      "tooltip_def": "Q1 FY27E Revenue Guidance: Following $774.38M Q4E, bulls need Q1 FY27 guided to $795M\u2013$820M (+26% to +30% YoY) to confirm sequential acceleration through the Walmart ASR & cellumation integrations.",
+      "street_consensus_hurdle": "$785.0M \u2013 $800.0M (~$792.0M)",
+      "bull_case_bogey": "$810.0M+ Midpoint (+28.6% YoY)",
+      "bear_case_breakdown": "< $775.0M Midpoint (Flat/Sequential Pause)",
+      "sensitivity_badge": "High Multiple Sensitivity",
+      "strategic_rationale": "At 44.2x Forward P/E with 31.55% short interest, SYM must demonstrate uninterrupted sequential top-line compounding above $800M/quarter."
+    },
+    {
+      "forward_metric": "Q1 FY27E Adjusted EBITDA & Gross Margin Trajectory",
+      "tooltip_title": "Forward EBITDA and GAAP gross margin expansion beyond the ~22.3% Q3 FY26 baseline.",
+      "tooltip_def": "EBITDA & Gross Margin: Q3 FY26 GAAP gross margin hit 22.3% ($160.91M / $720.84M). Guiding Q1 FY27 Adjusted EBITDA >= $115M and gross margin >= 23.5% refutes fears of a 25% margin ceiling.",
+      "street_consensus_hurdle": "$108.0M \u2013 $112.0M Adj. EBITDA / ~22.5% GM",
+      "bull_case_bogey": "$118.0M+ Adj. EBITDA / >= 24.0% Gross Margin",
+      "bear_case_breakdown": "< $105.0M Adj. EBITDA / < 21.5% GM Compression",
+      "sensitivity_badge": "Core Valuation Anchor",
+      "strategic_rationale": "Shares fell -14.88% after Q3 despite beating revenue/EBITDA because investors questioned gross margin ceiling and rising R&D/SG&A from Fox Robotics & cellumation."
+    },
+    {
+      "forward_metric": "Operating Cash Flow & True FCF Inflection",
+      "tooltip_title": "Reversal of Q3 FY26's -$147.30M OCF working-capital swing back into sustained positive Free Cash Flow.",
+      "tooltip_def": "OCF / FCF Conversion: Symbotic generated +$530.7M, +$191.5M, and +$261.3M OCF in Q4 FY25\u2013Q2 FY26 before swinging to -$147.30M in Q3 FY26 on milestone billing timing. Returning to +$150M+ OCF in Q4 is vital.",
+      "street_consensus_hurdle": "Positive Q4 OCF >= +$100M / FY27 Positive FCF",
+      "bull_case_bogey": "Q4 OCF >= +$180M + Recurring Software/Ops GM Expansion",
+      "bear_case_breakdown": "Back-to-Back Negative OCF (< $0M) / Cash Drawdown < $1.5B",
+      "sensitivity_badge": "Cash Quality Check",
+      "strategic_rationale": "With $1.75B cash on hand and -$213.06M Q3 True FCF, proving working-capital normalization eliminates the primary short-seller accounting critique."
+    }
+  ],
+  "section_4b_pre_print_debates": [
+    {
+      "debate_id": "DEBATE_1",
+      "title": "Oct 29 $6.0B Walmart Expansion vs. Customer Concentration & GreenBox / Non-WMT Diversification",
+      "consensus_view": "Skeptical shorts (31.55% short float) argue that the Oct 29 Walmart Enterprise Master Agreement deepens reliance on a single customer (>85% of backlog) while independent third-party enterprise wins (Target, Albertsons, C&S, GreenBox) remain slow to ramp.",
+      "variant_perception": "Walmart's $6.0B new commitment (up to $6.92B backlog addition + $125M R&D DPA for next-gen racking/picking) expands Symbotic into Walmart's international Americas ambient centers and funds proprietary IP Symbotic can subsequently monetize across GreenBox and European cold-chain/micro-fulfillment via cellumation.",
+      "call_focus_question": "CEO Rick Cohen: Following the October 29 $6.0B Walmart Enterprise Master Agreement, how much of the $125M R&D DPA unlocks modular architecture for GreenBox and non-Walmart grocers, and when do international Americas deployments begin recognizing revenue?"
+    },
+    {
+      "debate_id": "DEBATE_2",
+      "title": "Gross Margin Ceiling (~22%\u201325%) & M&A Integration Drag (Walmart ASR, Fox Robotics, cellumation) vs. Software Mix",
+      "consensus_view": "Shares slid -14.88% after Q3 FY26 despite an EPS/EBITDA beat as management signaled near-term gross margin stabilization around ~22%\u201325% and absorbed R&D/SG&A from integrating Walmart ASR, Fox Robotics, and Germany's cellumation GmbH.",
+      "variant_perception": "High-margin recurring Software Maintenance & Support ($12.77M, +57% YoY) and Operation Services ($37.12M, +49% YoY) are scaling rapidly as the operational system base hits 56+ sites, creating a structural multi-year gross margin tailwind toward 28%\u201330% as systems complete installation.",
+      "call_focus_question": "CFO Izzy Martins: Now that 56+ systems are operational and Software + Operation Services reached ~$50M/quarter (+51% YoY), what is the gross margin bridge for FY27 once Fox Robotics and cellumation integration costs normalize?"
+    },
+    {
+      "debate_id": "DEBATE_3",
+      "title": "Working Capital Volatility (-$147.3M Q3 OCF) & Up-C Share Structure vs. 31.55% Short Squeeze Setup",
+      "consensus_view": "Bears point to Q3's -$147.30M OCF outflow (which pulled cash from $2.01B to $1.75B), $48.43M/qtr SBC, and the complex Up-C dual-class share structure (128.9M Class A shares vs ~605M total diluted units implied by $19.53B market cap) as reasons for multiple compression.",
+      "variant_perception": "Q3's working-capital outflow was purely milestone-billing timing following three consecutive quarters of massive OCF (+$530.7M, +$191.5M, +$261.3M). With shares down ~20% into the print ($32.27 vs $59.84 mean PT) and 31.55% short float, a clean Q4 OCF rebound + $810M+ Q1 guide triggers a sharp squeeze.",
+      "call_focus_question": "Management: Can you quantify the milestone-billing timing reversal expected in Q4 FY26 Operating Cash Flow and outline your FY27 Free Cash Flow conversion framework relative to Adjusted EBITDA?"
+    }
+  ]
+}

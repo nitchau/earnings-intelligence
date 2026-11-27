@@ -1,0 +1,70 @@
+{
+  "ticker": "MDB",
+  "earnings_date": "2026-12-01",
+  "agent": "Pre_KPI_Consensus_Agent (Agent 2A)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "upcoming_quarter_label": "Q3 FY27E (Ended Oct 31, 2026)",
+  "latest_reported_quarter_label": "Q2 FY27 (Ended Jul 31, 2026)",
+  "headline_and_company_kpis": [
+    {
+      "metric": "Consolidated GAAP Revenue ($M)",
+      "tooltip_title": "Total consolidated GAAP revenue across MongoDB Atlas, Enterprise Advanced, and Services.",
+      "tooltip_def": "Consolidated GAAP Revenue ($M): MongoDB posted $771.77M in Q2 FY27 (+30.5% YoY). Management guided Q3 FY27 revenue to $756M\u2013$761M (~20%\u201321% YoY); Yahoo consensus sits at $761.75M (+21.24% YoY) while buy-side whispers look for $780M\u2013$790M+.",
+      "q_minus_1_actual": "$771.77M",
+      "q_minus_4_yoy_baseline": "$628.31M",
+      "street_consensus_q0e": "$761.75M",
+      "whisper_bogey_q0e": "$780.0M\u2013$792.0M+",
+      "whisper_spread_display": "+3.2% vs Consensus",
+      "bar_width_pct": 90,
+      "hurdle_badge": "Top-Line Hurdle"
+    },
+    {
+      "metric": "Non-GAAP Diluted EPS ($/sh)",
+      "tooltip_title": "Non-GAAP diluted earnings per share excluding $148.94M stock-based compensation.",
+      "tooltip_def": "Non-GAAP Diluted EPS ($/sh): Consensus is $1.61/sh (top of Q3 guidance $1.57\u2013$1.61 vs $1.90 in Q2 FY27 and $1.32 in Q3 FY26). MongoDB has beaten consensus EPS 4 consecutive quarters (+26.99% avg surprise).",
+      "q_minus_1_actual": "$1.90",
+      "q_minus_4_yoy_baseline": "$1.32",
+      "street_consensus_q0e": "$1.61",
+      "whisper_bogey_q0e": "$1.78\u2013$1.88",
+      "whisper_spread_display": "+10.6% to +16.8% Whisper",
+      "bar_width_pct": 89,
+      "hurdle_badge": "Bottom-Line Hurdle"
+    },
+    {
+      "metric": "MongoDB Atlas Cloud Revenue ($M & YoY %)",
+      "tooltip_title": "Usage-based multi-cloud DBaaS revenue including Atlas Search, Vector Search, and Stream Processing.",
+      "tooltip_def": "MongoDB Atlas ($M): Reached $565.92M in Q2 FY27 (+28.9% YoY, 73.3% of revenue), adding a record $127M net-new annualized run rate. Management guided Q3 Atlas growth to ~26% YoY (~$592.7M); bulls demand >= 28% YoY (~$602M+).",
+      "q_minus_1_actual": "$565.92M (+28.9% YoY)",
+      "q_minus_4_yoy_baseline": "$470.40M (74.9% Mix)",
+      "street_consensus_q0e": "~$592.7M (~26% YoY)",
+      "whisper_bogey_q0e": "$602M+ (>= 28% YoY)",
+      "whisper_spread_display": "+200bps Growth Bogey",
+      "bar_width_pct": 93,
+      "hurdle_badge": "Primary Valuation Anchor"
+    },
+    {
+      "metric": "Enterprise Advanced (EA) & Search/Vector Adoption",
+      "tooltip_title": "Self-managed Enterprise Advanced and other subscription revenue ($181.23M in Q2 FY27).",
+      "tooltip_def": "Enterprise Advanced & Other ($M): Surged +35.9% YoY to $181.23M in Q2 FY27 (3-year high) on GA rollout of embedded Search & Vector Search for private/multi-cloud deployments.",
+      "q_minus_1_actual": "$181.23M (+35.9% YoY)",
+      "q_minus_4_yoy_baseline": "$138.67M",
+      "street_consensus_q0e": "$145M\u2013$150M",
+      "whisper_bogey_q0e": "$155M\u2013$162M+",
+      "whisper_spread_display": "Vector Search Upside",
+      "bar_width_pct": 83,
+      "hurdle_badge": "Hybrid Cloud Catalyst"
+    },
+    {
+      "metric": "Non-GAAP Operating Margin & Net New Customers",
+      "tooltip_title": "Non-GAAP operating margin (24.1% in Q2 FY27) and net customer additions (2,900 added in Q2).",
+      "tooltip_def": "Operating Margin & Customer Scale: Q2 Non-GAAP operating income reached $185.9M (24% margin vs 15% YoY) while total customers topped 70,600 (2,999 >=$100K ARR). Q3 guide implies ~20.5% margin ($152M\u2013$156M).",
+      "q_minus_1_actual": "24.1% OM / 70,600+ Cust",
+      "q_minus_4_yoy_baseline": "19.5% OM / 62,500+ Cust",
+      "street_consensus_q0e": "20.5% OM ($154M Mid)",
+      "whisper_bogey_q0e": "22.5%+ OM / 2,600+ Adds",
+      "whisper_spread_display": "+200bps Margin Cushion",
+      "bar_width_pct": 85,
+      "hurdle_badge": "Profitability & AI Logos"
+    }
+  ]
+}

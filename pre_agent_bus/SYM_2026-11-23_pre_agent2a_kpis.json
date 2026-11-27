@@ -1,0 +1,70 @@
+{
+  "ticker": "SYM",
+  "earnings_date": "2026-11-23",
+  "agent": "Pre_KPI_Consensus_Agent (Agent 2A)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "upcoming_quarter_label": "Q4 FY26E (Ended Sep 26, 2026)",
+  "latest_reported_quarter_label": "Q3 FY26 (Ended Jun 27, 2026)",
+  "headline_and_company_kpis": [
+    {
+      "metric": "Consolidated Revenue ($M)",
+      "tooltip_title": "Total consolidated revenue across Systems, Software Maintenance & Support, and Operation Services.",
+      "tooltip_def": "Consolidated Revenue ($M): Symbotic generated $720.84M in Q3 FY26 (+21.7% YoY vs $592.12M; $618.46M in Q4 FY25). Management guided Q4 FY26 to $760M\u2013$780M; Street consensus sits at $774.38M (+25.2% YoY), while buy-side whisper targets $785M+.",
+      "q_minus_1_actual": "$720.84M",
+      "q_minus_4_yoy_baseline": "$618.46M",
+      "street_consensus_q0e": "$774.38M",
+      "whisper_bogey_q0e": "$785.00M",
+      "whisper_spread_display": "+1.37% Whisper Spread",
+      "bar_width_pct": 89,
+      "hurdle_badge": "Top-Line Hurdle"
+    },
+    {
+      "metric": "Adjusted EBITDA ($M)",
+      "tooltip_title": "Non-GAAP Adjusted EBITDA excluding SBC, restructuring, and transaction integration items.",
+      "tooltip_def": "Adjusted EBITDA ($M): Reached $95.0M in Q3 FY26 (13.2% margin, more than double $45M YoY). Q4 FY26 management guidance is $100M\u2013$105M; buy-side whisper demands $108M+ to prove operating leverage above the 13.5% margin ceiling.",
+      "q_minus_1_actual": "$95.0M",
+      "q_minus_4_yoy_baseline": "$49.0M",
+      "street_consensus_q0e": "$103.0M",
+      "whisper_bogey_q0e": "$108.0M",
+      "whisper_spread_display": "+4.85% EBITDA Beat",
+      "bar_width_pct": 91,
+      "hurdle_badge": "Profitability Anchor"
+    },
+    {
+      "metric": "Street / Adjusted Diluted EPS ($/sh)",
+      "tooltip_title": "Adjusted diluted EPS excluding stock-based compensation and Up-C non-controlling tax adjustments.",
+      "tooltip_def": "Adjusted Diluted EPS ($/sh): Q3 FY26 printed $0.41 (+218.5% surprise vs $0.13 est). Street consensus for Q4 FY26E sits at $0.16/sh; whisper expects $0.35+ given 100% 4Q beat rate (+385.6% avg surprise).",
+      "q_minus_1_actual": "$0.41",
+      "q_minus_4_yoy_baseline": "$0.58",
+      "street_consensus_q0e": "$0.16",
+      "whisper_bogey_q0e": "$0.35",
+      "whisper_spread_display": "+$0.19 Whisper Cushion",
+      "bar_width_pct": 93,
+      "hurdle_badge": "Bottom-Line Hurdle"
+    },
+    {
+      "metric": "Contracted Backlog & Walmart Oct-29 Expansion ($B)",
+      "tooltip_title": "Remaining performance obligations under binding automation master agreements plus the Oct 29, 2026 $6.0B Walmart Commercial Agreement.",
+      "tooltip_def": "Contracted Backlog: Stood at $22.5B at Q3 FY26 close. On Oct 29, 2026, Walmart signed a new Enterprise Master Automation Agreement ($6.0B initial spend incl. $125M R&D DPA) expected to add up to $6.92B in future backlog (~$29.4B pro-forma).",
+      "q_minus_1_actual": "$22.5B",
+      "q_minus_4_yoy_baseline": "$22.4B",
+      "street_consensus_q0e": "$22.5B Base + $6.92B Oct-29 Add",
+      "whisper_bogey_q0e": "$28.5B+ Pro-Forma / Non-WMT Wins",
+      "whisper_spread_display": "+$6.92B Oct-29 Expansion",
+      "bar_width_pct": 95,
+      "hurdle_badge": "Visibility Engine"
+    },
+    {
+      "metric": "Systems in Deployment & Operational Count (#)",
+      "tooltip_title": "Active customer warehouse deployments currently in installation vs live commercial operation.",
+      "tooltip_def": "System Deployments: Symbotic ended Q3 FY26 with 77 systems in deployment (11 new starts) and 56 operational systems. Bulls want 82+ systems in deployment and >=60 operational systems to drive recurring Software & Ops Services.",
+      "q_minus_1_actual": "77 Deploy / 56 Ops",
+      "q_minus_4_yoy_baseline": "46 Deploy / 44 Ops",
+      "street_consensus_q0e": "80 Deploy / 59 Ops",
+      "whisper_bogey_q0e": "83+ Deploy / 61+ Ops",
+      "whisper_spread_display": "+3 Deployment Pace",
+      "bar_width_pct": 87,
+      "hurdle_badge": "Deployment Velocity"
+    }
+  ]
+}

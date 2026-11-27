@@ -1,0 +1,95 @@
+{
+  "ticker": "MRVL",
+  "earnings_date": "2026-12-01",
+  "agent": "Pre_Guidance_Debate_Agent (Agent 2B)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "credibility_score": 83,
+  "credibility_label": "83 / 100 (100% 4Q EPS Beat Rate, Massive H2 Custom ASIC Inflection, Yet Q2 -10.3% Pullback & Lumentum Dilution Overhang)",
+  "matrix_a_prior_guidance_and_track_record": [
+    {
+      "metric": "Q3 FY27E Net Revenue vs. Prior Management Guide",
+      "tooltip_title": "Comparison of management's Q2 FY27 outlook for Q3 FY27 against Street consensus.",
+      "tooltip_def": "Revenue Guidance Calibration: Management guided Q3 FY27 net revenue to $3,150M (\u00b15%), implying +15.0% QoQ and +51.8% YoY acceleration. Yahoo consensus sits right at $3,152.21M.",
+      "prior_q_guidance_for_q0": "$3,150.0M \u00b1 5% (Q2 Call)",
+      "current_street_consensus": "$3,152.21M (Range $3,032.5M\u2013$3,227.8M)",
+      "historical_4q_beat_rate": "4 / 4 Revenue Beats",
+      "variance_and_sandbag_commentary": "Q2 revenue ($2,739.3M) beat midpoint by ~$39M, yet MRVL fell -10.28% after Q2 on steepening expectations and sector multiple compression despite guiding Q3 up +15% QoQ.",
+      "credibility_grade": "Grade A (Strong H2 Visibility)"
+    },
+    {
+      "metric": "Non-GAAP Diluted EPS & Gross Margin Mix",
+      "tooltip_title": "4Q Non-GAAP EPS surprise track record alongside custom ASIC gross margin dilution.",
+      "tooltip_def": "EPS & Margin Audit: Trailing 4Q EPS beats were modest (+3.01%, +1.05%, +0.64%, +0.99%; avg +1.42%) as Marvell passes through high-volume custom XPU wafers at lower gross margin (57.5%\u201358.5% Q3 guide vs 58.9% in Q2).",
+      "prior_q_guidance_for_q0": "$1.10 \u00b1 $0.05 EPS / 57.5%\u201358.5% GM",
+      "current_street_consensus": "$1.10/sh (Whisper $1.14\u2013$1.18)",
+      "historical_4q_beat_rate": "100% Beat Rate (+1.42% Avg Surp.)",
+      "variance_and_sandbag_commentary": "Because custom AI silicon carries lower gross margin percentage than merchant DSPs, maintaining Non-GAAP GM >= 58.0% while scaling EPS > $1.12 is critical for bull conviction.",
+      "credibility_grade": "Grade B+ (Tight EPS Beats)"
+    },
+    {
+      "metric": "Free Cash Flow Conversion & SBC Discipline",
+      "tooltip_title": "Q2 FY27 OCF ($605.5M) and True FCF ($148.1M) after $131.2M CapEx and $326.2M SBC.",
+      "tooltip_def": "FCF & Capital Audit: Unlike many AI peers, Marvell generated positive True Forensic FCF of +$148.10M in Q2 ($474.3M Rep FCF minus $326.2M SBC), though SBC jumped +57.1% QoQ post-Celestial AI & XConn deals.",
+      "prior_q_guidance_for_q0": "Strong Cash Flow Generation",
+      "current_street_consensus": ">$500M Q3 Reported FCF",
+      "historical_4q_beat_rate": "$1.72B TTM Reported FCF",
+      "variance_and_sandbag_commentary": "Debt rose to $5,286.1M vs $3,932.8M cash ($1.35B net debt) and SBC climbed to $326.2M (11.9% of sales) following M&A integrations, making post-Lumentum capital discipline a focal point.",
+      "credibility_grade": "Grade B+ (Positive True FCF, Watch SBC)"
+    }
+  ],
+  "matrix_b_forward_guidance_bogeys": [
+    {
+      "forward_metric": "Q4 FY27E Revenue Guide & ~$12B FY27 / ~$18B FY28 Reaffirmation",
+      "tooltip_title": "Forward Q4 FY27 revenue guidance confirming sequential custom XPU acceleration toward ~$12B FY27.",
+      "tooltip_def": "Q4 FY27E Revenue Bogey: After Q3's $3.15B consensus, hitting ~$12B FY27 requires Q4 FY27 guidance >= $3.65B\u2013$3.75B (+65% YoY). Any slippage below $3.55B threatens the ~$18B FY28 narrative.",
+      "street_consensus_hurdle": "$3.60B\u2013$3.68B Q4E / ~$12B FY27",
+      "bull_case_bogey": ">= $3.75B Q4E + Raise FY27 > $12.2B",
+      "bear_case_breakdown": "< $3.50B Q4E (Signals XPU Ramp Delay)",
+      "sensitivity_badge": "Primary Re-Rating Catalyst",
+      "strategic_rationale": "At just 17.76x Forward P/E (down sharply from mid-year highs), delivering >= $3.75B Q4 guidance proves the AWS/hyperscaler custom silicon ramp is accelerating on schedule."
+    },
+    {
+      "forward_metric": "Lumentum All-Stock Deal Economics & Optical Vertical Integration",
+      "tooltip_title": "Strategic defense, EPS accretion timeline, and dilution mitigation for the Lumentum Holdings acquisition.",
+      "tooltip_def": "Lumentum Deal Audit: With current MRVL holders slated to own ~2/3 of the combined entity, investors require clear gross-margin synergy math and assurance that M&A isn't masking organic optical DSP share shifts.",
+      "street_consensus_hurdle": "Clear Accretion Timeline & Laser Supply Edge",
+      "bull_case_bogey": "Quantified Synergies + Buyback Offset",
+      "bear_case_breakdown": "Margin Dilution or Delayed Regulatory Close",
+      "sensitivity_badge": "Sentiment Overhang",
+      "strategic_rationale": "Resolving retail and institutional backlash over Lumentum share dilution is mandatory to close the 128% gap to the $298.99 Street mean target."
+    },
+    {
+      "forward_metric": "Custom AI XPU Customer Breadth & Non-GAAP Gross Margin Floor",
+      "tooltip_title": "Defending >= 57.5% Non-GAAP GM while ramping multiple Tier-1 hyperscaler custom ASIC sockets.",
+      "tooltip_def": "ASIC Mix & Margin Floor: Investors track next-gen AWS Trainium/custom silicon continuity, Google/Microsoft optical/XPU programs, and Celestial AI photonic fabric traction.",
+      "street_consensus_hurdle": "Q4 Non-GAAP GM >= 57.0%\u201357.5%",
+      "bull_case_bogey": "GM >= 58.0% + New Tier-1 XPU Ramp",
+      "bear_case_breakdown": "GM < 56.5% or Hyperscaler Socket Loss",
+      "sensitivity_badge": "Gross Margin & Share",
+      "strategic_rationale": "Proves custom AI ASICs generate high operating-dollar leverage despite lower gross margin % vs merchant optical DSPs."
+    }
+  ],
+  "section_4b_pre_print_debates": [
+    {
+      "debate_id": "DEBATE_1",
+      "title": "Lumentum All-Stock Acquisition Dilution vs. End-to-End AI Optical Scale",
+      "consensus_view": "Retail traders and skeptical funds blasted Marvell's all-stock deal for Lumentum Holdings\u2014leaving existing MRVL shareholders with roughly two-thirds of the combined company\u2014contributing to a brutal pullback from mid-year highs and price-target trims (e.g., Susquehanna to $225).",
+      "variant_perception": "Bulls argue that owning Lumentum's high-power datacom lasers alongside Inphi's electro-optics DSPs and Celestial AI's photonic fabric creates an unmatched vertically integrated optical interconnect powerhouse for 1.6T/3.2T AI clusters, while 17.76x Forward P/E prices in peak pessimism.",
+      "call_focus_question": "CEO Matt Murphy: Can you walk through the exact pro-forma EPS accretion, gross margin profile, and capital return plans following the Lumentum transaction to address shareholder dilution concerns?"
+    },
+    {
+      "debate_id": "DEBATE_2",
+      "title": "Hyperscaler Custom AI ASIC Ramp ($12B FY27 / $18B FY28) vs. Gross Margin Compression",
+      "consensus_view": "Bears note that Marvell's Non-GAAP gross margin is guiding down from 58.9% (Q2) to 57.5%\u201358.5% (Q3) as lower-margin custom ASICs scale, while persistent rumors around AWS/hyperscaler next-gen socket sharing fuel volatility.",
+      "variant_perception": "Data Center revenue surged +45.7% YoY to $2,171.5M in Q2 (79.3% mix) and Q3 overall revenue is guided up +51.8% YoY to $3.15B, putting Marvell squarely on track for ~$12B in FY27 and ~$18B in FY28 with expanding operating-dollar leverage.",
+      "call_focus_question": "CEO Matt Murphy & CFO Willem Meintjes: What is the expected Q4 revenue split between custom AI silicon and merchant electro-optics, and where does Non-GAAP gross margin trough as custom XPU volumes peak?"
+    },
+    {
+      "debate_id": "DEBATE_3",
+      "title": "Post-M&A Balance Sheet Leverage ($5.29B Debt) & SBC Jump ($326.2M) vs. True FCF",
+      "consensus_view": "Forensic analysts highlight that total debt rose to $5,286.1M (net debt $1,353.3M vs $3,932.8M cash) and GAAP SBC jumped +57.1% QoQ to $326.2M (up from $207.6M in Q1) following the Celestial AI and XConn acquisitions.",
+      "variant_perception": "Even after deducting $131.2M CapEx and $326.2M SBC, Marvell generated +$148.1M in True Forensic FCF in Q2 ($474.3M Reported FCF, $1.72B TTM FCF) and grew GAAP Operating Income +52.9% YoY to $456.9M.",
+      "call_focus_question": "CFO Willem Meintjes: How much of Q2's $326.2M SBC was tied to Celestial AI and XConn retention awards, and what is your leverage and free cash flow conversion target exiting FY27?"
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "ticker": "ESTC",
+  "earnings_date": "2026-11-19",
+  "agent": "Pre_Guidance_Debate_Agent (Agent 2B)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "credibility_score": 86,
+  "credibility_label": "86 / 100 (100% 4Q EPS Beat Rate with +13.08% Avg Surprise, Yet Volatile Post-Print Stock Reactions [-15.4% to +19.3%])",
+  "matrix_a_prior_guidance_and_track_record": [
+    {
+      "metric": "Q2 FY27E Total Revenue Guidance Corridor",
+      "tooltip_title": "Prior revenue guidance issued by management in Q1 FY27 earnings release (Aug 27, 2026).",
+      "tooltip_def": "Q2 FY27 Revenue Guidance Corridor: Management guided $486.0M\u2013$487.0M (+14.9% YoY at midpoint); Street consensus sits at $486.77M (range $485.96M\u2013$491.41M), with buy-side whisper at $494.0M+.",
+      "prior_q_guidance_for_q0": "$486.0M \u2013 $487.0M ($486.5M Midpoint)",
+      "current_street_consensus": "$486.77M",
+      "historical_4q_beat_rate": "100.0% (4 / 4 EPS Beats, Avg +13.08% Surprise)",
+      "variance_and_sandbag_commentary": "CEO Ash Kulkarni & CFO consistently embed a 1.5\u20132.5% top-line guidance cushion, though Nov 2025 & Feb 2026 beats still sold off ~15% when cloud/consumption growth decelerated sequentially.",
+      "credibility_grade": "Grade A- (Consistent Beat, High Guide Bar)"
+    },
+    {
+      "metric": "Q2 FY27E Sales-Led Subscription Guidance",
+      "tooltip_title": "Prior sales-led subscription guidance issued in Q1 FY27 release.",
+      "tooltip_def": "Q2 FY27 Sales-Led Subscription Guidance: Management guided $407.5M\u2013$408.5M (+16.9% YoY at midpoint); Street models ~$408.0M, whisper expects $414.0M+.",
+      "prior_q_guidance_for_q0": "$407.5M \u2013 $408.5M ($408.0M Midpoint)",
+      "current_street_consensus": "$408.00M",
+      "historical_4q_beat_rate": "100.0% (4 / 4 Quarterly Beats)",
+      "variance_and_sandbag_commentary": "Sales-led subscription beat Q1 guidance ($392M\u2013$393M) by +$6.5M ($399M actual). Sustaining 18%+ YoY sales-led growth is the single highest-beta driver for institutional multiples.",
+      "credibility_grade": "Grade A (Core KPI Bellwether)"
+    },
+    {
+      "metric": "Q2 FY27E Non-GAAP Diluted EPS Target",
+      "tooltip_title": "Prior quarterly Non-GAAP EPS corridor issued in Q1 FY27.",
+      "tooltip_def": "Q2 FY27 Non-GAAP Diluted EPS Corridor: Management forecasted $0.80\u2013$0.82 ($0.81 midpoint) on 19.0% non-GAAP operating margin; Street sits squarely at $0.81.",
+      "prior_q_guidance_for_q0": "$0.80 \u2013 $0.82 ($0.81 Midpoint)",
+      "current_street_consensus": "$0.81",
+      "historical_4q_beat_rate": "100.0% (4 / 4 Beats: +19.85%, +8.44%, +12.96%, +11.08%)",
+      "variance_and_sandbag_commentary": "Restructuring ($19.9M in Q1) and disciplined G&A scaling are expanding non-GAAP operating margins toward 19%+, creating reliable +$0.05 to +$0.09 EPS beats.",
+      "credibility_grade": "Grade A (High Margin Leverage)"
+    }
+  ],
+  "matrix_b_forward_guidance_bogeys": [
+    {
+      "forward_metric": "Q3 FY27E Total Revenue Hurdle ($M)",
+      "tooltip_title": "Forward quarter top-line guidance required to re-rate ESTC above 5x EV/Sales.",
+      "tooltip_def": "Q3 FY27E Revenue Hurdle: Street consensus models ~$512M (+13.8% YoY). A Q3 guide >= $520M (Bull) signals genuine H2 Search AI acceleration; < $506M (Bear) implies deceleration toward low-double digits.",
+      "street_consensus_hurdle": "$510.0M \u2013 $514.0M (~$512.0M)",
+      "bull_case_bogey": "$520.0M+ Midpoint (+15.6% YoY)",
+      "bear_case_breakdown": "< $506.0M Midpoint (< +12.5% YoY)",
+      "sensitivity_badge": "High Multiple Sensitivity",
+      "strategic_rationale": "Determines whether Q1's record >$100K ACV additions and 21% cRPO growth convert into second-half top-line re-acceleration."
+    },
+    {
+      "forward_metric": "FY2027 Full-Year Total Revenue Raise ($B)",
+      "tooltip_title": "Full fiscal year FY27 revenue guidance currently sitting at $1.998B\u2013$2.010B.",
+      "tooltip_def": "FY2027 Full-Year Revenue Raise: Management currently guides $1.998B\u2013$2.010B (+15.2% YoY). Raising the floor above $2.020B confirms durable AI vector database monetization.",
+      "street_consensus_hurdle": "$2.005B \u2013 $2.015B",
+      "bull_case_bogey": "$2.025B \u2013 $2.040B+ Raised Corridor",
+      "bear_case_breakdown": "Reiterated / Trimmed < $2.010B Cap",
+      "sensitivity_badge": "Core Valuation Anchor",
+      "strategic_rationale": "Elastic trades at just 4.2x EV/Sales vs 8.3x at MongoDB and 13.7x at Datadog; raising the FY27 ceiling above $2.03B is essential to close the valuation discount."
+    },
+    {
+      "forward_metric": "FY2027 Non-GAAP Operating Margin & FCF Margin",
+      "tooltip_title": "Full-year operating leverage and adjusted FCF conversion targets.",
+      "tooltip_def": "FY2027 Operating & FCF Margin: Prior FY27 guide calls for ~19.4% non-GAAP operating margin and ~21.5% adjusted FCF margin. Raising operating margin toward 20.0%+ supports Rule-of-35+ framing.",
+      "street_consensus_hurdle": "19.4% Op Margin / 21.5% Adj FCF",
+      "bull_case_bogey": "20.0%+ Op Margin / 22.5%+ Adj FCF",
+      "bear_case_breakdown": "< 19.0% Op Margin (AI Infra Cost Drag)",
+      "sensitivity_badge": "Margin Quality Check",
+      "strategic_rationale": "Proves serverless GPU/EIS investments and Deductive AI integration are accretive rather than gross-margin dilutive."
+    }
+  ],
+  "section_4b_pre_print_debates": [
+    {
+      "debate_id": "DEBATE_1",
+      "title": "Search AI Monetization vs. Open-Source / Hyperscaler Commoditization (OpenSearch & pgvector)",
+      "consensus_view": "Skeptical sell-side checks (e.g., TD Cowen $85 Hold) argue enterprise GenAI POCs are slow to convert into production consumption and face fierce pricing pressure from AWS OpenSearch, MongoDB Atlas Vector Search, and Postgres pgvector.",
+      "variant_perception": "Over 37% of Elastic's >$100K ACV customers are already running AI workloads in production, driving record QoQ net-new >$100K customer additions (+80+ in Q1) and +21% cRPO growth. Elastic's DiskBBQ vector compression, Better Binary Quantization, and Jina AI On-Prem models deliver lower TCO at billion-vector scale.",
+      "call_focus_question": "CEO Ash Kulkarni: What proportion of the record Q1/Q2 >$100K ACV customer wins were directly catalyzed by VectorDB / RAG production deployments, and how is ACV expansion trending when customers migrate from POC to Search AI Lake?"
+    },
+    {
+      "debate_id": "DEBATE_2",
+      "title": "Self-Serve Monthly Cloud Drag vs. Sales-Led Subscription Re-Acceleration",
+      "consensus_view": "Flat sequential Monthly Elastic Cloud revenue (~$49M\u2013$50M/quarter, +6% YoY) masks sluggish SMB/self-serve developer expansion and drags headline total revenue growth down to ~15%.",
+      "variant_perception": "Sales-led subscription (83%+ of total revenue) is compounding at +18% YoY and accelerating via multi-year enterprise platform consolidation across Observability (Deductive AI + native PromQL) and Security (SIEM displacement + Alert Zero), rendering self-serve monthly noise increasingly irrelevant to intrinsic FCF.",
+      "call_focus_question": "CFO: Given Sales-Led Subscription is outpacing Monthly Elastic Cloud by >10 percentage points, when does Elastic Cloud Serverless adoption inflect self-serve consumption back into double-digit YoY growth?"
+    },
+    {
+      "debate_id": "DEBATE_3",
+      "title": "Valuation Dislocation (4.2x EV/Sales, 20.5x Fwd P/E) vs. Gross Margin Pressure from Serverless GPU Hosting",
+      "consensus_view": "GAAP Subscription Cost of Revenue jumped to $91.9M in Q1 FY27 (up from $69.4M YoY), compressing GAAP gross margin from 76.7% to 74.5% due to cloud infrastructure and GPU inference investments.",
+      "variant_perception": "Even after accounting for cloud hosting investments, ESTC generated $132M OCF and $143M adjusted FCF in Q1 alone (~30% margin) and repurchased $40M of stock under its $500M buyback. At 20.5x forward P/E vs 38x\u201352x for MDB/DDOG, any clean Q3 guide >$520M triggers violent multiple re-rating.",
+      "call_focus_question": "Management: Should investors expect GAAP subscription gross margins to stabilize around 74.5%\u201375.5% as Elastic Cloud Serverless and Elastic Inference Service (EIS) scale, and how aggressively will you deploy the remaining $500M buyback near $80/share?"
+    }
+  ]
+}

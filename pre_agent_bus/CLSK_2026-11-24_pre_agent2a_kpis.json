@@ -1,0 +1,70 @@
+{
+  "ticker": "CLSK",
+  "earnings_date": "2026-11-24",
+  "agent": "Pre_KPI_Consensus_Agent (Agent 2A)",
+  "model": "Gemini 3.8 Flash High Standard",
+  "upcoming_quarter_label": "Q4 FY26E (Ended Sep 30, 2026)",
+  "latest_reported_quarter_label": "Q3 FY26 (Ended Jun 30, 2026)",
+  "headline_and_company_kpis": [
+    {
+      "metric": "Consolidated GAAP Revenue ($M)",
+      "tooltip_title": "Total consolidated GAAP revenue from Bitcoin mining operations.",
+      "tooltip_def": "Consolidated GAAP Revenue ($M): CleanSpark generated $138.01M in Q3 FY26 (-30.5% YoY vs $198.64M; $223.65M in Q4 FY25). Street Q4 FY26E consensus sits at $127.75M (-42.9% YoY, range $110.65M\u2013$158.07M), while buy-side whisper looks for $132.0M+ on 1,708 BTC mined.",
+      "q_minus_1_actual": "$138.01M",
+      "q_minus_4_yoy_baseline": "$223.65M",
+      "street_consensus_q0e": "$127.75M",
+      "whisper_bogey_q0e": "$132.50M",
+      "whisper_spread_display": "+3.72% Whisper Spread",
+      "bar_width_pct": 82,
+      "hurdle_badge": "Top-Line Hurdle"
+    },
+    {
+      "metric": "GAAP Diluted EPS ($/sh)",
+      "tooltip_title": "GAAP diluted earnings per share including BTC fair-value remeasurement and D&A.",
+      "tooltip_def": "GAAP Diluted EPS ($/sh): Consensus models -$0.37/sh for Q4 FY26E vs -$0.39 actual in Q3 FY26 (16.3% miss vs -$0.33 est) and +$0.16 in Q4 FY25. Whisper targets -$0.30/sh or better if quarter-end BTC mark-to-market remeasurement is favorable.",
+      "q_minus_1_actual": "-$0.39",
+      "q_minus_4_yoy_baseline": "+$0.16",
+      "street_consensus_q0e": "-$0.37",
+      "whisper_bogey_q0e": "-$0.30",
+      "whisper_spread_display": "+$0.07 Narrower Loss",
+      "bar_width_pct": 74,
+      "hurdle_badge": "Bottom-Line Hurdle"
+    },
+    {
+      "metric": "Quarterly Bitcoin Mined (BTC)",
+      "tooltip_title": "Total self-mined Bitcoin produced during the fiscal quarter.",
+      "tooltip_def": "Quarterly Bitcoin Mined: CleanSpark already pre-announced monthly unaudited production totaling 1,708 BTC for Jul\u2013Sep 2026 (586 Jul + 593 Aug + 529 Sep), down from ~1,800+ BTC in Q3 FY26 due to higher network difficulty and curtailment.",
+      "q_minus_1_actual": "1,800+ BTC",
+      "q_minus_4_yoy_baseline": "2,011 BTC",
+      "street_consensus_q0e": "1,708 BTC (Pre-Ann.)",
+      "whisper_bogey_q0e": "1,708 BTC + Energy Credits",
+      "whisper_spread_display": "100% Pre-Announced",
+      "bar_width_pct": 86,
+      "hurdle_badge": "Core Output Volume"
+    },
+    {
+      "metric": "Average Operating Hashrate (EH/s)",
+      "tooltip_title": "Average energized mining computing capacity across CleanSpark facilities.",
+      "tooltip_def": "Operating Hashrate: Peak energized capacity sits at 50.0 EH/s, while average operating hashrate averaged ~37.6 EH/s across Q4 FY26 (38.6 Jul, 38.3 Aug, 36.0 Sep) reflecting strategic power curtailment and miner redeployment.",
+      "q_minus_1_actual": "39.0 EH/s Avg",
+      "q_minus_4_yoy_baseline": "43.5 EH/s Avg",
+      "street_consensus_q0e": "37.6 EH/s Avg (50 Peak)",
+      "whisper_bogey_q0e": "50.0 EH/s + Fleet Efficiency <16 J/TH",
+      "whisper_spread_display": "50 EH/s Ceiling",
+      "bar_width_pct": 85,
+      "hurdle_badge": "Infrastructure Scale"
+    },
+    {
+      "metric": "AI/HPC Contracted Capacity & Power Pipeline (MW / $B)",
+      "tooltip_title": "Contracted hyperscale data center critical IT load and total grid-connected power portfolio.",
+      "tooltip_def": "AI/HPC Infrastructure: Sandersville 175 MW NNN lease with Meta Platforms ($6.6B initial 20-yr contracted revenue, $2.276B project notes closed Sep 2026) plus Meta LOI/exclusivity on up to 885 MW in Texas out of a 1.8+ GW total power portfolio.",
+      "q_minus_1_actual": "175 MW Signed ($6.6B)",
+      "q_minus_4_yoy_baseline": "0 MW AI/HPC",
+      "street_consensus_q0e": "175 MW Funded ($2.28B Debt)",
+      "whisper_bogey_q0e": "Texas 885 MW LOI Conversion Update",
+      "whisper_spread_display": "+885 MW Texas Optionality",
+      "bar_width_pct": 94,
+      "hurdle_badge": "Re-Rating Catalyst"
+    }
+  ]
+}
